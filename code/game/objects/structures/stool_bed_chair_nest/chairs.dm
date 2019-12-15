@@ -102,7 +102,7 @@ GLOBAL_LIST_EMPTY(chair_icon_cache)
 	icon_state = "comfychair_preview"
 
 /obj/structure/bed/chair/comfy/brown
-	material_padding = MATERIAL_ID_LETAHER
+	material_padding = MATERIAL_ID_LEATHER
 
 /obj/structure/bed/chair/comfy/red
 	material_padding = MATERIAL_ID_CARPET

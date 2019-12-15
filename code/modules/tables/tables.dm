@@ -22,7 +22,7 @@ GLOBAL_LIST_EMPTY(table_icon_cache)
 	var/manipulating = 0
 
 	material_primary = MATERIAL_ID_STEEL
-	var/datum/material/reinforcing_material = MATERIAL_ID_STEEL
+	var/datum/material/material_reinforcing = MATERIAL_ID_STEEL
 
 	// Gambling tables. I'd prefer reinforced with carpet/felt/cloth/whatever, but AFAIK it's either harder or impossible to get /obj/item/stack/material of those.
 	// Convert if/when you can easily get stacks of these.
@@ -195,7 +195,7 @@ GLOBAL_LIST_EMPTY(table_icon_cache)
 /obj/structure/table/UpdateDescriptions()
 	. = ..()
 	if(material_reinforcing)
-		desc = "[initial(desc)] This one seems to be reinforced with [reinforcing_material.display_name]."
+		desc = "[initial(desc)] This one seems to be reinforced with [material_reinforcing.display_name]."
 	else
 		desc = initial(desc)
 
@@ -225,11 +225,11 @@ GLOBAL_LIST_EMPTY(table_icon_cache)
 /obj/structure/table/proc/break_to_parts(full_return = FALSE)
 	var/list/shards = list()
 	var/obj/item/weapon/material/shard/S = null
-	if(reinforcing_material)
-		if(reinforcing_material.stack_type && (full_return || prob(20)))
-			reinforcing_material.place_sheet(loc)
+	if(material_reinforcing)
+		if(material_reinforcing.stack_type && (full_return || prob(20)))
+			material_reinforcing.place_sheet(loc)
 		else
-			S = reinforcing_material.place_shard(loc)
+			S = material_reinforcing.place_shard(loc)
 			if(S)
 				shards += S
 	if(material_primary)
@@ -369,8 +369,8 @@ GLOBAL_LIST_EMPTY(table_icon_cache)
 	else
 		maxhealth = material_primary.integrity / 2
 
-		if(reinforcing_material)
-			maxhealth += reinforcing_material.integrity / 2
+		if(material_reinforcing)
+			maxhealth += material_reinforcing.integrity / 2
 
 	health = min(health, maxhealth)
 	update_desc()
@@ -379,7 +379,7 @@ GLOBAL_LIST_EMPTY(table_icon_cache)
 
 /obj/structure/table/proc/take_damage(amount)
 	// If the table is made of a brittle material, and is *not* reinforced with a non-brittle material, damage is multiplied by TABLE_BRITTLE_MATERIAL_MULTIPLIER
-	if(material_primary?.is_brittle() && !reinforcing_material?.is_brittle())
+	if(material_primary?.is_brittle() && !material_reinforcing?.is_brittle())
 		amount *= TABLE_BRITTLE_MATERIAL_MULTIPLIER
 	health -= amount
 	if(health <= 0)
@@ -404,11 +404,11 @@ GLOBAL_LIST_EMPTY(table_icon_cache)
 	color = "#ffffff"
 	alpha = 255
 	update_connections(ticker && ticker.current_state == GAME_STATE_PLAYING)
-	AutoSetMaterial(reinforcing_material, MATERIAL_INDEX_REINFORCING)
+	AutoSetMaterial(material_reinforcing, MATERIAL_INDEX_REINFORCING)
 
 /obj/structure/table/SetMaterial(datum/material/M, index = MATERIAL_INDEX_PRIMARY, updating)
 	else if(index == MATERIAL_INDEX_REINFORCING)
-		reinforcing_material = M
+		material_reinforcing = M
 	return ..()
 
 /obj/structure/table/Destroy()

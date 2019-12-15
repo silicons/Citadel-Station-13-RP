@@ -12,7 +12,7 @@
 		slot_r_hand_str = 'icons/mob/items/righthand_material.dmi',
 		)
 
-	var/material_id = DEFAULT_WALL_MATERIAL_ID		//What it starts out as. INTENTIONALLY NOT MATERIAL_PRIMARY.
+	var/material_id = MATERIAL_ID_STEEL		//What it starts out as. INTENTIONALLY NOT MATERIAL_PRIMARY.
 
 	var/perunit = SHEET_MATERIAL_AMOUNT
 

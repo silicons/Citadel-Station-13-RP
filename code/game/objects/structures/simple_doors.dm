@@ -6,7 +6,7 @@
 	icon = 'icons/obj/doors/material_primary_doors.dmi'
 	icon_state = "metal"
 
-	material_primary = DEFAULT_WALL_material_primary
+	material_primary = MATERIAL_ID_STEEL
 	var/state = 0 //closed, 1 == open
 	var/isSwitchingStates = 0
 	var/hardness = 1
