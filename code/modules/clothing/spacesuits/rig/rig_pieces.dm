@@ -45,10 +45,10 @@
 	flags = PHORONGUARD
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
-	heat_protection =    UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
-	cold_protection =    UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
-	flags_inv =          HIDEJUMPSUIT|HIDETAIL
-	item_flags =              STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
+	heat_protection =	 UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	cold_protection =	 UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	flags_inv =			 HIDEJUMPSUIT|HIDETAIL
+	item_flags =		 THICKMATERIAL | AIRTIGHT
 	slowdown = 0
 	//will reach 10 breach damage after 25 laser carbine blasts, 3 revolver hits, or ~1 PTR hit. Completely immune to smg or sts hits.
 	breach_threshold = 38
@@ -96,7 +96,7 @@
 		return 0
 
 	var/mob/living/carbon/human/H = loc
-	if(!istype(H) || !H.back)
+	if(!istype(H) || (!H.back && !H.belt))
 		return 0
 
 	var/obj/item/weapon/rig/suit = H.back
