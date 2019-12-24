@@ -18,7 +18,7 @@
 
 /obj/item/clothing/mask/gas/poltergeist/Initialize(mapload)
 	. = ..()
-	processing_objects.Add(src)
+	START_PROCESSING(SSobj, src)
 
 /obj/item/clothing/mask/gas/poltergeist/process()
 	if(heard_talk.len && istype(loc, /mob/living) && prob(10))
@@ -168,7 +168,7 @@
 
 /obj/effect/shadow_wight/Initialize(mapload)
 	. = ..()
-	processing_objects.Add(src)
+	START_PROCESSING(SSobj, src)
 
 /obj/effect/shadow_wight/process()
 	if(loc)
@@ -192,7 +192,7 @@
 			M.sleeping = max(M.sleeping,rand(5,10))
 			loc = null
 	else
-		processing_objects.Remove(src)
+		STOP_PROCESSING(SSobj, src)
 
 /obj/effect/shadow_wight/Bump(atom/obstacle)
 	. = ..()
