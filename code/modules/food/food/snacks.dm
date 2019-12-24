@@ -11,6 +11,7 @@
 	var/slices_num
 	var/dried_type = null
 	var/dry = 0
+	var/survivalfood = FALSE
 	var/nutriment_amt = 0
 	var/list/nutriment_desc = list("food" = 1)
 	var/datum/reagent/nutriment/coating/coating = null
@@ -50,7 +51,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/attack(mob/M as mob, mob/user as mob, def_zone)
 	if(reagents && !reagents.total_volume)
-		user << "<span class='danger'>None of [src] left!</span>"
+		to_chat(user, "<span class='danger'>None of [src] left!</span>")
 		user.drop_from_inventory(src)
 		qdel(src)
 		return 0
@@ -63,11 +64,15 @@
 			if(istype(M,/mob/living/carbon/human))
 				var/mob/living/carbon/human/H = M
 				if(!H.check_has_mouth())
-					user << "Where do you intend to put \the [src]? You don't have a mouth!"
+					to_chat(user, "Where do you intend to put \the [src]? You don't have a mouth!")
 					return
-				var/obj/item/blocked = H.check_mouth_coverage()
+				var/obj/item/blocked = null
+				if(survivalfood)
+					blocked = H.check_mouth_coverage_survival()
+				else
+					blocked = H.check_mouth_coverage()
 				if(blocked)
-					user << "<span class='warning'>\The [blocked] is in the way!</span>"
+					to_chat(user, "<span class='warning'>\The [blocked] is in the way!</span>")
 					return
 
 			 // Vorestation edits in this section.
