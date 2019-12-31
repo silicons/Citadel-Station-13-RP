@@ -39,7 +39,8 @@
 
 /obj/item/weapon/card/mining_point_card/examine(mob/user)
 	..(user)
-	to_chat(user, "There's [points] points on the card.")
+	to_chat(user, "There's [mine_points] excavation points on the card.")
+	to_chat(user, "There's [survey_points] survey points on the card.")
 
 /obj/item/weapon/card/mining_point_card/onethou
 	name = "deluxe mining point card"
@@ -51,4 +52,6 @@
 
 /obj/item/weapon/card/mining_point_card/threethou
 	name = "deluxe mining point card"
-	points = 3000
+	points = 3000/obj/item/weapon/card/mining_point_card/survey
+	mine_points = 0
+	survey_points = 50
