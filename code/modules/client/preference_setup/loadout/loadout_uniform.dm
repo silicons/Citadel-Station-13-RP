@@ -183,7 +183,7 @@
 /datum/gear/uniform/job_turtle/medical
 	display_name = "turtleneck, medical"
 	path = /obj/item/clothing/under/rank/medical/turtleneck
-	allowed_roles = list("Chief Medical Officer", "Paramedic", "Medical Doctor", "Psychologist", "Search and Rescue", "Chemist")
+	allowed_roles = list("Chief Medical Officer", "Paramedic", "Medical Doctor", "Psychologist", "Field Medic", "Chemist")
 
 /datum/gear/uniform/jeans_qm
 	display_name = "jeans, QM"
@@ -493,7 +493,7 @@
 /datum/gear/uniform/sifguard/medical
 	display_name = "uniform, crew (medical)"
 	path = /obj/item/clothing/under/utility/sifguard/medical
-	allowed_roles = list("Chief Medical Officer","Medical Doctor","Chemist","Paramedic","Geneticist","Search and Rescue")
+	allowed_roles = list("Chief Medical Officer","Medical Doctor","Chemist","Paramedic","Geneticist","Field Medic")
 
 /datum/gear/uniform/sifguard/science
 	display_name = "uniform, crew (science)"
@@ -524,7 +524,7 @@
 /datum/gear/uniform/fleet/medical
 	display_name = "uniform, coveralls (medical)"
 	path = /obj/item/clothing/under/utility/fleet/medical
-	allowed_roles = list("Chief Medical Officer","Medical Doctor","Chemist","Paramedic","Geneticist","Search and Rescue")
+	allowed_roles = list("Chief Medical Officer","Medical Doctor","Chemist","Paramedic","Geneticist","Field Medic")
 
 /datum/gear/uniform/fleet/science
 	display_name = "uniform, coveralls (science)"
@@ -555,7 +555,7 @@
 /datum/gear/uniform/marine/medical
 	display_name = "uniform, fatigues (medical)"
 	path = /obj/item/clothing/under/utility/marine/medical
-	allowed_roles = list("Chief Medical Officer","Medical Doctor","Chemist","Paramedic","Geneticist","Search and Rescue")
+	allowed_roles = list("Chief Medical Officer","Medical Doctor","Chemist","Paramedic","Geneticist","Field Medic")
 
 /datum/gear/uniform/marine/science
 	display_name = "uniform, fatigues (science)"

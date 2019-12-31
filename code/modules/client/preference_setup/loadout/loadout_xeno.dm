@@ -240,7 +240,7 @@
 /datum/gear/uniform/dept/undercoat/medical
 	display_name = "medical undercoat (Teshari)"
 	path = /obj/item/clothing/under/seromi/undercoat/jobs/medical
-	allowed_roles = list("Medical Doctor","Chief Medical Officer","Chemist","Search and Rescue","Paramedic","Geneticist", "Psychiatrist")
+	allowed_roles = list("Medical Doctor","Chief Medical Officer","Chemist","Field Medic","Paramedic","Geneticist", "Psychiatrist")
 
 /datum/gear/uniform/dept/undercoat/chemistry
 	display_name = "chemist undercoat (Teshari)"
@@ -329,7 +329,7 @@
 /datum/gear/suit/dept/cloak/medical
 	display_name = "medical cloak (Teshari)"
 	path = /obj/item/clothing/suit/storage/seromi/cloak/jobs/medical
-	allowed_roles = list("Medical Doctor","Chief Medical Officer","Chemist","Search and Rescue","Paramedic","Geneticist", "Psychiatrist")
+	allowed_roles = list("Medical Doctor","Chief Medical Officer","Chemist","Field Medic","Paramedic","Geneticist", "Psychiatrist")
 
 /datum/gear/suit/dept/cloak/chemistry
 	display_name = "chemist cloak (Teshari)"

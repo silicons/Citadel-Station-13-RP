@@ -348,7 +348,7 @@ datum/gear/suit/duster
 /datum/gear/suit/wintercoat/medical
 	display_name = "winter coat, medical"
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat/medical
-	allowed_roles = list("Medical Doctor","Chief Medical Officer","Chemist","Search and Rescue","Paramedic","Geneticist", "Psychiatrist")
+	allowed_roles = list("Medical Doctor","Chief Medical Officer","Chemist","Field Medic","Paramedic","Geneticist", "Psychiatrist")
 
 /datum/gear/suit/wintercoat/science
 	display_name = "winter coat, science"
