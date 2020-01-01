@@ -9,6 +9,8 @@
 	var/scanrange = 2
 	var/maxscanrange = 2
 	var/scan_time = 5 SECONDS
+	var/scan_exact_ores = FALSE
+	var/scan_exact_amounts = FALSE
 
 /obj/item/weapon/mining_scanner/examine()
 	. = ..()
@@ -32,9 +34,9 @@
 	if(!do_after(user, scan_time))
 		return
 
-	ScanTurf(user, get_turf(user))
+	ScanTurf(user, get_turf(user), scan_exact_amounts, scan_exact_ores)
 
-/obj/item/weapon/mining_scanner/proc/ScanTurf(var/atom/target, var/mob/user, var/exact = FALSE)
+/obj/item/weapon/mining_scanner/proc/ScanTurf(atom/target, /user, exact_amount = FALSE, exact_ores = FALSE)
 	var/list/metals = list(
 		"surface minerals" = 0,
 		"precious metals" = 0,
@@ -51,26 +53,40 @@
 		for(var/metal in T.resources)
 			var/ore_type
 
-			switch(metal)
-				if("silicates", "carbon", "hematite", "marble")	ore_type = "surface minerals"
-				if("gold", "silver", "diamond", "lead")					ore_type = "precious metals"
-				if("uranium")									ore_type = "nuclear fuel"
-				if("phoron", "osmium", "hydrogen")				ore_type = "exotic matter"
-				if("verdantium")				ore_type = "anomalous matter"
-
-			if(ore_type) metals[ore_type] += T.resources[metal]
+			if(!exact_ores)
+				switch(metal)
+					if("silicates", "carbon", "hematite", "marble")
+						ore_type = "surface minerals"
+					if("gold", "silver", "diamond", "lead")
+						ore_type = "precious metals"
+					if("uranium")
+						ore_type = "nuclear fuel"
+					if("phoron", "osmium", "hydrogen")
+						ore_type = "exotic matter"
+					if("verdantium")
+						ore_type = "anomalous matter"
+			else
+				ore_type = metal
+			if(ore_type)
+				metals[ore_type] += T.resources[metal]
 
 	to_chat(user,"\icon[src] <span class='notice'>The scanner beeps and displays a readout.</span>")
-
+	var/list/results = list()
 	for(var/ore_type in metals)
 		var/result = "no sign"
-
+		
+		if(exact_amount)
+			result = "- [metals[ore_type]] of [ore_type]"
+		else
 		switch(metals[ore_type])
-			if(1 to 25) result = "trace amounts"
-			if(26 to 75) result = "significant amounts"
-			if(76 to INFINITY) result = "huge quantities"
-
-		to_chat(user,"- [result] of [ore_type].")
+			if(1 to 25)
+				result = "trace amounts"
+			if(26 to 75)
+				result = "significant amounts"
+			if(76 to INFINITY)
+				result = "huge quantities"
+		results += result
+	to_chat(user, results.join("<br>"))
 
 /obj/item/weapon/mining_scanner/advanced
 	name = "advanced ore detector"
@@ -81,52 +97,6 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 2000, "glass" = 1000)
 	scanrange = 5
 	maxscanrange = 5
-
-/obj/item/weapon/mining_scanner/advanced/attack_self(mob/user)
-	to_chat(user,"You sweep \the [src] about, quickly pinging for ore deposits.")
-	playsound(loc, 'sound/items/goggles_charge.ogg', 50, 1, -6)
-
-	if(!do_after(user, 10))
-		return
-
-	var/list/metals = list(
-		"hematite" = 0,
-		"carbon" = 0,
-		"silicates" = 0,
-		"silver" = 0,
-		"gold" = 0,
-		"diamond" = 0,
-		"platinum" = 0,
-		"phoron" = 0,
-		"uranium" = 0,
-		"hydrogen" = 0
-			)
-
-	for(var/turf/simulated/T in range((scanrange), get_turf(user)))
-
-		if(!T.has_resources)
-			continue
-
-		for(var/metal in T.resources)
-			var/ore_type
-
-			switch(metal)
-				if("hematite")	ore_type = "hematite"
-				if("carbon")	ore_type = "carbon"
-				if("silicates") ore_type = "silicates"
-				if("silver")	ore_type = "silver"
-				if("gold")	ore_type = "gold"
-				if("diamond")	ore_type = "diamond"
-				if("osmium")	ore_type = "platinum"
-				if("phoron")	ore_type = "phoron"
-				if("uranium")	ore_type = "uranium"
-				if("hydrogen")	ore_type = "hydrogen"
-
-			if(ore_type) metals[ore_type] += T.resources[metal]
-
-	to_chat(user,"\icon[src] <span class='notice'>The scanner beeps and displays a readout.</span>")
-
-	for(var/ore_type in metals)
-		var/result = "no sign"
-		result = metals[ore_type]
-		to_chat(user,"- [result] [ore_type].")
+	scantime = 10
+	scan_exact_ores = TRUE
+	scan_exact_amounts = TRUE
