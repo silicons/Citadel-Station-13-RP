@@ -97,6 +97,8 @@
 							NETWORK_INTERROGATION
 							)
 
+	bot_patrolling = FALSE
+
 	allowed_spawns = list("Tram Station","Gateway","Cryogenic Storage","Cyborg Storage")
 	spawnpoint_died = /datum/spawnpoint/tram
 	spawnpoint_left = /datum/spawnpoint/tram
@@ -254,7 +256,7 @@
 	if(activated && !length(frozen_mobs))
 		return
 	activated = 1
-	for(var/mob/living/simple_animal/M in frozen_mobs)
+	for(var/mob/living/simple_mob/M in frozen_mobs)
 		M.life_disabled = 0
 		frozen_mobs -= M
 	frozen_mobs.Cut()

@@ -116,7 +116,7 @@
 				if(istype(H) && health > config.health_threshold_dead)
 					adjustOxyLoss(-(min(getOxyLoss(), 5)))
 					updatehealth()
-					src << "<span class='notice'>You feel a breath of fresh air enter your lungs. It feels good.</span>"
+					to_chat(src, "<span class='notice'>You feel a breath of fresh air enter your lungs. It feels good.</span>")
 
 			else if(!(M == src && apply_pressure(M, M.zone_sel.selecting)))
 				help_shake_act(M)
@@ -135,6 +135,7 @@
 			var/obj/item/weapon/grab/G = new /obj/item/weapon/grab(M, src)
 			if(buckled)
 				M << "<span class='notice'>You cannot grab [src], [TT.he] is buckled in!</span>"
+				return
 			if(!G)	//the grab will delete itself in New if affecting is anchored
 				return
 			M.put_in_active_hand(G)
@@ -146,7 +147,8 @@
 			//VORESTATION EDIT
 			visible_message("<span class='warning'>[M] has grabbed [src] [(M.zone_sel.selecting == BP_L_HAND || M.zone_sel.selecting == BP_R_HAND)? "by [(gender==FEMALE)? "her" : ((gender==MALE)? "his": "their")] hands": "passively"]!</span>")
 			//VORESTATION END END
-			return 1
+
+			return TRUE
 
 		if(I_HURT)
 
@@ -172,7 +174,7 @@
 
 			if(!affecting || affecting.is_stump())
 				M << "<span class='danger'>They are missing that limb!</span>"
-				return 1
+				return TRUE
 
 			switch(src.a_intent)
 				if(I_HELP)
@@ -242,7 +244,10 @@
 			// See what attack they use
 			var/datum/unarmed_attack/attack = H.get_unarmed_attack(src, hit_zone)
 			if(!attack)
-				return 0
+				return FALSE
+
+			if(attack.unarmed_override(H, src, hit_zone))
+				return FALSE
 
 			H.do_attack_animation(src)
 			if(!attack_message)
@@ -255,7 +260,7 @@
 			add_attack_logs(H,src,"Melee attacked with fists (miss/block)")
 
 			if(miss_type)
-				return 0
+				return FALSE
 
 			var/real_damage = rand_damage
 			var/hit_dam_type = attack.damage_type
@@ -265,7 +270,7 @@
 					var/obj/item/clothing/gloves/G = H.gloves
 					real_damage += G.punch_force
 					hit_dam_type = G.punch_damtype
-					if(H.pulling_punches)	//SO IT IS DECREED: PULLING PUNCHES WILL PREVENT THE ACTUAL DAMAGE FROM RINGS AND KNUCKLES, BUT NOT THE ADDED PAIN
+					if(H.pulling_punches && !attack.sharp && !attack.edge)	//SO IT IS DECREED: PULLING PUNCHES WILL PREVENT THE ACTUAL DAMAGE FROM RINGS AND KNUCKLES, BUT NOT THE ADDED PAIN, BUT YOU CAN'T "PULL" A KNIFE
 						hit_dam_type = AGONY
 			real_damage *= damage_multiplier
 			rand_damage *= damage_multiplier
@@ -359,7 +364,7 @@
 	var/armor_soak = get_armor_soak(affecting, armor_type, armor_pen)
 	apply_damage(damage, BRUTE, affecting, armor_block, armor_soak, sharp = a_sharp, edge = a_edge)
 	updatehealth()
-	return 1
+	return TRUE
 
 //Used to attack a joint through grabbing
 /mob/living/carbon/human/proc/grab_joint(var/mob/living/user, var/def_zone)
@@ -370,44 +375,43 @@
 			break
 
 	if(!has_grab)
-		return 0
+		return FALSE
 
 	if(!def_zone) def_zone = user.zone_sel.selecting
 	var/target_zone = check_zone(def_zone)
 	if(!target_zone)
-		return 0
+		return FALSE
 	var/obj/item/organ/external/organ = get_organ(check_zone(target_zone))
 	if(!organ || organ.dislocated > 0 || organ.dislocated == -1) //don't use is_dislocated() here, that checks parent
-		return 0
+		return FALSE
 
 	user.visible_message("<span class='warning'>[user] begins to dislocate [src]'s [organ.joint]!</span>")
 	if(do_after(user, 100))
 		organ.dislocate(1)
 		src.visible_message("<span class='danger'>[src]'s [organ.joint] [pick("gives way","caves in","crumbles","collapses")]!</span>")
-		log_and_message_admins("has dislocated [src]'s [organ.joint]!")
-		return 1
-	return 0
+		return TRUE
+	return FALSE
 
 //Breaks all grips and pulls that the mob currently has.
 /mob/living/carbon/human/proc/break_all_grabs(mob/living/carbon/user)
-	var/success = 0
+	var/success = FALSE
 	if(pulling)
 		visible_message("<span class='danger'>[user] has broken [src]'s grip on [pulling]!</span>")
-		success = 1
+		success = TRUE
 		stop_pulling()
 
 	if(istype(l_hand, /obj/item/weapon/grab))
 		var/obj/item/weapon/grab/lgrab = l_hand
 		if(lgrab.affecting)
 			visible_message("<span class='danger'>[user] has broken [src]'s grip on [lgrab.affecting]!</span>")
-			success = 1
+			success = TRUE
 		spawn(1)
 			qdel(lgrab)
 	if(istype(r_hand, /obj/item/weapon/grab))
 		var/obj/item/weapon/grab/rgrab = r_hand
 		if(rgrab.affecting)
 			visible_message("<span class='danger'>[user] has broken [src]'s grip on [rgrab.affecting]!</span>")
-			success = 1
+			success = TRUE
 		spawn(1)
 			qdel(rgrab)
 	return success
@@ -422,11 +426,11 @@
 /mob/living/carbon/human/proc/apply_pressure(mob/living/user, var/target_zone)
 	var/obj/item/organ/external/organ = get_organ(target_zone)
 	if(!organ || !(organ.status & ORGAN_BLEEDING) || (organ.robotic >= ORGAN_ROBOT))
-		return 0
+		return FALSE
 
 	if(organ.applied_pressure)
 		user << "<span class='warning'>Someone is already applying pressure to [user == src? "your [organ.name]" : "[src]'s [organ.name]"].</span>"
-		return 0
+		return FALSE
 
 	var/datum/gender/TU = gender_datums[user.get_visible_gender()]
 
@@ -447,4 +451,4 @@
 		else
 			user.visible_message("\The [user] stops applying pressure to [src]'s [organ.name]!", "You stop applying pressure to [src]'s [organ.name]!")
 
-	return 1
+	return TRUE 
