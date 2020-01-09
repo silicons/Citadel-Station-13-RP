@@ -144,6 +144,8 @@
 		list("Alien Ship - Z1 Ship"),
 		list("Desert Planet - Z1 Beach","Desert Planet - Z2 Cave"),
 		list("Remmi Aerostat - Z1 Aerostat","Remmi Aerostat - Z2 Surface")
+	)
+
 	ai_shell_restricted = TRUE
 	ai_shell_allowed_levels = list(
 		Z_LEVEL_SURFACE_LOW,
