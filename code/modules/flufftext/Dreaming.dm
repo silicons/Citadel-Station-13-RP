@@ -15,7 +15,7 @@ var/list/dreams = list(
 	//VOREStation Additions after this
 	"slimey surroundings","a sexy squirrel","licking their lips","a gaping maw","an unlikely predator","sinking inside",
 	"vulpine assets","more dakka","churning guts","pools of fluid","an exceptional grip","mawing in faces","gaping throat",
-	"swallowed whole","a fox","a wolf","a cat","a tiger","a dog","a taur","a xenochimera"
+	"swallowed whole","a fox","a wolf","a cat","a tiger","a dog","a taur","a xenochimera",
 	//Cit dream text!
 	"a teshari","an alarune","a promethean","a vox","a sergal","an akula","a zorren","a nevrean","a chimera","a vasilissan", //actual races not covered in the defaults
 
