@@ -4442,7 +4442,7 @@
 "jP" = (
 /obj/item/weapon/storage/fancy/cigar/havana,
 /obj/effect/decal/cleanable/dirt,
-/mob/living/simple_animal/hostile/mimic/crate,
+/mob/living/simple_mob/hostile/mimic/crate,
 /turf/simulated/floor/plating,
 /area/maintenance/lower/rnd)
 "jQ" = (
@@ -5097,7 +5097,7 @@
 /turf/simulated/floor/tiled,
 /area/rnd/rdoffice)
 "lk" = (
-/mob/living/simple_animal/slime/rainbow/kendrick,
+/mob/living/simple_mob/slime/rainbow/kendrick,
 /turf/simulated/floor/tiled,
 /area/rnd/rdoffice)
 "ll" = (
@@ -18454,7 +18454,7 @@
 /obj/effect/floor_decal/corner_techfloor_grid{
 	dir = 10
 	},
-/mob/living/simple_animal/lizard,
+/mob/living/simple_mob/lizard,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/lower/bar)
 "Xd" = (

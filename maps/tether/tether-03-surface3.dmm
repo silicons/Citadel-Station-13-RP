@@ -23385,7 +23385,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/mob/living/simple_animal/bird/commonblackbird{
+/mob/living/simple_mob/bird/commonblackbird{
 	desc = "The Bartenders beloved pet bird.";
 	name = "Fried Chicken"
 	},
