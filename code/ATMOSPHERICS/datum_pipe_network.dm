@@ -18,7 +18,6 @@ var/global/list/datum/pipe_network/pipe_networks = list()	// TODO - Move into SS
 	for(var/obj/machinery/atmospherics/normal_member in normal_members)
 		normal_member.reassign_network(src, null)
 	gases.Cut()  // Do not qdel the gases, we don't own them
-	leaks.Cut()
 	return ..()
 
 /datum/pipe_network/process()
