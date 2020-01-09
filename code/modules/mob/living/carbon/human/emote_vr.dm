@@ -70,27 +70,6 @@
 				message = "does a flip!"
 				m_type = 1
 
-				if(prob(danger))
-					spawn(10) //Stick the landing.
-						var/breaking = pick(involved_parts)
-						var/obj/item/organ/external/E = get_organ(breaking)
-						if(isSynthetic())
-							src.Weaken(5)
-							E.droplimb(1,DROPLIMB_EDGE)
-							message += " <span class='danger'>And loses a limb!</span>"
-							log_and_message_admins("broke their [breaking] with *flip and were kicked.", src)
-							to_chat(usr, "<span class='danger'>You have been automatically logged out for spamming emotes.</span>")
-							Logout(src)
-						else
-							src.Weaken(5)
-							if(E.cannot_break) //Prometheans go splat
-								E.droplimb(0,DROPLIMB_BLUNT)
-							else
-								E.fracture()
-							message += " <span class='danger'>And breaks something!</span>"
-							log_and_message_admins("broke their [breaking] with *flip and were kicked.", src)
-							to_chat(usr, "<span class='danger'>You have been automatically logged out for spamming emotes.</span>")
-							Logout(src)
 	if (message)
 		custom_emote(m_type,message)
 		return 1
