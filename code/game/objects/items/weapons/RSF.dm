@@ -66,21 +66,33 @@ RSF
 	playsound(src.loc, 'sound/effects/pop.ogg', 50, 0)
 	if (mode == 1)
 		mode = 2
-		to_chat(user,"<span class='notice'>Changed dispensing mode to 'Container'.</span>")
+		user << "Changed dispensing mode to 'Pint Glass'" //make it a little nicer
 		return
 	if (mode == 2)
 		mode = 3
-		to_chat(user,"<span class='notice'>Changed dispensing mode to 'Paper'</span>")
+		user << "Changed dispensing mode to 'Shot Glass'"
 		return
 	if (mode == 3)
 		mode = 4
-		to_chat(user,"<span class='notice'>Changed dispensing mode to 'Pen'</span>")
+		user << "Changed dispensing mode to 'Wine Glass'"
 		return
 	if (mode == 4)
 		mode = 5
-		to_chat(user,"<span class='notice'>Changed dispensing mode to 'Dice Pack'</span>")
+		user << "Changed dispensing mode to 'Paper'"
 		return
 	if (mode == 5)
+		mode = 6
+		user << "Changed dispensing mode to 'Pen'"
+		return
+	if (mode == 6)
+		mode = 7
+		user << "Changed dispensing mode to 'Dice Pack'"
+		return
+	if (mode == 7)
+		mode = 8
+		user << "Changed dispensing mode to 'Plushie' - WARNING: Requires Significant Charge"
+		return
+	if (mode == 8)
 		mode = 1
 		to_chat(user,"<span class='notice'>Changed dispensing mode to 'Cigarette'</span>")
 		return
@@ -112,14 +124,23 @@ RSF
 			product = new glasstype()
 			used_energy = 50
 		if(3)
+			product = new /obj/item/weapon/reagent_containers/food/drinks/glass2/shot()
+			used_energy = 25
+		if(4)
+			product = new /obj/item/weapon/reagent_containers/food/drinks/glass2/wine()
+			used_energy = 25
+		if(5)
 			product = new /obj/item/weapon/paper()
 			used_energy = 10
-		if(4)
+		if(6)
 			product = new /obj/item/weapon/pen()
 			used_energy = 50
-		if(5)
+		if(7)
 			product = new /obj/item/weapon/storage/pill_bottle/dice()
 			used_energy = 200
+		if(8)
+			product = new /obj/random/plushie() //dear god if this gets spammed i will commit die
+			used_energy = 1000
 
 	to_chat(user,"<span class='notice'>Dispensing [product ? product : "product"]...</span>")
 	product.loc = get_turf(A)

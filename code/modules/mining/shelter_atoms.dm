@@ -196,6 +196,8 @@
 	anchored = TRUE
 	density = TRUE
 	pixel_y = -32
+	gps_tag = "SHELTER"
+	tracking = TRUE
 
 /obj/item/device/gps/computer/attackby(obj/item/I, mob/living/user)
 	if(I.is_wrench())
