@@ -28,9 +28,11 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define NOBLOODY				(1<<3)	// Used for items if they don't want to get a blood overlay.
 #define OPENCONTAINER			(1<<4)	// Is an open container for chemistry purposes.
 #define PHORONGUARD				(1<<5)	// Does not get contaminated by phoron.
-#define	NOREACT					(1<<6)	// Reagents don't react inside this container.
+#define NOREACT					(1<<6)	// Reagents don't react inside this container.
 #define PROXMOVE				(1<<7)// Does this object require proximity checking in Enter()?
 #define OVERLAY_QUEUED			(1<<8)// Atom queued to SSoverlay for COMPILE_OVERLAYS
+/// Atom is initialized
+#define INITIALIZED				(1<<9)
 
 //Flags for items (equipment) - Used in /obj/item/var/item_flags
 #define THICKMATERIAL			(1<<0)	// Prevents syringes, parapens and hyposprays if equipped to slot_suit or slot_head.
