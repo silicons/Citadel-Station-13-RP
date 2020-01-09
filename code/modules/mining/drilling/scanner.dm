@@ -74,17 +74,17 @@
 	var/list/results = list()
 	for(var/ore_type in metals)
 		var/result = "no sign"
-		
+
 		if(exact_amount)
 			result = "- [metals[ore_type]] of [ore_type]"
 		else
-		switch(metals[ore_type])
-			if(1 to 25)
-				result = "trace amounts"
-			if(26 to 75)
-				result = "significant amounts"
-			if(76 to INFINITY)
-				result = "huge quantities"
+			switch(metals[ore_type])
+				if(1 to 25)
+					result = "trace amounts"
+				if(26 to 75)
+					result = "significant amounts"
+				if(76 to INFINITY)
+					result = "huge quantities"
 		results += result
 	to_chat(user, results.join("<br>"))
 

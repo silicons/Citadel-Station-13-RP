@@ -287,7 +287,6 @@
 			/obj/item/clothing/shoes/boots/jackboots,
 			/obj/item/clothing/gloves/black
 			)
-*/
 
 /datum/supply_pack/security/flexitac
 	name = "Armor - Tactical Light"

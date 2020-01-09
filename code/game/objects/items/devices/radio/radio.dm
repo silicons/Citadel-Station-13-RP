@@ -15,7 +15,7 @@ GLOBAL_LIST_INIT(default_internal_channels, list(
 	num2text(SUP_FREQ) = list(access_cargo, access_mining_station),
 	num2text(SRV_FREQ) = list(access_janitor, access_library, access_hydroponics, access_bar, access_kitchen),
 	num2text(EXP_FREQ) = list(access_explorer, access_pilot, access_rd)
-)
+))
 
 GLOBAL_LIST_INIT(default_medbay_channels, list(
 	num2text(PUB_FREQ) = list(),
