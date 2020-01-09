@@ -4,13 +4,13 @@
 /obj/item/weapon/storage/pill_bottle/happy
 	name = "bottle of Happy pills"
 	desc = "Highly illegal drug. When you want to see the rainbow."
-	wrapper_color = COLOR_PINK
+	//wrapper_color = COLOR_PINK
 	starts_with = list(/obj/item/weapon/reagent_containers/pill/happy = 7)
 
 /obj/item/weapon/storage/pill_bottle/zoom
 	name = "bottle of Zoom pills"
 	desc = "Highly illegal drug. Trade brain for speed."
-	wrapper_color = COLOR_BLUE
+	//wrapper_color = COLOR_BLUE
 	starts_with = list(/obj/item/weapon/reagent_containers/pill/zoom = 7)
 
 /obj/item/weapon/reagent_containers/glass/beaker/vial/random
