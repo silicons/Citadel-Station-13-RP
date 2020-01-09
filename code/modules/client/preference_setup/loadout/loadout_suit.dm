@@ -77,7 +77,7 @@
 	for(var/military_style in typesof(/obj/item/clothing/suit/storage/miljacket))
 		var/obj/item/clothing/suit/storage/miljacket/miljacket = military_style
 		mil_jackets[initial(miljacket.name)] = miljacket
-	gear_tweaks += new/datum/gear_tweak/path(timSort(mil_jackets, /proc/cmp_string_asc, TRUE))
+	gear_tweaks += new/datum/gear_tweak/path(timSort(mil_jackets, /proc/cmp_text_asc, TRUE))
 
 /* /datum/gear/suit/mil/alt
 	display_name = "military jacket, alt"
@@ -117,7 +117,7 @@ datum/gear/suit/duster
 	for(var/hazard_style in typesof(/obj/item/clothing/suit/storage/hazardvest))
 		var/obj/item/clothing/suit/storage/hazardvest/hazardvest = hazard_style
 		hazards[initial(hazardvest.name)] = hazardvest
-	gear_tweaks += new/datum/gear_tweak/path(timSort(hazards, /proc/cmp_string_asc, TRUE))
+	gear_tweaks += new/datum/gear_tweak/path(timSort(hazards, /proc/cmp_text_asc, TRUE))
 
 /datum/gear/suit/hoodie
 	display_name = "hoodie selection"
@@ -129,7 +129,7 @@ datum/gear/suit/duster
 	for(var/hoodie_style in typesof(/obj/item/clothing/suit/storage/toggle/hoodie))
 		var/obj/item/clothing/suit/storage/toggle/hoodie/hoodie = hoodie_style
 		hoodies[initial(hoodie.name)] = hoodie
-	gear_tweaks += new/datum/gear_tweak/path(timSort(hoodies, /proc/cmp_string_asc, TRUE))
+	gear_tweaks += new/datum/gear_tweak/path(timSort(hoodies, /proc/cmp_text_asc, TRUE))
 
 /datum/gear/suit/labcoat
 	display_name = "labcoat"
@@ -193,7 +193,7 @@ datum/gear/suit/duster
 	for(var/poncho_style in (typesof(/obj/item/clothing/accessory/poncho) - typesof(/obj/item/clothing/accessory/poncho/roles)))
 		var/obj/item/clothing/accessory/poncho/poncho = poncho_style
 		ponchos[initial(poncho.name)] = poncho
-	gear_tweaks += new/datum/gear_tweak/path(timSort(ponchos, /proc/cmp_string_asc, TRUE))
+	gear_tweaks += new/datum/gear_tweak/path(timSort(ponchos, /proc/cmp_text_asc, TRUE))
 
 /datum/gear/suit/roles/poncho/security
 	display_name = "poncho, security"
@@ -390,7 +390,7 @@ datum/gear/suit/duster
 	for(var/varsity_style in typesof(/obj/item/clothing/suit/varsity))
 		var/obj/item/clothing/suit/varsity/varsity = varsity_style
 		varsities[initial(varsity.name)] = varsity
-	gear_tweaks += new/datum/gear_tweak/path(timSort(varsities, /proc/cmp_string_asc, TRUE))
+	gear_tweaks += new/datum/gear_tweak/path(timSort(varsities, /proc/cmp_text_asc, TRUE))
 
 /datum/gear/suit/track
 	display_name = "track jacket selection"
@@ -402,7 +402,7 @@ datum/gear/suit/duster
 	for(var/track_style in typesof(/obj/item/clothing/suit/storage/toggle/track))
 		var/obj/item/clothing/suit/storage/toggle/track/track = track_style
 		tracks[initial(track.name)] = track
-	gear_tweaks += new/datum/gear_tweak/path(timSort(tracks, /proc/cmp_string_asc, TRUE))
+	gear_tweaks += new/datum/gear_tweak/path(timSort(tracks, /proc/cmp_text_asc, TRUE))
 
 /datum/gear/suit/flannel
 	display_name = "grey flannel"

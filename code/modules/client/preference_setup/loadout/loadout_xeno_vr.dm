@@ -103,4 +103,4 @@
 	for(var/plasman in (typesof(/obj/item/clothing/accessory/plasman)))
 		var/obj/item/clothing/accessory/plasman/plasaccessory_type = plasman
 		plasaccessories[initial(plasaccessory_type.name)] = plasaccessory_type
-	gear_tweaks += new/datum/gear_tweak/path(timSort(plasaccessories, /proc/cmp_string_asc, TRUE))
+	gear_tweaks += new/datum/gear_tweak/path(timSort(plasaccessories, /proc/cmp_text_asc, TRUE))

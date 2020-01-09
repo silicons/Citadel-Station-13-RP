@@ -19,7 +19,7 @@
 	for(var/cheongasm in typesof(/obj/item/clothing/under/cheongsam))
 		var/obj/item/clothing/under/cheongsam/cheongasm_type = cheongasm
 		cheongasms[initial(cheongasm_type.name)] = cheongasm_type
-	gear_tweaks += new/datum/gear_tweak/path(timSort(cheongasms, /proc/cmp_string_asc, TRUE))
+	gear_tweaks += new/datum/gear_tweak/path(timSort(cheongasms, /proc/cmp_text_asc, TRUE))
 
 /datum/gear/uniform/croptop
 	description = "Light shirts which shows the midsection of the wearer."
@@ -31,7 +31,7 @@
 	for(var/croptop in typesof(/obj/item/clothing/under/croptop))
 		var/obj/item/clothing/under/croptop/croptop_type = croptop
 		croptops[initial(croptop_type.name)] = croptop_type
-	gear_tweaks += new/datum/gear_tweak/path(timSort(croptops, /proc/cmp_string_asc, TRUE))
+	gear_tweaks += new/datum/gear_tweak/path(timSort(croptops, /proc/cmp_text_asc, TRUE))
 
 /datum/gear/uniform/kilt
 	display_name = "kilt"
@@ -55,7 +55,7 @@
 	for(var/jump in typesof(/obj/item/clothing/under/color))
 		var/obj/item/clothing/under/color/jumps = jump
 		jumpclothes[initial(jumps.name)] = jumps
-	gear_tweaks += new/datum/gear_tweak/path(timSort(jumpclothes, /proc/cmp_string_asc, TRUE))
+	gear_tweaks += new/datum/gear_tweak/path(timSort(jumpclothes, /proc/cmp_text_asc, TRUE))
 
 /datum/gear/uniform/skirt
 	display_name = "skirt selection"
@@ -69,7 +69,7 @@
 			continue												//VOREStation addition
 		var/obj/item/clothing/under/skirt/skirt_type = skirt
 		skirts[initial(skirt_type.name)] = skirt_type
-	gear_tweaks += new/datum/gear_tweak/path(timSort(skirts, /proc/cmp_string_asc, TRUE))
+	gear_tweaks += new/datum/gear_tweak/path(timSort(skirts, /proc/cmp_text_asc, TRUE))
 
 /datum/gear/uniform/pants
 	display_name = "pants selection"
@@ -81,7 +81,7 @@
 	for(var/pant in typesof(/obj/item/clothing/under/pants))
 		var/obj/item/clothing/under/pants/pant_type = pant
 		pants[initial(pant_type.name)] = pant_type
-	gear_tweaks += new/datum/gear_tweak/path(timSort(pants, /proc/cmp_string_asc, TRUE))
+	gear_tweaks += new/datum/gear_tweak/path(timSort(pants, /proc/cmp_text_asc, TRUE))
 
 /datum/gear/uniform/shorts
 	display_name = "shorts selection"
@@ -93,7 +93,7 @@
 	for(var/short in typesof(/obj/item/clothing/under/shorts))
 		var/obj/item/clothing/under/pants/short_type = short
 		shorts[initial(short_type.name)] = short_type
-	gear_tweaks += new/datum/gear_tweak/path(timSort(shorts, /proc/cmp_string_asc, TRUE))
+	gear_tweaks += new/datum/gear_tweak/path(timSort(shorts, /proc/cmp_text_asc, TRUE))
 
 /datum/gear/uniform/job_skirt/ce
 	display_name = "skirt, ce"
@@ -215,7 +215,7 @@
 	for(var/lsuit in typesof(/obj/item/clothing/under/lawyer))
 		var/obj/item/clothing/suit/lsuit_type = lsuit
 		lsuits[initial(lsuit_type.name)] = lsuit_type
-	gear_tweaks += new/datum/gear_tweak/path(timSort(lsuits, /proc/cmp_string_asc, TRUE))
+	gear_tweaks += new/datum/gear_tweak/path(timSort(lsuits, /proc/cmp_text_asc, TRUE))
 
 /datum/gear/uniform/suit/suit_jacket
 	display_name = "suit, modular selection"
@@ -229,7 +229,7 @@
 			continue															//VOREStation addition
 		var/obj/item/clothing/suit/msuit_type = msuit
 		msuits[initial(msuit_type.name)] = msuit_type
-	gear_tweaks += new/datum/gear_tweak/path(timSort(msuits, /proc/cmp_string_asc, TRUE))
+	gear_tweaks += new/datum/gear_tweak/path(timSort(msuits, /proc/cmp_text_asc, TRUE))
 
 /datum/gear/uniform/suit/amish  //amish
 	display_name = "suit, amish"
@@ -276,7 +276,7 @@
 	for(var/scrub in typesof(/obj/item/clothing/under/rank/medical/scrubs))
 		var/obj/item/clothing/under/rank/medical/scrubs/scrub_type = scrub
 		scrubs[initial(scrub_type.name)] = scrub_type
-	gear_tweaks += new/datum/gear_tweak/path(timSort(scrubs, /proc/cmp_string_asc, TRUE))
+	gear_tweaks += new/datum/gear_tweak/path(timSort(scrubs, /proc/cmp_text_asc, TRUE))
 
 /datum/gear/uniform/oldwoman
 	display_name = "old woman attire"
@@ -399,7 +399,7 @@
 	for(var/maid in typesof(/obj/item/clothing/under/dress/maid))
 		var/obj/item/clothing/under/dress/maid/maid_type = maid
 		maids[initial(maid_type.name)] = maid_type
-	gear_tweaks += new/datum/gear_tweak/path(timSort(maids, /proc/cmp_string_asc, TRUE))
+	gear_tweaks += new/datum/gear_tweak/path(timSort(maids, /proc/cmp_text_asc, TRUE))
 
 /datum/gear/uniform/utility
 	display_name = "utility, black"
