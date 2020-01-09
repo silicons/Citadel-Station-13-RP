@@ -24,7 +24,7 @@
 	for(var/communicator in typesof(/obj/item/device/communicator) - list(/obj/item/device/communicator/integrated,/obj/item/device/communicator/commlink)) //VOREStation Edit - Remove Commlink
 		var/obj/item/device/communicator_type = communicator
 		communicators[initial(communicator_type.name)] = communicator_type
-	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(communicators))
+	gear_tweaks += new/datum/gear_tweak/path(timSort(communicators, /proc/cmp_string_asc, TRUE))
 
 /datum/gear/utility/camera
 	display_name = "camera"

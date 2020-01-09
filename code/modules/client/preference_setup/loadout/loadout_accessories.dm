@@ -17,7 +17,7 @@
 	for(var/armband in (typesof(/obj/item/clothing/accessory/armband) - typesof(/obj/item/clothing/accessory/armband/med/color)))
 		var/obj/item/clothing/accessory/armband_type = armband
 		armbands[initial(armband_type.name)] = armband_type
-	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(armbands))
+	gear_tweaks += new/datum/gear_tweak/path(timSort(armbands, /proc/cmp_string_asc, TRUE))
 
 /datum/gear/accessory/armband/colored
 	display_name = "armband"
@@ -75,7 +75,7 @@
 	for(var/wcoat in typesof(/obj/item/clothing/accessory/wcoat))
 		var/obj/item/clothing/accessory/wcoat_type = wcoat
 		wcoats[initial(wcoat_type.name)] = wcoat_type
-	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(wcoats))
+	gear_tweaks += new/datum/gear_tweak/path(timSort(wcoats, /proc/cmp_string_asc, TRUE))
 
 /datum/gear/accessory/holster
 	display_name = "holster selection"
@@ -88,7 +88,7 @@
 	for(var/holster in typesof(/obj/item/clothing/accessory/holster))
 		var/obj/item/clothing/accessory/holster_type = holster
 		holsters[initial(holster_type.name)] = holster_type
-	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(holsters))
+	gear_tweaks += new/datum/gear_tweak/path(timSort(holsters, /proc/cmp_string_asc, TRUE))
 
 /datum/gear/accessory/tie
 	display_name = "tie selection"
@@ -101,7 +101,7 @@
 	for(var/tie in typesof(/obj/item/clothing/accessory/tie))
 		var/obj/item/clothing/accessory/tie_type = tie
 		ties[initial(tie_type.name)] = tie_type
-	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(ties))
+	gear_tweaks += new/datum/gear_tweak/path(timSort(ties, /proc/cmp_string_asc, TRUE))
 
 /datum/gear/accessory/scarf
 	display_name = "scarf selection"
@@ -114,7 +114,7 @@
 	for(var/scarf in typesof(/obj/item/clothing/accessory/scarf))
 		var/obj/item/clothing/accessory/scarf_type = scarf
 		scarfs[initial(scarf_type.name)] = scarf_type
-	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(scarfs))
+	gear_tweaks += new/datum/gear_tweak/path(timSort(scarfs, /proc/cmp_string_asc, TRUE))
 
 /datum/gear/accessory/jacket
 	display_name = "suit jacket selection"
@@ -127,7 +127,7 @@
 	for(var/jacket in typesof(/obj/item/clothing/accessory/jacket))
 		var/obj/item/clothing/accessory/jacket_type = jacket
 		jackets[initial(jacket_type.name)] = jacket_type
-	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(jackets))
+	gear_tweaks += new/datum/gear_tweak/path(timSort(jackets, /proc/cmp_string_asc, TRUE))
 
 /datum/gear/accessory/suitvest
 	display_name = "suit vest"
@@ -179,7 +179,7 @@
 	for(var/fanny in typesof(/obj/item/weapon/storage/belt/fannypack))
 		var/obj/item/weapon/storage/belt/fannypack/fanny_type = fanny
 		fannys[initial(fanny_type.name)] = fanny_type
-	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(fannys))
+	gear_tweaks += new/datum/gear_tweak/path(timSort(fannys, /proc/cmp_string_asc, TRUE))
 
 /datum/gear/accessory/webbing
 	display_name = "webbing, simple"
@@ -217,7 +217,7 @@
 	for(var/sweater in typesof(/obj/item/clothing/accessory/sweater))
 		var/obj/item/clothing/suit/sweater_type = sweater
 		sweaters[initial(sweater_type.name)] = sweater_type
-	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(sweaters))
+	gear_tweaks += new/datum/gear_tweak/path(timSort(sweaters, /proc/cmp_string_asc, TRUE))
 
 /datum/gear/accessory/bracelet/material
 	display_name = "bracelet selection"
@@ -282,7 +282,7 @@
 	for(var/asym in typesof(/obj/item/clothing/accessory/asymmetric))
 		var/obj/item/clothing/accessory/asymmetric_type = asym
 		asyms[initial(asymmetric_type.name)] = asymmetric_type
-	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(asyms))
+	gear_tweaks += new/datum/gear_tweak/path(timSort(asyms, /proc/cmp_string_asc, TRUE))
 
 /datum/gear/accessory/cowledvest
 	display_name = "cowled vest"

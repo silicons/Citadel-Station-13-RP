@@ -154,7 +154,7 @@ Swimsuits
 	for(var/swimsuit in typesof(/obj/item/weapon/storage/box/fluff/swimsuit))
 		var/obj/item/weapon/storage/box/fluff/swimsuit/swimsuit_type = swimsuit
 		swimsuits[initial(swimsuit_type.name)] = swimsuit_type
-	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(swimsuits))
+	gear_tweaks += new/datum/gear_tweak/path(timSort(swimsuits, /proc/cmp_string_asc, TRUE))
 
 /datum/gear/uniform/suit/gnshorts
 	display_name = "GN shorts"
