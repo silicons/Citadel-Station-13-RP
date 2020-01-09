@@ -33,7 +33,7 @@
 		last_threaten_time = world.time
 
 		if(holder.say_list)
-			holder.ISay(safepick(holder.say_list.say_threaten))
+			holder.ISay(SAFEPICK(holder.say_list.say_threaten))
 			playsound(holder.loc, holder.say_list.threaten_sound, 50, 1) // We do this twice to make the sound -very- noticable to the target.
 			playsound(target.loc, holder.say_list.threaten_sound, 50, 1) // Actual aim-mode also does that so at least it's consistant.
 	else // Otherwise we are waiting for them to go away or to wait long enough for escalate.
@@ -47,7 +47,7 @@
 				threatening = FALSE
 				set_stance(STANCE_APPROACH)
 				if(holder.say_list)
-					holder.ISay(safepick(holder.say_list.say_escalate))
+					holder.ISay(SAFEPICK(holder.say_list.say_escalate))
 			else
 				return // Wait a bit.
 
@@ -56,7 +56,7 @@
 				threatening = FALSE
 			set_stance(STANCE_IDLE)
 			if(holder.say_list)
-				holder.ISay(safepick(holder.say_list.say_stand_down))
+				holder.ISay(SAFEPICK(holder.say_list.say_stand_down))
 				playsound(holder.loc, holder.say_list.stand_down_sound, 50, 1) // We do this twice to make the sound -very- noticable to the target.
 				playsound(target.loc, holder.say_list.stand_down_sound, 50, 1) // Actual aim-mode also does that so at least it's consistant.
 
@@ -108,11 +108,11 @@
 
 		switch(pick(comm_types))
 			if(COMM_SAY)
-				holder.ISay(safepick(holder.say_list.speak))
+				holder.ISay(SAFEPICK(holder.say_list.speak))
 			if(COMM_AUDIBLE_EMOTE)
-				holder.audible_emote(safepick(holder.say_list.emote_hear))
+				holder.audible_emote(SAFEPICK(holder.say_list.emote_hear))
 			if(COMM_VISUAL_EMOTE)
-				holder.visible_emote(safepick(holder.say_list.emote_see))
+				holder.visible_emote(SAFEPICK(holder.say_list.emote_see))
 
 #undef COMM_SAY
 #undef COMM_AUDIBLE_EMOTE
