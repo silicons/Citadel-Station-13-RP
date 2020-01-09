@@ -45,6 +45,7 @@
 	cost = 7
 	containertype = /obj/structure/largecrate/animal/crab
 	containername = "Crab Crate"
+
 /datum/supply_pack/misc/medical_rig
 	name = "medical hardsuit (empty)"
 	contains = list(
@@ -73,7 +74,29 @@
 	/obj/item/weapon/tank/vox = 3,
 	)
 	cost = 40
-	containername = "spare phoronoid suits"/datum/supply_pack/misc/ce_rig
+	containername = "spare phoronoid suits"
+
+/datum/supply_pack/misc/security_rig
+	name = "hazard hardsuit (empty)"
+	contains = list(
+			/obj/item/weapon/rig/hazard = 1
+			)
+	cost = 150
+	containertype = /obj/structure/closet/crate/secure/gear
+	containername = "hazard hardsuit crate"
+	access = access_armory
+
+/datum/supply_pack/misc/science_rig
+	name = "ami hardsuit (empty)"
+	contains = list(
+			/obj/item/weapon/rig/hazmat = 1
+			)
+	cost = 150
+	containertype = /obj/structure/closet/crate/secure/gear
+	containername = "ami hardsuit crate"
+	access = access_rd
+
+/datum/supply_pack/misc/ce_rig
 	name = "advanced voidsuit (empty)"
 	contains = list(
 			/obj/item/weapon/rig/ce = 1
