@@ -278,7 +278,7 @@
 		//VOREStation Edit - Trying to fix some vorestation bug.
 		if(!istype(mob, /mob))
 			player_list -= mob
-			stack_trace("There is a null or non-mob reference inside player_list ([mob]).")
+			crash_with("There is a null or non-mob reference inside player_list ([mob]).")
 			continue
 		//VOREStation Edit End - Trying to fix some vorestation bug.
 		if(get_turf(mob) in hearturfs)
@@ -426,7 +426,7 @@ proc/isInSight(var/atom/A, var/atom/B)
 
 /proc/Show2Group4Delay(obj/O, list/group, delay=0)
 	if(!isobj(O))	return
-	if(!group)	group = GLOB.clients
+	if(!group)	group = clients
 	for(var/client/C in group)
 		C.screen += O
 	if(delay)
