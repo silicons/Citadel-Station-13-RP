@@ -16,5 +16,5 @@
 		SI.cmp = cmp
 		SI.associative = associative
 
-		SI.timSort(fromIndex, toIndex)
+		SI.sortTim(fromIndex, toIndex)
 	return L

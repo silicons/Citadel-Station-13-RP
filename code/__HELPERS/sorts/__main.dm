@@ -31,7 +31,7 @@ GLOBAL_DATUM_INIT(sortInstance, /datum/sortInstance, new())
 	var/list/runLens = list()
 
 
-/datum/sortInstance/proc/timSort(start, end)
+/datum/sortInstance/proc/sortTim(start, end)
 	runBases.Cut()
 	runLens.Cut()
 

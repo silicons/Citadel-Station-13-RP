@@ -387,7 +387,7 @@ var/list/teleportlocs = list()
 			teleportlocs += AR.name
 			teleportlocs[AR.name] = AR
 
-	teleportlocs = timSort(teleportlocs, /proc/cmp_text_asc, TRUE)
+	teleportlocs = sortTim(teleportlocs, /proc/cmp_text_asc, TRUE)
 
 	return 1
 
@@ -404,6 +404,6 @@ var/list/ghostteleportlocs = list()
 			ghostteleportlocs += AR.name
 			ghostteleportlocs[AR.name] = AR
 
-	ghostteleportlocs = timSort(ghostteleportlocs, /proc/cmp_text_asc, TRUE)
+	ghostteleportlocs = sortTim(ghostteleportlocs, /proc/cmp_text_asc, TRUE)
 
 	return 1

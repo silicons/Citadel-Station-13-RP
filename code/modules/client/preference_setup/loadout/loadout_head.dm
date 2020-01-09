@@ -175,7 +175,7 @@
 	for(var/pin in typesof(/obj/item/clothing/head/pin))
 		var/obj/item/clothing/head/pin/pin_type = pin
 		pins[initial(pin_type.name)] = pin_type
-	gear_tweaks += new/datum/gear_tweak/path(timSort(pins, /proc/cmp_text_asc, TRUE))
+	gear_tweaks += new/datum/gear_tweak/path(sortTim(pins, /proc/cmp_text_asc, TRUE))
 
 /datum/gear/head/hardhat
 	display_name = "hardhat selection"
@@ -188,7 +188,7 @@
 	for(var/hardhat in typesof(/obj/item/clothing/head/hardhat))
 		var/obj/item/clothing/head/hardhat/hardhat_type = hardhat
 		hardhats[initial(hardhat_type.name)] = hardhat_type
-	gear_tweaks += new/datum/gear_tweak/path(timSort(hardhats, /proc/cmp_text_asc, TRUE))
+	gear_tweaks += new/datum/gear_tweak/path(sortTim(hardhats, /proc/cmp_text_asc, TRUE))
 
 /datum/gear/head/boater
 	display_name = "hat, boatsman"
@@ -229,7 +229,7 @@
 	for(var/santahat in typesof(/obj/item/clothing/head/santa))
 		var/obj/item/clothing/head/santa/santahat_type = santahat
 		santahats[initial(santahat_type.name)] = santahat_type
-	gear_tweaks += new/datum/gear_tweak/path(timSort(santahats, /proc/cmp_text_asc, TRUE))
+	gear_tweaks += new/datum/gear_tweak/path(sortTim(santahats, /proc/cmp_text_asc, TRUE))
 
 /datum/gear/head/hijab
 	display_name = "hijab"
@@ -355,7 +355,7 @@
 	for(var/sol_style in typesof(/obj/item/clothing/head/beret/sol))
 		var/obj/item/clothing/head/beret/sol/sol = sol_style
 		sols[initial(sol.name)] = sol
-	gear_tweaks += new/datum/gear_tweak/path(timSort(sols, /proc/cmp_text_asc, TRUE))*/ // Vorestation removal.
+	gear_tweaks += new/datum/gear_tweak/path(sortTim(sols, /proc/cmp_text_asc, TRUE))*/ // Vorestation removal.
 
 /datum/gear/head/surgery
 	display_name = "surgical cap selection"

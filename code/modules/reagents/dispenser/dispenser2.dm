@@ -54,7 +54,7 @@
 
 	C.loc = src
 	cartridges[C.label] = C
-	cartridges = timSort(cartridges, /proc/cmp_text_asc, TRUE)
+	cartridges = sortTim(cartridges, /proc/cmp_text_asc, TRUE)
 	SSnanoui.update_uis(src)
 
 /obj/machinery/chemical_dispenser/proc/remove_cartridge(label)
