@@ -8,6 +8,14 @@
 				return soft_type
 		return src.default_attack
 	// VOREStation Edit - End
+	if(src.gloves)
+		var/obj/item/clothing/gloves/G = src.gloves
+		if(istype(G) && G.special_attack && G.special_attack.is_usable(src, target, hit_zone))
+			if(pulling_punches)
+				var/datum/unarmed_attack/soft_type = G.special_attack.get_sparring_variant()
+				if(soft_type)
+					return soft_type
+			return G.special_attack
 	for(var/datum/unarmed_attack/u_attack in species.unarmed_attacks)
 		if(u_attack.is_usable(src, target, hit_zone))
 			if(pulling_punches)
@@ -27,6 +35,8 @@
 		if(!temp || !temp.is_usable())
 			H << "<font color='red'>You can't use your hand.</font>"
 			return
+	if(H.lying)
+		return
 	M.break_cloak()
 
 	..()
@@ -39,39 +49,11 @@
 				H.do_attack_animation(src)
 				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 				visible_message("<font color='red'><B>[H] reaches for [src], but misses!</B></font>")
-				return 0
+				return FALSE
 
 		if(H != src && check_shields(0, null, H, H.zone_sel.selecting, H.name))
 			H.do_attack_animation(src)
-			return 0
-
-		if(istype(H.gloves, /obj/item/clothing/gloves/boxing/hologlove))
-			H.do_attack_animation(src)
-			var/damage = rand(0, 9)
-			if(!damage)
-				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
-				visible_message("<font color='red'><B>[H] has attempted to punch [src]!</B></font>")
-				return 0
-			var/obj/item/organ/external/affecting = get_organ(ran_zone(H.zone_sel.selecting))
-			var/armor_block = run_armor_check(affecting, "melee")
-			var/armor_soak = get_armor_soak(affecting, "melee")
-
-			if(HULK in H.mutations)
-				damage += 5
-
-			playsound(loc, "punch", 25, 1, -1)
-
-			visible_message("<font color='red'><B>[H] has punched [src]!</B></font>")
-
-			if(armor_soak >= damage)
-				return
-
-			apply_damage(damage, HALLOSS, affecting, armor_block, armor_soak)
-			if(damage >= 9)
-				visible_message("<font color='red'><B>[H] has weakened [src]!</B></font>")
-				apply_effect(4, WEAKEN, armor_block)
-
-			return
+			return FALSE
 
 	if(istype(M,/mob/living/carbon))
 		var/mob/living/carbon/C = M
@@ -105,7 +87,7 @@
 				spawn(30)
 					cpr_time = 1
 
-				H.visible_message("<span class='danger'>\The [H] is trying perform CPR on \the [src]!</span>")
+				H.visible_message("<span class='danger'>\The [H] is trying to perform CPR on \the [src]!</span>")
 
 				if(!do_after(H, 30))
 					return
@@ -120,7 +102,7 @@
 
 			else if(!(M == src && apply_pressure(M, M.zone_sel.selecting)))
 				help_shake_act(M)
-			return 1
+			return TRUE
 
 		if(I_GRAB)
 			if(M == src || anchored)
