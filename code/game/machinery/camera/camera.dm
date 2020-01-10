@@ -62,7 +62,7 @@
 	wires = new(src)
 	assembly = new(src)
 	assembly.state = 4
-	GLOB.client_huds |= global_hud.whitense
+	GLOB.client_huds |= GLOB.global_hud.whitense
 
 	/* // Use this to look for cameras that have the same c_tag.
 	for(var/obj/machinery/camera/C in cameranet.cameras)

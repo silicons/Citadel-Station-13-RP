@@ -44,8 +44,6 @@
 	flags =  NO_SCAN | NO_MINOR_CUT | NO_INFECT
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_WHITELIST_SELECTABLE
 
-	reagent_tag = IS_SHADEKIN		// for shadekin-unqiue chem interactions
-
 	flesh_color = "#FFC896"
 	blood_color = "#A10808"
 	base_color = "#f0f0f0"

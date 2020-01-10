@@ -28,6 +28,8 @@ var/list/global/map_templates = list()
 
 	var/static/dmm_suite/maploader = new
 
+	var/fixed_orientation = FALSE		//for ruins
+
 /datum/map_template/New(path = null, rename = null)
 	if(path)
 		mappath = path

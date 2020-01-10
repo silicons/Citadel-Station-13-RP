@@ -13,9 +13,9 @@
 	subspace_transmission = 1
 	adhoc_fallback = TRUE
 
-/obj/item/device/radio/emergency/New()
-	..()
-	internal_channels = default_medbay_channels.Copy()
+/obj/item/device/radio/emergency/Initialize(mapload)
+	. = ..()
+	internal_channels = GLOB.default_medbay_channels.Copy()
 
 //Pathfinder's Subspace Radio
 /obj/item/device/subspaceradio
@@ -33,14 +33,11 @@
 	w_class = ITEMSIZE_LARGE
 	action_button_name = "Remove/Replace Handset"
 
-	var/obj/item/device/radio/subspacehandset/linked/handset
+	var/obj/item/device/radio/subspacehandset/linked/handset = /obj/item/device/radio/subspacehandset/linked
 
-/obj/item/device/subspaceradio/New() //starts without a cell for rnd
-	..()
-	if(ispath(handset))
-		handset = new handset(src, src)
-	else
-		handset = new(src, src)
+/obj/item/device/subspaceradio/Initialize(Mapload) //starts without a cell for rnd
+	. = ..()
+	handset = new(src, src)
 
 /obj/item/device/subspaceradio/Destroy()
 	. = ..()

@@ -3362,19 +3362,50 @@ END CITADEL CHANGE */
 /obj/item/weapon/reagent_containers/food/snacks/rawsticks/Initialize()
 	. = ..()
 
-/obj/item/weapon/reagent_containers/food/snacks/liquidfood
-	name = "\improper LiquidFood Ration"
-	desc = "A prepackaged grey slurry of all the essential nutrients for a spacefarer on the go. Should this be crunchy?"
-	icon_state = "liquidfood"
-	trash = /obj/item/trash/liquidfood
+/obj/item/weapon/reagent_containers/food/snacks/liquidprotein
+	name = "\improper LiquidProtein Ration"
+	desc = "A variant of the liquidfood ration, designed for obligate carnivore species. Only barely more appealing than regular liquidfood. Should this be crunchy?"
+	icon_state = "liquidprotein"
+	trash = /obj/item/trash/liquidprotein
 	filling_color = "#A8A8A8"
-	nutriment_amt = 20
-	nutriment_desc = list("chalk" = 6)
+	survivalfood = TRUE
+	center_of_mass = list("x"=16, "y"=15)
 
-/obj/item/weapon/reagent_containers/food/snacks/liquidfood/Initialize()
-	. = ..()
+/obj/item/weapon/reagent_containers/food/snacks/liquidprotein/Initialize()
+	..()
+	reagents.add_reagent("protein", 30)
 	reagents.add_reagent("iron", 3)
 	bitesize = 4
+
+/obj/item/weapon/reagent_containers/food/snacks/liquidvitamin
+	name = "\improper VitaPaste Ration"
+	desc = "A variant of the liquidfood ration, designed for any carbon-based life. Somehow worse than regular liquidfood. Should this be crunchy?"
+	icon_state = "liquidvitamin"
+	trash = /obj/item/trash/liquidvitamin
+	filling_color = "#A8A8A8"
+	survivalfood = TRUE
+	center_of_mass = list("x"=16, "y"=15)
+
+/obj/item/weapon/reagent_containers/food/snacks/liquidvitamin/Initialize()
+	..()
+	reagents.add_reagent("flour", 20)
+	reagents.add_reagent("tricordrazine", 5)
+	reagents.add_reagent("paracetamol", 5)
+	reagents.add_reagent("enzyme", 1)
+	reagents.add_reagent("iron", 3)
+	bitesize = 4
+
+/obj/item/weapon/reagent_containers/food/snacks/meatcube
+	name = "cubed meat"
+	desc = "Fried, salted lean meat compressed into a cube. Not very appetizing."
+	icon_state = "meatcube"
+	filling_color = "#7a3d11"
+	center_of_mass = list("x"=16, "y"=16)
+
+/obj/item/weapon/reagent_containers/food/snacks/meatcube/Initialize()
+	. = ..()
+	reagents.add_reagent("protein", 15)
+	bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/tastybread
 	name = "bread tube"
@@ -3382,6 +3413,7 @@ END CITADEL CHANGE */
 	icon_state = "tastybread"
 	trash = /obj/item/trash/tastybread
 	filling_color = "#A66829"
+	center_of_mass = list("x"=17, "y"=16)
 	nutriment_amt = 6
 	nutriment_desc = list("bread" = 2, "sweetness" = 3)
 

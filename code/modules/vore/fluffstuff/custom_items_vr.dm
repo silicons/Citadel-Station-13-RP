@@ -66,6 +66,7 @@
 	if(!parts)
 		qdel(src)
 
+/*
 //JoanRisu:Joan Risu
 /obj/item/weapon/flame/lighter/zippo/fluff/joan
 	name = "Federation Zippo Lighter"
@@ -100,6 +101,7 @@
 /obj/item/weapon/material/knife/tacknife/combatknife/fluff/katarina
 	name = "tactical Knife"
 	desc = "A tactical knife with a small butterly engraved on the blade."
+*/
 
 /obj/item/weapon/material/knife/tacknife/combatknife/fluff/katarina/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 
@@ -117,7 +119,7 @@
 	icon_state = "scisword"
 	origin_tech = "materials=7"
 
-
+/*
 //john.wayne9392:Harmony Prechtl
 /obj/item/weapon/twohanded/fireaxe/fluff/mjollnir
 	name = "Mjollnir"
@@ -193,6 +195,7 @@
 	from_suit = /obj/item/clothing/suit/space/void
 	to_helmet = /obj/item/clothing/head/helmet/space/void/engineering/hazmat/fluff/screehelm
 	to_suit = /obj/item/clothing/suit/space/void/engineering/hazmat/fluff/screespess
+*/
 
 //General Use
 /obj/item/weapon/flag
