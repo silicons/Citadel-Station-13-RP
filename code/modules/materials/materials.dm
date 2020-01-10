@@ -714,7 +714,7 @@ var/list/name_to_material
 
 // Particle Smasher and other exotic materials.
 
-/material/verdantium
+/datum/material/verdantium
 	name = MAT_VERDANTIUM
 	stack_type = /obj/item/stack/material/verdantium
 	icon_base = "metal"
@@ -734,7 +734,7 @@ var/list/name_to_material
 	sheet_singular_name = "sheet"
 	sheet_plural_name = "sheets"
 
-/material/morphium
+/datum/material/morphium
 	name = MAT_MORPHIUM
 	stack_type = /obj/item/stack/material/morphium
 	icon_base = "metal"
@@ -754,13 +754,13 @@ var/list/name_to_material
 	radiation_resistance = 10
 	stack_origin_tech = list(TECH_MATERIAL = 8, TECH_ILLEGAL = 1, TECH_PHORON = 4, TECH_BLUESPACE = 4, TECH_ARCANE = 1)
 
-/material/morphium/hull
+/datum/material/morphium/hull
 	name = MAT_MORPHIUMHULL
 	stack_type = /obj/item/stack/material/morphium/hull
 	icon_base = "hull"
 	icon_reinf = "reinf_mesh"
 
-/material/valhollide
+/datum/material/valhollide
 	name = MAT_VALHOLLIDE
 	stack_type = /obj/item/stack/material/valhollide
 	icon_base = "stone"

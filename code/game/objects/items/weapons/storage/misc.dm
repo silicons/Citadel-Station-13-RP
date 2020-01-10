@@ -25,7 +25,6 @@
 /obj/item/weapon/storage/box/donut/empty
 	empty = TRUE
 
-/*
 /obj/item/weapon/storage/box/wormcan
 	icon = 'icons/obj/food.dmi'
 	icon_state = "wormcan"
@@ -68,4 +67,3 @@
 /obj/item/weapon/storage/box/wormcan/deluxe/update_icon(var/itemremoved = 0)
 	if (contents.len == 0)
 		icon_state = "wormcan_empty_deluxe"
-*/
