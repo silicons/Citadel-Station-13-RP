@@ -463,10 +463,10 @@ var/list/name_to_material
 	explosion_resistance = 90
 	reflectivity = 0.9
 
-/material/durasteel/hull/place_sheet(var/turf/target) //Deconstructed into normal durasteel sheets.
+/datum/material/durasteel/hull/place_sheet(var/turf/target) //Deconstructed into normal durasteel sheets.
 	new /obj/item/stack/material/durasteel(target)
 
-/material/plasteel/titanium
+/datum/material/plasteel/titanium
 	name = MAT_TITANIUM
 	stack_type = /obj/item/stack/material/titanium
 	conductivity = 2.38
@@ -842,7 +842,7 @@ var/list/name_to_material
 		return 1
 	return 0
 
-/material/resin/wall_touch_special(var/turf/simulated/wall/W, var/mob/living/L)
+/datum/material/resin/wall_touch_special(var/turf/simulated/wall/W, var/mob/living/L)
 	var/mob/living/carbon/M = L
 	if(istype(M) && locate(/obj/item/organ/internal/xenos/hivenode) in M.internal_organs)
 		to_chat(M, "<span class='alien'>\The [W] shudders under your touch, starting to become porous.</span>")
