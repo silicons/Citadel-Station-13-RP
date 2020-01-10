@@ -44,11 +44,11 @@
 
 /obj/item/weapon/card/mining_point_card/onethou
 	name = "deluxe mining point card"
-	points = 1000
+	mine_points = 1000
 
 /obj/item/weapon/card/mining_point_card/twothou
 	name = "deluxe mining point card"
-	points = 2000
+	mine_points = 2000
 
 /obj/item/weapon/card/mining_point_card/threethou
 	name = "deluxe mining point card"

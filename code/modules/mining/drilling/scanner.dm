@@ -36,7 +36,7 @@
 
 	ScanTurf(user, get_turf(user), scan_exact_amounts, scan_exact_ores)
 
-/obj/item/weapon/mining_scanner/proc/ScanTurf(atom/target, /user, exact_amount = FALSE, exact_ores = FALSE)
+/obj/item/weapon/mining_scanner/proc/ScanTurf(atom/target, mob/user, exact_amount = FALSE, exact_ores = FALSE)
 	var/list/metals = list(
 		"surface minerals" = 0,
 		"precious metals" = 0,
@@ -70,7 +70,7 @@
 			if(ore_type)
 				metals[ore_type] += T.resources[metal]
 
-	to_chat(user,"\icon[src] <span class='notice'>The scanner beeps and displays a readout.</span>")
+	to_chat(user, "\icon[src] <span class='notice'>The scanner beeps and displays a readout.</span>")
 	var/list/results = list()
 	for(var/ore_type in metals)
 		var/result = "no sign"
