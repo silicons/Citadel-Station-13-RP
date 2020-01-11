@@ -86,7 +86,7 @@
 				if(76 to INFINITY)
 					result = "huge quantities"
 		results += result
-	to_chat(user, results.join("<br>"))
+	to_chat(user, results.Join("<br>"))
 
 /obj/item/weapon/mining_scanner/advanced
 	name = "advanced ore detector"
@@ -97,6 +97,6 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 2000, "glass" = 1000)
 	scanrange = 5
 	maxscanrange = 5
-	scantime = 10
+	scan_time = 1 SECONDS
 	scan_exact_ores = TRUE
 	scan_exact_amounts = TRUE

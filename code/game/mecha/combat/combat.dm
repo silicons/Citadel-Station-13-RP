@@ -28,7 +28,7 @@
 
 /obj/mecha/combat/melee_action(atom/T)
 	if(internal_damage&MECHA_INT_CONTROL_LOST)
-		T = safepick(oview(1,src))
+		T = SAFEPICK(oview(1,src))
 	if(!melee_can_hit)
 		return
 	if(istype(T, /mob/living))

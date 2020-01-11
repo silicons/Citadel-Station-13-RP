@@ -148,6 +148,7 @@
 	name = "Away Mission - Aerostat Surface"
 	z = Z_LEVEL_AEROSTAT_SURFACE
 
+/*
 
 #include "space/_debrisfield.dm"
 #include "space/pois/_templates.dm"
@@ -167,8 +168,11 @@
 	name = "Away Mission - Debris Field"
 	z = Z_LEVEL_DEBRISFIELD
 
+*/
+
 //////////////////////////////////////////////////////////////////////////////////////
 // Gateway submaps go here
+/*
 /datum/map_template/tether_lateload/gateway
 	name = "Gateway Submap"
 	desc = "Please do not use this."
@@ -213,6 +217,7 @@
 	desc = "Asteroid-bound mercenary listening post"
 	mappath = 'gateway/listeningpost.dmm'
 	associated_map_datum = /datum/map_z_level/tether_lateload/gateway_destination
+*/
 //////////////////////////////////////////////////////////////////////////////////////
 // Admin-use z-levels for loading whenever an admin feels like
 #if AWAY_MISSION_TEST

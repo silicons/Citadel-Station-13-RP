@@ -547,7 +547,7 @@
 	var/datum/matter_synth/wire = new /datum/matter_synth/wire()
 	synths += metal
 	synths += glass
-	synths += plasteel
+	//synths += plasteel
 	synths += wood
 	synths += plastic
 	synths += wire
