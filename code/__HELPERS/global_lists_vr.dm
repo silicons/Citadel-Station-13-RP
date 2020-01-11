@@ -39,8 +39,8 @@ var/global/list/item_vore_blacklist = list(
 		/obj/item/clothing/shoes/magboots,
 		/obj/item/blueprints,
 		/obj/item/clothing/head/helmet/space,
-		/obj/item/weapon/disk/nuclear,
-		/obj/item/clothing/suit/storage/hooded/wintercoat/roiz)
+		/obj/item/weapon/disk/nuclear)
+//		/obj/item/clothing/suit/storage/hooded/wintercoat/roiz)
 
 //Classic Vore sounds
 var/global/list/classic_vore_sounds = list(
