@@ -52,6 +52,8 @@
 
 /obj/item/weapon/card/mining_point_card/threethou
 	name = "deluxe mining point card"
-	points = 3000/obj/item/weapon/card/mining_point_card/survey
+	points = 3000
+
+/obj/item/weapon/card/mining_point_card/survey
 	mine_points = 0
 	survey_points = 50
