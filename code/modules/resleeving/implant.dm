@@ -40,7 +40,7 @@
 /obj/item/weapon/backup_implanter
 	name = "backup implanter"
 	desc = "After discovering that Nanotrasen was just re-using the same implanters over and over again on organics, leading to cross-contamination, Kitsuhana Heavy industries designed this self-cleaning model. Holds four backup implants at a time."
-	catalogue_data = list(/datum/category_item/catalogue/information/organization/khi,
+	catalogue_data = list(///datum/category_item/catalogue/information/organization/khi,
 						/datum/category_item/catalogue/technology/resleeving)
 	icon = 'icons/obj/device_alt.dmi'
 	icon_state = "bimplant"

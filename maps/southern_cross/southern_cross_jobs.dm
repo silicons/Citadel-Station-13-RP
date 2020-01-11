@@ -4,6 +4,7 @@ var/const/SAR 				=(1<<11)
 var/const/PILOT 			=(1<<13)
 var/const/EXPLORER 			=(1<<14)
 
+/*
 var/const/access_pilot = 67
 var/const/access_explorer = 43
 
@@ -16,6 +17,7 @@ var/const/access_explorer = 43
 	id = access_explorer
 	desc = "Explorer"
 	region = ACCESS_REGION_GENERAL
+*/
 
 //SC IDs
 

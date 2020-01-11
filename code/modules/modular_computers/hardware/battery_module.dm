@@ -64,14 +64,14 @@
 	..()
 	to_chat(user, "Internal battery charge: [battery.charge]/[battery.maxcharge] CU")
 
-/obj/item/weapon/computer_hardware/battery_module/New()
-	battery = new/obj/item/weapon/cell(src)
+/obj/item/weapon/computer_hardware/battery_module/Initialize(mapload)
+	battery = new /obj/item/weapon/cell(src)
 	battery.maxcharge = battery_rating
 	battery.charge = 0
-	..()
+	return ..()
 
 /obj/item/weapon/computer_hardware/battery_module/Destroy()
-	qdel_null(battery)
+	QDEL_NULL(batery)
 	return ..()
 
 /obj/item/weapon/computer_hardware/battery_module/proc/charge_to_full()

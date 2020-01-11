@@ -133,7 +133,8 @@ var/global/list/ore_data = list()
 	smelts_to = "tritium"
 	compresses_to = "mhydrogen"
 	scan_icon = "mineral_rare"
-/ore/verdantium
+
+/datum/ore/verdantium
 	name = MAT_VERDANTIUM
 	display_name = "crystalline verdantite"
 	compresses_to = MAT_VERDANTIUM
@@ -146,7 +147,7 @@ var/global/list/ore_data = list()
 		"billion_lower" = 10
 		)
 
-/ore/marble
+/datum/ore/marble
 	name = MAT_MARBLE
 	display_name = "recrystallized carbonate"
 	compresses_to = "marble"
@@ -155,7 +156,7 @@ var/global/list/ore_data = list()
 	ore = /obj/item/weapon/ore/marble
 	scan_icon = "mineral_common"
 
-/ore/lead
+/datum/ore/lead
 	name = MAT_LEAD
 	display_name = "lead glance"
 	smelts_to = "lead"

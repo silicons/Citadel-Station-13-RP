@@ -28,7 +28,7 @@ var/const/SAR 				=(1<<14)
 	rank = "Explorer"
 	job_access_type = /datum/job/explorer
 
-/obj/item/weapon/card/id/explorer/head/
+/obj/item/weapon/card/id/explorer/head
 	name = "identification card"
 	desc = "A card which represents discovery of the unknown."
 	icon_state = "cyanGold"
@@ -105,8 +105,8 @@ var/const/SAR 				=(1<<14)
 	idtype = /obj/item/weapon/card/id/medical/sar
 	economic_modifier = 6
 	minimal_player_age = 3
-	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_eva, access_maint_tunnels, access_external_airlocks, access_pilot)
-	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_pilot)
+	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_eva, access_maint_tunnels, access_external_airlocks, access_psychiatrist, access_explorer)
+	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_explorer)
 	outfit_type = /decl/hierarchy/outfit/job/medical/sar
 
 /datum/job/offduty_exploration
