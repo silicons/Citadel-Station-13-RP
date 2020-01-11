@@ -29,7 +29,7 @@
 	icon_state = "nsfw_mag"
 	max_ammo = 4
 	x_offset = 4
-	catalogue_data = list(/datum/category_item/catalogue/information/organization/khi)
+	catalogue_data = null//list(/datum/category_item/catalogue/information/organization/khi)
 	description_info = "This magazine holds NSFW microbatteries to power the NSFW handgun. Up to three can be loaded at once, and each provides four shots of their respective energy type. Loading multiple of the same type will provide additional shots of that type. The batteries can be recharged in a normal recharger."
 	ammo_type = /obj/item/ammo_casing/microbattery/combat
 
