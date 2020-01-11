@@ -71,7 +71,7 @@
 	return ..()
 
 /obj/item/weapon/computer_hardware/battery_module/Destroy()
-	QDEL_NULL(batery)
+	QDEL_NULL(battery)
 	return ..()
 
 /obj/item/weapon/computer_hardware/battery_module/proc/charge_to_full()
