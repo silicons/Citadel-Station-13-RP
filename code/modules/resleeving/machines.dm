@@ -172,7 +172,7 @@
 /obj/machinery/transhuman/synthprinter
 	name = "SynthFab 3000"
 	desc = "A rapid fabricator for synthetic bodies."
-	catalogue_data = list(/datum/category_item/catalogue/information/organization/khi,
+	catalogue_data = list(///datum/category_item/catalogue/information/organization/khi,
 						/datum/category_item/catalogue/technology/resleeving)
 	icon = 'icons/obj/machines/synthpod.dmi'
 	icon_state = "pod_0"
@@ -399,7 +399,7 @@
 /obj/machinery/transhuman/resleever
 	name = "resleeving pod"
 	desc = "Used to combine mind and body into one unit."
-	catalogue_data = list(/datum/category_item/catalogue/information/organization/khi,
+	catalogue_data = list(///datum/category_item/catalogue/information/organization/khi,
 						/datum/category_item/catalogue/technology/resleeving)
 	icon = 'icons/obj/machines/implantchair.dmi'
 	icon_state = "implantchair"

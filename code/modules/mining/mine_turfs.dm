@@ -24,7 +24,7 @@ var/list/mining_overlay_cache = list()
 
 	can_dirty = FALSE
 
-	var/ore/mineral
+	var/datum/ore/mineral
 	var/sand_dug
 	var/mined_ore = 0
 	var/last_act = 0

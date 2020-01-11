@@ -7,7 +7,7 @@
 /obj/item/weapon/implant/backup
 	name = "backup implant"
 	desc = "A mindstate backup implant that occasionally stores a copy of one's mind on a central server for backup purposes."
-	catalogue_data = list(/datum/category_item/catalogue/information/organization/khi,
+	catalogue_data = list(///datum/category_item/catalogue/information/organization/khi,
 						/datum/category_item/catalogue/technology/resleeving)
 	icon = 'icons/vore/custom_items_vr.dmi'
 	icon_state = "backup_implant"
