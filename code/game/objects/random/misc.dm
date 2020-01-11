@@ -546,7 +546,9 @@
 	/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer,
 	/obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale,
 	/obj/item/weapon/reagent_containers/food/drinks/bottle/sake,
-	/obj/item/weapon/reagent_containers/food/drinks/bottle/champagne)/obj/random/janusmodule
+	/obj/item/weapon/reagent_containers/food/drinks/bottle/champagne)
+
+/obj/random/janusmodule
 	name = "random janus circuit"
 	desc = "A random (possibly broken) Janus module."
 	icon = 'icons/obj/abductor.dmi'
