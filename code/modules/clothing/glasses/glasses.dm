@@ -220,7 +220,7 @@ BLIND     // can't see anything
 
 /obj/item/clothing/glasses/graviton/New()
 	..()
-	overlay = global_hud.material
+	overlay = GLOB.global_hud.material
 
 /obj/item/clothing/glasses/regular
 	name = "prescription glasses"

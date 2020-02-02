@@ -181,8 +181,8 @@
 		Z_LEVEL_SURFACE_MID,
 		Z_LEVEL_SURFACE_HIGH,
 		Z_LEVEL_SURFACE_MINE,
-		Z_LEVEL_SOLARS,
-		Z_LEVEL_PLAINS
+		Z_LEVEL_SOLARS//,
+		//Z_LEVEL_PLAINS
 	)
 
 // Short range computers see only the six main levels, others can see the surrounding surface levels.

@@ -4,7 +4,7 @@
 	desc = "Variety is the spice of life! The KHI-102b 'Nanotech Selectable-Fire Weapon', or NSFW for short, is an unholy hybrid of an ammo-driven  \
 	energy weapon that allows the user to mix and match their own fire modes. Up to four combinations of \
 	energy beams can be configured at once. Ammo not included."
-	catalogue_data = list(/datum/category_item/catalogue/information/organization/khi)
+	//catalogue_data = list(/datum/category_item/catalogue/information/organization/khi)
 
 	description_fluff = "The Kitsuhana 'Nanotech Selectable Fire Weapon' allows one to customize their loadout in the field, or before deploying, to achieve various results in a weapon they are already familiar with wielding."
 	allowed_magazines = list(/obj/item/ammo_magazine/cell_mag/combat)

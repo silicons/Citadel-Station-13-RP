@@ -196,6 +196,11 @@
 		del_reagent(current.id)
 	return
 
+/datum/reagents/proc/get_reagent(id)
+	for(var/datum/reagent/R in reagent_list)
+		if(R.id == id)
+			return R
+
 /datum/reagents/proc/get_reagent_amount(var/id)
 	for(var/datum/reagent/current in reagent_list)
 		if(current.id == id)
