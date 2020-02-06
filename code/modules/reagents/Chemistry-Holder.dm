@@ -401,3 +401,22 @@
 
 /atom/proc/create_reagents(var/max_vol)
 	reagents = new/datum/reagents(max_vol, src)
+
+//Spreads the contents of this reagent holder all over the vicinity of the target turf.
+/datum/reagents/proc/splash_area(var/turf/epicentre, var/range = 3, var/portion = 1.0, var/multiplier = 1, var/copy = 0)
+	var/list/things = dview(range, epicentre, INVISIBILITY_LIGHTING)
+	var/list/turfs = list()
+	for (var/turf/T in things)
+		turfs += T
+	if (!turfs.len)
+		return//Nowhere to splash to, somehow
+	//Create a temporary holder to hold all the amount that will be spread
+	var/datum/reagents/R = new /datum/reagents(total_volume * portion * multiplier)
+	trans_to_holder(R, total_volume * portion, multiplier, copy)
+	//The exact amount that will be given to each turf
+	var/turfportion = R.total_volume / turfs.len
+	for (var/turf/T in turfs)
+		var/datum/reagents/TR = new /datum/reagents(turfportion)
+		R.trans_to_holder(TR, turfportion, 1, 0)
+		TR.splash_turf(T)
+	qdel(R)
