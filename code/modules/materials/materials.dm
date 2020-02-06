@@ -241,6 +241,9 @@ var/list/name_to_material
 /datum/material/proc/combustion_effect(var/turf/T, var/temperature)
 	return
 
+/datum/material/proc/wall_touch_special(var/turf/simulated/wall/W, var/mob/living/L)
+	return
+
 // Datum definitions follow.
 /datum/material/uranium
 	name = "uranium"
