@@ -1,4 +1,5 @@
-#define DEBUG
+#define get_turf(A) (get_step(A, 0))
+
 // Turf-only flags.
 #define NOJAUNT 1 // This is used in literally one place, turf.dm, to block ethereal jaunt.
 
