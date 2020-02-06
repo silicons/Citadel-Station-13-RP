@@ -1,3 +1,8 @@
+/obj/structure/window/reinforced/polarized/full
+	dir = SOUTHWEST
+	icon_state = "fwindow"
+	maxhealth = 80
+
 //Special map objects
 /obj/effect/landmark/map_data/virgo3b
     height = 7
@@ -413,9 +418,35 @@ var/global/list/latejoin_tram   = list()
 
 /obj/machinery/camera/network/exploration
 	network = list(NETWORK_EXPLORATION)
+// Underdark mob spawners
+/obj/tether_away_spawner/underdark_normal
+	name = "Underdark Normal Spawner"
+	faction = "underdark"
+	atmos_comp = TRUE
+	prob_spawn = 100
+	prob_fall = 50
+	guard = 20
+	mobs_to_pick_from = list(
+		/mob/living/simple_animal/hostile/jelly = 3,
+		/mob/living/simple_animal/hostile/giant_spider/hunter = 1,
+		/mob/living/simple_animal/hostile/giant_spider/phorogenic = 1,
+		/mob/living/simple_animal/hostile/giant_spider/lurker = 1,
+	)
 
 /obj/machinery/camera/network/research/xenobio
 	network = list(NETWORK_RESEARCH, NETWORK_XENOBIO)
+/obj/tether_away_spawner/underdark_hard
+	name = "Underdark Hard Spawner"
+	faction = "underdark"
+	atmos_comp = TRUE
+	prob_spawn = 100
+	prob_fall = 50
+	guard = 20
+	mobs_to_pick_from = list(
+		/mob/living/simple_animal/hostile/corrupthound = 1,
+		/mob/living/simple_animal/hostile/rat = 1,
+		/mob/living/simple_animal/hostile/mimic = 1
+	)
 
 //Camera monitors
 /obj/machinery/computer/security/xenobio
@@ -426,12 +457,25 @@ var/global/list/latejoin_tram   = list()
 	network = list(NETWORK_XENOBIO)
 	circuit = /obj/item/weapon/circuitboard/security/xenobio
 	light_color = "#F9BBFC"
+/obj/tether_away_spawner/underdark_boss
+	name = "Underdark Boss Spawner"
+	faction = "underdark"
+	atmos_comp = TRUE
+	prob_spawn = 100
+	prob_fall = 100
+	guard = 70
+	mobs_to_pick_from = list(
+		/mob/living/simple_animal/hostile/dragon = 1
+	)
 
 /obj/item/weapon/circuitboard/security/xenobio
 	name = T_BOARD("xenobiology camera monitor")
 	build_path = /obj/machinery/computer/security/xenobio
 	network = list(NETWORK_XENOBIO)
 	req_access = list()
+// Used at centcomm for the elevator
+/obj/machinery/cryopod/robot/door/dorms
+	spawnpoint_type = /datum/spawnpoint/tram
 
 //Dance pole
 /obj/structure/dancepole
