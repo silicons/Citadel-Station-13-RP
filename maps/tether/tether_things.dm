@@ -418,6 +418,7 @@ var/global/list/latejoin_tram   = list()
 
 /obj/machinery/camera/network/exploration
 	network = list(NETWORK_EXPLORATION)
+/*
 // Underdark mob spawners
 /obj/tether_away_spawner/underdark_normal
 	name = "Underdark Normal Spawner"
@@ -433,8 +434,6 @@ var/global/list/latejoin_tram   = list()
 		/mob/living/simple_animal/hostile/giant_spider/lurker = 1,
 	)
 
-/obj/machinery/camera/network/research/xenobio
-	network = list(NETWORK_RESEARCH, NETWORK_XENOBIO)
 /obj/tether_away_spawner/underdark_hard
 	name = "Underdark Hard Spawner"
 	faction = "underdark"
@@ -448,15 +447,6 @@ var/global/list/latejoin_tram   = list()
 		/mob/living/simple_animal/hostile/mimic = 1
 	)
 
-//Camera monitors
-/obj/machinery/computer/security/xenobio
-	name = "xenobiology camera monitor"
-	desc = "Used to access the xenobiology cell cameras."
-	icon_keyboard = "mining_key"
-	icon_screen = "mining"
-	network = list(NETWORK_XENOBIO)
-	circuit = /obj/item/weapon/circuitboard/security/xenobio
-	light_color = "#F9BBFC"
 /obj/tether_away_spawner/underdark_boss
 	name = "Underdark Boss Spawner"
 	faction = "underdark"
@@ -467,6 +457,20 @@ var/global/list/latejoin_tram   = list()
 	mobs_to_pick_from = list(
 		/mob/living/simple_animal/hostile/dragon = 1
 	)
+*/
+
+/obj/machinery/camera/network/research/xenobio
+	network = list(NETWORK_RESEARCH, NETWORK_XENOBIO)
+
+//Camera monitors
+/obj/machinery/computer/security/xenobio
+	name = "xenobiology camera monitor"
+	desc = "Used to access the xenobiology cell cameras."
+	icon_keyboard = "mining_key"
+	icon_screen = "mining"
+	network = list(NETWORK_XENOBIO)
+	circuit = /obj/item/weapon/circuitboard/security/xenobio
+	light_color = "#F9BBFC"
 
 /obj/item/weapon/circuitboard/security/xenobio
 	name = T_BOARD("xenobiology camera monitor")
