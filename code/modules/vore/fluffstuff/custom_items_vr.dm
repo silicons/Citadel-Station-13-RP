@@ -2015,6 +2015,7 @@
 	attack_verb = list("bapped", "thwapped", "bonked", "whacked")
 	icon_state = initial(icon_state)
 
+/*
 //SilencedMP5A5 - Serdykov Antoz
 /obj/item/device/modkit_conversion/hasd
 	name = "HASD EVA modification kit"
@@ -2026,6 +2027,7 @@
 	from_suit = /obj/item/clothing/suit/space/void/security
 	to_helmet = /obj/item/clothing/head/helmet/space/void/security/hasd
 	to_suit = /obj/item/clothing/suit/space/void/security/hasd
+*/
 
 //InterroLouis - Kai Highlands
 /obj/item/borg/upgrade/modkit/chassis_mod/kai

@@ -3443,7 +3443,6 @@ END CITADEL CHANGE */
 /obj/item/weapon/reagent_containers/food/snacks/skrellsnacks
 	name = "\improper SkrellSnax"
 	desc = "Cured fungus shipped all the way from Qerr'balak, almost like jerky! Almost."
-	trash = /obj/item/trash/skrellsnacks
 	icon_state = "skrellsnacks"
 	filling_color = "#A66829"
 	nutriment_amt = 10

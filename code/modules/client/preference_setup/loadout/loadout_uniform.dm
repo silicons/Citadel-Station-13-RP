@@ -526,10 +526,12 @@
 	path = /obj/item/clothing/under/solgov/utility/fleet/medical
 	allowed_roles = list("Chief Medical Officer","Medical Doctor","Chemist","Paramedic","Geneticist","Field Medic")
 
+/*
 /datum/gear/uniform/fleet/science
 	display_name = "uniform, coveralls (science)"
 	path = /obj/item/clothing/under/solgov/utility/fleet/research
 	allowed_roles = list("Research Director","Scientist","Roboticist","Xenobiologist")
+*/
 
 /datum/gear/uniform/fleet/engineering
 	display_name = "uniform, coveralls (engineering)"
@@ -557,10 +559,12 @@
 	path = /obj/item/clothing/under/solgov/utility/marine/medical
 	allowed_roles = list("Chief Medical Officer","Medical Doctor","Chemist","Paramedic","Geneticist","Field Medic")
 
+/*
 /datum/gear/uniform/marine/science
 	display_name = "uniform, fatigues (science)"
 	path = /obj/item/clothing/under/solgov/utility/marine/research
 	allowed_roles = list("Research Director","Scientist","Roboticist","Xenobiologist")
+*/
 
 /datum/gear/uniform/marine/engineering
 	display_name = "uniform, fatigues (engineering)"
