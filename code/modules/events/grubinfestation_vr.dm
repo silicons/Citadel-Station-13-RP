@@ -31,7 +31,7 @@
 
 /datum/event/grub_infestation/end()
 	var/list/area_names = list()
-	for(var/grub in exi)
+	for(var/grub in GLOB.solargrubs)
 		var/mob/living/G = grub
 		if(!G || G.stat == DEAD)
 			continue

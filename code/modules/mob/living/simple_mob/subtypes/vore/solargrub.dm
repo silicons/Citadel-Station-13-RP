@@ -8,6 +8,8 @@ List of things solar grubs should be able to do:
 6. add glow?
 */
 
+GLOBAL_LIST_EMPTY(solargrubs)
+
 /datum/category_item/catalogue/fauna/solargrub		//TODO: VIRGO_LORE_WRITING_WIP
 	name = "Solargrub"
 	desc = "Some form of mutated space larva, they seem to crop up on space stations wherever there is power. \
