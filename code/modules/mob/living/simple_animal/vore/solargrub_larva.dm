@@ -31,6 +31,7 @@ var/global/list/grub_machine_overlays = list()
 	var/static/list/ignored_machine_types = list(
 		/obj/machinery/atmospherics/unary/vent_pump,
 		/obj/machinery/atmospherics/unary/vent_scrubber,
+		/obj/machinery/light_switch,
 		/obj/machinery/door/firedoor
 		)
 
@@ -43,8 +44,9 @@ var/global/list/grub_machine_overlays = list()
 	var/power_drained = 0
 	var/forced_out = 0
 
-/mob/living/simple_mob/solargrub_larva/New()
-	..()
+/mob/living/simple_mob/solargrub_larva/Initialize(mapload)
+	. = ..()
+	GLOB.solargrubs += src
 	powermachine = new(src)
 	sparks = new(src)
 	sparks.set_up()
@@ -57,6 +59,7 @@ var/global/list/grub_machine_overlays = list()
 	return ..()
 
 /mob/living/simple_mob/solargrub_larva/Destroy()
+	GLOB.solargrubs -= src
 	QDEL_NULL(powermachine)
 	QDEL_NULL(sparks)
 	QDEL_NULL(machine_effect)

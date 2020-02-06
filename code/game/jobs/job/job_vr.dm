@@ -14,3 +14,4 @@
 // Check client-specific availability rules.
 /datum/job/proc/player_has_enough_pto(client/C)
 	return timeoff_factor >= 0 || (C && LAZYACCESS(C.department_hours, department) > 0)
+

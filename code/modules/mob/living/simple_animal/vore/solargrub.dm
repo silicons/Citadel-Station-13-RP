@@ -8,6 +8,8 @@ List of things solar grubs should be able to do:
 6. add glow?
 */
 
+GLOBAL_LIST_EMPTY(solargrubs)
+
 #define SINK_POWER 1
 
 /mob/living/simple_mob/retaliate/solargrub
@@ -58,6 +60,14 @@ List of things solar grubs should be able to do:
 	if(target_mob&& prob(emp_chance))
 		target_mob.emp_act(4) //The weakest strength of EMP
 		visible_message("<span class='danger'>The grub releases a powerful shock!</span>")
+	..()
+
+/mob/living/simple_mob/retaliate/solargrub/Destroy()
+	GLOB.solargrubs -= src
+	..()
+
+/mob/living/simple_mob/retaliate/solargrub/Initialize(mapload)
+	GLOB.solargrubs += src
 	..()
 
 /mob/living/simple_mob/retaliate/solargrub/Life()
