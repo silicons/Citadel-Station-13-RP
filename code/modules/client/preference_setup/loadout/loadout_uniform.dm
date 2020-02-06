@@ -225,8 +225,8 @@
 	..()
 	var/list/msuits = list()
 	for(var/msuit in typesof(/obj/item/clothing/under/suit_jacket))
-		if(msuit in typesof(/obj/item/clothing/under/suit_jacket/female/fluff))	//VOREStation addition
-			continue															//VOREStation addition
+		//if(msuit in typesof(/obj/item/clothing/under/suit_jacket/female/fluff))	//VOREStation addition
+		//	continue															//VOREStation addition
 		var/obj/item/clothing/suit/msuit_type = msuit
 		msuits[initial(msuit_type.name)] = msuit_type
 	gear_tweaks += new/datum/gear_tweak/path(sortTim(msuits, /proc/cmp_text_asc, TRUE))

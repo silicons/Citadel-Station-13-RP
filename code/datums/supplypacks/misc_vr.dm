@@ -39,12 +39,14 @@
 				  access_eva)
 	one_access = TRUE
 
+/*
 /datum/supply_pack/misc/looksir // CIT Change: Adds a crab crate, that isn't free
 	name = "free crabs"
 	contains = list()
 	cost = 7
 	containertype = /obj/structure/largecrate/animal/crab
 	containername = "Crab Crate"
+*/
 
 /datum/supply_pack/misc/medical_rig
 	name = "medical hardsuit (empty)"
