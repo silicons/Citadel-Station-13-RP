@@ -65,8 +65,8 @@
 	..()
 	var/list/skirts = list()
 	for(var/skirt in (typesof(/obj/item/clothing/under/skirt)))
-		if(skirt in typesof(/obj/item/clothing/under/skirt/fluff))	//VOREStation addition
-			continue												//VOREStation addition
+		//if(skirt in typesof(/obj/item/clothing/under/skirt/fluff))	//VOREStation addition
+		//	continue												//VOREStation addition
 		var/obj/item/clothing/under/skirt/skirt_type = skirt
 		skirts[initial(skirt_type.name)] = skirt_type
 	gear_tweaks += new/datum/gear_tweak/path(sortTim(skirts, /proc/cmp_text_asc, TRUE))
@@ -497,7 +497,7 @@
 
 /datum/gear/uniform/sifguard/science
 	display_name = "uniform, crew (science)"
-	path = /obj/item/clothing/under/solgov/utility/sifguard/science
+	path = /obj/item/clothing/under/solgov/utility/sifguard/research
 	allowed_roles = list("Research Director","Scientist","Roboticist","Xenobiologist")
 
 /datum/gear/uniform/sifguard/engineering
@@ -528,7 +528,7 @@
 
 /datum/gear/uniform/fleet/science
 	display_name = "uniform, coveralls (science)"
-	path = /obj/item/clothing/under/solgov/utility/fleet/science
+	path = /obj/item/clothing/under/solgov/utility/fleet/research
 	allowed_roles = list("Research Director","Scientist","Roboticist","Xenobiologist")
 
 /datum/gear/uniform/fleet/engineering
@@ -559,7 +559,7 @@
 
 /datum/gear/uniform/marine/science
 	display_name = "uniform, fatigues (science)"
-	path = /obj/item/clothing/under/solgov/utility/marine/science
+	path = /obj/item/clothing/under/solgov/utility/marine/research
 	allowed_roles = list("Research Director","Scientist","Roboticist","Xenobiologist")
 
 /datum/gear/uniform/marine/engineering

@@ -3449,7 +3449,6 @@
 #include "modular_citadel\code\game\objects\items\weapons\storage\firstaid.dm"
 #include "modular_citadel\code\game\objects\random\random_cit.dm"
 #include "modular_citadel\code\modules\admin\verbs\debug_vr.dm"
-#include "modular_citadel\code\modules\client\preference_setup\loadout.dm"
 #include "modular_citadel\code\modules\client\preference_setup\loadout_donator.dm"
 #include "modular_citadel\code\modules\client\preference_setup\loadout\loadout_general_cit.dm"
 #include "modular_citadel\code\modules\client\preference_setup\loadout\loadout_shoes_cit.dm"

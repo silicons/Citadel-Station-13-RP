@@ -46,7 +46,7 @@
 		new /datum/data/mining_equipment("Diamond Pickaxe",				/obj/item/weapon/pickaxe/diamond,									2000),
 		new /datum/data/mining_equipment("Advanced Ore Scanner",				/obj/item/weapon/mining_scanner/advanced,										2000),
 		new /datum/data/mining_equipment("Space Cash",					/obj/item/weapon/spacecash/c100,									1000),
-		new /datum/data/mining_equipment("Hardsuit - Control Module",	/obj/item/weapon/rig/industrial/vendor,									2000),
+		new /datum/data/mining_equipment("Hardsuit - Control Module",	/obj/item/weapon/rig/industrial,									2000),
 		new /datum/data/mining_equipment("Hardsuit - Plasma Cutter",		/obj/item/rig_module/device/plasmacutter,						800),
 		new /datum/data/mining_equipment("Hardsuit - Drill",				/obj/item/rig_module/device/drill,								5000),
 		new /datum/data/mining_equipment("Hardsuit - Ore Scanner",		/obj/item/rig_module/device/orescanner,								1000),

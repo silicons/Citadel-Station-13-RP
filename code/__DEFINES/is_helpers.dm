@@ -49,7 +49,7 @@
 
 #define iscarbon(A) istype(A, /mob/living/carbon)
 
-#define iscorgi(A) istype(A, /mob/living/simple_mob/passive/dog/corgi)
+#define iscorgi(A) istype(A, /mob/living/simple_mob/corgi)
 
 #define isEye(A) istype(A, /mob/observer/eye)
 
