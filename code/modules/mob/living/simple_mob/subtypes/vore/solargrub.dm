@@ -51,6 +51,14 @@ List of things solar grubs should be able to do:
 	var/obj/structure/cable/attached        // the attached cable
 	var/shock_chance = 10 // Beware
 
+/mob/living/simple_mob/vore/solargrub/Initialize(mapload)
+	GLOB.solargrubs += src
+	return ..()
+
+/mob/living/simple_mob/vore/solargrub/Destroy()
+	GLOB.solargrubs -= src
+	return ..()
+
 /datum/say_list/solargrub
 	emote_see = list("squelches", "squishes")
 

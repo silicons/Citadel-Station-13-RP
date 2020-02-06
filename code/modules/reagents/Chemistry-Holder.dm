@@ -420,3 +420,33 @@
 		R.trans_to_holder(TR, turfportion, 1, 0)
 		TR.splash_turf(T)
 	qdel(R)
+
+//Spreads the contents of this reagent holder all over the target turf, dividing among things in it.
+//50% is divided between mobs, 20% between objects, and whatever is left on the turf itself
+/datum/reagents/proc/splash_turf(var/turf/T, var/amount = null, var/multiplier = 1, var/copy = 0)
+	if (isnull(amount))
+		amount = total_volume
+	else
+		amount = min(amount, total_volume)
+	if (amount <= 0)
+		return
+	var/list/mobs = list()
+	for (var/mob/M in T)
+		mobs += M
+	var/list/objs = list()
+	for (var/obj/O in T)
+		objs += O
+	if (objs.len)
+		var/objportion = (amount * 0.2) / objs.len
+		for (var/o in objs)
+			var/obj/O = o
+			trans_to(O, objportion, multiplier, copy)
+	amount = min(amount, total_volume)
+	if (mobs.len)
+		var/mobportion = (amount * 0.5) / mobs.len
+		for (var/m in mobs)
+			var/mob/M = m
+			trans_to(M, mobportion, multiplier, copy)
+	trans_to(T, total_volume, multiplier, copy)
+	if (total_volume <= 0)
+		qdel(src)

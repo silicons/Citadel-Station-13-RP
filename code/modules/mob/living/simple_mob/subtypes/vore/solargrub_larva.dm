@@ -48,6 +48,14 @@ var/global/list/grub_machine_overlays = list()
 
 	ai_holder_type = /datum/ai_holder/simple_mob/solargrub_larva
 
+/mob/living/simple_mob/animal/solargrub_larva/Initialize(mapload)
+	GLOB.solargrubs += src
+	return ..()
+
+/mob/living/simple_mob/animal/solargrub_larva/Destroy()
+	GLOB.solargrubs -= src
+	return ..()
+
 /mob/living/simple_mob/animal/solargrub_larva/New()
 	..()
 	powermachine = new(src)
