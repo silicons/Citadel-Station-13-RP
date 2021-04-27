@@ -14,6 +14,8 @@
 	var/list/datum/autopsy_data_scanner/chemtraces = list()
 	var/target_name = null
 	var/timeofdeath = null
+	drop_sound = 'sound/items/drop/device.ogg'
+	pickup_sound = 'sound/items/pickup/device.ogg'
 
 /datum/autopsy_data_scanner
 	var/weapon = null // this is the DEFINITE weapon type that was used
@@ -50,8 +52,10 @@
 			*/
 
 			// Buffing this stuff up for now!
-			W.pretend_weapon = W.weapon
-			// W.pretend_weapon = pick("mechanical toolbox", "wirecutters", "revolver", "crowbar", "fire extinguisher", "tomato soup", "oxygen tank", "emergency oxygen tank", "laser", "bullet")
+			if(1)
+				W.pretend_weapon = W.weapon
+			else
+				W.pretend_weapon = pick("mechanical toolbox", "wirecutters", "revolver", "crowbar", "fire extinguisher", "tomato soup", "oxygen tank", "emergency oxygen tank", "laser", "bullet")
 
 
 		var/datum/autopsy_data_scanner/D = wdata[V]
@@ -163,6 +167,9 @@
 /obj/item/autopsy_scanner/do_surgery(mob/living/carbon/human/M, mob/living/user)
 	if(!istype(M))
 		return 0
+
+	if (user.a_intent == INTENT_HELP)
+		return ..()
 
 	if(target_name != M.name)
 		target_name = M.name

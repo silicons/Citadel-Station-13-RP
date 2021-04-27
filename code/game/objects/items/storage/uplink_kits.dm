@@ -129,6 +129,12 @@
 /obj/item/storage/box/syndie_kit/imp_aug/sprinter
 	case_type = /obj/item/implantcase/sprinter
 
+/obj/item/storage/box/syndie_kit/imp_aug/armblade
+	case_type = /obj/item/implantcase/armblade
+
+/obj/item/storage/box/syndie_kit/imp_aug/handblade
+	case_type = /obj/item/implantcase/handblade
+
 /obj/item/storage/box/syndie_kit/space
 	name = "boxed space suit and helmet"
 	starts_with = list(
@@ -142,15 +148,7 @@
 	name = "chameleon kit"
 	desc = "Comes with all the clothes you need to impersonate most people.  Acting lessons sold seperately."
 	starts_with = list(
-		/obj/item/clothing/under/chameleon,
-		/obj/item/clothing/head/chameleon,
-		/obj/item/clothing/suit/chameleon,
-		/obj/item/clothing/shoes/chameleon,
-		/obj/item/storage/backpack/chameleon,
-		/obj/item/clothing/gloves/chameleon,
-		/obj/item/clothing/mask/chameleon,
-		/obj/item/clothing/glasses/chameleon,
-		/obj/item/clothing/accessory/chameleon,
+		/obj/item/storage/backpack/chameleon/full,
 		/obj/item/gun/energy/chameleon
 	)
 
@@ -227,7 +225,7 @@
 
 	new /obj/item/flame/lighter/zippo(src)
 
-	//calibrate_size()
+	calibrate_size()
 
 /proc/fill_cigarre_package(var/obj/item/storage/fancy/cigarettes/C, var/list/reagents)
 	for(var/reagent in reagents)
@@ -274,6 +272,37 @@
 		/obj/item/tool/screwdriver
 	)
 
+/obj/item/storage/box/syndie_kit/voidsuit
+	starts_with = list(
+		/obj/item/clothing/suit/space/void/merc,
+		/obj/item/clothing/head/helmet/space/void/merc,
+		/obj/item/clothing/shoes/magboots,
+		/obj/item/tank/jetpack/oxygen
+	)
+
+/obj/item/storage/box/syndie_kit/voidsuit/fire
+	starts_with = list(
+		/obj/item/clothing/suit/space/void/merc/fire,
+		/obj/item/clothing/head/helmet/space/void/merc/fire,
+		/obj/item/clothing/shoes/magboots,
+		/obj/item/tank/jetpack/oxygen
+	)
+
+/obj/item/storage/box/syndie_kit/concussion_grenade
+	starts_with = list(
+		/obj/item/grenade/concussion = 8
+		)
+
+/obj/item/storage/box/syndie_kit/deadliest_game
+	starts_with = list(
+		/obj/item/beartrap/hunting = 4
+		)
+
+/obj/item/storage/box/syndie_kit/viral
+	starts_with = list(
+		/obj/item/virusdish/random = 3
+		)
+
 /obj/item/storage/secure/briefcase/rifle
 	name = "secure briefcase"
 	starts_with = list(
@@ -281,6 +310,15 @@
 		/obj/item/sniper_rifle_part/stock,
 		/obj/item/sniper_rifle_part/trigger_group,
 		/obj/item/ammo_casing/a145 = 4
+	)
+
+/obj/item/storage/secure/briefcase/flamer
+	name = "secure briefcase"
+	starts_with = list(
+		/obj/item/gun/magnetic/gasthrower,
+		/obj/item/cell/super,
+		/obj/item/stock_parts/capacitor/adv,
+		/obj/item/tank/phoron/pressurized = 2
 	)
 
 /obj/item/storage/secure/briefcase/fuelrod
