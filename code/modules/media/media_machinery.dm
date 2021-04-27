@@ -61,7 +61,7 @@
 
 /obj/machinery/media/forceMove(var/atom/destination)
 	disconnect_media_source()
-	..()
+	. = ..()
 	if(anchored)
 		update_music()
 
