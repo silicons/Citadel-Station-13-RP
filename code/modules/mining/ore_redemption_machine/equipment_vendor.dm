@@ -1,14 +1,21 @@
+// Use this define to register something as a purchasable!
+// * n — The proper name of the purchasable
+// * o — The object type path of the purchasable to spawn
+// * p — The price of the purchasable in mining points
+#define EQUIPMENT(n, o, p) n = new /datum/data/mining_equipment(n, o, p)
+
 /**********************Mining Equipment Locker**************************/
 
 /obj/machinery/mineral/equipment_vendor
 	name = "mining equipment vendor"
 	desc = "An equipment vendor for miners, points collected at an ore redemption machine can be spent here."
-	icon = 'icons/obj/machines/mining_machines.dmi'
-	icon_state = "mining"
+	icon = 'icons/obj/vending.dmi'
+	icon_state = "adh-tool"
 	density = TRUE
 	anchored = TRUE
+	var/icon_deny = "adh-tool-deny"
+	var/icon_vend = "adh-tool-vend"
 	circuit = /obj/item/circuitboard/mining_equipment_vendor
-	var/icon_deny = "mining-deny"
 	var/obj/item/card/id/inserted_id
 	//VOREStation Edit Start - Heavily modified list
 	var/list/prize_list = list(
@@ -88,7 +95,7 @@
 		new /datum/data/mining_equipment("Durasteel Fishing Rod",		/obj/item/material/fishing_rod/modern/strong,				7500),
 		new /datum/data/mining_equipment("Bar Shelter Capsule",		/obj/item/survivalcapsule/luxurybar,							10000)
 		)
-	//VOREStation Edit End
+	var/dirty_items = FALSE // Used to refresh the static/redundant data in case the machine gets VV'd
 
 /datum/data/mining_equipment
 	var/equipment_name = "generic"
@@ -115,7 +122,12 @@
 
 /obj/machinery/mineral/equipment_vendor/update_icon()
 	if(panel_open)
-		icon_state = "[initial(icon_state)]-open"
+		add_overlay("[initial(icon_state)]-panel")
+	else
+		cut_overlay("[initial(icon_state)]-panel")
+
+	if(stat & BROKEN)
+		icon_state = "[initial(icon_state)]-broken"
 	else if(powered())
 		icon_state = initial(icon_state)
 	else
@@ -124,72 +136,104 @@
 /obj/machinery/mineral/equipment_vendor/attack_hand(mob/user)
 	if(..())
 		return
-	interact(user)
+	tgui_interact(user)
 
 /obj/machinery/mineral/equipment_vendor/attack_ghost(mob/user)
-	interact(user)
+	tgui_interact(user)
 
-/obj/machinery/mineral/equipment_vendor/interact(mob/user)
-	user.set_machine(src)
+/obj/machinery/mineral/equipment_vendor/ui_data(mob/user)
+	var/list/data = ..()
 
-	var/dat
-	dat +="<div class='statusDisplay'>"
-	if(istype(inserted_id))
-		dat += "You have [inserted_id.mining_points] mining points collected. <A href='?src=\ref[src];choice=eject'>Eject ID.</A><br>"
+	// ID
+	if(inserted_id)
+		data["has_id"] = TRUE
+		data["id"] = list()
+		data["id"]["name"] = inserted_id.registered_name
+		data["id"]["points"] = get_points(inserted_id)
 	else
-		dat += "No ID inserted.  <A href='?src=\ref[src];choice=insert'>Insert ID.</A><br>"
-	dat += "</div>"
-	dat += "<br><b>Equipment point cost list:</b><BR><table border='0' width='100%'>"
-	for(var/datum/data/mining_equipment/prize in prize_list)
-		dat += "<tr><td>[prize.equipment_name]</td><td>[prize.cost]</td><td><A href='?src=\ref[src];purchase=\ref[prize]'>Purchase</A></td></tr>"
-	dat += "</table>"
-	var/datum/browser/popup = new(user, "miningvendor", "Mining Equipment Vendor", 400, 600)
-	popup.set_content(dat)
-	popup.open()
+		data["has_id"] = FALSE
 
-/obj/machinery/mineral/equipment_vendor/Topic(href, href_list)
+	return data
+
+/obj/machinery/mineral/equipment_vendor/proc/get_points(obj/item/card/id/target)
+	if(!istype(target))
+		return 0
+	return target.mining_points
+
+/obj/machinery/mineral/equipment_vendor/proc/remove_points(obj/item/card/id/target, amt)
+	target.mining_points -= amt
+
+/obj/machinery/mineral/equipment_vendor/ui_static_data(mob/user)
+	var/list/static_data[0]
+
+	// Available items - in static data because we don't wanna compute this list every time! It hardly changes.
+	static_data["items"] = list()
+	for(var/cat in prize_list)
+		var/list/cat_items = list()
+		for(var/prize_name in prize_list[cat])
+			var/datum/data/mining_equipment/prize = prize_list[cat][prize_name]
+			cat_items[prize_name] = list("name" = prize_name, "price" = prize.cost)
+		static_data["items"][cat] = cat_items
+
+	return static_data
+
+/obj/machinery/mineral/equipment_vendor/vv_edit_var(var_name, var_value)
+	// Gotta update the static data in case an admin VV's the items for some reason..!
+	if(var_name == "prize_list")
+		dirty_items = TRUE
+	return ..()
+
+/obj/machinery/mineral/equipment_vendor/ui_interact(mob/user, datum/tgui/ui = null)
+	// Update static data if need be
+	if(dirty_items)
+		update_ui_static_data(user, ui)
+		dirty_items = FALSE
+
+	// Open the window
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "MiningVendor", name)
+		ui.open()
+		ui.set_autoupdate(FALSE)
+
+
+/obj/machinery/mineral/equipment_vendor/ui_act(action, params)
 	if(..())
-		return 1
+		return
 
-	if(href_list["choice"])
-		if(istype(inserted_id))
-			if(href_list["choice"] == "eject")
-				to_chat(usr, "<span class='notice'>You eject the ID from [src]'s card slot.</span>")
-				usr.put_in_hands(inserted_id)
-				inserted_id = null
-		else if(href_list["choice"] == "insert")
-			var/obj/item/card/id/I = usr.get_active_hand()
-			if(istype(I) && !inserted_id && usr.unEquip(I))
-				I.forceMove(src)
-				inserted_id = I
-				interact(usr)
-				to_chat(usr, "<span class='notice'>You insert the ID into [src]'s card slot.</span>")
-			else
-				to_chat(usr, "<span class='warning'>No valid ID.</span>")
-				flick(icon_deny, src)
-
-	if(href_list["purchase"])
-		if(istype(inserted_id))
-			var/datum/data/mining_equipment/prize = locate(href_list["purchase"])
-			if (!prize || !(prize in prize_list))
-				to_chat(usr, "<span class='warning'>Error: Invalid choice!</span>")
-				flick(icon_deny, src)
+	. = TRUE
+	switch(action)
+		if("logoff")
+			if(!inserted_id)
 				return
-			if(prize.cost > inserted_id.mining_points)
-				to_chat(usr, "<span class='warning'>Error: Insufficent points for [prize.equipment_name]!</span>")
-				flick(icon_deny, src)
-			else
-				inserted_id.mining_points -= prize.cost
-				to_chat(usr, "<span class='notice'>[src] clanks to life briefly before vending [prize.equipment_name]!</span>")
-				new prize.equipment_path(drop_location())
+			usr.put_in_hands(inserted_id)
+			inserted_id = null
+		if("purchase")
+			if(!inserted_id)
+				flick(icon_deny, src) //VOREStation Add
+				return
+			var/category = params["cat"] // meow
+			var/name = params["name"]
+			if(!(category in prize_list) || !(name in prize_list[category])) // Not trying something that's not in the list, are you?
+				flick(icon_deny, src) //VOREStation Add
+				return
+			var/datum/data/mining_equipment/prize = prize_list[category][name]
+			if(prize.cost > get_points(inserted_id)) // shouldn't be able to access this since the button is greyed out, but..
+				to_chat(usr, "<span class='danger'>You have insufficient points.</span>")
+				flick(icon_deny, src) //VOREStation Add
+				return
+
+			remove_points(inserted_id, prize.cost)
+			new prize.equipment_path(loc)
+			flick(icon_vend, src) //VOREStation Add
 		else
-			to_chat(usr, "<span class='warning'>Error: Please insert a valid ID!</span>")
-			flick(icon_deny, src)
-	updateUsrDialog()
+			flick(icon_deny, src) //VOREStation Add
+			return FALSE
+	add_fingerprint()
+
 
 /obj/machinery/mineral/equipment_vendor/attackby(obj/item/I, mob/user, params)
 	if(default_deconstruction_screwdriver(user, I))
-		updateUsrDialog()
 		return
 	if(default_part_replacement(user, I))
 		return
@@ -198,7 +242,7 @@
 	if(istype(I, /obj/item/mining_voucher))
 		if(!powered())
 			return
-		RedeemVoucher(I, user)
+		redeem_voucher(I, user)
 		return
 	if(istype(I,/obj/item/card/id))
 		if(!powered())
@@ -206,16 +250,23 @@
 		else if(!inserted_id && user.unEquip(I))
 			I.forceMove(src)
 			inserted_id = I
-			interact(user)
+			tgui_interact(user)
 		return
-	..()
+	return ..()
 
 /obj/machinery/mineral/equipment_vendor/dismantle()
 	if(inserted_id)
 		inserted_id.forceMove(loc) //Prevents deconstructing the ORM from deleting whatever ID was inside it.
 	. = ..()
 
-/obj/machinery/mineral/equipment_vendor/proc/RedeemVoucher(obj/item/mining_voucher/voucher, mob/redeemer)
+/**
+  * Called when someone slaps the machine with a mining voucher
+  *
+  * Arguments:
+  * * voucher - The voucher card item
+  * * redeemer - The person holding it
+  */
+/obj/machinery/mineral/equipment_vendor/proc/redeem_voucher(obj/item/mining_voucher/voucher, mob/redeemer)
 	var/selection = input(redeemer, "Pick your equipment", "Mining Voucher Redemption") as null|anything in list("Kinetic Accelerator", "Resonator", "Mining Drone", "Advanced Scanner", "Crusher")
 	if(!selection || !Adjacent(redeemer) || voucher.loc != redeemer)
 		return
