@@ -54,7 +54,8 @@
 		new /datum/data/mining_equipment("Fishing Net",					/obj/item/material/fishing_net,								50),
 		new /datum/data/mining_equipment("Titanium Fishing Rod",		/obj/item/material/fishing_rod/modern,						100),
 		new /datum/data/mining_equipment("Durasteel Fishing Rod",		/obj/item/material/fishing_rod/modern/strong,				750),
-		new /datum/data/mining_equipment("Bar Shelter Capsule",		/obj/item/survivalcapsule/luxurybar,							1000)
+		new /datum/data/mining_equipment("Bar Shelter Capsule",		/obj/item/survivalcapsule/luxurybar,							1000),
+		EQUIPMENT("UAV - Recon Skimmer",		/obj/item/uav,												40)
 		)
 		//VOREStation Edit End
 
