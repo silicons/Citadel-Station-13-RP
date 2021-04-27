@@ -36,9 +36,15 @@
 		"Fox" = "pai-fox",
 		"Parrot" = "pai-parrot",
 		"Rabbit" = "pai-rabbit",
-		"Bear" = "pai-bear",  //VOREStation Edit
-		"Fennec" = "pai-fen",  // VOREStation Edit - Rykka
-		"Fennec" = "pai-typezero"  //VOREStation Edit
+		//VOREStation Addition Start
+		"Bear" = "pai-bear",
+		"Fennec" = "pai-fen",
+		"Type Zero" = "pai-typezero",
+		"Raccoon" = "pai-raccoon",
+		"Raptor" = "pai-raptor",
+		"Rat" = "rat",
+		"Panther" = "panther"
+		//VOREStation Addition End
 		)
 
 	var/global/list/possible_say_verbs = list(
@@ -47,7 +53,8 @@
 		"Beep" = list("beeps","beeps loudly","boops"),
 		"Chirp" = list("chirps","chirrups","cheeps"),
 		"Feline" = list("purrs","yowls","meows"),
-		"Canine" = list("yaps","barks","woofs")
+		"Canine" = list("yaps","barks","woofs"),
+		"Rodent" = list("squeaks", "SQUEAKS", "sqiks")	//VOREStation Edit
 		)
 
 	var/obj/item/pai_cable/cable		// The cable we produce and use when door or camera jacking
@@ -83,7 +90,7 @@
 	var/hackprogress = 0				// Possible values: 0 - 1000, >= 1000 means the hack is complete and will be reset upon next check
 	var/hack_aborted = 0
 
-	var/obj/item/integated_radio/signal/sradio // AI's signaller
+	var/obj/item/radio/integrated/signal/sradio // AI's signaller
 
 	var/translator_on = 0 // keeps track of the translator module
 
@@ -204,7 +211,7 @@
 	medicalActive1 = null
 	medicalActive2 = null
 	medical_cannotfind = 0
-	SSnanoui.update_uis(src)
+	SStgui.update_uis(src)
 	to_chat(usr, "<span class='notice'>You reset your record-viewing software.</span>")
 
 /mob/living/silicon/pai/cancel_camera()
