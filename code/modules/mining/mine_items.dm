@@ -21,10 +21,10 @@
 	w_class = ITEMSIZE_LARGE
 	matter = list(DEFAULT_WALL_MATERIAL = 3750)
 	var/digspeed = 40 //moving the delay to an item var so R&D can make improved picks. --NEO
-	var/sand_dig = FALSE
+	var/sand_dig = FALSE // does this thing dig sand?
 	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
 	attack_verb = list("hit", "pierced", "sliced", "attacked")
-	var/drill_sound = 'sound/weapons/Genhit.ogg'
+	var/drill_sound = "pickaxe"
 	var/drill_verb = "drilling"
 	sharp = 1
 
@@ -44,10 +44,10 @@
 	icon_state = "handdrill"
 	item_state = "jackhammer"
 	digspeed = 30
+	sand_dig = TRUE
 	origin_tech = list(TECH_MATERIAL = 2, TECH_POWER = 3, TECH_ENGINEERING = 2)
 	desc = "Yours is the drill that will pierce through the rock walls."
 	drill_verb = "drilling"
-	sand_dig = TRUE
 
 /obj/item/pickaxe/jackhammer
 	name = "sonic jackhammer"
@@ -90,21 +90,22 @@
 	desc = "A pickaxe with a diamond pick head."
 	drill_verb = "picking"
 
-/obj/item/pickaxe/diamonddrill // When people ask about the badass leader of the mining tools, they are talking about ME!
+/obj/item/pickaxe/diamonddrill //When people ask about the badass leader of the mining tools, they are talking about ME!
 	name = "diamond mining drill"
 	icon_state = "diamonddrill"
 	item_state = "jackhammer"
 	digspeed = 5 //Digs through walls, girders, and can dig up sand
+	sand_dig = TRUE
 	origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 4, TECH_ENGINEERING = 5)
 	desc = "Yours is the drill that will pierce the heavens!"
 	drill_verb = "drilling"
-	sand_dig = TRUE
 
 /obj/item/pickaxe/borgdrill
 	name = "enhanced sonic jackhammer"
 	icon_state = "jackhammer"
 	item_state = "jackhammer"
 	digspeed = 15
+	sand_dig = TRUE
 	desc = "Cracks rocks with sonic blasts. This one seems like an improved design."
 	drill_verb = "hammering"
 	sand_dig = TRUE
@@ -181,6 +182,7 @@
 /obj/item/stack/flag/Initialize(mapload, new_amount, merge)
 	. = ..()
 	base_state = icon_state
+	update_icon()
 
 /obj/item/stack/flag/blue
 	name = "blue flags"

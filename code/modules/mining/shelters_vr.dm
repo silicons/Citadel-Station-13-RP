@@ -2,17 +2,16 @@
 	var/shelter_id
 	var/description
 	var/blacklisted_turfs
-	var/whitelisted_turfs
 	var/banned_areas
 	var/banned_objects
 
 /datum/map_template/shelter/New()
 	. = ..()
-	blacklisted_turfs = typecacheof(list(/turf/unsimulated, /turf/simulated/floor))
+	blacklisted_turfs = typecacheof(list(/turf/unsimulated, /turf/simulated/floor/tiled))
 	banned_areas = typecacheof(/area/shuttle)
 	banned_objects = list()
 
-/datum/map_template/shelter/proc/check_deploy(turf/deploy_location)
+/datum/map_template/shelter/proc/check_deploy(turf/deploy_location, var/is_ship)
 	var/affected = get_affected_turfs(deploy_location, centered=TRUE)
 	for(var/turf/T in affected)
 		var/area/A = get_area(T)
@@ -20,12 +19,14 @@
 			return SHELTER_DEPLOY_BAD_AREA
 
 		var/banned = is_type_in_typecache(T, blacklisted_turfs)
-		var/permitted = !whitelisted_turfs || is_type_in_typecache(T, whitelisted_turfs)
-		if(banned && !permitted)
+		if(banned || T.density)
 			return SHELTER_DEPLOY_BAD_TURFS
+		//Ships can only deploy in space (bacause their base turf is always turf/space)
+		if(is_ship && !is_type_in_typecache(T, typecacheof(/turf/space)))
+			return SHELTER_DEPLOY_SHIP_SPACE
 
 		for(var/obj/O in T)
-			if((O.density && O.anchored && !istype(O, /obj/structure/flora)) || is_type_in_typecache(O, banned_objects))
+			if((O.density && O.anchored) || is_type_in_typecache(O, banned_objects))
 				return SHELTER_DEPLOY_ANCHORED_OBJECTS
 	return SHELTER_DEPLOY_ALLOWED
 
@@ -56,7 +57,7 @@
 		built-in navigation, entertainment, medical facilities and a \
 		sleeping area! Order now, and we'll throw in a TINY FAN, \
 		absolutely free!"
-	mappath = "_maps/templates/shelters/shelter_1.dmm"
+	mappath = "maps/submaps/shelters/shelter_1.dmm"
 
 /datum/map_template/shelter/beta
 	name = "Shelter Beta"
@@ -66,7 +67,7 @@
 		running water, a gourmet three course meal, cooking facilities, \
 		and a deluxe companion to keep you from getting lonely during \
 		an ash storm."
-	mappath = "_maps/templates/shelters/shelter_2.dmm"
+	mappath = "maps/submaps/shelters/shelter_2.dmm"
 
 /datum/map_template/shelter/gamma
 	name = "Shelter Gamma"
@@ -76,7 +77,7 @@
 		also has a sink. This isn't a survival capsule and so you can \
 		expect that this won't save you if you're bleeding out to \
 		death."
-	mappath = "_maps/templates/shelters/shelter_3.dmm"
+	mappath = "maps/submaps/shelters/shelter_3.dmm"
 
 /datum/map_template/shelter/delta
 	name = "Shelter Delta"
@@ -86,17 +87,7 @@
 		supplies allow it to hold out for an extended period of time\
 		and a built in medical facility allows field treatment to be \
 		possible."
-	mappath = "_maps/templates/shelters/shelter_4.dmm"
-
-/datum/map_template/shelter/phi
-	name = "Shelter Phi"
-	shelter_id = "shelter_phi"
-	description = "An heavily modified variant of the luxury shelter, \
-		this particular model has extra food, drinks, and other supplies. \
-		Originally designed for use by colonists on worlds with little to \
-		to no contact, the expense of these shelters have prevented them \
-		from seeing common use."
-	mappath = "_maps/templates/shelters/shelter_a.dmm"
+	mappath = "maps/submaps/shelters/shelter_4.dmm"
 
 /datum/map_template/shelter/epsilon
 	name = "Shelter Epsilon"
@@ -120,3 +111,13 @@
 		unknown who manufactued a vessel like this, as it is beyond the \
 		technology level of most contemporary powers."
 	mappath = "maps/offmap_vr/om_ships/shelter_6.dmm"
+
+/datum/map_template/shelter/phi
+	name = "Shelter Phi"
+	shelter_id = "shelter_phi"
+	description = "An heavily modified variant of the luxury shelter, \
+		this particular model has extra food, drinks, and other supplies. \
+		Originally designed for use by colonists on worlds with little to \
+		to no contact, the expense of these shelters have prevented them \
+		from seeing common use."
+	mappath = "maps/submaps/shelters/shelter_a.dmm"

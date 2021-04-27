@@ -2,6 +2,7 @@
 	name = "small rock"
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "ore2"
+	randpixel = 8
 	w_class = ITEMSIZE_SMALL
 	var/datum/geosample/geologic_data
 	var/material
@@ -109,6 +110,41 @@
 	material = MAT_LEAD
 	origin_tech = list(TECH_MATERIAL = 3)
 
+/obj/item/ore/copper
+	name = "raw copper"
+	icon_state = "ore_copper"
+	material = "copper"
+
+/obj/item/ore/tin
+	name = "raw tin"
+	icon_state = "ore_tin"
+	material = "tin"
+
+/obj/item/ore/bauxite
+	name = "raw bauxite"
+	icon_state = "ore_bauxite"
+	material = "bauxite"
+
+/obj/item/ore/rutile
+	name = "raw rutile"
+	icon_state = "ore_rutile"
+	material = "rutile"
+
+/obj/item/ore/void_opal
+	name = "raw void opal"
+	icon_state = "ore_void_opal"
+	material = "void opal"
+
+/obj/item/ore/painite
+	name = "raw painite"
+	icon_state = "ore_painite"
+	material = "painite"
+
+/obj/item/ore/quartz
+	name = "raw quartz"
+	icon_state = "ore_quartz"
+	material = "quartz"
+
 /obj/item/ore/slag
 	name = "Slag"
 	desc = "Someone screwed up..."
@@ -117,8 +153,7 @@
 
 /obj/item/ore/Initialize(mapload)
 	. = ..()
-	pixel_x = rand(0,16)-8
-	pixel_y = rand(0,8)-8
+	randpixel_xy()
 
 /obj/item/ore/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/core_sampler))
@@ -126,3 +161,15 @@
 		C.sample_item(src, user)
 	else
 		return ..()
+
+//VOREStation Add
+/obj/item/ore/attack(mob/living/M as mob, mob/living/user as mob)
+	if(M.handle_eat_minerals(src, user))
+		return
+	..()
+
+/obj/item/ore/attack_generic(var/mob/living/user) //Allow adminbussed mobs to eat ore if they click it while NOT on help intent.
+	if(user.handle_eat_minerals(src))
+		return
+	..()
+//VOREStation Add End

@@ -1,3 +1,4 @@
+GLOBAL_LIST_EMPTY(unique_deployable)
 /*****************************Survival Pod********************************/
 /area/survivalpod
 	name = "\improper Emergency Shelter"
@@ -16,6 +17,8 @@
 	var/template_id = "shelter_alpha"
 	var/datum/map_template/shelter/template
 	var/used = FALSE
+	var/is_ship = FALSE
+	var/unique_id = null
 
 /obj/item/survivalcapsule/proc/get_template()
 	if(template)
@@ -31,9 +34,13 @@
 
 /obj/item/survivalcapsule/examine(mob/user)
 	. = ..()
-	get_template()
-	. += "This capsule has the [template.name] stored."
-	. += template.description
+	if(!template)
+		get_template()
+	if(template)
+		. += "This capsule has the [template.name] stored:"
+		. += template.description
+	else
+		. += "This capsule has an unknown template stored."
 
 /obj/item/survivalcapsule/attack_self()
 	//Can't grab when capsule is New() because templates aren't loaded then
@@ -45,7 +52,7 @@
 		sleep(5 SECONDS)
 
 		var/turf/deploy_location = get_turf(src)
-		var/status = template.check_deploy(deploy_location)
+		var/status = template.check_deploy(deploy_location, is_ship)
 		var/turf/above_location = GetAbove(deploy_location)
 		if(above_location && status == SHELTER_DEPLOY_ALLOWED)
 			status = template.check_deploy(above_location)
@@ -61,9 +68,19 @@
 				var/height = template.height
 				src.loc.visible_message("<span class='warning'>\The [src] doesn't have room to deploy! You need to clear a [width]x[height] area!</span>")
 
+			if(SHELTER_DEPLOY_SHIP_SPACE)
+				src.loc.visible_message("<span class='warning'>\The [src] can only be deployed in space.</span>")
+
 		if(status != SHELTER_DEPLOY_ALLOWED)
 			used = FALSE
 			return
+
+		if(unique_id)
+			if(unique_id in GLOB.unique_deployable)
+				loc.visible_message("<span class='warning'>There can only be one [src] deployed at a time.</span>")
+				used = FALSE
+				return
+			GLOB.unique_deployable += unique_id
 
 		var/turf/T = deploy_location
 		var/datum/effect_system/smoke_spread/smoke = new /datum/effect_system/smoke_spread()
@@ -72,7 +89,7 @@
 		smoke.start()
 		sleep(4 SECONDS)
 
-		playsound(get_turf(src), 'sound/effects/phasein.ogg', 100, 1)
+		playsound(src, 'sound/effects/phasein.ogg', 100, 1)
 
 		log_and_message_admins("[key_name_admin(usr)] activated a bluespace capsule at [get_area(T)]!")
 		if(above_location)
@@ -97,11 +114,32 @@
 	desc = "A prefabricated firebase in a capsule. Contains basic weapons, building materials, and combat suits. There's a license for use printed on the bottom."
 	template_id = "shelter_delta"
 
+/obj/item/survivalcapsule/escapepod
+	name = "escape surfluid shelter capsule"
+	desc = "A prefabricated escape pod in a capsule. Contains a basic escape pod for survival purposes. There's a license for use printed on the bottom."
+	template_id = "shelter_epsilon"
+	unique_id = "shelter_5"
+	is_ship = TRUE
+
+/obj/item/survivalcapsule/popcabin
+	name = "pop-out cabin shelter capsule"
+	desc = "A cozy cabin; crammed into a survival capsule."
+	template_id = "shelter_cab"
+
+/obj/item/survivalcapsule/dropship
+	name = "dropship surfluid shelter capsule"
+	desc = "A military dropship in a capsule. Contains everything an assault squad would need, minus the squad itself. This capsule is significantly larger than most. There's a license for use printed on the bottom."
+	template_id = "shelter_zeta"
+	unique_id = "shelter_6"
+	is_ship = TRUE
+	w_class = ITEMSIZE_SMALL
+
 //Custom Shelter Capsules
 /obj/item/survivalcapsule/tabiranth
 	name = "silver-trimmed surfluid shelter capsule"
 	desc = "An exorbitantly expensive luxury suite programmed into construction nanomachines. This one is a particularly rare and expensive model. There's a license for use printed on the bottom."
 	template_id = "shelter_phi"
+	unique_id = "shelter_a"
 
 //Pod objects
 //Walls
@@ -171,7 +209,7 @@
 	verbs -= /obj/structure/table/proc/do_put
 	return ..()
 
-/obj/structure/table/survival_pod/dismantle(obj/item/tool/wrench/W, mob/user)
+/obj/structure/table/survival_pod/dismantle(obj/item/wrench/W, mob/user)
 	to_chat(user, "<span class='warning'>You cannot dismantle \the [src].</span>")
 	return
 
@@ -226,9 +264,9 @@
 	name = "survival pod storage"
 	desc = "A heated storage unit."
 	icon_state = "donkvendor"
+	icon_base = "donkvendor"
+	icon_contents = null
 	icon = 'icons/obj/survival_pod_vend.dmi'
-	icon_on = "donkvendor"
-	icon_off = "donkvendor"
 	light_range = 5
 	light_power = 1.2
 	light_color = "#DDFFD3"
@@ -282,6 +320,32 @@
 	density = FALSE
 	icon_state = "fan_tiny"
 	buildstackamount = 2
+
+/obj/structure/fans/hardlight
+	name = "hardlight shield"
+	desc = "Retains air, allows passage."
+	plane = TURF_PLANE
+	layer = ABOVE_TURF_LAYER
+	density = FALSE
+	icon = 'icons/effects/effects_vr.dmi'
+	icon_state = "hardlight"
+	buildstackamount = 2
+
+	light_range = 3
+	light_power = 1
+	light_color = "#FFFFFF"
+
+/obj/structure/fans/hardlight/ex_act()
+	return
+
+/obj/structure/fans/hardlight/colorable
+	name = "hardlight shield"
+	icon_state = "hardlight_colorable"
+
+/obj/structure/fans/hardlight/colorable/abductor
+	name = "hardlight shield"
+	icon_state = "hardlight_colorable"
+	color = "#ff0099"
 
 //Signs
 /obj/structure/sign/mining

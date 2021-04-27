@@ -1,6 +1,4 @@
 /**********************Mint**************************/
-
-
 /obj/machinery/mineral/mint
 	name = "Coin press"
 	icon = 'icons/obj/stationobjs.dmi'
