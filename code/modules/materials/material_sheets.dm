@@ -6,6 +6,7 @@
 	w_class = ITEMSIZE_NORMAL
 	throw_speed = 3
 	throw_range = 3
+	center_of_mass = null
 	max_amount = 50
 	item_icons = list(
 		slot_l_hand_str = 'icons/mob/items/lefthand_material.dmi',
@@ -21,6 +22,8 @@
 	pickup_sound = 'sound/items/pickup/axe.ogg'
 
 /obj/item/stack/material/Initialize(mapload, new_amount, merge = TRUE)
+	randpixel_xy()
+
 	if(!default_type)
 		default_type = DEFAULT_WALL_MATERIAL
 	material = get_material_by_name("[default_type]")
@@ -28,10 +31,6 @@
 		return INITIALIZE_HINT_QDEL
 
 	. = ..()
-
-	pixel_x = rand(0,4)-4
-	pixel_y = rand(0,4)-4
-
 
 	recipes = material.get_recipes()
 	stacktype = material.stack_type
@@ -89,6 +88,18 @@
 		material.build_rod_product(user, W, src)
 		return
 	return ..()
+
+//VOREStation Add
+/obj/item/stack/material/attack(mob/living/M as mob, mob/living/user as mob)
+	if(M.handle_eat_minerals(src, user))
+		return
+	..()
+
+/obj/item/stack/material/attack_generic(var/mob/living/user) //Allow adminbussed mobs to eat ore if they click it while NOT on help intent.
+	if(user.handle_eat_minerals(src))
+		return
+	..()
+//VOREStation Add End
 
 /obj/item/stack/material/iron
 	name = "iron"
@@ -228,6 +239,7 @@
 /obj/item/stack/material/titanium
 	name = MAT_TITANIUM
 	icon_state = "sheet-silver"
+	apply_colour = TRUE
 	item_state = "sheet-silver"
 	default_type = MAT_TITANIUM
 	no_variants = FALSE
@@ -328,6 +340,7 @@
 	strict_color_stacking = TRUE
 	drop_sound = 'sound/items/drop/wooden.ogg'
 	pickup_sound = 'sound/items/pickup/wooden.ogg'
+	no_variants = FALSE
 
 /obj/item/stack/material/wood/sif
 	name = "alien wooden plank"
@@ -361,7 +374,7 @@
 		user.setClickCooldown(time)
 		if(do_after(user, time, src) && use(1))
 			to_chat(user, "<span class='notice'>You cut up a log into planks.</span>")
-			playsound(get_turf(src), 'sound/effects/woodcutting.ogg', 50, 1)
+			playsound(src, 'sound/effects/woodcutting.ogg', 50, 1)
 			var/obj/item/stack/material/wood/existing_wood = null
 			for(var/obj/item/stack/material/wood/M in user.loc)
 				if(M.material.name == src.material.name)
@@ -383,8 +396,11 @@
 	no_variants = FALSE
 	pass_color = TRUE
 	strict_color_stacking = TRUE
-	drop_sound = 'sound/items/drop/cloth.ogg'
-	pickup_sound = 'sound/items/pickup/cloth.ogg'
+	drop_sound = 'sound/items/drop/clothing.ogg'
+	pickup_sound = 'sound/items/pickup/clothing.ogg'
+
+/obj/item/stack/material/cloth/diyaab
+	color = "#c6ccf0"
 
 /obj/item/stack/material/resin
 	name = "resin"
@@ -409,6 +425,8 @@
 	name = "snow"
 	desc = "The temptation to build a snowman rises."
 	icon_state = "sheet-snow"
+	drop_sound = 'sound/items/drop/gloves.ogg'
+	pickup_sound = 'sound/items/pickup/clothing.ogg'
 	default_type = "snow"
 
 /obj/item/stack/material/snowbrick
@@ -416,12 +434,25 @@
 	desc = "For all of your igloo building needs."
 	icon_state = "sheet-snowbrick"
 	default_type = "packed snow"
+	drop_sound = 'sound/items/drop/gloves.ogg'
+	pickup_sound = 'sound/items/pickup/clothing.ogg'
 
 /obj/item/stack/material/leather
 	name = "leather"
 	desc = "The by-product of mob grinding."
 	icon_state = "sheet-leather"
-	default_type = "leather"
+	default_type = MAT_LEATHER
+	no_variants = FALSE
+	pass_color = TRUE
+	strict_color_stacking = TRUE
+	drop_sound = 'sound/items/drop/leather.ogg'
+	pickup_sound = 'sound/items/pickup/leather.ogg'
+
+/obj/item/stack/material/chitin
+	name = "chitin"
+	desc = "The by-product of mob grinding."
+	icon_state = "chitin"
+	default_type = MAT_CHITIN
 	no_variants = FALSE
 	pass_color = TRUE
 	strict_color_stacking = TRUE
@@ -430,33 +461,37 @@
 
 /obj/item/stack/material/glass
 	name = "glass"
-	icon_state = "sheet-glass"
+	icon_state = "sheet-transparent"
 	default_type = "glass"
 	no_variants = FALSE
 	drop_sound = 'sound/items/drop/glass.ogg'
 	pickup_sound = 'sound/items/pickup/glass.ogg'
+	apply_colour = TRUE
 
 /obj/item/stack/material/glass/reinforced
 	name = "reinforced glass"
-	icon_state = "sheet-rglass"
+	icon_state = "sheet-rtransparent"
 	default_type = "rglass"
 	no_variants = FALSE
+	apply_colour = TRUE
 
 /obj/item/stack/material/glass/phoronglass
 	name = "borosilicate glass"
 	desc = "This sheet is special platinum-glass alloy designed to withstand large temperatures"
 	singular_name = "borosilicate glass sheet"
-	icon_state = "sheet-phoronglass"
+	icon_state = "sheet-transparent"
 	default_type = "borosilicate glass"
 	no_variants = FALSE
+	apply_colour = TRUE
 
 /obj/item/stack/material/glass/phoronrglass
 	name = "reinforced borosilicate glass"
 	desc = "This sheet is special platinum-glass alloy designed to withstand large temperatures. It is reinforced with few rods."
 	singular_name = "reinforced borosilicate glass sheet"
-	icon_state = "sheet-phoronrglass"
+	icon_state = "sheet-rtransparent"
 	default_type = "reinforced borosilicate glass"
 	no_variants = FALSE
+	apply_colour = TRUE
 
 //CitMain Sandbag port.
 /obj/item/stack/material/emptysandbag
