@@ -33,7 +33,7 @@
 
 /datum/category_item/autolathe/tools/wrench
 	name = "wrench"
-	path =/obj/item/tool/wrench
+	path =/obj/item/wrench
 
 /datum/category_item/autolathe/tools/hatchet
 	name = "hatchet"

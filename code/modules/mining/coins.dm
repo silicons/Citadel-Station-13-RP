@@ -3,7 +3,9 @@
 /obj/item/coin
 	icon = 'icons/obj/items.dmi'
 	name = "Coin"
+	desc = "A simple coin you can flip."
 	icon_state = "coin"
+	randpixel = 8
 	force = 0.0
 	throwforce = 0.0
 	w_class = ITEMSIZE_TINY
@@ -13,10 +15,8 @@
 	drop_sound = 'sound/items/drop/ring.ogg'
 	pickup_sound = 'sound/items/pickup/ring.ogg'
 
-/obj/item/coin/Initialize(mapload)
-	. = ..()
-	pixel_x = rand(0,16)-8
-	pixel_y = rand(0,8)-8
+/obj/item/coin/New()
+	randpixel_xy()
 
 /obj/item/coin/gold
 	name = "gold coin"
@@ -45,6 +45,18 @@
 /obj/item/coin/platinum
 	name = "platinum coin"
 	icon_state = "coin_adamantine"
+
+/obj/item/coin/morphium
+	name = "morphium coin"
+	icon_state = "coin_morphium"
+
+/obj/item/coin/aluminium
+	name = "aluminium coin"
+	icon_state = "coin_aluminium"
+
+/obj/item/coin/verdantium
+	name = "verdantium coin"
+	icon_state = "coin_verdantium"
 
 /obj/item/coin/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/stack/cable_coil))

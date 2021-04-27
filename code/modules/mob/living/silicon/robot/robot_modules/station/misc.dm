@@ -26,6 +26,6 @@
 /obj/item/robot_module/robot/standard/Initialize(mapload)
 	. = ..()
 	src.modules += new /obj/item/melee/baton/loaded(src)
-	src.modules += new /obj/item/tool/wrench/cyborg(src)
+	src.modules += new /obj/item/wrench/cyborg(src)
 	src.modules += new /obj/item/healthanalyzer(src)
 	src.emag = new /obj/item/melee/energy/sword(src)

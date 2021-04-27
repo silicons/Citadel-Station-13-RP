@@ -60,7 +60,7 @@
 		if(53 to 54)
 			new/obj/item/latexballon(src)
 		if(55 to 56)
-			var/newitem = pick(typesof(/obj/item/toy/prize) - /obj/item/toy/prize)
+			var/newitem = pick(typesof(/obj/item/toy/mecha) - /obj/item/toy/mecha)
 			new newitem(src)
 		if(57 to 58)
 			new/obj/item/toy/syndicateballoon(src)
@@ -122,7 +122,7 @@
 			new/obj/item/bikehorn(src)
 			//new/obj/item/stamp/clown(src) I'd add it, but only clowns can use it
 			new/obj/item/pen/crayon/rainbow(src)
-			new/obj/item/toy/waterflower(src)
+			new/obj/item/reagent_containers/spray/waterflower(src)
 		if(95)
 			new/obj/item/clothing/under/mime(src)
 			new/obj/item/clothing/shoes/black(src)
@@ -164,7 +164,7 @@
 		to_chat(user, "<span class='notice'>You leave the crate alone.</span>")
 	else if(check_input(input))
 		to_chat(user, "<span class='notice'>The crate unlocks!</span>")
-		playsound(user, 'sound/machines/lockreset.ogg', 50, 1)
+		playsound(src, 'sound/machines/lockreset.ogg', 50, 1)
 		set_locked(0)
 	else
 		visible_message("<span class='warning'>A red light on \the [src]'s control panel flashes briefly.</span>")

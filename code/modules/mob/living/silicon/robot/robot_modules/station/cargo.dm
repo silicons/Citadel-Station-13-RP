@@ -25,7 +25,7 @@
 /obj/item/robot_module/robot/miner/Initialize(mapload)
 	. = ..()
 	src.modules += new /obj/item/borg/sight/material(src)
-	src.modules += new /obj/item/tool/wrench/cyborg(src)
+	src.modules += new /obj/item/wrench/cyborg(src)
 	src.modules += new /obj/item/tool/screwdriver/cyborg(src)
 	src.modules += new /obj/item/storage/bag/ore(src)
 	src.modules += new /obj/item/pickaxe/borgdrill(src)

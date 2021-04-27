@@ -40,7 +40,7 @@
 	item_state_slots = list(slot_r_hand_str = "toolbox_blue", slot_l_hand_str = "toolbox_blue")
 	starts_with = list(
 		/obj/item/tool/screwdriver,
-		/obj/item/tool/wrench,
+		/obj/item/wrench,
 		/obj/item/weldingtool,
 		/obj/item/tool/crowbar,
 		/obj/item/analyzer,
@@ -76,7 +76,7 @@
 	starts_with = list(
 		/obj/item/clothing/gloves/yellow,
 		/obj/item/tool/screwdriver,
-		/obj/item/tool/wrench,
+		/obj/item/wrench,
 		/obj/item/weldingtool,
 		/obj/item/tool/crowbar,
 		/obj/item/tool/wirecutters,

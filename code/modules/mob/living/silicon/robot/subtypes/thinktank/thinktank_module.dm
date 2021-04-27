@@ -49,7 +49,7 @@
 
 /obj/item/robot_module/robot/platform/explorer/New()
 	..()
-	modules += new /obj/item/tool/wrench/cyborg(src)
+	modules += new /obj/item/wrench/cyborg(src)
 	modules += new /obj/item/weldingtool/electric/mounted/cyborg(src)
 	modules += new /obj/item/tool/wirecutters/cyborg(src)
 	modules += new /obj/item/tool/screwdriver/cyborg(src)

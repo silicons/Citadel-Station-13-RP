@@ -27,7 +27,11 @@
 		"osmium" = /obj/item/ore/osmium,
 		"hydrogen" = /obj/item/ore/hydrogen,
 		"silicates" = /obj/item/ore/glass,
-		"carbon" = /obj/item/ore/coal
+		"carbon" = /obj/item/ore/coal,
+		"copper" = /obj/item/ore/copper,
+		"tin" = /obj/item/ore/tin,
+		"bauxite" = /obj/item/ore/bauxite,
+		"rutile" = /obj/item/ore/rutile
 		)
 
 	//Upgrades
@@ -40,11 +44,14 @@
 	// Found with an advanced laser. exotic_drilling >= 1
 	var/list/ore_types_uncommon = list(
 		MAT_MARBLE = /obj/item/ore/marble,
+		"painite" = /obj/item/ore/painite,
+		"quartz" = /obj/item/ore/quartz,
 		MAT_LEAD = /obj/item/ore/lead
 		)
 
 	// Found with an ultra laser. exotic_drilling >= 2
 	var/list/ore_types_rare = list(
+		"void opal" = /obj/item/ore/void_opal,
 		MAT_VERDANTIUM = /obj/item/ore/verdantium
 		)
 
@@ -175,7 +182,7 @@
 			to_chat(user, "The drill already has a cell installed.")
 		else
 			user.drop_item()
-			O.loc = src
+			O.forceMove(src)
 			cell = O
 			component_parts += O
 			to_chat(user, "You install \the [O].")
@@ -187,7 +194,7 @@
 
 	if (panel_open && cell && user.Adjacent(src))
 		to_chat(user, "You take out \the [cell].")
-		cell.loc = get_turf(user)
+		user.put_in_hands(cell)
 		component_parts -= cell
 		cell = null
 		return

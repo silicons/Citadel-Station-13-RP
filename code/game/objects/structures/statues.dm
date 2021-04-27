@@ -18,7 +18,7 @@
 
 /obj/structure/statue/attackby(obj/item/tool/W, mob/living/user, params)
 	add_fingerprint(user)
-	if(istype(W, /obj/item/tool/wrench))
+	if(istype(W, /obj/item/wrench))
 		if(anchored)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 			user.visible_message("[user] is loosening the [name]'s bolts.", \

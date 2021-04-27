@@ -581,7 +581,7 @@ END OF CITADEL CHANGE */
 /obj/item/storage/belt/utility/fluff/vulpine/PopulateContents()
 	. = ..()
 	new /obj/item/tool/screwdriver(src)
-	new /obj/item/tool/wrench(src)
+	new /obj/item/wrench(src)
 	new /obj/item/weldingtool(src)
 	new /obj/item/tool/crowbar(src)
 	new /obj/item/tool/wirecutters(src)

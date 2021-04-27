@@ -48,7 +48,7 @@
 	id = "hybridwrench"
 	req_tech = list(TECH_ENGINEERING = 6, TECH_MATERIAL = 5, TECH_BLUESPACE = 2, TECH_MAGNET = 3, TECH_PRECURSOR = 1)
 	materials = list(MAT_PLASTEEL = 2000, MAT_VERDANTIUM = 3000, MAT_SILVER = 300, MAT_URANIUM = 2000)
-	build_path = /obj/item/tool/wrench/hybrid
+	build_path = /obj/item/wrench/hybrid
 	sort_string = "ZBAAB"
 
 /datum/design/item/precursor/screwdriver

@@ -25,7 +25,7 @@
 	var/screen = ATMOS_MODE //Starts on the atmos tab.
 	var/piping_layer = PIPING_LAYER_DEFAULT
 	var/wrench_mode = FALSE
-	var/obj/item/tool/wrench/tool
+	var/obj/item/wrench/tool
 	var/datum/pipe_recipe/recipe
 	var/static/datum/pipe_recipe/first_atmos
 	var/static/datum/pipe_recipe/first_disposal
@@ -40,7 +40,7 @@
 	if(!first_disposal)
 		first_disposal = disposal_pipe_recipes[disposal_pipe_recipes[1]][1]
 	recipe = first_atmos
-	tool = new /obj/item/tool/wrench/cyborg(src) // RPDs have wrenches inside of them, so that they can wrench down spawned pipes without being used as superior wrenches themselves.
+	tool = new /obj/item/wrench/cyborg(src) // RPDs have wrenches inside of them, so that they can wrench down spawned pipes without being used as superior wrenches themselves.
 
 /obj/item/pipe_dispenser/Destroy()
 	qdel(spark_system)

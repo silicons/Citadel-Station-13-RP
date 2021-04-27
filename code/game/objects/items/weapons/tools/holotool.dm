@@ -19,7 +19,7 @@
 
 	//the colon separates the typepath from the name
 	var/list/obj/item/start_modules = list(/obj/item/tool/screwdriver/switchy = null,
-											/obj/item/tool/wrench/switchy = null,
+											/obj/item/wrench/switchy = null,
 											/obj/item/tool/wirecutters/switchy = null,
 											/obj/item/tool/crowbar/switchy = null,
 											/obj/item/multitool/switchy = null)
@@ -325,7 +325,7 @@
 						/obj/item/surgical/retractor/holoswitch = null,
 						/obj/item/surgical/bone_clamp/holoswitch = null,
 						/obj/item/tool/screwdriver/holoswitch = null,
-						/obj/item/tool/wrench/holoswitch = null,
+						/obj/item/wrench/holoswitch = null,
 						/obj/item/tool/crowbar/holoswitch = null,
 						/obj/item/tool/wirecutters/holoswitch = null,
 						/obj/item/weldingtool/holoswitch = null,
@@ -359,7 +359,7 @@
 	light_color = "#FED8B1" //lightcolororange sucks lmao
 	start_modules = list(
 						/obj/item/tool/screwdriver/holoswitch = null,
-						/obj/item/tool/wrench/holoswitch = null,
+						/obj/item/wrench/holoswitch = null,
 						/obj/item/tool/crowbar/holoswitch = null,
 						/obj/item/tool/wirecutters/holoswitch = null,
 						/obj/item/weldingtool/holoswitch = null,
@@ -387,7 +387,7 @@
 	deploytype = "screwdriver"
 	toolspeed = 0.9
 
-/obj/item/tool/wrench/holoswitch
+/obj/item/wrench/holoswitch
 	name = "hardlight bolt driver"
 	desc = "This should not exist."
 	deploytype = "wrench"
@@ -485,7 +485,7 @@
 	deploytype = "screwdriver"
 	toolspeed = 1.2
 
-/obj/item/tool/wrench/switchy
+/obj/item/wrench/switchy
 	name = "switchtool wrench"
 	desc = "This should not exist."
 	deploytype = "wrench"

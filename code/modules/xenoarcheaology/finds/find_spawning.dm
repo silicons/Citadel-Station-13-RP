@@ -157,7 +157,7 @@
 		if(ARCHAEO_TOOL)
 			item_type = "tool"
 			if(prob(25))
-				new_item = new /obj/item/tool/wrench(src.loc)
+				new_item = new /obj/item/wrench(src.loc)
 			else if(prob(25))
 				new_item = new /obj/item/tool/crowbar(src.loc)
 			else
@@ -451,7 +451,7 @@
 				/obj/item/tool/screwdriver/alien,
 				/obj/item/weldingtool/alien,
 				/obj/item/tool/wirecutters/alien,
-				/obj/item/tool/wrench/alien,
+				/obj/item/wrench/alien,
 				/obj/item/surgical/FixOVein/alien,
 				/obj/item/surgical/bone_clamp/alien,
 				/obj/item/surgical/cautery/alien,
