@@ -15,7 +15,7 @@
 /datum/ai_holder/proc/should_threaten()
 	if(!threaten)
 		return FALSE // We don't negotiate.
-	if(target in attackers)
+	if(check_attacker(target))
 		return FALSE // They (or someone like them) attacked us before, escalate immediately.
 	if(!will_threaten(target))
 		return FALSE // Pointless to threaten an animal, a mindless drone, or an object.
@@ -33,9 +33,9 @@
 		last_threaten_time = world.time
 
 		if(holder.say_list)
-			holder.ISay(SAFEPICK(holder.say_list.say_threaten))
-			playsound(holder.loc, holder.say_list.threaten_sound, 50, 1) // We do this twice to make the sound -very- noticable to the target.
-			playsound(target.loc, holder.say_list.threaten_sound, 50, 1) // Actual aim-mode also does that so at least it's consistant.
+			holder.ISay(safepick(holder.say_list.say_threaten))
+			playsound(holder, holder.say_list.threaten_sound, 50, 1) // We do this twice to make the sound -very- noticable to the target.
+			playsound(target, holder.say_list.threaten_sound, 50, 1) // Actual aim-mode also does that so at least it's consistant.
 	else // Otherwise we are waiting for them to go away or to wait long enough for escalate.
 		if(target in list_targets()) // Are they still visible?
 			var/should_escalate = FALSE
@@ -47,7 +47,7 @@
 				threatening = FALSE
 				set_stance(STANCE_APPROACH)
 				if(holder.say_list)
-					holder.ISay(SAFEPICK(holder.say_list.say_escalate))
+					holder.ISay(safepick(holder.say_list.say_escalate))
 			else
 				return // Wait a bit.
 
@@ -56,9 +56,9 @@
 				threatening = FALSE
 			set_stance(STANCE_IDLE)
 			if(holder.say_list)
-				holder.ISay(SAFEPICK(holder.say_list.say_stand_down))
-				playsound(holder.loc, holder.say_list.stand_down_sound, 50, 1) // We do this twice to make the sound -very- noticable to the target.
-				playsound(target.loc, holder.say_list.stand_down_sound, 50, 1) // Actual aim-mode also does that so at least it's consistant.
+				holder.ISay(safepick(holder.say_list.say_stand_down))
+				playsound(holder, holder.say_list.stand_down_sound, 50, 1) // We do this twice to make the sound -very- noticable to the target.
+				playsound(target, holder.say_list.stand_down_sound, 50, 1) // Actual aim-mode also does that so at least it's consistant.
 
 // Determines what is deserving of a warning when STANCE_ALERT is active.
 /datum/ai_holder/proc/will_threaten(mob/living/the_target)
@@ -108,11 +108,11 @@
 
 		switch(pick(comm_types))
 			if(COMM_SAY)
-				holder.ISay(SAFEPICK(holder.say_list.speak))
+				holder.ISay(safepick(holder.say_list.speak))
 			if(COMM_AUDIBLE_EMOTE)
-				holder.audible_emote(SAFEPICK(holder.say_list.emote_hear))
+				holder.audible_emote(safepick(holder.say_list.emote_hear))
 			if(COMM_VISUAL_EMOTE)
-				holder.visible_emote(SAFEPICK(holder.say_list.emote_see))
+				holder.visible_emote(safepick(holder.say_list.emote_see))
 
 #undef COMM_SAY
 #undef COMM_AUDIBLE_EMOTE
