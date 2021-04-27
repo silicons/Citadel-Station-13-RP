@@ -1,6 +1,7 @@
 # Tools for working with modern DreamMaker icon files (PNGs + metadata)
 
 import math
+import dmi
 from PIL import Image
 from PIL.PngImagePlugin import PngInfo
 
@@ -34,6 +35,33 @@ DIR_NAMES = {
     None: SOUTH,
 }
 
+def escape(text):
+    text = text.replace('\\', '\\\\')
+    text = text.replace('"', '\\"')
+    return f'"{text}"'
+
+
+def unescape(text, quote='"'):
+    if text == 'null':
+        return None
+    if not (text.startswith(quote) and text.endswith(quote)):
+        raise ValueError(text)
+    text = text[1:-1]
+    text = text.replace('\\"', '"')
+    text = text.replace('\\\\', '\\')
+    return text
+
+
+def parse_num(value):
+    if '.' in value:
+        return float(value)
+    return int(value)
+
+
+def parse_bool(value):
+    if value not in ('0', '1'):
+        raise ValueError(value)
+    return value == '1'
 
 class Dmi:
     version = "4.0"
@@ -176,7 +204,6 @@ class Dmi:
             output = output.convert('P')
         output.save(filename, 'png', optimize=True, pnginfo=pnginfo)
 
-
 class State:
     def __init__(self, dmi, name, *, loop=LOOP_UNLIMITED, rewind=False, movement=False, dirs=1):
         self.dmi = dmi
@@ -217,32 +244,3 @@ class State:
 
     def get_frame(self, *args, **kwargs):
         return self.frames[self._frame_index(*args, **kwargs)]
-
-
-def escape(text):
-    text = text.replace('\\', '\\\\')
-    text = text.replace('"', '\\"')
-    return f'"{text}"'
-
-
-def unescape(text, quote='"'):
-    if text == 'null':
-        return None
-    if not (text.startswith(quote) and text.endswith(quote)):
-        raise ValueError(text)
-    text = text[1:-1]
-    text = text.replace('\\"', '"')
-    text = text.replace('\\\\', '\\')
-    return text
-
-
-def parse_num(value):
-    if '.' in value:
-        return float(value)
-    return int(value)
-
-
-def parse_bool(value):
-    if value not in ('0', '1'):
-        raise ValueError(value)
-    return value == '1'
