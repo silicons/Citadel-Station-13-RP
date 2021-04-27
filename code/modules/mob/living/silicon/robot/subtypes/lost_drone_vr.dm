@@ -21,7 +21,7 @@
 	if(!cell)
 		cell = new /obj/item/cell/high(src) // 15k cell, as recharging stations are a lot more rare on the Surface.
 
-	playsound(loc, 'sound/mecha/nominalsyndi.ogg', 75, 0)
+	playsound(src, 'sound/mecha/nominalsyndi.ogg', 75, 0)
 
 /mob/living/silicon/robot/stray/speech_bubble_appearance()
 	return "synthetic_evil"
@@ -32,7 +32,7 @@
 	..()
 	laws = give_random_lawset_vore()
 
-/mob/living/silicon/proc/give_random_lawset_vore()		// Should be filled out with more vorish possibilities later
+/mob/living/silicon/proc/give_random_lawset_vore()
 	// Decide what kind of laws we want to draw from.
 	var/law_class = pick(
 		prob(25);"good",
