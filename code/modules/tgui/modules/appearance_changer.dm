@@ -277,7 +277,7 @@
 		// VOREStation Add End
 	return FALSE
 
-/datum/tgui_module/appearance_changer/tgui_interact(mob/user, datum/tgui/ui = null, datum/tgui/parent_ui = null, datum/tgui_state/custom_state)
+/datum/tgui_module/appearance_changer/ui_interact(mob/user, datum/tgui/ui = null, datum/tgui/parent_ui = null, datum/tgui_state/custom_state)
 	var/mob/living/carbon/human/target = owner
 	if(customize_usr)
 		if(!ishuman(user))

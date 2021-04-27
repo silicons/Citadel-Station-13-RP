@@ -79,7 +79,7 @@
 	name = "Navigation Display"
 	tgui_id = "OvermapNavigation"
 
-/datum/tgui_module/ship/nav/tgui_interact(mob/user, datum/tgui/ui)
+/datum/tgui_module/ship/nav/ui_interact(mob/user, datum/tgui/ui)
 	if(!linked)
 		var/obj/machinery/computer/ship/navigation/host = ui_host()
 		if(istype(host))

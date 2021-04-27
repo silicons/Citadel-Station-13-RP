@@ -304,9 +304,7 @@
 	..()
 	to_chat(user, "<span class='caution'>Your stomach rumbles...</span>")
 	if(user.nutrition)
-		user.nutrition -= 200
-		if(user.nutrition <= 0)
-			user.nutrition = 0
+		user.adjust_nutrition(-200)
 
 /obj/item/spellbook/oneuse/blind
 	spell = /spell/targeted/genetic/blind

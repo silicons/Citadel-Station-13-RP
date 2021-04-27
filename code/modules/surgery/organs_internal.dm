@@ -10,6 +10,8 @@
 		return 0
 
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	if(coverage_check(user, target, affected, tool))
+		return 0
 	return affected && affected.open == (affected.encased ? 3 : 2)
 
 
@@ -162,6 +164,9 @@
 	if (!..())
 		return 0
 
+	if(!istype(tool))
+		return 0
+
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 
 	if(!(affected && !(affected.robotic >= ORGAN_ROBOT)))
@@ -225,6 +230,9 @@
 	if (!..())
 		return 0
 
+	if(!istype(tool))
+		return 0
+
 	target.op_stage.current_organ = null
 
 	var/list/removable_organs = list()
@@ -279,7 +287,7 @@
 	var/obj/item/organ/internal/O = tool
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 
-	if(!affected)
+	if(!affected || !istype(O))
 		return
 
 	var/organ_compatible
@@ -359,6 +367,9 @@
 	if (!..())
 		return 0
 
+	if(!istype(tool))
+		return 0
+
 	target.op_stage.current_organ = null
 
 	var/list/removable_organs = list()
@@ -415,6 +426,9 @@
 	if (!..())
 		return 0
 
+	if(!istype(tool))
+		return 0
+
 	target.op_stage.current_organ = null
 
 	var/list/removable_organs = list()
@@ -452,20 +466,3 @@
 	user.visible_message("<span class='warning'>[user]'s hand slips, damaging [target]'s [affected.name] with \the [tool]!</span>", \
 	"<span class='warning'>Your hand slips, damaging [target]'s [affected.name] with \the [tool]!</span>")
 	affected.createwound(BRUISE, 20)
-
-//////////////////////////////////////////////////////////////////
-//						HEART SURGERY							//
-//////////////////////////////////////////////////////////////////
-// To be finished after some tests.
-// /datum/surgery_step/ribcage/heart/cut
-//	allowed_tools = list(
-//	/obj/item/surgical/scalpel = 100,
-//	/obj/item/material/knife = 75,
-//	/obj/item/material/shard = 50,
-//	)
-
-//	min_duration = 30
-//	max_duration = 40
-
-//	/datum/surgery_step/ribcage/heart/cut/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-//		return ..() && target.op_stage.ribcage == 2

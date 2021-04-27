@@ -141,7 +141,7 @@
 				to_chat(usr, "<span class='notice'>Laws displayed.</span>")
 			return TRUE
 
-/datum/tgui_module/law_manager/tgui_interact(mob/user, datum/tgui/ui)
+/datum/tgui_module/law_manager/ui_interact(mob/user, datum/tgui/ui)
 	owner.lawsync()
 	return ..() // 800, is_malf(user) ? 600 : 400
 

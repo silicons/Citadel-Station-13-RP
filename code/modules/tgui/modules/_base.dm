@@ -78,7 +78,7 @@ Code is pretty much ripped verbatim from nano modules, but with un-needed stuff 
 			return TRUE
 
 // Just a nice little default interact in case the subtypes don't need any special behavior here
-/datum/tgui_module/tgui_interact(mob/user, datum/tgui/ui = null, datum/tgui/parent_ui = null)
+/datum/tgui_module/ui_interact(mob/user, datum/tgui/ui = null, datum/tgui/parent_ui = null)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, tgui_id, name, parent_ui)

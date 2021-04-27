@@ -31,7 +31,7 @@
 			ui.set_map_z_level(params["mapZLevel"])
 			return TRUE
 
-/datum/tgui_module/crew_monitor/tgui_interact(mob/user, datum/tgui/ui = null)
+/datum/tgui_module/crew_monitor/ui_interact(mob/user, datum/tgui/ui = null)
 	var/z = get_z(user)
 	var/list/map_levels = GLOB.using_map.get_map_levels(z, TRUE, om_range = DEFAULT_OVERMAP_RANGE)
 

@@ -67,6 +67,21 @@
 
 	return 1
 
+// Let's check if stuff blocks us from doing surgery on them
+// TODO: make it based on area coverage rather than just forbid spacesuits?
+// Returns true if target organ is covered
+/datum/surgery_step/proc/coverage_check(mob/living/user, mob/living/carbon/human/target, obj/item/organ/external/affected, obj/item/tool)
+	if(!affected)
+		return FALSE
+
+	if(affected.organ_tag == BP_HEAD)
+		if(target.head && istype(target.head,/obj/item/clothing/head/helmet/space))
+			return TRUE
+	else
+		if(target.wear_suit && istype(target.wear_suit,/obj/item/clothing/suit/space))
+			return TRUE
+
+	return FALSE
 
 // checks whether this step can be applied with the given user and target
 /datum/surgery_step/proc/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -106,17 +121,12 @@
 
 
 /obj/item/proc/can_do_surgery(mob/living/carbon/M, mob/living/user)
-	if(M == user)
-		return 0
+//	if(M == user)
+//		return 0
 	if(!ishuman(M))
 		return 1
-	var/mob/living/carbon/human/H = M
-	var/obj/item/organ/external/affected = H.get_organ(user.zone_sel.selecting)
-	if(affected)
-		for(var/datum/surgery_step/S in GLOB.surgery_steps)
-			if(!affected.open && S.req_open)
-				return 0
-	return 0
+
+	return 1
 
 /obj/item/proc/do_surgery(mob/living/carbon/M, mob/living/user)
 	if(!istype(M))
@@ -132,6 +142,13 @@
 		if(S.tool_quality(src))
 			var/step_is_valid = S.can_use(user, M, zone, src)
 			if(step_is_valid && S.is_valid_target(M))
+
+				if(M == user)	// Once we determine if we can actually do a step at all, give a slight delay to self-surgery to confirm attempts.
+					to_chat(user, "<span class='critical'>You focus on attempting to perform surgery upon yourself.</span>")
+
+					if(!do_after(user, 3 SECONDS, M))
+						return 0
+
 				if(step_is_valid == SURGERY_FAILURE) // This is a failure that already has a message for failing.
 					return 1
 				M.op_stage.in_progress += zone
@@ -143,14 +160,14 @@
 					success = FALSE
 
 				// Bad or no surface may mean failure as well.
-				var/obj/surface = M.get_surgery_surface()
+				var/obj/surface = M.get_surgery_surface(user)
 				if(!surface || !prob(surface.surgery_odds))
 					success = FALSE
 
 				// Not staying still fails you too.
 				if(success)
 					var/calc_duration = rand(S.min_duration, S.max_duration)
-					if(!do_mob(user, M, calc_duration * toolspeed, zone))
+					if(!do_mob(user, M, calc_duration * toolspeed, zone, exclusive = TRUE))
 						success = FALSE
 						to_chat(user, "<span class='warning'>You must remain close to and keep focused on your patient to conduct surgery.</span>")
 
