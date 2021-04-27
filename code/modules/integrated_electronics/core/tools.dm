@@ -29,9 +29,6 @@
 		mode = WIRING
 		update_icon()
 	else if(mode == WIRING)
-		if(!selected_io)
-			mode = WIRE
-			.()
 		if(io == selected_io)
 			to_chat(user, "<span class='warning'>Wiring \the [selected_io.holder]'s [selected_io.name] into itself is rather pointless.</span>")
 			return
@@ -63,9 +60,6 @@
 		return
 
 	else if(mode == UNWIRING)
-		if(!selected_io)
-			mode = UNWIRE
-			.()
 		if(io == selected_io)
 			to_chat(user, "<span class='warning'>You can't wire a pin into each other, so unwiring \the [selected_io.holder] from \
 			the same pin is rather moot.</span>")
@@ -121,7 +115,7 @@
 
 /obj/item/integrated_electronics/debugger/attack_self(mob/user)
 	var/type_to_use = input("Please choose a type to use.","[src] type setting") as null|anything in list("string","number","ref", "null")
-	if(!CanInteract(user, physical_state))
+	if(!CanInteract(user, GLOB.tgui_physical_state))
 		return
 
 	var/new_data = null
@@ -130,13 +124,13 @@
 			accepting_refs = 0
 			new_data = input("Now type in a string.","[src] string writing") as null|text
 			new_data = sanitizeSafe(new_data, MAX_MESSAGE_LEN, 0, 0)
-			if(istext(new_data) && CanInteract(user, physical_state))
+			if(istext(new_data) && CanInteract(user, GLOB.tgui_physical_state))
 				data_to_write = new_data
 				to_chat(user, "<span class='notice'>You set \the [src]'s memory to \"[new_data]\".</span>")
 		if("number")
 			accepting_refs = 0
 			new_data = input("Now type in a number.","[src] number writing") as null|num
-			if(isnum(new_data) && CanInteract(user, physical_state))
+			if(isnum(new_data) && CanInteract(user, GLOB.tgui_physical_state))
 				data_to_write = new_data
 				to_chat(user, "<span class='notice'>You set \the [src]'s memory to [new_data].</span>")
 		if("ref")
@@ -149,7 +143,7 @@
 
 /obj/item/integrated_electronics/debugger/afterattack(atom/target, mob/living/user, proximity)
 	if(accepting_refs && proximity)
-		data_to_write = WEAKREF(target)
+		data_to_write = weakref(target)
 		visible_message("<span class='notice'>[user] slides \a [src]'s over \the [target].</span>")
 		to_chat(user, "<span class='notice'>You set \the [src]'s memory to a reference to [target.name] \[Ref\].  The ref scanner is \
 		now off.</span>")
@@ -160,7 +154,7 @@
 		io.write_data_to_pin(data_to_write)
 		var/data_to_show = data_to_write
 		if(isweakref(data_to_write))
-			var/datum/weakref/w = data_to_write
+			var/weakref/w = data_to_write
 			var/atom/A = w.resolve()
 			data_to_show = A.name
 		to_chat(user, "<span class='notice'>You write '[data_to_write ? data_to_show : "NULL"]' to the '[io]' pin of \the [io.holder].</span>")
@@ -250,7 +244,7 @@
 
 /obj/item/multitool/afterattack(atom/target, mob/living/user, proximity)
 	if(accepting_refs && toolmode == MULTITOOL_MODE_INTCIRCUITS && proximity)
-		weakref_wiring = WEAKREF(target)
+		weakref_wiring = weakref(target)
 		visible_message("<span class='notice'>[user] slides \a [src]'s over \the [target].</span>")
 		to_chat(user, "<span class='notice'>You set \the [src]'s memory to a reference to [target.name] \[Ref\].  The ref scanner is \
 		now off.</span>")

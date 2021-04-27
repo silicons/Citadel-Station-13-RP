@@ -24,7 +24,7 @@
 		..()
 
 /obj/item/assembly/electronic_assembly/proc/toggle_open(mob/user)
-	playsound(get_turf(src), 'sound/items/Crowbar.ogg', 50, 1)
+	playsound(src, 'sound/items/Crowbar.ogg', 50, 1)
 	opened = !opened
 	EA.opened = opened
 	to_chat(user, "<span class='notice'>You [opened ? "opened" : "closed"] \the [src].</span>")
@@ -53,7 +53,7 @@
 	. = ..()
 	if(EA)
 		for(var/obj/item/integrated_circuit/IC in EA.contents)
-			IC.external_examine(user)
+			. += IC.external_examine(user)
 
 /obj/item/assembly/electronic_assembly/verb/toggle()
 	set src in usr
@@ -82,6 +82,7 @@
 	output.assembly = src
 
 /obj/item/electronic_assembly/device/check_interactivity(mob/user)
-	if(!CanInteract(user, state = deep_inventory_state))
+	if(!CanInteract(user, state = GLOB.tgui_deep_inventory_state))
 		return 0
 	return 1
+
