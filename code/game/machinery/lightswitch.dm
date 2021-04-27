@@ -32,6 +32,11 @@
 	on = area.lightswitch
 	updateicon()
 
+/obj/machinery/light_switch/Destroy()
+	area = null
+	overlay = null
+	return ..()
+
 /obj/machinery/light_switch/proc/updateicon()
 	if(!overlay)
 		overlay = image(icon, "light1-overlay")
@@ -48,7 +53,9 @@
 		set_light(2, 0.1, on ? "#82FF4C" : "#F86060")
 
 /obj/machinery/light_switch/examine(mob/user)
-	. += "<span class = 'notice'>A light switch. It is [on? "on" : "off"].</span>"
+	. = ..()
+	if(Adjacent(user))
+		. += "A light switch. It is [on? "on" : "off"]."
 
 /obj/machinery/light_switch/attack_hand(mob/user)
 
@@ -63,6 +70,7 @@
 		L.updateicon()
 
 	area.power_change()
+	GLOB.lights_switched_on_roundstat++
 
 /obj/machinery/light_switch/power_change()
 
