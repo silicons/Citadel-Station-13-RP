@@ -254,7 +254,7 @@
 		return 0
 
 	var/datum/signal/signal = new
-	signal.transmission_method = 1 //radio signal
+	signal.transmission_method = TRANSMISSION_RADIO //radio signal
 	signal.source = src
 
 	signal.data = list(
@@ -365,6 +365,12 @@
 			ONE_ATMOSPHERE*50
 		)
 
+	if("reset_external_pressure" in signal.data)
+		external_pressure_bound = ONE_ATMOSPHERE
+
+	if("reset_internal_pressure" in signal.data)
+		internal_pressure_bound = 0
+
 	if(signal.data["init"] != null)
 		name = signal.data["init"]
 		return
@@ -387,7 +393,7 @@
 			to_chat(user, "<span class='notice'>Now welding the vent.</span>")
 			if(do_after(user, 20 * WT.toolspeed))
 				if(!src || !WT.isOn()) return
-				playsound(src.loc, WT.usesound, 50, 1)
+				playsound(src, WT.usesound, 50, 1)
 				if(!welded)
 					user.visible_message("<span class='notice'>\The [user] welds the vent shut.</span>", "<span class='notice'>You weld the vent shut.</span>", "You hear welding.")
 					welded = 1
@@ -406,7 +412,10 @@
 
 /obj/machinery/atmospherics/unary/vent_pump/examine(mob/user)
 	. = ..()
-	. += "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W"
+	if(Adjacent(user))
+		. += "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W"
+	else
+		. += "You are too far away to read the gauge."
 	if(welded)
 		. += "It seems welded shut."
 
