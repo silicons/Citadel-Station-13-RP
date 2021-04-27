@@ -60,12 +60,13 @@
 				return
 
 		user.visible_message("<span class='notice'>\The [user] sticks \a [O] into \the [src].</span>")
+		B.preserved = TRUE
 
 		brainmob = B.brainmob
 		B.brainmob = null
 		brainmob.loc = src
 		brainmob.container = src
-		brainmob.stat = 0
+		brainmob.set_stat(CONSCIOUS)
 		dead_mob_list -= brainmob//Update dem lists
 		living_mob_list += brainmob
 
@@ -109,6 +110,7 @@
 			brainobj = null
 		else	//Or make a new one if empty.
 			brain = new(user.loc)
+		brain.preserved = FALSE
 		brainmob.container = null//Reset brainmob mmi var.
 		brainmob.loc = brain//Throw mob into brain.
 		living_mob_list -= brainmob//Get outta here
@@ -231,7 +233,7 @@
 /obj/item/mmi/digital/transfer_identity(var/mob/living/carbon/H)
 	brainmob.dna = H.dna
 	brainmob.timeofhostdeath = H.timeofdeath
-	brainmob.stat = 0
+	brainmob.set_stat(CONSCIOUS)
 	if(H.mind)
 		H.mind.transfer_to(brainmob)
 	return

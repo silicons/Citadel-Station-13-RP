@@ -3,6 +3,8 @@
 
 	ai_holder_type = /datum/ai_holder/simple_mob/melee/evasive
 
+	a_intent = INTENT_HARM
+
 	var/generate_species = SPECIES_HUMAN
 	var/generate_dead = FALSE
 

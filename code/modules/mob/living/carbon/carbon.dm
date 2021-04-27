@@ -56,6 +56,60 @@
 
 	return
 
+//EMP vulnerability for non-synth carbons. could be useful for diona, vox, or others
+//the species' emp_sensitivity var needs to be greater than 0 for this to proc, and it defaults to 0 - shouldn't stack with prosthetics/fbps in most cases
+//higher sensitivity values incur additional effects, starting with confusion/blinding/knockdown and ending with increasing amounts of damage
+//the degree of damage and duration of effects can be tweaked up or down based on the species emp_dmg_mod and emp_stun_mod vars (default 1) on top of tuning the random ranges
+/mob/living/carbon/emp_act(severity)
+	//pregen our stunning stuff, had to do this seperately or else byond complained. remember that severity falls off with distance based on the source, so we don't need to do any extra distance calcs here.
+	var/agony_str = ((rand(4,6)*15)-(15*severity))*species.emp_stun_mod //big ouchies at high severity, causes 0-75 halloss/agony; shotgun beanbags and revolver rubbers do 60
+	var/deafen_dur = (rand(9,16)-severity)*species.emp_stun_mod //5-15 deafen, on par with a flashbang
+	var/confuse_dur = (rand(4,11)-severity)*species.emp_stun_mod //0-10 wobbliness, on par with a flashbang
+	var/weaken_dur = (rand(2,4)-severity)*species.emp_stun_mod //0-3 knockdown, on par with.. you get the idea
+	var/blind_dur = (rand(3,6)-severity)*species.emp_stun_mod //0-5 blind
+	if(species.emp_sensitivity) //receive warning message and basic effects
+		to_chat(src, "<span class='danger'><B>*BZZZT*</B></span>")
+		switch(severity)
+			if(1)
+				to_chat(src, "<span class='danger'>DANGER: Extreme EM flux detected!</span>")
+			if(2)
+				to_chat(src, "<span class='danger'>Danger: High EM flux detected!</span>")
+			if(3)
+				to_chat(src, "<span class='danger'>Warning: Moderate EM flux detected!</span>")
+			if(4)
+				to_chat(src, "<span class='danger'>Warning: Minor EM flux detected!</span>")
+		if(prob(90-(10*severity))) //50-80% chance to fire an emote. most are harmless, but vomit might reduce your nutrition level which could suck (so the whole thing is padded out with extras)
+			src.emote(pick("twitch", "twitch_v", "choke", "pale", "blink", "blink_r", "shiver", "sneeze", "vomit", "gasp", "cough", "drool"))
+		//stun effects block, effects vary wildly
+		if(species.emp_sensitivity & EMP_PAIN)
+			to_chat(src, "<span class='danger'>A wave of intense pain washes over you.</span>")
+			src.adjustHalLoss(agony_str)
+		if(species.emp_sensitivity & EMP_BLIND)
+			if(blind_dur >= 1) //don't flash them unless they actually roll a positive blind duration
+				src.flash_eyes(3)	//3 allows it to bypass any tier of eye protection, necessary or else sec sunglasses/etc. protect you from this
+			Blind(max(0,blind_dur))
+		if(species.emp_sensitivity & EMP_DEAFEN)
+			src.ear_damage += rand(0,deafen_dur) //this will heal pretty quickly, but spamming them at someone could cause serious damage
+			src.ear_deaf = max(src.ear_deaf,deafen_dur)
+		if(species.emp_sensitivity & EMP_CONFUSE)
+			if(confuse_dur >= 1)
+				to_chat(src, "<span class='danger'>Oh god, everything's spinning!</span>")
+			Confuse(max(0,confuse_dur))
+		if(species.emp_sensitivity & EMP_WEAKEN)
+			if(weaken_dur >= 1)
+				to_chat(src, "<span class='danger'>Your limbs go slack!</span>")
+			Weaken(max(0,weaken_dur))
+		//physical damage block, deals (minor-4) 5-15, 10-20, 15-25, 20-30 (extreme-1) of *each* type
+		if(species.emp_sensitivity & EMP_BRUTE_DMG)
+			src.adjustBruteLoss(rand(25-(severity*5),35-(severity*5)) * species.emp_dmg_mod)
+		if(species.emp_sensitivity & EMP_BURN_DMG)
+			src.adjustFireLoss(rand(25-(severity*5),35-(severity*5)) * species.emp_dmg_mod)
+		if(species.emp_sensitivity & EMP_TOX_DMG)
+			src.adjustToxLoss(rand(25-(severity*5),35-(severity*5)) * species.emp_dmg_mod)
+		if(species.emp_sensitivity & EMP_OXY_DMG)
+			src.adjustOxyLoss(rand(25-(severity*5),35-(severity*5)) * species.emp_dmg_mod)
+	..()
+
 /mob/living/carbon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/def_zone = null, var/stun = 1)
 	if(status_flags & GODMODE)	return 0	//godmode
 	if(def_zone == "l_hand" || def_zone == "r_hand") //Diona (And any other potential plant people) hands don't get shocked.
@@ -65,8 +119,12 @@
 	if (shock_damage<1)
 		return 0
 
-	src.apply_damage(shock_damage, BURN, def_zone, used_weapon="Electrocution")
-	playsound(loc, "sparks", 50, 1, -1)
+	src.apply_damage(0.2 * shock_damage, BURN, def_zone, used_weapon="Electrocution") //shock the target organ
+	src.apply_damage(0.4 * shock_damage, BURN, BP_TORSO, used_weapon="Electrocution") //shock the torso more
+	src.apply_damage(0.2 * shock_damage, BURN, null, used_weapon="Electrocution") //shock a random part!
+	src.apply_damage(0.2 * shock_damage, BURN, null, used_weapon="Electrocution") //shock a random part!
+
+	playsound(src, "sparks", 50, 1, -1)
 	if (shock_damage > 15)
 		src.visible_message(
 			"<span class='warning'>[src] was electrocuted[source ? " by the [source]" : ""]!</span>", \
@@ -103,8 +161,8 @@
 			var/mob/living/carbon/human/H = src
 			var/datum/gender/T = gender_datums[H.get_visible_gender()]
 			src.visible_message( \
-				"<font color='blue'>[src] examines [T.himself].</font>", \
-				"<font color='blue'>You check yourself for injuries.</font>" \
+				"<span class='notice'>[src] examines [T.himself].</span>", \
+				"<span class='notice'>You check yourself for injuries.</span>" \
 				)
 
 			for(var/obj/item/organ/external/org in H.organs)
@@ -154,7 +212,7 @@
 			if((SKELETON in H.mutations) && (!H.w_uniform) && (!H.wear_suit))
 				H.play_xylophone()
 		else if (on_fire)
-			playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+			playsound(src, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 			if (M.on_fire)
 				M.visible_message("<span class='warning'>[M] tries to pat out [src]'s flames, but to no avail!</span>",
 				"<span class='warning'>You try to pat out [src]'s flames, but to no avail! Put yourself out first!</span>")
@@ -222,7 +280,7 @@
 			AdjustStunned(-3)
 			AdjustWeakened(-3)
 
-			playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+			playsound(src, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 
 /mob/living/carbon/proc/eyecheck()
 	return 0
@@ -250,7 +308,7 @@
 /mob/living/carbon/can_use_hands()
 	if(handcuffed)
 		return 0
-	if(buckled && ! istype(buckled, /obj/structure/bed/chair)) // buckling does not restrict hands
+	if(buckled && istype(buckled, /obj/structure/bed/nest)) // buckling does not restrict hands
 		return 0
 	return 1
 
@@ -264,7 +322,7 @@
 
 	else if (W == handcuffed)
 		handcuffed = null
-		update_inv_handcuffed()
+		update_handcuffed()
 		if(buckled && buckled.buckle_require_restraints)
 			buckled.unbuckle_mob()
 
@@ -272,7 +330,7 @@
 		legcuffed = null
 		update_inv_legcuffed()
 	else
-	 ..()
+		..()
 
 	return
 
@@ -323,7 +381,7 @@
 		return 0
 	stop_pulling()
 	to_chat(src, "<span class='warning'>You slipped on [slipped_on]!</span>")
-	playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
+	playsound(src, 'sound/misc/slip.ogg', 50, 1, -3)
 	Weaken(FLOOR(stun_duration/2, 1))
 	return 1
 
@@ -341,9 +399,9 @@
 			return GLOB.all_languages[LANGUAGE_GIBBERISH]
 
 	if(!species)
-		return null
+		return GLOB.all_languages[LANGUAGE_GIBBERISH]
 
-	return species.default_language ? GLOB.all_languages[species.default_language] : null
+	return species.default_language ? GLOB.all_languages[species.default_language] : GLOB.all_languages[LANGUAGE_GIBBERISH]
 
 /mob/living/carbon/proc/should_have_organ(var/organ_check)
 	return 0
@@ -357,3 +415,93 @@
 	if(does_not_breathe)
 		return FALSE
 	return ..()
+
+/mob/living/carbon/proc/update_handcuffed()
+	if(handcuffed)
+		drop_l_hand()
+		drop_r_hand()
+		stop_pulling()
+		throw_alert("handcuffed", /obj/screen/alert/restrained/handcuffed, new_master = handcuffed)
+	else
+		clear_alert("handcuffed")
+	update_action_buttons() //some of our action buttons might be unusable when we're handcuffed.
+	update_inv_handcuffed()
+
+// Clears blood overlays
+/mob/living/carbon/clean_blood()
+	. = ..()
+	if(src.r_hand)
+		src.r_hand.clean_blood()
+	if(src.l_hand)
+		src.l_hand.clean_blood()
+	if(src.back)
+		if(src.back.clean_blood())
+			src.update_inv_back(0)
+
+	if(ishuman(src))
+		var/mob/living/carbon/human/H = src
+		var/washgloves = 1
+		var/washshoes = 1
+		var/washmask = 1
+		var/washears = 1
+		var/washglasses = 1
+
+		if(H.wear_suit)
+			washgloves = !(H.wear_suit.flags_inv & HIDEGLOVES)
+			washshoes = !(H.wear_suit.flags_inv & HIDESHOES)
+
+		if(H.head)
+			washmask = !(H.head.flags_inv & HIDEMASK)
+			washglasses = !(H.head.flags_inv & HIDEEYES)
+			washears = !(H.head.flags_inv & HIDEEARS)
+
+		if(H.wear_mask)
+			if (washears)
+				washears = !(H.wear_mask.flags_inv & HIDEEARS)
+			if (washglasses)
+				washglasses = !(H.wear_mask.flags_inv & HIDEEYES)
+
+		if(H.head)
+			if(H.head.clean_blood())
+				H.update_inv_head()
+
+		if(H.wear_suit)
+			if(H.wear_suit.clean_blood())
+				H.update_inv_wear_suit()
+
+		else if(H.w_uniform)
+			if(H.w_uniform.clean_blood())
+				H.update_inv_w_uniform()
+
+		if(H.gloves && washgloves)
+			if(H.gloves.clean_blood())
+				H.update_inv_gloves(0)
+
+		if(H.shoes && washshoes)
+			if(H.shoes.clean_blood())
+				H.update_inv_shoes(0)
+
+		if(H.wear_mask && washmask)
+			if(H.wear_mask.clean_blood())
+				H.update_inv_wear_mask(0)
+
+		if(H.glasses && washglasses)
+			if(H.glasses.clean_blood())
+				H.update_inv_glasses(0)
+
+		if(H.l_ear && washears)
+			if(H.l_ear.clean_blood())
+				H.update_inv_ears(0)
+
+		if(H.r_ear && washears)
+			if(H.r_ear.clean_blood())
+				H.update_inv_ears(0)
+
+		if(H.belt)
+			if(H.belt.clean_blood())
+				H.update_inv_belt(0)
+
+	else
+		if(src.wear_mask)						//if the mob is not human, it cleans the mask without asking for bitflags
+			if(src.wear_mask.clean_blood())
+				src.update_inv_wear_mask(0)
