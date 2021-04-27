@@ -7,8 +7,7 @@
 	anchored = TRUE
 	circuit = /obj/item/circuitboard/exploration_equipment_vendor
 	icon_deny = "exploration-deny" //VOREStation Edit
-	var/icon_vend = "exploration-vend" //VOREStation Add
-	//VOREStation Edit Start - Heavily modified list
+	icon_vend = "exploration-vend" //VOREStation Add
 	prize_list = list(
 		new /datum/data/mining_equipment("1 Marker Beacon",			/obj/item/stack/marker_beacon,										1),
 		new /datum/data/mining_equipment("10 Marker Beacons",			/obj/item/stack/marker_beacon/ten,									10),
@@ -77,43 +76,13 @@
 	popup.set_content(dat)
 	popup.open()
 
-/obj/machinery/mineral/equipment_vendor/survey/Topic(href, href_list)
-	if(..())
-		return 1
+	)
+	//VOREStation Edit End
 
-	if(href_list["choice"])
-		if(istype(inserted_id))
-			if(href_list["choice"] == "eject")
-				to_chat(usr, "<span class='notice'>You eject the ID from [src]'s card slot.</span>")
-				usr.put_in_hands(inserted_id)
-				inserted_id = null
-		else if(href_list["choice"] == "insert")
-			var/obj/item/card/id/I = usr.get_active_hand()
-			if(istype(I) && !inserted_id && usr.unEquip(I))
-				I.forceMove(src)
-				inserted_id = I
-				interact(usr)
-				to_chat(usr, "<span class='notice'>You insert the ID into [src]'s card slot.</span>")
-			else
-				to_chat(usr, "<span class='warning'>No valid ID.</span>")
-				flick(icon_deny, src)
+/obj/machinery/mineral/equipment_vendor/survey/get_points(obj/item/card/id/target)
+	if(!istype(target))
+		return 0
+	return target.survey_points
 
-	if(href_list["purchase"])
-		if(istype(inserted_id))
-			var/datum/data/mining_equipment/prize = locate(href_list["purchase"])
-			if (!prize || !(prize in prize_list))
-				to_chat(usr, "<span class='warning'>Error: Invalid choice!</span>")
-				flick(icon_deny, src)
-				return
-			if(prize.cost > inserted_id.survey_points)
-				to_chat(usr, "<span class='warning'>Error: Insufficent points for [prize.equipment_name]!</span>")
-				flick(icon_deny, src)
-			else
-				inserted_id.survey_points -= prize.cost
-				to_chat(usr, "<span class='notice'>[src] clanks to life briefly before vending [prize.equipment_name]!</span>")
-				flick(icon_vend, src) //VOREStation Add
-				new prize.equipment_path(drop_location())
-		else
-			to_chat(usr, "<span class='warning'>Error: Please insert a valid ID!</span>")
-			flick(icon_deny, src)
-	updateUsrDialog()
+/obj/machinery/mineral/equipment_vendor/survey/remove_points(obj/item/card/id/target, amt)
+	target.survey_points -= amt
