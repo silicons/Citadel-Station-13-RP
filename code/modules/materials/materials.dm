@@ -53,9 +53,10 @@ var/list/name_to_material
 /proc/populate_material_list(force_remake=0)
 	if(name_to_material && !force_remake) return // Already set up!
 	name_to_material = list()
-	for(var/type in typesof(/datum/material) - /datum/material)
+	for(var/type in subtypesof(/datum/material))
 		var/datum/material/new_mineral = new type
 		if(!new_mineral.name)
+			qdel(new_mineral)
 			continue
 		name_to_material[lowertext(new_mineral.name)] = new_mineral
 	return 1
@@ -114,6 +115,7 @@ var/list/name_to_material
 	var/list/composite_material  // If set, object matter var will be a list containing these values.
 	var/luminescence
 	var/radiation_resistance = 0 // Radiation resistance, which is added on top of a material's weight for blocking radiation. Needed to make lead special without superrobust weapons.
+	var/supply_conversion_value  // Supply points per sheet that this material sells for.
 
 	// Placeholder vars for the time being, todo properly integrate windows/light tiles/rods.
 	var/created_window
@@ -187,7 +189,7 @@ var/list/name_to_material
 	if(islist(composite_material))
 		for(var/material_string in composite_material)
 			temp_matter[material_string] = composite_material[material_string]
-	else
+	else if(SHEET_MATERIAL_AMOUNT)
 		temp_matter[name] = SHEET_MATERIAL_AMOUNT
 	return temp_matter
 
@@ -221,13 +223,13 @@ var/list/name_to_material
 
 // General wall debris product placement.
 // Not particularly necessary aside from snowflakey cult girders.
-/datum/material/proc/place_dismantled_product(turf/target, amount)
-	place_sheet(target, amount)
+/datum/material/proc/place_dismantled_product(var/turf/target)
+	place_sheet(target)
 
 // Debris product. Used ALL THE TIME.
-/datum/material/proc/place_sheet(turf/target, amount)
+/datum/material/proc/place_sheet(var/turf/target)
 	if(stack_type)
-		return new stack_type(target, ispath(stack_type, /obj/item/stack)? amount : null)
+		return new stack_type(target)
 
 // As above.
 /datum/material/proc/place_shard(var/turf/target)
@@ -241,6 +243,7 @@ var/list/name_to_material
 /datum/material/proc/combustion_effect(var/turf/T, var/temperature)
 	return
 
+// Used by walls to do on-touch things, after checking for crumbling and open-ability.
 /datum/material/proc/wall_touch_special(var/turf/simulated/wall/W, var/mob/living/L)
 	return
 
@@ -255,6 +258,7 @@ var/list/name_to_material
 	weight = 22
 	stack_origin_tech = list(TECH_MATERIAL = 5)
 	door_icon_base = "stone"
+	supply_conversion_value = 2
 
 /datum/material/diamond
 	name = "diamond"
@@ -264,11 +268,13 @@ var/list/name_to_material
 	icon_colour = "#00FFE1"
 	opacity = 0.4
 	reflectivity = 0.6
+	conductive = 0
 	conductivity = 1
 	shard_type = SHARD_SHARD
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
 	hardness = 100
 	stack_origin_tech = list(TECH_MATERIAL = 6)
+	supply_conversion_value = 8
 
 /datum/material/gold
 	name = "gold"
@@ -280,6 +286,7 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 4)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
+	supply_conversion_value = 2
 
 /datum/material/gold/bronze //placeholder for ashtrays
 	name = "bronze"
@@ -295,6 +302,7 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 3)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
+	supply_conversion_value = 2
 
 //R-UST port
 /datum/material/supermatter
@@ -327,6 +335,7 @@ var/list/name_to_material
 	door_icon_base = "stone"
 	sheet_singular_name = "crystal"
 	sheet_plural_name = "crystals"
+	supply_conversion_value = 5
 
 /*
 // Commenting this out while fires are so spectacularly lethal, as I can't seem to get this balanced appropriately.
@@ -339,7 +348,7 @@ var/list/name_to_material
 	for(var/turf/simulated/floor/target_tile in range(2,T))
 		var/phoronToDeduce = (temperature/30) * effect_multiplier
 		totalPhoron += phoronToDeduce
-		target_tile.assume_gas(/datum/gas/phoron, phoronToDeduce, 200+T0C)
+		target_tile.assume_gas("phoron", phoronToDeduce, 200+T0C)
 		spawn (0)
 			target_tile.hotspot_expose(temperature, 400)
 	return round(totalPhoron/100)
@@ -368,7 +377,7 @@ var/list/name_to_material
 	hardness = 30 //VOREStation Edit - Please.
 	integrity = 201 //hack to stop kitchen benches being flippable, todo: refactor into weight system
 	stack_type = /obj/item/stack/material/marble
-
+	supply_conversion_value = 2
 
 /datum/material/steel
 	name = DEFAULT_WALL_MATERIAL
@@ -427,7 +436,7 @@ var/list/name_to_material
 	conductivity = 13 // For the purposes of balance.
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	composite_material = list(DEFAULT_WALL_MATERIAL = SHEET_MATERIAL_AMOUNT, "platinum" = SHEET_MATERIAL_AMOUNT) //todo
-	radiation_resistance = 14
+	supply_conversion_value = 6
 
 /datum/material/plasteel/hull
 	name = MAT_PLASTEELHULL
@@ -444,7 +453,7 @@ var/list/name_to_material
 // Very rare alloy that is reflective, should be used sparingly.
 /datum/material/durasteel
 	name = "durasteel"
-	stack_type = /obj/item/stack/material/durasteel
+	stack_type = /obj/item/stack/material/durasteel/hull
 	integrity = 600
 	melting_point = 7000
 	icon_base = "metal"
@@ -457,6 +466,7 @@ var/list/name_to_material
 	reflectivity = 0.7 // Not a perfect mirror, but close.
 	stack_origin_tech = list(TECH_MATERIAL = 8)
 	composite_material = list("plasteel" = SHEET_MATERIAL_AMOUNT, "diamond" = SHEET_MATERIAL_AMOUNT) //shrug
+	supply_conversion_value = 9
 
 /datum/material/durasteel/hull //The 'Hardball' of starship hulls.
 	name = MAT_DURASTEELHULL
@@ -477,12 +487,16 @@ var/list/name_to_material
 	door_icon_base = "metal"
 	icon_colour = "#D1E6E3"
 	icon_reinf = "reinf_metal"
+	composite_material = null
 
 /datum/material/plasteel/titanium/hull
 	name = MAT_TITANIUMHULL
-	stack_type = null
+	stack_type = /obj/item/stack/material/titanium/hull
 	icon_base = "hull"
 	icon_reinf = "reinf_mesh"
+
+/datum/material/plasteel/titanium/hull/place_sheet(var/turf/target) //Deconstructed into normal titanium sheets.
+	new /obj/item/stack/material/titanium(target)
 
 /datum/material/glass
 	name = "glass"
@@ -500,7 +514,7 @@ var/list/name_to_material
 	conductivity = 1 // Glass shards don't conduct.
 	door_icon_base = "stone"
 	destruction_desc = "shatters"
-	window_options = list("One Direction" = 1, "Full Window" = 2, "Windoor" = 2)
+	window_options = list("One Direction" = 1, "Full Window" = 4, "Windoor" = 2)
 	created_window = /obj/structure/window/basic
 	created_fulltile_window = /obj/structure/window/basic/full
 	rod_product = /obj/item/stack/material/glass/reinforced
@@ -526,7 +540,7 @@ var/list/name_to_material
 		return 1
 
 	// Get data for building windows here.
-	var/list/possible_directions = GLOB.cardinal.Copy()
+	var/list/possible_directions = cardinal.Copy()
 	var/window_count = 0
 	for (var/obj/structure/window/check_window in user.loc)
 		window_count++
@@ -593,7 +607,7 @@ var/list/name_to_material
 	weight = 30
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	composite_material = list(DEFAULT_WALL_MATERIAL = SHEET_MATERIAL_AMOUNT / 2, "glass" = SHEET_MATERIAL_AMOUNT)
-	window_options = list("One Direction" = 1, "Full Window" = 2, "Windoor" = 2)
+	window_options = list("One Direction" = 1, "Full Window" = 4, "Windoor" = 2)
 	created_window = /obj/structure/window/reinforced
 	created_fulltile_window = /obj/structure/window/reinforced/full
 	wire_product = null
@@ -607,7 +621,7 @@ var/list/name_to_material
 	integrity = 100
 	icon_colour = "#FC2BC5"
 	stack_origin_tech = list(TECH_MATERIAL = 4)
-	window_options = list("One Direction" = 1, "Full Window" = 2)
+	window_options = list("One Direction" = 1, "Full Window" = 4)
 	created_window = /obj/structure/window/phoronbasic
 	created_fulltile_window = /obj/structure/window/phoronbasic/full
 	wire_product = null
@@ -619,13 +633,13 @@ var/list/name_to_material
 	stack_type = /obj/item/stack/material/glass/phoronrglass
 	stack_origin_tech = list(TECH_MATERIAL = 5)
 	composite_material = list() //todo
-	window_options = list("One Direction" = 1, "Full Window" = 2)
+	window_options = list("One Direction" = 1, "Full Window" = 4)
 	created_window = /obj/structure/window/phoronreinforced
 	created_fulltile_window = /obj/structure/window/phoronreinforced/full
 	hardness = 40
 	weight = 30
 	stack_origin_tech = list(TECH_MATERIAL = 2)
-	composite_material = list() //todo
+	composite_material = list(DEFAULT_WALL_MATERIAL = SHEET_MATERIAL_AMOUNT / 2, "borosilicate glass" = SHEET_MATERIAL_AMOUNT)
 	rod_product = null
 
 /datum/material/plastic
@@ -649,6 +663,22 @@ var/list/name_to_material
 	stack_type = null
 	shard_type = SHARD_NONE
 
+/datum/material/graphite
+	name = MAT_GRAPHITE
+	stack_type = /obj/item/stack/material/graphite
+	flags = MATERIAL_BRITTLE
+	icon_base = "solid"
+	icon_reinf = "reinf_mesh"
+	icon_colour = "#333333"
+	hardness = 75
+	weight = 15
+	integrity = 175
+	protectiveness = 15
+	conductivity = 18
+	melting_point = T0C+3600
+	radiation_resistance = 15
+	stack_origin_tech = list(TECH_MATERIAL = 2, TECH_MAGNET = 2)
+
 /datum/material/osmium
 	name = "osmium"
 	stack_type = /obj/item/stack/material/osmium
@@ -657,6 +687,7 @@ var/list/name_to_material
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	conductivity = 100
+	supply_conversion_value = 6
 
 /datum/material/tritium
 	name = "tritium"
@@ -685,6 +716,7 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 6, TECH_MAGNET = 5)
 	conductivity = 100
 	is_fusion_fuel = 1
+	supply_conversion_value = 6
 
 /datum/material/platinum
 	name = "platinum"
@@ -695,6 +727,7 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
+	supply_conversion_value = 5
 
 /datum/material/iron
 	name = "iron"
@@ -714,6 +747,7 @@ var/list/name_to_material
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	radiation_resistance = 25 // Lead is Special and so gets to block more radiation than it normally would with just weight, totalling in 48 protection.
+	supply_conversion_value = 2
 
 // Particle Smasher and other exotic materials.
 
@@ -736,8 +770,8 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 5, TECH_BIO = 4)
 	sheet_singular_name = "sheet"
 	sheet_plural_name = "sheets"
+	supply_conversion_value = 8
 
-//exotic wonder material
 /datum/material/morphium
 	name = MAT_MORPHIUM
 	stack_type = /obj/item/stack/material/morphium
@@ -746,17 +780,18 @@ var/list/name_to_material
 	icon_colour = "#37115A"
 	icon_reinf = "reinf_metal"
 	protectiveness = 60
-	integrity = 900
+	integrity = 300
 	conductive = 0
 	conductivity = 1.5
-	hardness = 80
+	hardness = 90
 	shard_type = SHARD_SHARD
 	weight = 30
 	negation = 25
 	explosion_resistance = 85
 	reflectivity = 0.2
 	radiation_resistance = 10
-	stack_origin_tech = list(TECH_MATERIAL = 8, TECH_MAGNET = 8, TECH_PHORON = 6, TECH_BLUESPACE = 6, TECH_ARCANE = 3)
+	stack_origin_tech = list(TECH_MATERIAL = 8, TECH_ILLEGAL = 1, TECH_PHORON = 4, TECH_BLUESPACE = 4, TECH_ARCANE = 1)
+	supply_conversion_value = 13
 
 /datum/material/morphium/hull
 	name = MAT_MORPHIUMHULL
@@ -791,6 +826,7 @@ var/list/name_to_material
 	name = "alienalloy"
 	display_name = "durable alloy"
 	stack_type = null
+	flags = MATERIAL_UNMELTABLE
 	icon_colour = "#6C7364"
 	integrity = 1200
 	melting_point = 6000       // Hull plating.
@@ -887,6 +923,8 @@ var/list/name_to_material
 	stack_type = /obj/item/stack/material/log
 	sheet_singular_name = null
 	sheet_plural_name = "pile"
+	pass_stack_colors = TRUE
+	supply_conversion_value = 1
 
 /datum/material/wood/log/sif
 	name = MAT_SIFLOG
@@ -902,7 +940,7 @@ var/list/name_to_material
 
 /datum/material/wood/sif
 	name = MAT_SIFWOOD
-//	stack_type = /obj/item/stack/material/wood/sif
+	stack_type = /obj/item/stack/material/wood/sif
 	icon_colour = "#0099cc" // Cyan-ish
 	stack_origin_tech = list(TECH_MATERIAL = 2, TECH_BIO = 2) // Alien wood would presumably be more interesting to the analyzer.
 
@@ -971,7 +1009,9 @@ var/list/name_to_material
 	protectiveness = 1 // 4%
 	flags = MATERIAL_PADDING
 	conductive = 0
+	integrity = 40
 	pass_stack_colors = TRUE
+	supply_conversion_value = 2
 
 /datum/material/emptysandbag
 	name = "empty sandbag"
@@ -1181,6 +1221,28 @@ var/list/name_to_material
 	display_name = "lime"
 	use_name = "lime cloth"
 	icon_colour = "#62E36C"
+	flags = MATERIAL_PADDING
+	ignition_point = T0C+232
+	melting_point = T0C+300
+	protectiveness = 1 // 4%
+	conductive = 0
+
+/datum/material/cloth_yellow
+	name = "yellow"
+	display_name = "yellow"
+	use_name = "yellow cloth"
+	icon_colour = "#EEF573"
+	flags = MATERIAL_PADDING
+	ignition_point = T0C+232
+	melting_point = T0C+300
+	protectiveness = 1 // 4%
+	conductive = 0
+
+/datum/material/cloth_orange
+	name = "orange"
+	display_name = "orange"
+	use_name = "orange cloth"
+	icon_colour = "#E3BF49"
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+232
 	melting_point = T0C+300

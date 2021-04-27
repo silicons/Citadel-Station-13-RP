@@ -28,6 +28,14 @@
 	name = "stack of plastic"
 	type_to_spawn = /obj/item/stack/material/plastic
 
+/obj/fiftyspawner/copper
+	name = "stack of copper"
+	type_to_spawn = /obj/item/stack/material/copper
+
+/obj/fiftyspawner/graphite
+	name = "stack of graphite"
+	type_to_spawn = /obj/item/stack/material/graphite
+
 /obj/fiftyspawner/gold
 	name = "stack of gold"
 	type_to_spawn = /obj/item/stack/material/gold
