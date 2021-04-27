@@ -45,21 +45,15 @@
 
 // This one's pretty dumb, but pirates are dumb anyways and it makes for a good test.
 /datum/say_list/pirate
-	speak = list("Yarr!",
-				"Yohoho and a bottle of rum...",
-				"Getting tired of hardtack.",
-				"What do you do with a drunken sailor...",
-				"One day, we'll get that big score.",
-				"They ain't catching this pirate, no siree.")
+	speak = list("Yarr!")
+
 	say_understood = list("Alright, matey.")
 	say_cannot = list("No, matey.")
-	say_maybe_target = list("Eh?", "Who goes there?")
-	say_got_target = list("Yarrrr!", "Just drop your loot and run.")
+	say_maybe_target = list("Eh?")
+	say_got_target = list("Yarrrr!")
 	say_threaten = list("You best leave, this booty is mine.", "No plank to walk on, just walk away.")
-	say_stand_down = list("Good.", "That's right, run, you lilly livers.")
-	say_escalate = list("Yarr! That booty is mine!", "Going to gut you, landlubber.")
-	threaten_sound = 'sound/weapons/TargetOn.ogg'
-	stand_down_sound = 'sound/weapons/TargetOff.ogg'
+	say_stand_down = list("Good.")
+	say_escalate = list("Yarr! The booty is mine!")
 
 // Mercs!
 /datum/say_list/merc
@@ -77,6 +71,7 @@
 	say_threaten = list("Get out of here!", "Hey! Private Property!")
 	say_stand_down = list("Good.")
 	say_escalate = list("Your funeral!", "Bring it!")
+	
 	threaten_sound = 'sound/weapons/TargetOn.ogg'
 	stand_down_sound = 'sound/weapons/TargetOff.ogg'
 
@@ -110,6 +105,10 @@
 
 	threaten_sound = 'sound/effects/turret/move1.wav'
 	stand_down_sound = 'sound/effects/turret/move2.wav'
+
+/datum/say_list/mercenary
+	threaten_sound = 'sound/weapons/TargetOn.ogg'
+	stand_down_sound = 'sound/weapons/TargetOff.ogg'
 
 
 /datum/say_list/crab
