@@ -23,6 +23,7 @@ GLOBAL_LIST_INIT(ore_data, initialize_ore_data())
 		"million" = 999
 		)
 	var/xarch_source_mineral = "iron"
+	var/reagent = "silicate"
 
 /datum/ore/New()
 	. = ..()
@@ -42,6 +43,7 @@ GLOBAL_LIST_INIT(ore_data, initialize_ore_data())
 		"million" = 704
 		)
 	xarch_source_mineral = "potassium"
+	reagent = "uranium"
 
 /datum/ore/hematite
 	name = "hematite"
@@ -49,19 +51,22 @@ GLOBAL_LIST_INIT(ore_data, initialize_ore_data())
 	smelts_to = "iron"
 	alloy = 1
 	result_amount = 5
-	spread_chance = 30
+	spread_chance = 25
 	ore = /obj/item/ore/iron
 	scan_icon = "mineral_common"
+	reagent = "iron"
 
 /datum/ore/coal
 	name = "carbon"
 	display_name = "raw carbon"
 	smelts_to = "plastic"
+	compresses_to = "graphite"
 	alloy = 1
 	result_amount = 5
-	spread_chance = 30
+	spread_chance = 25
 	ore = /obj/item/ore/coal
 	scan_icon = "mineral_common"
+	reagent = "carbon"
 
 /datum/ore/glass
 	name = "sand"
@@ -75,7 +80,7 @@ GLOBAL_LIST_INIT(ore_data, initialize_ore_data())
 	display_name = "phoron crystals"
 	compresses_to = "phoron"
 	//smelts_to = something that explodes violently on the conveyor, huhuhuhu
-	result_amount = 8
+	result_amount = 5
 	spread_chance = 25
 	ore = /obj/item/ore/phoron
 	scan_icon = "mineral_uncommon"
@@ -86,22 +91,24 @@ GLOBAL_LIST_INIT(ore_data, initialize_ore_data())
 		"billion_lower" = 10
 		)
 	xarch_source_mineral = "phoron"
+	reagent = "phoron"
 
 /datum/ore/silver
 	name = "silver"
 	display_name = "native silver"
 	smelts_to = "silver"
 	result_amount = 5
-	spread_chance = 18
+	spread_chance = 10
 	ore = /obj/item/ore/silver
 	scan_icon = "mineral_uncommon"
+	reagent = "silver"
 
 /datum/ore/gold
 	smelts_to = "gold"
 	name = "gold"
 	display_name = "native gold"
 	result_amount = 5
-	spread_chance = 15
+	spread_chance = 10
 	ore = /obj/item/ore/gold
 	scan_icon = "mineral_uncommon"
 	xarch_ages = list(
@@ -110,17 +117,19 @@ GLOBAL_LIST_INIT(ore_data, initialize_ore_data())
 		"billion" = 4,
 		"billion_lower" = 3
 		)
+	reagent = "gold"
 
 /datum/ore/diamond
 	name = "diamond"
 	display_name = "diamond"
 	alloy = 1
 	compresses_to = "diamond"
-	result_amount = 6
-	spread_chance = 15
+	result_amount = 5
+	spread_chance = 10
 	ore = /obj/item/ore/diamond
 	scan_icon = "mineral_rare"
 	xarch_source_mineral = "nitrogen"
+	reagent = "carbon"
 
 /datum/ore/platinum
 	name = "platinum"
@@ -129,9 +138,10 @@ GLOBAL_LIST_INIT(ore_data, initialize_ore_data())
 	compresses_to = "osmium"
 	alloy = 1
 	result_amount = 5
-	spread_chance = 15
+	spread_chance = 10
 	ore = /obj/item/ore/osmium
 	scan_icon = "mineral_rare"
+	reagent = "platinum"
 
 /datum/ore/hydrogen
 	name = "mhydrogen"
@@ -139,12 +149,13 @@ GLOBAL_LIST_INIT(ore_data, initialize_ore_data())
 	smelts_to = "tritium"
 	compresses_to = "mhydrogen"
 	scan_icon = "mineral_rare"
+	reagent = "hydrogen"
 
 /datum/ore/verdantium
 	name = MAT_VERDANTIUM
 	display_name = "crystalline verdantite"
 	compresses_to = MAT_VERDANTIUM
-	result_amount = 4
+	result_amount = 2
 	spread_chance = 5
 	ore = /obj/item/ore/verdantium
 	scan_icon = "mineral_rare"
@@ -157,16 +168,86 @@ GLOBAL_LIST_INIT(ore_data, initialize_ore_data())
 	name = MAT_MARBLE
 	display_name = "recrystallized carbonate"
 	compresses_to = "marble"
-	result_amount = 2
+	result_amount = 1
 	spread_chance = 10
 	ore = /obj/item/ore/marble
 	scan_icon = "mineral_common"
+	reagent = "calciumcarbonate"
 
 /datum/ore/lead
 	name = MAT_LEAD
 	display_name = "lead glance"
 	smelts_to = "lead"
-	result_amount = 4
+	result_amount = 3
 	spread_chance = 20
 	ore = /obj/item/ore/lead
+	scan_icon = "mineral_rare"
+	reagent = "lead"
+
+/datum/ore/copper
+	name = "copper"
+	display_name = "copper"
+	smelts_to = "copper"
+	alloy = 1
+	result_amount = 5
+	spread_chance = 15
+	ore = /obj/item/ore/copper
+	scan_icon = "mineral_common"
+	reagent = "copper"
+
+/datum/ore/tin
+	name = "tin"
+	display_name = "tin"
+	smelts_to = "tin"
+	alloy = 1
+	result_amount = 5
+	spread_chance = 10
+	ore = /obj/item/ore/tin
+	scan_icon = "mineral_common"
+
+/datum/ore/quartz
+	name = "quartz"
+	display_name = "unrefined quartz"
+	compresses_to = "quartz"
+	result_amount = 5
+	spread_chance = 5
+	ore = /obj/item/ore/quartz
+	scan_icon = "mineral_common"
+
+/datum/ore/bauxite
+	name = "bauxite"
+	display_name = "bauxite"
+	smelts_to = "aluminium"
+	result_amount = 5
+	spread_chance = 25
+	ore = /obj/item/ore/bauxite
+	scan_icon = "mineral_common"
+	reagent = "aluminum"
+
+/datum/ore/rutile
+	name = "rutile"
+	display_name = "rutile"
+	smelts_to = "titanium"
+	result_amount = 5
+	spread_chance = 12
+	alloy = 1
+	ore = /obj/item/ore/rutile
+	scan_icon = "mineral_uncommon"
+
+/datum/ore/painite
+	name = "painite"
+	display_name = "rough painite"
+	compresses_to = "painite"
+	result_amount = 5
+	spread_chance = 3
+	ore = /obj/item/ore/painite
+	scan_icon = "mineral_rare"
+
+/datum/ore/void_opal
+	name = "void opal"
+	display_name = "rough void opal"
+	compresses_to = "void opal"
+	result_amount = 5
+	spread_chance = 1
+	ore = /obj/item/ore/void_opal
 	scan_icon = "mineral_rare"
