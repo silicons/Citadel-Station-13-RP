@@ -30,7 +30,7 @@
 		return
 	tgui_interact(user)
 
-/obj/machinery/artifact_analyser/tgui_interact(mob/user, datum/tgui/ui)
+/obj/machinery/artifact_analyser/ui_interact(mob/user, datum/tgui/ui)
 	if(!owned_scanner)
 		reconnect_scanner()
 	ui = SStgui.try_update_ui(user, src, ui)

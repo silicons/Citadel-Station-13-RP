@@ -140,7 +140,7 @@
 /obj/machinery/replicator/attack_hand(mob/user as mob)
 	tgui_interact(user)
 
-/obj/machinery/replicator/tgui_interact(mob/user, datum/tgui/ui)
+/obj/machinery/replicator/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "XenoarchReplicator", name)

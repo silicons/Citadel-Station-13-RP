@@ -60,7 +60,7 @@
 /obj/item/anodevice/tgui_state(mob/user)
 	return GLOB.tgui_inventory_state
 
-/obj/item/anodevice/tgui_interact(mob/user, datum/tgui/ui)
+/obj/item/anodevice/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "XenoarchHandheldPowerUtilizer", name)

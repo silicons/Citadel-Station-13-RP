@@ -159,7 +159,7 @@
 /obj/item/depth_scanner/tgui_state(mob/user)
 	return GLOB.tgui_deep_inventory_state
 
-/obj/item/depth_scanner/tgui_interact(mob/user, datum/tgui/ui)
+/obj/item/depth_scanner/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "XenoarchDepthScanner", name)
@@ -283,7 +283,7 @@
 /obj/item/beacon_locator/tgui_state(mob/user)
 	return GLOB.tgui_inventory_state
 
-/obj/item/beacon_locator/tgui_interact(mob/user, datum/tgui/ui)
+/obj/item/beacon_locator/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "BeaconLocator", name)

@@ -118,7 +118,7 @@
 /obj/machinery/radiocarbon_spectrometer/attack_hand(mob/user)
 	tgui_interact(user)
 
-/obj/machinery/radiocarbon_spectrometer/tgui_interact(mob/user, datum/tgui/ui)
+/obj/machinery/radiocarbon_spectrometer/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "XenoarchSpectrometer", name)
