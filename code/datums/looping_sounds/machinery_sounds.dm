@@ -4,7 +4,7 @@
 	mid_sounds = list('sound/machines/shower/shower_mid1.ogg'=1,'sound/machines/shower/shower_mid2.ogg'=1,'sound/machines/shower/shower_mid3.ogg'=1)
 	mid_length = 10
 	end_sound = 'sound/machines/shower/shower_end.ogg'
-	volume = 20
+	volume = 15
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -31,7 +31,7 @@
 /datum/looping_sound/deep_fryer
 	start_sound = 'sound/machines/kitchen/fryer/deep_fryer_immerse.ogg' //my immersions
 	start_length = 10
-	mid_sounds = list('sound/machines/kitchen/fryer/deep_fryer_1.ogg' = 1, 'sound/machines/fryer/deep_fryer_2.ogg' = 1)
+	mid_sounds = list('sound/machines/kitchen/fryer/deep_fryer_1.ogg' = 1, 'sound/machines/kitchen/fryer/deep_fryer_2.ogg' = 1)
 	mid_length = 2
 	end_sound = 'sound/machines/kitchen/fryer/deep_fryer_emerge.ogg'
 	volume = 15
@@ -45,7 +45,9 @@
 	mid_length = 10
 	end_sound = 'sound/machines/kitchen/microwave/microwave-end.ogg'
 	volume = 90
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /datum/looping_sound/oven
 	start_sound = 'sound/machines/kitchen/oven/oven-start.ogg'
 	start_length = 10
@@ -78,7 +80,7 @@
 
 /datum/looping_sound/cerealmaker
 	start_sound = 'sound/machines/kitchen/cerealmaker/cerealmaker-start.ogg'
-	start_length = 10
+	start_length = 10 
 	mid_sounds = list('sound/machines/kitchen/cerealmaker/cerealmaker-mid1.ogg'=10)
 	mid_length = 60
 	end_sound = 'sound/machines/kitchen/cerealmaker/cerealmaker-stop.ogg'
@@ -99,7 +101,7 @@
 	start_sound = 'sound/machines/air_pump/airpumpstart.ogg'
 	start_length = 10
 	mid_sounds = list('sound/machines/air_pump/airpumpidle.ogg' = 1)
-	mid_length = 4
+	mid_length = 70
 	end_sound = 'sound/machines/air_pump/airpumpshutdown.ogg'
 	volume = 15
 	pref_check = /datum/client_preference/air_pump_noise
