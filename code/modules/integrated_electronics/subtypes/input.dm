@@ -54,7 +54,7 @@
 
 /obj/item/integrated_circuit/input/numberpad/ask_for_input(mob/user)
 	var/new_input = input(user, "Enter a number, please.","Number pad", get_pin_data(IC_OUTPUT, 1)) as null|num
-	if(isnum(new_input) && CanInteract(user, physical_state))
+	if(isnum(new_input) && CanInteract(user, GLOB.tgui_physical_state))
 		set_pin_data(IC_OUTPUT, 1, new_input)
 		push_data()
 		activate_pin(1)
@@ -73,7 +73,7 @@
 
 /obj/item/integrated_circuit/input/textpad/ask_for_input(mob/user)
 	var/new_input = input(user, "Enter some words, please.","Number pad", get_pin_data(IC_OUTPUT, 1)) as null|text
-	if(istext(new_input) && CanInteract(user, physical_state))
+	if(istext(new_input) && CanInteract(user, GLOB.tgui_physical_state))
 		set_pin_data(IC_OUTPUT, 1, new_input)
 		push_data()
 		activate_pin(1)
@@ -92,7 +92,7 @@
 
 /obj/item/integrated_circuit/input/colorpad/ask_for_input(mob/user)
 	var/new_color = input(user, "Enter a color, please.", "Color pad", get_pin_data(IC_OUTPUT, 1)) as color|null
-	if(new_color && CanInteract(user, physical_state))
+	if(new_color && CanInteract(user, GLOB.tgui_physical_state))
 		set_pin_data(IC_OUTPUT, 1, new_color)
 		push_data()
 		activate_pin(1)
@@ -423,7 +423,9 @@
 	desc = "Enables the sending and receiving of messages on the Exonet with the EPv2 protocol."
 	extended_desc = "An EPv2 address is a string with the format of XXXX:XXXX:XXXX:XXXX.  Data can be send or received using the \
 	second pin on each side, with additonal data reserved for the third pin.  When a message is received, the second activaiton pin \
-	will pulse whatever's connected to it.  Pulsing the first activation pin will send a message."
+	will pulse whatever's connected to it.  Pulsing the first activation pin will send a message.\
+	\
+	When messaging Communicators, you must set data to send to the string `text` to avoid errors in reception."
 	icon_state = "signal"
 	complexity = 4
 	inputs = list(
@@ -526,13 +528,15 @@
 	listening_objects -= src
 	return ..()
 
-/obj/item/integrated_circuit/input/microphone/hear_talk(mob/living/M, msg, var/verb="says", datum/language/speaking=null)
+/obj/item/integrated_circuit/input/microphone/hear_talk(mob/M, list/message_pieces, verb)
+	var/msg = multilingual_to_message(message_pieces, requires_machine_understands = TRUE)
+
 	var/translated = FALSE
 	if(M && msg)
-		if(speaking)
-			if(!speaking.machine_understands)
-				msg = speaking.scramble(msg)
-			if(!istype(speaking, /datum/language/common))
+		for(var/datum/multilingual_say_piece/S in message_pieces)
+			// S.speaking && here is not redundant, it's preventing `S.speaking = null` from flagging
+			// as a translation, when it is not.
+			if(S.speaking && !istype(S.speaking, /datum/language/common))
 				translated = TRUE
 		set_pin_data(IC_OUTPUT, 1, M.GetVoice())
 		set_pin_data(IC_OUTPUT, 2, msg)
@@ -566,7 +570,8 @@
 		LANGUAGE_SOL_COMMON,
 		LANGUAGE_TRADEBAND,
 		LANGUAGE_GUTTER,
-		LANGUAGE_TERMINUS
+		LANGUAGE_TERMINUS,
+		LANGUAGE_SIGN
 		)
 
 /obj/item/integrated_circuit/input/microphone/sign/Initialize(mapload)
@@ -575,24 +580,41 @@
 		var/datum/language/newlang = GLOB.all_languages[lang]
 		my_langs |= newlang
 
-/obj/item/integrated_circuit/input/microphone/sign/hear_talk(mob/living/M, msg, var/verb="says", datum/language/speaking=null)
+/obj/item/integrated_circuit/input/microphone/sign/hear_talk(mob/M, list/message_pieces, verb)
+	var/msg = multilingual_to_message(message_pieces)
+
 	var/translated = FALSE
 	if(M && msg)
-		if(speaking)
-			if(!((speaking.flags & NONVERBAL) || (speaking.flags & SIGNLANG)))
-				translated = TRUE
-				msg = speaking.scramble(msg, my_langs)
+		for(var/datum/multilingual_say_piece/S in message_pieces)
+			if(S.speaking)
+				if(!((S.speaking.flags & NONVERBAL) || (S.speaking.flags & SIGNLANG)))
+					translated = TRUE
+					msg = stars(msg)
+					break
 		set_pin_data(IC_OUTPUT, 1, M.GetVoice())
 		set_pin_data(IC_OUTPUT, 2, msg)
 
 	push_data()
-	activate_pin(1)
-	if(translated)
+	if(!translated)
+		activate_pin(1)
+	else
 		activate_pin(2)
 
 /obj/item/integrated_circuit/input/microphone/sign/hear_signlang(text, verb, datum/language/speaking, mob/M as mob)
-	hear_talk(M, text, verb, speaking)
-	return
+	var/translated = FALSE
+	if(M && text)
+		if(speaking)
+			if(!((speaking.flags & NONVERBAL) || (speaking.flags & SIGNLANG)))
+				translated = TRUE
+				text = speaking.scramble(text, my_langs)
+		set_pin_data(IC_OUTPUT, 1, M.GetVoice())
+		set_pin_data(IC_OUTPUT, 2, text)
+
+	push_data()
+	if(!translated)
+		activate_pin(1)
+	else
+		activate_pin(2)
 
 /obj/item/integrated_circuit/input/sensor
 	name = "sensor"

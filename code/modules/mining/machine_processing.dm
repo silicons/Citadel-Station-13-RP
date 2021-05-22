@@ -37,7 +37,7 @@
 	if(!allowed(user))
 		to_chat(user, "<span class='warning'>Access denied.</span>")
 		return
-	tgui_interact(user)
+	ui_interact(user)
 
 /obj/machinery/mineral/processing_unit_console/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/card/id))

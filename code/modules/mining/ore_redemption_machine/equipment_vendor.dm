@@ -138,10 +138,10 @@
 /obj/machinery/mineral/equipment_vendor/attack_hand(mob/user)
 	if(..())
 		return
-	tgui_interact(user)
+	ui_interact(user)
 
 /obj/machinery/mineral/equipment_vendor/attack_ghost(mob/user)
-	tgui_interact(user)
+	ui_interact(user)
 
 /obj/machinery/mineral/equipment_vendor/ui_data(mob/user)
 	var/list/data = ..()
@@ -252,7 +252,7 @@
 		else if(!inserted_id && user.unEquip(I))
 			I.forceMove(src)
 			inserted_id = I
-			tgui_interact(user)
+			ui_interact(user)
 		return
 	return ..()
 

@@ -56,9 +56,9 @@
 	if(..())
 		return
 
-	tgui_interact(user)
+	ui_interact(user)
 
-/obj/machinery/computer/looking_glass/tgui_interact(mob/user, datum/tgui/ui)
+/obj/machinery/computer/looking_glass/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "LookingGlass", name)

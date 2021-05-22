@@ -6,7 +6,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 /obj/item/integrated_circuit/examine(mob/user)
 	. = ..()
 	. += external_examine(user)
-	tgui_interact(user)
+	ui_interact(user)
 
 // This should be used when someone is examining while the case is opened.
 /obj/item/integrated_circuit/proc/internal_examine(mob/user)
@@ -22,7 +22,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 		if(A.linked.len)
 			. += "The '[A]' is connected to [A.get_linked_to_desc()]."
 	. += any_examine(user)
-	tgui_interact(user)
+	ui_interact(user)
 
 // This should be used when someone is examining from an 'outside' perspective, e.g. reading a screen or LED.
 /obj/item/integrated_circuit/proc/external_examine(mob/user)
@@ -207,9 +207,9 @@ a creative player the means to solve many problems.  Circuits are held inside an
 			var/obj/item/integrated_circuit/examined = locate(params["ref"])
 			if(istype(examined) && (examined.loc == loc))
 				if(ui.parent_ui)
-					examined.tgui_interact(usr, null, ui.parent_ui)
+					examined.ui_interact(usr, null, ui.parent_ui)
 				else
-					examined.tgui_interact(usr)
+					examined.ui_interact(usr)
 
 		if("remove")
 			remove(usr)
@@ -235,7 +235,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	to_chat(user, "<span class='notice'>You pop \the [src] out of the case, and slide it out.</span>")
 
 	if(istype(ea))
-		ea.tgui_interact(user)
+		ea.ui_interact(user)
 
 /obj/item/integrated_circuit/proc/push_data()
 	for(var/datum/integrated_io/O in outputs)
