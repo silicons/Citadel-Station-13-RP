@@ -125,7 +125,7 @@
 			var/obj/item/integrated_circuit/C = locate(params["ref"]) in contents
 			if(!istype(C))
 				return
-			C.tgui_interact(usr, null, ui)
+			C.ui_interact(usr, null, ui)
 			return TRUE
 
 		if("rename_circuit")
@@ -215,7 +215,7 @@
 		for(var/obj/item/integrated_circuit/IC in contents)
 			. += IC.external_examine(user)
 		if(opened)
-			tgui_interact(user)
+			ui_interact(user)
 
 /obj/item/electronic_assembly/proc/get_part_complexity()
 	. = 0
@@ -287,7 +287,7 @@
 		if(add_circuit(I, user))
 			to_chat(user, "<span class='notice'>You slide \the [I] inside \the [src].</span>")
 			playsound(src, 'sound/items/Deconstruct.ogg', 50, 1)
-			tgui_interact(user)
+			ui_interact(user)
 			return TRUE
 
 	else if(I.is_crowbar())
@@ -299,7 +299,7 @@
 
 	else if(istype(I, /obj/item/integrated_electronics/wirer) || istype(I, /obj/item/integrated_electronics/debugger) || I.is_screwdriver())
 		if(opened)
-			tgui_interact(user)
+			ui_interact(user)
 			return TRUE
 		else
 			to_chat(user, "<span class='warning'>\The [src] isn't opened, so you can't fiddle with the internal components.  \
@@ -324,7 +324,7 @@
 		battery = cell
 		playsound(src, 'sound/items/Deconstruct.ogg', 50, 1)
 		to_chat(user, "<span class='notice'>You slot \the [cell] inside \the [src]'s power supplier.</span>")
-		tgui_interact(user)
+		ui_interact(user)
 		return TRUE
 
 	else
@@ -334,7 +334,7 @@
 	if(!check_interactivity(user))
 		return
 	if(opened)
-		tgui_interact(user)
+		ui_interact(user)
 
 	var/list/input_selection = list()
 	var/list/available_inputs = list()
