@@ -213,9 +213,9 @@
 	if(lockdown)
 		return
 	user.set_machine(src)
-	tgui_interact(user)
+	ui_interact(user)
 
-/obj/machinery/seed_storage/tgui_interact(mob/user, datum/tgui/ui)
+/obj/machinery/seed_storage/ui_interact(mob/user, datum/tgui/ui)
 	if(!seeds_initialized)
 		for(var/typepath in starting_seeds)
 			var/amount = starting_seeds[typepath]
@@ -238,9 +238,9 @@
 		ui = new(user, src, "SeedStorage", name)
 		ui.open()
 
-/obj/machinery/seed_storage/tgui_data(mob/user, datum/tgui/ui, datum/tgui_state/state)
+/obj/machinery/seed_storage/ui_data(mob/user, datum/tgui/ui, datum/tgui_state/state)
 	var/list/data = ..()
-	
+
 	if(smart)
 		scanner = list("stats", "produce", "soil", "temperature", "light", "pressure")
 	else
@@ -349,7 +349,7 @@
 
 	return data
 
-/obj/machinery/seed_storage/tgui_act(action, list/params, datum/tgui/ui, datum/tgui_state/state)
+/obj/machinery/seed_storage/ui_act(action, list/params, datum/tgui/ui, datum/tgui_state/state)
 	if(..())
 		return TRUE
 	var/ID = text2num(params["id"])
@@ -386,8 +386,8 @@
 		add(O)
 		user.visible_message("[user] puts \the [O.name] into \the [src].", "You put \the [O] into \the [src].")
 		return
-	else if (istype(O, /obj/item/weapon/storage/bag/plants) && !lockdown)
-		var/obj/item/weapon/storage/P = O
+	else if (istype(O, /obj/item/storage/bag/plants) && !lockdown)
+		var/obj/item/storage/P = O
 		var/loaded = 0
 		for(var/obj/item/seeds/G in P.contents)
 			++loaded
@@ -408,7 +408,7 @@
 		overlays.Cut()
 		if(panel_open)
 			overlays += image(icon, "[initial(icon_state)]-panel")
-	else if((O.is_wirecutter() || istype(O, /obj/item/device/multitool)) && panel_open)
+	else if((O.is_wirecutter() || istype(O, /obj/item/multitool)) && panel_open)
 		wires.Interact(user)
 
 /obj/machinery/seed_storage/emag_act(var/remaining_charges, var/mob/user)
@@ -432,8 +432,8 @@
 	if (istype(O.loc, /mob))
 		var/mob/user = O.loc
 		user.remove_from_mob(O)
-	else if(istype(O.loc,/obj/item/weapon/storage))
-		var/obj/item/weapon/storage/S = O.loc
+	else if(istype(O.loc,/obj/item/storage))
+		var/obj/item/storage/S = O.loc
 		S.remove_from_storage(O, src)
 
 	O.loc = src
