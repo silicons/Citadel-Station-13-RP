@@ -25,7 +25,7 @@
 	switch(wire)
 		if(WIRE_AUTOLATHE_HACK)
 			A.hacked = !mend
-			A.update_tgui_static_data(usr)
+			A.update_ui_static_data(usr)
 		if(WIRE_ELECTRIFY)
 			A.shocked = !mend
 		if(WIRE_AUTOLATHE_DISABLE)
@@ -39,11 +39,11 @@
 	switch(wire)
 		if(WIRE_AUTOLATHE_HACK)
 			A.hacked = !A.hacked
-			A.update_tgui_static_data(usr)
+			A.update_ui_static_data(usr)
 			spawn(50)
 				if(A && !is_cut(wire))
 					A.hacked = 0
-					A.update_tgui_static_data(usr)
+					A.update_ui_static_data(usr)
 		if(WIRE_ELECTRIFY)
 			A.shocked = !A.shocked
 			spawn(50)
