@@ -29,7 +29,7 @@ var/datum/antagonist/loyalists/loyalists
 	faction_welcome = "Preserve NanoTrasen's interests against the traitorous recidivists amongst the crew. Protect the heads of staff with your life."
 	faction_indicator = "loyal"
 	faction_invisible = 1
-	restricted_jobs = list("AI", "Cyborg")
+	avoid_silicons = TRUE
 
 /datum/antagonist/loyalists/New()
 	..()
@@ -40,7 +40,7 @@ var/datum/antagonist/loyalists/loyalists
 		return
 	global_objectives = list()
 	for(var/mob/living/carbon/human/player in GLOB.mob_list)
-		if(!player.mind || player.stat==2 || !(player.mind.assigned_role in command_positions))
+		if(!player.mind || player.stat==2 || !(SSjob.is_job_in_department(player.mind.assigned_role, DEPARTMENT_COMMAND)))
 			continue
 		var/datum/objective/protect/loyal_obj = new
 		loyal_obj.target = player.mind
