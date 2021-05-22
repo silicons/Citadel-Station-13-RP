@@ -41,7 +41,7 @@ var/global/list/default_pai_software = list()
 	set category = "pAI Commands"
 	set name = "Software Interface"
 
-	tgui_interact(src)
+	ui_interact(src)
 
 /mob/living/silicon/pai/tgui_state(mob/user)
 	return GLOB.tgui_self_state
@@ -100,7 +100,7 @@ var/global/list/default_pai_software = list()
 			if(S.toggle)
 				S.toggle(src)
 			else
-				S.tgui_interact(src, parent_ui = ui)
+				S.ui_interact(src, parent_ui = ui)
 			return TRUE
 
 		if("purchase")

@@ -200,7 +200,7 @@
 		/* VOREStation Removal - See above
 		if(confused && prob(50) && m_intent=="run")
 			Weaken(2)
-			playsound(loc, "punch", 25, 1, -1)
+			playsound(src, "punch", 25, 1, -1)
 			visible_message("<span class='warning'>[src] [pick("ran", "slammed")] into \the [AM]!</span>")
 			src.apply_damage(5, BRUTE)
 			to_chat(src, "<span class='warning'>You just [pick("ran", "slammed")] into \the [AM]!</span>")

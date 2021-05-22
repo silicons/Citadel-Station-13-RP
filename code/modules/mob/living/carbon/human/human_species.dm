@@ -1,7 +1,7 @@
 /mob/living/carbon/human/dummy
 	real_name = "Test Dummy"
 	status_flags = GODMODE|CANPUSH
-	flags = NO_SCAN | NO_PAIN | NO_SLIP | NO_POISON | NO_MINOR_CUT | NO_BLOOD | UNDEAD | NO_DEFIB
+	has_huds = FALSE
 
 /mob/living/carbon/human/dummy/mannequin/Initialize()
 	. = ..()

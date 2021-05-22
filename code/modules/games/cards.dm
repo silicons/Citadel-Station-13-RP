@@ -233,7 +233,7 @@
 			cards -= P
 		cards = newcards
 		user.visible_message("<span class = 'notice'>\The [user] shuffles [src].</span>")
-		playsound(user, 'sound/items/cardshuffle.ogg', 50, 1)
+		playsound(src, 'sound/items/cardshuffle.ogg', 50, 1)
 		cooldown = world.time
 	else
 		return
@@ -257,8 +257,9 @@
 
 	return
 
-/obj/item/deck/verb_pickup(mob/user as mob) // Snowflaked so pick up verb work as intended
-	if((user == usr && (!( usr.restrained() ) && (!( usr.stat ) && (usr.contents.Find(src) || in_range(src, usr))))))
+/obj/item/deck/verb_pickup() // Snowflaked so pick up verb work as intended
+	var/mob/user = usr
+	if((istype(user) && (!( usr.restrained() ) && (!( usr.stat ) && (usr.contents.Find(src) || in_range(src, usr))))))
 		if(!istype(usr, /mob/living/simple_mob))
 			if( !usr.get_active_hand() )		//if active hand is empty
 				var/mob/living/carbon/human/H = user
@@ -343,7 +344,8 @@
 		H.update_icon()
 		src.update_icon()
 		usr.visible_message("<span class = 'notice'>\The [usr] plays \the [discarding].</span>")
-		H.loc = get_step(usr,usr.dir)
+		H.loc = get_turf(usr)
+		H.Move(get_step(usr,usr.dir))
 
 	if(!cards.len)
 		qdel(src)
@@ -459,4 +461,5 @@
 		update_icon()
 
 /obj/item/hand/pickup(mob/user as mob)
+	..()
 	src.update_icon()

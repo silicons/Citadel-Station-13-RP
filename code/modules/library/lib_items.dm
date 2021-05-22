@@ -13,6 +13,7 @@
 
 /obj/structure/bookcase
 	name = "bookcase"
+	desc = "A set of wooden shelves, perfect for placing books on."
 	icon = 'icons/obj/library.dmi'
 	icon_state = "book-0"
 	anchored = 1
@@ -38,11 +39,11 @@
 		else
 			name = ("bookcase ([newname])")
 	else if(O.is_wrench())
-		playsound(loc, O.usesound, 100, 1)
+		playsound(src, O.usesound, 100, 1)
 		to_chat(user, (anchored ? "<span class='notice'>You unfasten \the [src] from the floor.</span>" : "<span class='notice'>You secure \the [src] to the floor.</span>"))
 		anchored = !anchored
 	else if(O.is_screwdriver())
-		playsound(loc, O.usesound, 75, 1)
+		playsound(src, O.usesound, 75, 1)
 		to_chat(user, "<span class='notice'>You begin dismantling \the [src].</span>")
 		if(do_after(user,25 * O.toolspeed))
 			to_chat(user, "<span class='notice'>You dismantle \the [src].</span>")

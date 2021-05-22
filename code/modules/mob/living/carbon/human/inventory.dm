@@ -146,8 +146,8 @@ This saves us from having to call add_fingerprint() any time something is put in
 	else if (W == wear_id)
 		wear_id = null
 		update_inv_wear_id()
-		ENABLE_BITFIELD(hud_updateflag, ID_HUD)
-		ENABLE_BITFIELD(hud_updateflag, WANTED_HUD)
+		BITSET(hud_updateflag, ID_HUD)
+		BITSET(hud_updateflag, WANTED_HUD)
 	else if (W == r_store)
 		r_store = null
 		//update_inv_pockets() //Doesn't do anything.
@@ -164,7 +164,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 		handcuffed = null
 		if(buckled && buckled.buckle_require_restraints)
 			buckled.unbuckle_mob()
-		update_inv_handcuffed()
+		update_handcuffed()
 	else if (W == legcuffed)
 		legcuffed = null
 		update_inv_legcuffed()
@@ -241,8 +241,8 @@ This saves us from having to call add_fingerprint() any time something is put in
 			src.wear_id = W
 			W.equipped(src, slot)
 			update_inv_wear_id()
-			ENABLE_BITFIELD(hud_updateflag, ID_HUD)
-			ENABLE_BITFIELD(hud_updateflag, WANTED_HUD)
+			BITSET(hud_updateflag, ID_HUD)
+			BITSET(hud_updateflag, WANTED_HUD)
 		if(slot_l_ear)
 			src.l_ear = W
 			if(l_ear.slot_flags & SLOT_TWOEARS)
@@ -264,11 +264,11 @@ This saves us from having to call add_fingerprint() any time something is put in
 		if(slot_glasses)
 			src.glasses = W
 			W.equipped(src, slot)
+			worn_clothing += glasses
 			update_inv_glasses()
 		if(slot_gloves)
 			src.gloves = W
 			W.equipped(src, slot)
-			worn_clothing += glasses
 			update_inv_gloves()
 		if(slot_head)
 			src.head = W

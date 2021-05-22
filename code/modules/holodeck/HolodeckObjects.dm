@@ -106,10 +106,22 @@
 	base_icon = 'icons/turf/flooring/asteroid.dmi'
 	initial_flooring = null
 
-/turf/simulated/floor/holofloor/desert/Initialize(mapload)
+/turf/simulated/floor/holofloor/desert/Initialize()
 	. = ..()
 	if(prob(10))
 		add_overlay("asteroid[rand(0,9)]")
+
+/turf/simulated/floor/holofloor/bmarble
+	name = "marble"
+	icon = 'icons/turf/flooring/misc.dmi'
+	icon_state = "darkmarble"
+	initial_flooring = /decl/flooring/bmarble
+
+/turf/simulated/floor/holofloor/wmarble
+	name = "marble"
+	icon = 'icons/turf/flooring/misc.dmi'
+	icon_state = "lightmarble"
+	initial_flooring = /decl/flooring/wmarble
 
 /obj/structure/holostool
 	name = "stool"
@@ -137,7 +149,7 @@ datum/unarmed_attack/holopugilism/unarmed_override(var/mob/living/carbon/human/u
 	user.do_attack_animation(src)
 	var/damage = rand(0, 9)
 	if(!damage)
-		playsound(target.loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
+		playsound(target, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 		target.visible_message("<font color='red'><B>[user] has attempted to punch [target]!</B></font>")
 		return TRUE
 	var/obj/item/organ/external/affecting = target.get_organ(ran_zone(user.zone_sel.selecting))
@@ -147,7 +159,7 @@ datum/unarmed_attack/holopugilism/unarmed_override(var/mob/living/carbon/human/u
 	if(HULK in user.mutations)
 		damage += 5
 
-	playsound(target.loc, "punch", 25, 1, -1)
+	playsound(target, "punch", 25, 1, -1)
 
 	target.visible_message("<font color='red'><B>[user] has punched [target]!</B></font>")
 
@@ -204,7 +216,7 @@ datum/unarmed_attack/holopugilism/unarmed_override(var/mob/living/carbon/human/u
 				update_nearby_icons()
 				step(src, get_dir(user, src))
 		else
-			playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
+			playsound(src, 'sound/effects/Glasshit.ogg', 75, 1)
 		..()
 	return
 
@@ -222,7 +234,7 @@ datum/unarmed_attack/holopugilism/unarmed_override(var/mob/living/carbon/human/u
 
 	if(src.density && istype(I, /obj/item) && !istype(I, /obj/item/card))
 		var/aforce = I.force
-		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
+		playsound(src, 'sound/effects/Glasshit.ogg', 75, 1)
 		visible_message("<font color='red'><B>[src] was hit by [I].</B></font>")
 		if(I.damtype == BRUTE || I.damtype == BURN)
 			take_damage(aforce)
@@ -266,7 +278,6 @@ datum/unarmed_attack/holopugilism/unarmed_override(var/mob/living/carbon/human/u
 
 /obj/item/holo/esword
 	desc = "May the force be within you. Sorta."
-	icon = 'icons/obj/weapons.dmi'
 	icon_state = "esword"
 	var/lcolor
 	var/rainbow = FALSE
@@ -282,11 +293,11 @@ datum/unarmed_attack/holopugilism/unarmed_override(var/mob/living/carbon/human/u
 	flags = NOBLOODY
 	var/active = 0
 
-/obj/item/holo/esword/green
-	lcolor = "#008000"
+/obj/item/holo/esword/green/New()
+		lcolor = "#008000"
 
-/obj/item/holo/esword/red
-	lcolor = "#FF0000"
+/obj/item/holo/esword/red/New()
+		lcolor = "#FF0000"
 
 /obj/item/holo/esword/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	if(active && default_parry_check(user, attacker, damage_source) && prob(50))
@@ -295,7 +306,7 @@ datum/unarmed_attack/holopugilism/unarmed_override(var/mob/living/carbon/human/u
 		var/datum/effect_system/spark_spread/spark_system = new /datum/effect_system/spark_spread()
 		spark_system.set_up(5, 0, user.loc)
 		spark_system.start()
-		playsound(user.loc, 'sound/weapons/blade1.ogg', 50, 1)
+		playsound(src, 'sound/weapons/blade1.ogg', 50, 1)
 		return TRUE
 	return FALSE
 
@@ -376,7 +387,7 @@ datum/unarmed_attack/holopugilism/unarmed_override(var/mob/living/carbon/human/u
 		visible_message("<span class='notice'>[user] dunks [W] into the [src]!</span>", 3)
 		return
 
-/obj/structure/holohoop/CanAllowThrough(atom/movable/mover, turf/target)
+/obj/structure/holohoop/CanPass(atom/movable/mover, turf/target)
 	if (istype(mover,/obj/item) && mover.throwing)
 		var/obj/item/I = mover
 		if(istype(I, /obj/item/projectile))
@@ -395,12 +406,12 @@ datum/unarmed_attack/holopugilism/unarmed_override(var/mob/living/carbon/human/u
 	desc = "This device is used to declare ready. If all devices in an area are ready, the event will begin!"
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "auth_off"
+	layer = ABOVE_WINDOW_LAYER
 	var/ready = 0
 	var/area/currentarea = null
 	var/eventstarted = 0
 
 	anchored = 1.0
-	use_power = 1
 	idle_power_usage = 2
 	active_power_usage = 6
 	power_channel = ENVIRON

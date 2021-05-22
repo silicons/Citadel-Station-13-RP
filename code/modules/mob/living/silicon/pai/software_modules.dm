@@ -94,7 +94,7 @@
 	default = 1
 
 /datum/pai_software/radio_config/ui_interact(mob/living/silicon/pai/user, datum/tgui/ui, datum/tgui/parent_ui)
-	return user.radio.tgui_interact(user, parent_ui = parent_ui)
+	return user.radio.ui_interact(user, parent_ui = parent_ui)
 
 /datum/pai_software/crew_manifest
 	name = "Crew Manifest"
@@ -122,7 +122,7 @@
 	toggle = 0
 
 /datum/pai_software/messenger/ui_interact(mob/living/silicon/pai/user, datum/tgui/ui, datum/tgui/parent_ui)
-	return user.pda.tgui_interact(user, parent_ui = parent_ui)
+	return user.pda.ui_interact(user, parent_ui = parent_ui)
 
 /datum/pai_software/med_records
 	name = "Medical Records"

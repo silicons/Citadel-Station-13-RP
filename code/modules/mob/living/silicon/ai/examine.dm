@@ -2,38 +2,38 @@
 	. = ..()
 
 	if (src.stat == DEAD)
-		. += "<span class='deadsay'>It appears to be powered-down.</span>\n"
+		. += "<span class='deadsay'>It appears to be powered-down.</span>"
 	else
-		. += "<span class='warning'>"
 		if (src.getBruteLoss())
 			if (src.getBruteLoss() < 30)
-				. += "It looks slightly dented.\n"
+				. += "<span class='warning'>It looks slightly dented.</span>"
 			else
-				. += "<B>It looks severely dented!</B>\n"
+				. += "<span class='warning'><B>It looks severely dented!</B></span>"
 		if (src.getFireLoss())
 			if (src.getFireLoss() < 30)
-				. += "It looks slightly charred.\n"
+				. += "<span class='warning'>It looks slightly charred.</span>"
 			else
-				. += "<B>Its casing is melted and heat-warped!</B>\n"
+				. += "<span class='warning'><B>Its casing is melted and heat-warped!</B></span>"
 		if (src.getOxyLoss() && (aiRestorePowerRoutine != 0 && !APU_power))
 			if (src.getOxyLoss() > 175)
-				. += "<B>It seems to be running on backup power. Its display is blinking a \"BACKUP POWER CRITICAL\" warning.</B>\n"
+				. += "<span class='warning'><B>It seems to be running on backup power. Its display is blinking a \"BACKUP POWER CRITICAL\" warning.</B></span>"
 			else if(src.getOxyLoss() > 100)
-				. += "<B>It seems to be running on backup power. Its display is blinking a \"BACKUP POWER LOW\" warning.</B>\n"
+				. += "<span class='warning'><B>It seems to be running on backup power. Its display is blinking a \"BACKUP POWER LOW\" warning.</B></span>"
 			else
-				. += "It seems to be running on backup power.\n"
+				. += "<span class='warning'>It seems to be running on backup power.</span>"
 
 		if (src.stat == UNCONSCIOUS)
-			. += "It is non-responsive and displaying the text: \"RUNTIME: Sensory Overload, stack 26/3\".\n"
-		. += "</span>"
+			. += "<span class='warning'>It is non-responsive and displaying the text: \"RUNTIME: Sensory Overload, stack 26/3\".</span>"
+
 		if(deployed_shell)
-			. += "The wireless networking light is blinking.\n"
+			. += "The wireless networking light is blinking."
+
 	. += "*---------*"
+	
 	if(hardware && (hardware.owner == src))
-		. += "<br>"
 		. += hardware.get_examine_desc()
+	
 	user.showLaws(src)
-	return
 
 /mob/proc/showLaws(var/mob/living/silicon/S)
 	return

@@ -168,12 +168,21 @@
 
 /mob/living/emp_act(severity)
 	var/list/L = src.get_contents()
+
+	if(LAZYLEN(modifiers))
+		for(var/datum/modifier/M in modifiers)
+			if(!isnull(M.emp_modifier))
+				severity = CLAMP(severity + M.emp_modifier, 1, 5)
+
+	if(severity == 5)	// Effectively nullified.
+		return
+
 	for(var/obj/O in L)
 		O.emp_act(severity)
 	..()
 
 /mob/living/blob_act(var/obj/structure/blob/B)
-	if(stat == DEAD || faction == "blob")
+	if(stat == DEAD || faction == B.faction)
 		return
 
 	var/damage = rand(30, 40)
@@ -201,11 +210,14 @@
 		damage *= 0.66 // Take 2/3s as much damage.
 
 	visible_message("<span class='danger'>\The [B] [attack_verb] \the [src]!</span>", "<span class='danger'>[attack_message]!</span>")
-	playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
+	playsound(src, 'sound/effects/attackblob.ogg', 50, 1)
 
 	//Armor
 	var/soaked = get_armor_soak(def_zone, armor_check, armor_pen)
 	var/absorb = run_armor_check(def_zone, armor_check, armor_pen)
+
+	if(ai_holder)
+		ai_holder.react_to_attack(B)
 
 	apply_damage(damage, damage_type, def_zone, absorb, soaked)
 
@@ -317,6 +329,7 @@
 	O.loc = src
 	src.embedded += O
 	src.verbs += /mob/proc/yank_out_object
+	throw_alert("embeddedobject", /obj/screen/alert/embeddedobject)
 
 //This is called when the mob is thrown into a dense turf
 /mob/living/proc/turf_collision(var/turf/T, var/speed)
@@ -355,6 +368,7 @@
 	if(fire_stacks > 0 && !on_fire)
 		on_fire = 1
 		handle_light()
+		throw_alert("fire", /obj/screen/alert/fire)
 		update_fire()
 
 /mob/living/proc/ExtinguishMob()
@@ -362,13 +376,17 @@
 		on_fire = 0
 		fire_stacks = 0
 		handle_light()
+		clear_alert("fire")
 		update_fire()
+
+	if(has_modifier_of_type(/datum/modifier/fire))
+		remove_modifiers_of_type(/datum/modifier/fire)
 
 /mob/living/proc/update_fire()
 	return
 
 /mob/living/proc/adjust_fire_stacks(add_fire_stacks) //Adjusting the amount of fire_stacks we have on person
-    fire_stacks = clamp(fire_stacks + add_fire_stacks, FIRE_MIN_STACKS, FIRE_MAX_STACKS)
+    fire_stacks = CLAMP(fire_stacks + add_fire_stacks, FIRE_MIN_STACKS, FIRE_MAX_STACKS)
 
 /mob/living/proc/handle_fire()
 	if(fire_stacks < 0)
@@ -578,3 +596,73 @@
 		accuracy_penalty += 45
 
 	return accuracy_penalty
+
+// Applies direct "cold" damage while checking protection against the cold.
+/mob/living/proc/inflict_cold_damage(amount)
+	amount *= 1 - get_cold_protection(50) // Within spacesuit protection.
+	if(amount > 0)
+		adjustFireLoss(amount)
+
+// Ditto, but for "heat".
+/mob/living/proc/inflict_heat_damage(amount)
+	amount *= 1 - get_heat_protection(10000) // Within firesuit protection.
+	if(amount > 0)
+		adjustFireLoss(amount)
+
+// and one for electricity because why not
+/mob/living/proc/inflict_shock_damage(amount)
+	electrocute_act(amount, null, 1 - get_shock_protection(), pick(BP_HEAD, BP_TORSO, BP_GROIN))
+
+// also one for water (most things resist it entirely, except for slimes)
+/mob/living/proc/inflict_water_damage(amount)
+	amount *= 1 - get_water_protection()
+	if(amount > 0)
+		adjustToxLoss(amount)
+
+// one for abstracted away ""poison"" (mostly because simplemobs shouldn't handle reagents)
+/mob/living/proc/inflict_poison_damage(amount)
+	if(isSynthetic())
+		return
+	amount *= 1 - get_poison_protection()
+	if(amount > 0)
+		adjustToxLoss(amount)
+
+/mob/living/proc/can_inject()
+	return 1
+
+/mob/living/proc/get_organ_target()
+	var/mob/shooter = src
+	var/t = shooter:zone_sel.selecting
+	if ((t in list( O_EYES, O_MOUTH )))
+		t = BP_HEAD
+	var/obj/item/organ/external/def_zone = ran_zone(t)
+	return def_zone
+
+// heal ONE external organ, organ gets randomly selected from damaged ones.
+/mob/living/proc/heal_organ_damage(var/brute, var/burn)
+	adjustBruteLoss(-brute)
+	adjustFireLoss(-burn)
+	src.updatehealth()
+
+// damage ONE external organ, organ gets randomly selected from damaged ones.
+/mob/living/proc/take_organ_damage(var/brute, var/burn, var/emp=0)
+	if(status_flags & GODMODE)	return 0	//godmode
+	adjustBruteLoss(brute)
+	adjustFireLoss(burn)
+	src.updatehealth()
+
+// heal MANY external organs, in random order
+/mob/living/proc/heal_overall_damage(var/brute, var/burn)
+	adjustBruteLoss(-brute)
+	adjustFireLoss(-burn)
+	src.updatehealth()
+
+// damage MANY external organs, in random order
+/mob/living/proc/take_overall_damage(var/brute, var/burn, var/used_weapon = null)
+	if(status_flags & GODMODE)	return 0	//godmode
+	adjustBruteLoss(brute)
+	adjustFireLoss(burn)
+	src.updatehealth()
+
+/mob/living/proc/restore_all_organs()
+	return
