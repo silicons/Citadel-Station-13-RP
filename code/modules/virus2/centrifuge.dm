@@ -40,7 +40,7 @@
 		return
 	tgui_interact(user)
 
-/obj/machinery/computer/centrifuge/tgui_interact(mob/user, datum/tgui/ui)
+/obj/machinery/computer/centrifuge/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "IsolationCentrifuge", name)

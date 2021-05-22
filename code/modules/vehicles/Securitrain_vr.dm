@@ -23,7 +23,8 @@
 
 	var/car_limit = 0	//how many cars an engine can pull before performance degrades. This should be 0 to prevent trailers from unhitching.
 	active_engines = 1
-	var/obj/item/key/security/key
+	var/obj/item/key/key
+	var/key_type = /obj/item/key/security
 	var/siren = 0 //This is for eventually getting the siren sprite to work.
 
 /obj/item/key/security
@@ -61,7 +62,7 @@
 /obj/vehicle/train/security/engine/Initialize(mapload)
 	. = ..()
 	cell = new /obj/item/cell/high(src)
-	key = new(src)
+	key = new key_type(src)
 	var/image/I = new(icon = 'icons/obj/vehicles.dmi', icon_state = "cargo_engine_overlay", layer = src.layer + 0.2) //over mobs
 	overlays += I
 	turn_off()	//so engine verbs are correctly set
@@ -166,28 +167,28 @@
 	else
 		verbs += /obj/vehicle/train/security/engine/verb/stop_engine
 
-/obj/vehicle/train/security/RunOver(var/mob/living/carbon/human/H)
+/obj/vehicle/train/security/RunOver(var/mob/living/M)
 	var/list/parts = list(BP_HEAD, BP_TORSO, BP_L_LEG, BP_R_LEG, BP_L_ARM, BP_R_ARM)
 
-	H.apply_effects(5, 5)
+	M.apply_effects(5, 5)
 	for(var/i = 0, i < rand(1,3), i++)
-		H.apply_damage(rand(1,5), BRUTE, pick(parts))
+		M.apply_damage(rand(1,5), BRUTE, pick(parts))
 
-/obj/vehicle/train/security/trolley/RunOver(var/mob/living/carbon/human/H)
+/obj/vehicle/train/security/trolley/RunOver(var/mob/living/M)
 	..()
-	attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [H.name] ([H.ckey])</font>")
+	attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [M.name] ([M.ckey])</font>")
 
-/obj/vehicle/train/security/engine/RunOver(var/mob/living/carbon/human/H)
+/obj/vehicle/train/security/engine/RunOver(var/mob/living/M)
 	..()
 
 	if(is_train_head() && istype(load, /mob/living/carbon/human))
 		var/mob/living/carbon/human/D = load
-		to_chat(D, "<span class='danger'>You ran over \the [H]!</span>")
-		visible_message("<span class='danger'>\The [src] ran over \the [H]!</span>")
-		add_attack_logs(D,H,"Ran over with [src.name]")
-		attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [H.name] ([H.ckey]), driven by [D.name] ([D.ckey])</font>")
+		to_chat(D, "<span class='danger'>You ran over \the [M]!</span>"
+		visible_message("<span class='danger'>\The [src] ran over \the [M]!</span>")
+		add_attack_logs(D,M,"Ran over with [src.name]")
+		attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [M.name] ([M.ckey]), driven by [D.name] ([D.ckey])</font>")
 	else
-		attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [H.name] ([H.ckey])</font>")
+		attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [M.name] ([M.ckey])</font>")
 
 
 //-------------------------------------------
@@ -208,8 +209,10 @@
 
 /obj/vehicle/train/security/engine/examine(mob/user)
 	. = ..()
-	. += "The power light is [on ? "on" : "off"].\nThere are[key ? "" : " no"] keys in the ignition."
-	. += "The charge meter reads [cell? round(cell.percent(), 0.01) : 0]%"
+	if(Adjacent(user))
+		. += "The power light is [on ? "on" : "off"]."
+		. += "There are[key ? "" : " no"] keys in the ignition."
+		. += "The charge meter reads [cell? round(cell.percent(), 0.01) : 0]%"
 
 /obj/vehicle/train/security/engine/verb/start_engine()
 	set name = "Start engine"

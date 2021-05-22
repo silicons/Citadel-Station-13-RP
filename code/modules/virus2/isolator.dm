@@ -47,7 +47,7 @@
 		return
 	tgui_interact(user)
 
-/obj/machinery/disease2/isolator/tgui_interact(mob/user, datum/tgui/ui)
+/obj/machinery/disease2/isolator/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "PathogenicIsolator", name)

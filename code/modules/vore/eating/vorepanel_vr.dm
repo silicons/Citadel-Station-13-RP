@@ -45,15 +45,15 @@
 	. = ..()
 	. += get_asset_datum(/datum/asset/spritesheet/vore)
 
-/datum/vore_look/tgui_interact(mob/user, datum/tgui/ui)
+/datum/vore_look/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "VorePanel", "Inside!")
 		ui.open()
 
-// This looks weird, but all tgui_host is used for is state checking
+// This looks weird, but all ui_host is used for is state checking
 // So this allows us to use the self_state just fine.
-/datum/vore_look/tgui_host(mob/user)
+/datum/vore_look/ui_host(mob/user)
 	return host
 
 // Note, in order to allow others to look at others vore panels, this state would need
