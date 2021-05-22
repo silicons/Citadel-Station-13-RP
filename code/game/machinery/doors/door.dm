@@ -9,7 +9,7 @@
 	anchored = 1
 	opacity = 1
 	density = 1
-	can_atmos_pass = ATMOS_PASS_DENSITY
+	can_atmos_pass = ATMOS_PASS_PROC
 	layer = DOOR_OPEN_LAYER
 	var/open_layer = DOOR_OPEN_LAYER
 	var/closed_layer = DOOR_CLOSED_LAYER
@@ -42,7 +42,7 @@
 	if(isanimal(user))
 		var/mob/living/simple_mob/S = user
 		if(damage >= STRUCTURE_MIN_DAMAGE_THRESHOLD)
-			visible_message("<span class='danger'>\The [user] smashes into the [src]!</span>")
+			visible_message("<span class='danger'>\The [user] smashes into [src]!</span>")
 			playsound(src, S.attack_sound, 75, 1)
 			take_damage(damage)
 		else

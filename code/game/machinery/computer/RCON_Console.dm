@@ -6,14 +6,14 @@
 
 /obj/machinery/computer/rcon
 	name = "\improper RCON console"
-	desc = "Console used to remotely control machinery on the station."
+	desc = "Console used to remotely control electrical machinery on the station."
 	icon_keyboard = "power_key"
-	icon_screen = "ai_fixer" //VOREStation Edit
+	icon_screen = "ai-fixer"
 	light_color = "#a97faa"
 	circuit = /obj/item/circuitboard/rcon_console
 	req_one_access = list(access_engine)
 	var/current_tag = null
-	var/datum/nano_module/rcon/rcon
+	var/datum/tgui_module/rcon/rcon
 
 /obj/machinery/computer/rcon/Initialize(mapload)
 	. = ..()
@@ -28,15 +28,16 @@
 // Description: Opens UI of this machine.
 /obj/machinery/computer/rcon/attack_hand(var/mob/user as mob)
 	..()
-	nano_ui_interact(user)
+	ui_interact(user)
 
-// Proc: nano_ui_interact()
-// Parameters: 4 (standard NanoUI parameters)
-// Description: Uses dark magic (NanoUI) to render this machine's UI
-/obj/machinery/computer/rcon/nano_ui_interact(mob/user, ui_key = "rcon", var/datum/nanoui/ui = null, var/force_open = 1)
-	rcon.nano_ui_interact(user, ui_key, ui, force_open)
+// Proc: ui_interact()
+// Description: Uses dark magic (TGUI) to render this machine's UI
+/obj/machinery/computer/rcon/ui_interact(mob/user, datum/tgui/ui)
+	rcon.ui_interact(user, ui)
 
 /obj/machinery/computer/rcon/update_icon()
 	..()
 	if(!(stat & (NOPOWER|BROKEN)))
-		overlays += image(icon, "ai-fixer-empty", overlay_layer) //VOREStation Edit
+		add_overlay("ai-fixer-empty")
+	else
+		cut_overlay("ai-fixer-empty")

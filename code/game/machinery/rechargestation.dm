@@ -26,15 +26,8 @@
 
 /obj/machinery/recharge_station/Initialize(mapload, newdir)
 	. = ..()
-	component_parts = list()
-	component_parts += new /obj/item/stock_parts/manipulator(src)
-	component_parts += new /obj/item/stock_parts/manipulator(src)
-	component_parts += new /obj/item/stock_parts/capacitor(src)
-	component_parts += new /obj/item/stock_parts/capacitor(src)
-	component_parts += new /obj/item/cell/super(src)
-	component_parts += new /obj/item/stack/cable_coil(src, 5)
-	RefreshParts()
-
+	default_apply_parts()
+	cell = default_use_hicell()
 	update_icon()
 
 /obj/machinery/recharge_station/proc/has_cell_power()
@@ -259,6 +252,10 @@
 			return
 
 		if(!R.cell)
+			return
+
+		if(istype(R, /mob/living/silicon/robot/platform))
+			to_chat(R, SPAN_WARNING("You are too large to fit into \the [src]."))
 			return
 
 		add_fingerprint(R)

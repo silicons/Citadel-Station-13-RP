@@ -1,7 +1,7 @@
 /obj/machinery/seed_extractor
 	name = "seed extractor"
 	desc = "Extracts and bags seeds from produce."
-	icon = 'icons/obj/hydroponics_machines.dmi'
+	icon = 'icons/obj/hydroponics_machines_vr.dmi' //VOREStation Edit
 	icon_state = "sextractor"
 	density = 1
 	anchored = 1
@@ -16,10 +16,10 @@ obj/machinery/seed_extractor/attackby(var/obj/item/O as obj, var/mob/user as mob
 		var/datum/seed/new_seed_type
 		if(istype(O, /obj/item/grown))
 			var/obj/item/grown/F = O
-			new_seed_type = plant_controller.seeds[F.plantname]
+			new_seed_type = SSplants.seeds[F.plantname]
 		else
 			var/obj/item/reagent_containers/food/snacks/grown/F = O
-			new_seed_type = plant_controller.seeds[F.plantname]
+			new_seed_type = SSplants.seeds[F.plantname]
 
 		if(new_seed_type)
 			to_chat(user, "<span class='notice'>You extract some seeds from [O].</span>")
@@ -39,6 +39,11 @@ obj/machinery/seed_extractor/attackby(var/obj/item/O as obj, var/mob/user as mob
 		if(S.use(1))
 			to_chat(user, "<span class='notice'>You extract some seeds from the grass tile.</span>")
 			new /obj/item/seeds/grassseed(loc)
+
+	else if(istype(O, /obj/item/fossil/plant)) // Fossils
+		var/obj/item/seeds/random/R = new(get_turf(src))
+		to_chat(user, "\The [src] pulverizes \the [O] and spits out \the [R].")
+		qdel(O)
 
 	else if(default_unfasten_wrench(user, O, 20))
 		return

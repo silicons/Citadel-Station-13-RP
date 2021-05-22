@@ -50,7 +50,7 @@
 
 				if("Repeal")
 					src.authorized -= W:registered_name
-					to_chat(world, text("<span class='notice'><b>Alert: [] authorizations needed until shuttle is launched early</b></span>", src.auth_need - src.authorized.len))
+					to_chat(world, "<span class='notice'><b>Alert: [src.auth_need - src.authorized.len] authorizations needed until shuttle is launched early</b></span>")
 
 				if("Abort")
 					to_chat(world, "<span class='notice'><b>All authorizations to shortening time for shuttle launch have been revoked!</b></span>")

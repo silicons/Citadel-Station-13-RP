@@ -52,9 +52,12 @@
 
 /obj/machinery/door/firedoor/Initialize(mapload, newdir)
 	. = ..()
+	//Delete ourselves if we find extra mapped in firedoors
 	for(var/obj/machinery/door/firedoor/F in loc)
 		if(F != src)
+			log_debug("Duplicate firedoors at [x],[y],[z]")
 			return INITIALIZE_HINT_QDEL
+
 	var/area/A = get_area(src)
 	ASSERT(istype(A))
 
@@ -287,6 +290,7 @@
 					FA.anchored = 1
 					FA.density = 1
 					FA.wired = 1
+					FA.glass = glass
 					FA.update_icon()
 					qdel(src)
 		return
@@ -346,7 +350,9 @@
 /obj/machinery/door/firedoor/process(delta_time)
 	..()
 
-	if(density && next_process_time <= world.time)
+	if(!density)
+		return PROCESS_KILL
+	if(next_process_time <= world.time)
 		next_process_time = world.time + 100		// 10 second delays between process updates
 		var/changed = 0
 		lockdown=0
@@ -402,7 +408,10 @@
 
 /obj/machinery/door/firedoor/close()
 	latetoggle()
-	return ..()
+	. = ..()
+	// Queue us for processing when we are closed!
+	if(density)
+		START_MACHINE_PROCESSING(src)
 
 /obj/machinery/door/firedoor/open(var/forced = 0)
 	if(hatch_open)
