@@ -1,8 +1,8 @@
-#define NEIGHBOR_REFRESH_TIME 50
+#define NEIGHBOR_REFRESH_TIME 100
 
 /obj/effect/plant/proc/get_cardinal_neighbors()
 	var/list/cardinal_neighbors = list()
-	for(var/check_dir in GLOB.cardinal)
+	for(var/check_dir in cardinal)
 		var/turf/simulated/T = get_step(get_turf(src), check_dir)
 		if(istype(T))
 			cardinal_neighbors |= T
@@ -33,7 +33,7 @@
 		neighbors |= floor
 
 	if(neighbors.len)
-		plant_controller.add_plant(src)	//if we have neighbours again, start processing
+		SSplants.add_plant(src)	//if we have neighbours again, start processing
 
 	// Update all of our friends.
 	var/turf/T = get_turf(src)
@@ -41,7 +41,7 @@
 		if(neighbor.seed == src.seed)
 			neighbor.neighbors -= T
 
-/obj/effect/plant/process(delta_time)
+/obj/effect/plant/process()
 
 	// Something is very wrong, kill ourselves.
 	if(!seed)
@@ -52,14 +52,6 @@
 		if(smoke.reagents.has_reagent("plantbgone"))
 			die_off()
 			return
-		else if(smoke.reagents.has_reagent("fluorine"))
-			if(prob(40))
-				die_off()
-				return
-		else if(smoke.reagents.has_reagent("chlorine"))
-			if(prob(15))
-				die_off()
-				return
 
 	// Handle life.
 	var/turf/simulated/T = get_turf(src)
@@ -110,7 +102,7 @@
 
 		for(var/i in 1 to max_spread)
 			if(prob(spread_chance))
-				sleep(rand(1,2)) // Adjusting Sleep timer to be lower.
+				sleep(rand(3,5))
 				if(!neighbors.len)
 					break
 				spread_to(pick(neighbors))
@@ -118,7 +110,7 @@
 	// We shouldn't have spawned if the controller doesn't exist.
 	check_health()
 	if(has_buckled_mobs() || neighbors.len)
-		plant_controller.add_plant(src)
+		SSplants.add_plant(src)
 
 //spreading vines aren't created on their final turf.
 //Instead, they are created at their parent and then move to their destination.
@@ -168,7 +160,7 @@
 			continue
 		for(var/obj/effect/plant/neighbor in check_turf.contents)
 			neighbor.neighbors |= check_turf
-			plant_controller.add_plant(neighbor)
+			SSplants.add_plant(neighbor)
 	spawn(1) if(src) qdel(src)
 
 #undef NEIGHBOR_REFRESH_TIME

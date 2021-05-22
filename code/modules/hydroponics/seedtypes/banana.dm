@@ -4,7 +4,7 @@
 	display_name = "banana tree"
 	kitchen_tag = "banana"
 	chems = list("banana" = list(10,10))
-	trash_type = /obj/item/bananapeel
+	trash_type = /obj/item/weapon/bananapeel
 
 /datum/seed/banana/New()
 	..()

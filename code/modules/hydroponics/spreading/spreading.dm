@@ -1,22 +1,21 @@
 #define DEFAULT_SEED "glowshroom"
 #define VINE_GROWTH_STAGES 5
 
-/proc/spacevine_infestation(var/potency_min=40, var/potency_max=80, var/maturation_min=5, var/maturation_max=15)
+/proc/spacevine_infestation(var/potency_min=70, var/potency_max=100, var/maturation_min=5, var/maturation_max=15)
 	spawn() //to stop the secrets panel hanging
 		var/list/turf/simulated/floor/turfs = list() //list of all the empty floor turfs in the hallway areas
 		for(var/areapath in typesof(/area/hallway))
 			var/area/A = locate(areapath)
 			for(var/turf/simulated/floor/F in A.contents)
-				if(turf_clear(F))
+				if(!F.check_density())
 					turfs += F
 
 		if(turfs.len) //Pick a turf to spawn at if we can
 			var/turf/simulated/floor/T = pick(turfs)
-			var/datum/seed/seed = plant_controller.create_random_seed(1)
+			var/datum/seed/seed = SSplants.create_random_seed(1)
 			seed.set_trait(TRAIT_SPREAD,2)             // So it will function properly as vines.
-			seed.set_trait(TRAIT_POTENCY,rand(potency_min, potency_max))
+			seed.set_trait(TRAIT_POTENCY,rand(potency_min, potency_max)) // 70-100 potency will help guarantee a wide spread and powerful effects.
 			seed.set_trait(TRAIT_MATURATION,rand(maturation_min, maturation_max))
-			seed.set_trait(TRAIT_CARNIVOROUS,rand(0, 20)) // VINES WERE A BIT TOO MURDERHAPPY AT 80~100!!
 			seed.display_name = "strange plants" //more thematic for the vine infestation event
 
 			//make vine zero start off fully matured
@@ -55,10 +54,10 @@
 	pass_flags = PASSTABLE
 	mouse_opacity = 2
 
-	var/health = 15
-	var/max_health = 95 - TRAIT_POTENCY
+	var/health = 10
+	var/max_health = 100
 	var/growth_threshold = 0
-	var/growth_type = 1
+	var/growth_type = 0
 	var/max_growth = 0
 	var/list/neighbors = list()
 	var/obj/effect/plant/parent
@@ -73,31 +72,34 @@
 	var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/plant
 
 /obj/effect/plant/Destroy()
-	if(plant_controller)
-		plant_controller.remove_plant(src)
+	neighbors.Cut()
+	if(seed.get_trait(TRAIT_SPREAD)==2)
+		unsense_proximity(callback = .HasProximity, center = get_turf(src))
+	SSplants.remove_plant(src)
 	for(var/obj/effect/plant/neighbor in range(1,src))
-		plant_controller.add_plant(neighbor)
+		SSplants.add_plant(neighbor)
 	return ..()
 
 /obj/effect/plant/single
 	spread_chance = 0
 
-/obj/effect/plant/Initialize(mapload, datum/seed/newseed, obj/effect/plant/newparent)
-	. = ..()
+/obj/effect/plant/New(var/newloc, var/datum/seed/newseed, var/obj/effect/plant/newparent)
+	..()
+
 	if(!newparent)
 		parent = src
 	else
 		parent = newparent
 
-	if(!plant_controller)
+	if(!SSplants)
 		sleep(250) // ugly hack, should mean roundstart plants are fine. TODO initialize perhaps?
-	if(!plant_controller)
-		to_chat(world, "<span class='danger'>Plant controller does not exist and [src] requires it. Aborting.</span>")
+	if(!SSplants)
+		to_world("<span class='danger'>Plant controller does not exist and [src] requires it. Aborting.</span>")
 		qdel(src)
 		return
 
 	if(!istype(newseed))
-		newseed = plant_controller.seeds[DEFAULT_SEED]
+		newseed = SSplants.seeds[DEFAULT_SEED]
 	seed = newseed
 	if(!seed)
 		qdel(src)
@@ -106,9 +108,18 @@
 	name = seed.display_name
 	max_health = round(seed.get_trait(TRAIT_ENDURANCE)/2)
 	if(seed.get_trait(TRAIT_SPREAD)==2)
+		sense_proximity(callback = .HasProximity) // Grabby
 		max_growth = VINE_GROWTH_STAGES
 		growth_threshold = max_health/VINE_GROWTH_STAGES
 		icon = 'icons/obj/hydroponics_vines.dmi'
+		growth_type = 2 // Vines by default.
+		if(seed.get_trait(TRAIT_CARNIVOROUS) >= 2)
+			growth_type = 1 // WOOOORMS.
+		else if(!(seed.seed_noun in list("seeds","pits")))
+			if(seed.seed_noun == "nodes")
+				growth_type = 3 // Biomass
+			else
+				growth_type = 4 // Mold
 	else
 		max_growth = seed.growth_stages
 		growth_threshold = max_health/seed.growth_stages
@@ -116,16 +127,16 @@
 	if(max_growth > 2 && prob(50))
 		max_growth-- //Ensure some variation in final sprite, makes the carpet of crap look less wonky.
 
-	mature_time = world.time + seed.get_trait(TRAIT_MATURATION) + 25 //prevent vines from maturing until at least a few seconds after they've been created.
+	mature_time = world.time + seed.get_trait(TRAIT_MATURATION) + 15 //prevent vines from maturing until at least a few seconds after they've been created.
 	spread_chance = seed.get_trait(TRAIT_POTENCY)
-	spread_distance = ((growth_type>0) ? round(spread_chance*0.77) : round(spread_chance*0.6))
+	spread_distance = ((growth_type>0) ? round(spread_chance*0.6) : round(spread_chance*0.3))
 	update_icon()
 
 // Plants will sometimes be spawned in the turf adjacent to the one they need to end up in, for the sake of correct dir/etc being set.
 /obj/effect/plant/proc/finish_spreading()
-	setDir(calc_dir())
+	set_dir(calc_dir())
 	update_icon()
-	plant_controller.add_plant(src)
+	SSplants.add_plant(src)
 	//Some plants eat through plating.
 	if(islist(seed.chems) && !isnull(seed.chems["pacid"]))
 		var/turf/T = get_turf(src)
@@ -170,14 +181,15 @@
 			max_growth--
 	max_growth = max(1,max_growth)
 	if(growth_type > 0)
-		if(max_health > 40)
-			icon_state = "vines-[growth]"
-		else if(max_health <= 40 > 30)
-			icon_state = "mass-[growth]"
-		else if(max_health <= 30 > 20)
-			icon_state = "worms"
-		else
-			icon_state = "mold-[growth]"
+		switch(growth_type)
+			if(1)
+				icon_state = "worms"
+			if(2)
+				icon_state = "vines-[growth]"
+			if(3)
+				icon_state = "mass-[growth]"
+			if(4)
+				icon_state = "mold-[growth]"
 	else
 		icon_state = "[seed.get_trait(TRAIT_PLANT_ICON)]-[growth]"
 
@@ -197,7 +209,7 @@
 
 	var/direction = 16
 
-	for(var/wallDir in GLOB.cardinal)
+	for(var/wallDir in cardinal)
 		var/turf/newTurf = get_step(T,wallDir)
 		if(newTurf.density)
 			direction |= wallDir
@@ -226,12 +238,12 @@
 	floor = 1
 	return 1
 
-/obj/effect/plant/attackby(var/obj/item/W, var/mob/user)
+/obj/effect/plant/attackby(var/obj/item/weapon/W, var/mob/user)
 
 	user.setClickCooldown(user.get_attack_speed(W))
-	plant_controller.add_plant(src)
+	SSplants.add_plant(src)
 
-	if(W.is_wirecutter() || istype(W, /obj/item/surgical/scalpel))
+	if(W.is_wirecutter() || istype(W, /obj/item/weapon/surgical/scalpel))
 		if(sampled)
 			to_chat(user, "<span class='warning'>\The [src] has already been sampled recently.</span>")
 			return

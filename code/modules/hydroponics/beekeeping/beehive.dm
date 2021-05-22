@@ -30,7 +30,7 @@
 			if(81 to 100)
 				overlays += "bees3"
 
-/obj/machinery/beehive/examine(mob/user)
+/obj/machinery/beehive/examine(var/mob/user)
 	. = ..()
 	if(!closed)
 		. += "The lid is open."
@@ -43,7 +43,7 @@
 		return
 	else if(I.is_wrench())
 		anchored = !anchored
-		playsound(loc, I.usesound, 50, 1)
+		playsound(src, I.usesound, 50, 1)
 		user.visible_message("<span class='notice'>[user] [anchored ? "wrenches" : "unwrenches"] \the [src].</span>", "<span class='notice'>You [anchored ? "wrench" : "unwrench"] \the [src].</span>")
 		return
 	else if(istype(I, /obj/item/bee_smoker))
@@ -95,7 +95,7 @@
 			B.fill()
 		update_icon()
 		return
-	else if(istype(I, /obj/item/analyzer/plant_analyzer))
+	else if(istype(I, /obj/item/device/analyzer/plant_analyzer))
 		to_chat(user, "<span class='notice'>Scan result of \the [src]...</span>")
 		to_chat(user, "Beehive is [bee_count ? "[round(bee_count)]% full" : "empty"].[bee_count > 90 ? " Colony is ready to split." : ""]")
 		if(frames)
@@ -137,7 +137,7 @@
 			to_chat(user, "<span class='notice'>You take all filled honeycombs out.</span>")
 		return
 
-/obj/machinery/beehive/process(delta_time)
+/obj/machinery/beehive/process()
 	if(closed && !smoked && bee_count)
 		pollinate_flowers()
 		update_icon()
@@ -158,7 +158,7 @@
 /obj/machinery/honey_extractor
 	name = "honey extractor"
 	desc = "A machine used to turn honeycombs on the frame into honey and wax."
-	icon = 'icons/obj/virology.dmi'
+	icon = 'icons/obj/virology_vr.dmi' //VOREStation Edit
 	icon_state = "centrifuge"
 
 	var/processing = 0
@@ -183,11 +183,11 @@
 			honey += processing
 			processing = 0
 			icon_state = "centrifuge"
-	else if(istype(I, /obj/item/reagent_containers/glass))
+	else if(istype(I, /obj/item/weapon/reagent_containers/glass))
 		if(!honey)
 			to_chat(user, "<span class='notice'>There is no honey in \the [src].</span>")
 			return
-		var/obj/item/reagent_containers/glass/G = I
+		var/obj/item/weapon/reagent_containers/glass/G = I
 		var/transferred = min(G.reagents.maximum_volume - G.reagents.total_volume, honey)
 		G.reagents.add_reagent("honey", transferred)
 		honey -= transferred
@@ -215,9 +215,9 @@
 	desc = "A frame for the beehive that the bees have filled with honeycombs."
 	honey = 20
 
-/obj/item/honey_frame/filled/Initialize(mapload)
-	. = ..()
-	add_overlay("honeycomb")
+/obj/item/honey_frame/filled/New()
+	..()
+	overlays += "honeycomb"
 
 /obj/item/beehive_assembly
 	name = "beehive assembly"
@@ -232,6 +232,7 @@
 		new /obj/machinery/beehive(get_turf(user))
 		user.drop_from_inventory(src)
 		qdel(src)
+	return
 
 /obj/item/stack/material/wax
 	name = "wax"
@@ -243,7 +244,7 @@
 	pass_color = TRUE
 	strict_color_stacking = TRUE
 
-/obj/item/stack/material/wax/Initialize(mapload, new_amount, merge)
+/obj/item/stack/material/wax/Initialize()
 	. = ..()
 	recipes = wax_recipes
 
@@ -256,7 +257,7 @@
 	pass_stack_colors = TRUE
 
 var/global/list/datum/stack_recipe/wax_recipes = list( \
-	new/datum/stack_recipe("candle", /obj/item/flame/candle) \
+	new/datum/stack_recipe("candle", /obj/item/weapon/flame/candle) \
 )
 
 /obj/item/bee_pack
@@ -266,20 +267,20 @@ var/global/list/datum/stack_recipe/wax_recipes = list( \
 	icon_state = "beepack"
 	var/full = 1
 
-/obj/item/bee_pack/Initialize(mapload)
-	. = ..()
-	add_overlay("beepack-full")
+/obj/item/bee_pack/New()
+	..()
+	overlays += "beepack-full"
 
 /obj/item/bee_pack/proc/empty()
 	full = 0
 	name = "empty bee pack"
 	desc = "A stasis pack for moving bees. It's empty."
-	cut_overlays()
-	add_overlay("beepack-empty")
+	overlays.Cut()
+	overlays += "beepack-empty"
 
 /obj/item/bee_pack/proc/fill()
 	full = initial(full)
 	name = initial(name)
 	desc = initial(desc)
-	cut_overlays()
-	add_overlay("beepack-full")
+	overlays.Cut()
+	overlays += "beepack-full"

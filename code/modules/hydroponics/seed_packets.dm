@@ -13,14 +13,14 @@ GLOBAL_LIST_BOILERPLATE(all_seed_packs, /obj/item/seeds)
 	var/datum/seed/seed
 	var/modified = 0
 
-/obj/item/seeds/Initialize(mapload)
+/obj/item/seeds/Initialize()
 	update_seed()
 	. = ..()
 
 //Grabs the appropriate seed datum from the global list.
 /obj/item/seeds/proc/update_seed()
-	if(!seed && seed_type && !isnull(plant_controller.seeds) && plant_controller.seeds[seed_type])
-		seed = plant_controller.seeds[seed_type]
+	if(!seed && seed_type && !isnull(SSplants.seeds) && SSplants.seeds[seed_type])
+		seed = SSplants.seeds[seed_type]
 	update_appearance()
 
 //Updates strings and icon appropriately based on seed datum.
@@ -75,8 +75,8 @@ GLOBAL_LIST_BOILERPLATE(all_seed_packs, /obj/item/seeds)
 /obj/item/seeds/random
 	seed_type = null
 
-/obj/item/seeds/random/Initialize(mapload)
-	seed = plant_controller.create_random_seed()
+/obj/item/seeds/random/Initialize()
+	seed = SSplants.create_random_seed()
 	seed_type = seed.name
 	. = ..()
 
@@ -176,11 +176,20 @@ GLOBAL_LIST_BOILERPLATE(all_seed_packs, /obj/item/seeds)
 /obj/item/seeds/towermycelium
 	seed_type = "towercap"
 
+/obj/item/seeds/redtowermycelium
+	seed_type = "redcap"
+
 /obj/item/seeds/glowshroom
 	seed_type = "glowshroom"
 
 /obj/item/seeds/plumpmycelium
 	seed_type = "plumphelmet"
+
+/obj/item/seeds/plastellmycelium
+	seed_type = "plastic"
+
+/obj/item/seeds/sporemycelium
+	seed_type = "sporeshroom"
 
 /obj/item/seeds/nettleseed
 	seed_type = "nettle"
@@ -217,6 +226,9 @@ GLOBAL_LIST_BOILERPLATE(all_seed_packs, /obj/item/seeds)
 
 /obj/item/seeds/ambrosiadeusseed
 	seed_type = "ambrosiadeus"
+
+/obj/item/seeds/ambrosiainfernusseed
+	seed_type = "ambrosiainfernus"
 
 /obj/item/seeds/whitebeetseed
 	seed_type = "whitebeet"
@@ -308,8 +320,8 @@ GLOBAL_LIST_BOILERPLATE(all_seed_packs, /obj/item/seeds)
 /obj/item/seeds/eggyplant
 	seed_type = "egg-plant"
 
-/obj/item/seeds/spineapple
-	seed_type = "spineapple"
+/obj/item/seeds/pineapple
+	seed_type = "pineapple"
 
 /obj/item/seeds/durian
 	seed_type = "durian"
@@ -322,3 +334,12 @@ GLOBAL_LIST_BOILERPLATE(all_seed_packs, /obj/item/seeds)
 
 /obj/item/seeds/rose/blood
 	seed_type = "bloodrose"
+
+/obj/item/seeds/gnomes
+	seed_type = "gnomes"
+
+/obj/item/seeds/sifbulb
+	seed_type = "sifbulb"
+
+/obj/item/seeds/wurmwoad
+	seed_type = "wurmwoad"
