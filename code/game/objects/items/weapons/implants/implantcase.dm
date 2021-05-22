@@ -251,11 +251,32 @@
 	src.imp = new /obj/item/implant/organ/pelvic( src )
 	return ..()
 
-/obj/item/implantcase/vrlanguage
-	name = "glass case - 'language'"
-	desc = "A case containing a language implant."
-	icon_state = "implantcase-r"
+/obj/item/implantcase/armblade
+	name = "glass case - 'Armblade'"
+	desc = "A case containing a nanite fabricator implant."
+	icon_state = "implantcase-b"
 
-/obj/item/implantcase/vrlanguage/Initialize(mapload)
-	imp = new /obj/item/implant/vrlanguage( src )
-	return ..()
+/obj/item/implantcase/armblade/New()
+	src.imp = new /obj/item/implant/organ/limbaugment/upperarm/blade( src )
+	..()
+	return
+
+/obj/item/implantcase/handblade
+	name = "glass case - 'Handblade'"
+	desc = "A case containing a nanite fabricator implant."
+	icon_state = "implantcase-b"
+
+/obj/item/implantcase/handblade/New()
+	src.imp = new /obj/item/implant/organ/limbaugment/wrist/blade( src )
+	..()
+	return
+
+/obj/item/implantcase/restrainingbolt
+	name = "glass case - 'Restraining Bolt'"
+	desc = "A case containing a restraining bolt."
+	icon_state = "implantcase-b"
+
+/obj/item/implantcase/restrainingbolt/New()
+	src.imp = new /obj/item/implant/restrainingbolt( src )
+	..()
+	return

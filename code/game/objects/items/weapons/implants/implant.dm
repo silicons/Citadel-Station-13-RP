@@ -7,6 +7,8 @@
 	icon = 'icons/obj/device.dmi'
 	icon_state = "implant"
 	w_class = ITEMSIZE_TINY
+	show_messages = TRUE
+
 	var/implanted = null
 	var/mob/imp_in = null
 	var/obj/item/organ/external/part
@@ -14,7 +16,7 @@
 	var/allow_reagents = 0
 	var/malfunction = 0
 	var/initialize_loc = BP_TORSO
-	show_messages = 1
+	var/known_implant = FALSE
 
 /obj/item/implant/proc/trigger(emote, source as mob)
 	return
@@ -65,16 +67,17 @@
 	malfunction = MALFUNCTION_PERMANENT
 
 /obj/item/implant/proc/implant_loadout(var/mob/living/carbon/human/H)
-	if(H)
-		if(handle_implant(H, initialize_loc))
-			invisibility = initial(invisibility)
-			post_implant(H)
+	. = istype(H) && handle_implant(H, initialize_loc)
+	if(.)
+		invisibility = initial(invisibility)
+		known_implant = TRUE
+		post_implant(H)
 
 /obj/item/implant/Destroy()
 	if(part)
 		part.implants.Remove(src)
+		part = null
 	listening_objects.Remove(src)
-	part = null
 	imp_in = null
 	return ..()
 
@@ -100,6 +103,7 @@ GLOBAL_LIST_BOILERPLATE(all_tracking_implants, /obj/item/implant/tracking)
 /obj/item/implant/tracking
 	name = "tracking implant"
 	desc = "An implant normally given to dangerous criminals. Allows security to track your location."
+	known_implant = TRUE
 	var/id = 1
 	var/degrade_time = 10 MINUTES	//How long before the implant stops working outside of a living body.
 
@@ -227,7 +231,8 @@ Implant Specifics:<BR>"}
 <b>Integrity:</b> Implant will occasionally be degraded by the body's immune system and thus will occasionally malfunction."}
 	return dat
 
-/obj/item/implant/explosive/hear_talk(mob/M as mob, msg)
+/obj/item/implant/explosive/hear_talk(mob/M, list/message_pieces, verb)
+	var/msg = multilingual_to_message(message_pieces)
 	hear(msg)
 	return
 
@@ -251,7 +256,7 @@ Implant Specifics:<BR>"}
 			if (elevel == "Localized Limb")
 				if(part) //For some reason, small_boom() didn't work. So have this bit of working copypaste.
 					imp_in.visible_message("<span class='warning'>Something beeps inside [imp_in][part ? "'s [part.name]" : ""]!</span>")
-					playsound(loc, 'sound/items/countdown.ogg', 75, 1, -3)
+					playsound(src, 'sound/items/countdown.ogg', 75, 1, -3)
 					sleep(25)
 					if (istype(part,/obj/item/organ/external/chest) ||	\
 						istype(part,/obj/item/organ/external/groin) ||	\
@@ -324,7 +329,7 @@ Implant Specifics:<BR>"}
 /obj/item/implant/explosive/proc/small_boom()
 	if (ishuman(imp_in) && part)
 		imp_in.visible_message("<span class='warning'>Something beeps inside [imp_in][part ? "'s [part.name]" : ""]!</span>")
-		playsound(loc, 'sound/items/countdown.ogg', 75, 1, -3)
+		playsound(src, 'sound/items/countdown.ogg', 75, 1, -3)
 		spawn(25)
 			if (ishuman(imp_in) && part)
 				//No tearing off these parts since it's pretty much killing
@@ -347,6 +352,7 @@ GLOBAL_LIST_BOILERPLATE(all_chem_implants, /obj/item/implant/chem)
 	name = "chemical implant"
 	desc = "Injects things."
 	allow_reagents = 1
+	known_implant = TRUE
 
 /obj/item/implant/chem/get_data()
 	var/dat = {"
@@ -415,6 +421,7 @@ the implant may become unstable and either pre-maturely inject the subject or si
 /obj/item/implant/loyalty
 	name = "loyalty implant"
 	desc = "Makes you loyal or such."
+	known_implant = TRUE
 
 /obj/item/implant/loyalty/get_data()
 	var/dat = {"
@@ -488,6 +495,7 @@ the implant may become unstable and either pre-maturely inject the subject or si
 	name = "death alarm implant"
 	desc = "An alarm which monitors host vital signs and transmits a radio message upon death."
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2, TECH_DATA = 1)
+	known_implant = TRUE
 	var/mobname = "Will Robinson"
 
 /obj/item/implant/death_alarm/get_data()
@@ -613,141 +621,3 @@ the implant may become unstable and either pre-maturely inject the subject or si
 
 /obj/item/implant/compressed/islegal()
 	return 0
-
-//VR FILE MERGE
-/obj/item/implant/vrlanguage
-	name = "language"
-	desc = "Allows the user to understand and speak almost all known languages.."
-	var/uses = 1
-
-/obj/item/implant/vrlanguage/get_data()
-	var/dat = {"
-		<b>Implant Specifications:</b><BR>
-		<b>Name:</b> Language Implant<BR>
-		<b>Life:</b> One day.<BR>
-		<b>Important Notes:</b> Personnel with this implant can speak almost all known languages.<BR>
-		<HR>
-		<b>Implant Details:</b> Subjects injected with implant can understand and speak almost all known languages.<BR>
-		<b>Function:</b> Contains specialized nanobots to stimulate the brain so the user can speak and understand previously unknown languages.<BR>
-		<b>Special Features:</b> Will allow the user to understand almost all languages.<BR>
-		<b>Integrity:</b> Implant can only be used once before the nanobots are depleted."}
-	return dat
-
-/obj/item/implant/vrlanguage/trigger(emote, mob/source as mob)
-	if (src.uses < 1)
-		return 0
-	if (emote == "smile")
-		src.uses--
-		to_chat(source,"<span class='notice'>You suddenly feel as if you can understand other languages!</span>")
-		source.add_language(LANGUAGE_CHIMPANZEE)
-		source.add_language(LANGUAGE_NEAERA)
-		source.add_language(LANGUAGE_STOK)
-		source.add_language(LANGUAGE_FARWA)
-		source.add_language(LANGUAGE_UNATHI)
-		source.add_language(LANGUAGE_SIIK)
-		source.add_language(LANGUAGE_SKRELLIAN)
-		source.add_language(LANGUAGE_SCHECHI)
-		source.add_language(LANGUAGE_BIRDSONG)
-		source.add_language(LANGUAGE_SAGARU)
-		source.add_language(LANGUAGE_CANILUNZT)
-		source.add_language(LANGUAGE_SLAVIC)
-		source.add_language(LANGUAGE_SOL_COMMON) //In case they're giving a xenomorph an implant or something.
-
-/obj/item/implant/vrlanguage/post_implant(mob/source)
-	source.mind.store_memory("A implant can be activated by using the smile emote, <B>say *smile</B> to attempt to activate.", 0, 0)
-	to_chat(source,"The implanted language implant can be activated by using the smile emote, <B>say *smile</B> to attempt to activate.")
-	return 1
-
-//////////////////////////////
-//	Size Control Implant
-//////////////////////////////
-/obj/item/implant/sizecontrol
-	name = "size control implant"
-	desc = "Implant which allows to control host size via voice commands."
-	icon_state = "implant_evil"
-	var/owner
-	var/active = TRUE
-
-/obj/item/implant/sizecontrol/get_data()
-	var/dat = {"
-<b>Implant Specifications:</b><BR>
-<b>Name:</b>L3-WD Size Controlling Implant<BR>
-<b>Life:</b>1-2 weeks after implanting<BR>
-<HR>
-<b>Function:</b> Resizes the host whenever specific verbal command is received<BR>"}
-	return dat
-
-/obj/item/implant/sizecontrol/hear_talk(mob/M, msg)
-	if(M == imp_in)
-		return
-	if(owner)
-		if(M != owner)
-			return
-	if(findtext(msg,"ignore"))
-		return
-	var/list/replacechars = list("&#39;" = "",">" = "","<" = "","(" = "",")" = "", "~" = "")
-	msg = replace_characters(msg, replacechars)
-	hear(msg)
-	return
-
-/obj/item/implant/sizecontrol/see_emote(mob/living/M, message, m_type)
-	if(M == imp_in)
-		return
-	if(owner)
-		if(M != owner)
-			return
-	var/list/replacechars = list("&#39;" = "",">" = "","<" = "","(" = "",")" = "", "~" = "")
-	message = replace_characters(message, replacechars)
-	var/static/regex/say_in_me = new/regex("(&#34;)(.*?)(&#)", "g")
-	while(say_in_me.Find(message))
-		if(findtext(say_in_me.match,"ignore"))
-			return
-		hear(say_in_me.group[2])
-
-
-/obj/item/implant/sizecontrol/hear(var/msg)
-	if (malfunction)
-		return
-
-	if(istype(imp_in, /mob/living))
-		var/mob/living/H = imp_in
-		if(findtext(msg,"implant-toggle"))
-			active = !active
-		if(active)
-			if(findtext(msg,"grow"))
-				H.resize(min(H.size_multiplier*1.5, 2))
-			else if(findtext(msg,"shrink"))
-				H.resize(max(H.size_multiplier*0.5, 0.25))
-			else if(findtext(msg, "resize"))
-				var/static/regex/size_mult = new/regex("\\d+")
-				if(size_mult.Find(msg))
-					var/resizing_value = text2num(size_mult.match)
-					H.resize(clamp(resizing_value/100 , 0.25, 2))
-
-
-
-/obj/item/implant/sizecontrol/post_implant(mob/source, mob/living/user = usr)
-	if(source != user)
-		owner = user
-
-
-/obj/item/implant/sizecontrol/emp_act(severity)
-	if(istype(imp_in, /mob/living))
-		var/newsize = pick(RESIZE_HUGE,RESIZE_BIG,RESIZE_NORMAL,RESIZE_SMALL,RESIZE_TINY,RESIZE_A_HUGEBIG,RESIZE_A_BIGNORMAL,RESIZE_A_NORMALSMALL,RESIZE_A_SMALLTINY)
-		var/mob/living/H = imp_in
-		H.resize(newsize)
-
-/obj/item/implanter/sizecontrol
-	name = "size control implant"
-	desc = "Implant which allows to control host size via voice commands."
-	description_info = {"Only accessable by those who implanted the victim. Self-implanting allows everyone to change host size. The following special commands are available:
-'Shrink' - host size decreases.
-'Grow' - host size increases.
-'Resize (NUMBER)' - for accurate size control.
-'Ignore' - keywords in the speech won't have any effect.
-'Implant-toggle' - toggles implant."}
-
-/obj/item/implanter/sizecontrol/Initialize(mapload)
-	. = ..()
-	imp = new /obj/item/implant/sizecontrol( src )
-	update()

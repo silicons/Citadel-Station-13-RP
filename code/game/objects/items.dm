@@ -548,7 +548,7 @@ var/list/global/slot_flags_enumeration = list(
 	var/hit_zone = get_zone_with_miss_chance(U.zone_sel.selecting, M, U.get_accuracy_penalty(U))
 	if(!hit_zone)
 		U.do_attack_animation(M)
-		playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
+		playsound(src, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 		//visible_message("<span class='danger'>[U] attempts to stab [M] in the eyes, but misses!</span>")
 		for(var/mob/V in viewers(M))
 			V.show_message("<span class='danger'>[U] attempts to stab [M] in the eyes, but misses!</span>")
@@ -764,6 +764,15 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 // Called when you swap hands away from the item
 /obj/item/proc/in_inactive_hand(mob/user)
 	return
+
+//Used for selecting a random pixel placement, usually on initialize. Checks for pixel_x/y to not interfere with mapped in items.
+/obj/item/proc/randpixel_xy()
+	if(!pixel_x && !pixel_y)
+		pixel_x = rand(-randpixel, randpixel)
+		pixel_y = rand(-randpixel, randpixel)
+		return TRUE
+	else
+		return FALSE
 
 //Worn icon generation for on-mob sprites
 /obj/item/proc/make_worn_icon(var/body_type,var/slot_name,var/inhands,var/default_icon,var/default_layer,var/icon/clip_mask = null)

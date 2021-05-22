@@ -7,4 +7,4 @@
 	var/image/I=image(icon, icon_state = icon_state, dir = dir)
 	I.color=color
 	T.overlays += I
-	qdel(src)
+	return INITIALIZE_HINT_QDEL

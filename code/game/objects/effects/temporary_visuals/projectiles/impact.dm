@@ -74,7 +74,7 @@
 	light_power = 0.5
 	light_color = "#8837A3"
 
-/obj/effect/projectile/tungsten/impact
+/obj/effect/projectile/impact/tungsten
 	icon_state = "impact_mhd_laser"
 	light_range = 4
 	light_power = 3
@@ -88,3 +88,5 @@
 	light_power = 0.5
 	light_color = "#80F5FF"
 //VOREStation edit ends
+/obj/effect/projectile/impact/pointdefense
+	icon_state = "impact_pointdef"

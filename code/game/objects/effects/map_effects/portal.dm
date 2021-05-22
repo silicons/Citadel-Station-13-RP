@@ -201,7 +201,7 @@ when portals are shortly lived, or when portals are made to be obvious with spec
 			break
 
 	if(!counterpart)
-		crash_with("Portal master [type] ([x],[y],[z]) could not find another portal master with a matching portal_id ([portal_id]).")
+		CRASH("Portal master [type] ([x],[y],[z]) could not find another portal master with a matching portal_id ([portal_id]).")
 
 /obj/effect/map_effect/portal/master/proc/make_visuals()
 	var/list/observed_turfs = list()
@@ -268,7 +268,7 @@ when portals are shortly lived, or when portals are made to be obvious with spec
 	..()
 
 // Allows portals to transfer speech.
-/obj/effect/map_effect/portal/master/hear_talk(mob/living/M, list/message_pieces, verb)
+/obj/effect/map_effect/portal/master/hear_talk(mob/M, list/message_pieces, verb)
 	if(!counterpart)
 		return
 	var/turf/T = counterpart.get_focused_turf()
@@ -277,7 +277,7 @@ when portals are shortly lived, or when portals are made to be obvious with spec
 
 	for(var/thing in mobs_to_relay)
 		var/mob/mob = thing
-		var/message = ""
+		var/message = mob.combine_message(message_pieces, verb, M)
 		var/name_used = M.GetVoice()
 		var/rendered = null
 		rendered = "<span class='game say'><span class='name'>[name_used]</span> [message]</span>"
