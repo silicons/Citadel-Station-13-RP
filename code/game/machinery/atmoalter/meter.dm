@@ -67,7 +67,7 @@
 
 		var/datum/signal/signal = new
 		signal.source = src
-		signal.transmission_method = 1
+		signal.transmission_method = TRANSMISSION_RADIO
 		signal.data = list(
 			"tag" = id,
 			"device" = "AM",
@@ -78,13 +78,14 @@
 
 /obj/machinery/meter/examine(mob/user)
 	. = ..()
+
 	if(get_dist(user, src) > 3 && !(istype(user, /mob/living/silicon/ai) || istype(user, /mob/observer/dead)))
 		. += "<span class='warning'>You are too far away to read it.</span>"
 
 	else if(stat & (NOPOWER|BROKEN))
 		. += "<span class='warning'>The display is off.</span>"
 
-	else if(src.target)
+	else if(target)
 		var/datum/gas_mixture/environment = target.return_air()
 		if(environment)
 			. += "The pressure gauge reads [round(environment.return_pressure(), 0.01)] kPa; [round(environment.temperature,0.01)]K ([round(environment.temperature-T0C,0.01)]&deg;C)"
@@ -93,7 +94,15 @@
 	else
 		. += "The connect error light is blinking."
 
+/obj/machinery/meter/Click()
 
+	if(istype(usr, /mob/living/carbon/human) || istype(usr, /mob/living/silicon/ai)) // ghosts can call ..() for examine
+		var/mob/living/L = usr
+		if(!L.get_active_hand() || !L.Adjacent(src))
+			usr.examinate(src)
+			return 1
+
+	return ..()
 
 /obj/machinery/meter/attackby(var/obj/item/W, var/mob/user)
 	if(W.is_wrench())

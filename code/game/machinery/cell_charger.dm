@@ -13,12 +13,9 @@
 	var/chargelevel = -1
 	circuit = /obj/item/circuitboard/cell_charger
 
-/obj/machinery/cell_charger/Initialize(mapload, newdir)
+/obj/machinery/cell_charger/Initialize()
 	. = ..()
-	component_parts = list()
-	component_parts += new /obj/item/stock_parts/capacitor(src)
-	component_parts += new /obj/item/stack/cable_coil(src, 5)
-	RefreshParts()
+	default_apply_parts()
 
 /obj/machinery/cell_charger/update_icon()
 	icon_state = "ccharger[charging ? 1 : 0]"
@@ -39,9 +36,10 @@
 
 /obj/machinery/cell_charger/examine(mob/user)
 	. = ..()
-	. += "<span class = 'notice'>[charging ? "[charging]" : "Nothing"] is in [src].</span>"
-	if(charging)
-		. += "<span class = 'notice'>Current charge: [charging.charge] / [charging.maxcharge]</span>"
+	if(get_dist(user, src) <= 5)
+		. += "[charging ? "[charging]" : "Nothing"] is in [src]."
+		if(charging)
+			. += "Current charge: [charging.charge] / [charging.maxcharge]"
 
 /obj/machinery/cell_charger/attackby(obj/item/W, mob/user)
 	if(stat & BROKEN)
@@ -87,8 +85,7 @@
 	add_fingerprint(user)
 
 	if(charging)
-		usr.put_in_hands(charging)
-		charging.add_fingerprint(user)
+		user.put_in_hands(charging)
 		charging.update_icon()
 		user.visible_message("[user] removes [charging] from [src].", "You remove [charging] from [src].")
 		charging = null
@@ -103,7 +100,6 @@
 			charging.update_icon()
 			charging = null
 			update_icon()
-
 
 /obj/machinery/cell_charger/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))
@@ -126,7 +122,6 @@
 		update_icon()
 	else
 		update_use_power(USE_POWER_IDLE)
-
 
 /obj/machinery/cell_charger/RefreshParts()
 	var/E = 0

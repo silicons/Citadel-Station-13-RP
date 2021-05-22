@@ -30,12 +30,16 @@
 	var/pulses_remaining = 3
 	var/pulse_delay = 2 SECONDS
 
-/obj/effect/temporary_effect/pulse/Initialize(mapload)
-	spawn(0)
-		pulse_loop()
-	return ..()
+/obj/effect/temporary_effect/pulse/Initialize()
+	..()
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/effect/temporary_effect/pulse/LateInitialize()
+	pulse_loop()
 
 /obj/effect/temporary_effect/pulse/proc/pulse_loop()
+	set waitfor = FALSE
+
 	while(pulses_remaining)
 		sleep(pulse_delay)
 		on_pulse()
