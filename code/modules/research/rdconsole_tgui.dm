@@ -13,7 +13,7 @@
 	var/design_page = 0
 	var/builder_page = 0
 
-/obj/machinery/computer/rdconsole/tgui_interact(mob/user, datum/tgui/ui)
+/obj/machinery/computer/rdconsole/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "ResearchConsole", name)

@@ -1,5 +1,6 @@
 /obj/item/paper_bin
 	name = "paper bin"
+	desc = "A plastic bin full of paper. It seems to have both regular and carbon-copy paper to choose from."
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "paper_bin1"
 	item_icons = list(
@@ -97,13 +98,11 @@
 
 /obj/item/paper_bin/examine(mob/user)
 	. = ..()
-	if(get_dist(src, user) <= 1)
+	if(Adjacent(user))
 		if(amount)
 			. += "<span class='notice'>There " + (amount > 1 ? "are [amount] papers" : "is one paper") + " in the bin.</span>"
 		else
 			. += "<span class='notice'>There are no papers in the bin.</span>"
-	return
-
 
 /obj/item/paper_bin/update_icon()
 	if(amount < 1)

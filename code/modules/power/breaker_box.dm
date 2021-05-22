@@ -45,9 +45,9 @@
 /obj/machinery/power/breakerbox/examine(mob/user)
 	. = ..()
 	if(on)
-		. += "<font color='green'>It seems to be online.</font>"
+		. += "<span class='notice'>It seems to be online.</span>"
 	else
-		. += "<font color='red'>It seems to be offline.</font>"
+		. += "<span class='warning'>It seems to be offline.</span>"
 
 /obj/machinery/power/breakerbox/attack_ai(mob/user)
 	if(update_locked)
@@ -107,8 +107,6 @@
 		return
 	if(default_part_replacement(user, W))
 		return
-	if(W.is_multitool() || W.is_wirecutter() && panel_open)
-		wires.Interact(user)
 
 /obj/machinery/power/breakerbox/proc/set_state(var/state)
 	on = state

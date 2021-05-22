@@ -121,7 +121,7 @@
 		get_asset_datum(/datum/asset/cloning/resleeving),
 	)
 
-/obj/machinery/computer/transhuman/resleeving/tgui_interact(mob/user, datum/tgui/ui = null)
+/obj/machinery/computer/transhuman/resleeving/ui_interact(mob/user, datum/tgui/ui = null)
 	if(stat & (NOPOWER|BROKEN))
 		return
 

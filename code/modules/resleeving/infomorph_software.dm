@@ -32,7 +32,7 @@
 	id = "manifest"
 	toggle = 0
 
-/datum/infomorph_software/crew_manifest/tgui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
+/datum/infomorph_software/crew_manifest/ui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "CrewManifest", name, parent_ui)
@@ -51,7 +51,7 @@
 	id = "med_records"
 	toggle = 0
 
-/datum/infomorph_software/med_records/tgui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
+/datum/infomorph_software/med_records/ui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "pAIMedrecords", name, parent_ui)
@@ -107,7 +107,7 @@
 	id = "sec_records"
 	toggle = 0
 
-/datum/infomorph_software/sec_records/tgui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
+/datum/infomorph_software/sec_records/ui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "pAISecrecords", name, parent_ui)
@@ -167,7 +167,7 @@
 	id = "door_jack"
 	toggle = 0
 
-/datum/infomorph_software/door_jack/tgui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
+/datum/infomorph_software/door_jack/ui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "pAIDoorjack", "Door Jack", parent_ui)
@@ -251,7 +251,7 @@
 	id = "atmos_sense"
 	toggle = 0
 
-/datum/infomorph_software/atmosphere_sensor/tgui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
+/datum/infomorph_software/atmosphere_sensor/ui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "pAIAtmos", name, parent_ui)
@@ -328,7 +328,7 @@
 	id = "signaller"
 	toggle = 0
 
-/datum/infomorph_software/signaller/tgui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
+/datum/infomorph_software/signaller/ui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "Signaler", "Signaler", parent_ui)

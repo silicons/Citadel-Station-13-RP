@@ -2,7 +2,7 @@
 /obj/item/pda/tgui_state(mob/user)
 	return GLOB.tgui_inventory_state
 
-/obj/item/pda/tgui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
+/obj/item/pda/ui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "Pda", "Personal Data Assistant", parent_ui)

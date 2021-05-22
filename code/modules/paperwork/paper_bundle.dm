@@ -99,10 +99,9 @@
 /obj/item/paper_bundle/examine(mob/user)
 	. = ..()
 	if(Adjacent(user))
-		src.show_content(user)
+		show_content(user)
 	else
 		. += "<span class='notice'>It is too far away.</span>"
-	return
 
 /obj/item/paper_bundle/proc/show_content(mob/user as mob)
 	var/dat
@@ -156,13 +155,13 @@
 				insert_sheet_at(usr, page+1, in_hand)
 			else if(page != pages.len)
 				page++
-				playsound(src.loc, "pageturn", 50, 1)
+				playsound(src, "pageturn", 50, 1)
 		if(href_list["prev_page"])
 			if(in_hand && (istype(in_hand, /obj/item/paper) || istype(in_hand, /obj/item/photo)))
 				insert_sheet_at(usr, page, in_hand)
 			else if(page > 1)
 				page--
-				playsound(src.loc, "pageturn", 50, 1)
+				playsound(src, "pageturn", 50, 1)
 		if(href_list["remove"])
 			var/obj/item/W = pages[page]
 			usr.put_in_hands(W)

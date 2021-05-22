@@ -444,7 +444,7 @@
 /obj/machinery/transhuman/resleever/attack_hand(mob/user as mob)
 	tgui_interact(user)
 
-/obj/machinery/transhuman/resleever/tgui_interact(mob/user, datum/tgui/ui = null)
+/obj/machinery/transhuman/resleever/ui_interact(mob/user, datum/tgui/ui = null)
 	if(stat & (NOPOWER|BROKEN))
 		return
 

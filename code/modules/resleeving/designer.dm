@@ -83,7 +83,7 @@
 		return
 	tgui_interact(user)
 
-/obj/machinery/computer/transhuman/designer/tgui_interact(mob/user, datum/tgui/ui)
+/obj/machinery/computer/transhuman/designer/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		give_client_previews(user.client)

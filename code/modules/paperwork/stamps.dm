@@ -12,9 +12,11 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 60)
 	pressure_resistance = 2
 	attack_verb = list("stamped")
+	drop_sound = 'sound/items/drop/device.ogg'
+	pickup_sound = 'sound/items/pickup/device.ogg'
 
 /obj/item/stamp/captain
-	name = "Facility Director's rubber stamp"
+	name = "site manager's rubber stamp"
 	icon_state = "stamp-cap"
 
 /obj/item/stamp/hop
@@ -44,6 +46,7 @@
 /obj/item/stamp/denied
 	name = "\improper DENIED rubber stamp"
 	icon_state = "stamp-deny"
+	attack_verb = list("DENIED")
 
 /obj/item/stamp/clown
 	name = "clown's rubber stamp"

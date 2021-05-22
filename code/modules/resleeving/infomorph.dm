@@ -451,7 +451,7 @@ var/global/list/default_infomorph_software = list()
 		var/datum/infomorph_software/P = new type()
 		if(infomorph_software_by_key[P.id])
 			var/datum/infomorph_software/O = infomorph_software_by_key[P.id]
-			to_world("<span class='warning'>Infomorph software module [P.name] has the same key as [O.name]!</span>")
+			to_chat(world, "<span class='warning'>Infomorph software module [P.name] has the same key as [O.name]!</span>")
 			r = 0
 			continue
 		infomorph_software_by_key[P.id] = P
@@ -468,7 +468,7 @@ var/global/list/default_infomorph_software = list()
 /mob/living/silicon/infomorph/tgui_state(mob/user)
 	return GLOB.tgui_self_state
 
-/mob/living/silicon/infomorph/tgui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
+/mob/living/silicon/infomorph/ui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "pAIInterface", "Card Software Interface")

@@ -162,7 +162,7 @@
 	if(!allowed(user) && !emagged)
 		. = min(., UI_UPDATE)
 
-/obj/machinery/computer/rdservercontrol/tgui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
+/obj/machinery/computer/rdservercontrol/ui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "ResearchServerController", name)
