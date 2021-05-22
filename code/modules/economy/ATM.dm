@@ -17,7 +17,7 @@ log transactions
 /obj/machinery/atm
 	name = "Automatic Teller Machine"
 	desc = "For all your monetary needs!"
-	icon = 'icons/obj/terminals.dmi'
+	icon = 'icons/obj/terminals_vr.dmi' //VOREStation Edit
 	icon_state = "atm"
 	anchored = 1
 	use_power = USE_POWER_IDLE
@@ -37,7 +37,7 @@ log transactions
 
 /obj/machinery/atm/Initialize(mapload)
 	. = ..()
-	machine_id = "ATM Terminal #[num_financial_terminals++]"
+	machine_id = "[station_name()] RT #[num_financial_terminals++]"
 	spark_system = new /datum/effect_system/spark_spread
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
@@ -59,12 +59,13 @@ log transactions
 		S.loc = src.loc
 		if(prob(50))
 			playsound(loc, 'sound/items/polaroid1.ogg', 50, 1)
+			playsound(src, 'sound/items/polaroid1.ogg', 50, 1)
 		else
-			playsound(loc, 'sound/items/polaroid2.ogg', 50, 1)
+			playsound(src, 'sound/items/polaroid2.ogg', 50, 1)
 		break
 
 /obj/machinery/atm/emag_act(var/remaining_charges, var/mob/user)
-	if(!emagged)
+	if(emagged)
 		return
 
 	//short out the machine, shoot sparks, spew money!
@@ -103,9 +104,9 @@ log transactions
 			//consume the money
 			authenticated_account.money += I:worth
 			if(prob(50))
-				playsound(loc, 'sound/items/polaroid1.ogg', 50, 1)
+				playsound(src, 'sound/items/polaroid1.ogg', 50, 1)
 			else
-				playsound(loc, 'sound/items/polaroid2.ogg', 50, 1)
+				playsound(src, 'sound/items/polaroid2.ogg', 50, 1)
 
 			//create a transaction log entry
 			var/datum/transaction/T = new()
@@ -383,9 +384,9 @@ log transactions
 					R.stamps += "<HR><i>This paper has been stamped by the Automatic Teller Machine.</i>"
 
 				if(prob(50))
-					playsound(loc, 'sound/items/polaroid1.ogg', 50, 1)
+					playsound(src, 'sound/items/polaroid1.ogg', 50, 1)
 				else
-					playsound(loc, 'sound/items/polaroid2.ogg', 50, 1)
+					playsound(src, 'sound/items/polaroid2.ogg', 50, 1)
 			if ("print_transaction")
 				if(authenticated_account)
 					var/obj/item/paper/R = new(src.loc)
@@ -425,9 +426,9 @@ log transactions
 					R.stamps += "<HR><i>This paper has been stamped by the Automatic Teller Machine.</i>"
 
 				if(prob(50))
-					playsound(loc, 'sound/items/polaroid1.ogg', 50, 1)
+					playsound(src, 'sound/items/polaroid1.ogg', 50, 1)
 				else
-					playsound(loc, 'sound/items/polaroid2.ogg', 50, 1)
+					playsound(src, 'sound/items/polaroid2.ogg', 50, 1)
 
 			if("insert_card")
 				if(!held_card)

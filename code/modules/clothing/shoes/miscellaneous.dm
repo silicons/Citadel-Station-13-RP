@@ -108,8 +108,9 @@ obj/item/clothing/shoes/sandal/clogs
 	desc = "Fluffy!"
 	icon_state = "slippers"
 	species_restricted = null
+	w_class = ITEMSIZE_SMALL
 	drop_sound = 'sound/items/drop/clothing.ogg'
-	pickup_sound = 'sound/items/pickup/cloth.ogg'
+	pickup_sound = 'sound/items/pickup/clothing.ogg'
 
 /obj/item/clothing/shoes/slippers_worn
 	name = "worn bunny slippers"
@@ -175,7 +176,7 @@ obj/item/clothing/shoes/sandal/clogs
 	w_class = ITEMSIZE_SMALL
 	species_restricted = null
 	drop_sound = 'sound/items/drop/clothing.ogg'
-	pickup_sound = 'sound/items/pickup/cloth.ogg'
+	pickup_sound = 'sound/items/pickup/clothing.ogg'
 
 /obj/item/clothing/shoes/boots/ranger
 	var/bootcolor = "white"

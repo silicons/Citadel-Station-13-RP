@@ -1,5 +1,5 @@
 //
-// This event causes a gas leak of phoron, sleeping_agent, or carbon_dioxide in a random unoccupied area.
+// This event causes a gas leak of phoron, nitrous_oxide, or carbon_dioxide in a random unoccupied area.
 // One wonders, where did the gas come from? Who knows!  Its SPACE!  But if you want something a touch
 // more "explainable" then check out the canister_leak event instead.
 //

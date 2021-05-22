@@ -79,9 +79,9 @@
 	nano_ui_interact(user)
 
 /obj/machinery/atmospherics/unary/heater/attack_hand(mob/user as mob)
-	tgui_interact(user)
+	ui_interact(user)
 
-/obj/machinery/atmospherics/unary/heater/tgui_interact(mob/user, datum/tgui/ui)
+/obj/machinery/atmospherics/unary/heater/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "GasTemperatureSystem", name)

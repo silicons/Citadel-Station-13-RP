@@ -91,7 +91,7 @@
 
 	return 1
 
-/obj/machinery/atmospherics/omni/atmos_filter/tgui_interact(mob/user,datum/tgui/ui = null)
+/obj/machinery/atmospherics/omni/atmos_filter/ui_interact(mob/user,datum/tgui/ui = null)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "OmniFilter", name)

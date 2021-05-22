@@ -31,11 +31,14 @@
 	cash_stored = rand(10, 70)*10
 	transaction_devices += src // Global reference list to be properly set up by /proc/setup_economy()
 
-/obj/machinery/cash_register/examine(mob/user)
-	. = ..()
+
+/obj/machinery/cash_register/examine(mob/user as mob)
+	. = ..(user)
+	if(transaction_amount)
+		. += "It has a purchase of [transaction_amount] pending[transaction_purpose ? " for [transaction_purpose]" : ""]."
 	if(cash_open)
 		if(cash_stored)
-			. += "It holds [cash_stored] thaler\s of money."
+			. += "It holds [cash_stored] Thaler\s."
 		else
 			. += "It's completely empty."
 

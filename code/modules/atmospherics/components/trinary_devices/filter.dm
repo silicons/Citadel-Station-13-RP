@@ -119,7 +119,7 @@
 		to_chat(user, "<span class='warning'>Access denied.</span>")
 		return
 
-	tgui_interact(user)
+	ui_interact(user)
 
 	// var/dat
 	// var/current_filter_type
@@ -160,7 +160,7 @@
 
 
 
-/obj/machinery/atmospherics/trinary/atmos_filter/tgui_interact(mob/user, datum/tgui/ui)
+/obj/machinery/atmospherics/trinary/atmos_filter/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "AtmosFilter", name)

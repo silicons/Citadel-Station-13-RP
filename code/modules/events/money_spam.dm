@@ -36,7 +36,11 @@
 			var/obj/item/pda/P
 			var/list/viables = list()
 			for(var/obj/item/pda/check_pda in GLOB.PDAs)
-				if (!check_pda.owner||check_pda.toff||check_pda == src||check_pda.hidden)
+				if (!check_pda.owner || check_pda == src || check_pda.hidden)
+					continue
+
+				var/datum/data/pda/app/messenger/M = check_pda.find_program(/datum/data/pda/app/messenger)
+				if(!M || M.toff)
 					continue
 				viables.Add(check_pda)
 
@@ -61,7 +65,7 @@
 					"You have (1) new message!",\
 					"You have (2) new profile views!")
 				if(3)
-					sender = pick("Galactic Payments Association","Better Business Bureau","[GLOB.using_map.starsys_name] E-Payments","NAnoTrasen Finance Deparmtent","Luxury Replicas")
+					sender = pick("Galactic Payments Association","Better Business Bureau","[GLOB.using_map.starsys_name] E-Payments","NAnoTransen Finance Deparmtent","Luxury Replicas")
 					message = pick("Luxury watches for Blowout sale prices!",\
 					"Watches, Jewelry & Accessories, Bags & Wallets !",\
 					"Deposit 100$ and get 300$ totally free!",\
@@ -101,26 +105,16 @@
 
 			last_spam_time = world.time
 
+			/*	//VOREStation Removal: no need to spam the AI tenfold
 			if (prob(50)) //Give the AI an increased chance to intercept the message
 				for(var/mob/living/silicon/ai/ai in GLOB.mob_list)
 					// Allows other AIs to intercept the message but the AI won't intercept their own message.
 					if(ai.aiPDA != P && ai.aiPDA != src)
 						ai.show_message("<i>Intercepted message from <b>[sender]</b></i> (Unknown / spam?) <i>to <b>[P:owner]</b>: [message]</i>")
+			*/
 
 			//Commented out because we don't send messages like this anymore.  Instead it will just popup in their chat window.
 			//P.tnote += "<i><b>&larr; From [sender] (Unknown / spam?):</b></i><br>[message]<br>"
 
-			if (!P.message_silent)
-				playsound(P.loc, 'sound/machines/twobeep.ogg', 50, 1)
-			for (var/mob/O in hearers(3, P.loc))
-				if(!P.message_silent) to_chat(O, "[icon2html(thing = P, target = O)] *[P.ringtone]*")
-			//Search for holder of the PDA.
-			var/mob/living/L = null
-			if(P.loc && isliving(P.loc))
-				L = P.loc
-			//Maybe they are a pAI!
-			else
-				L = get(P, /mob/living/silicon)
-
-			if(L)
-				to_chat(L, "\[icon2html(thing = P, target = L)] <b>Message from [sender] (Unknown / spam?), </b>\"[message]\" (Unable to Reply)")
+			var/datum/data/pda/app/messenger/PM = P.find_program(/datum/data/pda/app/messenger)
+			PM.notify("<b>Message from [sender] (Unknown / spam?), </b>\"[message]\" (Unable to Reply)", 0)

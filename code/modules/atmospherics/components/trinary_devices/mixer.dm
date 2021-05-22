@@ -77,7 +77,7 @@
 
 	return 1
 
-/obj/machinery/atmospherics/trinary/mixer/tgui_interact(mob/user, datum/tgui/ui)
+/obj/machinery/atmospherics/trinary/mixer/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "AtmosMixer", name)
@@ -98,7 +98,7 @@
 /obj/machinery/atmospherics/trinary/mixer/attack_hand(user as mob)
 	if(..())
 		return
-	tgui_interact(user)
+	ui_interact(user)
 	// src.add_fingerprint(usr)
 	// if(!src.allowed(user))
 	// 	to_chat(user, "<span class='warning'>Access denied.</span>")

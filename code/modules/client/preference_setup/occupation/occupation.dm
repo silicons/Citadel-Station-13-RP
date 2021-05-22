@@ -265,7 +265,7 @@
 		dat += "You answer to <b>[job.supervisors]</b> normally."
 
 		dat += "<hr style='clear:left;'>"
-		if(config.wikiurl)
+		if(config_legacy.wikiurl)
 			dat += "<a href='?src=\ref[src];job_wiki=[rank]'>Open wiki page in browser</a>"
 
 		var/alt_title = pref.GetPlayerAltTitle(job)
@@ -283,7 +283,7 @@
 
 	else if(href_list["job_wiki"])
 		var/rank = href_list["job_wiki"]
-		open_link(user,"[config.wikiurl][rank]")
+		open_link(user,"[config_legacy.wikiurl][rank]")
 
 	return ..()
 

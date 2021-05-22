@@ -53,12 +53,12 @@
 	return
 
 /obj/machinery/atmospherics/unary/freezer/attack_ai(mob/user as mob)
-	tgui_interact(user)
+	ui_interact(user)
 
 /obj/machinery/atmospherics/unary/freezer/attack_hand(mob/user as mob)
-	tgui_interact(user)
+	ui_interact(user)
 
-/obj/machinery/atmospherics/unary/freezer/tgui_interact(mob/user, datum/tgui/ui)
+/obj/machinery/atmospherics/unary/freezer/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "GasTemperatureSystem", name)

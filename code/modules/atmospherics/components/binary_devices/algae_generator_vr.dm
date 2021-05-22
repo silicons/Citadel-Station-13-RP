@@ -141,7 +141,7 @@
 /obj/machinery/atmospherics/binary/algae_farm/attack_hand(mob/user)
 	if(..())
 		return 1
-	tgui_interact(user)
+	ui_interact(user)
 
 /obj/machinery/atmospherics/binary/algae_farm/RefreshParts()
 	..()
@@ -166,7 +166,7 @@
 
 	moles_per_tick = initial(moles_per_tick) + (manip_rating**2 - 1)
 
-/obj/machinery/atmospherics/binary/algae_farm/tgui_interact(mob/user, datum/tgui/ui)
+/obj/machinery/atmospherics/binary/algae_farm/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "AlgaeFarm", name)

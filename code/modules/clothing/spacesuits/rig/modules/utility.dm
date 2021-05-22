@@ -5,6 +5,7 @@
  * /obj/item/rig_module/device/drill
  * /obj/item/rig_module/device/orescanner
  * /obj/item/rig_module/device/rcd
+ * /obj/item/rig_module/device/arch_drill
  * /obj/item/rig_module/device/anomaly_scanner
  * /obj/item/rig_module/maneuvering_jets
  * /obj/item/rig_module/foam_sprayer
@@ -650,7 +651,7 @@
 
 	to_chat(H, "<font color='blue'><b>You activate the suit's sprint mode.</b></font>")
 
-	holder.slowdown -= sprint_speed
+	holder.slowdown = initial(holder.slowdown) - sprint_speed
 
 /obj/item/rig_module/sprinter/deactivate()
 
@@ -661,4 +662,4 @@
 
 	to_chat(H, "<span class='danger'>Your hardsuit returns to normal speed.</span>")
 
-	holder.slowdown += sprint_speed
+	holder.slowdown = initial(holder.slowdown)

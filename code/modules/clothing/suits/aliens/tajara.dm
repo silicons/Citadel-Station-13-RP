@@ -13,6 +13,5 @@
 	icon_state = "zhan_scarf"
 	item_state_slots = list(slot_r_hand_str = "beret_white", slot_l_hand_str = "beret_white")
 	body_parts_covered = HEAD|FACE
-	body_parts_covered = HEAD|FACE
 	drop_sound = 'sound/items/drop/leather.ogg'
 	pickup_sound = 'sound/items/pickup/leather.ogg'

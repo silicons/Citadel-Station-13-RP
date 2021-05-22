@@ -225,6 +225,6 @@ var/global/list/breach_burn_descriptors = list(
 
 /obj/item/clothing/suit/space/examine(mob/user)
 	. = ..()
-	if(can_breach && breaches && breaches.len)
+	if(can_breach && breaches?.len)
 		for(var/datum/breach/B in breaches)
 			. += "<font color='red'><B>It has \a [B.descriptor].</B></font>"

@@ -14,8 +14,6 @@
 
 /obj/item/eftpos/Initialize(mapload)
 	. = ..()
-	machine_id = "[station_name()] EFTPOS #[num_financial_terminals++]"
-	access_code = rand(1111,111111)
 	//by default, connect to the station account
 	//the user of the EFTPOS device can change the target account though, and no-one will be the wiser (except whoever's being charged)
 	linked_account = station_account
@@ -23,6 +21,8 @@
 
 /obj/item/eftpos/LateInitialize()
 	. = ..()
+	machine_id = "[station_name()] EFTPOS #[num_financial_terminals++]"
+	access_code = rand(1111,111111)
 	print_reference()
 
 	//create a short manual as well
@@ -63,6 +63,10 @@
 	R.stamped += /obj/item/stamp
 	R.overlays += stampoverlay
 	R.stamps += "<HR><i>This paper has been stamped by the EFTPOS device.</i>"
+
+/obj/item/eftpos/Destroy()
+	linked_account = null
+	return ..()
 
 /obj/item/eftpos/proc/print_reference()
 	var/obj/item/paper/R = new(src.loc)

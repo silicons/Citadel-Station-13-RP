@@ -143,7 +143,7 @@ Thus, the two variables affect pump operation are set in New():
 
 	return 1
 
-/obj/machinery/atmospherics/binary/pump/tgui_interact(mob/user, datum/tgui/ui)
+/obj/machinery/atmospherics/binary/pump/ui_interact(mob/user, datum/tgui/ui)
 	if(stat & (BROKEN|NOPOWER))
 		return
 	ui = SStgui.try_update_ui(user, src, ui)
@@ -201,7 +201,7 @@ Thus, the two variables affect pump operation are set in New():
 	return
 
 /obj/machinery/atmospherics/binary/pump/attack_ghost(mob/user)
-	tgui_interact(user)
+	ui_interact(user)
 
 /obj/machinery/atmospherics/binary/pump/attack_hand(mob/user)
 	if(..())
@@ -210,7 +210,7 @@ Thus, the two variables affect pump operation are set in New():
 	if(!allowed(user))
 		to_chat(user, "<span class='warning'>Access denied.</span>")
 		return
-	tgui_interact(user)
+	ui_interact(user)
 
 /obj/machinery/atmospherics/binary/pump/ui_act(action, params)
 	if(..())

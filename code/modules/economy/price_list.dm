@@ -13,7 +13,7 @@
 //---Beverages---//
 //***************//
 
-/datum/reagent/var/price_tag = null
+/datum/reagent/var/price_tag = 0
 
 
 // Juices, soda and similar //
@@ -511,6 +511,9 @@
 	price_tag = 25
 
 /obj/item/reagent_containers/food/drinks/bottle/sake
+	price_tag = 25
+
+/obj/item/reagent_containers/food/drinks/bottle/jager
 	price_tag = 25
 
 //***************//

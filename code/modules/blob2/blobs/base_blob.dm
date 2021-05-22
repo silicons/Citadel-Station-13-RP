@@ -26,7 +26,7 @@ GLOBAL_LIST_EMPTY(all_blobs)
 	update_icon()
 	if(!integrity)
 		integrity = max_integrity
-	set_dir(pick(cardinal))
+	setDir(pick(cardinal))
 	GLOB.all_blobs += src
 	consume_tile()
 	return ..()
@@ -210,7 +210,7 @@ GLOBAL_LIST_EMPTY(all_blobs)
 
 /obj/structure/blob/proc/blob_attack_animation(atom/A = null, controller) //visually attacks an atom
 	var/obj/effect/temporary_effect/blob_attack/O = new /obj/effect/temporary_effect/blob_attack(src.loc)
-	O.set_dir(dir)
+	O.setDir(dir)
 	if(controller)
 		var/mob/observer/blob/BO = controller
 		O.color = BO.blob_type.color
@@ -229,7 +229,7 @@ GLOBAL_LIST_EMPTY(all_blobs)
 	if(controller)
 		B.overmind = controller
 	B.update_icon()
-	B.set_dir(dir)
+	B.setDir(dir)
 	qdel(src)
 	return B
 
