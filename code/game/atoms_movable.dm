@@ -170,6 +170,8 @@
 		minor_dir = dx
 		minor_dist = dist_x
 
+	range = min(dist_x + dist_y, range)
+
 	while(src && target && src.throwing && istype(src.loc, /turf) \
 		  && ((abs(target.x - src.x)+abs(target.y - src.y) > 0 && dist_travelled < range) \
 		  	   || (a && a.has_gravity == 0) \
@@ -324,3 +326,78 @@
 	. = ..()
 	if(riding_datum)
 		riding_datum.handle_ride(user, direction)
+/atom/movable/proc/uncloak()
+	if(!cloaked)
+		return FALSE
+	cloaked = FALSE
+	. = TRUE // We did work
+
+	var/static/animation_time = 1 SECOND
+	QDEL_NULL(cloaked_selfimage)
+
+	//Needs to be first so people can actually see the effect, so become uninvisible first
+	plane = initial(plane)
+
+	//Oooooo
+	uncloak_animation(animation_time)
+
+
+// Animations for cloaking/uncloaking
+/atom/movable/proc/cloak_animation(var/length = 1 SECOND)
+	//Save these
+	var/initial_alpha = alpha
+
+	//Animate alpha fade
+	animate(src, alpha = 0, time = length)
+
+	//Animate a cloaking effect
+	var/our_filter = filters.len+1 //Filters don't appear to have a type that can be stored in a var and accessed. This is how the DM reference does it.
+	filters += filter(type="wave", x = 0, y = 16, size = 0, offset = 0, flags = WAVE_SIDEWAYS)
+	animate(filters[our_filter], offset = 1, size = 8, time = length, flags = ANIMATION_PARALLEL)
+
+	//Wait for animations to finish
+	sleep(length+5)
+
+	//Remove those
+	filters -= filter(type="wave", x = 0, y = 16, size = 8, offset = 1, flags = WAVE_SIDEWAYS)
+
+	//Back to original alpha
+	alpha = initial_alpha
+
+/atom/movable/proc/uncloak_animation(var/length = 1 SECOND)
+	//Save these
+	var/initial_alpha = alpha
+
+	//Put us back to normal, but no alpha
+	alpha = 0
+
+	//Animate alpha fade up
+	animate(src, alpha = initial_alpha, time = length)
+
+	//Animate a cloaking effect
+	var/our_filter = filters.len+1 //Filters don't appear to have a type that can be stored in a var and accessed. This is how the DM reference does it.
+	filters += filter(type="wave", x=0, y = 16, size = 8, offset = 1, flags = WAVE_SIDEWAYS)
+	animate(filters[our_filter], offset = 0, size = 0, time = length, flags = ANIMATION_PARALLEL)
+
+	//Wait for animations to finish
+	sleep(length+5)
+
+	//Remove those
+	filters -= filter(type="wave", x=0, y = 16, size = 0, offset = 0, flags = WAVE_SIDEWAYS)
+
+
+// So cloaked things can see themselves, if necessary
+/atom/movable/proc/get_cloaked_selfimage()
+	var/icon/selficon = icon(icon, icon_state)
+	selficon.MapColors(0,0,0, 0,0,0, 0,0,0, 1,1,1) //White
+	var/image/selfimage = image(selficon)
+	selfimage.color = "#0000FF"
+	selfimage.alpha = 100
+	selfimage.layer = initial(layer)
+	selfimage.plane = initial(plane)
+	selfimage.loc = src
+
+	return selfimage
+
+/atom/movable/proc/get_cell()
+	return

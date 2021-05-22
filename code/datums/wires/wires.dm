@@ -76,7 +76,7 @@
  */
 /datum/wires/proc/Interact(mob/user)
 	if(user && istype(user) && holder && interactable(user))
-		tgui_interact(user)
+		ui_interact(user)
 
 /**
  * Base proc, intended to be overriden. Wire datum specific checks you want to run before the TGUI is shown to the user should go here.
@@ -85,10 +85,10 @@
 	return TRUE
 
 /// Users will be interacting with our holder object and not the wire datum directly, therefore we need to return the holder.
-/datum/wires/tgui_host()
+/datum/wires/ui_host()
 	return holder
 
-/datum/wires/tgui_interact(mob/user, datum/tgui/ui = null)
+/datum/wires/ui_interact(mob/user, datum/tgui/ui = null)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "Wires", "[proper_name] wires")

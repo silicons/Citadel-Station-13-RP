@@ -33,7 +33,7 @@
 #define DNA_UI_GENDER      14
 #define DNA_UI_BEARD_STYLE 15
 #define DNA_UI_HAIR_STYLE  16
-#define DNA_UI_EAR_STYLE   17
+#define DNA_UI_EAR_STYLE   17 // VOREStation snippet.
 #define DNA_UI_TAIL_STYLE  18
 #define DNA_UI_PLAYERSCALE 19
 #define DNA_UI_TAIL_R      20
