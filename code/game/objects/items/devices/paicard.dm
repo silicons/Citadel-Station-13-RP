@@ -33,6 +33,30 @@ GLOBAL_LIST_BOILERPLATE(all_pai_cards, /obj/item/paicard)
 	QDEL_NULL(radio)
 	return ..()
 
+// VOREStation Edit - Allow everyone to become a pAI
+/obj/item/paicard/attack_ghost(mob/user as mob)
+	if(pai != null) //Have a person in them already?
+		return ..()
+
+	var/choice = input(user, "You sure you want to inhabit this PAI?") in list("Yes", "No")
+	if(choice == "No")
+		return ..()
+
+	var/pai_name = input(user, "Choose your character's name", "Character Name") as text
+	var/actual_pai_name = sanitize_name(pai_name)
+	if(isnull(actual_pai_name))
+		return ..()
+
+	var/turf/location = get_turf(src)
+	var/obj/item/paicard/card = new(location)
+	var/mob/living/silicon/pai/new_pai = new(card)
+	qdel(src)
+	new_pai.key = user.key
+	card.setPersonality(new_pai)
+	new_pai.SetName(actual_pai_name)
+	return ..()
+// VOREStation Edit End
+
 /obj/item/paicard/attack_self(mob/user)
 	if (!in_range(src, user))
 		return
