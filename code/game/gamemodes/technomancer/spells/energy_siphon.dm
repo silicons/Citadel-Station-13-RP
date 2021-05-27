@@ -57,7 +57,7 @@
 			return 0
 		siphoning = AM
 		update_icon()
-		log_and_message_admins("is siphoning energy from \a [AM].")
+		add_attack_logs(user,AM,"Siphoned energy from [src]")
 	else
 		stop_siphoning()
 
@@ -141,7 +141,7 @@
 		if( (core.max_energy - core.energy) < charge_to_give ) // We have some overflow, if this is true.
 			if(user.isSynthetic()) // Let's do something with it, if we're a robot.
 				charge_to_give = charge_to_give - (core.max_energy - core.energy)
-				user.nutrition =  min(user.nutrition + (charge_to_give / SIPHON_FBP_TO_ENERGY), 400)
+				user.adjust_nutrition(charge_to_give / SIPHON_FBP_TO_ENERGY)
 				to_chat(user, "<span class='notice'>Redirected energy to internal microcell.</span>")
 	else
 		to_chat(user, "<span class='notice'>Stolen [charge_to_give * CELLRATE] kJ.</span>")

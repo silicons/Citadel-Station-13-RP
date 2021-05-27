@@ -12,26 +12,34 @@
 	var/obj/item/disk/nuclear/the_disk = null
 	var/active = 0
 
+/obj/item/pinpointer/Destroy()
+	active = 0
+	STOP_PROCESSING(SSobj, src)
+	return ..()
 
 /obj/item/pinpointer/attack_self()
 	if(!active)
 		active = 1
-		workdisk()
+		START_PROCESSING(SSobj, src)
 		to_chat(usr, "<span class='notice'>You activate the pinpointer</span>")
 	else
 		active = 0
+		STOP_PROCESSING(SSobj, src)
 		icon_state = "pinoff"
-		to_chat(usr, "<span>You deactivate the pinpointer</span>")
+		to_chat(usr, "<span class='notice'>You deactivate the pinpointer</span>")
 
-/obj/item/pinpointer/proc/workdisk()
+/obj/item/pinpointer/process()
 	if(!active)
-		return
+		return PROCESS_KILL
+
 	if(!the_disk)
 		the_disk = locate()
 		if(!the_disk)
 			icon_state = "pinonnull"
 			return
+
 	setDir(get_dir(src,the_disk))
+
 	switch(get_dist(src,the_disk))
 		if(0)
 			icon_state = "pinondirect"
@@ -41,17 +49,14 @@
 			icon_state = "pinonmedium"
 		if(16 to INFINITY)
 			icon_state = "pinonfar"
-	spawn(5) .()
 
 /obj/item/pinpointer/examine(mob/user)
 	. = ..()
 	for(var/obj/machinery/nuclearbomb/bomb in machines)
 		if(bomb.timing)
-			. += "<span class = 'danger'>Extreme danger.  Arming signal detected.   Time remaining: [bomb.timeleft]</span>"
+			. += "Extreme danger.  Arming signal detected.   Time remaining: [bomb.timeleft]"
 
-/obj/item/pinpointer/Destroy()
-	active = 0
-	..()
+
 
 /obj/item/pinpointer/advpinpointer
 	name = "Advanced Pinpointer"
@@ -61,28 +66,23 @@
 	var/turf/location = null
 	var/obj/target = null
 
-/obj/item/pinpointer/advpinpointer/attack_self()
+/obj/item/pinpointer/advpinpointer/process()
 	if(!active)
-		active = 1
-		if(mode == 0)
-			workdisk()
-		if(mode == 1)
-			worklocation()
-		if(mode == 2)
-			workobj()
-		to_chat(usr, "<span class='notice'>You activate the pinpointer</span>")
-	else
-		active = 0
-		icon_state = "pinoff"
-		to_chat(usr, "<span class='notice'>You deactivate the pinpointer</span>")
+		return PROCESS_KILL
+	if(mode == 0)
+		..()
+	if(mode == 1)
+		worklocation()
+	if(mode == 2)
+		workobj()
 
 /obj/item/pinpointer/advpinpointer/proc/worklocation()
-	if(!active)
-		return
 	if(!location)
 		icon_state = "pinonnull"
 		return
+
 	setDir(get_dir(src,location))
+
 	switch(get_dist(src,location))
 		if(0)
 			icon_state = "pinondirect"
@@ -92,15 +92,14 @@
 			icon_state = "pinonmedium"
 		if(16 to INFINITY)
 			icon_state = "pinonfar"
-	spawn(5) .()
 
 /obj/item/pinpointer/advpinpointer/proc/workobj()
-	if(!active)
-		return
 	if(!target)
 		icon_state = "pinonnull"
 		return
+
 	setDir(get_dir(src,target))
+
 	switch(get_dist(src,target))
 		if(0)
 			icon_state = "pinondirect"
@@ -110,7 +109,6 @@
 			icon_state = "pinonmedium"
 		if(16 to INFINITY)
 			icon_state = "pinonfar"
-	spawn(5) .()
 
 /obj/item/pinpointer/advpinpointer/verb/toggle_mode()
 	set category = "Object"
@@ -139,7 +137,6 @@
 
 			to_chat(usr, "You set the pinpointer to locate [locationx],[locationy]")
 
-
 			return attack_self()
 
 		if("Disk Recovery")
@@ -149,9 +146,10 @@
 		if("Other Signature")
 			mode = 2
 			switch(alert("Search for item signature or DNA fragment?" , "Signature Mode Select" , "" , "Item" , "DNA"))
+
 				if("Item")
 					var/datum/objective/steal/itemlist
-					itemlist = itemlist // To supress a 'variable defined but not used' error.
+					itemlist = itemlist
 					var/targetitem = input("Select item to search for.", "Item Mode Select","") as null|anything in itemlist.possible_items
 					if(!targetitem)
 						return
@@ -160,6 +158,7 @@
 						to_chat(usr, "Failed to locate [targetitem]!")
 						return
 					to_chat(usr, "You set the pinpointer to locate [targetitem]")
+
 				if("DNA")
 					var/DNAstring = input("Input DNA string to search for." , "Please Enter String." , "")
 					if(!DNAstring)
@@ -186,6 +185,7 @@
 /obj/item/pinpointer/nukeop/attack_self(mob/user as mob)
 	if(!active)
 		active = 1
+		START_PROCESSING(SSobj, src)
 		if(!mode)
 			workdisk()
 			to_chat(user, "<span class='notice'>Authentication Disk Locator active.</span>")
@@ -194,30 +194,35 @@
 			to_chat(user, "<span class='notice'>Shuttle Locator active.</span>")
 	else
 		active = 0
+		STOP_PROCESSING(SSobj, src)
 		icon_state = "pinoff"
 		to_chat(user, "<span class='notice'>You deactivate the pinpointer.</span>")
 
+/obj/item/pinpointer/nukeop/process()
+	if(!active)
+		return PROCESS_KILL
 
-/obj/item/pinpointer/nukeop/workdisk()
-	if(!active) return
-	if(mode)		//Check in case the mode changes while operating
-		worklocation()
-		return
+	switch(mode)
+		if(0)
+			workdisk()
+		if(1)
+			worklocation()
+
+/obj/item/pinpointer/nukeop/proc/workdisk()
 	if(bomb_set)	//If the bomb is set, lead to the shuttle
 		mode = 1	//Ensures worklocation() continues to work
-		worklocation()
-		playsound(loc, 'sound/machines/twobeep.ogg', 50, 1)	//Plays a beep
-		visible_message("Shuttle Locator active.")			//Lets the mob holding it know that the mode has changed
+		playsound(src, 'sound/machines/twobeep.ogg', 50, 1)	//Plays a beep
+		visible_message("<span class='notice'>Shuttle Locator active.</span>")			//Lets the mob holding it know that the mode has changed
 		return		//Get outta here
+
 	if(!the_disk)
 		the_disk = locate()
 		if(!the_disk)
 			icon_state = "pinonnull"
 			return
-//	if(loc.z != the_disk.z)	//If you are on a different z-level from the disk
-//		icon_state = "pinonnull"
-//	else
+
 	setDir(get_dir(src, the_disk))
+
 	switch(get_dist(src, the_disk))
 		if(0)
 			icon_state = "pinondirect"
@@ -228,29 +233,25 @@
 		if(16 to INFINITY)
 			icon_state = "pinonfar"
 
-	spawn(5) .()
-
-
 /obj/item/pinpointer/nukeop/proc/worklocation()
-	if(!active)	return
-	if(!mode)
-		workdisk()
-		return
 	if(!bomb_set)
 		mode = 0
-		workdisk()
-		playsound(loc, 'sound/machines/twobeep.ogg', 50, 1)
+		playsound(src, 'sound/machines/twobeep.ogg', 50, 1)
 		visible_message("<span class='notice'>Authentication Disk Locator active.</span>")
 		return
+
 	if(!home)
 		home = locate()
 		if(!home)
 			icon_state = "pinonnull"
 			return
+
 	if(loc.z != home.z)	//If you are on a different z-level from the shuttle
 		icon_state = "pinonnull"
+
 	else
 		setDir(get_dir(src, home))
+
 		switch(get_dist(src, home))
 			if(0)
 				icon_state = "pinondirect"
@@ -261,8 +262,6 @@
 			if(16 to INFINITY)
 				icon_state = "pinonfar"
 
-	spawn(5) .()
-
 
 // This one only points to the ship.  Useful if there is no nuking to occur today.
 /obj/item/pinpointer/shuttle
@@ -272,16 +271,17 @@
 /obj/item/pinpointer/shuttle/attack_self(mob/user as mob)
 	if(!active)
 		active = TRUE
-		find_shuttle()
+		START_PROCESSING(SSobj, src)
 		to_chat(user, "<span class='notice'>Shuttle Locator active.</span>")
 	else
 		active = FALSE
+		STOP_PROCESSING(SSobj, src)
 		icon_state = "pinoff"
 		to_chat(user, "<span class='notice'>You deactivate the pinpointer.</span>")
 
-/obj/item/pinpointer/shuttle/proc/find_shuttle()
+/obj/item/pinpointer/shuttle/process()
 	if(!active)
-		return
+		return PROCESS_KILL
 
 	if(!our_shuttle)
 		for(var/obj/machinery/computer/shuttle_control/S in machines)
@@ -295,8 +295,10 @@
 
 	if(loc.z != our_shuttle.z)	//If you are on a different z-level from the shuttle
 		icon_state = "pinonnull"
+
 	else
 		setDir(get_dir(src, our_shuttle))
+
 		switch(get_dist(src, our_shuttle))
 			if(0)
 				icon_state = "pinondirect"
@@ -306,9 +308,6 @@
 				icon_state = "pinonmedium"
 			if(16 to INFINITY)
 				icon_state = "pinonfar"
-
-	spawn(5)
-		.()
 
 
 /obj/item/pinpointer/shuttle/merc

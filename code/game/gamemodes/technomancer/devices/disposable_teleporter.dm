@@ -24,7 +24,7 @@
 
 /obj/item/disposable_teleporter/examine(mob/user)
 	. = ..()
-	. += "<span class = 'notice'>There are [uses] uses remaining.</span>"
+	. += "[uses] uses remaining."
 
 /obj/item/disposable_teleporter/attack_self(mob/user as mob)
 	if(!uses)
