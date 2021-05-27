@@ -28,7 +28,7 @@
 	add_fingerprint(user)
 	if(stat & (NOPOWER|BROKEN) || get_dist(src, user) > 1)
 		return
-	tgui_interact(user)
+	ui_interact(user)
 
 /obj/machinery/artifact_analyser/ui_interact(mob/user, datum/tgui/ui)
 	if(!owned_scanner)

@@ -45,7 +45,7 @@
 /obj/machinery/disease2/isolator/attack_hand(mob/user as mob)
 	if(stat & (NOPOWER|BROKEN))
 		return
-	tgui_interact(user)
+	ui_interact(user)
 
 /obj/machinery/disease2/isolator/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)

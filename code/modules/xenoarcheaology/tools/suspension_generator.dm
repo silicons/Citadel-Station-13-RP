@@ -46,7 +46,7 @@
 			cell = null
 		return
 
-	tgui_interact(user)
+	ui_interact(user)
 
 /obj/machinery/suspension_gen/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)

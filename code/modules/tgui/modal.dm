@@ -9,7 +9,7 @@ GLOBAL_LIST(tgui_modals)
 /**
   * Call this from a proc that is called in ui_act() to process modal actions
   *
-  * Example: /obj/machinery/chem_master/proc/tgui_act_modal
+  * Example: /obj/machinery/chem_master/proc/ui_act_modal
   * You can then switch based on the return value and show different
   * modals depending on the answer.
   * Arguments:

@@ -55,7 +55,7 @@
 		return ..()
 
 /obj/item/anodevice/attack_self(var/mob/user as mob)
-	return tgui_interact(user)
+	return ui_interact(user)
 
 /obj/item/anodevice/tgui_state(mob/user)
 	return GLOB.tgui_inventory_state

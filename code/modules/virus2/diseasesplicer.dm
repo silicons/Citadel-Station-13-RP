@@ -42,7 +42,7 @@
 /obj/machinery/computer/diseasesplicer/attack_hand(var/mob/user as mob)
 	if(..())
 		return TRUE
-	tgui_interact(user)
+	ui_interact(user)
 
 /obj/machinery/computer/diseasesplicer/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)

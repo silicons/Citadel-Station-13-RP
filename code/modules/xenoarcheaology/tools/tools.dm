@@ -154,7 +154,7 @@
 			to_chat(user, "<span class='notice'>[bicon(src)] [src] pings [pick("madly","wildly","excitedly","crazily")]!</span>")
 
 /obj/item/depth_scanner/attack_self(var/mob/living/user)
-	tgui_interact(user)
+	ui_interact(user)
 
 /obj/item/depth_scanner/tgui_state(mob/user)
 	return GLOB.tgui_deep_inventory_state
@@ -278,7 +278,7 @@
 			icon_state = "pinoff"
 
 /obj/item/beacon_locator/attack_self(mob/user)
-	return tgui_interact(user)
+	return ui_interact(user)
 
 /obj/item/beacon_locator/tgui_state(mob/user)
 	return GLOB.tgui_inventory_state
@@ -338,7 +338,7 @@
 	depth_scanner = new/obj/item/depth_scanner(src)
 
 /obj/item/xenoarch_multi_tool/attack_self(var/mob/living/user)
-	depth_scanner.tgui_interact(user)
+	depth_scanner.ui_interact(user)
 
 /obj/item/xenoarch_multi_tool/verb/swap_settings(var/mob/living/user)
 	set name = "Swap Functionality"

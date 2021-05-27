@@ -19,7 +19,7 @@
 		log_debug("[src] ([type], \ref[src]) didn't have a vorePanel and tried to use the verb.")
 		vorePanel = new(src)
 
-	vorePanel.tgui_interact(src)
+	vorePanel.ui_interact(src)
 
 /mob/living/proc/updateVRPanel() //Panel popup update call from belly events.
 	SStgui.update_uis(vorePanel)
@@ -577,7 +577,7 @@
 				return
 
 			var/datum/tgui_module/appearance_changer/vore/V = new(host, H)
-			V.tgui_interact(user)
+			V.ui_interact(user)
 			return TRUE
 
 /datum/vore_look/proc/set_attr(mob/user, params)

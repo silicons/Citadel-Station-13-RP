@@ -111,7 +111,7 @@
 
 /obj/structure/smoletrack/attack_hand(mob/user)
 	if(user.a_intent == INTENT_DISARM)
-		if(ismouse(usr) || (isobserver(usr) && !config.ghost_interaction))
+		if(ismouse(usr) || (isobserver(usr) && !config_legacy.ghost_interaction))
 			return
 		to_chat(user, "<span class='notice'>[src] was dismantaled into bricks.</span>")
 		playsound(src, 'sound/items/smolesmallbuild.ogg', 50, 1, -1, volume_channel = VOLUME_CHANNEL_MASTER)
@@ -124,7 +124,7 @@
 	set name = "Rotate Road Clockwise"
 	set category = "Object"
 	set src in oview(1)
-	if(ismouse(usr) || (isobserver(usr) && !config.ghost_interaction))
+	if(ismouse(usr) || (isobserver(usr) && !config_legacy.ghost_interaction))
 		return
 	src.setDir(turn(src.dir, 270))
 
@@ -169,7 +169,7 @@
 //makes it so buildings can be dismaintaled or GodZilla style attacked
 /obj/structure/smolebuilding/attack_hand(mob/user)
 	if(user.a_intent == INTENT_DISARM)
-		if(ismouse(usr) || (isobserver(usr) && !config.ghost_interaction))
+		if(ismouse(usr) || (isobserver(usr) && !config_legacy.ghost_interaction))
 			return
 		to_chat(user, "<span class='notice'>[src] was dismantaled into bricks.</span>")
 		playsound(src, 'sound/items/smolesmallbuild.ogg', 50, 1, -1, volume_channel = VOLUME_CHANNEL_MASTER)
@@ -180,7 +180,7 @@
 
 	else if (usr.a_intent == INTENT_HARM)
 
-		if(ismouse(usr) || (isobserver(usr) && !config.ghost_interaction))
+		if(ismouse(usr) || (isobserver(usr) && !config_legacy.ghost_interaction))
 			return
 
 		take_damage()
@@ -232,7 +232,7 @@
 //get material from ruins
 /obj/structure/smoleruins/attack_hand(mob/user)
 	if(user.a_intent == INTENT_DISARM)
-		if(ismouse(usr) || (isobserver(usr) && !config.ghost_interaction))
+		if(ismouse(usr) || (isobserver(usr) && !config_legacy.ghost_interaction))
 			return
 		to_chat(user, "<span class='notice'>[src] was dismantaled into bricks.</span>")
 		playsound(src, 'sound/items/smolelargeunbuild.ogg', 50, 1, volume_channel = VOLUME_CHANNEL_MASTER)

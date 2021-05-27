@@ -38,7 +38,7 @@
 /obj/machinery/computer/centrifuge/attack_hand(var/mob/user as mob)
 	if(..())
 		return
-	tgui_interact(user)
+	ui_interact(user)
 
 /obj/machinery/computer/centrifuge/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
