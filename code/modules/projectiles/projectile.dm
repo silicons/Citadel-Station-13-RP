@@ -10,6 +10,8 @@
 	unacidable = TRUE
 	pass_flags = PASSTABLE
 	mouse_opacity = 0
+	hitsound = 'sound/weapons/pierce.ogg'
+	var/hitsound_wall = null // Played when something hits a wall, or anything else that isn't a mob.
 
 	////TG PROJECTILE SYTSEM
 	//Projectile stuff
@@ -129,12 +131,20 @@
 
 	var/temporary_unstoppable_movement = FALSE
 
+	// When a non-hitscan projectile hits something, a visual effect can be spawned.
+	// This is distinct from the hitscan's "impact_type" var.
+	var/impact_effect_type = null
+
+	var/list/impacted_mobs = list()
+
 /obj/item/projectile/proc/Range()
 	range--
 	if(range <= 0 && loc)
 		on_range()
 
 /obj/item/projectile/proc/on_range() //if we want there to be effects when they reach the end of their range
+	impact_sounds(loc)
+	impact_visuals(loc) // So it does a little 'burst' effect, but not actually do anything (unless overrided).
 	qdel(src)
 
 /obj/item/projectile/proc/return_predicted_turf_after_moves(moves, forced_angle)		//I say predicted because there's no telling that the projectile won't change direction/location in flight.
@@ -331,14 +341,13 @@
 	START_PROCESSING(SSprojectiles, src)
 	pixel_move(1, FALSE)	//move it now!
 
-/obj/item/projectile/Move(atom/newloc, dir = NONE)
+/obj/item/projectile/Moved(atom/old_loc, direction, forced = FALSE)
 	. = ..()
-	if(.)
-		if(temporary_unstoppable_movement)
-			temporary_unstoppable_movement = FALSE
-			DISABLE_BITFIELD(movement_type, UNSTOPPABLE)
-		if(fired && can_hit_target(original, permutated, TRUE))
-			Bump(original)
+	if(temporary_unstoppable_movement)
+		temporary_unstoppable_movement = FALSE
+		DISABLE_BITFIELD(movement_type, UNSTOPPABLE)
+	if(fired && can_hit_target(original, permutated, TRUE))
+		Bump(original)
 
 /obj/item/projectile/proc/after_z_change(atom/olcloc, atom/newloc)
 
@@ -436,6 +445,12 @@
 	if(hitscan)
 		finalize_hitscan_and_generate_tracers()
 	STOP_PROCESSING(SSprojectiles, src)
+
+	if(impacted_mobs)
+		if(LAZYLEN(impacted_mobs))
+			impacted_mobs.Cut()
+		impacted_mobs = null
+
 	qdel(trajectory)
 	return ..()
 
@@ -445,10 +460,14 @@
 	qdel(beam_index)
 
 /obj/item/projectile/proc/vol_by_damage()
-	if(damage)
-		return clamp((damage) * 0.67, 30, 100)// Multiply projectile damage by 0.67, then clamp the value between 30 and 100
+	if(damage || agony)
+		var/value_to_use = damage > agony ? damage : agony
+		// Multiply projectile damage by 1.2, then CLAMP the value between 30 and 100.
+		// This was 0.67 but in practice it made all projectiles that did 45 or less damage play at 30,
+		// which is hard to hear over the gunshots, and is rather rare for a projectile to do that much.
+		return CLAMP((value_to_use) * 1.2, 30, 100)
 	else
-		return 50 //if the projectile doesn't do damage, play its hitsound at 50% volume.
+		return 50 //if the projectile doesn't do damage or agony, play its hitsound at 50% volume.
 
 /obj/item/projectile/proc/finalize_hitscan_and_generate_tracers(impacting = TRUE)
 	if(trajectory && beam_index)
@@ -589,6 +608,9 @@
 
 //called when the projectile stops flying because it Bump'd with something
 /obj/item/projectile/proc/on_impact(atom/A)
+	impact_sounds(A)
+	impact_visuals(A)
+
 	if(damage && damage_type == BURN)
 		var/turf/T = get_turf(A)
 		if(T)
@@ -622,6 +644,9 @@
 	if(!istype(target_mob))
 		return
 
+	if(target_mob in impacted_mobs)
+		return
+
 	//roll to-hit
 	miss_modifier = max(15*(distance-2) - accuracy + miss_modifier + target_mob.get_evasion(), 0)
 	var/hit_zone = get_zone_with_miss_chance(def_zone, target_mob, miss_modifier, ranged_attack=(distance > 1 || original != target_mob)) //if the projectile hits a target we weren't originally aiming at then retain the chance to miss
@@ -631,16 +656,31 @@
 		def_zone = hit_zone //set def_zone, so if the projectile ends up hitting someone else later (to be implemented), it is more likely to hit the same part
 		result = target_mob.bullet_act(src, def_zone)
 
+	if(!istype(target_mob))
+		return FALSE // Mob deleted itself or something.
+
+	// Safe to add the target to the list that is soon to be poofed. No double jeopardy, pixel projectiles.
+	if(islist(impacted_mobs))
+		impacted_mobs |= target_mob
+
 	if(result == PROJECTILE_FORCE_MISS)
 		if(!silenced)
-			visible_message("<span class='notice'>\The [src] misses [target_mob] narrowly!</span>")
+			target_mob.visible_message("<span class='notice'>\The [src] misses \the [target_mob] narrowly!</span>")
+			playsound(target_mob, "bullet_miss", 75, 1)
 		return FALSE
 
 	//hit messages
 	if(silenced)
-		to_chat(target_mob, "<span class='danger'>You've been hit in the [parse_zone(def_zone)] by \the [src]!</span>")
+		playsound(target_mob, hitsound, 5, 1, -1)
+		to_chat(target_mob, span("critical", "You've been hit in the [parse_zone(def_zone)] by \the [src]!"))
 	else
-		visible_message("<span class='danger'>\The [target_mob] is hit by \the [src] in the [parse_zone(def_zone)]!</span>")//X has fired Y is now given by the guns so you cant tell who shot you if you could not see the shooter
+		var/volume = vol_by_damage()
+		playsound(target_mob, hitsound, volume, 1, -1)
+		// X has fired Y is now given by the guns so you cant tell who shot you if you could not see the shooter
+		target_mob.visible_message(
+			span("danger", "\The [target_mob] was hit in the [parse_zone(def_zone)] by \the [src]!"),
+			span("critical", "You've been hit in the [parse_zone(def_zone)] by \the [src]!")
+		)
 
 	//admin logs
 	if(!no_attack_log)
@@ -701,6 +741,8 @@
 
 	shot_from = launcher.name
 	silenced = launcher.silenced
+	if(user)
+		firer = user
 
 	return launch_projectile(target, target_zone, user, params, angle_override, forced_spread)
 
@@ -745,3 +787,28 @@
 
 	preparePixelProjectile(target, get_turf(src), params, forced_spread)
 	return fire(angle_override, direct_target)
+
+// Makes a brief effect sprite appear when the projectile hits something solid.
+/obj/item/projectile/proc/impact_visuals(atom/A, hit_x, hit_y)
+	if(impact_effect_type && !hitscan) // Hitscan things have their own impact sprite.
+		if(isnull(hit_x) && isnull(hit_y))
+			if(trajectory)
+				// Effect goes where the projectile 'stopped'.
+				hit_x = A.pixel_x + trajectory.return_px()
+				hit_y = A.pixel_y + trajectory.return_py()
+			else if(A == original)
+				// Otherwise it goes where the person who fired clicked.
+				hit_x = A.pixel_x + p_x - 16
+				hit_y = A.pixel_y + p_y - 16
+			else
+				// Otherwise it'll be random.
+				hit_x = A.pixel_x + rand(-8, 8)
+				hit_y = A.pixel_y + rand(-8, 8)
+		new impact_effect_type(get_turf(A), src, hit_x, hit_y)
+
+/obj/item/projectile/proc/impact_sounds(atom/A)
+	if(hitsound_wall && !ismob(A)) // Mob sounds are handled in attack_mob().
+		var/volume = CLAMP(vol_by_damage() + 20, 0, 100)
+		if(silenced)
+			volume = 5
+		playsound(A, hitsound_wall, volume, 1, -1)
