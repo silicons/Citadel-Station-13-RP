@@ -15,7 +15,7 @@
 				/obj/item/weldingtool,
 				/obj/item/weldingtool/largetank,
 				/obj/item/tool/crowbar,
-				/obj/item/tool/wrench,
+				/obj/item/wrench,
 				/obj/item/flashlight,
 				/obj/item/multitool)
 
@@ -53,7 +53,7 @@
 				/obj/item/tool/wirecutters/alien,
 				/obj/item/weldingtool/alien,
 				/obj/item/tool/crowbar/alien,
-				/obj/item/tool/wrench/alien,
+				/obj/item/wrench/alien,
 				/obj/item/stack/cable_coil/alien,
 				/obj/item/multitool/alien)
 
@@ -108,6 +108,27 @@
 				prob(2);/obj/item/storage/toolbox/emergency,
 				prob(1);/obj/item/storage/toolbox/syndicate)
 
+/obj/random/smes_coil
+	name = "random smes coil"
+	desc = "This is a random smes coil."
+	icon = 'icons/obj/power.dmi'
+	icon_state = "smes"
+
+/obj/random/smes_coil/item_to_spawn()
+	return pick(prob(4);/obj/item/smes_coil,
+				prob(1);/obj/item/smes_coil/super_capacity,
+				prob(1);/obj/item/smes_coil/super_io)
+
+/obj/random/pacman
+	name = "random portable generator"
+	desc = "This is a random portable generator."
+	icon = 'icons/obj/power.dmi'
+	icon_state = "portgen0"
+
+/obj/random/pacman/item_to_spawn()
+	return pick(prob(6);/obj/machinery/power/port_gen/pacman,
+				prob(3);/obj/machinery/power/port_gen/pacman/super,
+				prob(1);/obj/machinery/power/port_gen/pacman/mrs)
 
 /obj/random/tech_supply
 	name = "random tech supply"
@@ -128,10 +149,14 @@
 				prob(2);/obj/item/storage/belt/utility,
 				prob(1);/obj/item/storage/belt/utility/full,
 				prob(5);/obj/random/tool,
-				prob(2);/obj/item/duct_tape_roll,
-				prob(2);/obj/item/barrier_tape_roll/engineering,
-				prob(1);/obj/item/barrier_tape_roll/atmos,
+				prob(2);/obj/item/tape_roll,
+				prob(2);/obj/item/taperoll/engineering,
+				prob(1);/obj/item/taperoll/atmos,
 				prob(1);/obj/item/flashlight/maglight)
+
+/obj/random/tech_supply/nofail
+	name = "guaranteed random tech supply"
+	spawn_nothing_percentage = 0
 
 /obj/random/tech_supply/component
 	name = "random tech component"
@@ -155,6 +180,10 @@
 		prob(3);/obj/item/stock_parts/scanning_module,
 		prob(2);/obj/item/stock_parts/scanning_module/adv,
 		prob(1);/obj/item/stock_parts/scanning_module/phasic)
+
+/obj/random/tech_supply/component/nofail
+	name = "guaranteed random tech component"
+	spawn_nothing_percentage = 0
 
 /obj/random/medical
 	name = "Random Medicine"
@@ -229,11 +258,11 @@
 	icon_state = "purplecomb"
 	spawn_nothing_percentage = 50
 /obj/random/contraband/item_to_spawn()
-	return pick(prob(6);/obj/item/storage/pill_bottle/tramadol,
+	return pick(prob(6);/obj/item/storage/pill_bottle/paracetamol, //VOREStation Edit,
 				prob(8);/obj/item/haircomb,
 				prob(4);/obj/item/storage/pill_bottle/happy,
 				prob(4);/obj/item/storage/pill_bottle/zoom,
-				prob(10);/obj/item/contraband/poster,
+				prob(10);/obj/item/contraband/poster/custom,
 				prob(4);/obj/item/material/butterfly,
 				prob(6);/obj/item/material/butterflyblade,
 				prob(6);/obj/item/material/butterflyhandle,
@@ -248,6 +277,10 @@
 				prob(2);/obj/item/reagent_containers/syringe/drugs,
 				prob(1);/obj/item/reagent_containers/syringe/steroid)
 
+/obj/random/contraband/nofail
+	name = "Guaranteed Random Illegal Item"
+	spawn_nothing_percentage = 0
+
 /obj/random/cash
 	name = "random currency"
 	desc = "LOADSAMONEY!"
@@ -261,6 +294,32 @@
 				prob(4);/obj/item/spacecash/c20,
 				prob(1);/obj/item/spacecash/c50,
 				prob(1);/obj/item/spacecash/c100)
+
+/obj/random/cash/big
+	name = "random currency pile"
+	desc = "DOSH!"
+	icon = 'icons/obj/items.dmi'
+	icon_state = "spacecash100"
+
+/obj/random/cash/big/item_to_spawn()
+	return pick(prob(64);/obj/item/spacecash/c10,
+				prob(32);/obj/item/spacecash/c20,
+				prob(16);/obj/item/spacecash/c50,
+				prob(8);/obj/item/spacecash/c100,
+				prob(4);/obj/item/spacecash/c200,
+				prob(2);/obj/item/spacecash/c500,
+				prob(1);/obj/item/spacecash/c1000)
+
+/obj/random/cash/huge
+	name = "random huge currency pile"
+	desc = "LOOK AT MY WAD!"
+	icon = 'icons/obj/items.dmi'
+	icon_state = "spacecash1000"
+
+/obj/random/cash/huge/item_to_spawn()
+	return pick(prob(15);/obj/item/spacecash/c200,
+				prob(10);/obj/item/spacecash/c500,
+				prob(5);/obj/item/spacecash/c1000)
 
 /obj/random/soap
 	name = "Random Soap"
@@ -291,7 +350,112 @@
 				/obj/item/reagent_containers/food/drinks/bottle/wine,
 				/obj/item/reagent_containers/food/drinks/bottle/cognac,
 				/obj/item/reagent_containers/food/drinks/bottle/rum,
-				/obj/item/reagent_containers/food/drinks/bottle/patron)
+				/obj/item/reagent_containers/food/drinks/bottle/patron,
+				/obj/item/reagent_containers/food/drinks/bottle/vermouth,
+				/obj/item/reagent_containers/food/drinks/bottle/goldschlager,
+				/obj/item/reagent_containers/food/drinks/bottle/kahlua,
+				/obj/item/reagent_containers/food/drinks/bottle/melonliquor,
+				/obj/item/reagent_containers/food/drinks/bottle/bluecuracao,
+				/obj/item/reagent_containers/food/drinks/bottle/grenadine,
+				/obj/item/reagent_containers/food/drinks/bottle/sake,
+				/obj/item/reagent_containers/food/drinks/bottle/champagne,
+				/obj/item/reagent_containers/food/drinks/bottle/peppermintschnapps,
+				/obj/item/reagent_containers/food/drinks/bottle/peachschnapps,
+				/obj/item/reagent_containers/food/drinks/bottle/lemonadeschnapps,
+				/obj/item/reagent_containers/food/drinks/bottle/jager,
+				/obj/item/reagent_containers/food/drinks/bottle/small/cider,
+				/obj/item/reagent_containers/food/drinks/bottle/small/litebeer,
+				/obj/item/reagent_containers/food/drinks/bottle/small/beer,
+				/obj/item/reagent_containers/food/drinks/bottle/small/beer/silverdragon,
+				/obj/item/reagent_containers/food/drinks/bottle/small/beer/meteor)
+
+/obj/random/drinksoft
+	name = "random soft drink"
+	desc = "This is a random (once) carbonated beverage drinks can."
+	icon = 'icons/obj/drinks.dmi'
+	icon_state = "cola"
+
+/obj/random/drinksoft/item_to_spawn()
+	return pick(/obj/item/reagent_containers/food/drinks/cans/cola,
+				/obj/item/reagent_containers/food/drinks/cans/waterbottle,
+				/obj/item/reagent_containers/food/drinks/cans/space_mountain_wind,
+				/obj/item/reagent_containers/food/drinks/cans/thirteenloko,
+				/obj/item/reagent_containers/food/drinks/cans/dr_gibb,
+				/obj/item/reagent_containers/food/drinks/cans/dr_gibb_diet,
+				/obj/item/reagent_containers/food/drinks/cans/starkist,
+				/obj/item/reagent_containers/food/drinks/cans/space_up,
+				/obj/item/reagent_containers/food/drinks/cans/lemon_lime,
+				/obj/item/reagent_containers/food/drinks/cans/iced_tea,
+				/obj/item/reagent_containers/food/drinks/cans/grape_juice,
+				/obj/item/reagent_containers/food/drinks/cans/tonic,
+				/obj/item/reagent_containers/food/drinks/cans/sodawater,
+				/obj/item/reagent_containers/food/drinks/cans/gingerale,
+				/obj/item/reagent_containers/food/drinks/cans/root_beer)
+
+
+/obj/random/snack
+	name = "random snack"
+	desc = "This is a random snackfood. Probably still safe to eat?"
+	icon = 'icons/obj/food_snacks.dmi'
+	icon_state = "tastybread"
+
+/obj/random/snack/item_to_spawn()
+	return pick(/obj/item/reagent_containers/food/snacks/candy,
+				/obj/item/reagent_containers/food/snacks/candy/proteinbar,
+				/obj/item/reagent_containers/food/snacks/candy/gummy,
+				/obj/item/reagent_containers/food/snacks/candy/donor,
+				/obj/item/reagent_containers/food/snacks/candy_corn,
+				/obj/item/reagent_containers/food/snacks/chips,
+				/obj/item/reagent_containers/food/snacks/chips/bbq,
+				/obj/item/reagent_containers/food/snacks/cookie,
+				/obj/item/reagent_containers/food/snacks/cookiesnack,
+				/obj/item/reagent_containers/food/snacks/fruitbar,
+				/obj/item/reagent_containers/food/snacks/chocolatebar,
+				/obj/item/reagent_containers/food/snacks/chocolatepiece,
+				/obj/item/reagent_containers/food/snacks/chocolatepiece/white,
+				/obj/item/reagent_containers/food/snacks/chocolatepiece/truffle,
+				/obj/item/reagent_containers/food/snacks/chocolateegg,
+				/obj/item/reagent_containers/food/snacks/donut,
+				/obj/item/reagent_containers/food/snacks/donut/normal,
+				/obj/item/reagent_containers/food/snacks/donut/jelly,
+				/obj/item/reagent_containers/food/snacks/donut/cherryjelly,
+				/obj/item/reagent_containers/food/snacks/tuna,
+				/obj/item/reagent_containers/food/snacks/pistachios,
+				/obj/item/reagent_containers/food/snacks/semki,
+				/obj/item/reagent_containers/food/snacks/cb01,
+				/obj/item/reagent_containers/food/snacks/cb02,
+				/obj/item/reagent_containers/food/snacks/cb03,
+				/obj/item/reagent_containers/food/snacks/cb04,
+				/obj/item/reagent_containers/food/snacks/cb05,
+				/obj/item/reagent_containers/food/snacks/cb06,
+				/obj/item/reagent_containers/food/snacks/cb07,
+				/obj/item/reagent_containers/food/snacks/cb08,
+				/obj/item/reagent_containers/food/snacks/cb09,
+				/obj/item/reagent_containers/food/snacks/cb10,
+				/obj/item/reagent_containers/food/snacks/tofu,
+				/obj/item/reagent_containers/food/snacks/donkpocket,
+				/obj/item/reagent_containers/food/snacks/muffin,
+				/obj/item/reagent_containers/food/snacks/soylentgreen,
+				/obj/item/reagent_containers/food/snacks/soylenviridians,
+				/obj/item/reagent_containers/food/snacks/popcorn,
+				/obj/item/reagent_containers/food/snacks/sosjerky,
+				/obj/item/reagent_containers/food/snacks/no_raisin,
+				/obj/item/reagent_containers/food/snacks/spacetwinkie,
+				/obj/item/reagent_containers/food/snacks/cheesiehonkers,
+				/obj/item/reagent_containers/food/snacks/poppypretzel,
+				/obj/item/reagent_containers/food/snacks/baguette,
+				/obj/item/reagent_containers/food/snacks/carrotfries,
+				/obj/item/reagent_containers/food/snacks/candiedapple,
+				/obj/item/storage/box/admints,
+				/obj/item/reagent_containers/food/snacks/tastybread,
+				/obj/item/reagent_containers/food/snacks/liquidfood,
+				/obj/item/reagent_containers/food/snacks/liquidprotein,
+				/obj/item/reagent_containers/food/snacks/liquidvitamin,
+				/obj/item/reagent_containers/food/snacks/skrellsnacks,
+				/obj/item/reagent_containers/food/snacks/unajerky,
+				/obj/item/reagent_containers/food/snacks/croissant,
+				/obj/item/reagent_containers/food/snacks/sugarcookie,
+				/obj/item/reagent_containers/food/drinks/dry_ramen)
 
 /obj/random/meat
 	name = "random meat"
@@ -310,11 +474,24 @@
 				prob(1);/obj/item/reagent_containers/food/snacks/meat/corgi,
 				prob(1);/obj/item/reagent_containers/food/snacks/xenomeat)
 
+/obj/random/pizzabox
+	name = "random pizza box"
+	desc = "This is a random pizza box."
+	icon = 'icons/obj/food.dmi'
+	icon_state = "pizzabox1"
+
+/obj/random/pizzabox/item_to_spawn()
+	return pick(/obj/item/pizzabox/margherita,
+				/obj/item/pizzabox/mushroom,
+				/obj/item/pizzabox/meat,
+				/obj/item/pizzabox/vegetable,
+				/obj/item/pizzabox/pineapple)
+
 /obj/random/material //Random materials for building stuff
 	name = "random material"
 	desc = "This is a random material."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "sheet-metal"
+	icon = 'icons/obj/stacks.dmi'
+	icon_state = "sheet-metal_2"
 
 /obj/random/material/item_to_spawn()
 	return pick(/obj/item/stack/material/steel{amount = 10},
@@ -325,6 +502,35 @@
 				/obj/item/stack/material/cardboard{amount = 10},
 				/obj/item/stack/rods{amount = 10},
 				/obj/item/stack/material/plasteel{amount = 10})
+
+/obj/random/material/refined //Random materials for building stuff
+	name = "random refined material"
+	desc = "This is a random refined metal."
+	icon = 'icons/obj/stacks.dmi'
+	icon_state = "sheet-adamantine_3"
+
+/obj/random/material/refined/item_to_spawn()
+	return pick(/obj/item/stack/material/steel{amount = 10},
+				/obj/item/stack/material/glass{amount = 10},
+				/obj/item/stack/material/glass/reinforced{amount = 5},
+				/obj/item/stack/material/glass/phoronglass{amount = 5},
+				/obj/item/stack/material/glass/phoronrglass{amount = 5},
+				/obj/item/stack/material/plasteel{amount = 5},
+				/obj/item/stack/material/durasteel{amount = 5},
+				/obj/item/stack/material/gold{amount = 5},
+				/obj/item/stack/material/iron{amount = 10},
+				/obj/item/stack/material/lead{amount = 10},
+				/obj/item/stack/material/diamond{amount = 3},
+				/obj/item/stack/material/deuterium{amount = 5},
+				/obj/item/stack/material/uranium{amount = 5},
+				/obj/item/stack/material/phoron{amount = 5},
+				/obj/item/stack/material/silver{amount = 5},
+				/obj/item/stack/material/platinum{amount = 5},
+				/obj/item/stack/material/mhydrogen{amount = 3},
+				/obj/item/stack/material/osmium{amount = 3},
+				/obj/item/stack/material/titanium{amount = 5},
+				/obj/item/stack/material/tritium{amount = 3},
+				/obj/item/stack/material/verdantium{amount = 2})
 
 /obj/random/tank
 	name = "random tank"
@@ -456,7 +662,23 @@
 				/obj/item/toy/plushie/spider,
 				/obj/item/toy/plushie/tabby_cat,
 				/obj/item/toy/plushie/tuxedo_cat,
-				/obj/item/toy/plushie/white_cat)
+				/obj/item/toy/plushie/white_cat,
+				//VOREStation Add Start
+				/obj/item/toy/plushie/lizardplushie,
+				/obj/item/toy/plushie/lizardplushie/kobold,
+				/obj/item/toy/plushie/lizardplushie/resh,
+				/obj/item/toy/plushie/slimeplushie,
+				/obj/item/toy/plushie/box,
+				/obj/item/toy/plushie/borgplushie,
+				/obj/item/toy/plushie/borgplushie/medihound,
+				/obj/item/toy/plushie/borgplushie/scrubpuppy,
+				/obj/item/toy/plushie/foxbear,
+				/obj/item/toy/plushie/nukeplushie,
+				/obj/item/toy/plushie/otter,
+				/obj/item/toy/plushie/vox,
+				/obj/item/toy/plushie/borgplushie/drakiesec,
+				/obj/item/toy/plushie/borgplushie/drakiemed)
+				//VOREStation Add End
 
 /obj/random/plushielarge
 	name = "random large plushie"
@@ -491,20 +713,20 @@
 				/obj/item/toy/balloon,
 				/obj/item/toy/crossbow,
 				/obj/item/toy/blink,
-				/obj/item/toy/waterflower,
+				/obj/item/reagent_containers/spray/waterflower,
 				/obj/item/toy/eight_ball,
 				/obj/item/toy/eight_ball/conch,
-				/obj/item/toy/prize/ripley,
-				/obj/item/toy/prize/fireripley,
-				/obj/item/toy/prize/deathripley,
-				/obj/item/toy/prize/gygax,
-				/obj/item/toy/prize/durand,
-				/obj/item/toy/prize/honk,
-				/obj/item/toy/prize/marauder,
-				/obj/item/toy/prize/seraph,
-				/obj/item/toy/prize/mauler,
-				/obj/item/toy/prize/odysseus,
-				/obj/item/toy/prize/phazon)
+				/obj/item/toy/mecha/ripley,
+				/obj/item/toy/mecha/fireripley,
+				/obj/item/toy/mecha/deathripley,
+				/obj/item/toy/mecha/gygax,
+				/obj/item/toy/mecha/durand,
+				/obj/item/toy/mecha/honk,
+				/obj/item/toy/mecha/marauder,
+				/obj/item/toy/mecha/seraph,
+				/obj/item/toy/mecha/mauler,
+				/obj/item/toy/mecha/odysseus,
+				/obj/item/toy/mecha/phazon)
 
 /obj/random/mouseremains
 	name = "random mouseremains"
@@ -517,36 +739,9 @@
 				/obj/item/assembly/mousetrap/armed,
 				/obj/effect/decal/cleanable/spiderling_remains,
 				/obj/effect/decal/cleanable/ash,
-				/obj/item/cigbutt,
-				/obj/item/cigbutt/cigarbutt,
+				/obj/item/trash/cigbutt,
+				/obj/item/trash/cigbutt/cigarbutt,
 				/obj/effect/decal/remains/mouse)
-
-/obj/random/alcohol //cit change starts
-	name = "random booze"
-	desc = "This is a random booze object."
-	icon = 'icons/obj/drinks.dmi'
-	icon_state = "shaker"
-
-/obj/random/alcohol/item_to_spawn()
-	return pick(/obj/item/reagent_containers/food/drinks/bottle/gin,
-	/obj/item/reagent_containers/food/drinks/bottle/whiskey,
-	/obj/item/reagent_containers/food/drinks/bottle/specialwhiskey,
-	/obj/item/reagent_containers/food/drinks/bottle/vodka,
-	/obj/item/reagent_containers/food/drinks/bottle/tequila,
-	/obj/item/reagent_containers/food/drinks/bottle/patron,
-	/obj/item/reagent_containers/food/drinks/bottle/rum,
-	/obj/item/reagent_containers/food/drinks/bottle/vermouth,
-	/obj/item/reagent_containers/food/drinks/bottle/kahlua,
-	/obj/item/reagent_containers/food/drinks/bottle/goldschlager,
-	/obj/item/reagent_containers/food/drinks/bottle/cognac,
-	/obj/item/reagent_containers/food/drinks/bottle/wine,
-	/obj/item/reagent_containers/food/drinks/bottle/absinthe,
-	/obj/item/reagent_containers/food/drinks/bottle/melonliquor,
-	/obj/item/reagent_containers/food/drinks/bottle/bluecuracao,
-	/obj/item/reagent_containers/food/drinks/bottle/small/beer,
-	/obj/item/reagent_containers/food/drinks/bottle/small/ale,
-	/obj/item/reagent_containers/food/drinks/bottle/sake,
-	/obj/item/reagent_containers/food/drinks/bottle/champagne)
 
 /obj/random/janusmodule
 	name = "random janus circuit"
@@ -1139,3 +1334,15 @@
 				prob(2);list(/obj/item/mecha_parts/mecha_equipment/weapon/energy/flamer/rigged),
 				prob(1);list(/obj/item/mecha_parts/mecha_equipment/tool/drill/diamonddrill),
 				)
+/obj/random/thermalponcho
+	name = "random thermal poncho"
+	desc = "This is a thermal poncho spawn."
+	icon = 'icons/obj/clothing/ties.dmi'
+	icon_state = "classicponcho"
+
+/obj/random/thermalponcho/item_to_spawn()
+	return pick(prob(5);/obj/item/clothing/accessory/poncho/thermal,
+				prob(3);/obj/item/clothing/accessory/poncho/thermal/red,
+				prob(3);/obj/item/clothing/accessory/poncho/thermal/green,
+				prob(3);/obj/item/clothing/accessory/poncho/thermal/purple,
+				prob(3);/obj/item/clothing/accessory/poncho/thermal/blue)
