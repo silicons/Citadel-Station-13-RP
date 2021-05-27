@@ -103,10 +103,10 @@ var/list/restricted_camera_networks = list(NETWORK_ERT,NETWORK_MERCENARY,"Secret
 #define STAGE_SUPER	11
 
 // NanoUI flags
-#define STATUS_INTERACTIVE 2 // GREEN Visability
-#define STATUS_UPDATE 1 // ORANGE Visability
-#define STATUS_DISABLED 0 // RED Visability
-#define STATUS_CLOSE -1 // Close the interface
+#define UI_INTERACTIVE 2 // GREEN Visability
+#define UI_UPDATE 1 // ORANGE Visability
+#define UI_DISABLED 0 // RED Visability
+#define UI_CLOSE -1 // Close the interface
 
 /*
  *	Atmospherics Machinery.

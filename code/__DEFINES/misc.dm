@@ -63,25 +63,23 @@ Will print: "/mob/living/carbon/human/death" (you can optionally embed it in a s
 
 
 // For secHUDs and medHUDs and variants. The number is the location of the image on the list hud_list of humans.
-#define HEALTH_HUD		1	// A simple line rounding the mob's number health.
-#define STATUS_HUD		2	// Alive, dead, diseased, etc.
-#define ID_HUD			3	// The job asigned to your ID.
-#define WANTED_HUD		4	// Wanted, released, paroled, security status.
-#define IMPLOYAL_HUD	5	// Loyality implant.
-#define IMPCHEM_HUD		6	// Chemical implant.
-#define IMPTRACK_HUD	7	// Tracking implant.
-#define SPECIALROLE_HUD	8	// AntagHUD image.
-#define STATUS_HUD_OOC	9	// STATUS_HUD without virus DB check for someone being ill.
-#define LIFE_HUD		10	// STATUS_HUD that only reports dead or alive
+#define      HEALTH_HUD 1 // A simple line rounding the mob's number health.
+#define      STATUS_HUD 2 // Alive, dead, diseased, etc.
+#define          ID_HUD 3 // The job asigned to your ID.
+#define      WANTED_HUD 4 // Wanted, released, paroled, security status.
+#define    IMPLOYAL_HUD 5 // Loyality implant.
+#define     IMPCHEM_HUD 6 // Chemical implant.
+#define    IMPTRACK_HUD 7 // Tracking implant.
+#define SPECIALROLE_HUD 8 // AntagHUD image.
+#define  STATUS_HUD_OOC 9 // STATUS_HUD without virus DB check for someone being ill.
+#define 	  LIFE_HUD 10 // STATUS_HUD that only reports dead or alive
+#define     TOTAL_HUDS 10 // Total number of HUDs. Like body layers, and other things, it comes up sometimes.
 
-// Because of omnihud having overlapping issues, we have extra ones.
-#define BACKUP_HUD		11	// HUD for showing whether or not they have a backup implant.
-#define STATUS_R_HUD	12	// HUD for showing the same STATUS_HUD info on the right side, but not for 'boring' statuses (transparent icons)
-#define HEALTH_VR_HUD	13	// HUD with blank 100% bar so it's hidden most of the time.
-#define VANTAG_HUD		14	// HUD for showing being-an-antag-target prefs
+#define CLIENT_FROM_VAR(I) (ismob(I) ? I:client : (isclient(I) ? I : null))
 
-// Total number of HUDs. Like body layers, and other things, it comes up sometimes.
-#define TOTAL_HUDS 14
+
+//Persistence
+#define AREA_FLAG_IS_NOT_PERSISTENT 8 // SSpersistence will not track values from this area.
 
 //	Shuttles.
 
@@ -102,54 +100,42 @@ Will print: "/mob/living/carbon/human/death" (you can optionally embed it in a s
 #define HYPERSPACE_END		2
 
 // Ferry shuttle processing status.
-#define IDLE_STATE		0
-#define WAIT_LAUNCH		1
-#define FORCE_LAUNCH	2
-#define WAIT_ARRIVE		3
-#define WAIT_FINISH		4
-#define DO_AUTOPILOT	5
-
-// Shuttle madness!
-#define SHUTTLE_CRASHED	3	// Yup that can happen now
-
-#define BLUE_SHIELDED	2		// Shield from bluespace teleportation (telescience)
-
-
-// Bluespace shelter deploy checks
-#define SHELTER_DEPLOY_ALLOWED			"allowed"
-#define SHELTER_DEPLOY_BAD_TURFS		"bad turfs"
-#define SHELTER_DEPLOY_BAD_AREA			"bad area"
-#define SHELTER_DEPLOY_ANCHORED_OBJECTS	"anchored objects"
-
+#define IDLE_STATE   0
+#define WAIT_LAUNCH  1
+#define FORCE_LAUNCH 2
+#define WAIT_ARRIVE  3
+#define WAIT_FINISH  4
+#define DO_AUTOPILOT 5
 
 // Setting this much higher than 1024 could allow spammers to DOS the server easily.
-#define MAX_MESSAGE_LEN			4096	// I'm not sure about "easily". It can be a lot longer.
-#define MAX_PAPER_MESSAGE_LEN	6144
-#define MAX_BOOK_MESSAGE_LEN	24576
-#define MAX_RECORD_LENGTH		24576
-#define MAX_LNAME_LEN			64
-#define MAX_NAME_LEN			52
-#define MAX_TEXTFILE_LENGTH		128000		// 512GQ file
+#define MAX_MESSAGE_LEN       4096 //VOREStation Edit - I'm not sure about "easily". It can be a little longer.
+#define MAX_PAPER_MESSAGE_LEN 6144
+#define MAX_BOOK_MESSAGE_LEN  24576
+#define MAX_RECORD_LENGTH	  24576
+#define MAX_LNAME_LEN         64
+#define MAX_NAME_LEN          52
+#define MAX_FEEDBACK_LENGTH      4096
+#define MAX_TEXTFILE_LENGTH 128000		// 512GQ file
 
 // Event defines.
 #define EVENT_LEVEL_MUNDANE		1
 #define EVENT_LEVEL_MODERATE	2
 #define EVENT_LEVEL_MAJOR		3
 
-// General-purpose life speed define for plants.
-#define HYDRO_SPEED_MULTIPLIER	1
-
-#define ANNOUNCER_NAME "Facility PA"
+//General-purpose life speed define for plants.
+#define HYDRO_SPEED_MULTIPLIER 1
 
 #define DEFAULT_JOB_TYPE /datum/job/assistant
 
-//Assistant/Visitor/Whatever
-#define USELESS_JOB	"Visitor"
+//Area flags, possibly more to come
+#define RAD_SHIELDED 1 //shielded from radiation, clearly
 
-#define ECO_MODIFIER 10
-
-// Area flags, possibly more to come
-#define RAD_SHIELDED	1	// Shielded from radiation, clearly
+// OnTopic return values
+#define TOPIC_NOACTION 0
+#define TOPIC_HANDLED 1
+#define TOPIC_REFRESH 2
+#define TOPIC_UPDATE_PREVIEW 4
+#define TOPIC_REFRESH_UPDATE_PREVIEW (TOPIC_REFRESH|TOPIC_UPDATE_PREVIEW)
 
 // Convoluted setup so defines can be supplied by Bay12 main server compile script.
 // Should still work fine for people jamming the icons into their repo.
@@ -200,28 +186,41 @@ Will print: "/mob/living/carbon/human/death" (you can optionally embed it in a s
 #define MAT_SUPERMATTER		"supermatter"
 #define MAT_METALHYDROGEN	"mhydrogen"
 #define MAT_OSMIUM			"osmium"
+#define MAT_GRAPHITE		"graphite"
+#define MAT_LEATHER			"leather"
+#define MAT_CHITIN			"chitin"
+#define MAT_CLOTH			"cloth"
+#define MAT_SYNCLOTH		"syncloth"
+#define MAT_COPPER			"copper"
+#define MAT_QUARTZ			"quartz"
+#define MAT_TIN				"tin"
+#define MAT_VOPAL			"void opal"
+#define MAT_ALUMINIUM		"aluminium"
+#define MAT_BRONZE			"bronze"
+#define MAT_PAINITE			"painite"
+#define MAT_BOROSILICATE	"borosilicate glass"
 
-#define SHARD_SHARD			"shard"
-#define SHARD_SHRAPNEL		"shrapnel"
-#define SHARD_STONE_PIECE	"piece"
-#define SHARD_SPLINTER		"splinters"
-#define SHARD_NONE			""
+#define SHARD_SHARD "shard"
+#define SHARD_SHRAPNEL "shrapnel"
+#define SHARD_STONE_PIECE "piece"
+#define SHARD_SPLINTER "splinters"
+#define SHARD_NONE ""
 
-#define MATERIAL_UNMELTABLE	0x1
-#define MATERIAL_BRITTLE	0x2
-#define MATERIAL_PADDING	0x4
+#define MATERIAL_UNMELTABLE 0x1
+#define MATERIAL_BRITTLE    0x2
+#define MATERIAL_PADDING    0x4
 
-#define TABLE_BRITTLE_MATERIAL_MULTIPLIER 4	// Amount table damage is multiplied by if it is made of a brittle material (e.g. glass)
+#define TABLE_BRITTLE_MATERIAL_MULTIPLIER 4 // Amount table damage is multiplied by if it is made of a brittle material (e.g. glass)
 
-#define BOMBCAP_DVSTN_RADIUS	(max_explosion_range/4)
-#define BOMBCAP_HEAVY_RADIUS	(max_explosion_range/2)
-#define BOMBCAP_LIGHT_RADIUS	max_explosion_range
-#define BOMBCAP_FLASH_RADIUS	(max_explosion_range*1.5)
-											// NTNet module-configuration values. Do not change these. If you need to add another use larger number (5..6..7 etc)
-#define NTNET_SOFTWAREDOWNLOAD	1			// Downloads of software from NTNet
-#define NTNET_PEERTOPEER		2			// P2P transfers of files between devices
-#define NTNET_COMMUNICATION		3			// Communication (messaging)
-#define NTNET_SYSTEMCONTROL		4			// Control of various systems, RCon, air alarm control, etc.
+#define BOMBCAP_DVSTN_RADIUS (max_explosion_range/4)
+#define BOMBCAP_HEAVY_RADIUS (max_explosion_range/2)
+#define BOMBCAP_LIGHT_RADIUS max_explosion_range
+#define BOMBCAP_FLASH_RADIUS (max_explosion_range*1.5)
+									// NTNet module-configuration values. Do not change these. If you need to add another use larger number (5..6..7 etc)
+#define NTNET_SOFTWAREDOWNLOAD 1 	// Downloads of software from NTNet
+#define NTNET_PEERTOPEER 2			// P2P transfers of files between devices
+#define NTNET_COMMUNICATION 3		// Communication (messaging)
+#define NTNET_SYSTEMCONTROL 4		// Control of various systems, RCon, air alarm control, etc.
 
 // NTNet transfer speeds, used when downloading/uploading a file/program.
 #define NTNETSPEED_LOWSIGNAL	0.25		// GQ/s transfer speed when the device is wirelessly connected and on Low signal
@@ -261,24 +260,20 @@ Will print: "/mob/living/carbon/human/death" (you can optionally embed it in a s
 #define ANTAG_SHARED	"Shared"
 #define ANTAG_KNOWN		"Known"
 
-// Take a guess what the V stands for
-#define VANTAG_NONE		"hudblank"
-#define VANTAG_VORE		"vantag_vore"
-#define VANTAG_KIDNAP	"vantag_kidnap"
-#define VANTAG_KILL		"vantag_kill"
+// Departments.
+#define DEPARTMENT_COMMAND			"Command"
+#define DEPARTMENT_SECURITY			"Security"
+#define DEPARTMENT_ENGINEERING		"Engineering"
+#define DEPARTMENT_MEDICAL			"Medical"
+#define DEPARTMENT_RESEARCH			"Research"
+#define DEPARTMENT_CARGO			"Cargo"
+#define DEPARTMENT_CIVILIAN			"Civilian"
+#define DEPARTMENT_PLANET			"Exploration" //VOREStation Edit // I hate having this be here and not in a SC file. Hopefully someday the manifest can be rewritten to be map-agnostic.
+#define DEPARTMENT_SYNTHETIC		"Synthetic"
 
-
-// Job groups
-#define ROLE_COMMAND			"command"
-#define ROLE_SECURITY			"security"
-#define ROLE_ENGINEERING		"engineering"
-#define ROLE_MEDICAL			"medical"
-#define ROLE_RESEARCH			"research"
-#define ROLE_CARGO				"cargo"
-#define ROLE_CIVILIAN			"civilian"
-#define ROLE_SYNTHETIC			"synthetic"
-#define ROLE_UNKNOWN			"unknown"
-#define ROLE_EVERYONE			"everyone"
+// These are mostly for the department guessing code and event system.
+#define DEPARTMENT_UNKNOWN			"Unknown"
+#define DEPARTMENT_EVERYONE			"Everyone"
 
 // Canonical spellings of TSCs, so typos never have to happen again due to human error.
 #define TSC_NT		"NanoTrasen"
@@ -397,6 +392,9 @@ GLOBAL_LIST_EMPTY(##LIST_NAME);\
 
 
 #define PR_ANNOUNCEMENTS_PER_ROUND	5
+// Calculation modes for effective radiation
+#define RAD_RESIST_CALC_DIV 0 // Each turf absorbs some fraction of the working radiation level
+#define RAD_RESIST_CALC_SUB 1 // Each turf absorbs a fixed amount of radiation
 
 //https://secure.byond.com/docs/ref/info.html#/atom/var/mouse_opacity
 #define MOUSE_OPACITY_TRANSPARENT	0
@@ -412,12 +410,18 @@ GLOBAL_LIST_EMPTY(##LIST_NAME);\
 #define EMBED_CHANCE_UNSET	-1337
 
 
-// No hitsound define
-#define HITSOUND_UNSET	"UNSET"
+// Used by radios to indicate that they have sent a message via something other than subspace
+#define RADIO_CONNECTION_FAIL 0
+#define RADIO_CONNECTION_NON_SUBSPACE 1
 
+#define JOB_CARBON			0x1
+#define JOB_SILICON_ROBOT	0x2
+#define JOB_SILICON_AI		0x4
+#define JOB_SILICON			0x6 // 2|4, probably don't set jobs to this, but good for checking
 
 // Herm Gender	// Snowflake Global that throws a fit
 #define HERM "herm"
+#define DEFAULT_OVERMAP_RANGE 0 // Makes general computers and devices be able to connect to other overmap z-levels on the same tile.
 
 // For custom species
 #define STARTING_SPECIES_POINTS	1
@@ -435,3 +439,114 @@ GLOBAL_LIST_EMPTY(##LIST_NAME);\
 
 //Holy Weapon defines from Main. Lists null rod weapons and classifies them as HOLY.
 #define HOLY_WEAPONS /obj/item/nullrod
+/*
+	Used for wire name appearances. Replaces the color name on the left with the one on the right.
+	The color on the left is the one used as the actual color of the wire, but it doesn't look good when written.
+	So, we need to replace the name to something that looks better.
+*/
+#define LIST_COLOR_RENAME 				\
+	list(								\
+		"rebeccapurple" = "dark purple",\
+		"darkslategrey" = "dark grey",	\
+		"darkolivegreen"= "dark green",	\
+		"darkslateblue" = "dark blue",	\
+		"darkkhaki" 	= "khaki",		\
+		"darkseagreen" 	= "light green",\
+		"midnightblue" 	= "blue",		\
+		"lightgrey" 	= "light grey",	\
+		"darkgrey" 		= "dark grey",	\
+		"darkmagenta"	= "dark magenta",\
+		"steelblue" 	= "blue",		\
+		"goldenrod"	 	= "gold"		\
+	)
+
+/// Pure Black and white colorblindness. Every species except Vulpkanins and Tajarans will have this.
+#define GREYSCALE_COLOR_REPLACE		\
+	list(							\
+		"red"		= "grey",		\
+		"blue"		= "grey",		\
+		"green"		= "grey",		\
+		"orange"	= "light grey",	\
+		"brown"		= "grey",		\
+		"gold"		= "light grey",	\
+		"cyan"		= "silver",		\
+		"magenta"	= "grey",		\
+		"purple"	= "grey",		\
+		"pink"		= "light grey"	\
+	)
+
+/// Red colorblindness. Vulpkanins/Wolpins have this.
+#define PROTANOPIA_COLOR_REPLACE		\
+	list(								\
+		"red"		= "darkolivegreen",	\
+		"darkred"	= "darkolivegreen",	\
+		"green"		= "yellow",			\
+		"orange"	= "goldenrod",		\
+		"gold"		= "goldenrod", 		\
+		"brown"		= "darkolivegreen",	\
+		"cyan"		= "steelblue",		\
+		"magenta"	= "blue",			\
+		"purple"	= "darkslategrey",	\
+		"pink"		= "beige"			\
+	)
+
+/// Green colorblindness.
+#define DEUTERANOPIA_COLOR_REPLACE		\
+	list(								\
+		"red"			= "goldenrod",	\
+		"green"			= "tan",		\
+		"yellow"		= "tan",		\
+		"orange"		= "goldenrod",	\
+		"gold"			= "burlywood",	\
+		"brown"			= "saddlebrown",\
+		"cyan"			= "lavender",	\
+		"magenta"		= "blue",		\
+		"darkmagenta"	= "darkslateblue",	\
+		"purple"		= "slateblue",	\
+		"pink"			= "thistle"		\
+	)
+
+/// Yellow-Blue colorblindness. Tajarans/Farwas have this.
+#define TRITANOPIA_COLOR_REPLACE		\
+	list(								\
+		"red"		= "rebeccapurple",	\
+		"blue"		= "darkslateblue",	\
+		"green"		= "darkolivegreen",	\
+		"orange"	= "darkkhaki",		\
+		"gold"		= "darkkhaki",		\
+		"brown"		= "rebeccapurple",	\
+		"cyan"		= "darkseagreen",	\
+		"magenta"	= "darkslateblue",	\
+		"navy"		= "darkslateblue",	\
+		"purple"	= "darkslateblue",	\
+		"pink"		= "lightgrey"		\
+	)
+// Volume Channel Defines
+
+#define VOLUME_CHANNEL_MASTER "Master"
+#define VOLUME_CHANNEL_AMBIENCE "Ambience"
+#define VOLUME_CHANNEL_ALARMS "Alarms"
+#define VOLUME_CHANNEL_VORE "Vore"
+#define VOLUME_CHANNEL_DOORS "Doors"
+
+// Make sure you update this or clients won't be able to adjust the channel
+GLOBAL_LIST_INIT(all_volume_channels, list(
+	VOLUME_CHANNEL_MASTER,
+	VOLUME_CHANNEL_AMBIENCE,
+	VOLUME_CHANNEL_ALARMS,
+	VOLUME_CHANNEL_VORE,
+	VOLUME_CHANNEL_DOORS,
+))
+
+#define APPEARANCECHANGER_CHANGED_RACE "Race"
+#define APPEARANCECHANGER_CHANGED_GENDER "Gender"
+#define APPEARANCECHANGER_CHANGED_GENDER_ID "Gender Identity"
+#define APPEARANCECHANGER_CHANGED_SKINTONE "Skin Tone"
+#define APPEARANCECHANGER_CHANGED_SKINCOLOR "Skin Color"
+#define APPEARANCECHANGER_CHANGED_HAIRSTYLE "Hair Style"
+#define APPEARANCECHANGER_CHANGED_HAIRCOLOR "Hair Color"
+#define APPEARANCECHANGER_CHANGED_F_HAIRSTYLE "Facial Hair Style"
+#define APPEARANCECHANGER_CHANGED_F_HAIRCOLOR "Facial Hair Color"
+#define APPEARANCECHANGER_CHANGED_EYES "Eye Color"
+
+#define GET_DECL(D) (ispath(D, /decl) ? (decls_repository.fetched_decls[D] || decls_repository.get_decl(D)) : null)

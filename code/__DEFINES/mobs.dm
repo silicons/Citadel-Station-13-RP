@@ -14,6 +14,7 @@
 #define GODMODE     0x1000
 #define FAKEDEATH   0x2000  // Replaces stuff like changeling.changeling_fakedeath.
 #define DISFIGURED  0x4000  // Set but never checked. Remove this sometime and replace occurences with the appropriate organ code
+#define DOING_TASK	0x8000  // Performing a do_after or do_mob that's exclusive
 
 // Grab levels.
 #define GRAB_PASSIVE    1
@@ -204,6 +205,13 @@
 #define O_AUG_SPINE "spinal augment"
 #define O_AUG_PELVIC "pelvic augment"
 
+// FBP components.
+
+#define O_PUMP     "hydraulic hub"
+#define O_CYCLER   "reagent cycler"
+#define O_HEATSINK "thermal regulator"
+#define O_DIAGNOSTIC "diagnostic controller"
+
 // Non-Standard organs
 #define O_MOUTH    "mouth"
 #define O_CELL     "cell"
@@ -272,6 +280,7 @@
 #define BORG_BRAINTYPE_CYBORG	"Cyborg"
 #define BORG_BRAINTYPE_POSI		"Robot"
 #define BORG_BRAINTYPE_DRONE	"Drone"
+#define BORG_BRAINTYPE_PLATFORM	"Platform"
 #define BORG_BRAINTYPE_AI_SHELL	"AI Shell"
 
 // 'Regular' species.
@@ -385,16 +394,13 @@
 #define VIS_OBJS			20
 #define VIS_MOBS			21
 
-#define VIS_CH_STATUS_R		22
-#define VIS_CH_HEALTH_VR	23
-#define VIS_CH_BACKUP		24
-#define VIS_CH_VANTAG		25
+#define VIS_BUILDMODE		22
 
-#define VIS_AUGMENTED		26
+#define VIS_CLOAKED			23
 
-#define VIS_STATUS			27
+#define VIS_STATUS			24
 
-#define VIS_COUNT			27 //Must be highest number from above.
+#define VIS_COUNT			24 //Must be highest number from above.
 
 //Some mob icon layering defines
 #define BODY_LAYER		-100
@@ -424,33 +430,6 @@
 #define EXAMINE_SKIPLEGS			0x0080
 #define EXAMINE_SKIPFEET			0x0100
 
-//Protean organs
-#define O_ORCH		"orchestrator"
-#define O_FACT		"refactory"
+#define MAX_NUTRITION	5000 //VOREStation Edit
 
-//Alraune organs
-#define A_FRUIT	"fruit gland"
-
-//species defines
-#define SPECIES_AKULA			"Akula"
-#define SPECIES_ALRAUNE			"Alraune"
-#define SPECIES_NEVREAN			"Nevrean"
-#define SPECIES_PROTEAN			"Protean"
-#define SPECIES_RAPALA			"Rapala"
-#define SPECIES_SERGAL			"Sergal"
-#define SPECIES_VASILISSAN		"Vasilissan"
-#define SPECIES_VULPKANIN		"Vulpkanin"
-#define SPECIES_XENOCHIMERA		"Xenochimera"
-#define SPECIES_XENOHYBRID		"Xenomorph Hybrid"
-#define SPECIES_ZORREN_FLAT		"Flatland Zorren"
-#define SPECIES_ZORREN_HIGH		"Highlander Zorren"
-#define SPECIES_CUSTOM			"Custom Species"
-#define SPECIES_PLASMAMAN		"Phoronoid"
-
-#define SPECIES_MONKEY_AKULA		"Sobaka"
-#define SPECIES_MONKEY_NEVREAN		"Sparra"
-#define SPECIES_MONKEY_SERGAL		"Saru"
-#define SPECIES_MONKEY_VULPKANIN	"Wolpin"
-
-#define SPECIES_WEREBEAST			"Werebeast"
-#define SPECIES_SHADEKIN			"Shadekin"
+#define FAKE_INVIS_ALPHA_THRESHOLD 127 // If something's alpha var is at or below this number, certain things will pretend it is invisible.
