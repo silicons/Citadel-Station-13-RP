@@ -51,7 +51,7 @@ obj/item/chainsaw/proc/turnOn(mob/user as mob)
 	if(!on) return
 	to_chat(user, "You switch the gas nozzle on the chainsaw, turning it off.")
 	attack_verb = list("bluntly hit", "beat", "knocked")
-	playsound(user, 'sound/weapons/chainsaw_turnoff.ogg',40,1)
+	playsound(src, 'sound/weapons/chainsaw_turnoff.ogg',40,1)
 	force = inactive_force
 	edge = 0
 	sharp = 0
@@ -82,11 +82,16 @@ obj/item/chainsaw/proc/turnOn(mob/user as mob)
 		else if(istype(A,/obj/effect/plant))
 			var/obj/effect/plant/P = A
 			qdel(P) //Plant isn't surviving that. At all
+		else if(istype(A,/obj/machinery/portable_atmospherics/hydroponics))
+			var/obj/machinery/portable_atmospherics/hydroponics/Hyd = A
+			if(Hyd.seed && !Hyd.dead)
+				to_chat(user, "<span class='notice'>You shred the plant.</span>")
+				Hyd.die()
 	if (istype(A, /obj/structure/reagent_dispensers/fueltank) && get_dist(src,A) <= 1)
 		to_chat(user, "<span class='notice'>You begin filling the tank on the chainsaw.</span>")
 		if(do_after(usr, 15))
 			A.reagents.trans_to_obj(src, max_fuel)
-			playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
+			playsound(src, 'sound/effects/refill.ogg', 50, 1, -6)
 			to_chat(user, "<span class='notice'>Chainsaw succesfully refueled.</span>")
 		else
 			to_chat(user, "<span class='notice'>Don't move while you're refilling the chainsaw.</span>")
