@@ -1,3 +1,6 @@
+/mob/living/carbon/human
+	var/datum/unarmed_attack/default_attack
+
 /mob/living/carbon/human/proc/get_unarmed_attack(var/mob/living/carbon/human/target, var/hit_zone)
 	// VOREStation Edit - Begin
 	if(nif && nif.flag_check(NIF_C_HARDCLAWS,NIF_FLAGS_COMBAT)){return unarmed_hardclaws}
@@ -16,6 +19,12 @@
 				if(soft_type)
 					return soft_type
 			return G.special_attack
+	if(src.default_attack && src.default_attack.is_usable(src, target, hit_zone))
+		if(pulling_punches)
+			var/datum/unarmed_attack/soft_type = src.default_attack.get_sparring_variant()
+			if(soft_type)
+				return soft_type
+		return src.default_attack
 	for(var/datum/unarmed_attack/u_attack in species.unarmed_attacks)
 		if(u_attack.is_usable(src, target, hit_zone))
 			if(pulling_punches)
@@ -47,7 +56,7 @@
 			var/hit_zone = get_zone_with_miss_chance(H.zone_sel.selecting, src, H.get_accuracy_penalty())
 			if(!hit_zone)
 				H.do_attack_animation(src)
-				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
+				playsound(src, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 				visible_message("<font color='red'><B>[H] reaches for [src], but misses!</B></font>")
 				return FALSE
 
@@ -125,11 +134,10 @@
 			LAssailant = M
 
 			H.do_attack_animation(src)
-			playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+			playsound(src, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 			//VORESTATION EDIT
 			visible_message("<span class='warning'>[M] has grabbed [src] [(M.zone_sel.selecting == BP_L_HAND || M.zone_sel.selecting == BP_R_HAND)? "by [(gender==FEMALE)? "her" : ((gender==MALE)? "his": "their")] hands": "passively"]!</span>")
 			//VORESTATION END END
-
 			return TRUE
 
 		if(INTENT_HARM)
@@ -216,7 +224,7 @@
 						attack_message = "[H] attempted to strike [src], but missed!"
 					else
 						attack_message = "[H] attempted to strike [src], but [TT.he] rolled out of the way!"
-						src.setDir(pick(GLOB.cardinal))
+						src.setDir(pick(cardinal))
 					miss_type = 1
 
 			if(!miss_type && block)
@@ -237,7 +245,7 @@
 			else
 				H.visible_message("<span class='danger'>[attack_message]</span>")
 
-			playsound(loc, ((miss_type) ? (miss_type == 1 ? attack.miss_sound : 'sound/weapons/thudswoosh.ogg') : attack.attack_sound), 25, 1, -1)
+			playsound(src, ((miss_type) ? (miss_type == 1 ? attack.miss_sound : 'sound/weapons/thudswoosh.ogg') : attack.attack_sound), 25, 1, -1)
 
 			add_attack_logs(H,src,"Melee attacked with fists (miss/block)")
 
@@ -297,15 +305,15 @@
 
 			var/randn = rand(1, 100)
 			last_push_time = world.time
-			if(!(species.flags & NO_SLIP) && randn <= 25)
+			// We ARE wearing shoes OR
+			// We as a species CAN be slipped when barefoot
+			// And also 1 in 4 because rngesus
+			if((shoes || !(species.flags & NO_SLIP)) && randn <= 25)
 				var/armor_check = run_armor_check(affecting, "melee")
 				apply_effect(3, WEAKEN, armor_check)
-				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+				playsound(src, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 				if(armor_check < 60)
-					if(M.zone_sel.selecting == BP_L_LEG || M.zone_sel.selecting == BP_R_LEG || M.zone_sel.selecting == BP_L_FOOT || M.zone_sel.selecting == BP_R_FOOT)
-						visible_message("<span class='danger'>[M] has leg swept [src]!</span>")
-					else
-						visible_message("<span class='danger'>[M] has pushed [src]!</span>")
+					visible_message("<span class='danger'>[M] has pushed [src]!</span>")
 				else
 					visible_message("<span class='warning'>[M] attempted to push [src]!</span>")
 				return
@@ -313,7 +321,7 @@
 			if(randn <= 60)
 				//See about breaking grips or pulls
 				if(break_all_grabs(M))
-					playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+					playsound(src, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 					return
 
 				//Actually disarm them
@@ -321,10 +329,10 @@
 					if(I)
 						drop_from_inventory(I)
 						visible_message("<span class='danger'>[M] has disarmed [src]!</span>")
-						playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+						playsound(src, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 						return
 
-			playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
+			playsound(src, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 			visible_message("<font color='red'> <B>[M] attempted to disarm [src]!</B></font>")
 	return
 
@@ -411,7 +419,8 @@
 		return FALSE
 
 	if(organ.applied_pressure)
-		to_chat(user, "<span class='warning'>Someone is already applying pressure to [user == src? "your [organ.name]" : "[src]'s [organ.name]"].</span>")
+		var/message = "<span class='warning'>Someone is already applying pressure to [user == src ? "your [organ.name]" : "[src]'s [organ.name]"].</span>"
+		to_chat(user,message)
 		return FALSE
 
 	var/datum/gender/TU = gender_datums[user.get_visible_gender()]
@@ -435,23 +444,11 @@
 
 	return TRUE
 
-/mob/living/carbon/human
-	var/datum/unarmed_attack/default_attack
-
 /mob/living/carbon/human/verb/check_attacks()
 	set name = "Check Attacks"
 	set category = "IC"
 	set src = usr
 
-	var/dat = "<b><font size = 5>Known Attacks</font></b><br/><br/>"
-
-	for(var/datum/unarmed_attack/u_attack in species.unarmed_attacks)
-		dat += "<b>Primarily [u_attack.attack_name] </b><br/><br/><br/>"
-
-	src << browse(dat, "window=checkattack")
-	return
-
-/mob/living/carbon/human/check_attacks()
 	var/dat = "<b><font size = 5>Known Attacks</font></b><br/><br/>"
 
 	if(default_attack)
@@ -480,21 +477,3 @@
 
 /mob/living/carbon/human/proc/set_default_attack(var/datum/unarmed_attack/u_attack)
 	default_attack = u_attack
-
-/datum/unarmed_attack
-	var/attack_name = "fist"
-
-/datum/unarmed_attack
-	bite/attack_name = "bite"
-	bite/sharp/attack_name = "sharp bite"
-	bite/strong/attack_name = "strong bite"
-	punch/attack_name = "punch"
-	kick/attack_name = "kick"
-	stomp/attack_name = "stomp"
-	stomp/weak/attack_name = "weak stomp"
-	light_strike/attack_name = "light hit"
-	diona attack_name = "tendrils"
-	claws/attack_name = "claws"
-	claws/strong/attack_name = "strong claws"
-	slime_glomp/attack_name = "glomp"
-	bite/sharp/numbing/attack_name = "numbing bite"
