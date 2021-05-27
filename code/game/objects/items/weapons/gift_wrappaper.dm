@@ -27,6 +27,7 @@
 
 /obj/item/gift/attack_self(mob/user as mob)
 	user.drop_item()
+	playsound(src, 'sound/items/package_unwrap.ogg', 50,1)
 	if(src.gift)
 		user.put_in_active_hand(gift)
 		src.gift.add_fingerprint(user)
@@ -75,7 +76,7 @@
 		/obj/item/lipstick/random,
 		/obj/item/grenade/smokebomb,
 		/obj/item/corncob,
-		/obj/item/contraband/poster,
+		/obj/item/contraband/poster/custom,
 		/obj/item/book/manual/barman_recipes,
 		/obj/item/book/manual/chef_recipes,
 		/obj/item/bikehorn,
@@ -86,17 +87,17 @@
 		/obj/item/toy/crossbow,
 		/obj/item/gun/projectile/revolver/capgun,
 		/obj/item/toy/katana,
-		/obj/item/toy/prize/deathripley,
-		/obj/item/toy/prize/durand,
-		/obj/item/toy/prize/fireripley,
-		/obj/item/toy/prize/gygax,
-		/obj/item/toy/prize/honk,
-		/obj/item/toy/prize/marauder,
-		/obj/item/toy/prize/mauler,
-		/obj/item/toy/prize/odysseus,
-		/obj/item/toy/prize/phazon,
-		/obj/item/toy/prize/ripley,
-		/obj/item/toy/prize/seraph,
+		/obj/item/toy/mecha/deathripley,
+		/obj/item/toy/mecha/durand,
+		/obj/item/toy/mecha/fireripley,
+		/obj/item/toy/mecha/gygax,
+		/obj/item/toy/mecha/honk,
+		/obj/item/toy/mecha/marauder,
+		/obj/item/toy/mecha/mauler,
+		/obj/item/toy/mecha/odysseus,
+		/obj/item/toy/mecha/phazon,
+		/obj/item/toy/mecha/ripley,
+		/obj/item/toy/mecha/seraph,
 		/obj/item/toy/spinningtoy,
 		/obj/item/toy/sword,
 		/obj/item/reagent_containers/food/snacks/grown/ambrosiadeus,
@@ -166,7 +167,8 @@
 
 /obj/item/wrapping_paper/examine(mob/user)
 	. = ..()
-	. += "There is about [src.amount] square units of paper left!"
+	if(Adjacent(user))
+		. += "There is about [src.amount] square units of paper left!"
 
 /obj/item/wrapping_paper/attack(mob/target as mob, mob/user as mob)
 	if (!istype(target, /mob/living/carbon/human)) return

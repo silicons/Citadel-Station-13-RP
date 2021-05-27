@@ -34,7 +34,8 @@
 		var/mob/living/M = AM
 		M.slip("the [src.name]",3)
 
-/obj/item/soap/pre_attack(atom/target, mob/user as mob)
+/obj/item/soap/afterattack(atom/target, mob/user as mob, proximity)
+	if(!proximity) return
 	//I couldn't feasibly  fix the overlay bugs caused by cleaning items we are wearing.
 	//So this is a workaround. This also makes more sense from an IC standpoint. ~Carn
 	if(user.client && (target in user.client.screen))
@@ -72,8 +73,14 @@
 /obj/item/bikehorn/attack_self(mob/user as mob)
 	if (spam_flag == 0)
 		spam_flag = 1
-		playsound(src.loc, 'sound/items/bikehorn.ogg', 50, 1)
+		playsound(src, honk_sound, 50, 1)
 		src.add_fingerprint(user)
 		spawn(20)
 			spam_flag = 0
 	return
+
+/obj/item/bikehorn/Crossed(atom/movable/AM as mob|obj)
+	if(AM.is_incorporeal())
+		return
+	if(istype(AM, /mob/living))
+		playsound(src, honk_sound, 50, 1)
