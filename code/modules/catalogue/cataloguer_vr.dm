@@ -1,3 +1,6 @@
+/obj/item/cataloguer
+	credit_sharing_range = 280
+
 /obj/item/cataloguer/compact
 	name = "compact cataloguer"
 	icon = 'icons/vore/custom_items_vr.dmi'
