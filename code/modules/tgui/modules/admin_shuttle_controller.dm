@@ -8,8 +8,8 @@
 	var/list/data = ..()
 
 	var/list/shuttles = list()
-	for(var/shuttle_name in SSshuttles.shuttles)
-		var/datum/shuttle/S = SSshuttles.shuttles[shuttle_name]
+	for(var/shuttle_name in SSshuttle.shuttles)
+		var/datum/shuttle/S = SSshuttle.shuttles[shuttle_name]
 		shuttles.Add(list(list(
 			"name" = shuttle_name,
 			"ref" = REF(S),
@@ -19,7 +19,7 @@
 	data["shuttles"] = shuttles
 
 	var/list/overmap_ships = list()
-	for(var/ship in SSshuttles.ships)
+	for(var/ship in SSshuttle.ships)
 		var/obj/effect/overmap/visitable/ship/S = ship
 		overmap_ships.Add(list(list(
 			"name" = S.scanner_name || S.name,

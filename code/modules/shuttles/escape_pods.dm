@@ -14,12 +14,12 @@
 	var/arming_controller_tag = arming_controller
 	if(!arming_controller && active_docking_controller)
 		arming_controller_tag = active_docking_controller.id_tag
-	arming_controller = SSshuttles.docking_registry[arming_controller_tag]
+	arming_controller = SSshuttle.docking_registry[arming_controller_tag]
 	if(!istype(arming_controller))
 		CRASH("Could not find arming controller for escape pod \"[name]\", tag was '[arming_controller_tag]'.")
 
 	//find the pod's own controller
-	var/datum/computer/file/embedded_program/docking/simple/prog = SSshuttles.docking_registry[docking_controller_tag]
+	var/datum/computer/file/embedded_program/docking/simple/prog = SSshuttle.docking_registry[docking_controller_tag]
 	var/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod/controller_master = prog.master
 	if(!istype(controller_master))
 		CRASH("Escape pod \"[name]\" could not find it's controller master! docking_controller_tag=[docking_controller_tag]")

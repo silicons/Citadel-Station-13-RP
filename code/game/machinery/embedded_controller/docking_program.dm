@@ -76,12 +76,12 @@
 /datum/computer/file/embedded_program/docking/New()
 	..()
 	if(id_tag)
-		if(SSshuttles.docking_registry[id_tag])
+		if(SSshuttle.docking_registry[id_tag])
 			CRASH("Docking controller tag [id_tag] had multiple associated programs.")
-		SSshuttles.docking_registry[id_tag] = src
+		SSshuttle.docking_registry[id_tag] = src
 
 /datum/computer/file/embedded_program/docking/Destroy()
-	SSshuttles.docking_registry -= id_tag
+	SSshuttle.docking_registry -= id_tag
 	return ..()
 
 /datum/computer/file/embedded_program/docking/receive_signal(datum/signal/signal, receive_method, receive_param)

@@ -194,7 +194,7 @@
 			log_shuttle("[my_area] shuttle computer couldn't find [lost] sensor!")
 
 /obj/machinery/computer/shuttle_control/web/attackby(obj/I, mob/user)
-	var/datum/shuttle/autodock/web_shuttle/shuttle = SSshuttles.shuttles[shuttle_tag]
+	var/datum/shuttle/autodock/web_shuttle/shuttle = SSshuttle.shuttles[shuttle_tag]
 	if(shuttle && istype(I,/obj/item/clothing/head/pilot))
 		var/obj/item/clothing/head/pilot/H = I
 		H.shuttle_comp = src
