@@ -93,12 +93,12 @@ SUBSYSTEM_DEF(radiation)
 				origin.calc_rad_resistance()
 
 			if(origin.cached_rad_resistance)
-				if(config.radiation_resistance_calc_mode == RAD_RESIST_CALC_DIV)
-					working = round((working / (origin.cached_rad_resistance * config.radiation_resistance_multiplier)), 0.01)
-				else if(config.radiation_resistance_calc_mode == RAD_RESIST_CALC_SUB)
-					working = round((working - (origin.cached_rad_resistance * config.radiation_resistance_multiplier)), 0.01)
+				if(config_legacy.radiation_resistance_calc_mode == RAD_RESIST_CALC_DIV)
+					working = round((working / (origin.cached_rad_resistance * config_legacy.radiation_resistance_multiplier)), 0.01)
+				else if(config_legacy.radiation_resistance_calc_mode == RAD_RESIST_CALC_SUB)
+					working = round((working - (origin.cached_rad_resistance * config_legacy.radiation_resistance_multiplier)), 0.01)
 
-			if(working <= config.radiation_lower_limit) // Too far from this source
+			if(working <= config_legacy.radiation_lower_limit) // Too far from this source
 				working = 0 // May as well be 0
 				break
 
@@ -106,7 +106,7 @@ SUBSYSTEM_DEF(radiation)
 		// Shouldn't really ever have practical uses, but standing in a room literally made from uranium is more dangerous than standing next to a single uranium vase
 		. += working / (dist ** 2)
 
-	if(. <= config.radiation_lower_limit)
+	if(. <= config_legacy.radiation_lower_limit)
 		. = 0
 
 // Add a radiation source instance to the repository.  It will override any existing source on the same turf.
