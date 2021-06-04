@@ -1,23 +1,21 @@
-#define CLEAR_OBJECT(TARGET)                \
-	processing -= TARGET;                   \
-	TARGET.airflow_dest = null;             \
-	TARGET.airflow_speed = 0;               \
-	TARGET.airflow_time = 0;                \
-	TARGET.airflow_skip_speedcheck = FALSE; \
-	if (TARGET.airflow_od) {                \
-		TARGET.density = 0;                 \
-	}
-
-// No point in making this a processing substem, it overrides fire() and handles its own processing list!
 SUBSYSTEM_DEF(airflow)
 	name = "Airflow"
-	wait = 2
+	wait = 1
 	flags = SS_NO_INIT
-	runlevels = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
+	runlevels = RUNLEVLE_GAME | RUNLEVEL_POSTGAME
 	priority = FIRE_PRIORITY_AIRFLOW
 
-	var/list/processing = list()
-	var/list/currentrun = list()
+	var/static/list/processing = list()
+	var/static/list/currentrun = list()
+
+/datum/controller/subsystem/airflow/fire(resumed = FALSE)
+	if(!resumed)
+		currentrun = processing.Copy()
+	while(currentrun.len)
+		var/atom/movable/AM = currentrun[currentrun.len--]
+		AM.airflow_tick()
+		if(MC_TICK_CHECK)
+			return
 
 /datum/controller/subsystem/airflow/fire(resumed = FALSE)
 	CACHE_VSC_PROP(atmos_vsc, /atmos/airflow/speed_decay, speed_decay)
@@ -99,8 +97,6 @@ SUBSYSTEM_DEF(airflow)
 
 		if (MC_TICK_CHECK)
 			return
-
-#undef CLEAR_OBJECT
 
 /atom/movable
 	var/tmp/airflow_xo

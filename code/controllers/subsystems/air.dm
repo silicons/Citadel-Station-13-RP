@@ -16,18 +16,34 @@ SUBSYSTEM_DEF(air)
 	var/static/list/part_names = list("turfs", "edges", "fire zones", "hotspots", "zones")
 
 	/// Associative id = datum list of generated /datum/atmosphere's.
-	var/list/generated_atmospheres
+	var/static/list/generated_atmospheres = list()
 	/// Generated zones for immutable turfs.
-	var/list/immutable_zones
+	var/static/list/immutable_zones = list()
+	/// Zoneless, self-blocked turfs that need to be processed separately
+	var/static/list/turf/active_lone_turfs = list()
+	/// Active edges - where airflow is happening
+	var/static/list/datum/zone_edge/active_edges = list()
+	/// Active zones - where things are reacting
+	var/static/list/datum/zone/active_zones()
+	/// Turfs awaiting a zone rebuild
+	var/static/list/turf/rebuild_queue = list()
 
-	var/cost_turfs = 0
+	/// Costs of misc ops - lone turfs
+	var/cost_misc = 0
+	/// Costs of active edges
 	var/cost_edges = 0
-	var/cost_firezones = 0
-	var/cost_hotspots = 0
+	/// Costs of active zones
 	var/cost_zones = 0
+	/// Costs of rebuilds
+	var/cost_rebuild = 0
+	/// Costs of fire object processing - this is not the gas zone fire reaction, this is individual burning tiles and fire damage.
+	var/cost_fire = 0
 
-	var/list/currentrun = null
-	var/current_step = null
+	/// Currentrun list
+	var/list/currentrun
+	/// What step we're on
+	var/current_step
+
 
 	// Updating zone tiles requires temporary storage location of self-zone-blocked turfs across resumes. Used only by process_tiles_to_update.
 	var/list/selfblock_deferred = null

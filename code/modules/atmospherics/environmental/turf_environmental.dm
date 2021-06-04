@@ -11,8 +11,19 @@
 	var/datum/zone/air_zone
 
 
+
 /**
  * Sets a turf's air status
  */
 /turf/proc/set_air_status(new_status)
+	if(air_status == new_status)
+		return
+	air_status = new_status
+	update_air_properties()
+
+/**
+ * Updates our air properties
+ */
+/turf/proc/update_air_properties(force_rebuild)
+	switch(air_status)
 
