@@ -17,6 +17,8 @@ SUBSYSTEM_DEF(air)
 
 	/// Associative id = datum list of generated /datum/atmosphere's.
 	var/list/generated_atmospheres
+	/// Generated zones for immutable turfs.
+	var/list/immutable_zones
 
 	var/cost_turfs = 0
 	var/cost_edges = 0
@@ -149,7 +151,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 		#endif
 		if(MC_TICK_CHECK)
 			return
-	
+
 	if(LAZYLEN(selfblock_deferred) != 0)
 		stack_trace("WARNING: selfblock_deffered was not empty (length [LAZYLEN(selfblock_deferred)])")
 	src.selfblock_deferred = null
@@ -308,6 +310,15 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 		return gas_string
 	var/datum/atmosphere/mix = generated_atmospheres[gas_string]
 	return mix.gas_string
+
+/**
+ * Returns the cached immutable zone for a certain turf.
+ */
+/datum/controller/subsystem/air/proc/get_immutable_turf_zone(turf/T)
+	var/string = preprocess_gas_string(T.initial_gas_mix, T)
+	if(!immutable_zones[string])
+		immutable_zones[string] = new /datum/zone/immutable(string)
+	return immutable_zones[string]
 
 #undef SSAIR_TURFS
 #undef SSAIR_EDGES
