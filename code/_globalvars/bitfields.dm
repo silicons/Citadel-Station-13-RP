@@ -66,6 +66,9 @@ GLOBAL_LIST_INIT(bitfields, list(
 	"obj_flags" = list(
 		"EMAGGED" = EMAGGED,
 		"CAN_BE_HIT" = CAN_BE_HIT
+	),
+	"turf_flags" = list(
+		"UNUSED_RESERVATION_TURF" = UNUSED_RESERVATION_TURF
 	)
 /*
 	"obj_flags" = list(

@@ -4,6 +4,10 @@
 	plane = TURF_PLANE
 	luminosity = 1
 	level = 1
+
+	/// See __DEFINES/flags.dm - turf flags bitmask
+	var/turf_flags = NONE
+
 	var/holy = 0
 
 	// Properties for airtight tiles (/wall)
