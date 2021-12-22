@@ -7,12 +7,6 @@
 	///Intearaction flags
 	var/interaction_flags_atom = NONE
 
-	var/list/fingerprints
-	var/list/fingerprintshidden
-	var/fingerprintslast = null
-	var/list/blood_DNA
-	var/was_bloodied
-	var/blood_color
 	var/last_bumped = 0
 	var/pass_flags = NONE
 	var/throwpass = 0

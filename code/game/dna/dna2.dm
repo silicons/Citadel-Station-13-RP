@@ -213,7 +213,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 		//src.species_traits = CS.traits.Copy() //No traits
 		src.base_species = CS.base_species
 		src.blood_color = CS.blood_color
-		
+
 	src.custom_say = character.custom_say
 	src.custom_ask = character.custom_ask
 	src.custom_whisper = character.custom_whisper

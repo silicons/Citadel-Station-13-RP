@@ -1,3 +1,29 @@
+/**
+ * Fingerprints module
+ *
+ * Every time someone touches something without gloves, or with thin gloves, they
+ * have a chance to leave fingerprints. These fingerprints are often partial and fragmented,
+ * and repeated touches tend to leave fuller fingerprints.
+ *
+ * This is a relatively hard to leave piece of evidence due to the number of
+ * gloves in the game, but is also the hardest to clean, and is very deterministic in terms of
+ * who it tracks (hardest to spoof).
+ *
+ * This module also contains the fingerprintshidden and fingerprintslast variables, which are EXPLICITLY
+ * used for admin tracking. Do not apply any "balancing" to them! They are not used by players, only
+ * admin view variables.
+ */
+/atom
+	var/list/fingerprints
+	var/list/fingerprintshidden
+	var/fingerprintslast = null
+
+//This is the output of the stringpercent(print) proc, and means about 80% of
+//the print must be there for it to be complete.  (Prints are 32 digits)
+var/const/FINGERPRINT_COMPLETE = 6
+proc/is_complete_print(var/print)
+	return stringpercent(print) <= FINGERPRINT_COMPLETE
+
 
 /atom/proc/add_hiddenprint(mob/living/M as mob)
 	if(isnull(M)) return

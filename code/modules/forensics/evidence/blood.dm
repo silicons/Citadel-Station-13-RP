@@ -1,3 +1,21 @@
+/**
+ * Blood DNA module
+ *
+ * Touching something with bloody gloves/hands,
+ * getting hit with a bleeding wound while wearing clothing,
+ * making someone else bleed with an attack,
+ * and some other factors will cause you to bleed onto items.
+ *
+ * This leaves your blood DNA on it.
+ * Blood DNA can get fragmented/mixed if there's too many pieces of DNA on an object.
+ *
+ * This is by far the most easy piece of evidence to both leave and clean up.
+ * However, this is also a very deterministic piece of evidence.
+ */
+/atom
+	var/list/blood_DNA
+	var/was_bloodied
+	var/blood_color
 
 
 //returns 1 if made bloody, returns 0 otherwise

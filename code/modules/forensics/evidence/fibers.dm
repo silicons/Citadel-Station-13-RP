@@ -1,9 +1,23 @@
+/**
+ * Fibers module
+ *
+ * Every time someone touches something, they have a chance to leave fibers.
+ *
+ * Fibers is now associative instead of just additive,
+ * so you can get the relative count of fibers on an object.
+ *
+ * Every time something is used, there is also a small chance to dislodge fibers.
+ *
+ * This is a mildly useful and easy to leave evidence type.
+ */
+/atom
+	/// Fibers. [fiber] = count
+	var/list/fibers
 
-//This is the output of the stringpercent(print) proc, and means about 80% of
-//the print must be there for it to be complete.  (Prints are 32 digits)
-var/const/FINGERPRINT_COMPLETE = 6
-proc/is_complete_print(var/print)
-	return stringpercent(print) <= FINGERPRINT_COMPLETE
+
+
+
+
 
 atom/var/list/suit_fibers
 
