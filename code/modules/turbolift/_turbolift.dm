@@ -44,6 +44,8 @@
 	var/priority_called_at
 
 	// Structure
+	/// Ordered floors
+	var/list/datum/floor/ordered_floors
 
 
 
