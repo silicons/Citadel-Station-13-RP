@@ -28,8 +28,6 @@ GLOBAL_LIST_INIT(surgery_steps, initialize_surgery_steps)
 
 
 //////////////////////////////////////////////////////////
-
-
 	var/priority = 0	//steps with higher priority would be attempted first
 
 	var/req_open = 1	//1 means the part must be cut open, 0 means it doesn't
@@ -39,10 +37,6 @@ GLOBAL_LIST_INIT(surgery_steps, initialize_surgery_steps)
 
 	// List of procs that can be called if allowed_tools fails
 	var/list/allowed_procs = null
-
-	// type paths referencing races that this step applies to.
-	var/list/allowed_species = null
-	var/list/disallowed_species = null
 
 	// duration of the step
 	var/min_duration = 0

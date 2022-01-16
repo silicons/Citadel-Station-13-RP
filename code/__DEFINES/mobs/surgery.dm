@@ -30,6 +30,14 @@
 /// leave blood everywhere
 #define SURGERY_BLOOD_MAJOR			2
 
+// surgery step open requirements
+/// require nothing
+#define SURGERY_REQUIRES_NONE				1
+/// requires partially open
+#define SURGERY_REQUIRES_PARTIALLY_OPEN		2
+/// requires fully open
+#define SURGERY_REQUIRES_FULLY_OPEN			3
+
 // state defines
 
 // /datum/surgery_state/robotic/open_panel
