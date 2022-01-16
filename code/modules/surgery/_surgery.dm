@@ -1,9 +1,33 @@
-/* SURGERY STEPS */
+/**
+ * Surgery module
+ *
+ * Specifically for surgery on /obj/item/organ/external.
+ *
+ * Supports staged open/close as well as surgical states.
+ */
+GLOBAL_LIST_INIT(surgery_steps, initialize_surgery_steps)
 
-/obj/
-	var/surgery_odds = 0 // Used for tables/etc which can have surgery done of them.
+/proc/initialize_surgery_steps()
+	. = list()
+	for(var/path in subtypesof(/datum/surgery_step))
+		var/datum/surgery_step/S = path
+		if(initial(S.abstract_type) == path)
+			continue
+		. += new path
+	sortTim(., /proc/cmp_surgery_priority_asc)
 
+/**
+ * An individual surgery step
+ */
 /datum/surgery_step
+	/// abstract type
+	var/abstract_type = /datum/surgery_step
+
+
+
+//////////////////////////////////////////////////////////
+
+
 	var/priority = 0	//steps with higher priority would be attempted first
 
 	var/req_open = 1	//1 means the part must be cut open, 0 means it doesn't
@@ -166,16 +190,76 @@
 				return	1	  												//don't want to do weapony things after surgery
 	return 0
 
-/proc/initialize_surgeries()
-	. = list()
-	for(var/path in subtypesof(/datum/surgery_step))
-		. += new path
-	sortTim(., cmp = /proc/cmp_surgery_priority_asc)
+//////////////////////////////////////////////////////////////
 
-/datum/surgery_status/
-	var/eyes	=	0
-	var/face	=	0
-	var/brainstem = 0
-	var/head_reattach = 0
-	var/current_organ = "organ"
-	var/list/in_progress = list()
+/**
+ * State datum placed on limbs themselves
+ */
+/datum/surgery_data
+	/// What kind of surgeries can be done on us
+	var/surgery_type = SURGERY_TYPE_NONE
+	/// Our current open stage
+	var/open_state = SURGERY_OPEN_NONE
+	/// Current list of mobs operating on us
+	var/list/mob/living/operated_by
+	/// List of states, associated to path
+	var/list/states
+	/// What limb we belong to
+	var/obj/item/organ/external/parent
+
+/datum/surgery_data/New(obj/item/organ/external/E)
+	if(istype(E))
+		parent = E
+
+/datum/surgery_data/Destroy()
+	parent = null
+	operated_by = null
+	states = null
+	return ..()
+
+/datum/surgery_data/proc/is_fully_open()
+	return FALSE
+
+/datum/surgery_data/proc/is_partially_open()
+	return FALSE
+
+/datum/surgery_data/proc/set_state(type, data)
+	if(!states)
+		states = list()
+	states[type] = new type(data)
+
+/datum/surgery_data/proc/clear_state(type)
+	if(!states)
+		return
+	states -= type
+
+/datum/surgery_data/proc/get_state(type)
+	return states && states[type]
+
+/datum/surgery_data/proc/set_open(new_state)
+	open_state = new_state
+	validate()
+
+/datum/surgery_data/proc/validate()
+	if(!parent)
+		return
+	for(var/path in states)
+		var/datum/surgery_sate/state = states[path]
+		if(!state.is_valid(parent, src))
+			clear_state(type)
+
+/**
+ * Individual surgery states
+ */
+/datum/surgery_state
+	/// our state
+	var/state
+
+/datum/surgery_state/New(_state)
+	state = _state
+
+/**
+ * Returns if we make sense for a limb.
+ */
+/datum/surgery_state/proc/is_valid(obj/item/organ/external/affecting)
+	return TRUE

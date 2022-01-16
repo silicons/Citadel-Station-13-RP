@@ -71,18 +71,18 @@
 	var/dislocated = 0    // If you target a joint, you can dislocate the limb, impairing it's usefulness and causing pain
 	var/encased                        // Needs to be opened with a saw to access the organs.
 
+	// HUD element variable, see organ_icon.dm get_damage_hud_image()
+	var/image/hud_damage_image
+
+	/// makes this dumb as fuck mechanic slightly less awful - records queued syringe infections instead of a spawn()
+	var/syringe_infection_queued
+
 	// Surgery vars.
 	var/open = 0
 	var/stage = 0
 	var/cavity = 0
 	var/burn_stage = 0		//Surgical repair stage for burn.
 	var/brute_stage = 0		//Surgical repair stage for brute.
-
-	// HUD element variable, see organ_icon.dm get_damage_hud_image()
-	var/image/hud_damage_image
-
-	/// makes this dumb as fuck mechanic slightly less awful - records queued syringe infections instead of a spawn()
-	var/syringe_infection_queued
 
 /obj/item/organ/external/Destroy()
 
