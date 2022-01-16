@@ -77,12 +77,12 @@
 	/// makes this dumb as fuck mechanic slightly less awful - records queued syringe infections instead of a spawn()
 	var/syringe_infection_queued
 
-	// Surgery vars.
-	var/open = 0
-	var/stage = 0
-	var/cavity = 0
-	var/burn_stage = 0		//Surgical repair stage for burn.
-	var/brute_stage = 0		//Surgical repair stage for brute.
+/obj/item/organ/external/Initialize(mapload)
+	. = ..(mapload, FALSE)
+	if(owner)
+		replaced(owner)
+		sync_colour_to_human(owner)
+	addtimer(CALLBACK(src, .proc/get_icon), 1)
 
 /obj/item/organ/external/Destroy()
 
@@ -222,13 +222,6 @@
 
 /obj/item/organ/external/update_health()
 	damage = min(max_damage, (brute_dam + burn_dam))
-
-/obj/item/organ/external/Initialize(mapload)
-	. = ..(mapload, FALSE)
-	if(owner)
-		replaced(owner)
-		sync_colour_to_human(owner)
-	addtimer(CALLBACK(src, .proc/get_icon), 1)
 
 /obj/item/organ/external/replaced(var/mob/living/carbon/human/target)
 	owner = target
@@ -1129,6 +1122,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	dislocated = -1
 	cannot_break = 1
+	encased = FALSE
 	min_broken_damage = ROBOLIMB_REPAIR_CAP //VOREStation Addition - Makes robotic limb damage scalable
 	remove_splint()
 	get_icon()

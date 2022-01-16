@@ -2949,6 +2949,7 @@
 #include "code\modules\organs\external\_render.dm"
 #include "code\modules\organs\external\robolimbs.dm"
 #include "code\modules\organs\external\stump.dm"
+#include "code\modules\organs\external\surgery.dm"
 #include "code\modules\organs\external\subtypes\alraune.dm"
 #include "code\modules\organs\external\subtypes\diona.dm"
 #include "code\modules\organs\external\subtypes\indestructible.dm"

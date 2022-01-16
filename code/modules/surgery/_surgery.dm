@@ -3,6 +3,8 @@
  *
  * Specifically for surgery on /obj/item/organ/external.
  *
+ * A lot of the code is on code/modules/organs/external/surgery.dm
+ *
  * Supports staged open/close as well as surgical states.
  */
 GLOBAL_LIST_INIT(surgery_steps, initialize_surgery_steps)
@@ -191,62 +193,6 @@ GLOBAL_LIST_INIT(surgery_steps, initialize_surgery_steps)
 	return 0
 
 //////////////////////////////////////////////////////////////
-
-/**
- * State datum placed on limbs themselves
- */
-/datum/surgery_data
-	/// What kind of surgeries can be done on us
-	var/surgery_type = SURGERY_TYPE_NONE
-	/// Our current open stage
-	var/open_state = SURGERY_OPEN_NONE
-	/// Current list of mobs operating on us
-	var/list/mob/living/operated_by
-	/// List of states, associated to path
-	var/list/states
-	/// What limb we belong to
-	var/obj/item/organ/external/parent
-
-/datum/surgery_data/New(obj/item/organ/external/E)
-	if(istype(E))
-		parent = E
-
-/datum/surgery_data/Destroy()
-	parent = null
-	operated_by = null
-	states = null
-	return ..()
-
-/datum/surgery_data/proc/is_fully_open()
-	return FALSE
-
-/datum/surgery_data/proc/is_partially_open()
-	return FALSE
-
-/datum/surgery_data/proc/set_state(type, data)
-	if(!states)
-		states = list()
-	states[type] = new type(data)
-
-/datum/surgery_data/proc/clear_state(type)
-	if(!states)
-		return
-	states -= type
-
-/datum/surgery_data/proc/get_state(type)
-	return states && states[type]
-
-/datum/surgery_data/proc/set_open(new_state)
-	open_state = new_state
-	validate()
-
-/datum/surgery_data/proc/validate()
-	if(!parent)
-		return
-	for(var/path in states)
-		var/datum/surgery_sate/state = states[path]
-		if(!state.is_valid(parent, src))
-			clear_state(type)
 
 /**
  * Individual surgery states
