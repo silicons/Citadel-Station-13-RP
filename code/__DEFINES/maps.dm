@@ -11,6 +11,9 @@
 // Misc map defines.
 #define SUBMAP_MAP_EDGE_PAD 8 // Automatically created submaps are forbidden from being this close to the main map's edge.	//VOREStation Edit
 
+// Access map misc metainformation
+#define ACCESS_MAP_METAINFO(key)		"[(SSmapping.current_map_metainfo(key))]"
+
 // TG MAP LOADING SYSTEM PENDING
 /*
 The /tg/ codebase allows mixing of hardcoded and dynamically-loaded z-levels.

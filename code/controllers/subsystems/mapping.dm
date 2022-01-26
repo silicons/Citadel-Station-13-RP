@@ -307,6 +307,11 @@ SUBSYSTEM_DEF(mapping)
 	used_turfs.Cut()
 	reserve_turfs(clearing)
 
+/**
+ * Returns a string of a metainformation property for a map, by key.
+ */
+/datum/controller/subsystem/mapping/proc/current_map_metainfo(key)
+	return config.metainfo.Find(key)? config.metainfo[key] : "!!KEY NOT FOUND: [key]"
 
 //
 // Mapping subsystem handles initialization of random map elements at server start

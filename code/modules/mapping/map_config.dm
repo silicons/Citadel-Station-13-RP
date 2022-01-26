@@ -33,6 +33,9 @@
 	/// List of lists for Zlevel traits.
 	var/traits = null
 
+	/// Metainfo list, for misc stuff. Keys are defined in maps.dm
+	var/list/metainfo = list()
+
 /*
 	var/space_ruin_levels = 2
 	var/space_empty_levels = 1
