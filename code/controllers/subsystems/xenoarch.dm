@@ -1,3 +1,10 @@
+/**
+ * xenoarcheology system
+ * handles energy emissions, generation, handling procs, etc
+ * lots of the code are in code/modules/xenoarch/
+ * all fire() code and active ticker code should be in here though
+ */
+
 #define XENOARCH_SPAWN_CHANCE 0.5
 #define DIGSITESIZE_LOWER 4
 #define DIGSITESIZE_UPPER 12
