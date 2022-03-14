@@ -1,0 +1,148 @@
+/*****************************Pickaxe********************************/
+
+/obj/item/pickaxe
+	name = "mining drill"
+	desc = "The most basic of mining drills, for short excavations and small mineral extractions."
+	icon = 'icons/obj/items.dmi'
+	slot_flags = SLOT_BELT
+	force = 15.0
+	throwforce = 4.0
+	icon_state = "pickaxe"
+	item_state = "jackhammer"
+	w_class = ITEMSIZE_LARGE
+	matter = list(DEFAULT_WALL_MATERIAL = 3750)
+	var/digspeed = 40 //moving the delay to an item var so R&D can make improved picks. --NEO
+	var/sand_dig = FALSE
+	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
+	attack_verb = list("hit", "pierced", "sliced", "attacked")
+	var/drill_sound = 'sound/weapons/Genhit.ogg'
+	var/drill_verb = "drilling"
+	sharp = 1
+
+	var/excavation_amount = 200
+	var/destroy_artefacts = FALSE // some mining tools will destroy artefacts completely while avoiding side-effects.
+
+/obj/item/pickaxe/silver
+	name = "silver pickaxe"
+	icon_state = "spickaxe"
+	item_state = "spickaxe"
+	digspeed = 30
+	origin_tech = list(TECH_MATERIAL = 3)
+	desc = "This makes no metallurgic sense."
+
+/obj/item/pickaxe/drill
+	name = "advanced mining drill" // Can dig sand as well!
+	icon_state = "handdrill"
+	item_state = "jackhammer"
+	digspeed = 30
+	origin_tech = list(TECH_MATERIAL = 2, TECH_POWER = 3, TECH_ENGINEERING = 2)
+	desc = "Yours is the drill that will pierce through the rock walls."
+	drill_verb = "drilling"
+	sand_dig = TRUE
+
+/obj/item/pickaxe/jackhammer
+	name = "sonic jackhammer"
+	icon_state = "jackhammer"
+	item_state = "jackhammer"
+	digspeed = 20 //faster than drill, but cannot dig
+	origin_tech = list(TECH_MATERIAL = 3, TECH_POWER = 2, TECH_ENGINEERING = 2)
+	desc = "Cracks rocks with sonic blasts, perfect for killing cave lizards."
+	drill_verb = "hammering"
+
+/obj/item/pickaxe/gold
+	name = "golden pickaxe"
+	icon_state = "gpickaxe"
+	item_state = "gpickaxe"
+	digspeed = 20
+	origin_tech = list(TECH_MATERIAL = 4)
+	desc = "This makes no metallurgic sense."
+	drill_verb = "picking"
+
+/obj/item/pickaxe/plasmacutter
+	name = "plasma cutter"
+	icon_state = "plasmacutter"
+	item_state = "gun"
+	w_class = ITEMSIZE_NORMAL //it is smaller than the pickaxe
+	damtype = "fire"
+	digspeed = 20 //Can slice though normal walls, all girders, or be used in reinforced wall deconstruction/ light thermite on fire
+	origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINEERING = 3)
+	desc = "A rock cutter that uses bursts of hot plasma. You could use it to cut limbs off of xenos! Or, you know, mine stuff."
+	drill_verb = "cutting"
+	drill_sound = 'sound/items/Welder.ogg'
+	sharp = 1
+	edge = 1
+
+/obj/item/pickaxe/diamond
+	name = "diamond pickaxe"
+	icon_state = "dpickaxe"
+	item_state = "dpickaxe"
+	digspeed = 10
+	origin_tech = list(TECH_MATERIAL = 6, TECH_ENGINEERING = 4)
+	desc = "A pickaxe with a diamond pick head."
+	drill_verb = "picking"
+
+/obj/item/pickaxe/diamonddrill // When people ask about the badass leader of the mining tools, they are talking about ME!
+	name = "diamond mining drill"
+	icon_state = "diamonddrill"
+	item_state = "jackhammer"
+	digspeed = 5 //Digs through walls, girders, and can dig up sand
+	origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 4, TECH_ENGINEERING = 5)
+	desc = "Yours is the drill that will pierce the heavens!"
+	drill_verb = "drilling"
+	sand_dig = TRUE
+
+/obj/item/pickaxe/borgdrill
+	name = "enhanced sonic jackhammer"
+	icon_state = "jackhammer"
+	item_state = "jackhammer"
+	digspeed = 15
+	desc = "Cracks rocks with sonic blasts. This one seems like an improved design."
+	drill_verb = "hammering"
+	sand_dig = TRUE
+
+/obj/item/pickaxe/icepick //Cannot actually lobotomize people. Yet.
+	name = "icepick"
+	desc = "A simple icepick, for all your digging, climbing, and lobotomizing needs."
+	slot_flags = SLOT_BELT
+	force = 12
+	throwforce = 15 //Discount shuriken.
+	icon_state = "icepick"
+	item_state = "spickaxe" //im lazy fuck u
+	w_class = ITEMSIZE_SMALL
+	matter = list(DEFAULT_WALL_MATERIAL = 2750, "titanium" = 2000)
+	digspeed = 25 //More expensive than a diamond pick, a lot smaller but decently slower.
+	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
+	attack_verb = list("mined", "pierced", "stabbed", "attacked")
+	drill_verb = "picking"
+	sharp = 1
+
+//upgrades the speed of all drills and pickaxes.
+
+/obj/item/pickaxe
+	digspeed = 36
+
+/obj/item/pickaxe/silver
+	digspeed = 27
+
+/obj/item/pickaxe/drill
+	digspeed = 27
+
+/obj/item/pickaxe/jackhammer
+	digspeed = 18
+	destroy_artefacts = TRUE
+
+/obj/item/pickaxe/gold
+	digspeed = 18
+
+/obj/item/pickaxe/plasmacutter
+	digspeed = 18
+
+/obj/item/pickaxe/diamond
+	digspeed = 9
+
+/obj/item/pickaxe/diamonddrill
+	digspeed = 4
+
+/obj/item/pickaxe/borgdrill
+	digspeed = 13
+	destroy_artefacts = TRUE
