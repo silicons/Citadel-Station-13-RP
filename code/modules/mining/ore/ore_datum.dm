@@ -57,6 +57,7 @@ GLOBAL_LIST_INIT(ore_data, initialize_ore_data())
 	name = "carbon"
 	display_name = "raw carbon"
 	smelts_to = "plastic"
+	compresses_to = "carbon"
 	alloy = 1
 	result_amount = 5
 	spread_chance = 30
