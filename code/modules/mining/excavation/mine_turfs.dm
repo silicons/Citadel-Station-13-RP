@@ -2,12 +2,6 @@ var/list/mining_overlay_cache = list()
 
 
 /**********************Mineral deposits**************************/
-/turf/unsimulated/mineral
-	name = "impassable rock"
-	icon = 'icons/turf/walls.dmi'
-	icon_state = "rock-dark"
-	density = 1
-
 /turf/simulated/mineral //wall piece
 	name = "rock"
 	icon = 'icons/turf/walls.dmi'
@@ -39,6 +33,21 @@ var/list/mining_overlay_cache = list()
 	var/ignore_mapgen
 
 	has_resources = 1
+	var/ignore_oregen = FALSE
+	var/ignore_cavegen = FALSE
+
+/turf/simulated/mineral/ignore_oregen
+	ignore_oregen = TRUE
+
+/turf/simulated/mineral/floor/ignore_oregen
+	ignore_oregen = TRUE
+
+/turf/simulated/mineral/ignore_cavegen
+	ignore_cavegen = TRUE
+
+/turf/simulated/mineral/floor/ignore_cavegen
+	ignore_cavegen = TRUE
+
 
 // Alternative rock wall sprites.
 /turf/simulated/mineral/light
