@@ -1,9 +1,15 @@
 /**
- * excavation - "horizontal" mining, breaking rock walls
- *
- * the archeology system hooks into this.
+ * mineral walls and turfs
+ * contains minerals and xenoarch finds
+ * in the future we might get underground artifacts but not now
  */
+/turf/simulated/mineral
+	name = "rock"
+	icon = 'icons/modules/mining/turfs.dmi'
+	icon_state = "rock"
 
+
+/turf/simulated/mineral/floor
 
 var/list/mining_overlay_cache = list()
 

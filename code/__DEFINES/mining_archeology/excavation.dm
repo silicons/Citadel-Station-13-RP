@@ -17,3 +17,7 @@
 #define EXCAVATION_LEVEL_MAX_BOULDER			100
 /// default excavation level for pickaxes meant to destroy the whole turf
 #define EXCAVATION_LEVEL_MINING_TOOLS			200
+
+// ret vals
+/// can't excavate
+#define CANT_EXCAVATE							-1
