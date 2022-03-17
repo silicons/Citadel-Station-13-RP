@@ -1,3 +1,13 @@
+/**
+ * effects used for scanning
+ *
+ * to make things visible through walls, we are going to use images with 480x480 overlays without TILE_BOUND
+ */
+/atom/movable/effect/mineral
+	name = "mineral vein"
+	desc = "Why can you see this text?"
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+
 /obj/effect/mineral
 	name = "mineral vein"
 	icon = 'icons/obj/mining.dmi'

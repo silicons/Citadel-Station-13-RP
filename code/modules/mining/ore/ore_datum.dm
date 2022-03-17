@@ -24,6 +24,13 @@ GLOBAL_LIST_INIT(ore_data, initialize_ore_data())
 		)
 	var/xarch_source_mineral = "iron"
 
+	#warn impl, get rid of old
+	/// icon used for all resources involving ore
+	var/icon = 'icons/modules/mining/ores.dmi'
+	/// state used for flickering during scan
+	// var/icon_state_scan =
+	/// state used for
+
 /datum/ore/New()
 	. = ..()
 	if(!display_name)
