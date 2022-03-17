@@ -27,6 +27,8 @@
 // creates the random item
 /obj/random/proc/spawn_item()
 	var/build_path = item_to_spawn()
+	if(!ispath(build_path))
+		CRASH("Invalid path: [build_path].")
 
 	var/atom/A = new build_path(drop_location())
 	if(pixel_x || pixel_y)

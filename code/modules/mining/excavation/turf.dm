@@ -7,9 +7,17 @@
 	name = "rock"
 	icon = 'icons/modules/mining/turfs.dmi'
 	icon_state = "rock"
+	#warn icon smoothing / sprites
+	/// path to drilled version of turf
+	var/excavates_to = /turf/simulated/mineral/floor
+
 
 
 /turf/simulated/mineral/floor
+	name = "sand"
+	icon = 'icons/modules/mining/turfs.dmi'
+	icon_state = "sand"
+	#warn icon smoothing / sprites
 
 var/list/mining_overlay_cache = list()
 
