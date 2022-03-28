@@ -23,6 +23,7 @@
 
 #define Z_LEVEL_TRADEPORT				20
 #define Z_LEVEL_LAVALAND				21
+#define Z_LEVEL_LAVALAND_EAST			22
 
 // Camera Networks
 /datum/map/triumph
@@ -142,18 +143,21 @@
 						 	 	 Z_LEVEL_ROGUEMINE_3,
 								 Z_LEVEL_ROGUEMINE_4)
 
+	lavaland_levels =		list(Z_LEVEL_LAVALAND,
+								 Z_LEVEL_LAVALAND_EAST)
+
 	lateload_z_levels = list(
 		list("Triumph - Misc","Triumph - Ships",), // Stock Triumph lateload maps
 		list("Debris Field - Z1 Space"), // Debris Field
 		list("Away Mission - Pirate Base"), // Vox Pirate Base & Mining Planet
-		list("Away Mission - Mining Planet"),//Mining planet
-		list("ExoPlanet - Z1 Planet"), // Rogue Exoplanet
-		list("ExoPlanet - Z2 Planet"), // Desert Exoplanet
-		list("Gaia Planet - Z3 Planet"), // Gaia Planet
-		list("Forzen Planet - Z4 Planet"), // Frozen Planet
+		list("ExoPlanet - Z1 Planet"),//Mining planet
+		list("ExoPlanet - Z2 Planet"), // Rogue Exoplanet
+		list("ExoPlanet - Z3 Planet"), // Desert Exoplanet
+		list("ExoPlanet - Z4 Planet"), // Gaia Planet
+		list("ExoPlanet - Z5 Planet"), // Frozen Planet
 		list("Asteroid Belt 1","Asteroid Belt 2","Asteroid Belt 3","Asteroid Belt 4"),
 		list("Away Mission - Trade Port"), // Trading Post
-		list("Away Mission - Lava Land")
+		list("Away Mission - Lava Land", "Away Mission - Lava Land (East)")
 	)
 
 	ai_shell_restricted = TRUE
@@ -170,14 +174,17 @@
 		Z_LEVEL_GAIA_PLANET,
 		Z_LEVEL_FROZEN_PLANET,
 		Z_LEVEL_TRADEPORT,
-		Z_LEVEL_LAVALAND)
+		Z_LEVEL_LAVALAND,
+		Z_LEVEL_LAVALAND_EAST)
 
 	lateload_single_pick = null //Nothing right now.
-	
+
 	planet_datums_to_make = list(/datum/planet/lavaland,
+								/datum/planet/classg,
+								/datum/planet/classd,
 								/datum/planet/classh,
-								/datum/planet/frozen_planet,
-								/datum/planet/gaia_planet)
+								/datum/planet/classp,
+								/datum/planet/classm)
 
 /datum/map/triumph/perform_map_generation()
 	return 1
