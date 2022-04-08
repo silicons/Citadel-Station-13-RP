@@ -33,7 +33,7 @@
 			return
 
 		user.remove_from_mob(C)
-		C.loc = src
+		C.forceMove(src)
 		loaded.Insert(1, C) //add to the head of the list
 		user.visible_message("[user] notches \the [C] into [src].", "<span class='notice'>You nock \the [C] into [src].</span>")
 		playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)

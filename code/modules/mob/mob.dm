@@ -1032,6 +1032,8 @@ mob/proc/yank_out_object()
 	else
 		return ..()
 
+#warn change these to be like synthetik/cm :drool:
+
 /mob/verb/northfaceperm()
 	set hidden = 1
 	set_face_dir(client.client_dir(NORTH))
