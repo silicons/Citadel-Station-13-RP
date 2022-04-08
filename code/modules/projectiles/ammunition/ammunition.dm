@@ -18,6 +18,8 @@
 	var/caseless = FALSE
 	/// ferromagnetic - if true, magnetic acceleration weapons can fire this. caseless should usually be TRUE for this, unless you want a cased magnetic projectile(???)
 	var/ferromagntic = FALSE
+	/// has ballistic accelerant - without this, it'll need to be ferromagnetic or have another way of being fired
+	var/accelerant = TRUE
 
 /obj/item/ammo_casing/Initialize(mapload)
 	. = ..()
