@@ -31,6 +31,9 @@
 	var/overlay_full_state = "cell-o2" // Overlay used when fully charged.
 	var/last_overlay_state = null // Used to optimize update_icon() calls.
 
+	/// cell type
+	var/cell_type = CELL_TYPE_NORMAL
+
 /obj/item/cell/Initialize(mapload)
 	. = ..()
 	if(isnull(charge))

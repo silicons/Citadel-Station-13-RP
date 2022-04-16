@@ -12,6 +12,7 @@
 	charge_amount = 5
 	matter = list("metal" = 350, "glass" = 50)
 	preserve_item = 1
+	cell_type = CELL_TYPE_DEVICE
 
 /obj/item/cell/device/empty
 	charge = 0
