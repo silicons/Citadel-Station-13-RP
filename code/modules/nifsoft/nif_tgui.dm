@@ -22,7 +22,7 @@
  * Small helper component to manage the HUD icon
  */
 /datum/component/nif_menu
-	var/obj/screen/nif/screen_icon
+	var/atom/movable/screen/nif/screen_icon
 
 /datum/component/nif_menu/Initialize(mapload)
 	if(!ismob(parent))
@@ -62,7 +62,7 @@
 
 	user.verbs |= /mob/living/carbon/human/proc/nif_menu
 
-/datum/component/nif_menu/proc/nif_menu_click(obj/screen/nif/image, location, control, params, user)
+/datum/component/nif_menu/proc/nif_menu_click(atom/movable/screen/nif/image, location, control, params, user)
 	var/mob/living/carbon/human/H = user
 	if(istype(H) && H.nif)
 		INVOKE_ASYNC(H.nif, .proc/ui_interact, user)
@@ -70,7 +70,7 @@
 /**
  * Screen object for NIF menu access
  */
-/obj/screen/nif
+/atom/movable/screen/nif
 	name = "nif menu"
 	icon = 'icons/mob/screen/midnight.dmi'
 	icon_state = "nif"
