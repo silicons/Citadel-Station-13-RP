@@ -80,7 +80,7 @@
 
 					//Blind the AI
 					updateicon()
-					overlay_fullscreen("blind", /atom/movable/screen/fullscreen/blind)
+					overlay_fullscreen("blind", /atom/movable/screen/fullscreen/scaled/blind)
 					src.sight = src.sight&~SEE_TURFS
 					src.sight = src.sight&~SEE_MOBS
 					src.sight = src.sight&~SEE_OBJS
@@ -169,7 +169,7 @@
 /mob/living/silicon/ai/updatehealth()
 	if(status_flags & GODMODE)
 		health = 100
-		stat = CONSCIOUS
+		set_stat(CONSCIOUS)
 		setOxyLoss(0)
 	else
 		health = 100 - getFireLoss() - getBruteLoss() // Oxyloss is not part of health as it represents AIs backup power. AI is immune against ToxLoss as it is machine.
@@ -177,4 +177,3 @@
 /mob/living/silicon/ai/rejuvenate()
 	..()
 	add_ai_verbs(src)
-

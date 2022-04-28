@@ -227,7 +227,7 @@
 /mob/living/carbon/proc/eyecheck()
 	return 0
 
-/mob/living/carbon/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /atom/movable/screen/fullscreen/flash)
+/mob/living/carbon/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /atom/movable/screen/fullscreen/tiled/flash)
 	if(eyecheck() < intensity || override_blindness_check)
 		return ..()
 
@@ -359,7 +359,7 @@
 	return ..()
 
 /mob/living/carbon/proc/set_nutrition(amount)
-	nutrition = clamp(amount, 0, initial(nutrition))
+	nutrition = clamp(amount, 0, initial(nutrition) * 1.5)
 
 /mob/living/carbon/proc/adjust_nutrition(amount)
 	set_nutrition(nutrition + amount)

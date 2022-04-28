@@ -1,17 +1,24 @@
 /mob
+	datum_flags = DF_USE_TAG
 	density = 1
 	layer = MOB_LAYER
 	plane = MOB_PLANE
 	animate_movement = 2
 	flags = PROXMOVE | HEAR
 
+	// Rendering
+	/// Fullscreen objects
+	var/list/fullscreens = list()
+
 	// Intents
 	/// How are we intending to move? Walk/run/etc.
 	var/m_intent = MOVE_INTENT_RUN
 
-	var/datum/mind/mind
+	var/next_mob_id = 0
 
-	var/stat = 0 //Whether a mob is alive or dead. TODO: Move this to living - Nodrak
+	var/datum/mind/mind
+	/// Whether a mob is alive or dead. TODO: Move this to living - Nodrak
+	var/stat = CONSCIOUS
 	/// Next world.time we will be able to move.
 	var/move_delay = 0
 	/// Last world.time we turned in our spot without moving (see: facing directions)
@@ -239,7 +246,7 @@
 	var/typing
 	var/obj/effect/decal/typing_indicator
 
-	var/low_priority = FALSE //Skip processing life() if there's just no players on this Z-level
+	var/low_priority = TRUE //Skip processing life() if there's just no players on this Z-level
 
 	var/default_pixel_x = 0 //For offsetting mobs
 	var/default_pixel_y = 0
