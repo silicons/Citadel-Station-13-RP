@@ -265,9 +265,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	*/
 
 	. = ..()	//calls mob.Login()
-
-	if(!using_perspective)
-		stack_trace("mob login didn't put in perspective")
+	//! WARNING: mob.login is called ASYNC. Do not do anything important in it that you want to access from this proc or the procs this proc calls!
 
 	if(log_client_to_db() == "BUNKER_DROPPED")
 		disconnect_with_message("Disconnected by bunker: [config_legacy.panic_bunker_message]")
