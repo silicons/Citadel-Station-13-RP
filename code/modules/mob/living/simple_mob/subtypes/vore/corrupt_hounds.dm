@@ -57,7 +57,7 @@
 	maxbodytemp = 900
 
 	say_list_type = /datum/say_list/corrupthound
-	ai_holder_type = /datum/ai_holder/simple_mob/melee/evasive/corrupthound
+	ai_holder_type = /datum/ai_holder/fsm/simple_mob/melee/evasive/corrupthound
 
 	max_buckled_mobs = 1 //Yeehaw
 	can_buckle = TRUE
@@ -130,7 +130,7 @@
 	say_maybe_target = list("MEAT?", "NEW FRIEND?", "WHAT!", "Not again. NOT AGAIN!", "FRIEND?")
 	say_got_target = list("HERE COMES BIG MEAN HUG MACHINE!", "I'LL BE GENTLE!", "FUEL ME FRIEND!", "I*M SO SORRY!", "YUMMY TREAT DETECTED!", "LOVE ME!", "Not again. NOT AGAIN!")
 
-/datum/ai_holder/simple_mob/melee/evasive/corrupthound
+/datum/ai_holder/fsm/simple_mob/melee/evasive/corrupthound
 	violent_breakthrough = TRUE
 	can_breakthrough = TRUE
 

@@ -50,7 +50,7 @@
 	mount_offset_x = 0
 
 	say_list_type = /datum/say_list/horse
-	ai_holder_type = /datum/ai_holder/simple_mob/retaliate
+	ai_holder_type = /datum/ai_holder/fsm/simple_mob/retaliate
 
 // Activate Noms!
 /mob/living/simple_mob/vore/horse

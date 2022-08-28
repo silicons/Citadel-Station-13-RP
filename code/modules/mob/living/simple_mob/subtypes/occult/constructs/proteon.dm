@@ -30,4 +30,4 @@
 	movement_cooldown = 0
 	catalogue_data = list(/datum/category_item/catalogue/fauna/construct/proteon)
 
-	ai_holder_type = /datum/ai_holder/simple_mob/melee/evasive
+	ai_holder_type = /datum/ai_holder/fsm/simple_mob/melee/evasive

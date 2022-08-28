@@ -34,7 +34,7 @@
 	pixel_x = -16
 	pixel_y = 0
 
-	ai_holder_type = /datum/ai_holder/simple_mob/melee
+	ai_holder_type = /datum/ai_holder/fsm/simple_mob/melee
 	say_list_type = /datum/say_list/dragonboss
 
 /mob/living/simple_mob/vore/aggressive/dragon/Process_Spacemove(var/check_drift = 0)

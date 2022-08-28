@@ -90,7 +90,7 @@
 
 	say_list_type = /datum/say_list/mouse
 
-	ai_holder_type = /datum/ai_holder/simple_mob/melee/evasive
+	ai_holder_type = /datum/ai_holder/fsm/simple_mob/melee/evasive
 
 	var/rank //pyro, operative, ammo, stealth. more to come. Do not leave blank.
 
@@ -209,7 +209,7 @@
 	projectiletype = /obj/item/projectile/bullet/incendiary/flamethrower
 	base_attack_cooldown = 10
 
-	ai_holder_type = /datum/ai_holder/simple_mob/ranged
+	ai_holder_type = /datum/ai_holder/fsm/simple_mob/ranged
 
 	var/datum/effect_system/spark_spread/spark_system
 	var/ruptured = FALSE
@@ -287,7 +287,7 @@
 	var/explosion_delay_lower	= 1 SECOND	// Lower bound for explosion delay.
 	var/explosion_delay_upper	= 3 SECONDS	// Upper bound.
 
-	ai_holder_type = /datum/ai_holder/simple_mob/melee/evasive
+	ai_holder_type = /datum/ai_holder/fsm/simple_mob/melee/evasive
 
 /mob/living/simple_mob/animal/space/mouse_army/ammo/death()
 	visible_message("<span class='critical'>\The [src]'s body begins to rupture!</span>")
@@ -348,7 +348,7 @@
 	you will do bonus damage, stun the target, and unstealth for a period of time.<br>\
 	Getting attacked will also break your stealth."
 
-	ai_holder_type = /datum/ai_holder/simple_mob/melee/hit_and_run
+	ai_holder_type = /datum/ai_holder/fsm/simple_mob/melee/hit_and_run
 
 	var/stealthed = FALSE
 	var/stealthed_alpha = 45			// Lower = Harder to see.

@@ -42,10 +42,10 @@
 
 	movement_cooldown = -1
 
-	ai_holder_type = /datum/ai_holder/simple_mob/statue
+	ai_holder_type = /datum/ai_holder/fsm/simple_mob/statue
 
 //Mob AI Code.
-/datum/ai_holder/simple_mob/statue
+/datum/ai_holder/fsm/simple_mob/statue
 	hostile = TRUE
 	retaliate = FALSE
 	cooperative = FALSE
@@ -55,7 +55,7 @@
 	wander = FALSE
 
 /*
-/datum/ai_holder/simple_mob/statue/walk_to_destination()
+/datum/ai_holder/fsm/simple_mob/statue/walk_to_destination()
 	. = ..()
 	var/turf/T = get_turf(src)
 	if(T && destination && T.lighting_object)
@@ -64,7 +64,7 @@
 		if(T == destination)
 			destination = null
 
-/datum/ai_holder/simple_mob/statue/can_attack(atom/movable/the_target)
+/datum/ai_holder/fsm/simple_mob/statue/can_attack(atom/movable/the_target)
 	. = ..()
 	var/turf/T = get_turf(src)
 	if(T.get_lumcount()<0.1)

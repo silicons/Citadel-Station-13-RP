@@ -39,7 +39,7 @@
 
 	catalogue_data = list(/datum/category_item/catalogue/fauna/construct/artificer)
 
-	ai_holder_type = /datum/ai_holder/mimic
+	ai_holder_type = /datum/ai_holder/fsm/mimic
 
 ////////////////////////////
 //		Ranged Artificer
@@ -52,6 +52,6 @@
 	desc = "A bulbous construct dedicated to building and maintaining temples to their otherworldly lords. Its central eye glows with unknowable power."
 	icon_state = "caster_artificer"
 	icon_living = "caster_artificer"
-	ai_holder_type = /datum/ai_holder/simple_mob/ranged/kiting
+	ai_holder_type = /datum/ai_holder/fsm/simple_mob/ranged/kiting
 	projectiletype = /obj/item/projectile/beam/inversion
 	projectilesound = 'sound/weapons/spiderlunge.ogg'

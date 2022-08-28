@@ -87,7 +87,7 @@
 	speak_emote = list("chitters")
 	say_list_type = /datum/say_list/roach
 	holder_type = /obj/item/holder/roach
-	ai_holder_type = /datum/ai_holder/simple_mob/retaliate/cooperative
+	ai_holder_type = /datum/ai_holder/fsm/simple_mob/retaliate/cooperative
 
 /mob/living/simple_mob/animal/roach/Initialize(mapload)
 	. = ..()
@@ -253,7 +253,7 @@
 				"melee" = 10
 				)
 
-	ai_holder_type = /datum/ai_holder/simple_mob/melee/evasive
+	ai_holder_type = /datum/ai_holder/fsm/simple_mob/melee/evasive
 
 //When I said roaches made me sick, this isn't what I meant.
 /datum/category_item/catalogue/fauna/roach/seuche
@@ -285,7 +285,7 @@
 				"bio" = 100
 				)
 
-	ai_holder_type = /datum/ai_holder/simple_mob/melee/hit_and_run
+	ai_holder_type = /datum/ai_holder/fsm/simple_mob/melee/hit_and_run
 
 	var/poison_chance = 50
 	var/poison_per_bite = 5
@@ -344,7 +344,7 @@
 	projectiletype = /obj/item/projectile/energy/blob/toxic
 	projectilesound = 'sound/effects/slime_squish.ogg'
 
-	ai_holder_type = /datum/ai_holder/simple_mob/ranged/kiting
+	ai_holder_type = /datum/ai_holder/fsm/simple_mob/ranged/kiting
 
 //Nanomachines? Huh. That's not very Patriotic.
 /datum/category_item/catalogue/fauna/roach/uberfallen
@@ -388,7 +388,7 @@
 	base_attack_cooldown = 8
 	projectiletype = /obj/item/projectile/energy/declone
 
-	ai_holder_type = /datum/ai_holder/simple_mob/ranged/kiting
+	ai_holder_type = /datum/ai_holder/fsm/simple_mob/ranged/kiting
 
 //Remember when Liam Neeson taught you how to kill these?
 /datum/category_item/catalogue/fauna/roach/strahlend
@@ -425,7 +425,7 @@
 	base_attack_cooldown = 4
 	projectiletype = /obj/item/projectile/energy/dart
 
-	ai_holder_type = /datum/ai_holder/simple_mob/ranged/kiting
+	ai_holder_type = /datum/ai_holder/fsm/simple_mob/ranged/kiting
 
 //The Color out of Bluespace
 /datum/category_item/catalogue/fauna/roach/zeitraum
@@ -465,7 +465,7 @@
 				"energy" = 20
 				)
 
-	ai_holder_type = /datum/ai_holder/simple_mob/melee/hit_and_run
+	ai_holder_type = /datum/ai_holder/fsm/simple_mob/melee/hit_and_run
 
 	var/stealthed = FALSE
 	var/stealthed_alpha = 60			// Lower = Harder to see.

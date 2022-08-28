@@ -29,7 +29,7 @@
 
 	attacktext = list("slammed")
 
-	ai_holder_type = /datum/ai_holder/simple_mob/inert
+	ai_holder_type = /datum/ai_holder/fsm/simple_mob/inert
 
 	mob_class = MOB_CLASS_ABERRATION	// It's a monster.
 
