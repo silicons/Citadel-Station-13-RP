@@ -4,6 +4,7 @@
 /world/_setup_logs_boilerplate(){							\
 	GLOB.##type_log = "[GLOB.log_directory]/[#type].log";	\
 	start_log(GLOB.##type_log);								\
+	...()													\
 }															\
 /proc/log_##type(text){										\
 	WRITE_LOG(GLOB.##type_log, text);						\

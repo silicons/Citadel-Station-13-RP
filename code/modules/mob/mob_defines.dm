@@ -199,6 +199,7 @@
 
 	var/voice_name = "unidentifiable voice"
 
+	#warn refactor
 	///Used for checking whether hostile simple animals will attack you, possibly more stuff later.
 	var/faction = "neutral"
 	/// To prevent pAIs/mice/etc from getting antag in autotraitor and future auto- modes. Uses inheritance instead of a bunch of typechecks.
