@@ -1,4 +1,5 @@
 /datum/species/xenohybrid
+	id = SPECIES_ID_XEONHYBRID
 	name = SPECIES_XENOHYBRID
 	name_plural = "Xenomorph Hybrids"
 

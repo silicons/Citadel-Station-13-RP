@@ -22,6 +22,7 @@
 	/// uid
 	var/id
 	// TODO: ref species by id in code, so we can rename as needed
+	// TODO: SUBSPECIES SYSTEM FOR IDS!!
 
 //! ## Descriptors and strings.
 	/// Species real name.

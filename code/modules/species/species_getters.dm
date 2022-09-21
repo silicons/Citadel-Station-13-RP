@@ -1,3 +1,16 @@
+/**
+ * get full species id; subspecies may differ
+ * if you want "basically this species" handling for subspecies, use get_master_id().
+ */
+/datum/species/proc/get_id()
+	return id
+
+/**
+ * for subspecies, get the id of the main species we are
+ */
+/datum/species/proc/get_master_id()
+	return id
+
 /datum/species/proc/get_valid_shapeshifter_forms(mob/living/carbon/human/H)
 	return list()
 

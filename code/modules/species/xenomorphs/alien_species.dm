@@ -1,5 +1,6 @@
 //Stand-in until this is made more lore-friendly.
 /datum/species/xenos
+	id = SPECIES_ID_XENOMORPH
 	name = SPECIES_XENO
 	name_plural = "Xenomorphs"
 

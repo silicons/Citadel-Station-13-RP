@@ -1,14 +1,21 @@
 /**
  * Species IDs
  */
+#define SPECIES_ID_ADHERENT "adherent"
+#define SPECIES_ID_HUMAN "human"
 #define SPECIES_ID_MOTH "moth"
 #define SPECIES_ID_MOTH_DARK "moth_dark"
 #define SPECIES_ID_MOTH_LIGHT "moth_light"
 #define SPECIES_ID_PROMETHEAN "promethean"
+#define SPECIES_ID_PROTEAN "protean"
 #define SPECIES_ID_TESHARI "teshari"
 #define SPECIES_ID_VOX "vox"
+#define SPECIES_ID_XENOCHIMERA "xenochimera"
+#define SPECIES_ID_XENOHYBRID "xenohybrid"
+#define SPECIES_ID_XENOMORPH "xenomorph"
 
-//
+//! MAKE SURE THIS IS SET PROPERLY
+#define TOTAL_SPECIES_IDS 11
 
 /**
  * !It is important to note that these are not only used for the name of the species.

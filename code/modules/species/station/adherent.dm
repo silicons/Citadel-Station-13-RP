@@ -1,4 +1,5 @@
 /datum/species/adherent
+	id = SPECIES_ID_ADHERENT
 	name = SPECIES_ADHERENT
 	name_plural = "Adherents"
 	default_bodytype = BODYTYPE_ADHERENT
