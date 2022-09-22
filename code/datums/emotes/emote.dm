@@ -31,6 +31,11 @@ GLOBAL_LIST_EMPTY(emote_lookup)
 	var/name = "unknown emote"
 
 	//! standard handling
+	/// skip standard handling entirely?
+	var/no_standard_handling = FALSE
+	/// a sound, list of sounds, or a soundbyte datum path (or a list of those).
+	var/standard_sound
+	/// a message, or a list of messages
 
 //! The Two Most Important Heuristics
 /**
