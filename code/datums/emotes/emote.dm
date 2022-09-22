@@ -34,8 +34,15 @@ GLOBAL_LIST_EMPTY(emote_lookup)
 	/// skip standard handling entirely?
 	var/no_standard_handling = FALSE
 	/// a sound, list of sounds, or a soundbyte datum path (or a list of those).
-	var/standard_sound
-	/// a message, or a list of messages
+	var/sound
+	/// a message, or a list of messages to display; %THEY% replaces to p_they(), %THEIR% replaces to p_their(), %THEM% replaces to p_them().
+	var/message
+	/// message type
+	var/message_type = NONE
+	/// message class
+	var/message_class = MESSAGE_CLASS_EMOTE
+	/// do we do the %THING% replacements? if not, set this to FALSE so we don't waste CPU trying!
+	var/message_preprocess = FALSE
 
 //! The Two Most Important Heuristics
 /**
@@ -51,6 +58,7 @@ GLOBAL_LIST_EMPTY(emote_lookup)
  * checks to see if we can potentially collide with another
  */
 /datum/emote/proc/collides_with(datum/emote/other)
+	return other.key == key
 
 //! Emote Execution
 /**
@@ -75,5 +83,35 @@ GLOBAL_LIST_EMPTY(emote_lookup)
  * What happens when the emote runs
  */
 /datum/emote/proc/Run(mob/M, client/C, extra)
+	if(!no_standard_handling)
+		if(sound)
+			Sound(M, extra = extra)
+		if(message)
+			Message(M, extra = extra)
 
+/**
+ * plays sound
+ */
+/datum/emote/proc/Sound(atom/source, sound)
 
+/**
+ * displays message
+ */
+/datum/emote/proc/Message(atom/source, message, type = message_type, class = message_class)
+
+/**
+ * preprocess message
+ *
+ * called regardless of if standard preprocessing is enabled, so feel free to do your own thing!
+ */
+/datum/emote/proc/ProcessMessage(mob/user, message, extra)
+	if(!message_preprocess)
+		return message
+	if(!user)
+		message = replacetext_char(message, "%THEM%", "them")
+		message = replacetext_char(message, "%THEY%", "they")
+		message = replacetext_char(message, "%THEIR%", "their")
+	else
+		message = replacetext_char(message, "%THEM%", user.p_them())
+		message = replacetext_char(message, "%THEY%", user.p_they())
+		message = replacetext_char(message, "%THEIR%", user.p_their())

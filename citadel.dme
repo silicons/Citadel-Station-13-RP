@@ -518,6 +518,7 @@
 #include "code\datums\elements\persistence.dm"
 #include "code\datums\elements\clothing\_clothing.dm"
 #include "code\datums\elements\clothing\hud_granter.dm"
+#include "code\datums\emotes\custom.dm"
 #include "code\datums\emotes\emote.dm"
 #include "code\datums\emotes\species\_species.dm"
 #include "code\datums\emotes\species\adherent.dm"
