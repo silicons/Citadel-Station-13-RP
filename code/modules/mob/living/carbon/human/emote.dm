@@ -655,14 +655,6 @@
 				message = "raises a hand."
 			m_type = 1
 
-		if("shake")
-			message = "shakes [T.his] head."
-			m_type = 1
-
-		if ("shrug")
-			message = "shrugs."
-			m_type = 1
-
 		if ("signal")
 			if (!src.restrained())
 				var/t1 = round(text2num(param))
@@ -671,10 +663,6 @@
 						message = "raises [t1] finger\s."
 					else if (t1 <= 10 && (!src.r_hand && !src.l_hand))
 						message = "raises [t1] finger\s."
-			m_type = 1
-
-		if ("smile")
-			message = "smiles."
 			m_type = 1
 
 		if ("shiver")

@@ -14,6 +14,13 @@
 /datum/emote/signal
 	key = "signal"
 	name = "Signal with fingers"
+	message_type = MESSAGE_TYPE_VISIBLE
+
+/datum/emote/signal/ProcessMessage(mob/user, message, extra)
+	if(!extra)
+		return "raises a finger."
+	if(!text2num(extra))
+		to_chat(user, SPAN_WARNING())
 
 #warn impl
 
