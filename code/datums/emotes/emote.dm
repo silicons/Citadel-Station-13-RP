@@ -32,7 +32,6 @@ GLOBAL_LIST_EMPTY(emote_lookup)
 
 	//! standard handling
 
-
 //! The Two Most Important Heuristics
 /**
  * checks to see if an emote is applicable for us;
