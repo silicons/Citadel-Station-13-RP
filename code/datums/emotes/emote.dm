@@ -99,6 +99,8 @@ GLOBAL_LIST_EMPTY(emote_lookup)
  */
 /datum/emote/proc/Message(atom/source, message, type = message_type, class = message_class)
 
+#warn okay given we have to sometimes switch message type + messgae based on user stuff, this ain't working
+
 /**
  * preprocess message
  *
