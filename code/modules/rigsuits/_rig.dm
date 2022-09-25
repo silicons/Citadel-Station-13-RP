@@ -26,9 +26,6 @@
 	unacidable = 1
 	preserve_item = 1
 
-	// Activation
-	/// activation state
-	var/activation_state = RIG_ACTIVATION_OFF
 	/// last online, set in process()
 	var/last_online = FALSE
 
