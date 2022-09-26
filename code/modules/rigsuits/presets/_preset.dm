@@ -1,0 +1,1 @@
+/datum/rigsuit_preset
