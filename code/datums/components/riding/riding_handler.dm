@@ -256,6 +256,8 @@
 	return default
 
 /datum/component/riding_handler/proc/signal_hook_handle_relaymove(datum/source, mob/M, dir)
+	if(!(riding_handler_flags & CF_RIDING_HANDLER_IS_CONTROLLABLE))
+		return NONE
 	attempt_drive(M, dir)
 	return COMPONENT_RELAYMOVE_HANDLED
 
