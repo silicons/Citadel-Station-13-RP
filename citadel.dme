@@ -2522,6 +2522,7 @@
 #include "code\modules\keybindings\keybind\mob.dm"
 #include "code\modules\keybindings\keybind\movement.dm"
 #include "code\modules\keybindings\keybind\robot.dm"
+#include "code\modules\language\hivemind.dm"
 #include "code\modules\language\holder.dm"
 #include "code\modules\language\language.dm"
 #include "code\modules\language\translation.dm"
