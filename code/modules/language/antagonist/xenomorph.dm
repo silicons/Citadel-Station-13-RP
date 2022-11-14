@@ -8,7 +8,7 @@
 	exclaim_verb = "hisses"
 	key = "u"
 	machine_understands = 0
-	language_flags = RESTRICTED
+	language_flags = LANGUAGE_RESTRICTED
 	syllables = list("sss","sSs","SSS")
 
 /datum/language/xenos
@@ -21,7 +21,7 @@
 	colour = "alien"
 	machine_understands = 0
 	key = "x"
-	language_flags = RESTRICTED | HIVEMIND
+	language_flags = LANGUAGE_RESTRICTED | LANGUAGE_HIVEMIND
 
 /datum/language/xenos/check_special_condition(var/mob/other)
 

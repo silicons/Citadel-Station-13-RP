@@ -7,7 +7,7 @@
 	exclaim_verb = "chants"
 	colour = "cult"
 	key = "f"
-	language_flags = RESTRICTED
+	language_flags = LANGUAGE_RESTRICTED
 	space_chance = 100
 	machine_understands = 0
 	syllables = list("ire","ego","nahlizet","certum","veri","jatkaa","mgar","balaq", "karazet", "geeri", \
@@ -28,5 +28,5 @@
 	colour = "cult"
 	key = "y"
 	machine_understands = 0
-	language_flags = RESTRICTED | HIVEMIND
+	language_flags = LANGUAGE_RESTRICTED | LANGUAGE_HIVEMIND
 

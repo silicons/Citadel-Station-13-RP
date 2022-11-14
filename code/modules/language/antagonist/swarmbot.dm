@@ -8,6 +8,6 @@
 	colour = "changeling"
 	key = "_"
 	machine_understands = 0
-	language_flags = NO_STUTTER | RESTRICTED
+	language_flags = LANGUAGE_NO_STUTTER | LANGUAGE_RESTRICTED
 	syllables = list("^", "v", "-", ".", "~")
 	space_chance = 60

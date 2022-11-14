@@ -29,7 +29,7 @@
 		language_lookup[L.id] = L
 		language_names[L.name] = L
 		language_paths[path] = L
-		if(!(L.language_flags & NONGLOBAL))
+		if(!(L.language_flags & LANGUAGE_NONGLOBAL))
 			language_keys[L.key] = L
 
 	tim_sort(language_names, /proc/cmp_auto_compare, TRUE)

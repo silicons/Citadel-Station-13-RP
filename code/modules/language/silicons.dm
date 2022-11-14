@@ -8,7 +8,7 @@
 	exclaim_verb = "declares"
 	key = "b"
 	machine_understands = 0
-	language_flags = RESTRICTED | HIVEMIND
+	language_flags = LANGUAGE_RESTRICTED | LANGUAGE_HIVEMIND
 	var/drone_only
 
 /datum/language/binary/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
@@ -68,5 +68,5 @@
 	colour = "say_quote"
 	key = "d"
 	machine_understands = 0
-	language_flags = RESTRICTED | HIVEMIND
+	language_flags = LANGUAGE_RESTRICTED | LANGUAGE_HIVEMIND
 	drone_only = 1
