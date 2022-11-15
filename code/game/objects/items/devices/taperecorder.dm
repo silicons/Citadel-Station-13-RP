@@ -19,6 +19,8 @@
 	throw_speed = 4
 	throw_range = 20
 
+#warn can we store by language? no more auto translate..
+
 /obj/item/tape_recorder/Initialize(mapload)
 	. = ..()
 	if(ispath(mytape))

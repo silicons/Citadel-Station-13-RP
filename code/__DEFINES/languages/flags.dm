@@ -1,4 +1,4 @@
-//! ## LANGUAGE_FLAGS
+//! /datum/language/var/language_flags
 /// Language is available if the speaker is whitelisted.
 #define LANGUAGE_WHITELISTED  (1<<0)
 /// Language can only be acquired by spawning or an admin.
@@ -31,4 +31,49 @@ DEFINE_BITFIELD(language_flags, list(
 	BITFIELD(LANGUAGE_NO_TALK_MSG),
 	BITFIELD(LANGUAGE_NO_STUTTER),
 	BITFIELD(LANGUAGE_ALT_TRANSMIT),
+))
+
+//! translation_class on /datum/language and /datum/translation_context as well as all translation operations
+/// common galactic languages; most translators can instantly translate this
+#define TRANSLATION_CLASS_LEVEL_1 (1<<0)
+/// high end translators can translate these
+#define TRANSLATION_CLASS_LEVEL_2 (1<<1)
+/// extremely high end translators can translate these
+#define TRANSLATION_CLASS_LEVEL_3 (1<<2)
+/// xenomorphs, etc
+#define TRANSLATION_CLASS_MONSTER (1<<18)
+/// simpler animal languages
+#define TRANSLATION_CLASS_ANIMAL (1<<19)
+/// magical languages
+#define TRANSLATION_CLASS_ARCANE (1<<20)
+/// encrypted languages ; usually conjunction with machine class
+#define TRANSLATION_CLASS_ENCRYPTED (1<<21)
+/// tribal/native languages
+#define TRANSLATION_CLASS_TRIBAL (1<<22)
+/// machine-like languages
+#define TRANSLATION_CLASS_MACHINE (1<<23)
+
+#warn impl on all languages
+#warn impl on translation contexts
+
+DEFINE_BITFIELD(translation_class, list(
+	BITFIELD(TRANSLATION_CLASS_LEVEL_1),
+	BITFIELD(TRANSLATION_CLASS_LEVEL_2),
+	BITFIELD(TRANSLATION_CLASS_LEVEL_3),
+	BITFIELD(TRANSLATION_CLASS_MONSTER),
+	BITFIELD(TRANSLATION_CLASS_ANIMAL),
+	BITFIELD(TRANSLATION_CLASS_ENCRYPTED),
+	BITFIELD(TRANSLATION_CLASS_TRIBAL),
+	BITFIELD(TRANSLATION_CLASS_MACHINE),
+))
+
+DEFINE_BITFIELD(translation_class_learnable, list(
+	BITFIELD(TRANSLATION_CLASS_LEVEL_1),
+	BITFIELD(TRANSLATION_CLASS_LEVEL_2),
+	BITFIELD(TRANSLATION_CLASS_LEVEL_3),
+	BITFIELD(TRANSLATION_CLASS_MONSTER),
+	BITFIELD(TRANSLATION_CLASS_ANIMAL),
+	BITFIELD(TRANSLATION_CLASS_ENCRYPTED),
+	BITFIELD(TRANSLATION_CLASS_TRIBAL),
+	BITFIELD(TRANSLATION_CLASS_MACHINE),
 ))

@@ -25,6 +25,7 @@
 // INDEXES FOR TIMER COOLDOWNS - Must be unique!
 #define COOLDOWN_SONAR_PULSE				"sonar_pulse"
 #define COOLDOWN_POWER_DRAIN_WARNING		"power_drain_warning"
+#define COOLDOWN_TAPE_TRANSLATION			"tape_translation"
 
 //TIMER COOLDOWN MACROS
 

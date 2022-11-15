@@ -12,6 +12,16 @@
 	var/omni = 0		//cit change - if the language translated doesn't need machine_understands
 	var/listening = 0
 	var/datum/language/langset
+	/// allow us to translate tapes
+	var/cassette_translation = TRUE
+
+/obj/item/universal_translator/examine(mob/user)
+	. = ..()
+	if(cassette_translation)
+		. += SPAN_NOTICE("Use a cassette tape on this to translate the tape's contents where possible.")
+
+#warn tape translation
+#warn COOLDOWN_TAPE_TRANSLATION for anti DOS
 
 /obj/item/universal_translator/attack_self(mob/user)
 	if(!listening) //Turning ON
