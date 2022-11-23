@@ -21,6 +21,10 @@
 // TODO: actual better way to do "can we use this" checks because one whitelist list and a var is fucking horrible to maintain what the fuck
 
 /datum/sprite_accessory
+	/// abstract type
+	var/abstract_type = /datum/sprite_accessory
+	/// id
+	var/id
 
 	/// The icon file the accessory is located in.
 	var/icon

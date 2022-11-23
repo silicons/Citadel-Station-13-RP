@@ -146,6 +146,9 @@ GLOBAL_LIST_EMPTY(mannequins)
 	hair_styles_list = list()
 	for(var/path in paths)
 		var/datum/sprite_accessory/hair/H = new path
+		if(H.abstract_type == path)
+			qdel(H)
+			continue
 		if(!istext(H.name))
 			qdel(H)
 			continue
@@ -166,6 +169,9 @@ GLOBAL_LIST_EMPTY(mannequins)
 	facial_hair_styles_list = list()
 	for(var/path in paths)
 		var/datum/sprite_accessory/facial_hair/H = new path()
+		if(H.abstract_type == path)
+			qdel(H)
+			continue
 		if(!istext(H.name))
 			qdel(H)
 			continue
@@ -186,6 +192,9 @@ GLOBAL_LIST_EMPTY(mannequins)
 	body_marking_styles_list = list()
 	for(var/path in paths)
 		var/datum/sprite_accessory/marking/M = new path()
+		if(M.abstract_type == path)
+			qdel(Mb)
+			continue
 		if(!istext(M.name))
 			qdel(M)
 			continue
@@ -218,19 +227,28 @@ GLOBAL_LIST_EMPTY(mannequins)
 	//Custom Ears
 	paths = typesof(/datum/sprite_accessory/ears) - /datum/sprite_accessory/ears
 	for(var/path in paths)
-		var/obj/item/clothing/head/instance = new path()
+		var/datum/sprite_accessory/ears/instance = new path()
+		if(instance.abstract_type == path)
+			qdel(instance)
+			continue
 		ear_styles_list[path] = instance
 
 	//Custom Tails
 	paths = typesof(/datum/sprite_accessory/tail) - /datum/sprite_accessory/tail - /datum/sprite_accessory/tail/taur
 	for(var/path in paths)
 		var/datum/sprite_accessory/tail/instance = new path()
+		if(instance.abstract_type == path)
+			qdel(instance)
+			continue
 		tail_styles_list[path] = instance
 
 	//Custom Wings
 	paths = typesof(/datum/sprite_accessory/wing) - /datum/sprite_accessory/wing
 	for(var/path in paths)
 		var/datum/sprite_accessory/wing/instance = new path()
+		if(instance.abstract_type == path)
+			qdel(instance)
+			continue
 		wing_styles_list[path] = instance
 
 	//Custom Ears2 -- Repathing was deemed worse than this I'm so sorry
