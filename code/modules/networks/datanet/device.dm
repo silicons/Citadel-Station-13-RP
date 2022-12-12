@@ -1,2 +1,0 @@
-/datum/data_device
-
