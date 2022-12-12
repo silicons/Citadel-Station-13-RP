@@ -1,0 +1,7 @@
+//! socket states
+#define SOCKET_STATE_INITIALIZING 0
+#define SOCKET_STATE_ESTABLISHED 1
+#define SOCKET_STATE_RECONNECTING 2
+
+//! socket datatypes
+#define SOCKET_DATATYPE_NONE 0

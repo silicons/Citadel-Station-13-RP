@@ -6,4 +6,3 @@
  * todo: desc
  */
 /datum/data_network
-
