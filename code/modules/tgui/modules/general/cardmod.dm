@@ -198,7 +198,7 @@
 	.["card_rank"] = editing?.rank
 	.["card_assignment"] = editing?.assignment
 	.["granted"] = editing?.access
-	.["can_demote"] = auth_demote(user, editing, authing, editing.rank)
+	.["can_demote"] = auth_demote(user, editing, authing, editing?.rank)
 
 /datum/tgui_module/card_mod/ui_act(action, list/params, datum/tgui/ui)
 	. = ..()
@@ -338,10 +338,12 @@
 	. = list()
 	var/list/left = accesses.Copy()
 	for(var/id in authing?.access)
+		if(!length(left))
+			break
 		var/list/allowed = SSjob.editable_access_ids_by_id(id)
 		if(isnull(allowed))
 			continue
-		var/list/got = allowed & accesses
+		var/list/got = allowed & left
 		if(!length(got))
 			continue
 		left -= got
