@@ -211,15 +211,15 @@ As a species evolved to be relatively lacking in brawn compared to others, the D
 - Augmentations often operate in synchronicity with the user it was designed for, as well as their environment. Wireless power distribution systems are wired into most common places on a ship to maintain low-power implants. Specific implants are often adapted to their user's preferences, with more advanced ones adjusting to their user's style over time without intervention.
 - While the utilization of external equipment is a constant for the species, the overall usage of prosthetics and cybernetics are at best, subject to debate. More conservative arkships and cultures tend to shun the elective usage of cybernetics - considering them to unacceptably blend the line between what is natural, and what is *created*.
 
-### Synthetics
+## Synthetics
 
 Synthetic life is nothing new to the Dnin-Nepids. The quick discovery of cohesive, self-sustaining networks led to an explosion of artificial intelligence. Eager technologists raced each other to be the first to fabricate a *created* lifeform. Unlike most corporations, these early synthetics were primarily researched, rather than put to work. While neural networks were common - as much of an inaccurate, *rough* commodity as they were - true synthetics were few in number at first. The processes required to fabricate positronic cores at the precisions required for their purpose were restricted to the most enigmatic of institutions. Early synthetic models were slow to take off, slow to evolve, and slow to *think*. As much of a curiosity as they were, they were relatively neglected compared to the zeal for augmentations and technologies that improve the *self*.
 
 With the discovery of lightspeed transit and the dispatch of the first scouting vessels, however, the race for sapient constructs re-ignited with far higher stakes. Rather than the mere goal of research into the artifice of synthetics itself, the need for avatars that could weather the hostile conditions of space, and forge out ahead where *people* could not, arose. Longevity of positronic cores skyrocketed from months, to years, until the first seemingly stable personalities arose. A stark contrast to the mass-produced, pre-imprinted positronics of a corporation, Dnin-Nepid synthetics were built to act in tandem with their creators, rather than to work *for* their creators.
 
-#### Nomenclature
+### Nomenclature
 
-Created to be an extension of their host vessels and their technicians and artisans, Dnin-Nepid synthetics share a similar, but divergent naming scheme as the one often used to name arkships and shuttlecraft.
+Created to be an extension of their host vessels, Dnin-Nepid synthetics share a similar, but divergent naming scheme as the one often used to name arkships and shuttlecraft.
 
 - Synthetics are always identified in domain by their originating ship.
     - For the outlying cases where one is not made onboard a ship, the name of the planet or the stellar system is also acceptable.
@@ -238,14 +238,21 @@ Created to be an extension of their host vessels and their technicians and artis
     - No Significant Harassment
     - Light of Numerous Aspects
     - Hale Complexity
-- In totality, an example of a full name for a synthetic might be `[name], of the [ship]` --> `Light of Numerous Aspects, of the Spirited to Stars`. 
-- Much like their creators, synthetics whom are fully integrated into other societies may adopt other names, or even shortened monikers.
+- In totality, an example of a full name for a synthetic might be `[name], [role] of the [ship]` --> `Light of Numerous Aspects, Navigator of the Spirit of Stars`. 
+- Much like their creators, synthetics whom are fully integrated into other societies may adopt other names, or even shortened monikers, given even their shortened names are often a mouthful to use.
 
-#### Form
+### Form
 
-Synthetics are made for, and 
+Opposite to the mass production of templated bodies practiced by the wider galaxy, Nepid synthetics are usually housed in custom-built shells made by their creators.
 
-#### Function
+- Recognized as an extension of their vessels as well as the *Nepids* as a whole, synthetic shells are often quite close to a life-like imitation of their creators.
+	- This is not, however, intended to be a perfect copy of a biological's appearance. It is recognized that synthetics are different entities, fundamentally, than their creators.
+- Stationary "cores" are generally extremely taboo, as synthetics are fundamentally created for purposes that require mobility and physical manipulation.
+- Given this design, it is not uncommon for synthetics to partake in much of the appearance-related formalities as a person, e.g. wearing clothing usually worn by those of their assigned position, or utilizing hardsuits despite lacking a physiological need to do so.
+
+### Function
+
+
 
 - Synthetics often choose their own names, and are addressed by such, in combination with their role. These names are often highly varied - influenced by the specific tendencies of their creators.
     - Their technical designations are shockingly similar in structure to those of common galactic corporations, likely due to the relative efficiency of alphanumeric designations. Most synthetics have a designation with a lineage and discriminator. Such designations are local to the ark-fleet of origin. Example: AVX-511.
@@ -254,6 +261,15 @@ Synthetics are made for, and
 - Most synthetics are first initialized as part of a batch in a laboratory, and then allowed to assimilate into the populace and observe their intended functions directly from those performing it. The lack of narrowly tuned parameters result in a synthetic being able to absorb vast amounts of information from their surroundings - rapidly becoming as proficient, or even more efficient than the organic that they shadow within a short period of time.
     - Synthetics often, for better or worse, exhibit this malleability throughout their lifespans, allowing even dated units to re-adapt to their circumstances - the exact opposite of most corporate synthetics made in Human space.
 - It is considered **strictly** taboo to permanently enslave synthetics, or to produce them for the explicit purpose of warfare. Such usages are only rumored from rogue arkships and fleet-groups.
+
+### Finality
+
+Given their purpose, Dnin-Nepid synthetics are designed from the ground up with mechanisms for the preservation of knowledge.
+
+- From creation, positronic cores are physically designed for the ability to mirror and imprint patterns created during operation - if they so choose to do so. These channels are meaningless if the core resists their operation - consciously or otherwise.
+- Synthetics often operate with special transponders inside their chassis that link up to their originating arkship to back up their conscious experience during their lives. This transponder may be turned off by them, voluntarily, or be physically removed.
+	- Such a transponder requires a suitable receiver with sufficient storage nearby to operate. Synthetics whom leave their home are sometimes hard-pressed to find facilities with the necessary bandwidth and processing.
+- A synthetic's exact circuit design and initial state is recorded during creation, and stored within an arkship's databanks along with provisioned space for the compressed storage of said conscious experience. In the event of a total loss of their positronic core, they can be recreated from scratch and their memories **imperfectly** replayed back to them, akin to watching one's life through a television, albeit sped up by a million times over, thanks to the in-built imprinting channels.
 
 ## Relations
 
