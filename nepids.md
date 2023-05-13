@@ -144,8 +144,6 @@ The usual penchant of Dnin-Nepids to live on a dagger's edge seemed to be inheri
 
 #### Planets
 
-%TODO%
-
 - %sys%-1 - %TODO%: A scorched world. Its proximity to the binary stars has long resulted in its sterilization. The atmosphere is practically non-existant, and the surface is constantly baked with deadly radiation.
 - %sys%-2 - %TODO%: A rocky world much like the first planet, albeit with far less resources - skipped over by even mining groups for this reason.
 - %sys%-3 - %plt%: The only planet that natively supported sapient life. Earth-like composition, with elevated amounts of noble gasses in the atmosphere and slightly lowered gravity. Tidally locked, with a narrow "habitable" band of the planet separating the day and night sides.
@@ -156,11 +154,38 @@ The usual penchant of Dnin-Nepids to live on a dagger's edge seemed to be inheri
 
 #### %plt%
 
+%plt% was the 'worldly' home of the Nepids before its unfortunate fate. A tidally-locked world, it has the uncharacteristic history of having **been** able to support nominal life on both its day and night halves.
 
+- %plt% is below-average in gravity, and above-average in atmospheric density. This made it quite easy to fly in.
+- A myriad of wind and water currents kept %plt% relatively inhabitable during its heyday. While temperatures still differed greatly from the sunlit hemisphere to the one with eternal night, they were still quite survivable by most lifeforms evolving on it - including the Dnin-Nepids.
+- %plt% is deceptively peaceful; It *had* evolutionary pressure. The Dnin-Nepids were one of the only species that thrived on both the day and night sides - mostly due to the advent of civilization and technology. Those adapted to the opposite half would be well learned to *not* stray out of the protection of society - or a guide - as while rare, larger predators **did** exist in the wild.
+  - Biodiversity was **high**. Vibrant colors reigned supreme on the sun-bathed side, and bioluminescent flora and fauna were common on the moon-lit counterpart. The massive networks of rivers, lakes, oceans, and air currents made travel trivial, and relatively frequent irrigation kept most of the land habitable. The planet was, all in all, easily akin to a Gaia world when viewed from afar.
+- Given all of these axioms of physical circumstance, %plt% was constantly at a razer's edge - a global disruption in climate could easily turn its precarious balance into a permanent ice-scape on one side, and a scorching wasteland on the other.
+	- The Dnin-Nepids were well aware of this - from the first achievements in science came some close calls, and the harsh realization that uncontrolled industrialization may very well result in their extinction.
+
+The events of the Exodus saw the Nepids' worst nightmares come true - %plt% in modern history is little more than a tidally locked hellscape. Most of the flora and fauna surviving the catastrophe remain limited to the narrow band of relatively habitable land between the two halves - wracked by frequent storms and extreme weather.
+
+%plt% nonetheless, does retain a number of autonomous and manned stations - research shuttles frequently ferry heavily shielded scientists to the ground to collect samples or run experiments on what is left of their homeworld. Modern technology does allow for the settlement of the extremes of the hemispheres, but there is little desire, let alone reason to do so.
 
 ### Fleet
 
+Part of the success of the Dnin-Nepids can easily be attributed to their rather unique habitation methodology. Rather than colonize planets - which they are not yet well equipped to do - the Dnin-Nepids instead invested all their resources after the Exodus into thriving in the void of space.
+
+- The vast majority of Nepids live on a variety of arkships. Arkships vary vastly in size, design, and purpose - though in general, most of them are able to fulfill much of the duties of deep-space exploration and salvage.
+  - All arkships tend to have the capability, and manpower, to perform salvage and construction tasks - this is the sole reason that the Nepids were able to get this far.
+  - Arkships often contain quite the number of amenities - anywhere from massive, climate-controlled holodecks, to fully artificial biospheres on the most extravagant of flagships. This is, of-course, limited by space - ships dedicated to scouting or the pursuit of technology and advancement are far less able to dedicate such space to luxuries.
+  - Given the crucial task of resource acquisition to those who are indefinitely space-bound, almost all ships have a variable contigent of small excursion craft, used to scout surrounding space, as well as retrieval of resources - like towing especially rich asteroids close enough for efficient excavation.
+- *Fleet-groups* of arkships are often formed - usually with prior agreements. These are, however, not necessarily designed to have ship compositions you would expect - it is very much valid to have a fleet-group consisting of multiple research vessels that are barely connected, much like it would be to have a massive flagship travelling with an escort of smaller scouting vessels.
+- Lacking the amenities provided by dedicated orbital shipyards, new ark-ships are often constructed within asteroid belts, or, more rarely, in the orbit of a planet near such an asteroid belt - serviced by hundreds, if not thousands, of engineers and architects coming together.
+  - Arkships are often created to provide room on an expanding fleet, or in rarer cases, commissioned for a specific purpose, like exploration or servicing of a group of systems.
+
+While scattered, the vast majority of Dnin-Nepids still occupy the same *general* areas of space - with many fleet-groups and arkships within just a few days, if not hours, of superluminal travel from each other. *The Wayfarer's Network* - a massive network of subspace ansibles connecting the different arkships, and fleets together - provides society with some semblence of normalcy compared to their planetary counterparts.
+
 ## Society
+
+
+
+### Religion
 
 ## History
 
@@ -252,21 +277,21 @@ Opposite to the mass production of templated bodies practiced by the wider galax
 
 ### Function
 
+Modern Dnin-Nepid synthetics are highly variable in behavior - designed to adapt to their roles as opposed to abiding by pre-imprinted directives.
 
-
-- Synthetics often choose their own names, and are addressed by such, in combination with their role. These names are often highly varied - influenced by the specific tendencies of their creators.
-    - Their technical designations are shockingly similar in structure to those of common galactic corporations, likely due to the relative efficiency of alphanumeric designations. Most synthetics have a designation with a lineage and discriminator. Such designations are local to the ark-fleet of origin. Example: AVX-511.
-- A lineage of positronics indicate the presence of similar, or even the exact same templates used in initialization. Unlike most modern corporations, however, the vast majority of Dnin-Nepid arkships opt to stop tuning their templates far before the level necessary for a synthetic able to perform complex tasks like engineering and colonization out of the box.
-    - It isn't uncommon for freshly created positronics to know no more than Luinimma, as well as any basic concepts pre-programmed in. Synthetics are initially tuned to *understand* their world and the people around them, as opposed to manipulate the world and perform a specific task.
-- Most synthetics are first initialized as part of a batch in a laboratory, and then allowed to assimilate into the populace and observe their intended functions directly from those performing it. The lack of narrowly tuned parameters result in a synthetic being able to absorb vast amounts of information from their surroundings - rapidly becoming as proficient, or even more efficient than the organic that they shadow within a short period of time.
-    - Synthetics often, for better or worse, exhibit this malleability throughout their lifespans, allowing even dated units to re-adapt to their circumstances - the exact opposite of most corporate synthetics made in Human space.
+- Synthetics are usually initialized in batches within a laboratory, and then allowed to assimilate into the populace and observe their intended functions directly from those performing it. The lack of narrowly tuned parameters result in a synthetic being able to absorb vast amounts of information from their surroundings - rapidly becoming as proficient, or even more efficient than the organics they shadow within a short period of time.
+  - This malleability is often retained throughout a synthetic's lifetime, allowing even dated units to re-adapt to their circumstances and thrive, as opposed to become obsolete.
+- Synthetics often take up an occupation within their ship once sufficiently adapted - this is a relatively fast process, off-setting the cost of custom tailored positronics and shells.
+  - Titles similar to the ones given to organic crew are adopted by synthetics as they acclimate, such as 'Engineer', 'Architect', 'Navigator', 'Keeper', etc.
+  - After a sufficient amount of time, synthetics often find themselves integrating with many of the varied excursion crews aboard their arkship; this is a practice that is *extremely* beneficial to scouting and architectural efforts, as a fully learned synthetic can perform navigation and analysis more efficiently than the rigid systems of a shuttlecraft - as well as care for its crew.
+- A synthetic, much like their organic counterparts, tends to become extremely proficient at operating their home ships and shuttles - often able to perform just as well as most stationary positronic AI cores if provided the necessary interfaces. Many ships often have transponders accessible by the *created* whom are tuned to it, allowing for wireless manipulation akin to stationbound synthetics when away from a hard-wired terminal.
 - It is considered **strictly** taboo to permanently enslave synthetics, or to produce them for the explicit purpose of warfare. Such usages are only rumored from rogue arkships and fleet-groups.
 
 ### Finality
 
 Given their purpose, Dnin-Nepid synthetics are designed from the ground up with mechanisms for the preservation of knowledge.
 
-- From creation, positronic cores are physically designed for the ability to mirror and imprint patterns created during operation - if they so choose to do so. These channels are meaningless if the core resists their operation - consciously or otherwise.
+- From creation, positronic cores are physically designed for the ability to mirror and imprint patterns created during operation - if the synthetic in question chooses to do so. These channels are meaningless if the core resists their operation - consciously or otherwise.
 - Synthetics often operate with special transponders inside their chassis that link up to their originating arkship to back up their conscious experience during their lives. This transponder may be turned off by them, voluntarily, or be physically removed.
 	- Such a transponder requires a suitable receiver with sufficient storage nearby to operate. Synthetics whom leave their home are sometimes hard-pressed to find facilities with the necessary bandwidth and processing.
 - A synthetic's exact circuit design and initial state is recorded during creation, and stored within an arkship's databanks along with provisioned space for the compressed storage of said conscious experience. In the event of a total loss of their positronic core, they can be recreated from scratch and their memories **imperfectly** replayed back to them, akin to watching one's life through a television, albeit sped up by a million times over, thanks to the in-built imprinting channels.
