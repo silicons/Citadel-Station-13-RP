@@ -25,7 +25,10 @@
 			price_tag = null
 	return
 
-/obj/item/reagent_containers/food/drinks/attack_self(mob/user as mob)
+/obj/item/reagent_containers/food/drinks/attack_self(mob/user)
+	. = ..()
+	if(.)
+		return
 	if(!is_open_container())
 		open(user)
 
@@ -65,7 +68,7 @@
 	return ..()
 
 /obj/item/reagent_containers/food/drinks/standard_pour_into(var/mob/user, var/atom/target)
-	if(!is_open_container())
+	if(!is_open_container() && target.reagents)
 		to_chat(user, "<span class='notice'>You need to open [src]!</span>")
 		return 1
 	if(target == loc) //prevent filling a machine with a glass you just put into it.
@@ -102,7 +105,7 @@
 	icon_state = "golden_cup"
 	item_state = "" //nope :(
 	w_class = ITEMSIZE_LARGE
-	force = 14
+	damage_force = 14
 	throw_force = 10
 	amount_per_transfer_from_this = 20
 	possible_transfer_amounts = null
@@ -381,3 +384,22 @@
 
 /obj/item/reagent_containers/food/drinks/britcup/on_reagent_change()
 	..()
+
+/obj/item/reagent_containers/food/drinks/glue
+	name = "Glue"
+	desc = "A small bottle full of glue. The orange tip calls to you, and the fluid inside is non-toxic... Should you?"
+	icon_state = "glue"
+	drop_sound = 'sound/items/drop/cardboardbox.ogg'
+	volume = 30
+	center_of_mass = list("x"=15, "y"=13)
+
+/obj/item/reagent_containers/food/drinks/glue/Initialize(mapload)
+	. = ..()
+	reagents.add_reagent("safeglue", 30)
+
+/obj/item/reagent_containers/food/drinks/glue/on_reagent_change()
+	..()
+	if(reagents.total_volume)
+		icon_state = "glue"
+	else
+		icon_state = "glue_e"

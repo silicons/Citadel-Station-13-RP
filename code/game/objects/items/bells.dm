@@ -3,7 +3,7 @@
 	desc = "An annoying bell. Ring for service."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "deskbell"
-	force = 2
+	damage_force = 2
 	throw_force = 2
 	w_class = 2.0
 	hitsound = 'sound/effects/deskbell.ogg'
@@ -18,7 +18,7 @@
 	if(broken)
 		. += "<span class = 'danger'>It looks damaged, the ringer is stuck firmly inside.</span>"
 
-/obj/item/deskbell/attack_hand(mob/user)
+/obj/item/deskbell/attack_hand(mob/user, list/params)
 
 	//This defines the radials and what call we're assiging to them.
 	var/list/options = list()

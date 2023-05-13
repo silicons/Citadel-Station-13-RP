@@ -260,7 +260,10 @@
 
 /obj/item/gripper/no_use //Used when you want to hold and put items in other things, but not able to 'use' the item
 
-/obj/item/gripper/no_use/attack_self(mob/user as mob)
+/obj/item/gripper/no_use/attack_self(mob/user)
+	. = ..()
+	if(.)
+		return
 	return
 
 /obj/item/gripper/no_use/loader //This is used to disallow building with metal.
@@ -272,7 +275,10 @@
 		/obj/item/stack/material
 		)
 
-/obj/item/gripper/attack_self(mob/user as mob)
+/obj/item/gripper/attack_self(mob/user)
+	. = ..()
+	if(.)
+		return
 	if(wrapped)
 		return wrapped.attack_self(user)
 	return ..()
@@ -297,9 +303,9 @@
 	remove_item(drop_location())
 
 /obj/item/gripper/attack_mob(mob/target, mob/user, clickchain_flags, list/params, mult, target_zone, intent)
-	if(wrapped) 	//The force of the wrapped obj gets set to zero during the attack() and afterattack().
-		force_holder = wrapped.force
-		wrapped.force = 0
+	if(wrapped) 	//The damage_force of the wrapped obj gets set to zero during the attack() and afterattack().
+		force_holder = wrapped.damage_force
+		wrapped.damage_force = 0
 		target.attackby(wrapped, user, params, clickchain_flags)	//attackby reportedly gets procced by being clicked on, at least according to Anewbe.
 		return 1
 	return 0
@@ -314,9 +320,9 @@
 		var/resolved = target.attackby(wrapped, user)
 		if(!resolved && wrapped && target)
 			wrapped.afterattack(target,user,1)
-		//wrapped's force was set to zero.  This resets it to the value it had before.
+		//wrapped's damage_force was set to zero.  This resets it to the value it had before.
 		if(wrapped)
-			wrapped.force = force_holder
+			wrapped.damage_force = force_holder
 		force_holder = null
 
 	else if(istype(target,/obj/item)) //Check that we're not pocketing a mob.

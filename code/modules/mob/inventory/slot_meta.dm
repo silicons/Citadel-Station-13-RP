@@ -629,6 +629,9 @@ GLOBAL_LIST_EMPTY(inventory_slot_type_cache)
 		BODYTYPE_STRING_ZORREN_HIGH = 'icons/mob/clothing/species/fox/mask.dmi',
 		BODYTYPE_STRING_UNATHI_DIGI = 'icons/mob/clothing/species/unathidigi/mask.dmi',
 	)
+	render_fallback = list(
+		BODYTYPE_STRING_TESHARI = "_fallback_",
+	)
 	render_layer = FACEMASK_LAYER
 
 /datum/inventory_slot_meta/restraints
@@ -782,3 +785,9 @@ GLOBAL_LIST_EMPTY(inventory_slot_type_cache)
 		INHAND_DEFAULT_ICON_UNIFORMS = 'icons/mob/items/righthand_uniforms.dmi',
 		INHAND_DEFAULT_ICON_64X64 = 'icons/mob/items/64x64_righthand.dmi',
 	)
+
+/datum/inventory_slot_meta/abstract/use_one_for_accessory
+	render_key = "acc"
+
+/datum/inventory_slot_meta/abstract/use_one_for_all
+	render_key = "all"

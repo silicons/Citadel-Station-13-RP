@@ -31,6 +31,7 @@
 /obj/item/geiger_counter/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/z_radiation_listener)
+	AddComponent(/datum/component/radiation_listener)
 	soundloop = new(list(src))
 	if(scanning)
 		START_PROCESSING(SSobj, src)
@@ -131,6 +132,9 @@
 	update_appearance()
 
 /obj/item/geiger_counter/attack_self(mob/user)
+	. = ..()
+	if(.)
+		return
 	scanning = !scanning
 	if(scanning)
 		START_PROCESSING(SSobj, src)

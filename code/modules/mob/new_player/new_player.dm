@@ -12,7 +12,7 @@
 
 	density = 0
 	stat = DEAD
-	canmove = 0
+	mobility_flags = NONE
 
 	anchored = 1	// Don't get pushed around
 
@@ -175,6 +175,9 @@
 				totalPlayers++
 				if(player.ready)totalPlayersReady++
 
+/mob/new_player/update_mobility()
+	return
+
 /mob/new_player/Topic(href, href_list[])
 	if(src != usr)
 		return 0
@@ -232,13 +235,23 @@
 
 	if(href_list["ready"])
 		if(!SSticker || SSticker.current_state <= GAME_STATE_PREGAME)	// Make sure we don't ready up after the round has started
-			var/list/warnings = list()
-			client.prefs.spawn_checks(PREF_COPY_TO_FOR_ROUNDSTART, warnings = warnings)
-			if(length(warnings))
-				to_chat(src, "<h3><center>--- Character Setup Warnings---</center></h3><br><b>-&nbsp;&nbsp;&nbsp;&nbsp;[jointext(warnings, "<br>-&nbsp;&nbsp;&nbsp;&nbsp;")]</b>")
-				if(tgui_alert(src, "You do not seem to have your preferences set properly. Are you sure you wish to ready up? Check the chat panel for details.", "Spawn Checks", list("Yes", "No")) != "Yes")
+			var/want_to_be_ready = text2num(href_list["ready"])
+			if(want_to_be_ready)
+				var/list/errors = list()
+				var/list/warnings = list()
+				var/failing = FALSE
+				if(!client.prefs.spawn_checks(PREF_COPY_TO_FOR_ROUNDSTART, errors = errors, warnings = warnings))
+					to_chat(src, "<h3><center>--- Character Setup Errors - Please resolve these to continue ---</center></h3><br><b>-&nbsp;&nbsp;&nbsp;&nbsp;[jointext(errors, "<br>-&nbsp;&nbsp;&nbsp;&nbsp;")]</b>")
+					failing = TRUE
+				if(length(warnings))
+					to_chat(src, "<h3><center>--- Character Setup Warnings---</center></h3><br><b>-&nbsp;&nbsp;&nbsp;&nbsp;[jointext(warnings, "<br>-&nbsp;&nbsp;&nbsp;&nbsp;")]</b>")
+				if(failing)
 					return
-			ready = text2num(href_list["ready"])
+				else if(length(warnings))
+					if(tgui_alert(src, "You do not seem to have your preferences set properly. Are you sure you wish to join the game?", "Spawn Checks", list("Yes", "No")) != "Yes")
+						return
+
+			ready = want_to_be_ready
 		else
 			ready = 0
 
@@ -465,7 +478,8 @@
 	return timer - world.time
 
 /mob/new_player/proc/AttemptLateSpawn(rank)
-	if(!client.is_preference_enabled(/datum/client_preference/debug/age_verified)) return
+	if(!client.is_preference_enabled(/datum/client_preference/debug/age_verified))
+		return
 	if (src != usr)
 		return 0
 	if(SSticker.current_state != GAME_STATE_PLAYING)
@@ -483,11 +497,15 @@
 		return FALSE
 	var/list/errors = list()
 	var/list/warnings = list()
-	if(!client.prefs.spawn_checks(PREF_COPY_TO_FOR_LATEJOIN, errors, warnings))
-		to_chat(src, SPAN_WARNING("An error has occured while trying to spawn you in:<br>[errors.Join("<br>")]"))
-		return FALSE
+	var/failing = FALSE
+	if(!client.prefs.spawn_checks(PREF_COPY_TO_FOR_LATEJOIN, errors = errors, warnings = warnings))
+		to_chat(src, "<h3><center>--- Character Setup Errors - Please resolve these to continue ---</center></h3><br><b>-&nbsp;&nbsp;&nbsp;&nbsp;[jointext(errors, "<br>-&nbsp;&nbsp;&nbsp;&nbsp;")]</b>")
+		failing = TRUE
 	if(length(warnings))
 		to_chat(src, "<h3><center>--- Character Setup Warnings---</center></h3><br><b>-&nbsp;&nbsp;&nbsp;&nbsp;[jointext(warnings, "<br>-&nbsp;&nbsp;&nbsp;&nbsp;")]</b>")
+	if(failing)
+		return FALSE
+	else if(length(warnings))
 		if(tgui_alert(src, "You do not seem to have your preferences set properly. Are you sure you wish to join the game?", "Spawn Checks", list("Yes", "No")) != "Yes")
 			return
 
@@ -551,7 +569,7 @@
 
 		//Grab some data from the character prefs for use in random news procs.
 
-		AnnounceArrival(character, rank, SP.RenderAnnounceMessage(character, name = character.mind.name, job_name = (character.mind.role_alt_title || rank)))
+		AnnounceArrival(character, rank, SP.RenderAnnounceMessage(character, name = character.mind.name, job_name = (GetAssignment(character) || rank)))
 
 	qdel(src)
 
@@ -571,7 +589,7 @@
 	var/list/errors = list()
 	// warnings ignored for now.
 	if(!client.prefs.spawn_checks(PREF_COPY_TO_FOR_ROUNDSTART, errors))
-		to_chat(src, SPAN_WARNING("An error has occured while trying to spawn you in:<br>[errors.Join("<br>")]"))
+		to_chat(src, SPAN_WARNING("<h3><center>--- Character Setup Errors - Please resolve these to continue ---</center></h3><br><b>-&nbsp;&nbsp;&nbsp;&nbsp;[jointext(errors, "<br>-&nbsp;&nbsp;&nbsp;&nbsp;")]</b>"))
 		return FALSE
 	spawning = 1
 	close_spawn_windows()
@@ -614,7 +632,7 @@
 		//mind.traits = client.prefs.traits.Copy()	// Conflict
 		//! Preferences shim: transfer stuff over
 		client.prefs.imprint_mind(mind)
-		mind.transfer_to(new_character)				// Won't transfer key since the mind is not active
+		mind.transfer(new_character)				// Won't transfer key since the mind is not active
 
 	new_character.name = real_name
 	new_character.dna.ready_dna(new_character)

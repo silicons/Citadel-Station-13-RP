@@ -15,7 +15,7 @@
 	icon_state = "cellconsole"
 	circuit = /obj/item/circuitboard/cryopodcontrol
 	density = FALSE
-	interact_offline = TRUE
+	interaction_flags_machine = INTERACT_MACHINE_OFFLINE | INTERACT_MACHINE_ALLOW_SILICON
 	var/mode = null
 
 	//Used for logging people entering cryosleep and important items they are carrying.
@@ -27,7 +27,7 @@
 	var/storage_name = "Cryogenic Oversight Control"
 	var/allow_items = TRUE
 
-	req_one_access = list(access_heads)
+	req_one_access = list(ACCESS_COMMAND_BRIDGE)
 
 /obj/machinery/computer/cryopod/update_icon()
 	..()
@@ -72,6 +72,24 @@
 
 	storage_type = "visitors"
 	storage_name = "Travel Oversight Control"
+	allow_items = TRUE
+
+/obj/machinery/computer/cryopod/psych_ward
+	name = "psych ward oversight console"
+	desc = "An interface between patients and the cryo pod oversight systems tasked with keeping track of all patients who enter deep storage."
+	circuit = "/obj/item/circuitboard/robotstoragecontrol"
+
+	storage_type = "patients"
+	storage_name = "Patient Storage Control"
+	allow_items = TRUE
+
+/obj/machinery/computer/cryopod/ashlander
+	name = "protective warrens token"
+	desc = "A hand carved fetish meant to be hung near entrances to the Warrens, to ward off evil spirits."
+	icon = 'icons/obj/lavaland.dmi'
+	icon_state = "cryocomputer"
+	storage_type = "Scori"
+	storage_name = "Surt-nar-Cthardamz"
 	allow_items = TRUE
 
 /obj/machinery/computer/cryopod/attack_ai()
@@ -299,7 +317,7 @@
 /obj/machinery/cryopod/Destroy()
 	if(occupant)
 		occupant.forceMove(loc)
-		occupant.resting = 1
+		occupant.update_perspective()
 	return ..()
 
 /obj/machinery/cryopod/Initialize(mapload)

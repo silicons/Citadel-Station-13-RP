@@ -51,7 +51,7 @@
 	var/long_range = FALSE		// If true, can see farther, depending on get_map_levels().
 	var/local_mode = FALSE		// If true, only GPS signals of the same Z level are shown.
 	var/hide_signal = FALSE		// If true, signal is not visible to other GPS devices.
-	var/can_hide_signal = FALSE	// If it can toggle the above var.
+	var/can_hide_signal = TRUE	// If it can toggle the above var.
 
 /obj/item/gps/Initialize(mapload)
 	. = ..()
@@ -163,6 +163,8 @@
 
 /obj/item/gps/attack_self(mob/user)
 	. = ..()
+	if(.)
+		return
 	// TODO: ATTACK_SELF REFACTOR
 	ui_interact(user)
 
@@ -340,7 +342,7 @@
 	return data
 
 /obj/item/gps/proc/push_waypoint_data()
-	send_tgui_data_immediate(data = list("waypoints" = ui_waypoint_data()))
+	push_ui_data(data = list("waypoints" = ui_waypoint_data()))
 
 /obj/item/gps/ui_static_data(mob/user)
 	. = ..()
@@ -384,7 +386,7 @@
 				"name" = sig.gps_tag
 			))
 
-/obj/item/gps/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
+/obj/item/gps/ui_act(action, list/params, datum/tgui/ui)
 	. = ..()
 	if(.)
 		return
@@ -466,6 +468,10 @@
 
 /obj/item/gps/command/on
 	on = TRUE
+
+/obj/item/gps/command/blueshield
+	gps_tag = "BLU0"
+
 
 /obj/item/gps/security
 	icon_state = "gps-sec"

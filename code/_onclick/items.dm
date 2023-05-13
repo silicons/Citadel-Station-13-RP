@@ -1,7 +1,9 @@
-//? If you change any of these procs, you better find/replace *every single* proc signature to match
-//? Obviously you don't need to do this for default arguments, because that'd insert a lot of compiled in isnull()'s
-//? But the whole point of this refactor is to standardize.
-//? All PRs that breach convention will be held until in compliance.
+//* If you change any of these procs, you better find/replace *every single* proc signature to match
+//* Obviously you don't need to do this for default arguments, because that'd insert a lot of compiled in isnull()'s
+//* But the whole point of this refactor is to standardize.
+//* All PRs that breach convention will be held until in compliance.
+
+//? Click-Chain system - using an item in hand to "attack", whether in melee or ranged.
 
 /**
  * Called when trying to click something that the user can Reachability() to.
@@ -28,7 +30,7 @@
 	var/stupid_fucking_shim = list2params(params)
 
 	// todo: refactor
-	if(resolve_attackby(target, user, stupid_fucking_shim))
+	if(resolve_attackby(target, user, params, null, clickchain_flags))
 		return CLICKCHAIN_DO_NOT_PROPAGATE
 
 	// todo: signal for afterattack here & anywhere that calls afterattack
@@ -115,6 +117,9 @@
 	// end
 	if(item_flags & ITEM_NOBLUDGEON)
 		return NONE
+	// todo: not hardcoding this
+	if(IS_PRONE(user))
+		mult *= 0.66
 	// is mob, go to that
 	// todo: signals for both
 	if(ismob(target))
@@ -176,10 +181,10 @@
 	if(!hit_zone)
 		// missed
 		// log
-		add_attack_logs(user, L, "missed with [src] DT [damtype] F [force] I [user.a_intent]")
+		add_attack_logs(user, L, "missed with [src] DT [damtype] F [damage_force] I [user.a_intent]")
 		return melee_mob_miss(L, user, clickchain_flags, params, mult, target_zone, intent)
 	// log
-	add_attack_logs(user, L, "attacked with [src] DT [damtype] F [force] I [user.a_intent]")
+	add_attack_logs(user, L, "attacked with [src] DT [damtype] F [damage_force] I [user.a_intent]")
 	// hit
 	return melee_mob_hit(L, user, clickchain_flags, params, mult, target_zone, intent)
 
@@ -244,7 +249,7 @@
 	if(!isliving(target))
 		return
 	// harmless, just tap them and leave
-	if(!force)
+	if(!damage_force)
 		// todo: proper weapon sound ranges/rework
 		playsound(src, 'sound/weapons/tap.ogg', 50, 1, -1)
 		// feedback
@@ -258,7 +263,7 @@
 	visible_message(SPAN_DANGER("[L] has been [length(attack_verb)? pick(attack_verb) : attack_verb] with [src] by [user]!"))
 
 	//? legacy code start
-	var/power = force
+	var/power = damage_force
 	if(isliving(user))
 		var/mob/living/attacker = user
 		for(var/datum/modifier/mod in attacker.modifiers)

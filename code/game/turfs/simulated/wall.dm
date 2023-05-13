@@ -59,6 +59,7 @@
 	color = null
 
 	set_materials(material, reinf_material, girder_material)
+	set_rad_insulation()
 
 	if(smoothing_flags & SMOOTH_DIAGONAL_CORNERS && fixed_underlay) //Set underlays for the diagonal walls.
 		var/mutable_appearance/underlay_appearance = mutable_appearance(layer = TURF_LAYER, plane = TURF_PLANE)
@@ -91,10 +92,10 @@
 /turf/simulated/wall/proc/get_default_material()
 	. = /datum/material/steel
 
-/turf/simulated/wall/bullet_act(var/obj/item/projectile/Proj)
-	if(istype(Proj,/obj/item/projectile/beam))
+/turf/simulated/wall/bullet_act(var/obj/projectile/Proj)
+	if(istype(Proj,/obj/projectile/beam))
 		burn(2500)
-	else if(istype(Proj,/obj/item/projectile/ion))
+	else if(istype(Proj,/obj/projectile/ion))
 		burn(500)
 
 	var/proj_damage = Proj.get_structure_damage()
@@ -106,7 +107,7 @@
 		if(thermite)
 			thermitemelt()
 
-	if(istype(Proj,/obj/item/projectile/beam))
+	if(istype(Proj,/obj/projectile/beam))
 		if(material && material.reflectivity >= 0.5) // Time to reflect lasers.
 			var/new_damage = damage * material.reflectivity
 			var/outgoing_damage = damage - new_damage
@@ -300,6 +301,10 @@
 
 	radiation_pulse(src, total_radiation)
 	return total_radiation
+
+/turf/simulated/wall/proc/set_rad_insulation()
+	var/total_rad_insulation = material.weight + material.radiation_resistance + (reinf_material ? (reinf_material.weight + reinf_material.radiation_resistance) / 4 : 0) + (girder_material ? (girder_material.weight + girder_material.radiation_resistance) / 16 : 0)
+	rad_insulation = round(1/(total_rad_insulation**1.35*1/21.25**1.35+1),0.01) // 21.25 would be the total_rad_insulation of basic steel walls and return 0.5 rad_insulation. 1.35 exponential function helps us to also hit the plasteel wall goal of 0.25.
 
 /turf/simulated/wall/proc/burn(temperature)
 	if(material.combustion_effect(src, temperature, 0.7))

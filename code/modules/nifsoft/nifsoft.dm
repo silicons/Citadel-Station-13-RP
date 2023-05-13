@@ -267,8 +267,12 @@
 	if(!laws)
 		to_chat(user,"<span class='warning'>You haven't set any laws yet. Use the disk in-hand first.</span>")
 		return
+	return ..()
 
 /obj/item/disk/nifsoft/compliance/attack_self(mob/user)
+	. = ..()
+	if(.)
+		return
 	var/newlaws = input(user,"Please Input Laws","Compliance Laws",laws) as message
 	newlaws = sanitize(newlaws,2048)
 	if(newlaws)
@@ -323,6 +327,19 @@
 /obj/item/storage/box/nifsofts_engineering/PopulateContents()
 	for(var/i = 0 to 7)
 		new /obj/item/disk/nifsoft/engineering(src)
+
+// Blueshield Disk //
+/obj/item/disk/nifsoft/blueshield
+	name = "NIFSoft Uploader - Blueshield"
+	desc = "Contains free NIFSofts useful for Blueshields.\n\
+	It has a small label: \n\
+	\"Portable NIFSoft Installation Media. \n\
+	Align ocular port with eye socket and depress red plunger.\""
+
+	stored = /datum/nifsoft/package/blueshield
+
+/datum/nifsoft/package/blueshield
+	software = list(/datum/nifsoft/hud/ar_med,/datum/nifsoft/hud/ar_sec)
 
 // Medical Disk //
 /obj/item/disk/nifsoft/medical

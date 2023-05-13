@@ -10,7 +10,7 @@
 	icon_state = "defibunit"
 	item_state = "defibunit"
 	slot_flags = SLOT_BACK
-	force = 5
+	damage_force = 5
 	throw_force = 6
 	preserve_item = 1
 	w_class = ITEMSIZE_LARGE
@@ -66,7 +66,7 @@
 /obj/item/defib_kit/ui_action_click()
 	toggle_paddles()
 
-/obj/item/defib_kit/attack_hand(mob/user)
+/obj/item/defib_kit/attack_hand(mob/user, list/params)
 	if(loc == user)
 		toggle_paddles()
 	else
@@ -193,7 +193,7 @@
 	icon_state = "defibpaddles"
 	item_state = "defibpaddles"
 	gender = PLURAL
-	force = 2
+	damage_force = 2
 	throw_force = 6
 	w_class = ITEMSIZE_LARGE
 
@@ -272,7 +272,7 @@
 
 /obj/item/shockpaddles/proc/can_revive(mob/living/carbon/human/H) //This is checked right before attempting to revive
 
-	H.updatehealth()
+	H.update_health()
 
 	if(H.isSynthetic())
 		if(H.health + H.getOxyLoss() + H.getToxLoss() <= config_legacy.health_threshold_dead)
@@ -296,7 +296,7 @@
 /obj/item/shockpaddles/proc/check_contact(mob/living/carbon/human/H)
 	if(!combat)
 		for(var/obj/item/clothing/cloth in list(H.wear_suit, H.w_uniform))
-			if((cloth.body_parts_covered & UPPER_TORSO) && (cloth.clothing_flags & THICKMATERIAL))
+			if((cloth.body_cover_flags & UPPER_TORSO) && (cloth.clothing_flags & THICKMATERIAL))
 				return FALSE
 	return TRUE
 
@@ -481,8 +481,8 @@
 	M.reload_fullscreen()
 
 	M.emote("gasp")
-	M.Weaken(rand(10,25))
-	M.updatehealth()
+	M.afflict_paralyze(20 * rand(10,25))
+	M.update_health()
 
 /obj/item/shockpaddles/proc/make_announcement(var/message, var/msg_class)
 	audible_message("<b>\The [src]</b> [message]", "\The [src] vibrates slightly.")
@@ -651,18 +651,18 @@
 	item_state = "jumperpaddles0"
 	use_on_synthetic = 1
 
-// Rig Defibs
-/obj/item/shockpaddles/standalone/rig
+// Hardsuit Defibs
+/obj/item/shockpaddles/standalone/hardsuit
 	desc = "You shouldn't be seeing these."
 	chargetime = (2 SECONDS)
 
-/obj/item/shockpaddles/standalone/rig/checked_use(var/charge_amt)
+/obj/item/shockpaddles/standalone/hardsuit/checked_use(var/charge_amt)
 	return 1
 
-/obj/item/shockpaddles/standalone/rig/emp_act(severity)
+/obj/item/shockpaddles/standalone/hardsuit/emp_act(severity)
 	return
 
-/obj/item/shockpaddles/standalone/rig/can_use(mob/user, mob/M)
+/obj/item/shockpaddles/standalone/hardsuit/can_use(mob/user, mob/M)
 	return 1
 
 #undef DEFIB_TIME_LIMIT

@@ -254,7 +254,7 @@ Implant Specifics:<BR>"}
 					if (istype(part,/obj/item/organ/external/chest) ||	\
 						istype(part,/obj/item/organ/external/groin) ||	\
 						istype(part,/obj/item/organ/external/head))
-						part.createwound(BRUISE, 80)	//mangle them instead
+						part.create_wound(BRUISE, 80)	//mangle them instead
 						explosion(get_turf(imp_in), -1, -1, 1, 3)
 						qdel(src)
 					else
@@ -330,7 +330,7 @@ Implant Specifics:<BR>"}
 				if (istype(part,/obj/item/organ/external/chest) ||	\
 					istype(part,/obj/item/organ/external/groin) ||	\
 					istype(part,/obj/item/organ/external/head))
-					part.createwound(BRUISE, 80)	//mangle them instead
+					part.create_wound(BRUISE, 80)	//mangle them instead
 				else
 					part.droplimb(0,DROPLIMB_BLUNT)
 			explosion(get_turf(imp_in), -1, -1, 1, 3)
@@ -469,9 +469,9 @@ the implant may become unstable and either pre-maturely inject the subject or si
 	if (emote == "pale")
 		src.uses--
 		to_chat(source, "<span class='notice'>You feel a sudden surge of energy!</span>")
-		source.SetStunned(0)
-		source.SetWeakened(0)
-		source.SetUnconscious(0)
+		source.set_stunned(0)
+		source.set_paralyzed(0)
+		source.set_unconscious(0)
 
 	return
 

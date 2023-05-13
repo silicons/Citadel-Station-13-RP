@@ -38,7 +38,10 @@
 	else
 		..()
 
-/obj/item/plastique/attack_self(mob/user as mob)
+/obj/item/plastique/attack_self(mob/user)
+	. = ..()
+	if(.)
+		return
 	var/newtime = input(usr, "Please set the timer.", "Timer", 10) as num
 	if(user.get_active_held_item() == src)
 		newtime = clamp(newtime, 10, 60000)
@@ -53,7 +56,7 @@
 	to_chat(user, "Planting explosives...")
 	user.do_attack_animation(target)
 
-	if(do_after(user, 50) && in_range(user, target))
+	if(do_after(user, 50, target, max_distance = 1))
 		if(!user.attempt_void_item_for_installation(src))
 			return
 		src.target = target

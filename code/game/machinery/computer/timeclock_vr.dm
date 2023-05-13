@@ -63,7 +63,7 @@
 		return
 	. = ..()
 
-/obj/machinery/computer/timeclock/attack_hand(var/mob/user as mob)
+/obj/machinery/computer/timeclock/attack_hand(mob/user, list/params)
 	if(..())
 		return
 	user.set_machine(src)
@@ -109,7 +109,7 @@
 
 	return data
 
-/obj/machinery/computer/timeclock/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
+/obj/machinery/computer/timeclock/ui_act(action, list/params, datum/tgui/ui)
 	if(..())
 		return TRUE
 
@@ -132,7 +132,7 @@
 			if(checkFace())
 				if(checkCardCooldown())
 					makeOnDuty(params["switch-to-onduty-rank"], params["switch-to-onduty-assignment"])
-					usr.put_in_hands(card)
+					usr.put_in_hands_or_drop(card)
 					card = null
 			update_icon()
 			return TRUE
@@ -140,7 +140,7 @@
 			if(checkFace())
 				if(checkCardCooldown())
 					makeOffDuty()
-					usr.put_in_hands(card)
+					usr.put_in_hands_or_drop(card)
 					card = null
 			update_icon()
 			return TRUE
@@ -223,7 +223,7 @@
 /obj/machinery/computer/timeclock/proc/checkCardCooldown()
 	if(!card)
 		return FALSE
-	var/time_left = 10 MINUTES - (world.time - card.last_job_switch)
+	var/time_left = 3 MINUTES - (world.time - card.last_job_switch)
 	if(time_left > 0)
 		to_chat(usr, "You need to wait another [round((time_left/10)/60, 1)] minute\s before you can switch.")
 		return FALSE
@@ -237,7 +237,7 @@
 	if(!(istype(H)))
 		to_chat(usr, "<span class='warning'>Invalid user detected. Access denied.</span>")
 		return FALSE
-	else if((H.wear_mask && (H.wear_mask.flags_inv & HIDEFACE)) || (H.head && (H.head.flags_inv & HIDEFACE)))	//Face hiding bad
+	else if((H.wear_mask && (H.wear_mask.inv_hide_flags & HIDEFACE)) || (H.head && (H.head.inv_hide_flags & HIDEFACE)))	//Face hiding bad
 		to_chat(usr, "<span class='warning'>Facial recognition scan failed due to physical obstructions. Access denied.</span>")
 		return FALSE
 	else if(H.get_face_name() == "Unknown" || !(H.real_name == card.registered_name))
@@ -245,13 +245,6 @@
 		return FALSE
 	else
 		return TRUE
-
-/obj/item/card/id
-	var/last_job_switch
-
-/obj/item/card/id/Initialize(mapload)
-	. = ..()
-	last_job_switch = world.time
 
 //
 // Frame type for construction

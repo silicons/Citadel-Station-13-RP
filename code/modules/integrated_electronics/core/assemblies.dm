@@ -138,7 +138,6 @@
 		var/obj/item/integrated_circuit/IC = I
 		/* Uncomment for debugging purposes. */
 		if(!IC)
-			TO_WORLD(SPAN_DEBUGERROR("Bad assembly_components entry in [src].  Has remove() been called incorrectly?"))
 			var/x = assembly_components.Find(null)
 			assembly_components.Cut(x,++x)
 			return
@@ -154,7 +153,7 @@
 	return battery
 
 // TGUI
-/obj/item/electronic_assembly/ui_state(mob/user)
+/obj/item/electronic_assembly/ui_state(mob/user, datum/tgui_module/module)
 	return GLOB.physical_state
 
 /obj/item/electronic_assembly/ui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
@@ -204,7 +203,7 @@
 				)))*/
 	return data
 
-/obj/item/electronic_assembly/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
+/obj/item/electronic_assembly/ui_act(action, list/params, datum/tgui/ui)
 	if(..())
 		return TRUE
 
@@ -514,6 +513,9 @@
 	return ..()
 
 /obj/item/electronic_assembly/attack_self(mob/user)
+	. = ..()
+	if(.)
+		return
 	if(!check_interactivity(user))
 		return
 	ui_interact(user)

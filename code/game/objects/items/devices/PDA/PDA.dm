@@ -150,6 +150,10 @@ GLOBAL_LIST_EMPTY(PDAs)
 	default_cartridge = /obj/item/cartridge/hos
 	icon_state = "pda-hos"
 
+/obj/item/pda/heads/blueshield
+	default_cartridge = /obj/item/cartridge/security
+	icon_state = "pda-hop"
+
 /obj/item/pda/heads/ce
 	default_cartridge = /obj/item/cartridge/ce
 	icon_state = "pda-ce"
@@ -318,7 +322,10 @@ GLOBAL_LIST_EMPTY(PDAs)
 	return 1
 
 
-/obj/item/pda/ai/attack_self(mob/user as mob)
+/obj/item/pda/ai/attack_self(mob/user)
+	. = ..()
+	if(.)
+		return
 	if ((honkamt > 0) && (prob(60)))//For clown virus.
 		honkamt--
 		playsound(loc, 'sound/items/bikehorn.ogg', 30, 1)
@@ -453,6 +460,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 				)
 				desc = "A portable microcomputer by Thinktronic Systems, LTD. This model is a wrist-bound version."
 				slot_flags = SLOT_ID | SLOT_BELT | SLOT_GLOVES
+				LAZYINITLIST(sprite_sheets)
 				sprite_sheets = list(
 				SPECIES_TESHARI = 'icons/mob/clothing/species/teshari/pda_wrist.dmi',
 				SPECIES_VR_TESHARI = 'icons/mob/clothing/species/teshari/pda_wrist.dmi',
@@ -468,7 +476,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 		return 0
 
 	var/mob/M = loc
-	if(M.stat || M.restrained() || M.paralysis || M.stunned || M.weakened)
+	if(!CHECK_MOBILITY(M, MOBILITY_CAN_USE))
 		return 0
 	if((src in M.contents) || ( istype(loc, /turf) && in_range(src, M) ))
 		return 1
@@ -666,7 +674,10 @@ GLOBAL_LIST_EMPTY(PDAs)
 	ui.set_auto_update(auto_update)
 
 //NOTE: graphic resources are loaded on client login
-/obj/item/pda/attack_self(mob/user as mob)
+/obj/item/pda/attack_self(mob/user)
+	. = ..()
+	if(.)
+		return
 
 	user.set_machine(src)
 
@@ -1359,7 +1370,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 						), 1)
 				user.show_message("<span class='notice'>    Key: Suffocation/Toxin/Burns/Brute</span>", 1)
 				user.show_message("<span class='notice'>    Body Temperature: [C.bodytemperature-T0C]&deg;C ([C.bodytemperature*1.8-459.67]&deg;F)</span>", 1)
-				if(C.tod && (C.stat == DEAD || (C.status_flags & FAKEDEATH)))
+				if(C.tod && (C.stat == DEAD || (C.status_flags & STATUS_FAKEDEATH)))
 					user.show_message("<span class='notice'>    Time of Death: [C.tod]</span>")
 				if(istype(C, /mob/living/carbon/human))
 					var/mob/living/carbon/human/H = C

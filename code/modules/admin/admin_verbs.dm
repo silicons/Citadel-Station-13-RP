@@ -144,7 +144,6 @@ var/list/admin_verbs_fun = list(
 	/client/proc/roll_dices,
 	/datum/admins/proc/call_supply_drop,
 	/datum/admins/proc/call_drop_pod,
-	/client/proc/smite_vr,
 	/client/proc/smite,
 	/client/proc/admin_lightning_strike
 	)
@@ -158,7 +157,6 @@ var/list/admin_verbs_spawn = list(
 	/client/proc/respawn_character,
 	/client/proc/spawn_character_mob,
 	/client/proc/virus2_editor,
-	/client/proc/spawn_chemdisp_cartridge,
 	/client/proc/map_template_load,
 	/client/proc/map_template_upload,
 	/client/proc/map_template_load_on_new_z
@@ -242,7 +240,9 @@ var/list/admin_verbs_debug = list(
 	/datum/admins/proc/change_weather,
 	/datum/admins/proc/change_time,
 	/client/proc/admin_give_modifier,
-	/client/proc/simple_DPS
+	/client/proc/fucky_wucky,
+	/client/proc/simple_DPS,
+	/datum/admins/proc/fishing_calculator,
 	)
 
 var/list/admin_verbs_paranoid_debug = list(

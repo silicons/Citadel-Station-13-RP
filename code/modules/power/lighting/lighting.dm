@@ -77,7 +77,7 @@ var/global/list/light_type_cache = list()
 	else
 		to_chat(user, "<span class='danger'>This casing doesn't support power cells for backup power.</span>")
 
-/obj/machinery/light_construct/attack_hand(mob/user)
+/obj/machinery/light_construct/attack_hand(mob/user, list/params)
 	. = ..()
 	if(.)
 		return . // obj/machinery/attack_hand returns 1 if user can't use the machine
@@ -338,7 +338,7 @@ var/global/list/light_type_cache = list()
 	plane = OBJ_PLANE
 	layer = OBJ_LAYER
 	desc = "A floor lamp."
-	light_type = /obj/item/light/bulb
+	light_type = /obj/item/light/bulb/strong
 	construct_type = /obj/machinery/light_construct/flamp
 	shows_alerts = FALSE
 	var/lamp_shade = 1
@@ -644,7 +644,7 @@ var/global/list/light_type_cache = list()
 	else if(status != LIGHT_BROKEN && status != LIGHT_EMPTY)
 
 
-		if(prob(1+W.force * 5))
+		if(prob(1+W.damage_force * 5))
 
 			to_chat(user, "You hit the light, and it smashes!")
 			for(var/mob/M in viewers(src))
@@ -776,7 +776,7 @@ var/global/list/light_type_cache = list()
 
 // attack with hand - remove tube/bulb
 // if hands aren't protected and the light is on, burn the player
-/obj/machinery/light/attack_hand(mob/user)
+/obj/machinery/light/attack_hand(mob/user, list/params)
 
 	add_fingerprint(user)
 
@@ -822,7 +822,7 @@ var/global/list/light_type_cache = list()
 	// create a light tube/bulb item and put it in the user's hand
 	user.put_in_active_hand(remove_bulb())	//puts it in our active hand
 
-/obj/machinery/light/flamp/attack_hand(mob/user)
+/obj/machinery/light/flamp/attack_hand(mob/user, list/params)
 	if(lamp_shade)
 		if(status == LIGHT_EMPTY)
 			to_chat(user, "There is no [get_fitting_name()] in this light.")

@@ -6,7 +6,7 @@
 	icon_opened = "capsecureopen"
 	icon_broken = "capsecurebroken"
 	icon_off = "capsecureoff"
-	req_access = list(access_captain)
+	req_access = list(ACCESS_COMMAND_CAPTAIN)
 
 	starts_with = list(
 		/obj/item/storage/backpack/dufflebag/captain,
@@ -34,7 +34,7 @@
 	icon_opened = "hopsecureopen"
 	icon_broken = "hopsecurebroken"
 	icon_off = "hopsecureoff"
-	req_access = list(access_hop)
+	req_access = list(ACCESS_COMMAND_HOP)
 
 	starts_with = list(
 		/obj/item/clothing/suit/storage/vest,
@@ -58,7 +58,7 @@
 	icon_opened = "hopsecureopen"
 	icon_broken = "hopsecurebroken"
 	icon_off = "hopsecureoff"
-	req_access = list(access_hop)
+	req_access = list(ACCESS_COMMAND_HOP)
 
 	starts_with = list(
 		/obj/item/clothing/under/rank/head_of_personnel,
@@ -86,14 +86,14 @@
 /*
 /obj/structure/closet/secure_closet/hos
 	name = "head of security's locker"
-	req_access = list(access_hos)
+	req_access = list(ACCESS_SECURITY_HOS)
 	icon_state = "hossecure1"
 	icon_closed = "hossecure"
 	icon_locked = "hossecure1"
 	icon_opened = "hossecureopen"
 	icon_broken = "hossecurebroken"
 	icon_off = "hossecureoff"
-	req_access = list(access_hos)
+	req_access = list(ACCESS_SECURITY_HOS)
 	storage_capacity = 2.5 * MOB_MEDIUM
 
 	starts_with = list(
@@ -152,7 +152,7 @@
 	icon_opened = "hossecureopen"
 	icon_broken = "hossecurebroken"
 	icon_off = "hossecureoff"
-	req_access = list(access_hos)
+	req_access = list(ACCESS_SECURITY_HOS)
 	storage_capacity = 2.5 * MOB_MEDIUM
 
 	starts_with = list(
@@ -189,7 +189,7 @@
 	icon_opened = "hossecureopen"
 	icon_broken = "hossecurebroken"
 	icon_off = "hossecureoff"
-	req_access = list(access_hos)
+	req_access = list(ACCESS_SECURITY_HOS)
 	storage_capacity = 2.5 * MOB_MEDIUM
 
 	// citadel edit NSFW > Multiphase
@@ -209,6 +209,52 @@
 		/obj/item/gps/security/hos,
 		/obj/item/flashlight/maglight)
 
+/obj/structure/closet/secure_closet/blueshield
+	name = "blueshield's locker"
+	icon_state = "secC1"
+	icon_closed = "secC"
+	icon_locked = "secC1"
+	icon_opened = "secCopen"
+	icon_broken = "secCbroken"
+	icon_off = "secCoff"
+	req_access = list(ACCESS_COMMAND_BLUESHIELD)
+	storage_capacity = 2.5 * MOB_MEDIUM
+
+	starts_with = list(
+		/obj/item/disk/nifsoft/blueshield,
+		/obj/item/radio/headset/heads/blueshield,
+		/obj/item/radio/headset/heads/blueshield/alt,
+		/obj/item/clothing/glasses/sunglasses/medhud,
+		/obj/item/clothing/head/beret/sec/corporate/blueshield,
+		/obj/item/clothing/under/oricon/utility/sysguard/crew/blueshield,
+		/obj/item/clothing/gloves/black,
+		/obj/item/clothing/shoes/boots/jackboots,
+		/obj/item/clothing/suit/storage/vest/blueshield,
+		/obj/item/clothing/suit/storage/hooded/covertcarrier/blueshield,
+		/obj/item/storage/backpack/blueshield,
+		/obj/item/storage/belt/security,
+		/obj/item/reagent_containers/spray/pepper,
+		/obj/item/flash,
+		/obj/item/gun/ballistic/revolver/consul,
+		/obj/item/ammo_magazine/s44,
+		/obj/item/ammo_magazine/s44,
+		/obj/item/ammo_magazine/s44,
+		/obj/item/ammo_magazine/s44,
+		/obj/item/ammo_magazine/s44/rubber,
+		/obj/item/ammo_magazine/s44/rubber,
+		/obj/item/ammo_magazine/s44/rubber,
+		/obj/item/ammo_magazine/s44/empty,
+		/obj/item/melee/telebaton,
+
+		/obj/item/gps/command/blueshield,
+		/obj/item/tank/oxygen,
+		/obj/item/clothing/mask/gas/half,
+		/obj/item/clothing/accessory/badge/holo,
+		/obj/item/clothing/accessory/badge/holo/cord,
+		/obj/item/tool/crowbar/red,
+		/obj/item/flashlight/maglight,
+		/obj/item/cartridge/security)
+
 /obj/structure/closet/secure_closet/warden
 	name = "warden's locker"
 	icon_state = "wardensecure1"
@@ -217,7 +263,7 @@
 	icon_opened = "wardensecureopen"
 	icon_broken = "wardensecurebroken"
 	icon_off = "wardensecureoff"
-	req_access = list(access_armory)
+	req_access = list(ACCESS_SECURITY_ARMORY)
 
 	starts_with = list(
 		/obj/item/clothing/suit/storage/vest/warden,
@@ -269,7 +315,7 @@
 	icon_opened = "secopen"
 	icon_broken = "secbroken"
 	icon_off = "secoff"
-	req_access = list(access_brig)
+	req_access = list(ACCESS_SECURITY_BRIG)
 
 	starts_with = list(
 		/obj/item/clothing/suit/storage/vest/officer,
@@ -289,7 +335,7 @@
 		/obj/item/clothing/accessory/storage/black_vest,
 		/obj/item/clothing/head/soft/sec/corp,
 		/obj/item/clothing/under/rank/security/corp,
-		/obj/item/gun/energy/taser,
+		/obj/item/gun/energy/secutor,
 		/obj/item/cell/device/weapon,
 		/obj/item/gps/security,
 		/obj/item/clothing/under/bodysuit/bodysuitsec,
@@ -337,7 +383,7 @@
 	icon_opened = "cabinetdetective_open"
 	icon_broken = "cabinetdetective_broken"
 	icon_off = "cabinetdetective_broken"
-	req_access = list(access_forensics_lockers)
+	req_access = list(ACCESS_SECURITY_FORENSICS)
 
 	starts_with = list(
 		/obj/item/clothing/accessory/badge/holo/detective,
@@ -377,7 +423,7 @@
 
 /obj/structure/closet/secure_closet/injection
 	name = "lethal injections locker"
-	req_access = list(access_captain)
+	req_access = list(ACCESS_COMMAND_CAPTAIN)
 
 	starts_with = list(
 		/obj/item/reagent_containers/syringe/ld50_syringe/choral = 2)
@@ -386,7 +432,7 @@ GLOBAL_LIST_BOILERPLATE(all_brig_closets, /obj/structure/closet/secure_closet/br
 
 /obj/structure/closet/secure_closet/brig
 	name = "brig locker"
-	req_access = list(access_brig)
+	req_access = list(ACCESS_SECURITY_BRIG)
 	anchored = 1
 	var/id = null
 
@@ -396,7 +442,7 @@ GLOBAL_LIST_BOILERPLATE(all_brig_closets, /obj/structure/closet/secure_closet/br
 
 /obj/structure/closet/secure_closet/posters
 	name = "morale storage"
-	req_access = list(access_security)
+	req_access = list(ACCESS_SECURITY_EQUIPMENT)
 	anchored = 1
 
 	starts_with = list(
@@ -408,7 +454,7 @@ GLOBAL_LIST_BOILERPLATE(all_brig_closets, /obj/structure/closet/secure_closet/br
 
 /obj/structure/closet/secure_closet/courtroom
 	name = "courtroom locker"
-	req_access = list(access_lawyer)
+	req_access = list(ACCESS_COMMAND_IAA)
 
 	starts_with = list(
 		/obj/item/clothing/shoes/brown,
@@ -427,7 +473,7 @@ GLOBAL_LIST_BOILERPLATE(all_brig_closets, /obj/structure/closet/secure_closet/br
 	icon_opened = "wall-lockeropen"
 	icon_broken = "wall-lockerbroken"
 	icon_off = "wall-lockeroff"
-	req_access = list(access_security)
+	req_access = list(ACCESS_SECURITY_EQUIPMENT)
 	density = 1
 
 	//too small to put a man in
@@ -454,8 +500,8 @@ GLOBAL_LIST_BOILERPLATE(all_brig_closets, /obj/structure/closet/secure_closet/br
 	icon_locked = "secC1"
 	icon_opened = "secCopen"
 	icon_broken = "secCbroken"
-	icon_off = "seCcoff"
-	req_access = list(access_brig)
+	icon_off = "secCoff"
+	req_access = list(ACCESS_SECURITY_BRIG)
 	storage_capacity = 3.5 * MOB_MEDIUM
 
 	starts_with = list(
@@ -475,7 +521,7 @@ GLOBAL_LIST_BOILERPLATE(all_brig_closets, /obj/structure/closet/secure_closet/br
 		/obj/item/hailer,
 		/obj/item/flashlight/flare,
 		/obj/item/clothing/accessory/storage/black_vest,
-		/obj/item/gun/energy/taser,
+		/obj/item/gun/energy/secutor,
 		/obj/item/cell/device/weapon,
 		/obj/item/flashlight/maglight,
 		/obj/item/clothing/head/soft/nanotrasen,
@@ -502,8 +548,8 @@ GLOBAL_LIST_BOILERPLATE(all_brig_closets, /obj/structure/closet/secure_closet/br
 	icon_locked = "secC1"
 	icon_opened = "secCopen"
 	icon_broken = "secCbroken"
-	icon_off = "seCcoff"
-	req_access = list(access_brig)
+	icon_off = "secCoff"
+	req_access = list(ACCESS_SECURITY_BRIG)
 	storage_capacity = 3.5 * MOB_MEDIUM
 
 	starts_with = list(
@@ -556,8 +602,8 @@ GLOBAL_LIST_BOILERPLATE(all_brig_closets, /obj/structure/closet/secure_closet/br
 	icon_locked = "secC1"
 	icon_opened = "secCopen"
 	icon_broken = "secCbroken"
-	icon_off = "seCcoff"
-	req_access = list(access_brig)
+	icon_off = "secCoff"
+	req_access = list(ACCESS_SECURITY_BRIG)
 	storage_capacity = 3.5 * MOB_MEDIUM
 
 	starts_with = list(

@@ -280,16 +280,14 @@ var/list/sacrificed = list()
 					I.damage = max(I.damage - 5, 0)		//Heals 5 damage per organ per use
 				if(I.damage <= 5 && I.organ_tag == O_EYES)
 					H.sdisabilities &= ~SDISABILITY_NERVOUS
+			// check their limbs
 			for(var/obj/item/organ/E in H.bad_external_organs)
 				var/obj/item/organ/external/affected = E
+				// fix bones
 				if((affected.damage < affected.min_broken_damage * config_legacy.organ_health_multiplier) && (affected.status & ORGAN_BROKEN))
 					affected.status &= ~ORGAN_BROKEN
-				for(var/datum/wound/W in affected.wounds)
-					if(istype(W, /datum/wound/internal_bleeding))
-						affected.wounds -= W
-						affected.update_damages()
-	return
-
+				// fix IB
+				affected.cure_specific_wound(/datum/wound/internal_bleeding, all = TRUE)
 
 //! SEVENTH RUNE
 /obj/effect/rune/proc/seer()
@@ -473,7 +471,7 @@ var/list/sacrificed = list()
 			chose_name = 1
 			break
 	D.universal_speak = 1
-	D.status_flags &= ~GODMODE
+	D.status_flags &= ~STATUS_GODMODE
 	D.b_eyes = 200
 	D.r_eyes = 200
 	D.g_eyes = 200
@@ -656,9 +654,7 @@ var/list/sacrificed = list()
 
 		var/worth = 0
 		if(istype(H,/mob/living/carbon/human))
-			var/mob/living/carbon/human/lamb = H
-			if(lamb.species.rarity_value > 3)
-				worth = 1
+			CRASH("This function wants to use a rarety value for the mobs, which was removed.")
 
 		if (SSticker.mode.name == "cult")
 			if(H.mind == cult.sacrifice_target)
@@ -1060,14 +1056,14 @@ var/list/sacrificed = list()
 				C.flash_eyes()
 				if(C.stuttering < 1 && (!(MUTATION_HULK in C.mutations)))
 					C.stuttering = 1
-				C.Weaken(1)
-				C.Stun(1)
+				C.afflict_paralyze(20 * 1)
+				C.afflict_stun(20 * 1)
 				C.show_message("<span class='danger'>The rune explodes in a bright flash.</span>", 3)
 				add_attack_logs(usr,C,"Stun rune")
 
 			else if(issilicon(L))
 				var/mob/living/silicon/S = L
-				S.Weaken(5)
+				S.afflict_paralyze(20 * 5)
 				S.show_message("<span class='danger'>BZZZT... The rune has exploded in a bright flash.</span>", 3)
 				add_attack_logs(usr,S,"Stun rune")
 		qdel(src)
@@ -1082,15 +1078,15 @@ var/list/sacrificed = list()
 				O.show_message(text("<span class='warning'><B>[] invokes a talisman at []</B></span>", usr, T), 1)
 
 			if(issilicon(T))
-				T.Weaken(15)
+				T.afflict_paralyze(20 * 15)
 				add_attack_logs(usr,T,"Stun rune")
 			else if(iscarbon(T))
 				var/mob/living/carbon/C = T
 				C.flash_eyes()
 				if (!(MUTATION_HULK in C.mutations))
 					C.silent += 15
-				C.Weaken(25)
-				C.Stun(25)
+				C.afflict_paralyze(20 * 25)
+				C.afflict_stun(20 * 25)
 				add_attack_logs(usr,C,"Stun rune")
 		return
 

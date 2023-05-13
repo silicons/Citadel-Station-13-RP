@@ -8,7 +8,7 @@
 	icon_opened = "secureexpopen"
 	icon_broken = "secureexpbroken"
 	icon_off = "secureexpoff"
-	req_access = list(access_explorer)
+	req_access = list(ACCESS_GENERAL_EXPLORER)
 
 	starts_with = list(
 		/obj/item/clothing/under/explorer,
@@ -81,7 +81,7 @@
 //Pilot Locker
 /obj/structure/closet/secure_closet/pilot
 	name = "pilot locker"
-	req_access = list(access_pilot)
+	req_access = list(ACCESS_GENERAL_PILOT)
 
 /obj/structure/closet/secure_closet/pilot
 	starts_with = list(
@@ -125,7 +125,7 @@
 	icon_opened = "secureexpopen"
 	icon_broken = "secureexpbroken"
 	icon_off = "secureexpoff"
-	req_access = list(access_gateway)
+	req_access = list(ACCESS_GENERAL_GATEWAY)
 
 	starts_with = list(
 		/obj/item/clothing/under/explorer,
@@ -143,7 +143,6 @@
 		/obj/item/geiger_counter,
 		/obj/item/cell/device,
 		/obj/item/radio,
-		/obj/item/bluespace_radio,
 		/obj/item/stack/marker_beacon/thirty,
 		/obj/item/storage/box/survival_knife,
 		/obj/item/material/knife/machete/deluxe,

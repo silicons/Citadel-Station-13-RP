@@ -35,19 +35,19 @@
 /mob/living/carbon/human/proc/get_coverage()
 	var/list/coverage = list()
 	for(var/obj/item/clothing/C in get_equipped_items())
-		if(C.body_parts_covered & HEAD)
+		if(C.body_cover_flags & HEAD)
 			coverage += list(organs_by_name[BP_HEAD])
-		if(C.body_parts_covered & UPPER_TORSO)
+		if(C.body_cover_flags & UPPER_TORSO)
 			coverage += list(organs_by_name[BP_TORSO])
-		if(C.body_parts_covered & LOWER_TORSO)
+		if(C.body_cover_flags & LOWER_TORSO)
 			coverage += list(organs_by_name[BP_GROIN])
-		if(C.body_parts_covered & LEGS)
+		if(C.body_cover_flags & LEGS)
 			coverage += list(organs_by_name[BP_L_LEG], organs_by_name[BP_R_LEG])
-		if(C.body_parts_covered & ARMS)
+		if(C.body_cover_flags & ARMS)
 			coverage += list(organs_by_name[BP_R_ARM], organs_by_name[BP_L_ARM])
-		if(C.body_parts_covered & FEET)
+		if(C.body_cover_flags & FEET)
 			coverage += list(organs_by_name[BP_L_FOOT], organs_by_name[BP_R_FOOT])
-		if(C.body_parts_covered & HANDS)
+		if(C.body_cover_flags & HANDS)
 			coverage += list(organs_by_name[BP_L_HAND], organs_by_name[BP_R_HAND])
 	return coverage
 
@@ -58,9 +58,9 @@
 	if(mind && mind.changeling)
 		mind.changeling.cloaked = 0
 	// Ninja cloak.
-	if(istype(back, /obj/item/rig))
-		var/obj/item/rig/suit = back
-		for(var/obj/item/rig_module/stealth_field/cloaker in suit.installed_modules)
+	if(istype(back, /obj/item/hardsuit))
+		var/obj/item/hardsuit/suit = back
+		for(var/obj/item/hardsuit_module/stealth_field/cloaker in suit.installed_modules)
 			if(cloaker.active)
 				cloaker.deactivate()
 
@@ -69,9 +69,9 @@
 	if(mind && mind.changeling && mind.changeling.cloaked)
 		return TRUE
 	// Ninja cloak.
-	else if(istype(back, /obj/item/rig))
-		var/obj/item/rig/suit = back
-		for(var/obj/item/rig_module/stealth_field/cloaker in suit.installed_modules)
+	else if(istype(back, /obj/item/hardsuit))
+		var/obj/item/hardsuit/suit = back
+		for(var/obj/item/hardsuit_module/stealth_field/cloaker in suit.installed_modules)
 			if(cloaker.active)
 				return TRUE
 	return ..()
@@ -126,14 +126,14 @@
 	var/obj/item/organ/external/H = organs_by_name[BP_HEAD]
 
 	// Look at their head.
-	if(!head || !(head && (head.flags_inv & HIDEFACE)))
+	if(!head || !(head && (head.inv_hide_flags & HIDEFACE)))
 		// Exactly robotic, not higher as lifelike is higher.
 		if(H && H.robotic == ORGAN_ROBOT)
 			return TRUE
 
 	// Look at their torso.
-	if(!wear_suit || (wear_suit && !(wear_suit.flags_inv & HIDEJUMPSUIT)))
-		if(!w_uniform || (w_uniform && !(w_uniform.body_parts_covered & UPPER_TORSO)))
+	if(!wear_suit || (wear_suit && !(wear_suit.inv_hide_flags & HIDEJUMPSUIT)))
+		if(!w_uniform || (w_uniform && !(w_uniform.body_cover_flags & UPPER_TORSO)))
 			if(T && T.robotic == ORGAN_ROBOT)
 				return TRUE
 
@@ -176,12 +176,12 @@
 		if(istype(O) && O.enables_planes && (slot in O.plane_slots))
 			compiled_vis |= O.enables_planes
 
-	// Check to see if we have a rig (ugh, blame rigs, desnowflake this).
-	var/obj/item/rig/rig = back
-	if(istype(rig) && rig.visor)
-		if(!rig.helmet || (head && rig.helmet == head))
-			if(rig.visor && rig.visor.vision && rig.visor.active && rig.visor.vision.glasses)
-				var/obj/item/clothing/glasses/V = rig.visor.vision.glasses
+	// Check to see if we have a hardsuit (ugh, blame rigs, desnowflake this).
+	var/obj/item/hardsuit/hardsuit = back
+	if(istype(hardsuit) && hardsuit.visor)
+		if(!hardsuit.helmet || (head && hardsuit.helmet == head))
+			if(hardsuit.visor && hardsuit.visor.vision && hardsuit.visor.active && hardsuit.visor.vision.glasses)
+				var/obj/item/clothing/glasses/V = hardsuit.visor.vision.glasses
 				compiled_vis |= V.enables_planes
 
 	// NIF Support.

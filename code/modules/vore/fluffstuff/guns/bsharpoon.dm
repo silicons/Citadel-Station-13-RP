@@ -47,6 +47,8 @@
 	if(get_area(A).area_flags & AREA_FLAG_BLUE_SHIELDED)
 		to_chat(user, "<span class='warning'>The target area protected by bluespace shielding!</span>")
 		return
+	if(!do_after(user, 5 SECONDS, src))
+		return
 
 	last_fire = current_fire
 	playsound(user, 'sound/weapons/wave.ogg', 60, 1)
@@ -71,7 +73,10 @@
 		var/turf/real_target = prob(failchance)? pick(trange(failrange, user)) : ToTurf
 		AM.locationTransitForceMove(real_target, allow_pulled = FALSE, allow_grabbed = GRAB_AGGRESSIVE)
 
-/obj/item/bluespace_harpoon/attack_self(mob/living/user as mob)
+/obj/item/bluespace_harpoon/attack_self(mob/user)
+	. = ..()
+	if(.)
+		return
 	return chande_fire_mode(user)
 
 /obj/item/bluespace_harpoon/verb/chande_fire_mode(mob/user as mob)

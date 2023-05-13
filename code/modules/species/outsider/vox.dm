@@ -26,7 +26,7 @@
 	"}
 	wikilink = "https://citadel-station.net/wikiRP/index.php?title=Race:_The_Vox"
 	catalogue_data = list(/datum/category_item/catalogue/fauna/vox)
-	rarity_value = 4
+	//rarity_value = 4
 
 //	taste_sensitivity = TASTE_DULL
 
@@ -112,7 +112,7 @@
 		)
 
 /datum/species/vox/get_random_name(gender)
-	var/datum/language/species_language = SScharacters.resolve_language_id(default_language)
+	var/datum/language/species_language = SScharacters.resolve_language(default_language)
 	return species_language.get_random_name(gender)
 
 /datum/species/vox/equip_survival_gear(mob/living/carbon/human/H, extendedtank = FALSE, comprehensive = FALSE)

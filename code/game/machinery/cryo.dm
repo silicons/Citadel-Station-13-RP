@@ -7,7 +7,7 @@
 	density = TRUE
 	anchored = TRUE
 	layer = UNDER_JUNK_LAYER
-	interact_offline = TRUE
+	interaction_flags_machine = INTERACT_MACHINE_OFFLINE | INTERACT_MACHINE_ALLOW_SILICON
 
 	var/on = FALSE
 	use_power = USE_POWER_IDLE
@@ -79,7 +79,7 @@
 	if(occupant == user && !user.stat)
 		go_out()
 
-/obj/machinery/atmospherics/component/unary/cryo_cell/attack_hand(mob/user)
+/obj/machinery/atmospherics/component/unary/cryo_cell/attack_hand(mob/user, list/params)
 	nano_ui_interact(user)
 
  /**
@@ -231,8 +231,8 @@
 		occupant.set_stat(UNCONSCIOUS)
 		occupant.dir = SOUTH
 		if(occupant.bodytemperature < T0C)
-			occupant.Sleeping(max(5, (1/occupant.bodytemperature)*2000))
-			occupant.Unconscious(max(5, (1/occupant.bodytemperature)*3000))
+			occupant.afflict_sleeping(20 * max(5, (1/occupant.bodytemperature)*2000))
+			occupant.afflict_unconscious(20 * max(5, (1/occupant.bodytemperature)*3000))
 			if(air_contents.gas[/datum/gas/oxygen] > 2)
 				if(occupant.getOxyLoss()) occupant.adjustOxyLoss(-1)
 			else
@@ -307,7 +307,7 @@
 		return
 	M.forceMove(src)
 	M.ExtinguishMob()
-	if(M.health > -100 && (M.health < 0 || M.sleeping))
+	if(!IS_DEAD(M))
 		to_chat(M, SPAN_USERDANGER("You feel a cold liquid surround you. Your skin starts to freeze up."))
 	occupant = M
 	occupant.update_perspective()

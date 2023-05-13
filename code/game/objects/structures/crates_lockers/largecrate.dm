@@ -61,7 +61,7 @@
 
 */
 
-/obj/structure/largecrate/attack_hand(mob/user as mob)
+/obj/structure/largecrate/attack_hand(mob/user, list/params)
 	to_chat(user, "<span class='notice'>You need a crowbar to pry this open!</span>")
 	return
 
@@ -146,6 +146,10 @@
 	name = "goat crate"
 	starts_with = list(/mob/living/simple_mob/animal/goat)
 
+/obj/structure/largecrate/animal/horse
+	name = "horse crate"
+	starts_with = list(/mob/living/simple_mob/horse)
+
 /obj/structure/largecrate/animal/cat
 	name = "cat carrier"
 	starts_with = list(/mob/living/simple_mob/animal/passive/cat)
@@ -213,7 +217,6 @@
 /obj/structure/largecrate/animal/pred/Initialize(mapload) //This is nessesary to get a random one each time.
 	starts_with = list(pick(/mob/living/simple_mob/vore/bee,
 						/mob/living/simple_mob/vore/aggressive/frog,
-						/mob/living/simple_mob/vore/horse,
 						/mob/living/simple_mob/vore/aggressive/panther,
 						/mob/living/simple_mob/vore/aggressive/giant_snake,
 						/mob/living/simple_mob/animal/wolf,

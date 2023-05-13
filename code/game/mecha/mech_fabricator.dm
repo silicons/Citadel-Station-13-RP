@@ -9,7 +9,7 @@
 	use_power = USE_POWER_IDLE
 	idle_power_usage = 20
 	active_power_usage = 5000
-	req_access = list(access_robotics)
+	req_access = list(ACCESS_SCIENCE_ROBOTICS)
 	circuit = /obj/item/circuitboard/mechfab
 
 	///Current items in the build queue.
@@ -73,6 +73,7 @@
 		"Vehicle",
 		"Rigsuit",
 		"Phazon",
+		"Pinnace",
 		"Gopher",
 		"Polecat",
 		"Weasel",
@@ -101,9 +102,7 @@
 
 		materials[Name] = 0
 
-	default_apply_parts()
 	files = new /datum/research(src) //Setup the research data holder.
-
 
 /obj/machinery/mecha_part_fabricator/update_icon_state()
 	. = ..()
@@ -193,6 +192,8 @@
 					category_override += "Durand"
 				if(mech_types & EXOSUIT_MODULE_PHAZON)
 					category_override += "Phazon"
+				if(mech_types & EXOSUIT_MODULE_PINNACE)
+					category_override += "Pinnace"
 
 	var/list/part = list(
 		"name" = D.name,
@@ -475,7 +476,7 @@
 		get_asset_datum(/datum/asset/spritesheet/sheetmaterials)
 	)
 
-/obj/machinery/mecha_part_fabricator/attack_hand(var/mob/user)
+/obj/machinery/mecha_part_fabricator/attack_hand(mob/user, list/params)
 	if(..())
 		return
 	if(!allowed(user))

@@ -85,6 +85,9 @@
 		. += "There is enough charge for [get_amount()]."
 
 /obj/item/stack/attack_self(mob/user)
+	. = ..()
+	if(.)
+		return
 	if(safety_check())
 		return
 	list_recipes(user)
@@ -361,7 +364,7 @@
 		if(!amount)
 			break
 
-/obj/item/stack/attack_hand(mob/user)
+/obj/item/stack/attack_hand(mob/user, list/params)
 	if(safety_check())
 		return
 	if(user.get_inactive_held_item() == src)
@@ -408,7 +411,7 @@
 
 /obj/item/stack/AltClick(mob/living/user)
 	. = ..()
-	if(!istype(user) || !in_range(user, src) || !user.canmove)
+	if(!istype(user) || !in_range(user, src) || !CHECK_MOBILITY(user, MOBILITY_CAN_PICKUP))
 		return
 	attempt_split_stack(user)
 
@@ -424,7 +427,7 @@
 		var/stackmaterial = tgui_input_number(user, "How many sheets do you wish to take out of this stack?", "Stack", max, max, 1, round_value=TRUE)
 		max = get_amount() // Not sure why this is done twice but whatever.
 		stackmaterial = min(max, stackmaterial)
-		if(stackmaterial == null || stackmaterial <= 0 || !in_range(user, src) || !user.canmove)
+		if(stackmaterial == null || stackmaterial <= 0 || !in_range(user, src) || !CHECK_MOBILITY(user, MOBILITY_CAN_PICKUP))
 			return TRUE
 		else
 			change_stack(user, stackmaterial)

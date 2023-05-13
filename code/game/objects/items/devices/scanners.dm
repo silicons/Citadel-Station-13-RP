@@ -77,7 +77,7 @@ HALOGEN COUNTER	- Radcount on mobs
 	var/TX = M.getToxLoss() > 50   ? "<b>[M.getToxLoss()]</b>"   : M.getToxLoss()
 	var/BU = M.getFireLoss() > 50  ? "<b>[M.getFireLoss()]</b>"  : M.getFireLoss()
 	var/BR = M.getBruteLoss() > 50 ? "<b>[M.getBruteLoss()]</b>" : M.getBruteLoss()
-	if(M.status_flags & FAKEDEATH)
+	if(M.status_flags & STATUS_FAKEDEATH)
 		OX = fake_oxy > 50 ? "<b>[fake_oxy]</b>" : fake_oxy
 		dat += SPAN_NOTICE("\nAnalyzing Results for [M]:")
 		dat += SPAN_NOTICE("\nOverall Status: dead")
@@ -88,7 +88,7 @@ HALOGEN COUNTER	- Radcount on mobs
 	dat += "\nBody Temperature: [M.bodytemperature-T0C]&deg;C ([M.bodytemperature*1.8-459.67]&deg;F)</span>"
 	dat += "\nSpecies: <b>[M.get_species_name()]</b>"
 
-	if(M.timeofdeath && (M.stat == DEAD || (M.status_flags & FAKEDEATH)))
+	if(M.timeofdeath && (M.stat == DEAD || (M.status_flags & STATUS_FAKEDEATH)))
 		dat += 	SPAN_NOTICE("\nTime of Death: [worldtime2stationtime(M.timeofdeath)]")
 		var/tdelta = round(world.time - M.timeofdeath)
 		if(tdelta < (DEFIB_TIME_LIMIT * 10))
@@ -112,7 +112,7 @@ HALOGEN COUNTER	- Radcount on mobs
 	TX = M.getToxLoss()   > 50 ? "<font color='green'><b>Dangerous amount of toxins detected</b></font>" : "Subject bloodstream toxin level minimal"
 	BU = M.getFireLoss()  > 50 ? "<font color='#FFA500'><b>Severe burn damage detected</b></font>"     : "Subject burn injury status O.K"
 	BR = M.getBruteLoss() > 50 ? "<font color='red'><b>Severe anatomical damage detected</b></font>"     : "Subject brute-force injury status O.K"
-	if(M.status_flags & FAKEDEATH)
+	if(M.status_flags & STATUS_FAKEDEATH)
 		OX = fake_oxy     > 50 ? SPAN_WARNING("Severe oxygen deprivation detected")                      : "Subject bloodstream oxygen level normal"
 	dat += "\n[OX] | [TX] | [BU] | [BR]"
 	if(M.radiation)
@@ -256,7 +256,7 @@ HALOGEN COUNTER	- Radcount on mobs
 			if(e.has_infected_wound())
 				dat += SPAN_WARNING("\nInfected wound detected in subject [e.name]. Disinfection recommended.")
 			// IB
-			for(var/datum/wound/W in e.wounds)
+			for(var/datum/wound/W as anything in e.wounds)
 				if(W.internal)
 					if(advscan >= 1 && showadvscan == 1)
 						ib_dat += SPAN_WARNING("\nInternal bleeding detected in subject [e.name].")
@@ -377,7 +377,10 @@ HALOGEN COUNTER	- Radcount on mobs
 
 	return atmosanalyzer_scan(src, air, user)
 
-/obj/item/analyzer/attack_self(mob/user as mob)
+/obj/item/analyzer/attack_self(mob/user)
+	. = ..()
+	if(.)
+		return
 	if (user.stat)
 		return
 	if (!(ishuman(user) || SSticker) && SSticker.mode.name != "monkey")
@@ -430,7 +433,10 @@ HALOGEN COUNTER	- Radcount on mobs
 	else
 		icon_state = initial(icon_state)
 
-/obj/item/mass_spectrometer/attack_self(mob/user as mob)
+/obj/item/mass_spectrometer/attack_self(mob/user)
+	. = ..()
+	if(.)
+		return
 	if (user.stat)
 		return
 	if (!(ishuman(user) || SSticker) && SSticker.mode.name != "monkey")

@@ -4,7 +4,7 @@
 	desc = "A cheap Martian knock-off of a Colt M1911. Uses .45 rounds."
 	magazine_type = /obj/item/ammo_magazine/m45
 	allowed_magazines = list(/obj/item/ammo_magazine/m45)
-	projectile_type = /obj/item/projectile/bullet/pistol/medium
+	projectile_type = /obj/projectile/bullet/pistol/medium
 	icon_state = "colt"
 	caliber = ".45"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
@@ -74,7 +74,7 @@
 	icon_state = "colt-taj"
 
 /*//apart of reskins that have two sprites, touching may result in frustration and breaks
-/obj/item/gun/ballistic/colt/detective/attack_hand(var/mob/living/user)
+/obj/item/gun/ballistic/colt/detective/attack_hand(mob/user, list/params)
 	if(!unique_reskin && loc == user)
 		reskin_gun(user)
 		return
@@ -87,7 +87,7 @@
 	icon_state = "secguncomp"
 	magazine_type = /obj/item/ammo_magazine/m45/rubber
 	allowed_magazines = list(/obj/item/ammo_magazine/m45/rubber, /obj/item/ammo_magazine/m45/flash, /obj/item/ammo_magazine/m45/practice)
-	projectile_type = /obj/item/projectile/bullet/pistol/medium
+	projectile_type = /obj/projectile/bullet/pistol/medium
 	caliber = ".45"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	load_method = MAGAZINE
@@ -128,14 +128,14 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m45
 	allowed_magazines = list(/obj/item/ammo_magazine/m45)
-	projectile_type = /obj/item/projectile/bullet/pistol/medium
+	projectile_type = /obj/projectile/bullet/pistol/medium
 
 /obj/item/gun/ballistic/deagle
 	name = "desert eagle"
 	desc = "The perfect handgun for shooters with a need to hit targets through a wall and behind a fridge in your neighbor's house. Uses .44 rounds."
 	icon_state = "deagle"
 	item_state = "deagle"
-	force = 14.0
+	damage_force = 14.0
 	caliber = ".44"
 	fire_sound = 'sound/weapons/Gunshot_deagle.ogg'
 	load_method = MAGAZINE
@@ -198,7 +198,7 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m9mm/compact
 	allowed_magazines = list(/obj/item/ammo_magazine/m9mm/compact)
-	projectile_type = /obj/item/projectile/bullet/pistol
+	projectile_type = /obj/projectile/bullet/pistol
 
 /obj/item/gun/ballistic/pistol/update_icon_state()
 	. = ..()
@@ -211,7 +211,7 @@
 	name = "compact signal pistol"
 	magazine_type = /obj/item/ammo_magazine/m9mm/compact/flash
 
-/obj/item/gun/ballistic/pistol/attack_hand(mob/living/user as mob)
+/obj/item/gun/ballistic/pistol/attack_hand(mob/user, list/params)
 	if(user.get_inactive_held_item() == src)
 		if(silenced)
 			if(!user.is_holding(src))
@@ -300,7 +300,7 @@
 	load_method = SINGLE_CASING
 	max_shells = 2
 	ammo_type = /obj/item/ammo_casing/a357
-	projectile_type = /obj/item/projectile/bullet/pistol/strong
+	projectile_type = /obj/projectile/bullet/pistol/strong
 
 /obj/item/gun/ballistic/luger
 	name = "\improper P08 Luger"
@@ -311,7 +311,7 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m9mm/compact
 	allowed_magazines = list(/obj/item/ammo_magazine/m9mm/compact)
-	projectile_type = /obj/item/projectile/bullet/pistol
+	projectile_type = /obj/projectile/bullet/pistol
 
 /obj/item/gun/ballistic/luger/update_icon_state()
 	. = ..()
@@ -363,7 +363,7 @@
 
 /obj/item/gun/ballistic/r9
 	name = "C96-Red 9"
-	desc = "A variation on the Mauser C-96 - the first semi firearm ever to be widely adopted by a human military. This version is chambered for 9mm and reloads using stripper clips."
+	desc = "A variation on the Mauser C-96, remade for a modern day. A Glithari Exports product, for gun collectors and private militaries alike. Uses 9mm stripper clips."
 	icon_state = "r9"
 	origin_tech = list(TECH_COMBAT = 1, TECH_MATERIAL =1) //VERY OLD
 	caliber = "9mm"
@@ -388,7 +388,7 @@
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ILLEGAL = 3)
 	magazine_type = /obj/item/ammo_magazine/mcompressedbio/compact
 	allowed_magazines = list(/obj/item/ammo_magazine/mcompressedbio/compact)
-	projectile_type = /obj/item/projectile/bullet/organic
+	projectile_type = /obj/projectile/bullet/organic
 
 /obj/item/gun/ballistic/clown_pistol/update_icon_state()
 	. = ..()
@@ -410,7 +410,7 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m9mm/compact
 	allowed_magazines = list(/obj/item/ammo_magazine/m9mm/compact)
-	projectile_type = /obj/item/projectile/bullet/pistol
+	projectile_type = /obj/projectile/bullet/pistol
 
 /obj/item/gun/ballistic/konigin
 	firemodes = list(
@@ -431,7 +431,7 @@
 	else
 		..()
 
-/obj/item/gun/ballistic/konigin/attack_hand(mob/user)
+/obj/item/gun/ballistic/konigin/attack_hand(mob/user, list/params)
 	if(user.get_inactive_held_item() == src && use_shotgun)
 		shotgun.unload_ammo(user)
 	else
@@ -473,7 +473,7 @@
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
 	magazine_type = /obj/item/ammo_magazine/m57x28mm
 	allowed_magazines = list(/obj/item/ammo_magazine/m57x28mm)
-	projectile_type = /obj/item/projectile/bullet/pistol/lap
+	projectile_type = /obj/projectile/bullet/pistol/lap
 	one_handed_penalty = 30
 	var/collapsible = 1
 	var/extended = 0
@@ -535,7 +535,7 @@
 	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 2, TECH_BIO = 5)
 	magazine_type = /obj/item/ammo_magazine/biovial
 	allowed_magazines = list(/obj/item/ammo_magazine/biovial)
-	projectile_type = /obj/item/projectile/bullet/organic/wax
+	projectile_type = /obj/projectile/bullet/organic/wax
 
 /obj/item/gun/ballistic/apinae_pistol/update_icon_state()
 	. = ..()

@@ -7,7 +7,7 @@
 	w_class = ITEMSIZE_NORMAL
 	matter = list(MAT_STEEL = 1000)
 	recoil = 0
-	projectile_type = /obj/item/projectile/bullet/pistol/strong	//Only used for chameleon guns
+	projectile_type = /obj/projectile/bullet/pistol/strong	//Only used for chameleon guns
 
 	var/caliber = ".357"		//determines which casings will fit
 	var/handle_casings = EJECT_CASINGS	//determines how spent casings should be handled
@@ -236,13 +236,13 @@
 	..()
 	load_ammo(A, user)
 
-/obj/item/gun/ballistic/attack_self(mob/user as mob)
+/obj/item/gun/ballistic/attack_self(mob/user)
 	if(firemodes.len > 1)
 		switch_firemodes(user)
 	else
 		unload_ammo(user)
 
-/obj/item/gun/ballistic/attack_hand(mob/user as mob)
+/obj/item/gun/ballistic/attack_hand(mob/user, list/params)
 	if(user.get_inactive_held_item() == src)
 		unload_ammo(user, allow_dump=0)
 	else

@@ -118,7 +118,7 @@
 			visible_message("<span class='warning'>\The [src] sparks and breaks open!</span>", "You hear a faint electrical spark.")
 		return 1
 
-/obj/structure/closet/secure_closet/attack_hand(mob/user as mob)
+/obj/structure/closet/secure_closet/attack_hand(mob/user, list/params)
 	src.add_fingerprint(user)
 	if(src.locked)
 		src.togglelock(user)
@@ -134,7 +134,7 @@
 	set category = "Object"
 	set name = "Toggle Lock"
 
-	if(!usr.canmove || usr.stat || usr.restrained() || !Adjacent(usr)) // Don't use it if you're not able to! Checks for stuns, ghost and restrain
+	if(!CHECK_MOBILITY(usr, MOBILITY_CAN_USE) || !Adjacent(usr)) // Don't use it if you're not able to! Checks for stuns, ghost and restrain
 		return
 
 	if(ishuman(usr) || isrobot(usr))

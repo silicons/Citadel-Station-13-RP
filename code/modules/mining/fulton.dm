@@ -30,6 +30,9 @@ var/global/list/total_extraction_beacons = list()
 	. +="It has [uses_left] use\s remaining."
 
 /obj/item/extraction_pack/attack_self(mob/user)
+	. = ..()
+	if(.)
+		return
 	var/list/possible_beacons = list()
 	for(var/B in global.total_extraction_beacons)
 		var/obj/structure/extraction_point/EP = B
@@ -87,7 +90,7 @@ var/global/list/total_extraction_beacons = list()
 			var/mutable_appearance/balloon3
 			if(isliving(A))
 				var/mob/living/M = A
-				M.AdjustStunned(10) // Keep them from moving during the duration of the extraction
+				M.adjust_stunned(20 * 10) // Keep them from moving during the duration of the extraction
 				if(M.buckled)
 					M.buckled.unbuckle_mob(M)
 			else
@@ -121,7 +124,7 @@ var/global/list/total_extraction_beacons = list()
 			animate(holder_obj, pixel_z = 1000, time = 30)
 			if(ishuman(A))
 				var/mob/living/carbon/L = A
-				L.AdjustStunned(stuntime)
+				L.adjust_stunned(20 * stuntime)
 				L.drowsyness = 0
 			sleep(30)
 			var/list/flooring_near_beacon = list()
@@ -163,6 +166,9 @@ var/global/list/total_extraction_beacons = list()
 	icon_state = "subspace_amplifier"
 
 /obj/item/fulton_core/attack_self(mob/user)
+	. = ..()
+	if(.)
+		return
 	if(do_after(user,15,target = user) && !QDELETED(src))
 		new /obj/structure/extraction_point(get_turf(user))
 		qdel(src)

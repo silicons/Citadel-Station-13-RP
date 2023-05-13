@@ -383,11 +383,6 @@ GLOBAL_LIST_EMPTY(##LIST_NAME);\
 #define IS_WIRECUTTER		"wirecutter"
 #define IS_WRENCH			"wrench"
 
-
-// Diagonal movement
-#define FIRST_DIAG_STEP 1
-#define SECOND_DIAG_STEP 2
-
 // RCD modes. Used on the RCD, and gets passed to an object's rcd_act() when an RCD is used on it, to determine what happens.
 /// Builds plating on space/ground/open tiles. Builds a wall when on floors. Finishes walls when used on girders.
 #define RCD_FLOORWALL		"Floor / Wall"
@@ -441,7 +436,7 @@ GLOBAL_LIST_EMPTY(##LIST_NAME);\
 #define HERM "herm"
 // For custom species
 #define STARTING_SPECIES_POINTS	1
-#define MAX_SPECIES_TRAITS		5
+#define MAX_SPECIES_TRAITS		7
 
 // Xenochimera thing mostly
 #define REVIVING_NOW		-1
@@ -579,3 +574,9 @@ GLOBAL_LIST_EMPTY(##LIST_NAME);\
 #define OUTSIDE_AREA null
 #define OUTSIDE_NO   FALSE
 #define OUTSIDE_YES  TRUE
+
+//Define a macro that we can use to assemble all the circuit board names
+#ifdef T_BOARD
+#error T_BOARD already defined elsewhere, we can't use it.
+#endif
+#define T_BOARD(name) "circuit board (" + (name) + ")"

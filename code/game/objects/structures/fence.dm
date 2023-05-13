@@ -67,7 +67,7 @@
 
 // Projectiles can pass through fences.
 /obj/structure/fence/CanAllowThrough(atom/movable/mover, turf/target)
-	if(istype(mover, /obj/item/projectile))
+	if(istype(mover, /obj/projectile))
 		return TRUE
 	return ..()
 
@@ -139,7 +139,7 @@
 	desc = "It looks like it has a strong padlock attached."
 	locked = TRUE
 
-/obj/structure/fence/door/attack_hand(mob/user)
+/obj/structure/fence/door/attack_hand(mob/user, list/params)
 	if(can_open(user))
 		toggle(user)
 	else

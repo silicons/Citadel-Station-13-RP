@@ -61,7 +61,10 @@
 	base_desc = desc
 
 
-/obj/item/reagent_containers/glass/attack_self()
+/obj/item/reagent_containers/glass/attack_self(mob/user)
+	. = ..()
+	if(.)
+		return
 	..()
 	if(is_open_container())
 		to_chat(usr, "<span class = 'notice'>You put the lid on \the [src].</span>")
@@ -163,7 +166,7 @@
 	. = ..()
 	update_icon()
 
-/obj/item/reagent_containers/glass/beaker/attack_hand()
+/obj/item/reagent_containers/glass/beaker/attack_hand(mob/user, list/params)
 	..()
 	update_icon()
 
@@ -296,11 +299,18 @@
 	else
 		return ..()
 
+/obj/item/reagent_containers/glass/bucket/afterattack()
+	.=..()
+	update_icon()
+
 /obj/item/reagent_containers/glass/bucket/update_icon()
 	cut_overlays()
 	if (!is_open_container())
 		var/image/lid = image(icon, src, "lid_[initial(icon_state)]")
 		add_overlay(lid)
+	if (is_open_container() && reagents.total_volume > 100)
+		var/image/water = image(icon, src, "water_[initial(icon_state)]")
+		add_overlay(water)
 
 /obj/item/reagent_containers/glass/bucket/wood
 	desc = "An old wooden bucket."
@@ -349,6 +359,14 @@
 	matter = list("sandstone" = 50)
 	w_class = ITEMSIZE_LARGE
 	unacidable = 1
+
+/obj/item/reagent_containers/glass/bucket/sandstone/examine(mob/user)
+	. = ..()
+	if(reagents && reagents.reagent_list.len)
+		for(var/datum/reagent/R in reagents.reagent_list)
+			. += "[icon2html(thing = src, target = world)] The [src.name] currently contains [R.volume] units of [R.name]!"
+	else
+		. += "<span class='notice'>It is empty.</span>"
 
 /obj/item/reagent_containers/glass/bucket/sandstone/attackby(var/obj/D, mob/user as mob)
 	if(isprox(D))
