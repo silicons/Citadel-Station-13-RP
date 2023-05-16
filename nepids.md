@@ -55,7 +55,7 @@ The Dnin-Nepids is a matriarchal society, with family names often passed through
 
 - OOC: Their names are generally Sumerian-adjacent sounding, for pure-bloods born in the fleet. 
 - Traditionally, a clan-name denoted origins, rarely changed throughout life other than when one fully emigrates. Obviously impractical to continue after such primitive groupings gave way to city-states, much less after their ascent to the stars, it is now far more common to have a phrase denoting where you are from.
-- Immigrants sometimes change their name to something more easily used in common galactic tongues. Those born outside of the arkships of the fleet often have partial names entirely.
+- Immigrants sometimes change their name to something more easily used in common galactic tongues. Those born outside of the ships of the fleet often have partial names entirely.
 - Most purebloods consider it insulting to adopt origin-phrases for foreign constructs. You would likely be laughed out of town if you claimed to be of a megacorporation's ship, both due to cultural reasons, and due to foreign ships not having quite the same ring to it.
 
 An example of a formal name would be
@@ -171,21 +171,25 @@ The events of the Exodus saw the Nepids' worst nightmares come true - %plt% in m
 
 Part of the success of the Dnin-Nepids can easily be attributed to their rather unique habitation methodology. Rather than colonize planets - which they are not yet well equipped to do - the Dnin-Nepids instead invested all their resources after the Exodus into thriving in the void of space.
 
-- The vast majority of Nepids live on a variety of arkships. Arkships vary vastly in size, design, and purpose - though in general, most of them are able to fulfill much of the duties of deep-space exploration and salvage.
-  - All arkships tend to have the capability, and manpower, to perform salvage and construction tasks - this is the sole reason that the Nepids were able to get this far.
-  - Arkships often contain quite the number of amenities - anywhere from massive, climate-controlled holodecks, to fully artificial biospheres on the most extravagant of flagships. This is, of-course, limited by space - ships dedicated to scouting or the pursuit of technology and advancement are far less able to dedicate such space to luxuries.
+- The vast majority of Nepids live on a variety of ships. Ships vary vastly in size, design, and purpose - though in general, most of them are able to fulfill much of the duties of deep-space exploration and salvage.
+  - All ships tend to have the capability, and manpower, to perform salvage and construction tasks - this is the sole reason that the Nepids were able to get this far.
+  - Ships often contain quite the number of amenities - anywhere from massive, climate-controlled holodecks, to fully artificial biospheres on the most extravagant of flagships. This is, of-course, limited by space - ships dedicated to scouting or the pursuit of technology and advancement are far less able to dedicate such space to luxuries.
   - Given the crucial task of resource acquisition to those who are indefinitely space-bound, almost all ships have a variable contigent of small excursion craft, used to scout surrounding space, as well as retrieval of resources - like towing especially rich asteroids close enough for efficient excavation.
-- *Fleet-groups* of arkships are often formed - usually with prior agreements. These are, however, not necessarily designed to have ship compositions you would expect - it is very much valid to have a fleet-group consisting of multiple research vessels that are barely connected, much like it would be to have a massive flagship travelling with an escort of smaller scouting vessels.
+- *Fleet-groups* of ships are often formed - usually with prior agreements. These are, however, not necessarily designed to have ship compositions you would expect - it is very much valid to have a fleet-group consisting of multiple research vessels that are barely connected, much like it would be to have a massive flagship travelling with an escort of smaller scouting vessels.
 - Lacking the amenities provided by dedicated orbital shipyards, new ark-ships are often constructed within asteroid belts, or, more rarely, in the orbit of a planet near such an asteroid belt - serviced by hundreds, if not thousands, of engineers and architects coming together.
-  - Arkships are often created to provide room on an expanding fleet, or in rarer cases, commissioned for a specific purpose, like exploration or servicing of a group of systems.
+  - Ships are often created to provide room on an expanding fleet, or in rarer cases, commissioned for a specific purpose, like exploration or servicing of a group of systems.
 
-While scattered, the vast majority of Dnin-Nepids still occupy the same *general* areas of space - with many fleet-groups and arkships within just a few days, if not hours, of superluminal travel from each other. *The Wayfarer's Network* - a massive network of subspace ansibles connecting the different arkships, and fleets together - provides society with some semblence of normalcy compared to their planetary counterparts.
+While scattered, the vast majority of Dnin-Nepids still occupy the same *general* areas of space - with many fleet-groups and ships within just a few days, if not hours, of superluminal travel from each other. *The Wayfarer's Network* - a massive network of subspace ansibles connecting the different ships, and fleets together - provides society with some semblence of normalcy compared to their planetary counterparts.
 
 ## Society
+
+
 
 ### Religion
 
 ### Migration
+
+
 
 ## History
 
@@ -232,9 +236,9 @@ A quick transition from the reliance upon terrestrial power sources has demanded
 
 As a species evolved to be relatively lacking in brawn compared to others, the Dnin-Nepids have long devised mechanical assistance for what they lack in sheer strength. While creativity is a point of pride for them, a steel beam weighing a few hundred pounds needing to be installed in a shipyard cares little for mental prowess. Exoskeletons powered off wireless induction quickly led to the first powered voidsuits in the ascent to the stars - followed by increasingly complex cybernetics churned out by scores of researchers wishing to leave their mark on synthetic evolution. This is, however, not without opposition.
 
-- Almost every engineer on a post-Exodus arkship has access to technologies that greatly improve their industrial capabilities. This can range from powered spacesuits capable of boosting one's lift by a few tens of pounds, all the way to the rare usage of fully prosthetic limbs and endoskeletons.
+- Almost every engineer on a post-Exodus ship has access to technologies that greatly improve their industrial capabilities. This can range from powered spacesuits capable of boosting one's lift by a few tens of pounds, all the way to the rare usage of fully prosthetic limbs and endoskeletons.
 - Augmentations often operate in synchronicity with the user it was designed for, as well as their environment. Wireless power distribution systems are wired into most common places on a ship to maintain low-power implants. Specific implants are often adapted to their user's preferences, with more advanced ones adjusting to their user's style over time without intervention.
-- While the utilization of external equipment is a constant for the species, the overall usage of prosthetics and cybernetics are at best, subject to debate. More conservative arkships and cultures tend to shun the elective usage of cybernetics - considering them to unacceptably blend the line between what is natural, and what is *created*.
+- While the utilization of external equipment is a constant for the species, the overall usage of prosthetics and cybernetics are at best, subject to debate. More conservative ships and cultures tend to shun the elective usage of cybernetics - considering them to unacceptably blend the line between what is natural, and what is *created*.
 
 ## Synthetics
 
@@ -244,7 +248,7 @@ With the discovery of lightspeed transit and the dispatch of the first scouting 
 
 ### Nomenclature
 
-Created to be an extension of their host vessels, Dnin-Nepid synthetics share a similar, but divergent naming scheme as the one often used to name arkships and shuttlecraft.
+Created to be an extension of their host vessels, Dnin-Nepid synthetics share a similar, but divergent naming scheme as the one often used to name ships and shuttlecraft.
 
 - Synthetics are always identified in domain by their originating ship.
     - For the outlying cases where one is not made onboard a ship, the name of the planet or the stellar system is also acceptable.
@@ -283,18 +287,18 @@ Modern Dnin-Nepid synthetics are highly variable in behavior - designed to adapt
   - This malleability is often retained throughout a synthetic's lifetime, allowing even dated units to re-adapt to their circumstances and thrive, as opposed to become obsolete.
 - Synthetics often take up an occupation within their ship once sufficiently adapted - this is a relatively fast process, off-setting the cost of custom tailored positronics and shells.
   - Titles similar to the ones given to organic crew are adopted by synthetics as they acclimate, such as 'Engineer', 'Architect', 'Navigator', 'Keeper', etc.
-  - After a sufficient amount of time, synthetics often find themselves integrating with many of the varied excursion crews aboard their arkship; this is a practice that is *extremely* beneficial to scouting and architectural efforts, as a fully learned synthetic can perform navigation and analysis more efficiently than the rigid systems of a shuttlecraft - as well as care for its crew.
+  - After a sufficient amount of time, synthetics often find themselves integrating with many of the varied excursion crews aboard their ship; this is a practice that is *extremely* beneficial to scouting and architectural efforts, as a fully learned synthetic can perform navigation and analysis more efficiently than the rigid systems of a shuttlecraft - as well as care for its crew.
 - A synthetic, much like their organic counterparts, tends to become extremely proficient at operating their home ships and shuttles - often able to perform just as well as most stationary positronic AI cores if provided the necessary interfaces. Many ships often have transponders accessible by the *created* whom are tuned to it, allowing for wireless manipulation akin to stationbound synthetics when away from a hard-wired terminal.
-- It is considered **strictly** taboo to permanently enslave synthetics, or to produce them for the explicit purpose of warfare. Such usages are only rumored from rogue arkships and fleet-groups.
+- It is considered **strictly** taboo to permanently enslave synthetics, or to produce them for the explicit purpose of warfare. Such usages are only rumored from rogue ships and fleet-groups.
 
 ### Finality
 
 Given their purpose, Dnin-Nepid synthetics are designed from the ground up with mechanisms for the preservation of knowledge.
 
 - From creation, positronic cores are physically designed for the ability to mirror and imprint patterns created during operation - if the synthetic in question chooses to do so. These channels are meaningless if the core resists their operation - consciously or otherwise.
-- Synthetics often operate with special transponders inside their chassis that link up to their originating arkship to back up their conscious experience during their lives. This transponder may be turned off by them, voluntarily, or be physically removed.
+- Synthetics often operate with special transponders inside their chassis that link up to their originating ship to back up their conscious experience during their lives. This transponder may be turned off by them, voluntarily, or be physically removed.
 	- Such a transponder requires a suitable receiver with sufficient storage nearby to operate. Synthetics whom leave their home are sometimes hard-pressed to find facilities with the necessary bandwidth and processing.
-- A synthetic's exact circuit design and initial state is recorded during creation, and stored within an arkship's databanks along with provisioned space for the compressed storage of said conscious experience. In the event of a total loss of their positronic core, they can be recreated from scratch and their memories **imperfectly** replayed back to them, akin to watching one's life through a television, albeit sped up by a million times over, thanks to the in-built imprinting channels.
+- A synthetic's exact circuit design and initial state is recorded during creation, and stored within an ship's databanks along with provisioned space for the compressed storage of said conscious experience. In the event of a total loss of their positronic core, they can be recreated from scratch and their memories **imperfectly** replayed back to them, akin to watching one's life through a television, albeit sped up by a million times over, thanks to the in-built imprinting channels.
 
 ## Relations
 
