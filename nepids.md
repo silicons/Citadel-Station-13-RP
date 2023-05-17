@@ -189,7 +189,9 @@ While scattered, the vast majority of Dnin-Nepids still occupy the same *general
 
 ### Migration
 
+As can be expected for a race whose 'land' composition is of fleets of carriers, and the craft which they carry, travel tends to be *frequent*. Most ships are well able to accomodate basically any reasonable size of shuttles - and in the worst case, if all room is exhausted, there's nothing wrong with diverting to another nearby vessel.
 
+Actual migration, however - while intermingling and eventual relocation between vessels within the same fleet is decently common, full on relocations 
 
 ## History
 
