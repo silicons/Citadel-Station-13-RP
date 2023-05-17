@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/honkpet
+/datum/prototype/struct/catalogue_entry/fauna/honkpet
 	name = "Clown Pet"
 	desc = "The Silence into Laughter program mass produces these excessively \
 	hardy animals for each member to raise and take care of. They often switch \
@@ -13,7 +13,7 @@
 	icon_state = "c_pet"
 	icon_living = "c_pet"
 	icon_dead = "c_pet_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/honkpet)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/honkpet)
 
 	maxHealth = 1500
 	health = 1500

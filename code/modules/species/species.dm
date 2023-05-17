@@ -49,8 +49,8 @@
 	var/blurb = "A completely nondescript species."
 	/// link to wiki page for species
 	var/wikilink = null
-	/// A list of /datum/category_item/catalogue datums, for the cataloguer, or null.
-	var/list/catalogue_data = null
+	/// A list of /datum/prototype/struct/catalogue_entry datums, for the cataloguer, or null.
+	var/list/catalogue_data_legacy = null
 	/// descriptors - Bay's height and fitness difference system
 	var/list/descriptors = list()
 

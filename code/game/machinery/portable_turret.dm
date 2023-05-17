@@ -3,7 +3,7 @@
 		This code is slightly more documented than normal, as requested by XSI on IRC.
 */
 
-/datum/category_item/catalogue/technology/turret
+/datum/prototype/struct/catalogue_entry/technology/turret
 	name = "Turrets"
 	desc = "This imtimidating machine is essentially an automated gun. It is able to \
 	scan its immediate environment, and if it determines that a threat is nearby, it will \
@@ -34,7 +34,7 @@
 
 /obj/machinery/porta_turret
 	name = "turret"
-	catalogue_data = list(/datum/category_item/catalogue/technology/turret)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/turret)
 	icon = 'icons/obj/turrets.dmi'
 	icon_state = "turret_cover_normal"
 	anchored = TRUE
@@ -170,7 +170,7 @@
 	health = 250 // Since lasers do 40 each.
 	maxhealth = 250
 
-/datum/category_item/catalogue/anomalous/precursor_a/alien_turret
+/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_turret
 	name = "Precursor Alpha Object - Turrets"
 	desc = "An autonomous defense turret created by unknown ancient aliens. It utilizes an \
 	integrated laser projector to harm, firing a cyan beam at the target. The signal processing \
@@ -185,7 +185,7 @@
 /obj/machinery/porta_turret/alien // The kind used on the UFO submap.
 	name = "interior anti-boarding turret"
 	desc = "A very tough looking turret made by alien hands."
-	catalogue_data = list(/datum/category_item/catalogue/anomalous/precursor_a/alien_turret)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_turret)
 	icon_state = "turret_cover_alien"
 	req_one_access = list(ACCESS_FACTION_ALIEN)
 	installation = /obj/item/gun/energy/alien

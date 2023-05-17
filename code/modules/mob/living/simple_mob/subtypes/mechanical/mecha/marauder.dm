@@ -1,6 +1,6 @@
 // Marauders are even tougher than Durands.
 
-/datum/category_item/catalogue/technology/marauder
+/datum/prototype/struct/catalogue_entry/technology/marauder
 	name = "Exosuit - Marauder"
 	desc = "Marauders are the more modern descendants of the Durand model. Stronger, faster, and \
 	more resilient than their predecessor, they have replaced the Durand's role entirely, and are generally deployed by \
@@ -11,7 +11,7 @@
 /mob/living/simple_mob/mechanical/mecha/combat/marauder
 	name = "marauder"
 	desc = "A heavy-duty, combat exosuit, developed after the Durand model. This is rarely found among civilian populations."
-	catalogue_data = list(/datum/category_item/catalogue/technology/marauder)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/marauder)
 	icon_state = "marauder"
 	movement_cooldown = 5
 	wreckage = /obj/structure/loot_pile/mecha/marauder
@@ -35,7 +35,7 @@
 
 
 
-/datum/category_item/catalogue/technology/seraph
+/datum/prototype/struct/catalogue_entry/technology/seraph
 	name = "Exosuit - Seraph"
 	desc = "The Seraph line of combat exosuit is essentially a Marauder with incremental improvements, making \
 	it slightly better. Due to the relatively minor improvements over its predecessor, and the cost of \
@@ -52,14 +52,14 @@
 	name = "seraph"
 	desc = "A heavy-duty, combat/command exosuit. This one is specialized towards housing important commanders such as high-ranking \
 	military personnel. It's stronger than the regular Marauder model, but not by much."
-	catalogue_data = list(/datum/category_item/catalogue/technology/seraph)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/seraph)
 	icon_state = "seraph"
 	wreckage = /obj/structure/loot_pile/mecha/marauder/seraph
 	health = 550
 	melee_damage_lower = 55 // The real version hits this hard apparently. Ouch.
 	melee_damage_upper = 55
 
-/datum/category_item/catalogue/technology/mauler
+/datum/prototype/struct/catalogue_entry/technology/mauler
 	name = "Exosuit - Mauler"
 	desc = "In spite of their technological advancement and heavily restricted deployments, NanoTrasen \
 	Marauders may sometimes be stolen, salvaged, or illictly purchased from corrupt company officials. These \

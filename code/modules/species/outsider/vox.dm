@@ -25,7 +25,7 @@
 	dealing with their traders and merchants; those that do rarely enjoy the experience.
 	"}
 	wikilink = "https://citadel-station.net/wikiRP/index.php?title=Race:_The_Vox"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/vox)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/vox)
 	//rarity_value = 4
 
 //	taste_sensitivity = TASTE_DULL

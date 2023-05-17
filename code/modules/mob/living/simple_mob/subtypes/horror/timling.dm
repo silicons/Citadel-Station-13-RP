@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/horror/TinyTim
+/datum/prototype/struct/catalogue_entry/fauna/horror/TinyTim
 	name = "%%OST$OSTLOSTLOS%@!"
 	desc = "%WARNING% PROCESSING FAILURE! RETURN SCANNER TO A CENTRAL \
 	ADMINISTRATOR FOR IMMEDIATE MAINTENANCE! %ERROR%"
@@ -15,7 +15,7 @@
 	faction = "horror"
 	icon = 'icons/mob/horror_show/tallhorror.dmi'
 	icon_gib = "generic_gib"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/horror/TinyTim)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/horror/TinyTim)
 
 	attack_sound = 'sound/h_sounds/youknowwhoitis.ogg'
 

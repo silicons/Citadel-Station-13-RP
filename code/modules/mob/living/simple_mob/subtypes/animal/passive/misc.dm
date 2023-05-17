@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/yithian
+/datum/prototype/struct/catalogue_entry/fauna/yithian
 	name = "Mystery - Yithian"
 	desc = "The exact provenance of this creature remains unknown. \
 	Although scientists have confirmed that this species is Sapient, and \
@@ -16,7 +16,7 @@
 	icon_living = "yithian"
 	icon_dead = "yithian_dead"
 	icon = 'icons/jungle.dmi'
-	catalogue_data = list(/datum/category_item/catalogue/fauna/yithian)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/yithian)
 
 	// Same stats as lizards.
 	health = 5
@@ -24,7 +24,7 @@
 	mob_size = MOB_MINISCULE
 	randomized = TRUE
 
-/datum/category_item/catalogue/fauna/tindalos
+/datum/prototype/struct/catalogue_entry/fauna/tindalos
 	name = "Mystery - Tindalos"
 	desc = "There is much dispute regarding the origin of Tindalosi. \
 	Commonly referred to as 'hounds', these creatures exhibit translocative \
@@ -43,7 +43,7 @@
 	icon_living = "tindalos"
 	icon_dead = "tindalos_dead"
 	icon = 'icons/jungle.dmi'
-	catalogue_data = list(/datum/category_item/catalogue/fauna/tindalos)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/tindalos)
 
 	// Same stats as lizards.
 	health = 5

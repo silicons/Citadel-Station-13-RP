@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/technology/drone/corrupt_hound		//TODO: VIRGO_LORE_WRITING_WIP
+/datum/prototype/struct/catalogue_entry/technology/drone/corrupt_hound		//TODO: VIRGO_LORE_WRITING_WIP
 	name = "Drone - Corrupt Hound"
 	desc = "A hound that has corrupted, due to outside influence, or other issues, \
 	and occasionally garbles out distorted voices or words. It looks like a reddish-colored \
@@ -13,7 +13,7 @@
 /mob/living/simple_mob/vore/aggressive/corrupthound
 	name = "corrupt hound"
 	desc = "Good boy machine broke. This is definitely no good news for the organic lifeforms in vicinity."
-	catalogue_data = list(/datum/category_item/catalogue/technology/drone/corrupt_hound)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/drone/corrupt_hound)
 
 	icon_state = "badboi"
 	icon_living = "badboi"

@@ -41,7 +41,7 @@
 	physiology allows them survive happily off a diet of nothing but light, water and other radiation.
 	"}
 	wikilink = "https://citadel-station.net/wikiRP/index.php?title=Race:_Dionea"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/dionaea)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/dionaea)
 	//rarity_value   = 3
 
 	has_organ = list(

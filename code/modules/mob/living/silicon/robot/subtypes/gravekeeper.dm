@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/silicon/robot/gravekeeper
+/datum/prototype/struct/catalogue_entry/fauna/silicon/robot/gravekeeper
 	name = "Robot - Gravekeeper"
 	desc = "Gravekeepers are often politely ignored. Serving as guards and custodians \
 	of funeral grounds, Gravekeepers only care about tending to their assigned station. \
@@ -16,7 +16,7 @@
 	idcard_type = /obj/item/card/id
 	icon_selected = FALSE
 	can_be_antagged = FALSE
-	catalogue_data = list(/datum/category_item/catalogue/fauna/silicon/robot/gravekeeper)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/silicon/robot/gravekeeper)
 
 /mob/living/silicon/robot/gravekeeper/init()
 	aiCamera = new/obj/item/camera/siliconcam/robot_camera(src)

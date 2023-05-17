@@ -18,7 +18,7 @@
 	"}
 
 	wikilink = "https://citadel-station.net/wikiRP/index.php?title=Skrell"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/skrell)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/skrell)
 
 	max_additional_languages = 3
 	name_language    = LANGUAGE_ID_SKRELL

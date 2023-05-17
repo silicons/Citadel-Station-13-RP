@@ -12,7 +12,7 @@
 	rad = 1.0
 
 
-/datum/category_item/catalogue/fauna/iceleech
+/datum/prototype/struct/catalogue_entry/fauna/iceleech
 	name = "Sivian Fauna - River Leech"
 	desc = "Classification: S Hirudinea phorus \
 	<br><br>\
@@ -31,7 +31,7 @@
 	name = "river leech"
 	desc = "What appears to be an oversized leech."
 	tt_desc = "S Hirudinea phorus"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/iceleech)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/iceleech)
 
 	faction = "leech"
 

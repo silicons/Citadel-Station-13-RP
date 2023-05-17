@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/fennec		//TODO: VIRGO_LORE_WRITING_WIP
+/datum/prototype/struct/catalogue_entry/fauna/fennec		//TODO: VIRGO_LORE_WRITING_WIP
 	name = "Wildlife - Fennec"
 	desc = "A small, dusty, big-eared sandfox, native to Virgo 4. It looks like a Zorren that's on all fours, \
 	and it's easy to see the resemblance to the little dunefox-like critters the Zorren are. However, the fennecs \

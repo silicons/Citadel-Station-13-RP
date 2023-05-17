@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/alien/larva
+/datum/prototype/struct/catalogue_entry/fauna/alien/larva
 	name = "Xenomorph - Larva"
 	desc = "Known colloquially as 'chestbursters', Xenomorph larva are the second \
 	stage of the Xenomorph life cycle. Gestating inside the chest of their host, Larva \
@@ -17,7 +17,7 @@
 	maxHealth = 25
 	health = 25
 	faction = "xeno"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/alien/larva)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/alien/larva)
 
 /mob/living/carbon/alien/larva/Initialize(mapload)
 	. = ..()

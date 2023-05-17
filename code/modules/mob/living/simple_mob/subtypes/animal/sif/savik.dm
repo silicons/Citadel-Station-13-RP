@@ -1,6 +1,6 @@
 // Saviks are dangerous, angry creatures that hit hard, and will berserk if losing a fight.
 
-/datum/category_item/catalogue/fauna/savik
+/datum/prototype/struct/catalogue_entry/fauna/savik
 	name = "Sivian Fauna - Savik"
 	desc = "Classification: S Pistris tellus\
 	<br><br>\
@@ -20,7 +20,7 @@
 /mob/living/simple_mob/animal/sif/savik
 	name = "savik"
 	tt_desc = "S Pistris tellus" //landshark
-	catalogue_data = list(/datum/category_item/catalogue/fauna/savik)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/savik)
 	faction = "savik"
 
 	icon_state = "savik"

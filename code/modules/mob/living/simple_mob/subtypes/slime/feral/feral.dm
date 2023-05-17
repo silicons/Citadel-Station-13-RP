@@ -1,6 +1,6 @@
 // These slimes lack certain xenobio features but get more combat-oriented goodies. Generally these are more oriented towards Explorers than Xenobiologists.
 
-/datum/category_item/catalogue/fauna/slime/feral
+/datum/prototype/struct/catalogue_entry/fauna/slime/feral
 	name = "Slime - Feral"
 	desc = "Having the means to successfully escape their lab, as well as having to survive on a harsh, cold world has made these \
 	creatures rival the ferocity of other apex predators in this region of Sif. It is considered to be a very invasive species."
@@ -10,7 +10,7 @@
 	name = "feral slime"
 	desc = "The result of slimes escaping containment from some xenobiology lab."
 	description_info = "Note that processing this large slime will give six cores."
-	catalogue_data = list(/datum/category_item/catalogue/fauna/slime/feral)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/slime/feral)
 
 	cores = 6 // Xenobio will love getting their hands on these.
 

@@ -1,28 +1,28 @@
-/datum/category_item/catalogue/fauna/horror
+/datum/prototype/struct/catalogue_entry/fauna/horror
 	name = "%#ERROR#%"
 	desc = "%ERROR% SCAN DATA REDACTED. RETURN SCANNER TO A \
 	CENTRAL ADMINISTRATOR FOR IMMEDIATE MAINTENANCE. %ERROR%"
 	value = CATALOGUER_REWARD_TRIVIAL
-	unlocked_by_any = list(/datum/category_item/catalogue/fauna/horror)
+	unlocked_by_any = list(/datum/prototype/struct/catalogue_entry/fauna/horror)
 
 // Obtained by scanning all X.
-/datum/category_item/catalogue/fauna/all_horrors
+/datum/prototype/struct/catalogue_entry/fauna/all_horrors
 	name = "Coll-LL-ec-T-io$#@ - %REDACTED!!!%"
 	desc = "You have REJECTED a large $%*^ of different MAINTENANCE MODE, \
 	and therefore you have been SLATED FOR &&!!%) sum of points, through this \
 	%%ERROR%%."
 	value = CATALOGUER_REWARD_TRIVIAL
 	unlocked_by_all = list(
-		/datum/category_item/catalogue/fauna/horror/bradley,
-		/datum/category_item/catalogue/fauna/horror/Eddy,
-		/datum/category_item/catalogue/fauna/horror/Master,
-		/datum/category_item/catalogue/fauna/horror/Rickey,
-		/datum/category_item/catalogue/fauna/horror/Sally,
-		/datum/category_item/catalogue/fauna/horror/BigTim,
-		/datum/category_item/catalogue/fauna/horror/Smiley,
-		/datum/category_item/catalogue/fauna/horror/Steve,
-		/datum/category_item/catalogue/fauna/horror/TinyTim,
-		/datum/category_item/catalogue/fauna/horror/Willy
+		/datum/prototype/struct/catalogue_entry/fauna/horror/bradley,
+		/datum/prototype/struct/catalogue_entry/fauna/horror/Eddy,
+		/datum/prototype/struct/catalogue_entry/fauna/horror/Master,
+		/datum/prototype/struct/catalogue_entry/fauna/horror/Rickey,
+		/datum/prototype/struct/catalogue_entry/fauna/horror/Sally,
+		/datum/prototype/struct/catalogue_entry/fauna/horror/BigTim,
+		/datum/prototype/struct/catalogue_entry/fauna/horror/Smiley,
+		/datum/prototype/struct/catalogue_entry/fauna/horror/Steve,
+		/datum/prototype/struct/catalogue_entry/fauna/horror/TinyTim,
+		/datum/prototype/struct/catalogue_entry/fauna/horror/Willy
 		)
 
 /mob/living/simple_mob/horror

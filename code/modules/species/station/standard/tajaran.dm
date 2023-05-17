@@ -48,7 +48,7 @@
 	home worlds and speak a variety of languages, especially Siik and Akhani.
 	"}
 	wikilink = "https://citadel-station.net/wikiRP/index.php?title=Race:_Tajarans"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/tajaran)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/tajaran)
 
 	body_temperature = 320.15 //Even more cold resistant, even more flammable
 

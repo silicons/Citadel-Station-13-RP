@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/horror/Sally
+/datum/prototype/struct/catalogue_entry/fauna/horror/Sally
 	name = "*@!!EARS*OF#@$$$JOY"
 	desc = "%WARNING% PROCESSING FAILURE! RETURN SCANNER TO A CENTRAL \
 	ADMINISTRATOR FOR IMMEDIATE MAINTENANCE! %ERROR%"
@@ -15,7 +15,7 @@
 	faction = "horror"
 	icon = 'icons/mob/horror_show/widehorror.dmi'
 	icon_gib = "generic_gib"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/horror/Sally)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/horror/Sally)
 
 	attack_sound = 'sound/h_sounds/sampler.ogg'
 

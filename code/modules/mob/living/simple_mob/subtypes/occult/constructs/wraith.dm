@@ -2,7 +2,7 @@
 //			Wraith
 ////////////////////////////
 
-/datum/category_item/catalogue/fauna/construct/wraith
+/datum/prototype/struct/catalogue_entry/fauna/construct/wraith
 	name = "Constructs - Wraith"
 	desc = "Employed during the incursion on the NDV Marksman as a flanker and assasin, \
 	the Wraith is an agile construct capble of rapidly outmaneuvering its foes. Worryingly, \
@@ -34,7 +34,7 @@
 							/spell/targeted/ambush_mode
 							)
 
-	catalogue_data = list(/datum/category_item/catalogue/fauna/construct/wraith)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/construct/wraith)
 
 	ai_holder_type = /datum/ai_holder/simple_mob/melee/evasive
 

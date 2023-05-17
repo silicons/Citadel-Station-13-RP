@@ -1,6 +1,6 @@
 // Glitterflies! Little butterfly-like creatures that float around and be cute.
 
-/datum/category_item/catalogue/fauna/glitterfly
+/datum/prototype/struct/catalogue_entry/fauna/glitterfly
 	name = "Sivian Fauna - Glitterfly"
 	desc = "Classification: S Lepidoptera adamas \
 	<br><br>\
@@ -12,7 +12,7 @@
 	produce large amounts of reflective flake-like dandruff."
 	value = CATALOGUER_REWARD_TRIVIAL
 
-/datum/category_item/catalogue/fauna/glitterfly_rare
+/datum/prototype/struct/catalogue_entry/fauna/glitterfly_rare
 	name = "Sivian Fauna - Adela's Glitterfly"
 	desc = "Classification: S Lepidoptera adamas \
 	<br><br>\
@@ -26,7 +26,7 @@
 	desc = "A large, shiny butterfly!"
 	description_info = "Glitterflies tend to have a wingspan equivalent to the length of an average human head."
 	tt_desc = "S Lepidoptera adamas"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/glitterfly)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/glitterfly)
 
 	faction = "neutral"
 
@@ -69,7 +69,7 @@
 /mob/living/simple_mob/animal/sif/glitterfly/rare
 	name = "sparkling glitterfly"
 	desc = "A large, incredibly shiny butterfly!"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/glitterfly, /datum/category_item/catalogue/fauna/glitterfly_rare)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/glitterfly, /datum/prototype/struct/catalogue_entry/fauna/glitterfly_rare)
 	maxHealth = 30
 	health = 30
 

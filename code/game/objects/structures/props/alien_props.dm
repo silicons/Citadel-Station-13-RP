@@ -42,7 +42,7 @@
 
 // Obtained by scanning both a void core and void cell.
 // The reward is a good chunk of points and some faulty physics wank.
-/datum/category_item/catalogue/anomalous/precursor_a/alien_void_power
+/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_void_power
 	name = "Precursor Alpha Technology - Void Power"
 	desc = "Several types of precursor objects observed so far appear to be driven by electricity, however the \
 	source appears to be from self contained objects, with no apparent means of generation being visible.\
@@ -69,13 +69,13 @@
 	Unfortunately, the extreme rarity of these objects, combined with small throughput, means that humanity will not become a \
 	post-scarcity civilization from this discovery, but instead might have a few permanent flashlights."
 	unlocked_by_all = list(
-		/datum/category_item/catalogue/anomalous/precursor_a/alien_void_core,
-		/datum/category_item/catalogue/anomalous/precursor_a/alien_void_cell
+		/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_void_core,
+		/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_void_cell
 		)
 	value = CATALOGUER_REWARD_MEDIUM
 
 
-/datum/category_item/catalogue/anomalous/precursor_a/alien_void_core
+/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_void_core
 	name = "Precursor Alpha Object - Void Core"
 	desc = "This is a very enigmatic machine. Scans show that electricity is being outputted from inside \
 	of it, and being distributed to its environment, however no apparent method of power generation \
@@ -90,7 +90,7 @@
 	icon_state = "core"
 	desc = "An alien machine that seems to be producing energy seemingly out of nowhere."
 	interaction_message = "<span class='warning'>Messing with something that makes energy out of nowhere seems very unwise.</span>"
-	catalogue_data = list(/datum/category_item/catalogue/anomalous/precursor_a/alien_void_core)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_void_core)
 
 /obj/item/prop/alien
 	name = "some alien item"

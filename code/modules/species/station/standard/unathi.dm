@@ -23,7 +23,7 @@
 	is a heavy hissing laungage called Sinta'Unathi.
 	"}
 	wikilink = "https://citadel-station.net/wikiRP/index.php?title=Unathi"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/unathi)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/unathi)
 
 	max_additional_languages = 3
 	name_language    = LANGUAGE_ID_UNATHI

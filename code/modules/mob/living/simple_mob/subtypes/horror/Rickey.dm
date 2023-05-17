@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/horror/Rickey
+/datum/prototype/struct/catalogue_entry/fauna/horror/Rickey
 	name = "!)*AKE@#US*!PRETT"
 	desc = "%WARNING% PROCESSING FAILURE! RETURN SCANNER TO A CENTRAL \
 	ADMINISTRATOR FOR IMMEDIATE MAINTENANCE! %ERROR%"
@@ -15,7 +15,7 @@
 	faction = "horror"
 	icon = 'icons/mob/horror_show/GHPS.dmi'
 	icon_gib = "generic_gib"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/horror/Rickey)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/horror/Rickey)
 
 	attack_sound = 'sound/h_sounds/wor.ogg'
 

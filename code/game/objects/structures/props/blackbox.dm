@@ -13,13 +13,13 @@
 
 
 /obj/structure/prop/blackbox/quarantined_shuttle
-	catalogue_data = list(/datum/category_item/catalogue/information/blackbox/quarantined_shuttle)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/information/blackbox/quarantined_shuttle)
 
 // The actual 'data' on the black box. Obtainable with a Cataloguer.
-/datum/category_item/catalogue/information/blackbox
+/datum/prototype/struct/catalogue_entry/information/blackbox
 	value = CATALOGUER_REWARD_MEDIUM
 
-/datum/category_item/catalogue/information/blackbox/quarantined_shuttle
+/datum/prototype/struct/catalogue_entry/information/blackbox/quarantined_shuttle
 	name = "Black Box Data - MBT-540"
 	desc = {"
 		<B>Pilot's Log for Major Bill's Transportation Shuttle MBT-540</B><BR>
@@ -51,9 +51,9 @@
 	"}
 
 /obj/structure/prop/blackbox/crashed_med_shuttle
-	catalogue_data = list(/datum/category_item/catalogue/information/blackbox/crashed_med_shuttle)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/information/blackbox/crashed_med_shuttle)
 
-/datum/category_item/catalogue/information/blackbox/crashed_med_shuttle
+/datum/prototype/struct/catalogue_entry/information/blackbox/crashed_med_shuttle
 	name = "Black Box Data - VMV Aurora's Light" // This might be incorrect.
 	desc = {"
 		\[Unable to recover data before this point.\]<BR>
@@ -108,9 +108,9 @@
 	"}
 
 /obj/structure/prop/blackbox/xenofrigate
-	catalogue_data = list(/datum/category_item/catalogue/information/blackbox/xenofrigate)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/information/blackbox/xenofrigate)
 
-/datum/category_item/catalogue/information/blackbox/xenofrigate
+/datum/prototype/struct/catalogue_entry/information/blackbox/xenofrigate
 	name = "Black Box Data - MBT-540"
 	desc = {"
 		<BR>
@@ -132,9 +132,9 @@
 	"}
 
 /obj/structure/prop/blackbox/mackerel_wreck
-	catalogue_data = list(/datum/category_item/catalogue/information/blackbox/mackerel_wreck)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/information/blackbox/mackerel_wreck)
 
-/datum/category_item/catalogue/information/blackbox/mackerel_wreck
+/datum/prototype/struct/catalogue_entry/information/blackbox/mackerel_wreck
 	name = "Black Box Data - ITV Phish Phood"
 	desc = {"
 		<BR>
@@ -175,9 +175,9 @@
 	"}
 
 /obj/structure/prop/blackbox/gecko_wreck
-	catalogue_data = list(/datum/category_item/catalogue/information/blackbox/gecko_wreck)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/information/blackbox/gecko_wreck)
 
-/datum/category_item/catalogue/information/blackbox/gecko_wreck
+/datum/prototype/struct/catalogue_entry/information/blackbox/gecko_wreck
 	name = "Black Box Data - ITV Sticky Situation"
 	desc = {"
 		<BR>
@@ -215,9 +215,9 @@
 	"}
 
 /obj/structure/prop/blackbox/salamander_wreck
-	catalogue_data = list(/datum/category_item/catalogue/information/blackbox/salamander_wreck)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/information/blackbox/salamander_wreck)
 
-/datum/category_item/catalogue/information/blackbox/salamander_wreck
+/datum/prototype/struct/catalogue_entry/information/blackbox/salamander_wreck
 	name = "Black Box Data - ITV Unity"
 	desc = {"
 		<BR>

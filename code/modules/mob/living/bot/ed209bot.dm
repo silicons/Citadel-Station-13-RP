@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/technology/bot/ed209
+/datum/prototype/struct/catalogue_entry/technology/bot/ed209
 	name = "Bot - ED 209"
 	desc = "The ED series security robot remains controversial to this day. \
 	Originally fielded by corporations during the Flicker, ED series secbots \
@@ -16,7 +16,7 @@
 	density = 1
 	health = 200
 	maxHealth = 200
-	catalogue_data = list(/datum/category_item/catalogue/technology/bot/ed209)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/bot/ed209)
 
 	is_ranged = 1
 	preparing_arrest_sounds = new()

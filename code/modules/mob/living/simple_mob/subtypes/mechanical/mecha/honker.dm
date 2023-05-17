@@ -1,6 +1,6 @@
 // HONK mecha are similar in speed and robustness to Gygaxes.
 
-/datum/category_item/catalogue/technology/honker
+/datum/prototype/struct/catalogue_entry/technology/honker
 	name = "Exosuit - H.O.N.K."
 
 	desc = "Utilized with shocking effectiveness during the Prank War of 2476, the H.O.N.K. mech was commissioned by former \
@@ -15,7 +15,7 @@
 /mob/living/simple_mob/mechanical/mecha/combat/honker
 	name = "H.O.N.K."
 	desc = "The H.O.N.K. mecha is sometimes crafted by deranged Roboticists with a grudge, and is illegal in thirty six different sectors."
-	catalogue_data = list(/datum/category_item/catalogue/technology/honker)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/honker)
 	icon_state = "honker"
 	movement_cooldown = 1
 	wreckage = /obj/structure/loot_pile/mecha/honker
@@ -41,7 +41,7 @@
 
 // A stronger variant.
 
-/datum/category_item/catalogue/technology/cluwne
+/datum/prototype/struct/catalogue_entry/technology/cluwne
 	name = "Exosuit - C.L.U.W.N.E."
 
 	desc = "As the unending battle over Vaudium wages to this day, it should come as no surprise that both \
@@ -58,7 +58,7 @@
 /mob/living/simple_mob/mechanical/mecha/combat/honker/cluwne
 	name = "C.L.U.W.N.E."
 	desc = "The C.L.U.W.N.E. mecha is an up-armored cousin of the H.O.N.K. mech. Still in service on the borders of the Clown Planet, this unit is not typically found elsewhere."
-	catalogue_data = list(/datum/category_item/catalogue/technology/cluwne)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/cluwne)
 	icon = 'icons/mecha/mecha_vr.dmi'
 	icon_state = "cluwne"
 	wreckage = /obj/structure/loot_pile/mecha/honker/cluwne

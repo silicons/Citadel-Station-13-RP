@@ -36,7 +36,7 @@
 	..()
  //TODO - Sprites for the charge
 
-/datum/category_item/catalogue/fauna/horing
+/datum/prototype/struct/catalogue_entry/fauna/horing
 	name = "Horing"
 	desc = "Horing are a form of life endemic to Lythios 43c. Somewhat rare, it is theorized \
 	that Horing were originally pack animals not dissimilar to Terran ungulates. Tall and muscular, Horing \

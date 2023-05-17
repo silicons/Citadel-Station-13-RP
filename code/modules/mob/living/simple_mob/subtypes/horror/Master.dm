@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/horror/Master
+/datum/prototype/struct/catalogue_entry/fauna/horror/Master
 	name = "&^DOCTO***ELIX!!%%"
 	desc = "%WARNING% PROCESSING FAILURE! RETURN SCANNER TO A CENTRAL \
 	ADMINISTRATOR FOR IMMEDIATE MAINTENANCE! %ERROR%"
@@ -16,7 +16,7 @@
 	icon = 'icons/mob/horror_show/master.dmi'
 	icon_gib = "generic_gib"
 	anchored = 1
-	catalogue_data = list(/datum/category_item/catalogue/fauna/horror/Master)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/horror/Master)
 
 	attack_sound = 'sound/h_sounds/shitty_tim.ogg'
 

@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/space_bear
+/datum/prototype/struct/catalogue_entry/fauna/space_bear
 	name = "Space Bear"
 	desc = "Often treated as a joke, or a byproduct of space madness, \
 	the existences of Space Bears is unfortunately very real. Similarly to \
@@ -17,7 +17,7 @@
 	icon_living = "bear"
 	icon_dead = "bear_dead"
 	icon_gib = "bear_gib"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/space_bear)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/space_bear)
 
 	faction = "russian"
 

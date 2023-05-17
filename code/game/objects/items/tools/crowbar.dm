@@ -42,7 +42,7 @@
 	icon_state = "crowbar_brass"
 	tool_speed = 0.75
 
-/datum/category_item/catalogue/anomalous/precursor_a/alien_crowbar
+/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_crowbar
 	name = "Precursor Alpha Object - Hard Light Pry Tool"
 	desc = "An object which bears striking resemblence to the common crowbar. \
 	It appears to also serve a similar purpose, being used for prying. Unlike \
@@ -58,7 +58,7 @@
 /obj/item/tool/crowbar/alien
 	name = "alien crowbar"
 	desc = "A hard-light crowbar. It appears to pry by itself, without any effort required."
-	catalogue_data = list(/datum/category_item/catalogue/anomalous/precursor_a/alien_crowbar)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_crowbar)
 	icon = 'icons/obj/abductor.dmi'
 	tool_sound = 'sound/weapons/sonic_jackhammer.ogg'
 	icon_state = "crowbar"
@@ -68,7 +68,7 @@
 /obj/item/tool/crowbar/hybrid
 	name = "strange crowbar"
 	desc = "A crowbar whose head seems to phase in and out of view."
-	catalogue_data = list(/datum/category_item/catalogue/anomalous/precursor_a/alien_crowbar)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_crowbar)
 	icon_state = "hybcrowbar"
 	tool_sound = 'sound/weapons/sonic_jackhammer.ogg'
 	tool_speed = 0.4

@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/mouse
+/datum/prototype/struct/catalogue_entry/fauna/mouse
 	name = "Mouse"
 	desc = "An ancient Old Earth rodent, mice have served as both pest and pet \
 	to Humanity for millenia. Originally brought into space for scientific testing \
@@ -15,7 +15,7 @@
 	item_state = "mouse_gray"
 	icon_living = "mouse_gray"
 	icon_dead = "mouse_gray_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/mouse)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/mouse)
 
 	maxHealth = 5
 	health = 5

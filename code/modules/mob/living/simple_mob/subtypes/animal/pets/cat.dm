@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/cat
+/datum/prototype/struct/catalogue_entry/fauna/cat
 	name = "Cat"
 	desc = "Felines are a popular domestic animal hailing from Earth. \
 	Sharing common ancestry with Earth's 'big cats', the housecats retain \
@@ -14,7 +14,7 @@
 	tt_desc = "E Felis silvestris catus"
 	icon_state = "cat2"
 	item_state = "cat2"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/cat)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/cat)
 
 	movement_cooldown = 0.5 SECONDS
 

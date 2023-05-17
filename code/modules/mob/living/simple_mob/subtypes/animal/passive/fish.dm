@@ -1,5 +1,5 @@
 // Different types of fish! They are all subtypes of this tho
-/datum/category_item/catalogue/fauna/invasive_fish
+/datum/prototype/struct/catalogue_entry/fauna/invasive_fish
 	name = "Invasive Fauna - Fish"
 	desc = "This fish is considered an invasive species according \
 	to Sivian wildlife regulations. Removal or relocation is advised."
@@ -11,7 +11,7 @@
 	icon = 'icons/mob/fish.dmi'
 	item_state = "fish"
 
-	catalogue_data = list(/datum/category_item/catalogue/fauna/invasive_fish)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/invasive_fish)
 
 	mob_size = MOB_SMALL
 	randomized = TRUE
@@ -141,7 +141,7 @@
 	M.reagents.add_reagent("impedrezene", 1)
 	return 1
 
-/datum/category_item/catalogue/fauna/javelin
+/datum/prototype/struct/catalogue_entry/fauna/javelin
 	name = "Sivian Fauna - Javelin Shark"
 	desc = "Classification: S Cetusan minimalix\
 	<br><br>\
@@ -164,11 +164,11 @@
 	icon_living = "javelin-swim"
 	icon_dead = "javelin-dead"
 
-	catalogue_data = list(/datum/category_item/catalogue/fauna/javelin)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/javelin)
 
 	meat_type = /obj/item/reagent_containers/food/snacks/carpmeat/fish
 
-/datum/category_item/catalogue/fauna/icebass
+/datum/prototype/struct/catalogue_entry/fauna/icebass
 	name = "Sivian Fauna - Glitter Bass"
 	desc = "Classification: X Micropterus notius crotux\
 	<br><br>\
@@ -191,7 +191,7 @@
 	icon_living = "sifbass-swim"
 	icon_dead = "sifbass-dead"
 
-	catalogue_data = list(/datum/category_item/catalogue/fauna/icebass)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/icebass)
 
 	meat_type = /obj/item/reagent_containers/food/snacks/carpmeat/fish
 
@@ -231,7 +231,7 @@
 	overlays_to_add += belly_image
 	add_overlay(overlays_to_add)
 
-/datum/category_item/catalogue/fauna/rockfish
+/datum/prototype/struct/catalogue_entry/fauna/rockfish
 	name = "Sivian Fauna - Rock Puffer"
 	desc = "Classification: S Tetraodontidae scopulix\
 	<br><br>\
@@ -255,7 +255,7 @@
 	icon_living = "rockfish-swim"
 	icon_dead = "rockfish-dead"
 
-	catalogue_data = list(/datum/category_item/catalogue/fauna/rockfish)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/rockfish)
 
 	armor_legacy_mob = list(
 		"melee" = 90,
@@ -295,7 +295,7 @@
 
 	add_overlay(head_image)
 
-/datum/category_item/catalogue/fauna/solarfish
+/datum/prototype/struct/catalogue_entry/fauna/solarfish
 	name = "Sivian Fauna - Solar Fin"
 	desc = "Classification: S Exocoetidae solarin\
 	<br><br>\
@@ -319,13 +319,13 @@
 	icon_living = "solarfin-swim"
 	icon_dead = "solarfin-dead"
 
-	catalogue_data = list(/datum/category_item/catalogue/fauna/solarfish)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/solarfish)
 
 	has_eye_glow = TRUE
 
 	meat_type = /obj/item/reagent_containers/food/snacks/carpmeat/fish
 
-/datum/category_item/catalogue/fauna/murkin
+/datum/prototype/struct/catalogue_entry/fauna/murkin
 	name = "Sivian Fauna - Murkfish"
 	desc = "Classification: S Perca lutux\
 	<br><br>\
@@ -348,6 +348,6 @@
 	icon_living = "murkin-swim"
 	icon_dead = "murkin-dead"
 
-	catalogue_data = list(/datum/category_item/catalogue/fauna/murkin)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/murkin)
 
 	meat_type = /obj/item/reagent_containers/food/snacks/carpmeat/fish/murkfish

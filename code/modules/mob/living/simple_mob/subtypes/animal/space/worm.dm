@@ -59,7 +59,7 @@
 	var/open_maw = FALSE	// Are we trying to eat things?
 
 
-/datum/category_item/catalogue/fauna/space_worm
+/datum/prototype/struct/catalogue_entry/fauna/space_worm
 	name = "Space Worm"
 	desc = "Space Worms are a relatively rare form of alien life sometimes \
 	encountered on the Frontier. Comprised of a long, segmented body, the \
@@ -74,7 +74,7 @@
 	name = "space worm"
 	icon_state = "spacewormhead"
 	icon_living = "spacewormhead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/space_worm)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/space_worm)
 
 	anchored = FALSE	// You can pull the head to pull the body.
 

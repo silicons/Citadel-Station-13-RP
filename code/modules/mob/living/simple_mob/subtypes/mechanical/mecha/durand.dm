@@ -2,7 +2,7 @@
 // They can also root themselves to become even tankier.
 // The AI doesn't do this currently.
 
-/datum/category_item/catalogue/technology/durand
+/datum/prototype/struct/catalogue_entry/technology/durand
 	name = "Exosuit - Durand"
 	desc = "The Durand is an old combat exosuit; once the most durable exosuit ever developed by humans. \
 	In modern times, this exosuit has been dethroned from that title, yet it remains one of the more well built and armored \
@@ -18,7 +18,7 @@
 /mob/living/simple_mob/mechanical/mecha/combat/durand
 	name = "durand"
 	desc = "An aging combat exosuit utilized by many corporations. It was originally developed to fight in the First Contact War."
-	catalogue_data = list(/datum/category_item/catalogue/technology/durand)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/durand)
 	icon_state = "durand"
 	movement_cooldown = 10
 	wreckage = /obj/structure/loot_pile/mecha/durand

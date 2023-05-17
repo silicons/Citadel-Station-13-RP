@@ -26,7 +26,7 @@
 	"}
 
 	wikilink = "https://citadel-station.net/wikiRP/index.php?title=Akula"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/akula)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/akula)
 
 	max_additional_languages = 3
 	name_language   = LANGUAGE_ID_SKRELL

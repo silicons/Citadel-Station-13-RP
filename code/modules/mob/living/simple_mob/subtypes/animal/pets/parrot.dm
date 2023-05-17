@@ -1,6 +1,6 @@
 // Parrots can talk, and may repeat things it hears.
 
-/datum/category_item/catalogue/fauna/parrot
+/datum/prototype/struct/catalogue_entry/fauna/parrot
 	name = "Parrot"
 	desc = "An Earthling tropical bird, parrots have been companions on \
 	nautical vessels for many years. Parrots are considered intelligent, \
@@ -14,7 +14,7 @@
 	description_info = "You can give it a headset by clicking on it with a headset. \
 	To remove it, click the bird while on grab intent."
 	has_langs = list("Galactic Common", "Bird")
-	catalogue_data = list(/datum/category_item/catalogue/fauna/parrot)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/parrot)
 
 	randomized = TRUE
 

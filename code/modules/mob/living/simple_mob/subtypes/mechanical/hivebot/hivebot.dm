@@ -2,7 +2,7 @@
 // As such, if laser damage is ever changed, you should change this define.
 #define LASERS_TO_KILL * 40
 
-/datum/category_item/catalogue/technology/drone/hivebot // Hivebot Scanner Data - This is for Generic Hivebots
+/datum/prototype/struct/catalogue_entry/technology/drone/hivebot // Hivebot Scanner Data - This is for Generic Hivebots
 	name = "Drone - Hivebot"
 	desc = "A drone that walks on several legs, with yellow/gold armor plating. It appears to lack a specific weapon, \
 	but uses a regular bullet-type weapon, firing a single projectile with a delay. Once upon a time, these bots may \
@@ -16,7 +16,7 @@
 	icon = 'icons/mob/hivebot.dmi'
 	icon_state = "basic"
 	icon_living = "basic"
-	catalogue_data = list(/datum/category_item/catalogue/technology/drone/hivebot)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/drone/hivebot)
 
 	faction = "hivebot"
 

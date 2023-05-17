@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/silicon/robot/syndicate
+/datum/prototype/struct/catalogue_entry/fauna/silicon/robot/syndicate
 	name = "Robot - Syndicate"
 	desc = "The Syndicated Corporations were able to field their own cyborgs \
 	through the Phoron Wars, albeit to a greatly limited degree. Issues with \
@@ -18,7 +18,7 @@
 	braintype = "Drone"
 	idcard_type = /obj/item/card/id/syndicate
 	icon_selected = FALSE
-	catalogue_data = list(/datum/category_item/catalogue/fauna/silicon/robot/syndicate)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/silicon/robot/syndicate)
 
 /mob/living/silicon/robot/syndicate/init()
 	aiCamera = new/obj/item/camera/siliconcam/robot_camera(src)

@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/dog
+/datum/prototype/struct/catalogue_entry/fauna/dog
 	name = "Dog"
 	desc = "Canines have been a consistent companion of Humanity for \
 	tens of thousands of years. Descended from Wolves, a larger pack \
@@ -15,7 +15,7 @@
 	icon_state = "corgi"
 	icon_living = "corgi"
 	icon_dead = "corgi_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/dog)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/dog)
 
 	health = 20
 	maxHealth = 20

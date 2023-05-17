@@ -1,30 +1,30 @@
-/datum/category_item/catalogue/fauna/feral_alien
+/datum/prototype/struct/catalogue_entry/fauna/feral_alien
 	name = "Feral Xenomorph"
 	desc = "Xenomorphs are a widely recognized and rightfully feared scourge \
 	across the Frontier. Some Xenomorph hives lose a connection to the greater \
 	Hive structure, and become less coordinated, though no less dangerous. \
 	Kill on sight."
 	value = CATALOGUER_REWARD_TRIVIAL
-	unlocked_by_any = list(/datum/category_item/catalogue/fauna/feral_alien)
+	unlocked_by_any = list(/datum/prototype/struct/catalogue_entry/fauna/feral_alien)
 
 // Obtained by scanning all Aliens.
-/datum/category_item/catalogue/fauna/all_feral_aliens
+/datum/prototype/struct/catalogue_entry/fauna/all_feral_aliens
 	name = "Collection - Feral Xenomorphs"
 	desc = "You have scanned a large array of different types of Xenomorph, \
 	and therefore you have been granted a large sum of points, through this \
 	entry."
 	value = CATALOGUER_REWARD_SUPERHARD
 	unlocked_by_all = list(
-		/datum/category_item/catalogue/fauna/feral_alien/hunter,
-		/datum/category_item/catalogue/fauna/feral_alien/drone,
-		/datum/category_item/catalogue/fauna/feral_alien/sentinel,
-		/datum/category_item/catalogue/fauna/feral_alien/sentinel/praetorian,
-		/datum/category_item/catalogue/fauna/feral_alien/queen,
-		/datum/category_item/catalogue/fauna/feral_alien/queen/empress,
-		/datum/category_item/catalogue/fauna/feral_alien/queen/empress/mother
+		/datum/prototype/struct/catalogue_entry/fauna/feral_alien/hunter,
+		/datum/prototype/struct/catalogue_entry/fauna/feral_alien/drone,
+		/datum/prototype/struct/catalogue_entry/fauna/feral_alien/sentinel,
+		/datum/prototype/struct/catalogue_entry/fauna/feral_alien/sentinel/praetorian,
+		/datum/prototype/struct/catalogue_entry/fauna/feral_alien/queen,
+		/datum/prototype/struct/catalogue_entry/fauna/feral_alien/queen/empress,
+		/datum/prototype/struct/catalogue_entry/fauna/feral_alien/queen/empress/mother
 		)
 
-/datum/category_item/catalogue/fauna/feral_alien/hunter
+/datum/prototype/struct/catalogue_entry/fauna/feral_alien/hunter
 	name = "Feral Xenomorph - Hunter"
 	desc = "Hunters are one of the generalized combat morphs used \
 	by the Hive offensively. Capable of moving at great speed and \
@@ -43,7 +43,7 @@
 	icon_dead = "alien_l"
 	icon_gib = "syndicate_gib"
 	icon_rest = "alienh_sleep"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/feral_alien/hunter)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/feral_alien/hunter)
 
 	faction = "xeno"
 
@@ -72,7 +72,7 @@
 	hide_amount = 2
 	hide_type = /obj/item/stack/xenochitin
 
-/datum/category_item/catalogue/fauna/feral_alien/drone
+/datum/prototype/struct/catalogue_entry/fauna/feral_alien/drone
 	name = "Feral Xenomorph - Drone"
 	desc = "The adult form of the Xenomorph, the drone's iconic \
 	morphology and biological traits make it easily identifiable across \
@@ -92,9 +92,9 @@
 	health = 300
 	melee_damage_lower = 15
 	melee_damage_upper = 15
-	catalogue_data = list(/datum/category_item/catalogue/fauna/feral_alien/drone)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/feral_alien/drone)
 
-/datum/category_item/catalogue/fauna/feral_alien/sentinel
+/datum/prototype/struct/catalogue_entry/fauna/feral_alien/sentinel
 	name = "Feral Xenomorph - Sentinel"
 	desc = "Sentinels serve as defensive units for the Hive. Possessing \
 	a powerful neurotoxic venom, Sentinels are able to spit this toxin at \
@@ -116,9 +116,9 @@
 	melee_damage_upper = 15
 	projectiletype = /obj/projectile/energy/neurotoxin
 	projectilesound = 'sound/weapons/pierce.ogg'
-	catalogue_data = list(/datum/category_item/catalogue/fauna/feral_alien/sentinel)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/feral_alien/sentinel)
 
-/datum/category_item/catalogue/fauna/feral_alien/sentinel/praetorian
+/datum/prototype/struct/catalogue_entry/fauna/feral_alien/sentinel/praetorian
 	name = "Feral Xenomorph - Praetorian"
 	desc = "The Xenomorph Praetorian is not often seen amongst \
 	standard Xeno incursions. Spawned in large Hives to serve as \
@@ -139,7 +139,7 @@
 	icon_rest = "prat_sleep"
 	maxHealth = 400
 	health = 400
-	catalogue_data = list(/datum/category_item/catalogue/fauna/feral_alien/sentinel/praetorian)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/feral_alien/sentinel/praetorian)
 
 	projectiletype = /obj/projectile/energy/neurotoxin/toxic
 
@@ -152,7 +152,7 @@
 	mod_min = 80
 	mod_max = 150
 
-/datum/category_item/catalogue/fauna/feral_alien/queen
+/datum/prototype/struct/catalogue_entry/fauna/feral_alien/queen
 	name = "Feral Xenomorph - Queen"
 	desc = "When a Drone reaches a certain level of maturity, she may \
 	evolve into a Queen, if there is no functioning Hive nearby. The Queen \
@@ -177,14 +177,14 @@
 	melee_damage_upper = 15
 	projectiletype = /obj/projectile/energy/neurotoxin/toxic
 	projectilesound = 'sound/weapons/pierce.ogg'
-	catalogue_data = list(/datum/category_item/catalogue/fauna/feral_alien/queen)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/feral_alien/queen)
 
 	mod_min = 90
 	mod_max = 150
 
 	movement_cooldown = 8
 
-/datum/category_item/catalogue/fauna/feral_alien/queen/empress
+/datum/prototype/struct/catalogue_entry/fauna/feral_alien/queen/empress
 	name = "Feral Xenomorph - Empress"
 	desc = "A Xenomorph queen who reaches a certain stage of maturity \
 	may eventually develop into an Empress. Xenomorph Empresses reign \
@@ -206,13 +206,13 @@
 	health = 1000
 	meat_amount = 5
 	hide_amount = 5
-	catalogue_data = list(/datum/category_item/catalogue/fauna/feral_alien/queen/empress)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/feral_alien/queen/empress)
 
 	base_pixel_x = -16
 	icon_x_dimension = 64
 	icon_y_dimension = 64
 
-/datum/category_item/catalogue/fauna/feral_alien/queen/empress/mother
+/datum/prototype/struct/catalogue_entry/fauna/feral_alien/queen/empress/mother
 	name = "Feral Xenomorph - Mother"
 	desc = "The true end stage of Xenomorph Queen development, \
 	the Xenomorph Mother is the local psionic node of the Hive. These \
@@ -236,7 +236,7 @@
 	hide_amount = 10
 	melee_damage_lower = 20
 	melee_damage_upper = 25
-	catalogue_data = list(/datum/category_item/catalogue/fauna/feral_alien/queen/empress/mother)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/feral_alien/queen/empress/mother)
 
 	base_pixel_x = -32
 	base_pixel_y = -32

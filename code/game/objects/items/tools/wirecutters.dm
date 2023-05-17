@@ -66,7 +66,7 @@
 	tool_speed = 0.75
 	random_color = FALSE
 
-/datum/category_item/catalogue/anomalous/precursor_a/alien_wirecutters
+/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_wirecutters
 	name = "Precursor Alpha Object - Wire Seperator"
 	desc = "An object appearing to have a tool shape. It has two handles, and two \
 	sides which are attached to each other in the center. At the end on each side \
@@ -82,7 +82,7 @@
 /obj/item/tool/wirecutters/alien
 	name = "alien wirecutters"
 	desc = "Extremely sharp wirecutters, made out of a silvery-green metal."
-	catalogue_data = list(/datum/category_item/catalogue/anomalous/precursor_a/alien_wirecutters)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_wirecutters)
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "cutters"
 	tool_speed = 0.1
@@ -104,7 +104,7 @@
 /obj/item/tool/wirecutters/hybrid
 	name = "strange wirecutters"
 	desc = "This cuts wires.  With <span class='alien'>Science!</span>"
-	catalogue_data = list(/datum/category_item/catalogue/anomalous/precursor_a/alien_wirecutters)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_wirecutters)
 	icon_state = "hybcutters"
 	w_class = ITEMSIZE_NORMAL
 	slowdown = 0.1

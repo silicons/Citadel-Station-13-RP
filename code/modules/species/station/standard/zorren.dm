@@ -30,9 +30,9 @@
 	"}
 
 	wikilink = "https://citadel-station.net/wikiRP/index.php?title=Zorren"
-	catalogue_data = list(
-		/datum/category_item/catalogue/fauna/zorren,
-		/datum/category_item/catalogue/fauna/highzorren,
+	catalogue_data_legacy = list(
+		/datum/prototype/struct/catalogue_entry/fauna/zorren,
+		/datum/prototype/struct/catalogue_entry/fauna/highzorren,
 	)
 
 
@@ -95,9 +95,9 @@
 	"}
 
 	wikilink = "https://citadel-station.net/wikiRP/index.php?title=Zorren"
-	catalogue_data = list(
-		/datum/category_item/catalogue/fauna/zorren,
-		/datum/category_item/catalogue/fauna/flatzorren,
+	catalogue_data_legacy = list(
+		/datum/prototype/struct/catalogue_entry/fauna/zorren,
+		/datum/prototype/struct/catalogue_entry/fauna/flatzorren,
 	)
 
 	species_spawn_flags = SPECIES_SPAWN_SECRET

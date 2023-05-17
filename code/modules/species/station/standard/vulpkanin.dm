@@ -31,7 +31,7 @@
 	"}
 
 	// wikilink = ""
-	catalogue_data = list(/datum/category_item/catalogue/fauna/vulpkanin)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/vulpkanin)
 
 	primitive_form = SPECIES_MONKEY_VULPKANIN
 

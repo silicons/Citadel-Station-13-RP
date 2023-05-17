@@ -882,7 +882,7 @@
 	icon_state = "saddle_lavaland"
 
 //Ashlander Specific Crafting Items
-/datum/category_item/catalogue/anomalous/scorian_religion/elder_stone
+/datum/prototype/struct/catalogue_entry/anomalous/scorian_religion/elder_stone
 	name = "Scorian Religion - Elder Stones"
 	desc = "Originally depicted in Scorian carvings and cave paintings discovered at various dig sites around Surt, \
 	actual samples of these curious gems only recently became available. These gems, whose name most closely translates \
@@ -899,7 +899,7 @@
 	icon = 'icons/obj/lavaland.dmi'
 	icon_state = "elderstone"
 	w_class = ITEMSIZE_SMALL
-	catalogue_data = list(/datum/category_item/catalogue/anomalous/scorian_religion/elder_stone)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/anomalous/scorian_religion/elder_stone)
 
 /obj/item/condensedphlogiston
 	name = "condensed phlogiston"

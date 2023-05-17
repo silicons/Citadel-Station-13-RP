@@ -53,7 +53,7 @@
 	towering cities to attempt to reach the stars, which they worship as gems of great spiritual and magical significance.
 	"}
 	wikilink = "N/A"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/vasilissan)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/vasilissan)
 
 	hazard_low_pressure = 20 //Prevents them from dying normally in space. Special code handled below.
 	cold_level_1 = -1 // All cold debuffs are handled below in handle_environment_special

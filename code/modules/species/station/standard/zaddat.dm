@@ -42,7 +42,7 @@
 	and living space.
 	"}
 
-	catalogue_data = list(/datum/category_item/catalogue/fauna/zaddat)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/zaddat)
 	// no wiki link exists for Zaddat yet
 
 	hazard_high_pressure  = HAZARD_HIGH_PRESSURE + 500 // Dangerously high pressure.

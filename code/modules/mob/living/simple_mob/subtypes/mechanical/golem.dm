@@ -1,7 +1,7 @@
 // The GOLEM is a spell-flinging synthetic.
 
 // Cataloguer data below - strange we can catalogue space golem wizards
-/datum/category_item/catalogue/technology/drone/technomancer_golem
+/datum/prototype/struct/catalogue_entry/technology/drone/technomancer_golem
 	name = "Drone - Technomancer Golem"
 	desc = "Some sort of advanced, unnatural looking synthetic, built for combat.\
 	It has a black-and-blue chassis, and wields some sort of... stun baton in it's hand.\
@@ -18,7 +18,7 @@
 	icon_state = "golem"
 	health = 300
 	maxHealth = 300
-	catalogue_data = list(/datum/category_item/catalogue/technology/drone/technomancer_golem)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/drone/technomancer_golem)
 
 	faction = "golem"
 

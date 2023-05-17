@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/goliath/goliaths
+/datum/prototype/struct/catalogue_entry/fauna/goliath/goliaths
 	name = "Goliaths"
 	desc = "The Goliath is native to KT-943, known commonly as Surt. Powerful and long-lived, early \
 	NanoTrasen mining operations struggled to contend with these hardy beasts. Due to overhunting and \
@@ -8,22 +8,22 @@
 	suggest the Goliath's form has not changed for millenia, implying that it is a 'perfect' lifeform\
 	for its environment, akin to sharks and alligators on Old Earth."
 	value = CATALOGUER_REWARD_TRIVIAL
-	unlocked_by_any = list(/datum/category_item/catalogue/fauna/goliath)
+	unlocked_by_any = list(/datum/prototype/struct/catalogue_entry/fauna/goliath)
 
-/datum/category_item/catalogue/fauna/all_goliaths
+/datum/prototype/struct/catalogue_entry/fauna/all_goliaths
 	name = "Collection - Goliaths"
 	desc = "You have scanned Goliaths at different parts of their life cycle, \
 	and therefore you have been granted a large sum of points, through this \
 	entry."
 	value = CATALOGUER_REWARD_HARD
 	unlocked_by_all = list(
-		/datum/category_item/catalogue/fauna/goliath,
-		/datum/category_item/catalogue/fauna/goliath/calf,
-		/datum/category_item/catalogue/fauna/goliath/ancient,
-		/datum/category_item/catalogue/fauna/goliath/goliaths
+		/datum/prototype/struct/catalogue_entry/fauna/goliath,
+		/datum/prototype/struct/catalogue_entry/fauna/goliath/calf,
+		/datum/prototype/struct/catalogue_entry/fauna/goliath/ancient,
+		/datum/prototype/struct/catalogue_entry/fauna/goliath/goliaths
 		)
 
-/datum/category_item/catalogue/fauna/goliath
+/datum/prototype/struct/catalogue_entry/fauna/goliath
 	name = "Goliath"
 	desc = "The common Goliath is easily recognizable. As KT-943's only known apex predator, it has left a \
 	lasting impression on NanoTrasen miners and engineers. Goliaths are bulky quadrupeds with thick, leathery \
@@ -41,7 +41,7 @@
 	icon_living = "goliath"
 	icon_dead = "goliath_dead"
 	icon_gib = "syndicate_gib"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/goliath)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/goliath)
 
 	maxHealth = 300
 	health = 300
@@ -290,7 +290,7 @@
 	deltimer(timerid)
 
 //Ancients
-/datum/category_item/catalogue/fauna/goliath/ancient
+/datum/prototype/struct/catalogue_entry/fauna/goliath/ancient
 	name = "Ancient Goliath"
 	desc = "Goliaths are immortal, and the dating of several notable specimens confirms that some Goliaths \
 	have been around for centuries. These truly ancient beasts possess a sharpened instinct. As Goliaths \
@@ -304,10 +304,10 @@
 	maxHealth = 400
 	health = 400
 	tentacle_warning = 1 SECOND
-	catalogue_data = list(/datum/category_item/catalogue/fauna/goliath/ancient)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/goliath/ancient)
 
 //Calves
-/datum/category_item/catalogue/fauna/goliath/calf
+/datum/prototype/struct/catalogue_entry/fauna/goliath/calf
 	name = "Goliath Calf"
 	desc = "Until recently, the nature by which Goliaths reproduced was unknown. Observation of Ashlander \
 	farmers, however, has confirmed that Goliaths reproduce sexually, and give birth to calves. These young \
@@ -322,7 +322,7 @@
 	icon_state = "goliath_baby"
 	maxHealth = 150
 	health = 150
-	catalogue_data = list(/datum/category_item/catalogue/fauna/goliath/calf)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/goliath/calf)
 
 	movement_cooldown = 7
 	special_attack_min_range = 1

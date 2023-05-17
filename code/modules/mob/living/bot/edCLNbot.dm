@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/technology/bot/cleanbot/edCLN
+/datum/prototype/struct/catalogue_entry/technology/bot/cleanbot/edCLN
 	name = "Bot - ED CLN"
 	desc = "ED CLN units are the end result of a marketing campaign designed \
 	to change the ED series robot's public image. Although marginally successful, \
@@ -13,7 +13,7 @@
 	icon_state = "edCLN0"
 	req_one_access = list(ACCESS_SCIENCE_ROBOTICS, ACCESS_GENERAL_JANITOR)
 	botcard_access = list(ACCESS_GENERAL_JANITOR, ACCESS_ENGINEERING_MAINT)
-	catalogue_data = list(/datum/category_item/catalogue/technology/bot/cleanbot/edCLN)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/bot/cleanbot/edCLN)
 
 	locked = FALSE //Starts unlocked so roboticist can set them to patrol.
 	wait_if_pulled = FALSE //One big boi.

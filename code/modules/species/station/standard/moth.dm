@@ -46,7 +46,7 @@ GLOBAL_LIST_INIT(moth_lore_data, init_moth_lore())
 	// see defines - as of right now, detects reagents at 7% instead of 15%
 	taste_sensitivity = TASTE_SENSITIVE
 
-	catalogue_data = list(/datum/category_item/catalogue/fauna/mothpeople)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/mothpeople)
 	blurb = "A nomadic species hailing from the southern reaches of the galaxy, Dnin-Nepids are a relatively \
 	new contender to the galaxy's state of affairs. They are a peaceful, innovative people with fragile, yet nimble bodies. \
 	Their appearance is not dissimilar to what certain Sol insects look like, earning them the moniker of '<b>moths</b>' by the majority. \
@@ -138,7 +138,7 @@ GLOBAL_LIST_INIT(moth_lore_data, init_moth_lore())
 	wikilink="https://citadel-station.net/wikiRP/index.php?title=Race:_Dnin-Nepids"
 
 // todo: cataloguer rework when
-/datum/category_item/catalogue/fauna/mothpeople
+/datum/prototype/struct/catalogue_entry/fauna/mothpeople
 	name = "Sapients - Dnin-Nepids"
 	desc = {"
 		The Dnin-Nepids are a nomadic species hailing from the southern side of the Milky Way. A relatively new contender

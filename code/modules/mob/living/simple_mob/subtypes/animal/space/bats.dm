@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/bats
+/datum/prototype/struct/catalogue_entry/fauna/bats
 	name = "Space Bats"
 	desc = "The byproduct of Human terraforming and genetics \
 	experimentation focusing on creating fauna more adapted to \
@@ -15,7 +15,7 @@
 	icon_living = "bat"
 	icon_dead = "bat_dead"
 	icon_gib = "bat_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/bats)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/bats)
 
 	faction = "scarybat"
 

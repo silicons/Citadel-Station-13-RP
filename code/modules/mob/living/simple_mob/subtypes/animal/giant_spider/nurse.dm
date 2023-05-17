@@ -1,7 +1,7 @@
 // Nurses, they create webs and eggs.
 // They're fragile but their attacks can cause horrifying consequences.
 
-/datum/category_item/catalogue/fauna/giant_spider/nurse_spider
+/datum/prototype/struct/catalogue_entry/fauna/giant_spider/nurse_spider
 	name = "Giant Spider - Nurse"
 	desc = "This specific spider has been catalogued as 'Nurse', \
 	and it belongs to the 'Nurse' caste. \
@@ -24,7 +24,7 @@
 
 /mob/living/simple_mob/animal/giant_spider/nurse
 	desc = "Furry and beige, it makes you shudder to look at it. This one has brilliant green eyes."
-	catalogue_data = list(/datum/category_item/catalogue/fauna/giant_spider/nurse_spider)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/giant_spider/nurse_spider)
 
 	icon_state = "nurse"
 	icon_living = "nurse"

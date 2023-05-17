@@ -34,7 +34,7 @@
 	all chimeras possess the ability to undergo some type of regeneration process, at the cost of energy.
 	"}
 	wikilink = "https://citadel-station.net/wikiRP/index.php?title=Race:_The_Xenochimera"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/xenochimera)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/xenochimera)
 	//rarity_value = 4
 
 	breath_type = /datum/gas/oxygen

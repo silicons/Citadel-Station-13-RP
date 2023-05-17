@@ -1,7 +1,7 @@
 // Beefy, but somewhat slow.
 // Melee attack is to bore you with its big drill, which has a lot of armor penetration and strikes rapidly.
 
-/datum/category_item/catalogue/technology/ripley
+/datum/prototype/struct/catalogue_entry/technology/ripley
 	name = "Exosuit - APLU"
 	desc = "The Autonomous Power Loader Unit, more commonly designated as the 'Ripley', \
 	is an exosuit that is often described as 'the workhorse of the exosuit world', \
@@ -14,7 +14,7 @@
 /mob/living/simple_mob/mechanical/mecha/ripley
 	name = "\improper APLU ripley"
 	desc = "Autonomous Power Loader Unit. The workhorse of the exosuit world. This one has big drill."
-	catalogue_data = list(/datum/category_item/catalogue/technology/ripley)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/ripley)
 	icon_state = "ripley"
 	wreckage = /obj/structure/loot_pile/mecha/ripley
 
@@ -77,7 +77,7 @@
 /mob/living/simple_mob/mechanical/mecha/ripley/pirate
 	name = "Hull Ripper"
 	desc = "A Ripley modified by pirates. Sports additional riveted armor plating and a jury rigged machine gun in addition to its hull piercing drill."
-	catalogue_data = list(/datum/category_item/catalogue/technology/ripley)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/ripley)
 	icon_state = "pirate"
 	faction = "pirate"
 	wreckage = /obj/structure/loot_pile/mecha/ripley/pirate

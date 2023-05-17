@@ -5,7 +5,7 @@
 /obj/item/implant/mirror
 	name = "Mirror"
 	desc = "A small implanted disk that stores a copy of ones conciousness, updated at times of rest."
-	catalogue_data = /datum/category_item/catalogue/technology/resleeving
+	catalogue_data_legacy = /datum/prototype/struct/catalogue_entry/technology/resleeving
 	icon = 'icons/obj/mirror.dmi'
 	icon_state = "mirror_implant_f"
 	var/stored_mind = null

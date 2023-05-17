@@ -1,7 +1,7 @@
 // Phorogenic spiders explode when they die.
 // You really shouldn't melee them.
 
-/datum/category_item/catalogue/fauna/giant_spider/phorogenic_spider
+/datum/prototype/struct/catalogue_entry/fauna/giant_spider/phorogenic_spider
 	name = "Giant Spider - Phorogenic"
 	desc = "This specific spider has been catalogued as 'Phorogenic', \
 	and it belongs to the 'Guard' caste. \
@@ -25,7 +25,7 @@
 
 /mob/living/simple_mob/animal/giant_spider/phorogenic
 	desc = "Crystalline and purple, it makes you shudder to look at it. This one has haunting purple eyes."
-	catalogue_data = list(/datum/category_item/catalogue/fauna/giant_spider/phorogenic_spider)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/giant_spider/phorogenic_spider)
 
 	icon_state = "phoron"
 	icon_living = "phoron"

@@ -2,7 +2,7 @@
 // They cooperate with other diyaabs, in order to swarm whoever decides to pick on the little fluffy critter.
 // A cleaving weapon like an axe will make short work of the pack.
 
-/datum/category_item/catalogue/fauna/diyaab
+/datum/prototype/struct/catalogue_entry/fauna/diyaab
 	name = "Sivian Fauna - Diyaab"
 	desc = "Classification: S Choeros hirtus\
 	<br><br>\
@@ -17,7 +17,7 @@
 	name = "diyaab"
 	desc = "A small pack animal. Although omnivorous, it will hunt meat on occasion."
 	tt_desc = "S Choeros hirtus" //diyaab and shantak are technically reletives!
-	catalogue_data = list(/datum/category_item/catalogue/fauna/diyaab)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/diyaab)
 
 	faction = "diyaab"
 

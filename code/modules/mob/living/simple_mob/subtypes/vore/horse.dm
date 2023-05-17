@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/horse
+/datum/prototype/struct/catalogue_entry/fauna/horse
 	name = "Horse"
 	desc = "A long-time companion of Humanity, the horse served as the \
 	primary method of transportation for pre-industrial Humans for thousands \
@@ -12,7 +12,7 @@
 	name = "horse"
 	desc = "Don't look it in the mouth."
 	tt_desc = "Equus ferus caballus"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/horse)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/horse)
 
 	icon_state = "horse"
 	icon_living = "horse"

@@ -38,7 +38,7 @@ var/list/ai_verbs_default = list(
 				subject.attack_ai(M)
 	return is_in_use
 
-/datum/category_item/catalogue/fauna/silicon/ai
+/datum/prototype/struct/catalogue_entry/fauna/silicon/ai
 	name = "Silicons - Artificial Intelligence"
 	desc = "Stationbound Artificial Intelligences were pioneered by \
 	multiple governments and species across the galaxy, with mixed results. \
@@ -58,7 +58,7 @@ var/list/ai_verbs_default = list(
 	density = TRUE
 	can_be_antagged = TRUE
 	status_flags = STATUS_CAN_STUN|STATUS_CAN_PARALYZE|STATUS_CAN_PUSH
-	catalogue_data = list(/datum/category_item/catalogue/fauna/silicon/ai)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/silicon/ai)
 	translation_context_type = /datum/translation_context/variable/learning/silicons	// ai gets the gamer context by default
 	see_invisible = SEE_INVISIBLE_LIVING
 

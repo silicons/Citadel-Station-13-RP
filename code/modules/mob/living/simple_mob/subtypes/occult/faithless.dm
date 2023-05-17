@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/horror
+/datum/prototype/struct/catalogue_entry/fauna/horror
 	name = "%#ERROR#%"
 	desc = "%ERROR% SCAN DATA REDACTED. RETURN SCANNER TO A\
 	CENTRAL ADMINISTRATOR FOR IMMEDIATE MAINTENANCE. %ERROR%"
@@ -10,7 +10,7 @@
 	icon_state = "faithless"
 	icon_living = "faithless"
 	icon_dead = "faithless_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/horror)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/horror)
 
 	faction = "faithless"
 

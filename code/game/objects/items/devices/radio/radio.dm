@@ -785,7 +785,7 @@ GLOBAL_DATUM_INIT(virtual_announcer_ai, /mob/living/silicon/ai/announcer, new(nu
 /obj/item/bluespace_radio
 	name = "subspace radio"
 	desc = "A powerful new radio originally gifted to Nanotrasen from Ward Takahashi. Immensely expensive, this communications device has the ability to send and recieve transmissions from anywhere."
-	catalogue_data = list()///datum/category_item/catalogue/information/organization/ward_takahashi)
+	catalogue_data_legacy = list()///datum/prototype/struct/catalogue_entry/information/organization/ward_takahashi)
 	icon = 'icons/vore/custom_items_vr.dmi'
 	icon_override = 'icons/mob/clothing/back.dmi'
 	icon_state = "radiopack"

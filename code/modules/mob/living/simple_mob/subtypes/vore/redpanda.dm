@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/redpanda
+/datum/prototype/struct/catalogue_entry/fauna/redpanda
 	name = "Red Panda"
 	desc = "Red Pandas are sometimes imported to the Frontier from \
 	exotic pet brokers in Orion space. Popular among collectors due \
@@ -10,7 +10,7 @@
 	name = "red panda"
 	desc = "It's a wah! Beware of doom pounce!"
 	tt_desc = "Ailurus fulgens"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/redpanda)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/redpanda)
 
 	icon_state = "wah"
 	icon_living = "wah"

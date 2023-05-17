@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/shank/shanks
+/datum/prototype/struct/catalogue_entry/fauna/shank/shanks
 	name = "Shanks"
 	desc = "The Shank is a species of parasite endemic to KT-943 which exhibits a uniquely interesting life cycle. \
 	Hatching from eggs into their larval form - the common Gutshank, these hardy tick-like creatures feed on the blood \
@@ -7,17 +7,17 @@
 	develop into Shanks. Pictographic evidence found in ancient Scorian archaeological sites suggests the existence \
 	of an even larger developmental form beyond Shanks, though this has yet to be confirmed."
 	value = CATALOGUER_REWARD_TRIVIAL
-	unlocked_by_any = list(/datum/category_item/catalogue/fauna/shank)
+	unlocked_by_any = list(/datum/prototype/struct/catalogue_entry/fauna/shank)
 
-/datum/category_item/catalogue/fauna/all_shanks
+/datum/prototype/struct/catalogue_entry/fauna/all_shanks
 	name = "Collection - Shanks"
 	desc = "You have scanned Shanks at different parts of their life cycle, \
 	and therefore you have been granted a fair sum of points, through this \
 	entry."
 	value = CATALOGUER_REWARD_MEDIUM
 	unlocked_by_all = list(
-		/datum/category_item/catalogue/fauna/shank,
-		/datum/category_item/catalogue/fauna/shank/gutshank
+		/datum/prototype/struct/catalogue_entry/fauna/shank,
+		/datum/prototype/struct/catalogue_entry/fauna/shank/gutshank
 		)
 
 //Notes for later development. ~Cap
@@ -25,7 +25,7 @@
 //Gutshanks parasitize until they reach maturity and molt. They continue to feed primarily on blood, but at this stage they begin to process silt and rocks in their diet as well.
 //Shanks mature even further into something like Silt Striders, which can be used as pack animals and safe transit over lava floes.
 
-/datum/category_item/catalogue/fauna/shank/gutshank
+/datum/prototype/struct/catalogue_entry/fauna/shank/gutshank
 	name = "Gutshank"
 	desc = "Gutshanks are rather frightening pests. Parasitic by nature, the Gutshank feeds on warm blood to \
 	sustain itself. Although they will typically feed on Goliaths, these creatures have been observed drinking \
@@ -43,7 +43,7 @@
 	icon_living = "gutshank"
 	icon_dead = "gutshank_dead"
 	icon_gib = "syndicate_gib"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/shank/gutshank)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/shank/gutshank)
 
 	maxHealth = 100
 	health = 100
@@ -148,7 +148,7 @@
 //It's intended to be used like a horse by Ashlanders, and won't have the same farming utility (water collection) its younger form does.
 //To help navigate lava floes, I am considering giving it a flea-like jump ability, but I'm unsure how this combines with the riding system.
 
-/datum/category_item/catalogue/fauna/shank
+/datum/prototype/struct/catalogue_entry/fauna/shank
 	name = "Shank"
 	desc = "When allowed to mature, the common Gutshank transforms into a lightweight creature. Although still \
 	subsiting primarily on a diet of blood, the Shank begins to also consume silt and loose rocks commonly found \
@@ -165,7 +165,7 @@
 	icon_living = "shank"
 	icon_dead = "shank_dead"
 	icon_gib = "syndicate_gib"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/shank)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/shank)
 
 	maxHealth = 150
 	health = 150

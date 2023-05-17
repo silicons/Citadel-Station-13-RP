@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/jelly
+/datum/prototype/struct/catalogue_entry/fauna/jelly
 	name = "Jelly Blob"
 	desc = "These curious creatures are native to the caustic surface of Virgo 2. \
 	Although docile, their undulating bodies can sometimes get in the way of attacks \
@@ -9,7 +9,7 @@
 /mob/living/simple_mob/animal/space/jelly
 	name = "jelly blob"
 	desc = "Some sort of undulating blob of slime!"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/jelly)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/jelly)
 
 	icon_dead = "jelly_dead"
 	icon_living = "jelly"

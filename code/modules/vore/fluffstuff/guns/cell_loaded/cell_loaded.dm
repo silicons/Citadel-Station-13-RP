@@ -4,7 +4,7 @@
 	desc = "Variety is the spice of life! This weapon is a hybrid of the NT-102b 'Nanotech Selectable-Fire Weapon' and the Vey-Med ML-3 'Medigun', dubbed the 'NSFW-ML3M'. \
 	It can fire both harmful and healing cells with an internal nanite fabricator and energy weapon cell loader. Up to three combinations of \
 	energy beams can be configured at once. Ammo not included."
-	//catalogue_data = list(/datum/category_item/catalogue/information/organization/nanotrasen)
+	//catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/information/organization/nanotrasen)
 
 	icon = 'icons/vore/custom_guns_vr.dmi'
 	icon_state = "nsfw"
@@ -204,7 +204,7 @@
 /obj/item/ammo_casing/microbattery
 	name = "\'NSFW\' microbattery - UNKNOWN"
 	desc = "A miniature battery for an energy weapon."
-	//catalogue_data = list(/datum/category_item/catalogue/information/organization/nanotrasen)
+	//catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/information/organization/nanotrasen)
 	icon = 'icons/obj/ammo_vr.dmi'
 	icon_state = "nsfw_batt"
 	slot_flags = SLOT_BELT | SLOT_EARS

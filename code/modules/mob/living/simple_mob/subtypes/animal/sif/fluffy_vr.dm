@@ -2,7 +2,7 @@
 	name = "Fluffy"
 	desc = "It's a pink Diyaab! It seems to be very tame and quiet."
 	tt_desc = "S Choeros hirtus"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/diyaab)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/diyaab)
 
 	icon_state = "fluffy"
 	icon_living = "fluffy"

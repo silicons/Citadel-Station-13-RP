@@ -5,7 +5,7 @@
 */
 
 // Obtained by scanning any roach.
-/datum/category_item/catalogue/fauna/roach/roach
+/datum/prototype/struct/catalogue_entry/fauna/roach/roach
 	name = "Roaches"
 	desc = "This hardy species of insect existed on earth for Millions of years prior to humanity,\
 	and attained a demonstrable measure of evolutionary 'perfection', as evidenced by their longevity.\
@@ -17,26 +17,26 @@
 	Some manner of speciation has been detected amongst roaches in the modern galaxy,\
 	leading to an as yet unknown number of varieties and mutations."
 	value = CATALOGUER_REWARD_TRIVIAL
-	unlocked_by_any = list(/datum/category_item/catalogue/fauna/roach)
+	unlocked_by_any = list(/datum/prototype/struct/catalogue_entry/fauna/roach)
 
 // Obtained by scanning all roach types.
-/datum/category_item/catalogue/fauna/all_roaches
+/datum/prototype/struct/catalogue_entry/fauna/all_roaches
 	name = "Collection - Roaches"
 	desc = "You have scanned a large array of different types of roaches, \
 	and therefore you have been granted a large sum of points, through this \
 	entry."
 	value = CATALOGUER_REWARD_HARD
 	unlocked_by_all = list(
-		/datum/category_item/catalogue/fauna/roach/roach,
-		/datum/category_item/catalogue/fauna/roach/roachling,
-		/datum/category_item/catalogue/fauna/roach/panzer,
-		/datum/category_item/catalogue/fauna/roach/jaeger,
-		/datum/category_item/catalogue/fauna/roach/seuche,
-		/datum/category_item/catalogue/fauna/roach/atomar,
-		/datum/category_item/catalogue/fauna/roach/uberfallen,
-		/datum/category_item/catalogue/fauna/roach/strahlend,
-		/datum/category_item/catalogue/fauna/roach/zeitraum,
-		/datum/category_item/catalogue/fauna/roach/fuhrer
+		/datum/prototype/struct/catalogue_entry/fauna/roach/roach,
+		/datum/prototype/struct/catalogue_entry/fauna/roach/roachling,
+		/datum/prototype/struct/catalogue_entry/fauna/roach/panzer,
+		/datum/prototype/struct/catalogue_entry/fauna/roach/jaeger,
+		/datum/prototype/struct/catalogue_entry/fauna/roach/seuche,
+		/datum/prototype/struct/catalogue_entry/fauna/roach/atomar,
+		/datum/prototype/struct/catalogue_entry/fauna/roach/uberfallen,
+		/datum/prototype/struct/catalogue_entry/fauna/roach/strahlend,
+		/datum/prototype/struct/catalogue_entry/fauna/roach/zeitraum,
+		/datum/prototype/struct/catalogue_entry/fauna/roach/fuhrer
 		)
 
 /datum/armor/physiology/roach
@@ -52,7 +52,7 @@
 	item_state = "roach"
 	icon_living = "roach"
 	icon_dead = "roach_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/roach/roach)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/roach/roach)
 
 	maxHealth = 15
 	health = 15
@@ -140,7 +140,7 @@
 	name = initial(name)
 
 //Baby Roaches? Baby Roaches.
-/datum/category_item/catalogue/fauna/roach/roachling
+/datum/prototype/struct/catalogue_entry/fauna/roach/roachling
 	name = "Roachling"
 	desc = "Every life begins somewhere, and the juvenile roach, commonly referred to as a 'roachling',\
 	serves as one of the first signs of a budding roach infestation. If you see one, there are more.\
@@ -155,7 +155,7 @@
 	item_state = "roachling"
 	icon_living = "roachling"
 	icon_dead = "roachling_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/roach/roachling)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/roach/roachling)
 
 	maxHealth = 5
 	health = 5
@@ -196,7 +196,7 @@
 	qdel(src)
 
 //That's just great. That's what we wanna show kids. Santa rolling down the block - in a Panzer.
-/datum/category_item/catalogue/fauna/roach/panzer
+/datum/prototype/struct/catalogue_entry/fauna/roach/panzer
 	name = "Armored Roach"
 	desc = "This peculiar subspecies of roach is believed to have adapted in high pressure environments,\
 	where even the sturdy exoskeleton of its ancestors were too frail to survive. Slower than average,\
@@ -216,7 +216,7 @@
 	item_state = "panzer"
 	icon_living = "panzer"
 	icon_dead = "panzer_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/roach/panzer)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/roach/panzer)
 
 	maxHealth = 30
 	health = 30
@@ -231,7 +231,7 @@
 	melee = 0.1
 
 //Sie Sind Das Essen Und Wir Sind Die Jager
-/datum/category_item/catalogue/fauna/roach/jaeger
+/datum/prototype/struct/catalogue_entry/fauna/roach/jaeger
 	name = "Hunter Roach"
 	desc = "According to the standing theory, 'Hunter Roaches' adapted in a predator rich environment,\
 	where mobility and speed became evolutionary advantages. The Hunter's aggressive nature and striking\
@@ -247,7 +247,7 @@
 	item_state = "jaeger"
 	icon_living = "jaeger"
 	icon_dead = "jaeger_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/roach/jaeger)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/roach/jaeger)
 
 	maxHealth = 15
 	health = 15
@@ -263,7 +263,7 @@
 	ai_holder_type = /datum/ai_holder/simple_mob/melee/evasive
 
 //When I said roaches made me sick, this isn't what I meant.
-/datum/category_item/catalogue/fauna/roach/seuche
+/datum/prototype/struct/catalogue_entry/fauna/roach/seuche
 	name = "Diseased Roach"
 	desc = "This phenomena was first observed on Virgo 3b, among certain species of Atrax robustus.\
 	When exposed to gaseous or powdered phoron over long periods of time without protection will mutate,\
@@ -284,7 +284,7 @@
 	item_state = "seuche"
 	icon_living = "seuche"
 	icon_dead = "seuche_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/roach/seuche)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/roach/seuche)
 
 	maxHealth = 15
 	health = 15
@@ -312,7 +312,7 @@
 		L.reagents.add_reagent(poison_type, poison_per_bite)
 
 //If you think roaches are bad, imagine dragons.
-/datum/category_item/catalogue/fauna/roach/atomar
+/datum/prototype/struct/catalogue_entry/fauna/roach/atomar
 	name = "Cancerous Roach"
 	desc = "Most roaches display an intensely robust resistance to the effects of radiaton. Most.\
 	Genetic mutations leading to a pronounced weakness to cell degeneration are rare, but not unheard of.\
@@ -334,7 +334,7 @@
 	item_state = "atomar"
 	icon_living = "atomar"
 	icon_dead = "atomar_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/roach/atomar)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/roach/atomar)
 
 	maxHealth = 10
 	health = 10
@@ -353,7 +353,7 @@
 	ai_holder_type = /datum/ai_holder/simple_mob/ranged/kiting
 
 //Nanomachines? Huh. That's not very Patriotic.
-/datum/category_item/catalogue/fauna/roach/uberfallen
+/datum/prototype/struct/catalogue_entry/fauna/roach/uberfallen
 	name = "Infested Roach"
 	desc = "WARNING: Infested roaches are currently flagged as a Class Red threat by NanoTrasen.\
 	This dangerous organism appeared shortly after the unidentified incident on local NT asset 'Surt',\
@@ -378,7 +378,7 @@
 	icon_living = "uberfallen"
 	icon_dead = "uberfallen_dead"
 	faction = "synthtide"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/roach/uberfallen)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/roach/uberfallen)
 	maxHealth = 30
 	health = 30
 	taser_kill = 0
@@ -394,7 +394,7 @@
 	ai_holder_type = /datum/ai_holder/simple_mob/ranged/kiting
 
 //Remember when Liam Neeson taught you how to kill these?
-/datum/category_item/catalogue/fauna/roach/strahlend
+/datum/prototype/struct/catalogue_entry/fauna/roach/strahlend
 	name = "Glowing Roach"
 	desc = "Just because roaches are by and large immune to radiation, it doesn't mean they avoid it.\
 	Glowing roaches are one of the first recorded subspecies of roach to be recorded off of Earth.\
@@ -417,7 +417,7 @@
 	item_state = "strahlend"
 	icon_living = "strahlend"
 	icon_dead = "strahlend_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/roach/strahlend)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/roach/strahlend)
 
 	maxHealth = 20
 	health = 20
@@ -431,7 +431,7 @@
 	ai_holder_type = /datum/ai_holder/simple_mob/ranged/kiting
 
 //The Color out of Bluespace
-/datum/category_item/catalogue/fauna/roach/zeitraum
+/datum/prototype/struct/catalogue_entry/fauna/roach/zeitraum
 	name = "Bluespace Roach"
 	desc = "The belief that these roaches actually inhabit Bluespace has long been disproven.\
 	However, the apellation has stuck to these creatures due to their trademark predation mechanism.\
@@ -455,7 +455,7 @@
 	item_state = "zeitraum"
 	icon_living = "zeitraum"
 	icon_dead = "zeitraum_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/roach/zeitraum)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/roach/zeitraum)
 
 	maxHealth = 20
 	health = 20
@@ -546,7 +546,7 @@
 	break_cloak()
 
 //King? Look around you! King of what?
-/datum/category_item/catalogue/fauna/roach/fuhrer
+/datum/prototype/struct/catalogue_entry/fauna/roach/fuhrer
 	name = "King Roach"
 	desc = "Known as the 'King Roach' by researchers, the Periplaneta rex displays no social behavior.\
 	Its nickname comes from its intimidating presence. Naturally resilient, the King Roach is slow, meaty,\
@@ -570,7 +570,7 @@
 	item_state = "fuhrer"
 	icon_living = "fuhrer"
 	icon_dead = "fuhrer_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/roach/fuhrer)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/roach/fuhrer)
 
 	maxHealth = 60
 	health = 60

@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/bee
+/datum/prototype/struct/catalogue_entry/fauna/bee
 	name = "Space Bumble Bee"
 	desc = "Unlike other attempts at modifying species for easier space transportation, \
 	bumble bee modification went off without a hitch. Space Bees are not capable of flight \
@@ -9,7 +9,7 @@
 /mob/living/simple_mob/vore/bee
 	name = "space bumble bee"
 	desc = "Buzz buzz."
-	catalogue_data = list(/datum/category_item/catalogue/fauna/bee)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/bee)
 
 	icon_state = "bee"
 	icon_living = "bee"

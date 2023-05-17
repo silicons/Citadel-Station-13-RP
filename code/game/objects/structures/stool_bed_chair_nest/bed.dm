@@ -370,7 +370,7 @@
 		return 0
 	return ..()
 
-/datum/category_item/catalogue/anomalous/precursor_a/alien_bed
+/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_bed
 	name = "Precursor Alpha Object - Resting Contraption"
 	desc = "This appears to be a relatively long and flat object, with the top side being made of \
 	an soft material, giving it very similar characteristics to an ordinary bed. If this object was \
@@ -389,7 +389,7 @@
 /obj/structure/bed/alien
 	name = "resting contraption"
 	desc = "Whatever species designed this must've enjoyed relaxation as well. Looks vaguely comfy."
-	catalogue_data = list(/datum/category_item/catalogue/anomalous/precursor_a/alien_bed)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_bed)
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "bed"
 

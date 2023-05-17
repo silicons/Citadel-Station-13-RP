@@ -14,7 +14,7 @@
 	While the Orion Confederation government represents humanity at large, on the Frontier powerful corporate \
 	interests, rampant cyber and bio-augmentation initiatives, and secretive factions make life on most human \
 	worlds tumultous at best."
-	catalogue_data = list(/datum/category_item/catalogue/fauna/humans)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/humans)
 
 	max_additional_languages = 3
 	intrinsic_languages = list(
@@ -64,7 +64,7 @@
 	base_color = "#EECEB3"
 	wikilink = "https://citadel-station.net/wikiRP/index.php?title=Race:_Humanity"
 
-/datum/category_item/catalogue/fauna/humans
+/datum/prototype/struct/catalogue_entry/fauna/humans
 	name = "Sapients - Humans"
 	desc = {"
 		Humans are a space-faring species hailing originally from the planet Earth in the Sol system.

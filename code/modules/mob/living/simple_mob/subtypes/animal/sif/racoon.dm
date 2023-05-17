@@ -1,6 +1,6 @@
 // Sakimm are small scavengers with an adoration for shiny things. They won't attack you for them, but you will be their friend holding something like a coin.
 
-/datum/category_item/catalogue/fauna/sakimm
+/datum/prototype/struct/catalogue_entry/fauna/sakimm
 	name = "Sivian Fauna - Sakimm"
 	desc = "Classification: S Procyon cogitae \
 	<br><br>\
@@ -15,7 +15,7 @@
 	name = "sakimm"
 	desc = "What appears to be an oversized rodent with hands."
 	tt_desc = "S Procyon cogitae"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/sakimm)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/sakimm)
 
 	faction = "sakimm"
 

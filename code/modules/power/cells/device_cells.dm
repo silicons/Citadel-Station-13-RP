@@ -45,7 +45,7 @@
 	charge_amount = 600
 	charge_delay = 100
 
-/datum/category_item/catalogue/anomalous/precursor_a/alien_void_cell
+/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_void_cell
 	name = "Precursor Alpha Object - Void Cell"
 	desc = "This is a very enigmatic and small machine. It is able to output a direct electrical current \
 	from itself to another device or machine that it is connected to. Its shape has a similar form as \
@@ -62,7 +62,7 @@
 /obj/item/cell/device/weapon/recharge/alien
 	name = "void cell"
 	desc = "An alien technology that produces energy seemingly out of nowhere. Its small, cylinderal shape means it might be able to be used with human technology, perhaps?"
-	catalogue_data = list(/datum/category_item/catalogue/anomalous/precursor_a/alien_void_cell)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_void_cell)
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "cell"
 	charge_amount = 120 // 5%.

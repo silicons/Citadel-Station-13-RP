@@ -4,7 +4,7 @@
 	desc = "Variety is the spice of life! The NT-102b 'Hydra' is an unholy hybrid of an ammo-driven  \
 	energy weapon that allows the user to mix and match their own fire modes. Up to four combinations of \
 	energy beams can be configured at once. Ammo not included."
-	//catalogue_data = list(/datum/category_item/catalogue/information/organization/nanotrasen)
+	//catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/information/organization/nanotrasen)
 
 	description_fluff = "The Nanotrasen 'Nanotech Selectable Fire Weapon' allows one to customize their loadout in the field, or before deploying, to achieve various results in a weapon they are already familiar with wielding."
 	allowed_magazines = list(/obj/item/ammo_magazine/cell_mag/combat)
@@ -29,7 +29,7 @@
 	icon_state = "nsfw_mag"
 	max_ammo = 4
 	x_offset = 4
-	catalogue_data = null//list(/datum/category_item/catalogue/information/organization/nanotrasen)
+	catalogue_data_legacy = null//list(/datum/prototype/struct/catalogue_entry/information/organization/nanotrasen)
 	description_info = "This magazine holds Hydra microbatteries to power the Hydra handgun. Up to three can be loaded at once, and each provides four shots of their respective energy type. Loading multiple of the same type will provide additional shots of that type. The batteries can be recharged in a normal recharger."
 	ammo_type = /obj/item/ammo_casing/microbattery/combat
 
@@ -38,7 +38,7 @@
 	icon_state = "nsfw_mag_prototype"
 	max_ammo = 2
 	x_offset = 6
-	catalogue_data = null
+	catalogue_data_legacy = null
 	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_MAGNETS = 2)
 
 

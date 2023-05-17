@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/penguin
+/datum/prototype/struct/catalogue_entry/fauna/penguin
 	name = "Penguin"
 	desc = "An Earthling bird, similar to chickens or other avians, the \
 	penguin is easily recognizable due to its wobbling gait and its iconic \
@@ -14,7 +14,7 @@
 	icon_state = "penguin_old"
 	icon_living = "penguin_old"
 	icon_dead = "penguin_old_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/penguin)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/penguin)
 
 	maxHealth = 20
 	health = 20

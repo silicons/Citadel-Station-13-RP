@@ -9,7 +9,7 @@
 	hopefully prevent chainstuns forever.
 */
 
-/datum/category_item/catalogue/fauna/hooligan_crab
+/datum/prototype/struct/catalogue_entry/fauna/hooligan_crab
 	name = "Sivian Fauna - Hooligan Crab"
 	desc = "A very large, grey crustacean-like creature. They display remarkable curiosity, \
 	often following people around, and occasionally stealing man-made objects, hence their name. \
@@ -27,7 +27,7 @@
 	name = "hooligan crab"
 	desc = "A large, hard-shelled crustacean. This one is mostly grey. \
 	You probably shouldn't mess with it."
-	catalogue_data = list(/datum/category_item/catalogue/fauna/hooligan_crab)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/hooligan_crab)
 
 	icon_state = "sif_crab"
 	icon_living = "sif_crab"

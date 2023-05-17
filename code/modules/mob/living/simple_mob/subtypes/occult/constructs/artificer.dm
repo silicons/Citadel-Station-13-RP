@@ -2,7 +2,7 @@
 //		Artificer
 ////////////////////////////
 
-/datum/category_item/catalogue/fauna/construct/artificer
+/datum/prototype/struct/catalogue_entry/fauna/construct/artificer
 	name = "Constructs - Artificer"
 	desc = "Artificers appear to function as a kind of builder class \
 	amongst Constructs. Able to repair their peers and form fortifications, \
@@ -37,7 +37,7 @@
 							/spell/targeted/construct_advanced/mend_acolyte
 							)
 
-	catalogue_data = list(/datum/category_item/catalogue/fauna/construct/artificer)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/construct/artificer)
 
 	ai_holder_type = /datum/ai_holder/mimic
 

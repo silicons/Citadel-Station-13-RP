@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/russian
+/datum/prototype/struct/catalogue_entry/fauna/russian
 	name = "Russians"
 	desc = "After the Human Diaspora, but before the Final War, many \
 	nations hosted their own colonial efforts out into the stars. Although \
@@ -19,7 +19,7 @@
 	icon_living = "russianmelee"
 	icon_dead = "russianmelee_dead"
 	icon_gib = "syndicate_gib"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/russian)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/russian)
 
 	faction = "russian"
 

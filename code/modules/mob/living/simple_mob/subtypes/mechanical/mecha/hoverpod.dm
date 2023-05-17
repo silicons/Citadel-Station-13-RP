@@ -1,6 +1,6 @@
 // Ranged, and capable of flight.
 
-/datum/category_item/catalogue/technology/hoverpod
+/datum/prototype/struct/catalogue_entry/technology/hoverpod
 	name = "Voidcraft - Hoverpod"
 	desc = "This is a small space-capable craft that has a round design. Can hold up to one pilot, \
 	and sometimes one or two passengers, with the right modifications made. \
@@ -15,7 +15,7 @@
 /mob/living/simple_mob/mechanical/mecha/hoverpod
 	name = "hover pod"
 	desc = "Stubby and round, this space-capable craft is an ancient favorite. It has a jury-rigged welder-laser."
-	catalogue_data = list(/datum/category_item/catalogue/technology/hoverpod)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/hoverpod)
 	icon_state = "engineering_pod"
 	movement_sound = 'sound/machines/hiss.ogg'
 	wreckage = /obj/structure/loot_pile/mecha/hoverpod

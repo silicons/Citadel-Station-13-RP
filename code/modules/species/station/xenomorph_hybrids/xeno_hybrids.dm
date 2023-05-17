@@ -26,7 +26,7 @@
 	allowing Xenohybrids to reproduce with most other species. This reproduction is not as invasive as the facehuggers of their relatives, \
 	but can still be dangerous to the host. Their chitinous exoskeleton allows them to endure low pressure and freezing cold \
 	quite well, but leaves them vurnerable to fire and heat."
-	catalogue_data = list(/datum/category_item/catalogue/fauna/xenohybrid)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/xenohybrid)
 	wikilink = "https://citadel-station.net/wikiRP/index.php?title=Race:_Neomorphs"
 
 	intrinsic_languages = LANGUAGE_ID_XENOMORPH

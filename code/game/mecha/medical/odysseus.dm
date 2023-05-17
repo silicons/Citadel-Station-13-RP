@@ -1,9 +1,9 @@
 /obj/mecha/medical/odysseus
 	desc = "These exosuits are developed and produced by Vey-Med. (&copy; All rights reserved)."
 	name = "Odysseus"
-	catalogue_data = list(
-		/datum/category_item/catalogue/technology/odysseus,
-		/datum/category_item/catalogue/information/organization/vey_med
+	catalogue_data_legacy = list(
+		/datum/prototype/struct/catalogue_entry/technology/odysseus,
+		/datum/prototype/struct/catalogue_entry/information/organization/vey_med
 		)
 	icon_state = "odysseus"
 	initial_icon = "odysseus"

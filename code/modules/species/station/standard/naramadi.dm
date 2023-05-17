@@ -31,7 +31,7 @@
 	also brings forth a constant danger of Hivebot Fleets attacks, leaving the Empire in a state of constant Defense.
 	"}
 
-	catalogue_data = list(/datum/category_item/catalogue/fauna/sergal)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/sergal)
 	wikilink = ""
 
 	primitive_form = SPECIES_MONKEY_SERGAL

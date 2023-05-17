@@ -1,6 +1,6 @@
 // Electric spiders fire taser-like beams at their enemies.
 
-/datum/category_item/catalogue/fauna/giant_spider/electric_spider
+/datum/prototype/struct/catalogue_entry/fauna/giant_spider/electric_spider
 	name = "Giant Spider - Electric"
 	desc = "This specific spider has been catalogued as 'Electric', \
 	and it belongs to the 'Guard' caste. \
@@ -19,7 +19,7 @@
 
 /mob/living/simple_mob/animal/giant_spider/electric
 	desc = "Spined and yellow, it makes you shudder to look at it. This one has flickering gold eyes."
-	catalogue_data = list(/datum/category_item/catalogue/fauna/giant_spider/electric_spider)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/giant_spider/electric_spider)
 
 	icon_state = "spark"
 	icon_living = "spark"

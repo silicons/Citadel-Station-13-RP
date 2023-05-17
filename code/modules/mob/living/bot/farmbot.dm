@@ -3,7 +3,7 @@
 #define FARMBOT_UPROOT 3
 #define FARMBOT_NUTRIMENT 4
 
-/datum/category_item/catalogue/technology/bot/farmbot
+/datum/prototype/struct/catalogue_entry/technology/bot/farmbot
 	name = "Bot - Farmbot"
 	desc = "Farmbots are the fusion of mobile water tanks with sophisticated \
 	cultivation routines. Designed to ease the burden of maintaining Hydroponics \
@@ -18,7 +18,7 @@
 	health = 50
 	maxHealth = 50
 	req_one_access = list(ACCESS_SCIENCE_ROBOTICS, ACCESS_GENERAL_BOTANY, ACCESS_SCIENCE_XENOBIO)
-	catalogue_data = list(/datum/category_item/catalogue/technology/bot/farmbot)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/bot/farmbot)
 
 	var/action = "" // Used to update icon
 	var/waters_trays = TRUE

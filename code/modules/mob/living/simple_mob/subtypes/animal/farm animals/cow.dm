@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/livestock/cow
+/datum/prototype/struct/catalogue_entry/fauna/livestock/cow
 	name = "Livestock - Cow"
 	desc = "The premier source of meat from old Earth, the cow is a lumbering \
 	herbivore. The milk produced by cows is safe for human consumption, and has \
@@ -15,7 +15,7 @@
 	icon_living = "cow"
 	icon_dead = "cow_dead"
 	icon_gib = "cow_gib"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/livestock/cow)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/livestock/cow)
 
 	health = 50
 	maxHealth = 50

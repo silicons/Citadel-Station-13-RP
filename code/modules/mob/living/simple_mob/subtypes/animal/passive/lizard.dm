@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/lizard
+/datum/prototype/struct/catalogue_entry/fauna/lizard
 	name = "Lizard"
 	desc = "A reptile common on Earth, lizards come in a variety \
 	of shapes, sizes, and colorations. Popular as pets due to their \
@@ -10,7 +10,7 @@
 	name = "lizard"
 	desc = "A cute, tiny lizard."
 	tt_desc = "E Anolis cuvieri"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/lizard)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/lizard)
 
 	icon_state = "lizard"
 	icon_living = "lizard"

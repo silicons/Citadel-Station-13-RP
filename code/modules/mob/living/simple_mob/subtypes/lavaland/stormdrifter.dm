@@ -1,5 +1,5 @@
 //Stormdrifters
-/datum/category_item/catalogue/fauna/stormdrifter/stormdrifters
+/datum/prototype/struct/catalogue_entry/fauna/stormdrifter/stormdrifters
 	name = "Stormdrifters"
 	desc = "Stormdrifters are a rare sight on the surface of Surt. Where for other native fauna this may have \
 	been true due to their subterranean lifestyle, Stormdrifters exist on the opposite side of the spectrum. These \
@@ -9,22 +9,22 @@
 	weather. Rarely, these creatures may drift down closer to Surt's surface, where Ashlanders will eagerly capture them for \
 	unknown purposes."
 	value = CATALOGUER_REWARD_TRIVIAL
-	unlocked_by_any = list(/datum/category_item/catalogue/fauna/stormdrifter)
+	unlocked_by_any = list(/datum/prototype/struct/catalogue_entry/fauna/stormdrifter)
 
-/datum/category_item/catalogue/fauna/all_stormdrifters
+/datum/prototype/struct/catalogue_entry/fauna/all_stormdrifters
 	name = "Collection - Stormdrifters"
 	desc = "You have scanned all known variants of Stormdrifter, \
 	and therefore you have been granted a fair sum of points, through this \
 	entry."
 	value = CATALOGUER_REWARD_MEDIUM
 	unlocked_by_all = list(
-		/datum/category_item/catalogue/fauna/stormdrifter,
-		/datum/category_item/catalogue/fauna/stormdrifter/bull
+		/datum/prototype/struct/catalogue_entry/fauna/stormdrifter,
+		/datum/prototype/struct/catalogue_entry/fauna/stormdrifter/bull
 		)
 
 //Netches! (Expand on this later with more detail.)
 
-/datum/category_item/catalogue/fauna/stormdrifter
+/datum/prototype/struct/catalogue_entry/fauna/stormdrifter
 	name = "Stormdrifter Polyp"
 	desc = "The common Stormdrifter is passive. If provoked, this creature is able to attack with the tendrils which dangle \
 	below its body. In a mechanism vaguely similar to Old Earth jellyfish, these tendrils pass on a debilitating pulse of electricity \
@@ -40,7 +40,7 @@
 	icon_living = "stormdrifter"
 	icon_dead = "stormdrifter_dead"
 	icon_gib = "syndicate_gib"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/stormdrifter)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/stormdrifter)
 
 	maxHealth = 100
 	health = 100
@@ -90,7 +90,7 @@
 		playsound(L, 'sound/effects/sparks6.ogg', 75, 1)
 
 //Stormdrifter Bulls!
-/datum/category_item/catalogue/fauna/stormdrifter/bull
+/datum/prototype/struct/catalogue_entry/fauna/stormdrifter/bull
 	name = "Stormdrifter Bull"
 	desc = "The hide of a Stormdrifter Bull is much thicker than that of a Polyp. Bulls also possess significantly \
 	better developed tendrils. These two factors alone make the Bull a far more formidable opponnent than the simple Polyp. \
@@ -104,7 +104,7 @@
 	icon_state = "bulldrifter"
 	icon_living = "bulldrifter"
 	icon_dead = "bulldrifter_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/stormdrifter/bull)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/stormdrifter/bull)
 
 	maxHealth = 200
 	health = 200

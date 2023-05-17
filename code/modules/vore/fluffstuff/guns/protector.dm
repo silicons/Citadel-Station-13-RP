@@ -6,7 +6,7 @@
 	description_fluff = "A common sight among Proxima Centauri Risk Control employees, the Myrmidon encourages responsible adherence to protocol, its lethal mode locked until the employee properly alerts their team and raises the alarm, freeing both the employee and their employer from responsibility for any ensuring casualties."
 	description_antag = "The \'Myrmidon\' can be tampered with to remove its restrictions, freeing up its lethal capabilities on Code Green."
 
-	catalogue_data = list()///datum/category_item/catalogue/information/organization/hephaestus)
+	catalogue_data_legacy = list()///datum/prototype/struct/catalogue_entry/information/organization/hephaestus)
 
 	icon = 'icons/vore/custom_guns_vr.dmi'
 	icon_state = "prot"

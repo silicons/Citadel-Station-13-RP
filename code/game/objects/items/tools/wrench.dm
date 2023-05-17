@@ -89,7 +89,7 @@
 	reach = 2
 	random_color = FALSE
 
-/datum/category_item/catalogue/anomalous/precursor_a/alien_wrench
+/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_wrench
 	name = "Precursor Alpha Object - Fastener Torque Tool"
 	desc = "This is an object that has a distinctive tool shape. \
 	It has a handle on one end, with a simple mechanism attached to it. \
@@ -107,7 +107,7 @@
 /obj/item/tool/wrench/alien
 	name = "alien wrench"
 	desc = "A polarized wrench. It causes anything placed between the jaws to turn."
-	catalogue_data = list(/datum/category_item/catalogue/anomalous/precursor_a/alien_wrench)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_wrench)
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "wrench"
 	tool_sound = 'sound/effects/empulse.ogg'

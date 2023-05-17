@@ -12,7 +12,7 @@
 	society on Aura, their homeworld, leads to some abandoning this mindset entirely, however, which in turn causes them to
 	seek out a new identity beyond their homeworld.
 	"}
-	catalogue_data = list(/datum/category_item/catalogue/fauna/auril)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/auril)
 
 	icobase = 'icons/mob/species/human/body_greyscale.dmi'
 	deform  = 'icons/mob/species/human/deformed_body_greyscale.dmi'
@@ -114,7 +114,7 @@
 	They are extremely divergent amongst themselves, hailing from one of the several megalopoli dotting the surface of the planet, or from the
 	dense networks underground, or even from many of the smaller settlements inhabited by bandits, religious groups and other delinquents in the eyes of Aurils.
 	"}
-	catalogue_data = list(/datum/category_item/catalogue/fauna/dremachir)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/dremachir)
 
 	icobase = 'icons/mob/species/human/body_greyscale.dmi'
 	deform  = 'icons/mob/species/human/deformed_body_greyscale.dmi'

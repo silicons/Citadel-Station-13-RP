@@ -91,7 +91,7 @@
 	tool_speed = 0.5
 	colorable = 0
 
-/datum/category_item/catalogue/anomalous/precursor_a/alien_multitool
+/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_multitool
 	name = "Precursor Alpha Object - Pulse Tool"
 	desc = "This ancient object appears to be an electrical tool. \
 	It has a simple mechanism at the handle, which will cause a pulse of \
@@ -106,7 +106,7 @@
 /obj/item/multitool/alien
 	name = "alien multitool"
 	desc = "An omni-technological interface."
-	catalogue_data = list(/datum/category_item/catalogue/anomalous/precursor_a/alien_multitool)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_multitool)
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "multitool"
 	tool_speed = 0.1

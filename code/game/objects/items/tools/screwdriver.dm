@@ -82,7 +82,7 @@
 	tool_speed = 0.75
 	random_color = FALSE
 
-/datum/category_item/catalogue/anomalous/precursor_a/alien_screwdriver
+/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_screwdriver
 	name = "Precursor Alpha Object - Hard Light Torgue Tool"
 	desc = "This appears to be a tool, with a solid handle, and a thin hard light \
 	shaft, with a tip at the end. On the handle appears to be two mechanisms that \
@@ -98,7 +98,7 @@
 /obj/item/tool/screwdriver/alien
 	name = "alien screwdriver"
 	desc = "An ultrasonic screwdriver."
-	catalogue_data = list(/datum/category_item/catalogue/anomalous/precursor_a/alien_screwdriver)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_screwdriver)
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "screwdriver_a"
 	item_state = "screwdriver_black"
@@ -109,7 +109,7 @@
 /obj/item/tool/screwdriver/hybrid
 	name = "strange screwdriver"
 	desc = "A strange conglomerate of a screwdriver."
-	catalogue_data = list(/datum/category_item/catalogue/anomalous/precursor_a/alien_screwdriver)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_screwdriver)
 	icon_state = "hybscrewdriver"
 	item_state = "screwdriver_black"
 	origin_tech = list(TECH_MATERIAL = 3, TECH_ENGINEERING = 3)

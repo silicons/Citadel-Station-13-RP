@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/silicon/robot/lost
+/datum/prototype/struct/catalogue_entry/fauna/silicon/robot/lost
 	name = "Robot - Lost"
 	desc = "Cyborgs may be considered valuable assets on the Frontier, but their \
 	recovery is not always tenable. Vessels lost in space, due either to mishap or \
@@ -16,7 +16,7 @@
 	braintype = "Drone"
 	idcard_type = /obj/item/card/id
 	icon_selected = FALSE
-	catalogue_data = list(/datum/category_item/catalogue/fauna/silicon/robot/lost)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/silicon/robot/lost)
 
 /mob/living/silicon/robot/lost/init()
 	aiCamera = new/obj/item/camera/siliconcam/robot_camera(src)

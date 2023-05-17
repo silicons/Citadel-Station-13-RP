@@ -1,29 +1,29 @@
 GLOBAL_VAR_CONST(MAX_CHICKENS, 50)	// How many chickens CAN we have?
 GLOBAL_VAR_INIT(chicken_count, 0)	// How mant chickens DO we have?
 
-/datum/category_item/catalogue/fauna/livestock
+/datum/prototype/struct/catalogue_entry/fauna/livestock
 	name = "Livestock"
 	desc = "Organisms raised and traded across the galaxy for utility purposes, \
 	such as labor, material harvesting, and most often - food. Many forms of livestock \
 	imported to the Frontier come from Confederation space, and trace their genetic \
 	origin points back to Earth."
 	value = CATALOGUER_REWARD_TRIVIAL
-	unlocked_by_any = list(/datum/category_item/catalogue/fauna/livestock)
+	unlocked_by_any = list(/datum/prototype/struct/catalogue_entry/fauna/livestock)
 
 // Obtained by scanning all X.
-/datum/category_item/catalogue/fauna/all_livestock
+/datum/prototype/struct/catalogue_entry/fauna/all_livestock
 	name = "Collection - Livestock"
 	desc = "You have scanned a large array of different types of Livestock, \
 	and therefore you have been granted a small sum of points, through this \
 	entry."
 	value = CATALOGUER_REWARD_EASY
 	unlocked_by_all = list(
-		/datum/category_item/catalogue/fauna/livestock/chicken,
-		/datum/category_item/catalogue/fauna/livestock/cow,
-		/datum/category_item/catalogue/fauna/livestock/goat
+		/datum/prototype/struct/catalogue_entry/fauna/livestock/chicken,
+		/datum/prototype/struct/catalogue_entry/fauna/livestock/cow,
+		/datum/prototype/struct/catalogue_entry/fauna/livestock/goat
 		)
 
-/datum/category_item/catalogue/fauna/livestock/chicken
+/datum/prototype/struct/catalogue_entry/fauna/livestock/chicken
 	name = "Livestock - Chicken"
 	desc = "An avian species hailing from Earth, chickens are actually \
 	the descendants of an ancient Earth clade known as Dinosaurs. Often regarded \
@@ -39,7 +39,7 @@ GLOBAL_VAR_INIT(chicken_count, 0)	// How mant chickens DO we have?
 	icon_state = "chicken"
 	icon_living = "chicken"
 	icon_dead = "chicken_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/livestock/chicken)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/livestock/chicken)
 
 	health = 10
 	maxHealth = 10

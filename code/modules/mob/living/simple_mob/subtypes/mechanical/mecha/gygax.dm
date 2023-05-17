@@ -1,7 +1,7 @@
 // Gygaxes are tough but also fast.
 // Their AI, unlike most, will advance towards their target instead of remaining in place.
 
-/datum/category_item/catalogue/technology/gygax
+/datum/prototype/struct/catalogue_entry/technology/gygax
 	name = "Exosuit - Gygax"
 	desc = "The Gygax is a relatively modern exosuit, built to be lightweight and agile, while still being fairly durable. \
 	These traits have made them rather popular among well funded private and corporate security forces, who desire \
@@ -15,7 +15,7 @@
 /mob/living/simple_mob/mechanical/mecha/combat/gygax
 	name = "gygax"
 	desc = "A lightweight, security exosuit. Popular among private and corporate security."
-	catalogue_data = list(/datum/category_item/catalogue/technology/gygax)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/gygax)
 	icon_state = "gygax"
 	movement_cooldown = 0
 	wreckage = /obj/structure/loot_pile/mecha/gygax
@@ -41,7 +41,7 @@
 
 // A stronger variant.
 
-/datum/category_item/catalogue/technology/dark_gygax
+/datum/prototype/struct/catalogue_entry/technology/dark_gygax
 	name = "Exosuit - Dark Gygax"
 	desc = "This exosuit is a variant of the regular Gygax. It is generally referred to as the Dark Gygax, \
 	due to being constructed from different materials that give it a darker appearance. Beyond merely looking \
@@ -56,7 +56,7 @@
 	name = "dark gygax"
 	desc = "A significantly upgraded Gygax security mech, often utilized by corporate asset protection teams and \
 	PMCs."
-	catalogue_data = list(/datum/category_item/catalogue/technology/dark_gygax)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/dark_gygax)
 	icon_state = "darkgygax"
 	wreckage = /obj/structure/loot_pile/mecha/gygax/dark
 

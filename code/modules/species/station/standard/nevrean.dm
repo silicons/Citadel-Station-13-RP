@@ -21,7 +21,7 @@
 	tone oscillates between tenor and soprano. They are excessively noisy when they quarrel in their native language.
 	"}
 
-	catalogue_data = list(/datum/category_item/catalogue/fauna/nevrean)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/nevrean)
 
 	max_additional_languages = 3
 	name_language = LANGUAGE_ID_BIRDSONG

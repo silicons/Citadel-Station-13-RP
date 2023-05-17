@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/silicon/pai
+/datum/prototype/struct/catalogue_entry/fauna/silicon/pai
 	name = "Silicons - pAI"
 	desc = "There remains some dispute over whether the 'p' stands \
 	for 'pocket', 'personal', or 'portable'. Regardless, the pAI is a \
@@ -16,7 +16,7 @@
 	pass_flags = 1
 	mob_size = MOB_SMALL
 
-	catalogue_data = list(/datum/category_item/catalogue/fauna/silicon/pai)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/silicon/pai)
 
 	holder_type = /obj/item/holder/pai
 

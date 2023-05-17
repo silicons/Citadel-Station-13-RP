@@ -1,9 +1,26 @@
+/atom/movable
+	//? Catalogue
+	/// catalogue entry path or id
+	var/catalogue_entry
+	/// catalogue data - legacy - can either be a list of entries, or a single entry, or null - DO NOT USE
+	var/catalogue_data_legacy
+	/// how long it takes to catalogue us by default
+	var/catalogue_delay = 5 SECONDS
+
+/atom/movable/proc/cataloguer_delay()
+	return catalogue_delay
+
+/**
+ * returns list of entry by type or id (mixed allowed).
+ */
+/atom/movable/proc/cataloguer_query()
+
 /atom
 	var/catalogue_delay = 5 SECONDS // How long it take to scan.
-	// List of types of /datum/category_item/catalogue that should be 'unlocked' when scanned by a Cataloguer.
+	// List of types of /datum/prototype/struct/catalogue_entry that should be 'unlocked' when scanned by a Cataloguer.
 	// It is null by default to save memory by not having everything hold onto empty lists. Use macros like LAZYLEN() to check.
 	// Also you should use get_catalogue_data() to access this instead of doing so directly, so special behavior can be enabled.
-	var/list/catalogue_data = null
+	var/list/catalogue_data_legacy = null
 
 /mob
 	catalogue_delay = 10 SECONDS
@@ -20,7 +37,7 @@
 		// Check if this has nothing new on it.
 		var/has_new_data = FALSE
 		for(var/t in data)
-			var/datum/category_item/catalogue/item = GLOB.catalogue_data.resolve_item(t)
+			var/datum/prototype/struct/catalogue_entry/item = GLOB.catalogue_data.resolve_item(t)
 			if(!item.visible)
 				has_new_data = TRUE
 				break
@@ -47,7 +64,7 @@
 	return catalogue_delay
 
 // Override for special behaviour.
-// Should return a list with one or more "/datum/category_item/catalogue" types, or null.
+// Should return a list with one or more "/datum/prototype/struct/catalogue_entry" types, or null.
 // If overriding, it may be wise to call the super and get the results in order to merge the base result and the special result, if appropiate.
 /atom/proc/get_catalogue_data()
 	return catalogue_data
@@ -58,11 +75,11 @@
 	var/beep_boop = get_FBP_type()
 	switch(beep_boop)
 		if(FBP_CYBORG)
-			data += /datum/category_item/catalogue/technology/cyborgs
+			data += /datum/prototype/struct/catalogue_entry/technology/cyborgs
 		if(FBP_POSI)
-			data += /datum/category_item/catalogue/technology/positronics
+			data += /datum/prototype/struct/catalogue_entry/technology/positronics
 		if(FBP_DRONE)
-			data += /datum/category_item/catalogue/technology/drone/drones
+			data += /datum/prototype/struct/catalogue_entry/technology/drone/drones
 	// Now for species.
 	if(!(beep_boop in list(FBP_POSI, FBP_DRONE))) // Don't give the species entry if they are a posi or drone.
 		if(species && LAZYLEN(species.catalogue_data))
@@ -73,9 +90,9 @@
 	var/list/data = list()
 	switch(braintype)
 		if(BORG_BRAINTYPE_CYBORG)
-			data += /datum/category_item/catalogue/technology/cyborgs
+			data += /datum/prototype/struct/catalogue_entry/technology/cyborgs
 		if(BORG_BRAINTYPE_POSI)
-			data += /datum/category_item/catalogue/technology/positronics
+			data += /datum/prototype/struct/catalogue_entry/technology/positronics
 		if(BORG_BRAINTYPE_DRONE)
-			data += /datum/category_item/catalogue/technology/drone/drones
+			data += /datum/prototype/struct/catalogue_entry/technology/drone/drones
 	return data

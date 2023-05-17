@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/brain/assisted
+/datum/prototype/struct/catalogue_entry/fauna/brain/assisted
 	name = "Heuristics - Assisted"
 	desc = "The Man Machine Interface, or MMI, is comparatively ancient \
 	technology. Originally designed to allow full interfacing between organic \
@@ -16,7 +16,7 @@
 	w_class = ITEMSIZE_NORMAL
 	can_speak = TRUE
 	origin_tech = list(TECH_BIO = 3)
-	catalogue_data = list(/datum/category_item/catalogue/fauna/brain/assisted)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/brain/assisted)
 
 	req_access = list(ACCESS_SCIENCE_ROBOTICS)
 
@@ -299,7 +299,7 @@
 /obj/item/mmi/digital/robot
 	name = "robotic intelligence circuit"
 	desc = "The pinnacle of artifical intelligence which can be achieved using classical computer science."
-	catalogue_data = list(/datum/category_item/catalogue/technology/drone/drones)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/drone/drones)
 	icon = 'icons/obj/module.dmi'
 	icon_state = "mainboard"
 	w_class = ITEMSIZE_NORMAL
@@ -318,7 +318,7 @@
 	to_chat(brainmob, "<span class='notify'>You feel slightly disoriented. That's normal when you're little more than a complex circuit.</span>")
 	return
 
-/datum/category_item/catalogue/fauna/brain/posibrain
+/datum/prototype/struct/catalogue_entry/fauna/brain/posibrain
 	name = "Heuristics - Positronic"
 	desc = "Positronic brains, unlike their organic counterparts, are the \
 	products of intelligent design, rather than evolution. Crafted by various \
@@ -330,13 +330,13 @@
 /obj/item/mmi/digital/posibrain
 	name = "positronic brain"
 	desc = "A cube of shining metal, four inches to a side and covered in shallow grooves."
-	catalogue_data = list(/datum/category_item/catalogue/technology/positronics)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/positronics)
 	icon = 'icons/obj/assemblies.dmi'
 	icon_state = "posibrain"
 	w_class = ITEMSIZE_NORMAL
 	origin_tech = list(TECH_ENGINEERING = 4, TECH_MATERIAL = 4, TECH_BLUESPACE = 2, TECH_DATA = 4)
 	ghost_query_type = /datum/ghost_query/posi_brain
-	catalogue_data = list(/datum/category_item/catalogue/fauna/brain/posibrain)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/brain/posibrain)
 
 /obj/item/mmi/digital/posibrain/request_player()
 	icon_state = "posibrain-searching"

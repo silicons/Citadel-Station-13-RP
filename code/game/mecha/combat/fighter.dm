@@ -244,7 +244,7 @@
 	icon_state = "gunpod"
 	initial_icon = "gunpod"
 
-	catalogue_data = list(/datum/category_item/catalogue/technology/gunpod)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/gunpod)
 	wreckage = /obj/effect/decal/mecha_wreckage/gunpod
 
 	step_in = 3 //Slightly slower than others
@@ -311,7 +311,7 @@
 	bound_width = 64
 	bound_height = 64
 
-/datum/category_item/catalogue/technology/gunpod
+/datum/prototype/struct/catalogue_entry/technology/gunpod
 	name = "Voidcraft - Gunpod"
 	desc = "This is a small space-capable fightercraft that has an arrowhead design. Can hold up to one pilot, \
 	and sometimes one or two passengers, with the right modifications made. \
@@ -328,7 +328,7 @@
 	icon_state = "baron"
 	initial_icon = "baron"
 
-	catalogue_data = list(/datum/category_item/catalogue/technology/baron)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/baron)
 	wreckage = /obj/effect/decal/mecha_wreckage/baron
 
 	ground_capable = FALSE
@@ -359,7 +359,7 @@
 	ME = new /obj/item/mecha_parts/mecha_equipment/weapon/energy/phase
 	ME.attach(src)
 
-/datum/category_item/catalogue/technology/baron
+/datum/prototype/struct/catalogue_entry/technology/baron
 	name = "Voidcraft - Baron"
 	desc = "This is a small space fightercraft that has an arrowhead design. Can hold up to one pilot. \
 	Unlike some fighters, this one is not designed for atmospheric operation, and is only capable of performing \
@@ -376,7 +376,7 @@
 	icon_state = "scoralis"
 	initial_icon = "scoralis"
 
-	catalogue_data = list(/datum/category_item/catalogue/technology/scoralis)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/scoralis)
 	wreckage = /obj/effect/decal/mecha_wreckage/scoralis
 
 	ground_capable = FALSE
@@ -396,7 +396,7 @@
 	bound_width = 64
 	bound_height = 64
 
-/datum/category_item/catalogue/technology/scoralis
+/datum/prototype/struct/catalogue_entry/technology/scoralis
 	name = "Voidcraft - Scoralis"
 	desc = "An import model fightercraft, this one contains an integral cloaking device that renders the fighter invisible \
 	to the naked eye. Still detectable on thermal sensors, the craft can maneuver in close to ill-equipped foes and strike unseen. \
@@ -412,7 +412,7 @@
 	icon_state = "allure"
 	initial_icon = "allure"
 
-	catalogue_data = list(/datum/category_item/catalogue/technology/allure)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/allure)
 	wreckage = /obj/effect/decal/mecha_wreckage/allure
 
 	ground_capable = FALSE
@@ -433,7 +433,7 @@
 	bound_width = 64
 	bound_height = 64
 
-/datum/category_item/catalogue/technology/allure
+/datum/prototype/struct/catalogue_entry/technology/allure
 	name = "Voidcraft - Allure"
 	desc = "A space superiority fighter of zorren design, many would comment that the blocky shape hinders aesthetic appeal. However, Zorren are \
 	often found painting their hulls in intricate designs of purple and gold, and this craft is no exception to the rule. Some individual seems to have \
@@ -455,7 +455,7 @@
 	max_universal_equip = 0
 	max_special_equip = 1
 
-	catalogue_data = list(/datum/category_item/catalogue/technology/pinnace)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/pinnace)
 	wreckage = /obj/effect/decal/mecha_wreckage/pinnace
 
 	ground_capable = TRUE
@@ -473,7 +473,7 @@
 	bound_width = 64
 	bound_height = 64
 
-/datum/category_item/catalogue/technology/pinnace
+/datum/prototype/struct/catalogue_entry/technology/pinnace
 	name = "Voidcraft - Pinnace"
 	desc = "A very small boat, usually used as a tender at very close ranges. The lack of a bluespace \
 	drive means that it can't get too far from it's parent ship. Though the pinnace is typically unarmed, \
@@ -500,7 +500,7 @@
 	max_universal_equip = 0
 	max_special_equip = 0
 
-	catalogue_data = list(/datum/category_item/catalogue/technology/cludge)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/cludge)
 	wreckage = /obj/effect/decal/mecha_wreckage/cludge
 
 	ground_capable = TRUE
@@ -513,7 +513,7 @@
 	bound_width = 64
 	bound_height = 64
 
-/datum/category_item/catalogue/technology/cludge
+/datum/prototype/struct/catalogue_entry/technology/cludge
 	name = "Voidcraft - Cludge"
 	desc = "A collection of parts strapped together in an attempt to make a flying vessel. Such vessels are fragile, unstable \
 	and very easily break apart, due to their roughshod engineering. These vessels commonly are built without critical components \

@@ -1,6 +1,6 @@
 // Kururaks, large pack-hunting felinids that reside in coastal regions. Less slowdown in water, speed on rocky turf.
 
-/datum/category_item/catalogue/fauna/kururak
+/datum/prototype/struct/catalogue_entry/fauna/kururak
 	name = "Sivian Fauna - Kururak"
 	desc = "Classification: S Felidae fluctursora \
 	<br><br>\
@@ -21,7 +21,7 @@
 	name = "kururak"
 	desc = "A large animal with sleek fur."
 	tt_desc = "S Felidae fluctursora"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/kururak)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/kururak)
 
 	faction = "kururak"
 

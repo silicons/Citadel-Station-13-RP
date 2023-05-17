@@ -1,5 +1,5 @@
 
-/datum/category_item/catalogue/technology/drone/infectionbot
+/datum/prototype/struct/catalogue_entry/technology/drone/infectionbot
 	name = "Drone - Injection Drone"
 	desc = "A strange and aged drone, this model appears to be made for gathering of genetic samples,\
 	sacrificing both power and durability for storage space and advanced scanners.\
@@ -26,7 +26,7 @@
 	icon_living = "vagrant"
 	icon_dead = "vagrant"
 	icon_gib = "vagrant"
-	catalogue_data = list(/datum/category_item/catalogue/technology/drone/infectionbot)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/drone/infectionbot)
 
 	maxHealth = 65
 	health = 40

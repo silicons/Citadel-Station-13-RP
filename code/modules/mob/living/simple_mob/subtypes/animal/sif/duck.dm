@@ -1,6 +1,6 @@
 // Crystal-feather "ducks" are rather weak, but will become aggressive if you have food.
 
-/datum/category_item/catalogue/fauna/crystalduck
+/datum/prototype/struct/catalogue_entry/fauna/crystalduck
 	name = "Sivian Fauna - Crystal-Feather Duck"
 	desc = "Classification: S Anatidae vitriae \
 	<br><br>\
@@ -17,7 +17,7 @@
 	name = "crystal-feather duck"
 	desc = "A glittering flightless bird."
 	tt_desc = "S Anatidae vitriae"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/crystalduck)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/crystalduck)
 
 	faction = "duck"
 

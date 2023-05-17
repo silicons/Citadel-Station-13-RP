@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/fox
+/datum/prototype/struct/catalogue_entry/fauna/fox
 	name = "Fox"
 	desc = "Vulpine creatures, commonly referred to as foxes, are a \
 	somewhat distant cousin of Canines. Due to their elegant features \
@@ -11,7 +11,7 @@
 	name = "fox"
 	desc = "It's a fox. I wonder what it says?"
 	tt_desc = "Vulpes vulpes"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/fox)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/fox)
 
 	icon_state = "fox2"
 	icon_living = "fox2"

@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/tree
+/datum/prototype/struct/catalogue_entry/fauna/tree
 	name = "Space Tree"
 	desc = "Presumed to be a distant cousin of Mimics, these hostile 'trees' are, \
 	in actuality, a predatory alien creature. Originating from a heavily forested tundra, \
@@ -14,7 +14,7 @@
 	icon_living = "pine_1"
 	icon_dead = "pine_1"
 	icon_gib = "pine_1"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/tree)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/tree)
 
 	mob_class = MOB_CLASS_PLANT
 

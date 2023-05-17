@@ -1,5 +1,5 @@
 /// Multiplier for amount of power cyborgs use.
-/datum/category_item/catalogue/fauna/silicon/robot
+/datum/prototype/struct/catalogue_entry/fauna/silicon/robot
 	name = "Silicons - Robot"
 	desc = "The most common form of Silicon encountered on the Frontier, \
 	robots - also known as 'cyborgs' due to the original methods behind their \
@@ -7,22 +7,22 @@
 	fill roles or duties their owners are unable to manage, a burgeoning rights \
 	movement has been met with heavy Corporate resistance."
 	value = CATALOGUER_REWARD_TRIVIAL
-	unlocked_by_any = list(/datum/category_item/catalogue/fauna/silicon/robot)
+	unlocked_by_any = list(/datum/prototype/struct/catalogue_entry/fauna/silicon/robot)
 
-/datum/category_item/catalogue/fauna/all_robots
+/datum/prototype/struct/catalogue_entry/fauna/all_robots
 	name = "Collection - Robots"
 	desc = "You have scanned a large array of different types of Robot, \
 	and therefore you have been granted a large sum of points, through this \
 	entry."
 	value = CATALOGUER_REWARD_HARD
 	unlocked_by_all = list(
-		/datum/category_item/catalogue/fauna/silicon/robot/cyborg,
-		/datum/category_item/catalogue/fauna/silicon/robot/lost,
-		/datum/category_item/catalogue/fauna/silicon/robot/gravekeeper,
-		/datum/category_item/catalogue/fauna/silicon/robot/syndicate
+		/datum/prototype/struct/catalogue_entry/fauna/silicon/robot/cyborg,
+		/datum/prototype/struct/catalogue_entry/fauna/silicon/robot/lost,
+		/datum/prototype/struct/catalogue_entry/fauna/silicon/robot/gravekeeper,
+		/datum/prototype/struct/catalogue_entry/fauna/silicon/robot/syndicate
 		)
 
-/datum/category_item/catalogue/fauna/silicon/robot/cyborg
+/datum/prototype/struct/catalogue_entry/fauna/silicon/robot/cyborg
 	name = "Robot - Cyborg"
 	desc = "Although many modern cyborgs use silicon based Heuristic processors, \
 	the use of the term 'cyborg' to refer to them stems from the early days of their \
@@ -43,7 +43,7 @@
 	icon_state = "robot"
 	maxHealth = 200
 	health = 200
-	catalogue_data = list(/datum/category_item/catalogue/fauna/silicon/robot/cyborg)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/silicon/robot/cyborg)
 
 	buckle_allowed = TRUE
 	buckle_flags = BUCKLING_NO_USER_BUCKLE_OTHER_TO_SELF

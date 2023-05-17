@@ -1,7 +1,7 @@
 /obj/mecha/working/hoverpod
 	desc = "Stubby and round, this space-capable craft is an ancient favorite."
 	name = "Hover Pod"
-	catalogue_data = list(/datum/category_item/catalogue/technology/hoverpod)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/hoverpod)
 	icon_state = "engineering_pod"
 	initial_icon = "engineering_pod"
 	internal_damage_threshold = 80

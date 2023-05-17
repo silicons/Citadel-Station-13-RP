@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/malf_drone
+/datum/prototype/struct/catalogue_entry/fauna/malf_drone
 	name = "Malfunctioning Combat Drone"
 	desc = "Many drones like this are fielded by Corporate naval fleets. \
 	Armed with heavy lasers, powerful combat shielding, armored frames, and \

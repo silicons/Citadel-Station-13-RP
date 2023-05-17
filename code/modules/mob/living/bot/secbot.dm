@@ -4,7 +4,7 @@
 #define SECBOT_THREAT_ARREST 4
 ///threat level at which was assume immediate danger and attack right away
 #define SECBOT_THREAT_ATTACK 8
-/datum/category_item/catalogue/technology/bot/secbot
+/datum/prototype/struct/catalogue_entry/technology/bot/secbot
 	name = "Bot - Securitron"
 	desc = "The Securitron is a proprietary support bot designed by NanoTrasen. \
 	Utilizing the standard Security department helmet, this wheeled automaton moves \
@@ -24,7 +24,7 @@
 	botcard_access = list(ACCESS_SECURITY_EQUIPMENT, ACCESS_SECURITY_MAIN, ACCESS_SECURITY_FORENSICS, ACCESS_ENGINEERING_MAINT)
 	patrol_speed = 2
 	target_speed = 3
-	catalogue_data = list(/datum/category_item/catalogue/technology/bot/secbot)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/bot/secbot)
 
 	density = 1
 
@@ -65,7 +65,7 @@
 				say("Do not interfere with active law enforcement routines!")
 				GLOB.global_announcer.autosay("[src] was interfered with in <b>[get_area(src)]</b>, activating defense routines.", "[src]", "Security")
 
-/datum/category_item/catalogue/technology/bot/secbot/beepsky
+/datum/prototype/struct/catalogue_entry/technology/bot/secbot/beepsky
 	name = "Bot - Officer Beepsky"
 	desc = "Officer Beepsky was designed to be the mascot for \
 	NanoTrasen's unveiling of the Securitron line. A favorite among \
@@ -82,9 +82,9 @@
 	will_patrol = TRUE
 	maxHealth = 130
 	health = 130
-	catalogue_data = list(/datum/category_item/catalogue/technology/bot/secbot/beepsky)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/bot/secbot/beepsky)
 
-/datum/category_item/catalogue/technology/bot/secbot/slime
+/datum/prototype/struct/catalogue_entry/technology/bot/secbot/slime
 	name = "Bot - Slime Securitron"
 	desc = "A rare NanoTrasen variant of their Securitron designs, \
 	Slime Securitrons utilize the same technology and programming as \
@@ -97,7 +97,7 @@
 	desc = "A little security robot, with a slime baton subsituted for the regular one."
 	default_icon_state = "slimesecbot"
 	stun_strength = 10 // Slimebatons aren't meant for humans.
-	catalogue_data = list(/datum/category_item/catalogue/technology/bot/secbot/slime)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/bot/secbot/slime)
 
 	xeno_harm_strength = 9 // Weaker than regular slimesky but they can stun.
 	baton_glow = "#33CCFF"
@@ -106,7 +106,7 @@
 	used_weapon = /obj/item/melee/baton/slime
 	var/xeno_stun_strength = 5 // How hard to slimebatoned()'d naughty slimes. 5 works out to 2 discipline and 5 weaken.
 
-/datum/category_item/catalogue/technology/bot/secbot/slime/slimesky
+/datum/prototype/struct/catalogue_entry/technology/bot/secbot/slime/slimesky
 	name = "Bot - Doctor Slimesky"
 	desc = "Although less popular than its inspiration - Officer Beepsky, \
 	Doctor Slimesky is still viewed with respect by Xenobiologists due to its \
@@ -118,7 +118,7 @@
 	desc = "An old friend of Officer Beepsky.  He prescribes beatings to rowdy slimes so that real doctors don't need to treat the xenobiologists."
 	maxHealth = 130
 	health = 130
-	catalogue_data = list(/datum/category_item/catalogue/technology/bot/secbot/slime/slimesky)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/bot/secbot/slime/slimesky)
 
 /mob/living/bot/secbot/update_icons()
 	if(on && busy)

@@ -515,7 +515,7 @@ var/const/cyberbeast_monitor_styles= "blank=cyber_blank;\
 
 /obj/item/disk/limb/bishop
 	company = "Bishop"
-	catalogue_data = list(/datum/category_item/catalogue/information/organization/bishop)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/information/organization/bishop)
 
 /obj/item/disk/limb/cenilimicybernetics
 	company = "Cenilimi Cybernetics"
@@ -528,15 +528,15 @@ var/const/cyberbeast_monitor_styles= "blank=cyber_blank;\
 
 /obj/item/disk/limb/hephaestus
 	company = "Hephaestus"
-	catalogue_data = list(/datum/category_item/catalogue/information/organization/hephaestus)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/information/organization/hephaestus)
 
 /obj/item/disk/limb/morpheus
 	company = "Morpheus"
-	catalogue_data = list(/datum/category_item/catalogue/information/organization/morpheus)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/information/organization/morpheus)
 
 /obj/item/disk/limb/veymed
 	company = "Vey-Med"
-	catalogue_data = list(/datum/category_item/catalogue/information/organization/vey_med)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/information/organization/vey_med)
 
 // Bus disk for Diona mech parts.
 /obj/item/disk/limb/veymed/diona
@@ -544,19 +544,19 @@ var/const/cyberbeast_monitor_styles= "blank=cyber_blank;\
 
 /obj/item/disk/limb/wardtakahashi
 	company = "Ward-Takahashi"
-	catalogue_data = list(/datum/category_item/catalogue/information/organization/ward_takahashi)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/information/organization/ward_takahashi)
 
 /obj/item/disk/limb/xion
 	company = "Xion"
-	catalogue_data = list(/datum/category_item/catalogue/information/organization/xion)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/information/organization/xion)
 
 /obj/item/disk/limb/zenghu
 	company = "Zeng-Hu"
-	catalogue_data = list(/datum/category_item/catalogue/information/organization/zeng_hu)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/information/organization/zeng_hu)
 
 /obj/item/disk/limb/nanotrasen
 	company = "NanoTrasen"
-	catalogue_data = list(/datum/category_item/catalogue/information/organization/nanotrasen)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/information/organization/nanotrasen)
 
 
 /obj/item/disk/species

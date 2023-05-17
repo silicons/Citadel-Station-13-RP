@@ -4,7 +4,7 @@
 // Third special attack creates a dangerous electric field that causes escalating electric damage, before emitting a tesla shock and blinding anyone looking at the mecha.
 // The AI will choose one every ten seconds.
 
-/datum/category_item/catalogue/technology/adv_dark_gygax
+/datum/prototype/struct/catalogue_entry/technology/adv_dark_gygax
 	name = "Exosuit - Advanced Dark Gygax"
 	desc = "This exosuit is an experimental prototype, descended from the Dark Gygax. It retains the \
 	speed that is characteristic of the other models, yet outclasses all of them in durability, \
@@ -74,7 +74,7 @@
 	name = "advanced dark gygax"
 	desc = "An experimental exosuit that utilizes advanced materials to allow for greater protection while still being lightweight and fast. \
 	It also is armed with an array of next-generation weaponry."
-	catalogue_data = list(/datum/category_item/catalogue/technology/adv_dark_gygax)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/adv_dark_gygax)
 	icon_state = "darkgygax_adv"
 	wreckage = /obj/structure/loot_pile/mecha/gygax/dark/adv
 	icon_scale_x = 1.5

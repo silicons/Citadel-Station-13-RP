@@ -513,7 +513,7 @@
 	name = "\improper NanoTrasen"
 	desc = "An old metal sign which reads 'NanoTrasen'."
 	icon_state = "NT"
-	catalogue_data = list(/datum/category_item/catalogue/information/organization/nanotrasen)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/information/organization/nanotrasen)
 
 // Eris standards compliant hazards
 /obj/structure/sign/signnew

@@ -3,7 +3,7 @@
 
 // Do not spawn, this is a base type.
 
-/datum/category_item/catalogue/fauna/blob
+/datum/prototype/struct/catalogue_entry/fauna/blob
 	name = "Blob"
 	desc = "Blobs are transient space hazards often encountered on the Frontier. \
 	Every Blob starts out as a Seed, which either hosts inside of an unwitting victim, \
@@ -16,25 +16,25 @@
 	critical mass will produce more seeds, and jettison them off blindly into space. Thus the \
 	cycle repeats itself."
 	value = CATALOGUER_REWARD_MEDIUM
-	unlocked_by_any = list(/datum/category_item/catalogue/fauna/blob)
+	unlocked_by_any = list(/datum/prototype/struct/catalogue_entry/fauna/blob)
 
 // Obtained by scanning all X.
-/datum/category_item/catalogue/fauna/all_blobs
+/datum/prototype/struct/catalogue_entry/fauna/all_blobs
 	name = "Collection - Blob"
 	desc = "You have scanned an array of different types of Blob forms, \
 	and therefore you have been granted a moderate sum of points, through this \
 	entry."
 	value = CATALOGUER_REWARD_MEDIUM
 	unlocked_by_all = list(
-		/datum/category_item/catalogue/fauna/blob,
-		/datum/category_item/catalogue/fauna/blob/spore
+		/datum/prototype/struct/catalogue_entry/fauna/blob,
+		/datum/prototype/struct/catalogue_entry/fauna/blob/spore
 		)
 
 /mob/living/simple_mob/blob
 	icon = 'icons/mob/blob.dmi'
 	pass_flags = ATOM_PASS_BLOB | ATOM_PASS_TABLE
 	faction = "blob"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/blob)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/blob)
 
 	heat_damage_per_tick = 0
 	cold_damage_per_tick = 0

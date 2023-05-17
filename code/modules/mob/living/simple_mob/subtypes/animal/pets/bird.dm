@@ -1,6 +1,6 @@
 // Base bird type.
 
-/datum/category_item/catalogue/fauna/bird
+/datum/prototype/struct/catalogue_entry/fauna/bird
 	name = "Bird"
 	desc = "Avians species, hailing originally from Earth, are one of the oldest \
 	classes of Vertebrate. Generally capable of winged flight, there are thousands \
@@ -13,7 +13,7 @@
 	name = "bird"
 	desc = "A domesticated bird. Tweet tweet!"
 	player_msg = "You are able to fly."
-	catalogue_data = list(/datum/category_item/catalogue/fauna/bird)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/bird)
 
 	icon = 'icons/mob/birds.dmi'
 	icon_state = "parrot"

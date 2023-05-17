@@ -27,8 +27,7 @@ GLOBAL_LIST_EMPTY(all_cataloguers)
 	damage_force = 0
 	var/points_stored = 0 // Amount of 'exploration points' this device holds.
 	var/scan_range = 3 // How many tiles away it can scan. Changing this also changes the box size.
-	var/credit_sharing_range = INFINITY // If another person is within this radius, they will also be credited with a successful scan.
-	var/datum/category_item/catalogue/displayed_data = null // Used for viewing a piece of data in the UI.
+	var/datum/prototype/struct/catalogue_entry/displayed_data = null // Used for viewing a piece of data in the UI.
 	var/busy = FALSE // Set to true when scanning, to stop multiple scans.
 	var/debug = FALSE // If true, can view all catalogue data defined, regardless of unlock status.
 	var/datum/weakref/partial_scanned = null // Weakref of the thing that was last scanned if inturrupted. Used to allow for partial scans to be resumed.
@@ -169,12 +168,12 @@ GLOBAL_LIST_EMPTY(all_cataloguers)
 	var/list/object_data = target.get_catalogue_data()
 	if(LAZYLEN(object_data))
 		for(var/data_type in object_data)
-			var/datum/category_item/catalogue/I = GLOB.catalogue_data.resolve_item(data_type)
+			var/datum/prototype/struct/catalogue_entry/I = GLOB.catalogue_data.resolve_item(data_type)
 			if(istype(I))
 				var/list/discoveries = I.discover(user, list(user.name) + contributer_names) // If one discovery leads to another, the list returned will have all of them.
 				if(LAZYLEN(discoveries))
 					for(var/D in discoveries)
-						var/datum/category_item/catalogue/data = D
+						var/datum/prototype/struct/catalogue_entry/data = D
 						points_gained += data.value
 
 	// Give out points.
@@ -285,7 +284,7 @@ GLOBAL_LIST_EMPTY(all_cataloguers)
 
 			group_dat += "<b>[group.name]</b>"
 			for(var/I in group.items)
-				var/datum/category_item/catalogue/item = I
+				var/datum/prototype/struct/catalogue_entry/item = I
 				if(item.visible || debug)
 					group_dat += "<a href='?src=\ref[src];show_data=\ref[item]'>[item.name]</a>"
 					show_group = TRUE
@@ -314,7 +313,7 @@ GLOBAL_LIST_EMPTY(all_cataloguers)
 		return // Don't refresh the window for this or it will open it back if its closed during the highlighting.
 
 	if(href_list["debug_unlock"] && debug)
-		var/datum/category_item/catalogue/item = locate(href_list["debug_unlock"])
+		var/datum/prototype/struct/catalogue_entry/item = locate(href_list["debug_unlock"])
 		item.discover(usr, list("Debugger"))
 
 	interact(usr) // So it refreshes the window.

@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/tomato
+/datum/prototype/struct/catalogue_entry/fauna/tomato
 	name = "Killer Tomato"
 	desc = "The byproduct of GMO experimentation gone wrong, killer tomatoes \
 	are a dramatic example of why rapid genetic tampering is ill advised."
@@ -11,7 +11,7 @@
 	icon_state = "tomato"
 	icon_living = "tomato"
 	icon_dead = "tomato_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/tomato)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/tomato)
 
 	mob_class = MOB_CLASS_PLANT
 

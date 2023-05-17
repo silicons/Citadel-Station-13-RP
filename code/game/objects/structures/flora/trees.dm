@@ -249,7 +249,7 @@
 
 // Sif trees
 
-/datum/category_item/catalogue/flora/sif_tree
+/datum/prototype/struct/catalogue_entry/flora/sif_tree
 	name = "Sivian Flora - Tree"
 	desc = "The damp, shaded environment of Sif's most common variety of tree provides an ideal environment for a wide \
 	variety of bioluminescent bacteria. The soft glow of the microscopic organisms in turn attracts several native microphagous \
@@ -266,7 +266,7 @@
 	icon_state = "tree_sif"
 	base_state = "tree_sif"
 	product = /obj/item/stack/material/log/sif
-	catalogue_data = list(/datum/category_item/catalogue/flora/sif_tree)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/flora/sif_tree)
 	randomize_size = TRUE
 
 	harvest_tool = /obj/item/material/knife

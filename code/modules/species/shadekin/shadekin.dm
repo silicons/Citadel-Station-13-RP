@@ -20,7 +20,7 @@
 	taken to calling these creatures 'Shadekin', and the name has generally stuck and spread.
 	"}
 	wikilink = "https://citadel-station.net/wikiRP/index.php?title=Race:_Shadekin"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/shadekin)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/shadekin)
 	//rarity_value = 15 //INTERDIMENSIONAL FLUFFERS
 
 	max_additional_languages = 3

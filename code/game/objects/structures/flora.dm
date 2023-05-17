@@ -282,7 +282,7 @@
 	name = "mysterious potted bulbs"
 	desc = "This is a mysterious looking plant. Touching the bulbs cause them to shrink."
 	icon_state = "plant-07"
-	catalogue_data = list(/datum/category_item/catalogue/flora/eyebulbs)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/flora/eyebulbs)
 
 /obj/structure/flora/pottedplant/smalltree
 	name = "small potted tree"
@@ -296,7 +296,7 @@
 	light_range = 2
 	light_power = 0.6
 	light_color = "#33CCFF"
-	catalogue_data = list(/datum/category_item/catalogue/flora/sif_tree)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/flora/sif_tree)
 
 /obj/structure/flora/pottedplant/orientaltree
 	name = "potted oriental tree"
@@ -402,7 +402,7 @@
 	else
 		user.visible_message("\The [user] pokes \the [src.name].", "You poke \the [src.name].")
 
-/datum/category_item/catalogue/flora/subterranean_bulbs
+/datum/prototype/struct/catalogue_entry/flora/subterranean_bulbs
 	name = "Sivian Flora - Subterranean Bulbs"
 	desc = "A plant which is native to Sif, it continues the trend of being a bioluminescent specimen. These plants \
 	are generally suited for conditions experienced in caverns, which are generally dark and cold. It is not \
@@ -422,14 +422,14 @@
 	light_range = 2
 	light_power = 0.6
 	light_color = "#FF6633"
-	catalogue_data = list(/datum/category_item/catalogue/flora/subterranean_bulbs)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/flora/subterranean_bulbs)
 
 /obj/structure/flora/sif/subterranean/Initialize(mapload)
 	icon_state = "[initial(icon_state)][rand(1,2)]"
 	. = ..()
 
 
-/datum/category_item/catalogue/flora/eyebulbs
+/datum/prototype/struct/catalogue_entry/flora/eyebulbs
 	name = "Sivian Flora - Eyebulbs"
 	desc = "A plant native to Sif. On the end of its stems are bulbs which visually resemble \
 	eyes, which shrink when touched. One theory is that the bulbs are a result of mimicry, appearing as eyeballs to protect from predators.<br><br>\
@@ -440,13 +440,13 @@
 	name = "mysterious bulbs"
 	desc = "This is a mysterious looking plant. They kind of look like eyeballs. Creepy."
 	icon_state = "eyeplant"
-	catalogue_data = list(/datum/category_item/catalogue/flora/eyebulbs)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/flora/eyebulbs)
 
 /obj/structure/flora/sif/eyes/Initialize(mapload)
 	icon_state = "[initial(icon_state)][rand(1,3)]"
 	. = ..()
 
-/datum/category_item/catalogue/flora/mosstendrils
+/datum/prototype/struct/catalogue_entry/flora/mosstendrils
 	name = "Sivian Flora - Moss Stalks"
 	desc = "A plant native to Sif. The plant is most closely related to the common, dense moss found covering Sif's terrain. \
 	It has evolved a method of camouflage utilizing white hairs on its dorsal sides to make it appear as a small mound of snow from \
@@ -458,7 +458,7 @@
 	desc = "A 'plant' made up of hardened moss. It has tiny hairs that bunch together to look like snow."
 	icon_state = "grass"
 	randomize_size = TRUE
-	catalogue_data = list(/datum/category_item/catalogue/flora/mosstendrils)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/flora/mosstendrils)
 
 /obj/structure/flora/sif/tendrils/Initialize(mapload)
 	icon_state = "[initial(icon_state)][rand(1,3)]"

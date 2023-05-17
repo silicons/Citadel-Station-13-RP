@@ -2,7 +2,7 @@
 // IMO they're a relic of several ages we're long past, their code and their design showing this plainly, but removing them would
 // make certain people Unhappy so here we are. They need a complete redesign but thats beyond the scope of the rewrite.
 
-/datum/category_item/catalogue/fauna/borer
+/datum/prototype/struct/catalogue_entry/fauna/borer
 	name = "Cortical Borer"
 	desc = "Cortical Borers are one of the many parasitic life forms \
 	encountered on the Frontier. Often treated - justifiably - with disgust \
@@ -22,7 +22,7 @@
 	item_state = "brainslug"
 	icon_living = "brainslug"
 	icon_dead = "brainslug_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/borer)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/borer)
 
 	response_help  = "pokes"
 	response_disarm = "prods"

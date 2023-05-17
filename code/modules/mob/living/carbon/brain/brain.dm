@@ -1,27 +1,27 @@
-/datum/category_item/catalogue/fauna/brain
+/datum/prototype/struct/catalogue_entry/fauna/brain
 	name = "Heuristic Processor"
 	desc = "Sapient life in all of its many forms requires some version \
 	of heuristic learning mechanism. From organic neural tissue to silicon \
 	chips with personality matrices, this processor may take any number of \
 	forms."
 	value = CATALOGUER_REWARD_TRIVIAL
-	unlocked_by_any = list(/datum/category_item/catalogue/fauna/brain)
+	unlocked_by_any = list(/datum/prototype/struct/catalogue_entry/fauna/brain)
 
 // Obtained by scanning all Brains.
-/datum/category_item/catalogue/fauna/all_brains
+/datum/prototype/struct/catalogue_entry/fauna/all_brains
 	name = "Collection - Heuristics"
 	desc = "You have scanned a large array of different types of heuristic \
 	processor, and therefore you have been granted a fair sum of points, \
 	through this entry."
 	value = CATALOGUER_REWARD_EASY
 	unlocked_by_all = list(
-		/datum/category_item/catalogue/fauna/brain/organic,
-		/datum/category_item/catalogue/fauna/brain/assisted,
-		/datum/category_item/catalogue/fauna/brain/posibrain,
-		/datum/category_item/catalogue/fauna/brain/robotic
+		/datum/prototype/struct/catalogue_entry/fauna/brain/organic,
+		/datum/prototype/struct/catalogue_entry/fauna/brain/assisted,
+		/datum/prototype/struct/catalogue_entry/fauna/brain/posibrain,
+		/datum/prototype/struct/catalogue_entry/fauna/brain/robotic
 		)
 
-/datum/category_item/catalogue/fauna/brain/organic
+/datum/prototype/struct/catalogue_entry/fauna/brain/organic
 	name = "Heuristics - Organic"
 	desc = "Generally the most recognizable form of processor, the brain \
 	is a densely packed network of neurons which fire electrical impulses \
@@ -41,7 +41,7 @@
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "brain1"
 	no_vore = TRUE
-	catalogue_data = list(/datum/category_item/catalogue/fauna/brain/organic)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/brain/organic)
 
 /mob/living/carbon/brain/Initialize(mapload)
 	. = ..()

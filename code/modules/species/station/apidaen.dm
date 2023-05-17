@@ -37,7 +37,7 @@
 	"}
 
 	wikilink = null
-	catalogue_data = list(/datum/category_item/catalogue/fauna/apidaen)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/apidaen)
 
 	hazard_low_pressure = 20
 

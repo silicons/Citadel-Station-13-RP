@@ -1549,7 +1549,7 @@
 	kitchen_tag = "disho"
 	chems = list("capsaicin" = list(1,3), "nutriment" = list(5,25))
 	mutants = list("brickdisho, thatchdisho")
-	catalog_data_grown = list(/datum/category_item/catalogue/flora/disho)
+	catalog_data_grown = list(/datum/prototype/struct/catalogue_entry/flora/disho)
 
 /datum/seed/disho/New()
 	..()
@@ -1569,7 +1569,7 @@
 	set_trait(TRAIT_IDEAL_LIGHT, 10)
 
 
-/datum/category_item/catalogue/flora/disho
+/datum/prototype/struct/catalogue_entry/flora/disho
 	name = "Flora - Disho"
 	desc = "A hardy root plant native to the desert world of Osmon. \
 	Remarkably resistant to pests, weeds and adverse enviromental conditions make it a relatively common crop on most hot worlds. \

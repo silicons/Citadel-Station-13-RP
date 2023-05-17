@@ -12,7 +12,7 @@
 	balanced species. You will see the options to customize them on the Species Customization tab once you select and
 	set this species as your species. Please look at the Species Customization tab if you select this species.
 	"}
-	catalogue_data = list(/datum/category_item/catalogue/fauna/custom_species)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/custom_species)
 
 	name_language = null // Use the first-name last-name generator rather than a language scrambler
 	max_age = 200

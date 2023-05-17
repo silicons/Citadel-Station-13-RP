@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/otie		//TODO: VIRGO_LORE_WRITING_WIP
+/datum/prototype/struct/catalogue_entry/fauna/otie		//TODO: VIRGO_LORE_WRITING_WIP
 	name = "Creature - Otie"
 	desc = "A bioengineered longdog, the otie is very long, and very cute, depending on if you like dogs, \
 	especially long ones. They are black-and-grey furred, typically, and tanky, hard to kill. \

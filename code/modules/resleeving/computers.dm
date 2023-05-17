@@ -1,8 +1,8 @@
 /obj/machinery/computer/transhuman/resleeving
 	name = "resleeving control console"
 	desc = "A control console for the resleeving and grower pods. It has a small slot for inserting a mirror tool for direct transfer of mirrors."
-	catalogue_data = list(///datum/category_item/catalogue/information/organization/vey_med,
-						/datum/category_item/catalogue/technology/resleeving)
+	catalogue_data_legacy = list(///datum/prototype/struct/catalogue_entry/information/organization/vey_med,
+						/datum/prototype/struct/catalogue_entry/technology/resleeving)
 	icon_keyboard = "med_key"
 	icon_screen = "dna"
 	light_color = "#315ab4"
@@ -426,7 +426,7 @@
 /obj/item/cmo_disk_holder
 	name = "cmo emergency packet"
 	desc = "A small paper packet with printing on one side. \"Tear open in case of Code Delta or Emergency Evacuation ONLY. Use in any other case is UNLAWFUL.\""
-	catalogue_data = list(/datum/category_item/catalogue/technology/resleeving)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/resleeving)
 	icon = 'icons/vore/custom_items_vr.dmi'
 	icon_state = "cmoemergency"
 	item_state = "card-id"
@@ -448,7 +448,7 @@
 	\"1.INSERT DISK INTO RESLEEVING CONSOLE\n\
 	2. BEGIN CORE DUMP PROCEDURE\n\
 	3. ENSURE DISK SAFETY WHEN EJECTED\""
-	catalogue_data = list(/datum/category_item/catalogue/technology/resleeving)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/resleeving)
 	icon = 'icons/obj/cloning.dmi'
 	icon_state = "harddisk"
 	item_state = "card-id"

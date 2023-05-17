@@ -3,7 +3,7 @@
 // When attacking, spores will hit harder if near other friendly spores.
 // Some blobs can infest dead non-robotic mobs, making them into Not Zombies.
 
-/datum/category_item/catalogue/fauna/blob/spore
+/datum/prototype/struct/catalogue_entry/fauna/blob/spore
 	name = "Blob - Spore"
 	desc = "Formed as a dual-purpose offensive/defensive solution, the Blob Spore \
 	works to deter aggression. When destroyed, spores release clouds of gas - sometimes \
@@ -15,7 +15,7 @@
 /mob/living/simple_mob/blob/spore
 	name = "blob spore"
 	desc = "A floating, fragile spore."
-	catalogue_data = list(/datum/category_item/catalogue/fauna/blob/spore)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/blob/spore)
 
 	icon_state = "blobpod"
 	icon_living = "blobpod"

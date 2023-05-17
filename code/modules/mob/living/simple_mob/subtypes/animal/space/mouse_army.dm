@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/mouse_army
+/datum/prototype/struct/catalogue_entry/fauna/mouse_army
 	name = "R.A.T.S."
 	desc = "First observed in limited engagements during the Phoron Wars, \
 	Rodents of Abnormal Technical Sophistication are the product of Donk Co \
@@ -8,20 +8,20 @@
 	and efficacy reasons. Recently, however, R.A.T.S. assets have been utilized by \
 	an unidentified entity for as-yet-unknown purposes."
 	value = CATALOGUER_REWARD_EASY
-	unlocked_by_any = list(/datum/category_item/catalogue/fauna/mouse_army)
+	unlocked_by_any = list(/datum/prototype/struct/catalogue_entry/fauna/mouse_army)
 
 // Obtained by scanning all R.A.T.S.
-/datum/category_item/catalogue/fauna/all_mouse_army
+/datum/prototype/struct/catalogue_entry/fauna/all_mouse_army
 	name = "Collection - R.A.T.S."
 	desc = "You have scanned a large array of different types of R.A.T.S., \
 	and therefore you have been granted a large sum of points, through this \
 	entry."
 	value = CATALOGUER_REWARD_HARD
 	unlocked_by_all = list(
-		/datum/category_item/catalogue/fauna/mouse_army/operative,
-		/datum/category_item/catalogue/fauna/mouse_army/pyro,
-		/datum/category_item/catalogue/fauna/mouse_army/ammo,
-		/datum/category_item/catalogue/fauna/mouse_army/stealth
+		/datum/prototype/struct/catalogue_entry/fauna/mouse_army/operative,
+		/datum/prototype/struct/catalogue_entry/fauna/mouse_army/pyro,
+		/datum/prototype/struct/catalogue_entry/fauna/mouse_army/ammo,
+		/datum/prototype/struct/catalogue_entry/fauna/mouse_army/stealth
 		)
 
 /mob/living/simple_mob/animal/space/mouse_army
@@ -145,7 +145,7 @@
 //Base ported from vgstation. Operative Mice.
 //Icon artists: DeityLink and plosky1
 
-/datum/category_item/catalogue/fauna/mouse_army/operative
+/datum/prototype/struct/catalogue_entry/fauna/mouse_army/operative
 	name = "R.A.T.S. - Operative"
 	desc = "The baseline unit of a R.A.T.S. team, the Operative was designed \
 	to move covertly through tunnel systems. Except for the implanted nano-RIG \
@@ -159,7 +159,7 @@
 	desc = "Where did it get that? Oh no..."
 	tt_desc = "E Mus sinister"
 	rank = "operative"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/mouse_army/operative)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/mouse_army/operative)
 
 	shock_resist = 1
 	armor_legacy_mob = list(
@@ -173,7 +173,7 @@
 
 //Pyro Mouse
 
-/datum/category_item/catalogue/fauna/mouse_army/pyro
+/datum/prototype/struct/catalogue_entry/fauna/mouse_army/pyro
 	name = "R.A.T.S. - Pyro"
 	desc = "Designed to serve as miniature sabotage units, Pyro\
 	mice are saddled with a purpose-built fuel tank and projector \
@@ -185,7 +185,7 @@
 	desc = "What kind of madman would strap this to a mouse?"
 	tt_desc = "E Mus phlogiston"
 	rank = "pyro"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/mouse_army/pyro)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/mouse_army/pyro)
 
 	maxHealth = 30
 	health = 30
@@ -243,7 +243,7 @@
 
 //Ammo Mouse
 
-/datum/category_item/catalogue/fauna/mouse_army/ammo
+/datum/prototype/struct/catalogue_entry/fauna/mouse_army/ammo
 	name = "R.A.T.S. - Ammo Bearer"
 	desc = "Ammo Bearing operative mice have sometimes been \
 	observed in the field, serving as logistical support to the \
@@ -257,7 +257,7 @@
 	desc = "Aww! It's carrying a bunch of tiny bullets!"
 	tt_desc = "E Mus tela"
 	rank = "ammo"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/mouse_army/ammo)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/mouse_army/ammo)
 
 	maxHealth = 30
 	health = 30
@@ -311,7 +311,7 @@
 	return ..()
 
 
-/datum/category_item/catalogue/fauna/mouse_army/stealth
+/datum/prototype/struct/catalogue_entry/fauna/mouse_army/stealth
 	name = "R.A.T.S. - Stealth"
 	desc = "Stealth operatives carry shockingly expensive integrated \
 	gear. Cloaking a rodent is less energy intensive at full scale, \
@@ -326,7 +326,7 @@
 	desc = "I bet you thought the normal ones were scary!"
 	tt_desc = "E Mus insidiis"
 	rank = "stealth"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/mouse_army/stealth)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/mouse_army/stealth)
 
 	//Mob melee settings
 	melee_damage_lower = 15

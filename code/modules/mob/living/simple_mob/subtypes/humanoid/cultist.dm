@@ -2,7 +2,7 @@
 //		Basic Cultist
 ////////////////////////////
 
-/datum/category_item/catalogue/fauna/cultist
+/datum/prototype/struct/catalogue_entry/fauna/cultist
 	name = "Cultists"
 	desc = "The Galactic Awakening unlocked the psionic potential of many \
 	from rim to rim. The first to notice this font of power were those who \
@@ -11,25 +11,25 @@
 	Although NanoTrasen and other entities have risen to combat these foes, a \
 	vast array of Hermetic Orders now command frightening power."
 	value = CATALOGUER_REWARD_TRIVIAL
-	unlocked_by_any = list(/datum/category_item/catalogue/fauna/cultist)
+	unlocked_by_any = list(/datum/prototype/struct/catalogue_entry/fauna/cultist)
 
 // Obtained by scanning all X.
-/datum/category_item/catalogue/fauna/all_cultists
+/datum/prototype/struct/catalogue_entry/fauna/all_cultists
 	name = "Collection - Cultists"
 	desc = "You have scanned a large array of different types of Cultist, \
 	and therefore you have been granted a large sum of points, through this \
 	entry."
 	value = CATALOGUER_REWARD_SUPERHARD
 	unlocked_by_all = list(
-		/datum/category_item/catalogue/fauna/cultist/human,
-		/datum/category_item/catalogue/fauna/cultist/tesh,
-		/datum/category_item/catalogue/fauna/cultist/lizard,
-		/datum/category_item/catalogue/fauna/cultist/caster,
-		/datum/category_item/catalogue/fauna/cultist/initiate,
-		/datum/category_item/catalogue/fauna/cultist/castertesh,
-		/datum/category_item/catalogue/fauna/cultist/elite,
-		/datum/category_item/catalogue/fauna/cultist/magus,
-		/datum/category_item/catalogue/fauna/cultist/hunter
+		/datum/prototype/struct/catalogue_entry/fauna/cultist/human,
+		/datum/prototype/struct/catalogue_entry/fauna/cultist/tesh,
+		/datum/prototype/struct/catalogue_entry/fauna/cultist/lizard,
+		/datum/prototype/struct/catalogue_entry/fauna/cultist/caster,
+		/datum/prototype/struct/catalogue_entry/fauna/cultist/initiate,
+		/datum/prototype/struct/catalogue_entry/fauna/cultist/castertesh,
+		/datum/prototype/struct/catalogue_entry/fauna/cultist/elite,
+		/datum/prototype/struct/catalogue_entry/fauna/cultist/magus,
+		/datum/prototype/struct/catalogue_entry/fauna/cultist/hunter
 		)
 
 /mob/living/simple_mob/humanoid/cultist //Do not spawn this on in directly it is simply a base for the rest namely the unique death animations.
@@ -41,7 +41,7 @@
 	faction = "cult"
 	mob_class = MOB_CLASS_DEMONIC
 
-/datum/category_item/catalogue/fauna/cultist/human
+/datum/prototype/struct/catalogue_entry/fauna/cultist/human
 	name = "Cultists - Human"
 	desc = "The first wave of zealots faced by many on the Frontier were \
 	human. For a short while it was assumed that humans were somehow more \
@@ -55,7 +55,7 @@
 	desc = "A fanatical zealot armed with a darkly colored sword."
 	icon_state = "cultist"
 	icon_living = "cultist"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/cultist/human)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/cultist/human)
 
 	status_flags = 0
 
@@ -204,7 +204,7 @@
 //		Teshari Cultist
 ////////////////////////////
 
-/datum/category_item/catalogue/fauna/cultist/tesh
+/datum/prototype/struct/catalogue_entry/fauna/cultist/tesh
 	name = "Cultists - Teshari"
 	desc = "Teshari cultists project a curiously sinister air. Perhaps \
 	due to their diminutive stature, these creatures are sometimes not \
@@ -220,7 +220,7 @@
 	icon_living = "culttesh"
 	maxHealth = 75
 	health = 75
-	catalogue_data = list(/datum/category_item/catalogue/fauna/cultist/tesh)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/cultist/tesh)
 
 	faction = "cult"
 
@@ -253,7 +253,7 @@
 //		Lizard Cultist
 ////////////////////////////
 
-/datum/category_item/catalogue/fauna/cultist/lizard
+/datum/prototype/struct/catalogue_entry/fauna/cultist/lizard
 	name = "Cultists - Lizard"
 	desc = "The Unathi Kingdom of Moghes has stamped down heavily on the \
 	heretical activities of religious sects not approved by the State. Due \
@@ -271,7 +271,7 @@
 	icon_living = "cultliz"
 	maxHealth = 200
 	health = 200
-	catalogue_data = list(/datum/category_item/catalogue/fauna/cultist/lizard)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/cultist/lizard)
 
 	faction = "cult"
 
@@ -304,7 +304,7 @@
 //		Blood Mage
 ////////////////////////////
 
-/datum/category_item/catalogue/fauna/cultist/caster
+/datum/prototype/struct/catalogue_entry/fauna/cultist/caster
 	name = "Cultists - Blood Mage"
 	desc = "For those servants of a Cult who possess enough latent ability, \
 	the channelling of Paracausal power is a very real skill to be honed and \
@@ -322,7 +322,7 @@
 	icon_living = "caster"
 	maxHealth = 150
 	health = 150
-	catalogue_data = list(/datum/category_item/catalogue/fauna/cultist/caster)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/cultist/caster)
 
 	faction = "cult"
 
@@ -357,7 +357,7 @@
 //		Blood Initiate
 ////////////////////////////
 
-/datum/category_item/catalogue/fauna/cultist/initiate
+/datum/prototype/struct/catalogue_entry/fauna/cultist/initiate
 	name = "Cultists - Initiate"
 	desc = "After the Awakening, some who thirst for power or belonging \
 	saw an opportunity to have their darker desires fulfilled. These converts \
@@ -373,7 +373,7 @@
 	icon_living = "initiate"
 	maxHealth = 150
 	health = 150
-	catalogue_data = list(/datum/category_item/catalogue/fauna/cultist/initiate)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/cultist/initiate)
 
 	faction = "cult"
 
@@ -405,7 +405,7 @@
 //		Teshari Mage
 ////////////////////////////
 
-/datum/category_item/catalogue/fauna/cultist/castertesh
+/datum/prototype/struct/catalogue_entry/fauna/cultist/castertesh
 	name = "Cultists - Teshari Mage"
 	desc = "Similar in skill to their human counter parts, Teshari mages \
 	are regarded as more ferocious combatants. Able to cast paracausal beams \
@@ -421,7 +421,7 @@
 	icon_living = "castertesh"
 	maxHealth = 75
 	health = 75
-	catalogue_data = list(/datum/category_item/catalogue/fauna/cultist/castertesh)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/cultist/castertesh)
 
 	faction = "cult"
 
@@ -456,7 +456,7 @@
 //		Elite Cultist
 ////////////////////////////
 
-/datum/category_item/catalogue/fauna/cultist/elite
+/datum/prototype/struct/catalogue_entry/fauna/cultist/elite
 	name = "Cultists - Elite"
 	desc = "Cultists who preceded the Great Awakening are often regarded \
 	with immense respect. Truly devoted, these adherents learned many rites \
@@ -473,7 +473,7 @@
 	icon_state = "cult_elite"
 	icon_living = "cult_elite"
 	faction = "cult"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/cultist/elite)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/cultist/elite)
 
 	status_flags = 0
 
@@ -529,7 +529,7 @@
 //		Cult Magus
 ////////////////////////////
 
-/datum/category_item/catalogue/fauna/cultist/magus
+/datum/prototype/struct/catalogue_entry/fauna/cultist/magus
 	name = "Cultists - Blood Magus"
 	desc = "The Blood Magus commands their local chapter with total authority. \
 	These religious leaders possess an unparalleled knowledge of their cult's \
@@ -546,7 +546,7 @@
 	icon_living = "magus"
 	maxHealth = 300 //Boss Mobs should be tanky.
 	health = 300
-	catalogue_data = list(/datum/category_item/catalogue/fauna/cultist/magus)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/cultist/magus)
 
 	faction = "cult"
 
@@ -601,7 +601,7 @@
 //		Blood Hunter
 ////////////////////////////
 
-/datum/category_item/catalogue/fauna/cultist/hunter
+/datum/prototype/struct/catalogue_entry/fauna/cultist/hunter
 	name = "Cultists - Blood Hunter"
 	desc = "Whether the Blood Hunter may be considered human still remains \
 	a hotly contested topic. There is further debate regarding whether every \
@@ -619,7 +619,7 @@
 	icon_living = "hunterb"
 	maxHealth = 300 //Boss Mobs should be tanky.
 	health = 300
-	catalogue_data = list(/datum/category_item/catalogue/fauna/cultist/hunter)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/cultist/hunter)
 
 	faction = "cult"
 

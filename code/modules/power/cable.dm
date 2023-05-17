@@ -936,7 +936,7 @@ GLOBAL_LIST_INIT(possible_cable_coil_colours, list(
 //Endless alien cable coil
 
 
-/datum/category_item/catalogue/anomalous/precursor_a/alien_wire
+/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_wire
 	name = "Precursor Alpha Object - Recursive Spool"
 	desc = "Upon visual inspection, this merely appears to be a \
 	spool for silver-colored cable. If one were to use this for \
@@ -954,7 +954,7 @@ GLOBAL_LIST_INIT(possible_cable_coil_colours, list(
 /obj/item/stack/cable_coil/alien
 	name = "alien spool"
 	desc = "A spool of cable. No matter how hard you try, you can never seem to get to the end."
-	catalogue_data = list(/datum/category_item/catalogue/anomalous/precursor_a/alien_wire)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_wire)
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "coil"
 	amount = MAXCOIL

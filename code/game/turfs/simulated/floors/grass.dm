@@ -16,7 +16,7 @@
 		/obj/structure/flora/ausbushes/fullgrass,
 	)
 
-/datum/category_item/catalogue/flora/sif_grass
+/datum/prototype/struct/catalogue_entry/flora/sif_grass
 	name = "Sivian Flora - Moss"
 	desc = "A natural moss that has adapted to the sheer cold climate of Sif. \
 	The moss came to rely partially on bioluminescent bacteria provided by the local tree populations. \
@@ -36,7 +36,7 @@
 		/obj/structure/flora/sif/tendrils = 10
 		)
 
-	catalogue_data = list(/datum/category_item/catalogue/flora/sif_grass)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/flora/sif_grass)
 	catalogue_delay = 2 SECONDS
 
 /turf/simulated/floor/outdoors/grass/sif/Initialize(mapload)

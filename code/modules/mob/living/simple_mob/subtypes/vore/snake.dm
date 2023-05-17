@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/giant_snake
+/datum/prototype/struct/catalogue_entry/fauna/giant_snake
 	name = "Snake"
 	desc = "An Earth reptile with a distinct lack of limbs, \
 	snakes ambulate by slithering across the ground. Snakes \
@@ -12,7 +12,7 @@
 /mob/living/simple_mob/vore/aggressive/giant_snake
 	name = "giant snake"
 	desc = "Snakes. Why did it have to be snakes?"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/giant_snake)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/giant_snake)
 
 	icon_dead = "snake-dead"
 	icon_living = "snake"

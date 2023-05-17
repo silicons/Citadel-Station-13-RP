@@ -10,7 +10,7 @@ kills them.
 TODO: Make them light up and heat the air when exposed to oxygen.
 */
 
-/datum/category_item/catalogue/fauna/gaslamp		//TODO: VIRGO_LORE_WRITING_WIP
+/datum/prototype/struct/catalogue_entry/fauna/gaslamp		//TODO: VIRGO_LORE_WRITING_WIP
 	name = "Virgo 3b Fauna - Gaslamp"
 	desc = "Gaslamps are a phoron-based life form endemic to the world \
 	of Virgo-3B. They are a sort of fungal organism with physical similarities \
@@ -25,7 +25,7 @@ TODO: Make them light up and heat the air when exposed to oxygen.
 	name = "gaslamp"
 	desc = "Some sort of floaty alien with a warm glow. This creature is endemic to Virgo-3B."
 	tt_desc = "Semaeostomeae virginus"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/gaslamp)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/gaslamp)
 
 	icon_state = "gaslamp"
 	icon_living = "gaslamp"

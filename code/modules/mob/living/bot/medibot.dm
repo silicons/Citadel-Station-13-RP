@@ -14,7 +14,7 @@
 #define MEDIBOT_MIN_HEAL 0.1
 #define MEDIBOT_MAX_HEAL 75
 
-/datum/category_item/catalogue/technology/bot/medibot
+/datum/prototype/struct/catalogue_entry/technology/bot/medibot
 	name = "Bot - Medibot"
 	desc = "Medibots have become vital additions to hazardous workplaces \
 	across the galaxy. A common sight on the Frontier, Medibots utilize \
@@ -31,7 +31,7 @@
 	base_icon_state = "medkit"
 	req_one_access = list(ACCESS_SCIENCE_ROBOTICS, ACCESS_MEDICAL_MAIN)
 	botcard_access = list(ACCESS_MEDICAL_MAIN, ACCESS_MEDICAL_MORGUE, ACCESS_MEDICAL_SURGERY, ACCESS_MEDICAL_CHEMISTRY, ACCESS_MEDICAL_VIROLOGY, ACCESS_SCIENCE_GENETICS)
-	catalogue_data = list(/datum/category_item/catalogue/technology/bot/medibot)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/bot/medibot)
 
 	var/healthanalyzer = /obj/item/healthanalyzer
 	var/firstaid = /obj/item/storage/firstaid

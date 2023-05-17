@@ -2,7 +2,7 @@
 //		Merc Mobs Go Here
 ///////////////////////////////
 
-/datum/category_item/catalogue/fauna/mercenary
+/datum/prototype/struct/catalogue_entry/fauna/mercenary
 	name = "Mercenaries"
 	desc = "Life on the Frontier is hard, and unregulated. Unlike life in \
 	more 'civlized' areas of the Galaxy, violence and piracy remain common \
@@ -11,29 +11,29 @@
 	thaler. From simple pirates to legitimate PMCs, Frontier mercs come in \
 	all shapes and sizes."
 	value = CATALOGUER_REWARD_TRIVIAL
-	unlocked_by_any = list(/datum/category_item/catalogue/fauna/mercenary)
+	unlocked_by_any = list(/datum/prototype/struct/catalogue_entry/fauna/mercenary)
 
 // Obtained by scanning all X.
-/datum/category_item/catalogue/fauna/all_mercenaries
+/datum/prototype/struct/catalogue_entry/fauna/all_mercenaries
 	name = "Collection - Mercenaries"
 	desc = "You have scanned a large array of different types of mercenary, \
 	and therefore you have been granted a large sum of points, through this \
 	entry."
 	value = CATALOGUER_REWARD_HARD
 	unlocked_by_all = list(
-		/datum/category_item/catalogue/fauna/mercenary/human,
-		/datum/category_item/catalogue/fauna/mercenary/human/peacekeeper,
-		/datum/category_item/catalogue/fauna/mercenary/human/grenadier,
-		/datum/category_item/catalogue/fauna/mercenary/human/space,
-		/datum/category_item/catalogue/fauna/mercenary/human/space/suppressor,
-		/datum/category_item/catalogue/fauna/mercenary/vox,
-		/datum/category_item/catalogue/fauna/mercenary/vox/boarder,
-		/datum/category_item/catalogue/fauna/mercenary/vox/technician,
-		/datum/category_item/catalogue/fauna/mercenary/vox/suppressor,
-		/datum/category_item/catalogue/fauna/mercenary/vox/captain
+		/datum/prototype/struct/catalogue_entry/fauna/mercenary/human,
+		/datum/prototype/struct/catalogue_entry/fauna/mercenary/human/peacekeeper,
+		/datum/prototype/struct/catalogue_entry/fauna/mercenary/human/grenadier,
+		/datum/prototype/struct/catalogue_entry/fauna/mercenary/human/space,
+		/datum/prototype/struct/catalogue_entry/fauna/mercenary/human/space/suppressor,
+		/datum/prototype/struct/catalogue_entry/fauna/mercenary/vox,
+		/datum/prototype/struct/catalogue_entry/fauna/mercenary/vox/boarder,
+		/datum/prototype/struct/catalogue_entry/fauna/mercenary/vox/technician,
+		/datum/prototype/struct/catalogue_entry/fauna/mercenary/vox/suppressor,
+		/datum/prototype/struct/catalogue_entry/fauna/mercenary/vox/captain
 		)
 
-/datum/category_item/catalogue/fauna/mercenary/human
+/datum/prototype/struct/catalogue_entry/fauna/mercenary/human
 	name = "Mercenaries - Human"
 	desc = "Human Mercenary bands are extremely common on the Frontier. Many \
 	of the modern outfits operating on the fringe today are veterans of the \
@@ -52,7 +52,7 @@
 	icon_living = "syndicate"
 	icon_dead = "syndicate_dead"
 	icon_gib = "syndicate_gib"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/mercenary/human)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/mercenary/human)
 
 	faction = "syndicate"
 	movement_cooldown = 2
@@ -214,7 +214,7 @@
 	base_attack_cooldown = 5 // Two attacks a second or so.
 	reload_max = 20
 
-/datum/category_item/catalogue/fauna/mercenary/human/peacekeeper
+/datum/prototype/struct/catalogue_entry/fauna/mercenary/human/peacekeeper
 	name = "Mercenaries - Solar Peacekeeper"
 	desc = "Activist groups in Civlized Space often raise moral concerns about \
 	conditions on the Frontier. The more organized groups will sometimes gather \
@@ -226,7 +226,7 @@
 /mob/living/simple_mob/humanoid/merc/ranged/smg/sol
 	icon_state = "bluforranged_smg"
 	icon_living = "blueforranged_smg"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/mercenary/human/peacekeeper)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/mercenary/human/peacekeeper)
 
 	corpse = /obj/spawner/corpse/solarpeacekeeper
 	loot_list = list(/obj/item/gun/ballistic/automatic/c20r = 100)
@@ -287,7 +287,7 @@
 	needs_reload = TRUE
 	reload_max = 7		// Deagle Reload
 
-/datum/category_item/catalogue/fauna/mercenary/human/grenadier
+/datum/prototype/struct/catalogue_entry/fauna/mercenary/human/grenadier
 	name = "Mercenaries - Grenadier"
 	desc = "After the Phoron Wars, many deniable operatives on both sides of \
 	the conflict found that there was no place for them within their home companies \
@@ -304,7 +304,7 @@
 	icon_living = "syndicateranged_shotgun"
 	projectiletype = /obj/projectile/bullet/pellet/shotgun		// Buckshot
 	projectilesound = 'sound/weapons/Gunshot_shotgun.ogg'
-	catalogue_data = list(/datum/category_item/catalogue/fauna/mercenary/human/grenadier)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/mercenary/human/grenadier)
 
 	loot_list = list(/obj/item/gun/ballistic/shotgun/pump = 100)
 
@@ -317,7 +317,7 @@
 //		Space Mercs
 ////////////////////////////////
 
-/datum/category_item/catalogue/fauna/mercenary/human/space
+/datum/prototype/struct/catalogue_entry/fauna/mercenary/human/space
 	name = "Mercenaries - Commando"
 	desc = "Commandos, much like their less equipped brethren, are experts in \
 	wet work. Honing their skills over years of training, the Commando's iconic \
@@ -332,7 +332,7 @@
 	desc = "A tough looking individual, armred with an energy sword and shield."
 	icon_state = "syndicatespace-melee"
 	icon_living = "syndicatespace-melee"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/mercenary/human/space)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/mercenary/human/space)
 
 	movement_cooldown = 0
 
@@ -466,7 +466,7 @@
 
 // suppressors are just assholes and are intended to be a piss poor experience for everyone on both sides
 
-/datum/category_item/catalogue/fauna/mercenary/human/space/suppressor
+/datum/prototype/struct/catalogue_entry/fauna/mercenary/human/space/suppressor
 	name = "Mercenaries - Suppressor"
 	desc = "Just because the Phoron Wars are over, it doesn't mean that covert \
 	actions and corporate espionage ended too. When you encounter mercs with \
@@ -493,7 +493,7 @@
 	special_attack_charges = 5
 	loot_list = list() // oh, you killed him?
 	corpse = null // well, sorry, buddy, he doesn't drop shit
-	catalogue_data = list(/datum/category_item/catalogue/fauna/mercenary/human/space/suppressor)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/mercenary/human/space/suppressor)
 // 	var/deathnade_path = /obj/item/grenade/flashbang/stingbang
 
 /* far too fun for the codebase at the moment
@@ -572,7 +572,7 @@
 ////////////////////////////////
 //Classifying these as Mercs, due to the general power level I want them at.
 
-/datum/category_item/catalogue/fauna/mercenary/vox
+/datum/prototype/struct/catalogue_entry/fauna/mercenary/vox
 	name = "Mercenaries - Vox"
 	desc = "For centuries the Vox have inflicted their way of life upon the \
 	Galaxy. Regarded with distrust due to their tendency to engage in piracy \
@@ -580,7 +580,7 @@
 	curiously advanced xenotech. Due to ancient compacts, Vox pirates try to \
 	avoid bloodshed, but will react to violence in kind."
 	value = CATALOGUER_REWARD_MEDIUM
-	unlocked_by_any = list(/datum/category_item/catalogue/fauna/mercenary/vox)
+	unlocked_by_any = list(/datum/prototype/struct/catalogue_entry/fauna/mercenary/vox)
 
 /mob/living/simple_mob/humanoid/merc/voxpirate	//Don't use this one.
 	name = "vox mannequin"
@@ -638,7 +638,7 @@
 //			Vox Melee
 ////////////////////////////////
 
-/datum/category_item/catalogue/fauna/mercenary/vox/boarder
+/datum/prototype/struct/catalogue_entry/fauna/mercenary/vox/boarder
 	name = "Mercenaries - Vox Boarder"
 	desc = "Vox are squat creatures, with powerful muscles and tough, scaly \
 	hides. Their dense bones and sharp talons make them a formidable threat in \
@@ -652,7 +652,7 @@
 	icon_state = "voxboarder_m"
 	icon_living = "voxboarder_m"
 	icon_dead = "voxboarder_m_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/mercenary/vox/boarder)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/mercenary/vox/boarder)
 
 	melee_damage_lower = 30		//Energy sword damage
 	melee_damage_upper = 30
@@ -697,7 +697,7 @@
 	icon_state = "voxboarder_r"
 	icon_living = "voxboarder_r"
 	icon_dead = "voxboarder_r_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/mercenary/vox/boarder)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/mercenary/vox/boarder)
 
 	projectiletype = /obj/projectile/bullet/pellet/shotgun
 	projectilesound = 'sound/weapons/Gunshot_shotgun.ogg'
@@ -712,7 +712,7 @@
 	needs_reload = TRUE
 	reload_max = 10
 
-/datum/category_item/catalogue/fauna/mercenary/vox/technician
+/datum/prototype/struct/catalogue_entry/fauna/mercenary/vox/technician
 	name = "Mercenaries - Vox Technician"
 	desc = "The belief that Vox are unintelligent comes largely from a kind \
 	of anthrochauvanism. Due to their difficulty speaking GalCom and their tendency \
@@ -728,7 +728,7 @@
 	icon_state = "voxboarder_t"
 	icon_living = "voxboarder_t"
 	icon_dead = "voxboarder_t_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/mercenary/vox/technician)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/mercenary/vox/technician)
 
 	projectiletype = /obj/projectile/ion
 	projectilesound = 'sound/weapons/Laser.ogg'
@@ -740,7 +740,7 @@
 	needs_reload = TRUE
 	reload_max = 25 //Suppressive tech weapon.
 
-/datum/category_item/catalogue/fauna/mercenary/vox/suppressor
+/datum/prototype/struct/catalogue_entry/fauna/mercenary/vox/suppressor
 	name = "Mercenaries - Vox Suppressor"
 	desc = "Among Vox bands, Suppressors are an even more motley crew. \
 	Staying true to the name, Suppressors are veteran Vox pirates who have \
@@ -758,7 +758,7 @@
 	icon_state = "voxsuppressor"
 	icon_living = "voxsuppressor"
 	icon_dead = "voxsuppresor_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/mercenary/vox/suppressor)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/mercenary/vox/suppressor)
 
 	armor_legacy_mob = list(melee = 30, bullet = 50, laser = 60, energy = 30, bomb = 35, bio = 100, rad = 100)	// Boosted armor to represent Tank role.
 
@@ -773,7 +773,7 @@
 	needs_reload = TRUE
 	reload_max = 30 //Gotta lay down that fire, son.
 
-/datum/category_item/catalogue/fauna/mercenary/vox/captain
+/datum/prototype/struct/catalogue_entry/fauna/mercenary/vox/captain
 	name = "Mercenaries - Vox Captain"
 	desc = "Accomplished Vox who bring in scrap reliably eventually become the \
 	'Quills' of their own expeditions. This Vox term is considered analagous to \
@@ -790,7 +790,7 @@
 	icon_state = "voxcaptain"
 	icon_living = "voxcaptain"
 	icon_dead = "voxcaptain_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/mercenary/vox/captain)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/mercenary/vox/captain)
 
 	armor_legacy_mob = list(melee = 60, bullet = 50, laser = 40, energy = 15, bomb = 30, bio = 100, rad = 100)	// Vox RIG armor values.
 

@@ -1,6 +1,6 @@
  //Fodder
 
-/datum/category_item/catalogue/fauna/cyberhorror
+/datum/prototype/struct/catalogue_entry/fauna/cyberhorror
 	name = "Cyber Horror"
 	desc = "First witnessed on Surt, the entities hence dubbed 'Cyber Horrors' have \
 	begun to appear at various sites across the Frontier. Based on recordings and logs \
@@ -11,7 +11,7 @@
 	Surt fell, the perpetrators of the incident are believed to have escaped to spread \
 	the affliction to other hosts."
 	value = CATALOGUER_REWARD_TRIVIAL
-	unlocked_by_any = list(/datum/category_item/catalogue/fauna/cyberhorror)
+	unlocked_by_any = list(/datum/prototype/struct/catalogue_entry/fauna/cyberhorror)
 
 /mob/living/simple_mob/mechanical/cyber_horror
 	name = "Cyber horror"
@@ -20,7 +20,7 @@
 	icon_state = "cyber_horror"
 	icon_dead = "cyber_horror_dead"
 	icon_gib = "cyber_horror_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/cyberhorror)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/cyberhorror)
 
 	faction = "synthtide"
 

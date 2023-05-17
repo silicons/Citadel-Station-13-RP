@@ -1,5 +1,5 @@
 // Frostflies are large, flightless insects with glittering wings, used as a means of deploying their gaseous self-defense mechanism.
-/datum/category_item/catalogue/fauna/frostfly
+/datum/prototype/struct/catalogue_entry/fauna/frostfly
 	name = "Sivian Fauna - Frostfly"
 	desc = "Classification: S Carabidae glacios \
 	<br><br>\
@@ -28,7 +28,7 @@
 	name = "frostfly"
 	desc = "A large insect with glittering wings."
 	tt_desc = "S Carabidae glacios"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/frostfly)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/frostfly)
 
 	faction = "diyaab"
 

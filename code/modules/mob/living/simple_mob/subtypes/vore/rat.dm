@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/rat		//TODO: VIRGO_LORE_WRITING_WIP
+/datum/prototype/struct/catalogue_entry/fauna/rat		//TODO: VIRGO_LORE_WRITING_WIP
 	name = "Creature - Rat"
 	desc = "A massive rat, some sort of mutated descendant of normal Earth rats. These ones seem particularly hungry, \
 	and are able to pounce and stun their targets - presumably to eat them. Their bodies are long and greyfurred, \
@@ -9,7 +9,7 @@
 	name = "giant rat"
 	desc = "In what passes for a hierarchy among verminous rodents, this one is king."
 	tt_desc = "Mus muscular"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/rat)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/rat)
 
 	icon_state = "rous"
 	icon_living = "rous"

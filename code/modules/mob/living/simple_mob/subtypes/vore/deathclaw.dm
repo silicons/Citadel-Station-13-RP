@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/deathclaw		//TODO: VIRGO_LORE_WRITING_WIP
+/datum/prototype/struct/catalogue_entry/fauna/deathclaw		//TODO: VIRGO_LORE_WRITING_WIP
 	name = "Creature - Deathclaw"
 	desc = "A massive beast, tall as three standard-size humans, with massive, terrifying claws, \
 	and dark, black fangs. It's entire body is yellowish, like sand, and it's skin is leathery and tough. \
@@ -8,7 +8,7 @@
 /mob/living/simple_mob/vore/aggressive/deathclaw
 	name = "deathclaw"
 	desc = "Big! Big! The size of three men! Claws as long as my forearm! Ripped apart! Ripped apart!"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/deathclaw)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/deathclaw)
 
 	icon_dead = "deathclaw_dead"
 	icon_living = "deathclaw"

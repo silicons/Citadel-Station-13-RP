@@ -1,6 +1,6 @@
 // Reticent mecha are quick and deadly in melee.
 
-/datum/category_item/catalogue/technology/reticent
+/datum/prototype/struct/catalogue_entry/technology/reticent
 	name = "Exosuit - Reticent"
 
 	desc = "During the Melancholy Occupation of 2476 - callously referred to by their opposition as the 'Prank War', the \
@@ -16,7 +16,7 @@
 /mob/living/simple_mob/mechanical/mecha/combat/reticent
 	name = "Reticent"
 	desc = "Designed in response to the H.O.N.K., Reticent models are close combat powerhouses designed to rapidly and quietly ambush slower foes."
-	catalogue_data = list(/datum/category_item/catalogue/technology/reticent)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/reticent)
 	icon_state = "reticent"
 	movement_cooldown = 0.5
 	movement_sound = 'sound/effects/suitstep1.ogg'
@@ -61,7 +61,7 @@
 
 // A stronger variant.
 
-/datum/category_item/catalogue/technology/reticence
+/datum/prototype/struct/catalogue_entry/technology/reticence
 	name = "Exosuit - Reticence"
 
 	desc = "After fully repelling the Columbinan occupiers in 2503, Le Rien began to construct powerful defensive \
@@ -77,7 +77,7 @@
 /mob/living/simple_mob/mechanical/mecha/combat/reticent/reticence
 	name = "Reticence"
 	desc = "The current flagship mecha of Le Rien. The Reticence trades some speed for durability, but remains formidable. It is not commercially available."
-	catalogue_data = list(/datum/category_item/catalogue/technology/reticence)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/reticence)
 	icon_state = "reticence"
 	movement_cooldown = 1
 	melee_attack_delay = 0

@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/frog
+/datum/prototype/struct/catalogue_entry/fauna/frog
 	name = "Giant Frog"
 	desc = "Another example of genetic engineering gone right - mostly - the Giant Frog \
 	is an upscaled amphibian originally imported from Earth. Although questions abound \
@@ -10,7 +10,7 @@
 	name = "giant frog"
 	desc = "You've heard of having a frog in your throat, now get ready for the reverse."
 	tt_desc = "Anura gigantus"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/frog)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/frog)
 
 	icon_dead = "frog-dead"
 	icon_living = "frog"

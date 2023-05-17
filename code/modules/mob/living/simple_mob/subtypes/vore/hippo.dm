@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/hippo
+/datum/prototype/struct/catalogue_entry/fauna/hippo
 	name = "Hippo"
 	desc = "A hardy savannah creature native to Earth, the only use for the \
 	hippopotamus on the Frontier is entertainment. Often traded by rare animal \
@@ -9,7 +9,7 @@
 	name = "hippo"
 	desc = "Mostly know for the spectacular hit of the live action movie Hungry Hungry Hippos."
 	tt_desc = "Hippopotamus amphibius"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/hippo)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/hippo)
 
 	icon_state = "hippo"
 	icon_living = "hippo"

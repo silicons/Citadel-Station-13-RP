@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/panther
+/datum/prototype/struct/catalogue_entry/fauna/panther
 	name = "Panther"
 	desc = "Sometimes imported to the Frontier by exotic animal collectors, \
 	Panthers are big cats native to Earth. Driven to near extinction after \
@@ -10,7 +10,7 @@
 	name = "panther"
 	desc = "Runtime's larger, less cuddly cousin."
 	tt_desc = "Panthera pardus"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/panther)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/panther)
 
 	icon_state = "panther"
 	icon_living = "panther"

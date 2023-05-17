@@ -2,7 +2,7 @@
 // They generally fit the archetype of 'fast but fragile'.
 // This is compensated by being in groups (usually).
 
-/datum/category_item/catalogue/fauna/carp
+/datum/prototype/struct/catalogue_entry/fauna/carp
 	name = "Voidborne Fauna - Space Carp"
 	desc = "A strange descendant of some form of voidborne life, they are the most \
 	common naturally void-faring lifeform found in human territory. They've been named \
@@ -28,7 +28,7 @@
 /mob/living/simple_mob/animal/space/carp
 	name = "space carp"
 	desc = "A ferocious, fang-bearing creature that resembles a fish."
-	catalogue_data = list(/datum/category_item/catalogue/fauna/carp)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/carp)
 	icon_state = "carp"
 	icon_living = "carp"
 	icon_dead = "carp_dead"

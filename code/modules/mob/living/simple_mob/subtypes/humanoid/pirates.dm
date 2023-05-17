@@ -2,7 +2,7 @@
 //	Yargh Yargh Fiddle De Di
 ///////////////////////////////
 
-/datum/category_item/catalogue/fauna/pirate
+/datum/prototype/struct/catalogue_entry/fauna/pirate
 	name = "Pirates"
 	desc = "Life on the Frontier is often harsh, and there are many \
 	natural hazards which must be navigated and accounted for. In the \
@@ -23,7 +23,7 @@
 	icon_state = "piratemelee"
 	icon_living = "piratemelee"
 	icon_dead = "piratemelee_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/pirate)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/pirate)
 
 	faction = "pirate"
 

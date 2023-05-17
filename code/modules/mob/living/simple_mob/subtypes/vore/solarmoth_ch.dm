@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/solarmoth		//TODO: VIRGO_LORE_WRITING_WIP
+/datum/prototype/struct/catalogue_entry/fauna/solarmoth		//TODO: VIRGO_LORE_WRITING_WIP
 	name = "Solarmoth"
 	desc = "An adult variation of a solargrub, these winged critters are very deadly. They seem to heat up everything nearby, \
 	turning ordinary rooms into infernos, and causing malfunctions across the station. They are so hot that laser weaponry is like throwing an ice cube at them. \
@@ -6,7 +6,7 @@
 	Melee seems to be thier weakness as long as the user has appropriate heat protection or if you're quick enough to respond before needing protection. Approach with caution."
 	value = CATALOGUER_REWARD_MEDIUM
 
-/datum/category_item/catalogue/fauna/lunarmoth		//TODO: VIRGO_LORE_WRITING_WIP
+/datum/prototype/struct/catalogue_entry/fauna/lunarmoth		//TODO: VIRGO_LORE_WRITING_WIP
 	name = "Lunarmoth"
 	desc = "A peculiar adult variation of a solargrub. Due to some sort of innate mutation, a simple solar grub turns into a power draining yet ever so majestic sparkling lunarmoth. \
 	Just their sheer sight sends chills down its beholders frame and the surroundings begin to creak. Approach with upmost caution."
@@ -15,7 +15,7 @@
 /mob/living/simple_mob/vore/solarmoth
 	name = "Solarmoth"
 	desc = "A majestic sparkling solarmoth. Also a slight engineering hazard known to heat rooms equal to temperatures of a white dwarf."
-	catalogue_data = list(/datum/category_item/catalogue/fauna/solarmoth)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/solarmoth)
 	icon = 'icons/mob/solarmoth.dmi' //all of these are placeholders
 	icon_state = "solarmoth"
 	icon_living = "solarmoth"

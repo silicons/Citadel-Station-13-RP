@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/livestock/goat
+/datum/prototype/struct/catalogue_entry/fauna/livestock/goat
 	name = "Livestock - Goat"
 	desc = "Like the cow, the goat is frequently farmed for its milk and \
 	its meat. Goat hair has some textile applications, but primarily the \
@@ -14,7 +14,7 @@
 	icon_state = "goat"
 	icon_living = "goat"
 	icon_dead = "goat_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/livestock/goat)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/livestock/goat)
 
 	faction = "goat"
 

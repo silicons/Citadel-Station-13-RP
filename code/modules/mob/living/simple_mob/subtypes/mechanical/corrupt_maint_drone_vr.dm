@@ -4,7 +4,7 @@
 	Code "borrowed" from viscerator drones. <3
 */
 
-/datum/category_item/catalogue/technology/drone/corrupt_maint_drone
+/datum/prototype/struct/catalogue_entry/technology/drone/corrupt_maint_drone
 	name = "Drone - Corrupted Maintenance Drone"
 	desc = "This drone appears to be a station maintenance drone, produced by some sort of corrupt fab, \
 	which has caused it to become corrupt and attack anything nearby, except spiders and such, oddy. \
@@ -19,7 +19,7 @@
 /mob/living/simple_mob/mechanical/corrupt_maint_drone
 	name = "Corrupt Maintenance Drone"
 	desc = "A small, normal-looking drone. It looks like one you'd find on station, except... IT'S COMING AT YOU!"
-	catalogue_data = list(/datum/category_item/catalogue/technology/drone/corrupt_maint_drone)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/drone/corrupt_maint_drone)
 
 	icon = 'icons/mob/robots.dmi'
 	icon_state = "corrupt-repairbot"

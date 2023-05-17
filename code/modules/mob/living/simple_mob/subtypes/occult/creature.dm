@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/creature
+/datum/prototype/struct/catalogue_entry/fauna/creature
 	name = "%#ERROR#%"
 	desc = "%ERROR% SCAN DATA REDACTED. RETURN SCANNER TO A \
 	CENTRAL ADMINISTRATOR FOR IMMEDIATE MAINTENANCE. %ERROR%"
@@ -11,7 +11,7 @@
 	icon_state = "otherthing"
 	icon_living = "otherthing"
 	icon_dead = "otherthing-dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/creature)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/creature)
 
 	mob_class = MOB_CLASS_ABERRATION
 

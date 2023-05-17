@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/spiderbot
+/datum/prototype/struct/catalogue_entry/fauna/spiderbot
 	name = "Spiderbot"
 	desc = "A roaming curiosity, spiderbots are as harmless as \
 	they are visually frightening. Generally friendly, the intelligence \
@@ -14,7 +14,7 @@
 	icon_living = "spiderbot-chassis"
 	icon_dead = "spiderbot-smashed"
 	intelligence_level = SA_HUMANOID // Because its piloted by players.
-	catalogue_data = list(/datum/category_item/catalogue/fauna/spiderbot)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/spiderbot)
 
 	health = 10
 	maxHealth = 10

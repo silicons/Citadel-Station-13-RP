@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/clown
+/datum/prototype/struct/catalogue_entry/fauna/clown
 	name = "Clown"
 	desc = "The Clown is truly a galactic phenomenon. Those who travel to \
 	Clown Planet to train in the comedic arts sometimes undergo a curious \
@@ -6,18 +6,18 @@
 	jesters roam the Frontier on missions of mayhem and hilarity. Just because \
 	they're smiling, it doesn't mean they aren't deadly. Watch where you step."
 	value = CATALOGUER_REWARD_TRIVIAL
-	unlocked_by_any = list(/datum/category_item/catalogue/fauna/clown)
+	unlocked_by_any = list(/datum/prototype/struct/catalogue_entry/fauna/clown)
 
 // Obtained by scanning all X.
-/datum/category_item/catalogue/fauna/all_clowns
+/datum/prototype/struct/catalogue_entry/fauna/all_clowns
 	name = "Collection - Clowns"
 	desc = "You have scanned a large array of different types of clown, \
 	and therefore you have been granted a large sum of points, through this \
 	entry."
 	value = CATALOGUER_REWARD_HARD
 	unlocked_by_all = list(
-		/datum/category_item/catalogue/fauna/clown,
-		/datum/category_item/catalogue/fauna/clown/commando
+		/datum/prototype/struct/catalogue_entry/fauna/clown,
+		/datum/prototype/struct/catalogue_entry/fauna/clown/commando
 		)
 
 /mob/living/simple_mob/humanoid/clown
@@ -28,7 +28,7 @@
 	icon_living = "clown"
 	icon_dead = "clown_dead"
 	icon_gib = "clown_gib"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/clown)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/clown)
 
 	faction = "clown"
 
@@ -64,7 +64,7 @@
 //		Honk Ops
 ////////////////////////////////
 
-/datum/category_item/catalogue/fauna/clown/commando
+/datum/prototype/struct/catalogue_entry/fauna/clown/commando
 	name = "Clown - Commando"
 	desc = "The ongoing aggression between the states of Columbina and La Rien \
 	may have begun to simmer down in recent years, but both sides still seek to \
@@ -83,7 +83,7 @@
 	icon_living = "clownop"
 	icon_dead = "clownop_dead"
 	icon_gib = "clown_gib"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/clown/commando)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/clown/commando)
 
 	movement_cooldown = 2
 
@@ -196,7 +196,7 @@
 
 //Voidsuit Variants
 
-/datum/category_item/catalogue/fauna/clown/commando/space
+/datum/prototype/struct/catalogue_entry/fauna/clown/commando/space
 	name = "Clown - Operative"
 	desc = "The most elite Commandos serving Columbina have come to be known as \
 	'Clown Operatives', though they are also referred to as 'Honk Ops'. Deadly, \
@@ -210,7 +210,7 @@
 	desc = "A heavily armored clown, wielding a deadly looking sword."
 	icon_state = "clownop_space_melee"
 	icon_living = "clownop_space_melee"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/clown/commando/space)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/clown/commando/space)
 
 	movement_cooldown = 0
 
@@ -248,7 +248,7 @@
 	desc = "A heavily armored clown, armed with a dangerous looking gun."
 	icon_state = "clownop_space_ranged"
 	icon_living = "clownop_space_ranged"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/clown/commando/space)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/clown/commando/space)
 
 	movement_cooldown = 0
 

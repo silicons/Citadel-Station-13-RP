@@ -5,7 +5,7 @@
 */
 
 // Obtained by scanning any giant spider.
-/datum/category_item/catalogue/fauna/giant_spider/giant_spiders
+/datum/prototype/struct/catalogue_entry/fauna/giant_spider/giant_spiders
 	name = "Giant Spiders"
 	desc = "Giant Spiders are massive arachnids genetically descended from conventional Earth spiders, \
 	however what caused ordinary arachnids to evolve into these are disputed. \
@@ -21,32 +21,32 @@
 	Finally, those in the Nurse caste generally act in a supporting role to the other two \
 	castes, spinning webs and ensuring their nest grows larger and more terrifying."
 	value = CATALOGUER_REWARD_TRIVIAL
-	unlocked_by_any = list(/datum/category_item/catalogue/fauna/giant_spider)
+	unlocked_by_any = list(/datum/prototype/struct/catalogue_entry/fauna/giant_spider)
 
 // Obtained by scanning all spider types.
-/datum/category_item/catalogue/fauna/all_giant_spiders
+/datum/prototype/struct/catalogue_entry/fauna/all_giant_spiders
 	name = "Collection - Giant Spiders"
 	desc = "You have scanned a large array of different types of giant spiders, \
 	and therefore you have been granted a large sum of points, through this \
 	entry."
 	value = CATALOGUER_REWARD_HARD
 	unlocked_by_all = list(
-		/datum/category_item/catalogue/fauna/giant_spider/guard_spider,
-		/datum/category_item/catalogue/fauna/giant_spider/carrier_spider,
-		/datum/category_item/catalogue/fauna/giant_spider/electric_spider,
-		/datum/category_item/catalogue/fauna/giant_spider/frost_spider,
-		/datum/category_item/catalogue/fauna/giant_spider/hunter_spider,
-		/datum/category_item/catalogue/fauna/giant_spider/lurker_spider,
-		/datum/category_item/catalogue/fauna/giant_spider/nurse_spider,
-		/datum/category_item/catalogue/fauna/giant_spider/pepper_spider,
-		/datum/category_item/catalogue/fauna/giant_spider/phorogenic_spider,
-		/datum/category_item/catalogue/fauna/giant_spider/thermic_spider,
-		/datum/category_item/catalogue/fauna/giant_spider/tunneler_spider,
-		/datum/category_item/catalogue/fauna/giant_spider/webslinger_spider
+		/datum/prototype/struct/catalogue_entry/fauna/giant_spider/guard_spider,
+		/datum/prototype/struct/catalogue_entry/fauna/giant_spider/carrier_spider,
+		/datum/prototype/struct/catalogue_entry/fauna/giant_spider/electric_spider,
+		/datum/prototype/struct/catalogue_entry/fauna/giant_spider/frost_spider,
+		/datum/prototype/struct/catalogue_entry/fauna/giant_spider/hunter_spider,
+		/datum/prototype/struct/catalogue_entry/fauna/giant_spider/lurker_spider,
+		/datum/prototype/struct/catalogue_entry/fauna/giant_spider/nurse_spider,
+		/datum/prototype/struct/catalogue_entry/fauna/giant_spider/pepper_spider,
+		/datum/prototype/struct/catalogue_entry/fauna/giant_spider/phorogenic_spider,
+		/datum/prototype/struct/catalogue_entry/fauna/giant_spider/thermic_spider,
+		/datum/prototype/struct/catalogue_entry/fauna/giant_spider/tunneler_spider,
+		/datum/prototype/struct/catalogue_entry/fauna/giant_spider/webslinger_spider
 		)
 
 // Specific to guard spiders.
-/datum/category_item/catalogue/fauna/giant_spider/guard_spider
+/datum/prototype/struct/catalogue_entry/fauna/giant_spider/guard_spider
 	name = "Giant Spider - Guard"
 	desc = "This specific spider has been catalogued as 'Guard', \
 	and belongs to the 'Guard' caste. It has a brown coloration, with \
@@ -62,7 +62,7 @@
 	name = "giant spider"
 	desc = "Furry and brown, it makes you shudder to look at it. This one has deep red eyes."
 	tt_desc = "X Atrax robustus gigantus"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/giant_spider/guard_spider)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/giant_spider/guard_spider)
 
 	icon_state = "guard"
 	icon_living = "guard"

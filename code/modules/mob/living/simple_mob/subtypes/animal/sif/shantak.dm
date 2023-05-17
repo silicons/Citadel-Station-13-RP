@@ -1,6 +1,6 @@
 // Shantaks are essentially sif wolves.
 
-/datum/category_item/catalogue/fauna/shantak
+/datum/prototype/struct/catalogue_entry/fauna/shantak
 	name = "Sivian Fauna - Shantak"
 	desc = "Classification: S Choeros shantak\
 	<br><br>\
@@ -23,7 +23,7 @@
 	desc = "A piglike creature with a bright iridiscent mane that sparkles as though lit by an inner light. \
 	Don't be fooled by its beauty though."
 	tt_desc = "S Choeros shantak"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/shantak)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/shantak)
 
 	faction = "shantak"
 

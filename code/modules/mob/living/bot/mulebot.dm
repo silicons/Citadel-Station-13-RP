@@ -7,7 +7,7 @@
 #define MULE_PATH_DONE 11
 // IF YOU CHANGE THOSE, UPDATE THEM IN pda.tmpl TOO
 
-/datum/category_item/catalogue/technology/bot/mulebot
+/datum/prototype/struct/catalogue_entry/technology/bot/mulebot
 	name = "Bot - Mulebot"
 	desc = "Mulebots are a favorite option for logistical services in \
 	Frontier space. Equipped with semi-sophisticated pathfinding systems, \
@@ -26,7 +26,7 @@
 	health = 150
 	maxHealth = 150
 	mob_bump_flag = HEAVY
-	catalogue_data = list(/datum/category_item/catalogue/technology/bot/mulebot)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/bot/mulebot)
 
 	min_target_dist = 0
 	max_target_dist = 250

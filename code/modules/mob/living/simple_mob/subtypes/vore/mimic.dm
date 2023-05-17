@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/mimic
+/datum/prototype/struct/catalogue_entry/fauna/mimic
 	name = "Aberration - Mimic"
 	desc = "A being that seems to take the form of a crates, closets, doors and even the floor as a means of camouflage. \
 	It seems to lie in wait for it's prey, and then pounce once the unsuspecting person attempts to open it or steps on it. \
@@ -17,7 +17,7 @@
 	var/mimic_chance = 30
 	var/mimic_active = TRUE
 
-	catalogue_data = list(/datum/category_item/catalogue/fauna/mimic)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/mimic)
 
 /obj/structure/closet/crate/mimic/open()
 	if(src.opened)

@@ -570,7 +570,7 @@
 	open_sound_powered = 'sound/machines/door/shuttle1o.ogg'
 	close_sound_powered = 'sound/machines/door/shuttle1c.ogg'
 
-/datum/category_item/catalogue/anomalous/precursor_a/alien_airlock
+/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_airlock
 	name = "Precursor Alpha Object - Doors"
 	desc = "This object appears to be used in order to restrict or allow access to \
 	rooms based on its physical state. In other words, a door. \
@@ -590,7 +590,7 @@
 /obj/machinery/door/airlock/alien
 	name = "alien airlock"
 	desc = "You're fairly sure this is a door."
-	catalogue_data = list(/datum/category_item/catalogue/anomalous/precursor_a/alien_airlock)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_airlock)
 	icon = 'icons/obj/doors/Dooralien.dmi'
 	explosion_resistance = 20
 	secured_wires = TRUE

@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/wolf		//TODO: VIRGO_LORE_WRITING_WIP
+/datum/prototype/struct/catalogue_entry/fauna/wolf		//TODO: VIRGO_LORE_WRITING_WIP
 	name = "Creature - Wolf"
 	desc = "Some sort of wolf, a descendent or otherwise of regular Earth canidae. They look almost exactly like their \
 	Earth counterparts, except for the fact that their fur is a uniform grey. Some do show signs of unique coloration, and they \
@@ -9,7 +9,7 @@
 	name = "grey wolf"
 	desc = "My, what big jaws it has!"
 	tt_desc = "Canis lupus"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/wolf)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/wolf)
 
 	icon_dead = "wolf-dead"
 	icon_living = "wolf"

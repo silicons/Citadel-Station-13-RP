@@ -1,7 +1,7 @@
 /obj/item/gun/energy/netgun
 	name = "Hephaestus \'Retiarius\'"
 	desc = "The Hephaestus Industries 'Retiarius' stuns targets, immobilizing them in an energized net field."
-	catalogue_data = list()///datum/category_item/catalogue/information/organization/hephaestus)
+	catalogue_data_legacy = list()///datum/prototype/struct/catalogue_entry/information/organization/hephaestus)
 	icon_state = "hunter"
 	item_state = "gun" // Placeholder
 	mode_name = "stun"

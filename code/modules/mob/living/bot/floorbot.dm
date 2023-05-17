@@ -4,7 +4,7 @@
 // Therefore that functionality is disabled for now.  But it can be turned on by uncommenting this.
 // #define FLOORBOT_PATCHES_HOLES 1
 
-/datum/category_item/catalogue/technology/bot/floorbot
+/datum/prototype/struct/catalogue_entry/technology/bot/floorbot
 	name = "Bot - Floorbot"
 	desc = "The standard Floorbot is an oft forgotten automaton \
 	utilized by Engineering teams to help rapidly patch catastrophic \
@@ -22,7 +22,7 @@
 
 	wait_if_pulled = TRUE
 	min_target_dist = 0
-	catalogue_data = list(/datum/category_item/catalogue/technology/bot/floorbot)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/bot/floorbot)
 
 	var/amount = 10 // 1 for tile, 2 for lattice
 	var/maxAmount = 60

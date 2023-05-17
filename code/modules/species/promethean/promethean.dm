@@ -18,7 +18,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 	"}
 
 	wikilink = "N/A"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/promethean)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/promethean)
 
 	max_additional_languages = 4
 	assisted_langs   = list(LANGUAGE_ROOTGLOBAL, LANGUAGE_VOX) // Prometheans are weird, let's just assume they can use basically any language.

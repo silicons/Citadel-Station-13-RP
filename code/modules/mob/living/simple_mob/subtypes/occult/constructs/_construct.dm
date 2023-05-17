@@ -2,7 +2,7 @@
 //		Base Construct
 ////////////////////////////
 
-/datum/category_item/catalogue/fauna/construct
+/datum/prototype/struct/catalogue_entry/fauna/construct
 	name = "Constructs"
 	desc = "Although much of the information behind these occult constructs \
 	is presumably still classified, NanoTrasen's general briefings have confirmed \
@@ -10,22 +10,22 @@
 	paracausal energies. They are considered extremely dangerous, and evidence of \
 	constructs necessitates immediate notification of the PMD."
 	value = CATALOGUER_REWARD_TRIVIAL
-	unlocked_by_any = list(/datum/category_item/catalogue/fauna/construct)
+	unlocked_by_any = list(/datum/prototype/struct/catalogue_entry/fauna/construct)
 
 // Obtained by scanning all Constructs.
-/datum/category_item/catalogue/fauna/all_X
+/datum/prototype/struct/catalogue_entry/fauna/all_X
 	name = "Collection - Constructs"
 	desc = "You have scanned a large array of different types of Construct, \
 	and therefore you have been granted a large sum of points, through this \
 	entry."
 	value = CATALOGUER_REWARD_HARD
 	unlocked_by_all = list(
-		/datum/category_item/catalogue/fauna/construct/artificer,
-		/datum/category_item/catalogue/fauna/construct/harvester,
-		/datum/category_item/catalogue/fauna/construct/juggernaut,
-		/datum/category_item/catalogue/fauna/construct/proteon,
-		/datum/category_item/catalogue/fauna/construct/shade,
-		/datum/category_item/catalogue/fauna/construct/wraith
+		/datum/prototype/struct/catalogue_entry/fauna/construct/artificer,
+		/datum/prototype/struct/catalogue_entry/fauna/construct/harvester,
+		/datum/prototype/struct/catalogue_entry/fauna/construct/juggernaut,
+		/datum/prototype/struct/catalogue_entry/fauna/construct/proteon,
+		/datum/prototype/struct/catalogue_entry/fauna/construct/shade,
+		/datum/prototype/struct/catalogue_entry/fauna/construct/wraith
 		)
 
 /mob/living/simple_mob/construct

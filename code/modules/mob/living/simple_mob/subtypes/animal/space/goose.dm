@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/goose
+/datum/prototype/struct/catalogue_entry/fauna/goose
 	name = "Planetary Fauna - Geese"
 	desc = "Another Avian species, geese are sometimes utilized as a \
 	food source, but are generally too aggressive and temperamental to \
@@ -12,7 +12,7 @@
 	icon_state = "goose"
 	icon_living = "goose"
 	icon_dead = "goose_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/goose)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/goose)
 
 	faction = "geese"
 

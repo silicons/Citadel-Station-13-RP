@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/technology/bot/cleanbot
+/datum/prototype/struct/catalogue_entry/technology/bot/cleanbot
 	name = "Bot - Cleanbot"
 	desc = "Cleanbots are little more than stabilized mop buckets \
 	on wheels, programmed with basic pathfinding abilities and onboard \
@@ -12,7 +12,7 @@
 	icon_state = "cleanbot0"
 	req_one_access = list(ACCESS_SCIENCE_ROBOTICS, ACCESS_GENERAL_JANITOR)
 	botcard_access = list(ACCESS_GENERAL_JANITOR)
-	catalogue_data = list(/datum/category_item/catalogue/technology/bot/cleanbot)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/bot/cleanbot)
 
 	locked = FALSE //Starts unlocked so roboticist can set them to patrol.
 	wait_if_pulled = TRUE

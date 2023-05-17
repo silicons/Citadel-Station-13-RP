@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/fauna/brain/robotic
+/datum/prototype/struct/catalogue_entry/fauna/brain/robotic
 	name = "Heuristics - Robotic"
 	desc = "Referred to as Intelligence Circuits, the complexity of these \
 	chips is obfuscted by such simple language. RICs are self contained environments \
@@ -14,7 +14,7 @@
 	icon_state = "mainboard"
 	w_class = ITEMSIZE_NORMAL
 	origin_tech = list(TECH_ENGINEERING = 4, TECH_MATERIAL = 3, TECH_DATA = 4)
-	catalogue_data = list(/datum/category_item/catalogue/fauna/brain/robotic)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/brain/robotic)
 
 /obj/item/mmi/digital/robot/Initialize(mapload)
 	. = ..()

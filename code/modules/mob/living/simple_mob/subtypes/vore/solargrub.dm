@@ -10,7 +10,7 @@ List of things solar grubs should be able to do:
 
 GLOBAL_LIST_EMPTY(solargrubs)
 
-/datum/category_item/catalogue/fauna/solargrub		//TODO: VIRGO_LORE_WRITING_WIP
+/datum/prototype/struct/catalogue_entry/fauna/solargrub		//TODO: VIRGO_LORE_WRITING_WIP
 	name = "Solargrub"
 	desc = "Some form of mutated space larva, they seem to crop up on space stations wherever there is power. \
 	They seem to have the chance to cocoon and mutate if left alone, but no recorded instances of this have happened yet. \
@@ -22,7 +22,7 @@ GLOBAL_LIST_EMPTY(solargrubs)
 /mob/living/simple_mob/vore/solargrub
 	name = "Juvenile solargrub"
 	desc = "A young sparkling solargrub"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/solargrub)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/solargrub)
 	icon = 'icons/mob/vore.dmi' //all of these are placeholders
 	icon_state = "solargrub"
 	icon_living = "solargrub"

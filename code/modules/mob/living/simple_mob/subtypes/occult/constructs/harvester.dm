@@ -2,7 +2,7 @@
 //		Harvester
 ////////////////////////////
 
-/datum/category_item/catalogue/fauna/construct/harvester
+/datum/prototype/struct/catalogue_entry/fauna/construct/harvester
 	name = "Constructs - Harvester"
 	desc = "Harvesters are incredibly rare Construct forms, observed \
 	only during the Blood Cult raid on the NDV Marksman. Fragile, but \
@@ -28,7 +28,7 @@
 	attacktext = list("violently stabbed")
 	friendly = list("caresses")
 	movement_cooldown = 0
-	catalogue_data = list(/datum/category_item/catalogue/fauna/construct/harvester)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/construct/harvester)
 
 	ai_holder_type = /datum/ai_holder/simple_mob/melee/evasive
 

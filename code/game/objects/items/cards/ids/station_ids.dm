@@ -38,6 +38,9 @@
 	var/survey_points = 0	// For redeeming at explorer equipment vendors.
 	var/engineer_points = 0	// For redeeming at engineering equipment vendors
 
+	/// gbp types accumulated
+	var/list/gbp_stored
+
 /obj/item/card/id/Initialize(mapload)
 	. = ..()
 	var/datum/role/job/J = SSjob.get_job(rank)

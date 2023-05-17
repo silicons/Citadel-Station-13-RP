@@ -1,4 +1,4 @@
-/datum/category_item/catalogue/technology/bot/ed209/slime
+/datum/prototype/struct/catalogue_entry/technology/bot/ed209/slime
 	name = "Bot - SL ED 209"
 	desc = "Due to the commercial failure of the ED model bots, \
 	the frames are easily procured by hobbyists or tinkerers for field \
@@ -14,7 +14,7 @@
 	density = 1
 	health = 200
 	maxHealth = 200
-	catalogue_data = list(/datum/category_item/catalogue/technology/bot/ed209/slime)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/bot/ed209/slime)
 
 	is_ranged = 1
 	preparing_arrest_sounds = new()

@@ -14,7 +14,7 @@
 	of Scori tribesmen were historically treated as hoaxes. NanoTrasen pathfinding teams operating in the wake of the expedition \
 	to Kristen's Harmony have since confirmed the presence of a nearby Scori tribe."
 	wikilink = "https://citadel-station.net/wikiRP/index.php?title=Race:_Scori"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/ashlander)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/ashlander)
 
 	icobase = 'icons/mob/species/human/body_greyscale.dmi'
 	deform  = 'icons/mob/species/human/deformed_body_greyscale.dmi'

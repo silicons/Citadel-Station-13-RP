@@ -2,7 +2,7 @@
 //			Shade
 ////////////////////////////
 
-/datum/category_item/catalogue/fauna/construct/shade
+/datum/prototype/struct/catalogue_entry/fauna/construct/shade
 	name = "%#ERROR#%"
 	desc = "%ERROR% SCAN DATA REDACTED. RETURN SCANNER TO A \
 	CENTRAL ADMINISTRATOR FOR IMMEDIATE MAINTENANCE. %ERROR%"
@@ -15,7 +15,7 @@
 	icon_state = "shade"
 	icon_living = "shade"
 	icon_dead = "shade_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/construct/shade)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/construct/shade)
 
 	response_help  = "puts their hand through"
 	response_disarm = "flails at"

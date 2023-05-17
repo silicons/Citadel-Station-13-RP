@@ -1,7 +1,7 @@
 ///Lythios "Experimental Fauna" since we technically need to be doing something on this planet.
 
 
-/datum/category_item/catalogue/fauna/livestock/icegoat
+/datum/prototype/struct/catalogue_entry/fauna/livestock/icegoat
 	name = "Experimental Livestock - Glacicorn"
 	desc = "A genetically engineered lifeform distantly related to the domesticated goat.\
 	It is currently being developed by NT as part of an independent initiative to slowly\
@@ -20,7 +20,7 @@
 	icon_state = "icegoat"
 	icon_living = "icegoat"
 	icon_dead = "icegoat_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/livestock/icegoat)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/livestock/icegoat)
 
 	faction = "goat"
 
@@ -98,7 +98,7 @@
 	else
 		..()
 
-/datum/category_item/catalogue/fauna/livestock/woolie
+/datum/prototype/struct/catalogue_entry/fauna/livestock/woolie
 	name = "Experimental Livestock - Woolie"
 	desc = "A large ball of dense wool hiding an unusual octopedal creature.\
 	It has been genetically engineered almost from scratch to create an animal\
@@ -115,7 +115,7 @@
 	icon_state = "woolie"
 	icon_living = "woolie"
 	icon_dead = "woolie_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/livestock/woolie)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/livestock/woolie)
 
 	faction = "goat"
 
@@ -170,7 +170,7 @@
 	else
 		..()
 
-/datum/category_item/catalogue/fauna/livestock/furnacegrub
+/datum/prototype/struct/catalogue_entry/fauna/livestock/furnacegrub
 	name = "Experimental Livestock - Furnace Grub"
 	desc = "After years of study by NT xenobiologists, the genes that allowed solar moths\
 	to produce heat were extracted and engineered into a docile and mostly safe living furnace.\
@@ -184,7 +184,7 @@
 	icon_state = "furnacegrub"
 	icon_living = "furnacegrub"
 	icon_dead = "furnacegrub_dead"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/livestock/furnacegrub)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/livestock/furnacegrub)
 
 	minbodytemp = 180
 	maxbodytemp = 350

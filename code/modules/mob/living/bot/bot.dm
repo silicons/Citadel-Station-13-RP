@@ -1,31 +1,31 @@
 // Obtained by scanning any bot.
-/datum/category_item/catalogue/technology/bot
+/datum/prototype/struct/catalogue_entry/technology/bot
 	name = "Bots"
 	desc = "Robots, commonly referred to as 'Bots', are unsophisticated automata programmed to follow \
 	a set routine of behaviors. Although automation has far outpaced the standard bot in sophistication \
 	and utility, bots are still able to fulfill a wide array of trivial utilities. From simple maintenance \
 	to augmenting law enforcement patrols, bots ease labor costs across the galaxy."
 	value = CATALOGUER_REWARD_TRIVIAL
-	unlocked_by_any = list(/datum/category_item/catalogue/technology/bot)
+	unlocked_by_any = list(/datum/prototype/struct/catalogue_entry/technology/bot)
 
 // Obtained by scanning all bots.
-/datum/category_item/catalogue/technology/all_bots
+/datum/prototype/struct/catalogue_entry/technology/all_bots
 	name = "Collection - Bots"
 	desc = "You have scanned a large array of different types of bot, \
 	and therefore you have been granted a fair sum of points, through this \
 	entry."
 	value = CATALOGUER_REWARD_EASY
 	unlocked_by_all = list(
-		/datum/category_item/catalogue/technology/bot/cleanbot,
-		/datum/category_item/catalogue/technology/bot/cleanbot/edCLN,
-		/datum/category_item/catalogue/technology/bot/ed209,
-		/datum/category_item/catalogue/technology/bot/ed209/slime,
-		/datum/category_item/catalogue/technology/bot/farmbot,
-		/datum/category_item/catalogue/technology/bot/floorbot,
-		/datum/category_item/catalogue/technology/bot/medibot,
-		/datum/category_item/catalogue/technology/bot/mulebot,
-		/datum/category_item/catalogue/technology/bot/secbot,
-		/datum/category_item/catalogue/technology/bot/secbot/slime
+		/datum/prototype/struct/catalogue_entry/technology/bot/cleanbot,
+		/datum/prototype/struct/catalogue_entry/technology/bot/cleanbot/edCLN,
+		/datum/prototype/struct/catalogue_entry/technology/bot/ed209,
+		/datum/prototype/struct/catalogue_entry/technology/bot/ed209/slime,
+		/datum/prototype/struct/catalogue_entry/technology/bot/farmbot,
+		/datum/prototype/struct/catalogue_entry/technology/bot/floorbot,
+		/datum/prototype/struct/catalogue_entry/technology/bot/medibot,
+		/datum/prototype/struct/catalogue_entry/technology/bot/mulebot,
+		/datum/prototype/struct/catalogue_entry/technology/bot/secbot,
+		/datum/prototype/struct/catalogue_entry/technology/bot/secbot/slime
 		)
 
 /mob/living/bot

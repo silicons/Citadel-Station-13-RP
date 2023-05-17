@@ -385,7 +385,7 @@
 	matter = list(MAT_STEEL = 70, "brass" = 60)
 	tool_speed = 0.75
 
-/datum/category_item/catalogue/anomalous/precursor_a/alien_welder
+/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_welder
 	name = "Precursor Alpha Object - Self Refueling Exothermic Tool"
 	desc = "An unwieldly tool which somewhat resembles a weapon, due to \
 	having a prominent trigger attached to the part which would presumably \
@@ -412,7 +412,7 @@
 /obj/item/weldingtool/alien
 	name = "alien welding tool"
 	desc = "An alien welding tool. Whatever fuel it uses, it never runs out."
-	catalogue_data = list(/datum/category_item/catalogue/anomalous/precursor_a/alien_welder)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_welder)
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "welder"
 	tool_speed = 0.1

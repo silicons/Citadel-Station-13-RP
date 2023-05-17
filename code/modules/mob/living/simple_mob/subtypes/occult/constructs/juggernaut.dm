@@ -2,7 +2,7 @@
 //		Juggernaut
 ////////////////////////////
 
-/datum/category_item/catalogue/fauna/construct/juggernaut
+/datum/prototype/struct/catalogue_entry/fauna/construct/juggernaut
 	name = "Constructs - Juggernaut"
 	desc = "An absolute behemoth, the Juggernaut is feared by \
 	many, and revered by some. Imposing, heavily armored, and powerful, \
@@ -28,7 +28,7 @@
 	attacktext = list("smashed their armoured gauntlet into")
 	friendly = list("pats")
 	mob_size = MOB_HUGE
-	catalogue_data = list(/datum/category_item/catalogue/fauna/construct/juggernaut)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/construct/juggernaut)
 
 
 	movement_cooldown = 6 //Not super fast, but it might catch up to someone in armor who got punched once or twice.

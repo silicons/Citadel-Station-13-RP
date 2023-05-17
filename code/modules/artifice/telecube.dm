@@ -2,7 +2,7 @@
  * Home of the telecube.
  */
 
-/datum/category_item/catalogue/anomalous/precursor_a/telecube
+/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/telecube
 	name = "Quantomatically Entangled Digicube"
 
 	desc = "An enigmatic cube that appears superficially similar to a Positronic Cube. \
@@ -26,7 +26,7 @@
 	w_class = ITEMSIZE_SMALL
 	origin_tech = list(TECH_MATERIAL = 7, TECH_POWER = 6, TECH_BLUESPACE = 7, TECH_ANOMALY = 2, TECH_PRECURSOR = 2)
 
-	catalogue_data = list(/datum/category_item/catalogue/anomalous/precursor_a/telecube)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/telecube)
 
 	slowdown = 5
 

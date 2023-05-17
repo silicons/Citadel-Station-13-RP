@@ -65,7 +65,7 @@
 	icon_state = "apilaser"
 	desc = "An older model of the basic lasergun. This version's casing has been painted yellow. Originating from, and carried by, Apidean combatants, it's unclear where they obtained them."
 
-/datum/category_item/catalogue/anomalous/precursor_a/alien_pistol
+/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_pistol
 	name = "Precursor Alpha Weapon - Appendageheld Laser"
 	desc = "This object strongly resembles a weapon, and if one were to pull the \
 	trigger located on the handle of the object, it would fire a deadly \
@@ -96,7 +96,7 @@
 /obj/item/gun/energy/alien
 	name = "alien pistol"
 	desc = "A weapon that works very similarly to a traditional energy weapon. How this came to be will likely be a mystery for the ages."
-	catalogue_data = list(/datum/category_item/catalogue/anomalous/precursor_a/alien_pistol)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/anomalous/precursor_a/alien_pistol)
 	icon_state = "alienpistol"
 	item_state = "alienpistol"
 	fire_delay = 10 // Handguns should be inferior to two-handed weapons. Even alien ones I suppose.

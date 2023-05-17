@@ -1,6 +1,6 @@
 // Phazons are weird.
 
-/datum/category_item/catalogue/technology/phazon
+/datum/prototype/struct/catalogue_entry/technology/phazon
 	name = "Exosuit - Phazon"
 	desc = "The Phazon exosuit is the result of a heavily classified NanoTrasen research initiative. \
 	Designed to serve as a reconnaissance, infiltration, and flanking mecha, the Phazon possesses an \
@@ -18,7 +18,7 @@
 	icon_state = "phazon"
 	movement_cooldown = 5
 	wreckage = /obj/structure/loot_pile/mecha/phazon
-	catalogue_data = list(/datum/category_item/catalogue/technology/phazon)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/technology/phazon)
 
 	maxHealth = 200
 	deflect_chance = 30

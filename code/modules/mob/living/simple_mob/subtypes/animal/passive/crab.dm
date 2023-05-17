@@ -1,5 +1,5 @@
 //Look Sir, free crabs!
-/datum/category_item/catalogue/fauna/crab
+/datum/prototype/struct/catalogue_entry/fauna/crab
 	name = "Crab"
 	desc = "A popular curstacean originating from Old Earth's oceans, the \
 	crab is enjoyed for its rich meat. The price of importing live crabs has ensured \
@@ -11,7 +11,7 @@
 	desc = "A hard-shelled crustacean. Seems quite content to lounge around all the time."
 	tt_desc = "E Cancer bellianus"
 	faction = "crabs"
-	catalogue_data = list(/datum/category_item/catalogue/fauna/crab)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/crab)
 
 	icon_state = "crab"
 	icon_living = "crab"
@@ -39,7 +39,7 @@
 
 // Sif!
 
-/datum/category_item/catalogue/fauna/sif_crab
+/datum/prototype/struct/catalogue_entry/fauna/sif_crab
 	name = "Sivian Fauna - Shelf Crab"
 	desc = "Classification: S Ocypode glacian\
 	<br><br>\
@@ -58,7 +58,7 @@
 	mod_min = 50
 	mod_max = 150
 
-	catalogue_data = list(/datum/category_item/catalogue/fauna/sif_crab)
+	catalogue_data_legacy = list(/datum/prototype/struct/catalogue_entry/fauna/sif_crab)
 
 // Meat!
 
