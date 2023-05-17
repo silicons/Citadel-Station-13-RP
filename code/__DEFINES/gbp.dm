@@ -2,7 +2,7 @@
 
 #define GBP_TYPE_SURVEY "survey"
 
-GLOBAL_LIST_REAL(gbp_names) = list(
+GLOBAL_REAL_LIST(gbp_names) = list(
 	GBP_TYPE_SURVEY = "Survey",
 )
 

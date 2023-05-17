@@ -4414,6 +4414,7 @@
 #include "code\modules\survey\catalogue\atoms.dm"
 #include "code\modules\survey\catalogue\catalogue_data.dm"
 #include "code\modules\survey\catalogue\catalogue_entry.dm"
+#include "code\modules\survey\catalogue\catalogue_network.dm"
 #include "code\modules\survey\catalogue\cataloguer.dm"
 #include "code\modules\survey\catalogue\cataloguer_visuals.dm"
 #include "code\modules\survey\catalogue\cataloguer_vr.dm"

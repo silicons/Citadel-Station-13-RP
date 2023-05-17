@@ -8,9 +8,12 @@
 #define EXAMINE_PANEL_PADDING "        "
 
 /atom/
-	var/description_info = null //Helpful blue text.
-	var/description_fluff = null //Green text about the atom's fluff, if any exists.
-	var/description_antag = null //Malicious red text, for the antags.
+	/// operation information
+	var/description_info = null
+	/// lore information
+	var/description_fluff
+	/// information on how to make people's days miserable
+	var/description_antag
 
 //Override these if you need special behaviour for a specific type.
 /atom/proc/get_description_info()

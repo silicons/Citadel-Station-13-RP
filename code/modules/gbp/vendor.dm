@@ -8,7 +8,9 @@
 	/// inserted id
 	var/obj/item/card/id/inserted_id
 
-/obj/machinery/gbp_vendor/Initailize(mapload)
+	#warn catalog.
+
+/obj/machinery/gbp_vendor/Initialize(mapload)
 	init_network()
 	return ..()
 

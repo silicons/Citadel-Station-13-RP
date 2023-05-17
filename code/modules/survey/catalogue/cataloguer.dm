@@ -1,4 +1,41 @@
-GLOBAL_LIST_EMPTY(all_cataloguers)
+/**
+ * as catalogue system is currently only stationside, this is the global network
+ */
+GLOBAL_DATUM_INIT(cataloguer_network, /datum/catalogue_network, new)
+
+/obj/item/cataloguer
+	name = "cataloguer"
+	desc = "A prototype, and relatively expensive scanner used to quickly scan the physical, and internal properties of an object, flora, or fauna."
+	description_fluff = "A marvel of modern informatics and sensor suites, this device was first created by Nanotrasen \
+	R&D early in the 2500s. Along with other prototypes in the Universal Excursion program, it managed to drive down the cost of \
+	performing routine planetary surface evaluations by nearly an order of magnitude due to its versatility. Contrary to usual doctrine, \
+	the designs for standard issue cataloguers were released to the public - of-course, \
+	nominally implanted with a 'sharing network' that NT was able to piggyback off of."
+
+	#warn sprites
+
+	/// connected network
+	var/datum/catalogue_network/network
+	/// lazylist stored points by type
+	var/list/stored_points
+	/// currently scanning
+	var/scanning = FALSE
+	/// current target
+	var/atom/movable/scanning_target
+
+
+/obj/item/cataloguer/Initialize(mapload)
+	. = ..()
+	init_network()
+
+/obj/item/cataloguer/proc/init_network()
+	network = GLOB.cataloguer_network
+
+/obj/item/cataloguer/examine(mob/user)
+	. = ..()
+	if(user.is_holding(src))
+		. += SPAN_NOTICE("To scan something, click on it while holding [src] in your hand.")
+		. += SPAN_NOTICE("Alt-click to detect nearby scannables.")
 
 /*
 	This is a special scanner which exists to give explorers something to do besides shoot things.
@@ -23,8 +60,6 @@ GLOBAL_LIST_EMPTY(all_cataloguers)
 	icon = 'icons/obj/device.dmi'
 	icon_state = "cataloguer"
 	w_class = ITEMSIZE_NORMAL
-	origin_tech = list(TECH_MATERIAL = 2, TECH_DATA = 3, TECH_MAGNET = 3)
-	damage_force = 0
 	var/points_stored = 0 // Amount of 'exploration points' this device holds.
 	var/scan_range = 3 // How many tiles away it can scan. Changing this also changes the box size.
 	var/datum/prototype/struct/catalogue_entry/displayed_data = null // Used for viewing a piece of data in the UI.
@@ -40,18 +75,6 @@ GLOBAL_LIST_EMPTY(all_cataloguers)
 	with a scanner that both can scan from farther away, and with less time."
 	scan_range = 4
 	tool_speed = 0.8
-
-// Able to see all defined catalogue data regardless of if it was unlocked, intended for testing.
-/obj/item/cataloguer/debug
-	name = "omniscient cataloguer"
-	desc = "A hand-held cataloguer device that appears to be plated with gold. For some reason, it \
-	just seems to already know everything about narrowly defined pieces of knowledge one would find \
-	from nearby, perhaps due to being colored gold. Truly a epistemological mystery."
-	icon_state = "debug_cataloguer"
-	tool_speed = 0.1
-	scan_range = 7
-	debug = TRUE
-
 
 /obj/item/cataloguer/Initialize(mapload)
 	GLOB.all_cataloguers += src
@@ -240,10 +263,12 @@ GLOBAL_LIST_EMPTY(all_cataloguers)
 		playsound(src.loc, 'sound/machines/buzz-two.ogg', 50)
 	to_chat(user, SPAN_NOTICE("\The [src] found [scannable_atoms.len] object\s that can be scanned."))
 
+/obj/item/cataloguer/proc/award_points(points)
+	if(!isnull(network))
+		#warn impl
+		return
+	stored_points[GBP_TYPE_SURVEY] += points
 
-// Negative points are bad.
-/obj/item/cataloguer/proc/adjust_points(amount)
-	points_stored = max(0, points_stored += amount)
 
 /obj/item/cataloguer/attack_self(mob/user)
 	. = ..()

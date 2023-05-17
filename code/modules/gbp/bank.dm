@@ -10,7 +10,7 @@
 	/// inserted id
 	var/obj/item/card/id/inserted_id
 
-/obj/machinery/gbp_bank/Initailize(mapload)
+/obj/machinery/gbp_bank/Initialize(mapload)
 	init_network()
 	return ..()
 

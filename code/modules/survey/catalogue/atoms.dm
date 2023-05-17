@@ -15,6 +15,8 @@
  */
 /atom/movable/proc/cataloguer_query()
 
+#warn finish all
+
 /atom
 	var/catalogue_delay = 5 SECONDS // How long it take to scan.
 	// List of types of /datum/prototype/struct/catalogue_entry that should be 'unlocked' when scanned by a Cataloguer.
