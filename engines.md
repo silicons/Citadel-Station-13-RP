@@ -25,3 +25,27 @@ Last requirement also met as you just crush the fuel into a fusion plasma, there
 Murphy:
 
 !(https://media.discordapp.net/attachments/1071527583352627315/1071527785723613244/20221223_220610.png?width=1135&height=1513)
+
+i want it to be extensible and flexible so people can fuck with it, but also make it simple and basically run itself
+so engineers can baby it if they want for more power/preformance, but people who wanna do other stuff can fuck off
+
+so the engine should be:
+-easy to run, but also tweakable
+-dangerous when damaged or messed with, but very powerful in the right hands
+-probably the sole concern of engineering when things are going really, really, really badly.
+
+so, i am thinking the engine has an integrity that's affected by the state of the plasma network to some degree
+the plasma network at a certain point will begin to consume power to maintain itself if you're pushing it beyond certain limits
+and the engine will take damage (maybe negatable through upgrades?) if you're running it too hard and something on the plasma network happens, like an emp, a conduit fails, etc
+but it should be durable, and able to recover from a fuckup to some degree
+
+so initial stages of fuckup would be like
+minor power fluxuations, random EMPs focused on parts of the plasma network, a computer complaining on the engineering radio about stability issues
+moving to 'the reactor is now taking damage',
+the reactor has an automatic purge feature which can dump the entirety of the plasma network, at the cost of knocking the entire ship offline for a prolonged period of time
+because ejecting the engine is like, ICly, a shipyard-level repair, so you want to avoid that at all costs; but the automatic core dump only works if the reactor is damaged and there's enough plasma to power [macguffin magnetic coils or something], but the dump also has a chance to fail because of damage (maybe add a manual process that's INSANELY DANGEROUS so if the automatic fails, someone can be a hero and dump the core)
+anyway, ejecting the core is a last resort for good reasons, and dumping it is bad, but not unrecoverable, and an engineer's tool to handle 'we have fucked up' is going to be trying to minimize the reactor's output without shutting it down entirely (which, an unplanned shutdown would be very bad and maybe cause similar issues to a core dump) until the plasma network is stabilized
+
+and the above would normally be an automatic process that tries to match output with demand
+
+consider: ship-wide cooling loop, plasma 2 energy converters require cooling which goes to a big radiator, without it they'll begin to break down and cause issues with the plasma network
