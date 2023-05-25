@@ -26,6 +26,8 @@ Murphy:
 
 !(https://media.discordapp.net/attachments/1071527583352627315/1071527785723613244/20221223_220610.png?width=1135&height=1513)
 
+Mazian:
+
 i want it to be extensible and flexible so people can fuck with it, but also make it simple and basically run itself
 so engineers can baby it if they want for more power/preformance, but people who wanna do other stuff can fuck off
 
@@ -49,3 +51,7 @@ anyway, ejecting the core is a last resort for good reasons, and dumping it is b
 and the above would normally be an automatic process that tries to match output with demand
 
 consider: ship-wide cooling loop, plasma 2 energy converters require cooling which goes to a big radiator, without it they'll begin to break down and cause issues with the plasma network
+
+silicons-draft:
+
+
