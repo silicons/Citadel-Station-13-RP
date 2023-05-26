@@ -104,17 +104,63 @@ i should probably emphasize that this is open to modifications since this is jus
 
 ### supporting machinery
 
+supporting machinery attach to the core by being adjacent
+
+they can be controlled via the control plane and linked consoles
+
 #### plasma tap
+
+- removes plasma from the core
+- can inject plasma into the core but this is, obviously, usually not worth it
+  - lol jumpstarting another ship?
+- configurable rate
 
 #### fuel injector
 
+- takes fuel
+- injects it
+- shrimple as
+
 #### control plane
+
+- provides an interface for control
+  - control consoles need this basically - link the ids together
+  - in the Future we might wanna look into making it use network cables instead but for now don't worry about it that's a Silicons Insanity Project
+- provides power to the core
+  - if any core functions require power this is where it's input from.
+  - this takes power from a wire. so yes, losing engine power bad
+  - on the bright side, cutting the apc doesn't just fuck the engine now lol
+  - **all supporting machinery receive power 
 
 #### pipenet adapter
 
+#### LASERS
+
+
+
 ### fuel
 
+we have a few options here
+
+#### solid / reagent fuel
+
+- fuels are stored in containers
+- containers are stored in injectors and, well, injected
+- if/when we get plumbing we can use that for the reagents
+
+#### gaseous fuel
+
+- fuels are stored in canisters
+- fuels can be piped into injectors
+- fuels can also be put into the pipenet adapter but this is Potentially A Very Bad Idea
+
+#### both
+
+- both. we start off by coding solid / reagent fuels, then add in translations for it to become gas / become reagent from gas
+- we should optimally make solid a thing first, this is minimal effort for minimum viable product
+
 ### startup, mechanics, reactions, output
+
 
 ### accidents
 
