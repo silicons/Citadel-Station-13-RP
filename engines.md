@@ -54,4 +54,76 @@ consider: ship-wide cooling loop, plasma 2 energy converters require cooling whi
 
 silicons-draft:
 
+i should probably emphasize that this is open to modifications since this is just another idea built off all of the above
 
+### initial stuff
+
+- ship-wide cooling loops are epic but i don't know if we can do this performantly without negatively impacting everyone potentially
+- core is meant to be able to be ejected (potentially stolen) and retrieved without incident
+  - this is like, under optimal conditions. ejecting a core that's critical is different from just jettisoning it and putting it back
+- plasma network is a lossy capacitor, not a battery. it loses power over time, as canonically it *takes* its own power to contain the plasma, and the more energy you have contained inside, the more energy it siphons to maintain containment
+  - you **physically turn the engine up** when you need more power, e.g. during evasive ship maneuvers that sacrifice power for efficiency. fun!
+
+### plasma network
+
+- producers, consumers, capacitors, one-way transfer valves, limiter valves
+- usually you wouldn't want capacitors at all since the network has natural capacitance and capacitors are still lossy (even if a bit less so)
+- draw is averaged
+- we don't necessarily want to punish overcharging as much as having super high power itself
+  - though we can have machines that draw have an upper limit, and maybe vent a bit of heat / cause unpleasant effects if overheated
+  - or better, just making running everything at high powers a bit inefficient and quite a bit dangerous
+  - if we did punish for having high power itself (or really, at all) we'd have to be strategic where we put plasma lines so it seems bad but it doesn't actually just start killing everyone
+  - it'd also give a reason to put plasma lines *away* from frequently travelled areas, so in maints/substations
+- rapid unplanned disassemblies (so shit breaking)
+  - ranging in effects from:
+  - a nasty shock and some heat (enough to warm a small room to 50-60C) at low energies
+  - a *lot* of heat
+  - small explosions
+  - large explosions that tear open the conduits around the line for violent decompositions
+    - network has a throttling system for this, so you can't have a chain reaction
+- overloads
+  - plasma machinery breaking/being overloaded, like reactor fluxes, can travel down the network like a "packet" and cause all sorts of nasty effects like
+  - flashes
+  - radiation
+  - small time emps
+  - machinery hit by the packet doing more powerful versions of this
+
+### core
+
+5x5 object. we are going to need sprites.
+
+- positioned above a big mass driver
+- supporting machinery is attached to it
+- contains the fusion reaction and serves as an intrinsic buffer of energy, radiation, and *mishaps*
+- probably placed very close to the main sublight engine
+  - we might even want a direct line for this purpose
+- this shit is
+  - **heavy**: only able to be pushed slowly by mechs, or multiple people. this is nullified if it's entirely on space tiles - in that case, you can drag it slowly solo. **theft of the engine is very possible.**
+  - **climbable**: i'll code in ~~/datum/element/climbable~~ climbing at /obj level because we're not deranged enough to use elements for this shit
+  - **highly valuable**: adminspawn only initially, we'll add a way to build it later (unless mazian vetos me by just coding in a way to do so lol)
+
+### supporting machinery
+
+#### plasma tap
+
+#### fuel injector
+
+#### control plane
+
+#### pipenet adapter
+
+### fuel
+
+### startup, mechanics, reactions, output
+
+### accidents
+
+### ejecting
+
+- core is next to a set of shutters
+- we have a massive driver that can shoot it into space
+- you **cannot easily** order a new core. lose it, and it's admin intervention
+  - eventually when it goes off level it'll turn into an overmap entity, and you can send a shuttle out to grab it later.
+  - eventually we may add a way to assemble a new core because we *do* like "we can rebuild it" mentality
+- if machinery is not safely detached, you basically just rip machinery apart and it might even cause back-flow overloads or bad network behaviors.
+- the core is **heavy**. ejecting it without any power at all is difficult.
