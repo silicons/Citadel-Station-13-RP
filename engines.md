@@ -118,7 +118,7 @@ they can be controlled via the control plane and linked consoles
 #### fuel injector
 
 - takes fuel
-- injects it
+- injects it at a configured rate
 - shrimple as
 
 #### control plane
@@ -130,9 +130,11 @@ they can be controlled via the control plane and linked consoles
   - if any core functions require power this is where it's input from.
   - this takes power from a wire. so yes, losing engine power bad
   - on the bright side, cutting the apc doesn't just fuck the engine now lol
-  - **all supporting machinery receive power 
+  - **all supporting machinery receive power from this.** the engine therefore technically does not need an APC
 
 #### pipenet adapter
+
+- 
 
 #### LASERS
 
