@@ -1,0 +1,27 @@
+//* themes
+
+#define DERELICT_THEME_GENERAL (1<<0)
+
+DEFINE_BITFIELD(derilect_theme, list(
+	BITFIELD(DERELICT_THEME_GENERAL),
+))
+
+//* fragment / connector types
+
+#define DERELICT_FRAGMENT_ROOM (1<<0)
+#define DERELICT_FRAGMENT_HALL (1<<1)
+#define DERELICT_FRAGMENT_HUB (1<<2)
+#define DERELICT_FRAGMENT_DOCK (1<<3)
+#define DERELICT_FRAGMENT_MISC (1<<4)
+
+#define DERILECT_ACCEPT_ALL (~0)
+
+DEFINE_SHARED_BITFIELD(derilect_fragment_types, list(
+	derelict_fragment,
+	derelict_connect,
+), list(
+	BITFIELD(DERELICT_FRAGMENT_ROOM),
+	BITFIELD(DERELICT_FRAGMENT_HALL),
+	BITFIELD(DERELICT_FRAGMENT_HUB),
+	BITFIELD(DERELICT_FRAGMENT_DOCK),
+))
