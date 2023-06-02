@@ -134,11 +134,22 @@ they can be controlled via the control plane and linked consoles
 
 #### pipenet adapter
 
-- 
+**Entirely optional device.**
 
-#### LASERS
+- pumps gas into thin 'shell' around core
+- gas heated by system
+  - gas is not heated to the actual core temperature, more like 1/5000 of it.
+  - core usually operates at millions or tens of millions degrees, we don't want gas *that* hot!
+  - at 1/5000, 50 mil degree is around 10,000 degree gas. This is already **extreme.**
+  - more than likely we'll use a non-linear heat transfer system to avoid being able to just pump out free superheated gas. Anything above 10,000K as a *constant stream* is very bad for atmos balancing.
+- in the future, gas reactions may occur from the radioactivity hitting the gas
+- for now, gas will provide a small amount of radiation shielding - diminishing when superheated.
+  - give a reason to use this at all
 
+#### focus
 
+- concentrates emitter/gyrotron pulses
+- provides energy to the core, but helps make it unstable.
 
 ### fuel
 
@@ -164,7 +175,33 @@ we have a few options here
 ### startup, mechanics, reactions, output
 
 
+
+
 ### accidents
+
+"sometimes, you just lose"
+
+#### instability
+
+#### venting
+
+when unstable, energy can be vented in different ways:
+
+- lightning bolts (arc flashes)
+- overcharge packets being sent through the plasma network
+  - cutting it off from the network is bad because it'll just vent the packet into the room
+- heating the area a bit
+- big, but weak emps
+- through unidentified Scientific Bullshit Reasons, highly unstable fusion cores can release burst instability into the ship's propulsion/drives, as well as surrounding ones. this makes thrusters less efficient, disrupts shields, and is highly visible on sensors (and is very bad for sensors that are too close).
+
+#### meltdown
+
+if instability gets too bad, the engine's spin entirely destabilizes
+
+- all core energy is ejected into the surrounding area:
+- large explosive shock wave
+- massive, decaying multideck emp pulse
+- everything remotely nearby is flung away at high speeds, magboots or not
 
 ### ejecting
 
@@ -175,3 +212,11 @@ we have a few options here
   - eventually we may add a way to assemble a new core because we *do* like "we can rebuild it" mentality
 - if machinery is not safely detached, you basically just rip machinery apart and it might even cause back-flow overloads or bad network behaviors.
 - the core is **heavy**. ejecting it without any power at all is difficult.
+
+#### activity
+
+when we fully finish the overmaps update, the ejected core will be a full overmap entity as opposed to just sitting somewhere on the level.
+
+- it's continuously simulated
+- if venting wins, it gradually, understandably, cools
+- if the reactions wins, it still detonates. this hits nearby ships and causes aforementioned issues with thrusters, shields, and EMPs them.
