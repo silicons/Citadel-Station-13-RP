@@ -189,9 +189,9 @@ While scattered, the vast majority of Dnin-Nepids still occupy the same *general
 
 ### Migration
 
-As can be expected for a race whose 'land' composition is of fleets of carriers, and the craft which they carry, travel tends to be *frequent*. Most ships are well able to accomodate basically any reasonable size of shuttles - and in the worst case, if all room is exhausted, there's nothing wrong with diverting to another nearby vessel.
+As can be expected for a race whose 'land' composition is of fleets of carriers, and the craft which they carry, travel tends to be *frequent*. Most ships are well able to accomodate any reasonable size of shuttles - and in the worst case, if all room is exhausted, there's nothing wrong with a temporary divert. The relative interconnection allowed for by the *Wayfarer's Network* further makes long distance travel more logistically simplified than for many other species.
 
-Actual migration, however - while intermingling and eventual relocation between vessels within the same fleet is decently common, full on relocations 
+Permanent emigration, however, remains more infrequent. While it does often happen between ships with close ties, or those of the same fleet, more distant migrations tend to be infrequent due to the subtle differences in operations seen on each ship. One often would find necessary re-adaptations to be quite arbitrary and lacking in sense - though on the bright side, *returning* is often a flight away.
 
 ## History
 
