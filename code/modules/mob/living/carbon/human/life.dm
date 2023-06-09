@@ -266,7 +266,7 @@
 	// The MUTATION_HULK stuff that was here is now in the hulk gene.
 	var/mister_robot = !!isSynthetic()
 	if(!mister_robot)
-		for(var/datum/gene/gene in dna_genes)
+		for(var/datum/legacy_gene/gene in dna_genes)
 			if(!gene.block)
 				continue
 			if(gene.is_active(src))

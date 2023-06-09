@@ -83,7 +83,7 @@ var/global/list/dna_activity_bounds[DNA_SE_LENGTH]
  */
 var/global/list/assigned_blocks[DNA_SE_LENGTH]
 
-var/global/list/datum/gene/dna_genes[0]
+var/global/list/datum/legacy_gene/dna_genes[0]
 
 /////////////////
 //! ## GENE DEFINES ## !//
@@ -298,7 +298,7 @@ var/global/list/datum/gene/dna_genes[0]
 	SetUIValueRange(DNA_UI_BEARD_STYLE, beard, GLOB.legacy_facial_hair_lookup.len,1)
 
 	body_markings.Cut()
-	
+
 	for(var/obj/item/organ/external/E in character.organs)
 		E.s_base = s_base
 		if(E.markings.len)

@@ -511,7 +511,7 @@ GLOBAL_LIST_EMPTY(damage_icon_parts)
 	var/image/standing	= image(icon = 'icons/effects/genetics.dmi', layer = BODY_LAYER+MUTATIONS_LAYER)
 	var/g = gender == FEMALE ? "f" : "m"
 
-	for(var/datum/gene/gene in dna_genes)
+	for(var/datum/legacy_gene/gene in dna_genes)
 		if(!gene.block)
 			continue
 		if(gene.is_active(src))

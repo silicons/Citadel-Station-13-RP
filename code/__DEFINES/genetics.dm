@@ -1,0 +1,1 @@
+#define GENE_COMPLEXITY_BASE 10

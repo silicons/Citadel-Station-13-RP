@@ -9,7 +9,7 @@
  * @author N3X15 <nexisentertainment@gmail.com>
  */
 
-/datum/gene
+/datum/legacy_gene
 	/// Display name
 	var/name="BASE GENE"
 
@@ -26,25 +26,25 @@
 /**
  * Is the gene active in this mob's DNA?
  */
-/datum/gene/proc/is_active(mob/M)
+/datum/legacy_gene/proc/is_active(mob/M)
 	return M.active_genes && (type in M.active_genes)
 
 /**
  * Return 1 if we can activate.
  * HANDLE MUTCHK_FORCED HERE!
  */
-/datum/gene/proc/can_activate(mob/M, flags)
+/datum/legacy_gene/proc/can_activate(mob/M, flags)
 	return 0
 
 /// Called when the gene activates.  Do your magic here.
-/datum/gene/proc/activate(mob/M, connected, flags)
+/datum/legacy_gene/proc/activate(mob/M, connected, flags)
 	return
 
 /**
  * Called when the gene deactivates.  Undo your magic here.
  * Only called when the block is deactivated.
  */
-/datum/gene/proc/deactivate(mob/M, connected, flags)
+/datum/legacy_gene/proc/deactivate(mob/M, connected, flags)
 	return
 
 // This section inspired by goone's bioEffects.
@@ -52,19 +52,19 @@
 /**
  * Called in each life() tick.
  */
-/datum/gene/proc/OnMobLife(mob/M)
+/datum/legacy_gene/proc/OnMobLife(mob/M)
 	return
 
 /**
  * Called when the mob dies
  */
-/datum/gene/proc/OnMobDeath(mob/M)
+/datum/legacy_gene/proc/OnMobDeath(mob/M)
 	return
 
 /**
  * Called when the mob says shit
  */
-/datum/gene/proc/OnSay(mob/M, message)
+/datum/legacy_gene/proc/OnSay(mob/M, message)
 	return message
 
 /**
@@ -74,7 +74,7 @@
  * @params g Gender (m or f)
  * @params fat Fat? (0 or 1)
  */
-/datum/gene/proc/OnDrawUnderlays(mob/M, g, fat)
+/datum/legacy_gene/proc/OnDrawUnderlays(mob/M, g, fat)
 	return 0
 
 
@@ -90,7 +90,7 @@
 /////////////////////
 
 
-/datum/gene/basic
+/datum/legacy_gene/basic
 	name="BASIC GENE"
 
 	/// Mutation to give.
@@ -102,19 +102,19 @@
 	/// Possible deactivation messages.
 	var/list/deactivation_messages=list()
 
-/datum/gene/basic/can_activate(mob/M, flags)
+/datum/legacy_gene/basic/can_activate(mob/M, flags)
 	if(flags & MUTCHK_FORCED)
 		return 1
 	// Probability check
 	return probinj(activation_prob,(flags&MUTCHK_FORCED))
 
-/datum/gene/basic/activate(mob/M)
+/datum/legacy_gene/basic/activate(mob/M)
 	M.mutations.Add(mutation)
 	if(activation_messages.len)
 		var/msg = pick(activation_messages)
 		to_chat(M, SPAN_NOTICE("[msg]"))
 
-/datum/gene/basic/deactivate(mob/M)
+/datum/legacy_gene/basic/deactivate(mob/M)
 	M.mutations.Remove(mutation)
 	if(deactivation_messages.len)
 		var/msg = pick(deactivation_messages)
