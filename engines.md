@@ -87,6 +87,7 @@ i should probably emphasize that this is open to modifications since this is jus
   - radiation
   - small time emps
   - machinery hit by the packet doing more powerful versions of this
+- maybe emergency devices that shunt a portion of energy to prevent overloads
 
 ### core
 
@@ -174,14 +175,31 @@ we have a few options here
 
 ### startup, mechanics, reactions, output
 
+this is somewhat but not really inspired by R-UST
 
+reactor has stats of:
 
+- spin: the kinetic velocity of the contained fusion plasma
+- instability: how (dis)orderly the plasma is, from a perfect ring to pretty much going all over the place
+- temperature: duh
+- volume: this is just the total amount of material in the core, including the fuel itself
 
 ### accidents
 
 "sometimes, you just lose"
 
 #### instability
+
+for (unnamed fake physics reasons), the main way the reactor keeps the mixture contained and stable is its inbuilt electromagnetics.
+the fusion fuel mixture is kept spinning; this further reduces instability.
+
+instability results in venting incidents that increase in severity and rate as it gets worse.
+
+it's mitigated by 
+
+- not having too much fuel / mass in the core
+- having the core be cooler
+- inputting more electromagnetic energy to an extent
 
 #### venting
 
