@@ -2,6 +2,8 @@
 				INTERNAL ORGANS DEFINES
 ****************************************************/
 /obj/item/organ/internal
+	/// raw damage value for this organ
+	var/damage = 0
 	/// Icon to use when the organ has died.
 	var/dead_icon
 
