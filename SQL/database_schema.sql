@@ -290,19 +290,36 @@ CREATE TABLE IF NOT EXISTS `%_PREFIX_%karmatotals` (
   PRIMARY KEY (`id`)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE IF NOT EXISTS `%_PREFIX_%library` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT ,
-  `author` TEXT NOT NULL ,
-  `title` TEXT NOT NULL ,
-  `content` TEXT NOT NULL ,
-  `category` TEXT NOT NULL ,
-  PRIMARY KEY (`id`)
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 CREATE TABLE IF NOT EXISTS `%_PREFIX_%population` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `playercount` INT(11) NULL DEFAULT NULL ,
   `admincount` INT(11) NULL DEFAULT NULL ,
   `time` DATETIME NOT NULL ,
   PRIMARY KEY (`id`)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- library --
+
+-- primary library table --
+-- used to store books   --
+CREATE TABLE IF NOT EXISTS `%_PREFIX_%library` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `creator_player` INT(11) NULL,
+  `creator_ckey` VARCHAR(32) NULL,
+  `creator_ip` INT(10) UNSIGNED NULL,
+  `creator_computerid` VARCHAR(32) NULL,
+  `created_datetime` DATETIME NOT NULL DEFAULT Now(),
+  `created_round` INT(11) NULL,
+  `name` VARCHAR(128) NOT NULL,
+  `content` TEXT NOT NULL,
+  `category` ENUM(`Reference`, `Fiction`, `Non-Fiction`, `Other`, `Adult`) NOT NULL,
+  `deleted` TINYINT(1) UNSIGNED DEFAULT "0",
+  `deleted_ckey` VARCHAR(32) NULL,
+  `deleted_datetime` DATETIME NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT FOREIGN KEY `playerid` (`creator_player`)
+  REFERENCES `%_prefix_%player` (`id`)
+  ON DELETE NULL
+  ON UPDATE CASCADE,
+  INDEX `lookup` (`deleted`, `name`, `category`)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

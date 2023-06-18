@@ -1,16 +1,3 @@
-/* Library Items
- *
- * Contains:
- *		Bookcase
- *		Book
- *		Barcode Scanner
- */
-
-
-/*
- * Bookcase
- */
-
 /obj/structure/bookcase
 	name = "bookcase"
 	icon = 'icons/obj/library.dmi'
@@ -94,8 +81,6 @@
 		icon_state = "book-[contents.len]"
 	else
 		icon_state = "book-5"
-
-
 
 /obj/structure/bookcase/manuals/medical
 	name = "Medical Manuals bookcase"
@@ -192,45 +177,3 @@
 		icon_state = "legalbook-[contents.len]"
 	else
 		icon_state = "legalbook-5"
-
-/*
- * Barcode Scanner
- */
-/obj/item/barcodescanner
-	name = "barcode scanner"
-	icon = 'icons/modules/library/items/barcode_scanner.dmi'
-	icon_state ="scanner"
-	worn_render_flags = WORN_RENDER_INHAND_NO_RENDER | WORN_RENDER_SLOT_NO_RENDER
-	throw_speed = 1
-	throw_range = 5
-	w_class = ITEMSIZE_SMALL
-	var/obj/machinery/librarycomp/computer // Associated computer - Modes 1 to 3 use this
-	var/obj/item/book/book	 //  Currently scanned book
-	var/mode = 0 					// 0 - Scan only, 1 - Scan and Set Buffer, 2 - Scan and Attempt to Check In, 3 - Scan and Attempt to Add to Inventory
-
-/obj/item/barcodescanner/attack_self(mob/user)
-	. = ..()
-	if(.)
-		return
-	mode += 1
-	if(mode > 3)
-		mode = 0
-	to_chat(user, "[src] Status Display:")
-	var/modedesc
-	switch(mode)
-		if(0)
-			modedesc = "Scan book to local buffer."
-		if(1)
-			modedesc = "Scan book to local buffer and set associated computer buffer to match."
-		if(2)
-			modedesc = "Scan book to local buffer, attempt to check in scanned book."
-		if(3)
-			modedesc = "Scan book to local buffer, attempt to add book to general inventory."
-		else
-			modedesc = "ERROR"
-	to_chat(user, " - Mode [mode] : [modedesc]")
-	if(src.computer)
-		to_chat(user, "<font color=green>Computer has been associated with this unit.</font>")
-	else
-		to_chat(user, "<font color=red>No associated computer found. Only local scans will function properly.</font>")
-	to_chat(user, "\n")
