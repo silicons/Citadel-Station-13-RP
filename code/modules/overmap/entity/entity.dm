@@ -24,6 +24,10 @@
 	/// is moving
 	var/tmp/is_moving = FALSE
 
+	//* ships
+	/// ship datum, if any
+	var/datum/ship/ship
+
 /obj/overmap/entity/New()
 	// assign id immediately
 	id = "[GLOB.round_id? "[GLOB.round_id]_" : ""][num2text(++id_next, 999)]"
