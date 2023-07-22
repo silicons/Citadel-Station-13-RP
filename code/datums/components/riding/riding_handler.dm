@@ -348,7 +348,7 @@
 	// move
 	last_move_time = world.time
 	next_move_time = world.time + (last_move_diagonal? SQRT_2 : 1) * vehicle_move_delay
-	step(AM, dir)
+	drive(M, dir)
 	last_move_diagonal = (AM.loc == next) && (ISDIAGONALDIR(dir))
 	return TRUE
 
@@ -357,6 +357,12 @@
  */
 /datum/component/riding_handler/proc/driver_check(mob/M)
 	return TRUE
+
+/**
+ * handle moving a direction
+ */
+/datum/component/riding_handler/proc/drive(mob/M, dir)
+	step(parent, dir)
 
 /**
  * handles checks/updates when we move

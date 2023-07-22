@@ -8,3 +8,10 @@
 /datum/component/riding_handler/vehicle/driver_check(mob/M)
 	var/obj/vehicle/ridden/R = parent
 	return R.drive_check(M)
+
+/datum/component/riding_handler/vehicle/drive(mob/M, dir)
+	var/obj/vehicle/ridden/R = parent
+	if(R.drive_override(M, dir))
+		return TRUE
+	. = ..()
+	R.drive_after(M, dir, .)

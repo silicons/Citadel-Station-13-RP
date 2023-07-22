@@ -1,3 +1,4 @@
+// todo: all behavior other than positioning should be here to reduce dependence on riding_handler.
 /obj/vehicle/ridden
 	name = "ridden vehicle"
 	// todo: i wish byond planes weren't monolithic and awful but we should probably have a proper plane system haha.
@@ -65,8 +66,20 @@
 		inserted_key = null
 		return TRUE
 
-/obj/vehicle/ridden/proc/drive_check(mob/user)
+/obj/vehicle/ridden/proc/drive_check(mob/driver)
 	if(key_type && !is_key(inserted_key))
 		to_chat(user, SPAN_WARNING("[src] has no key inserted."))
 		return FALSE
 	return TRUE
+
+/**
+ * return TRUE to stop component from moving
+ */
+/obj/vehicle/ridden/proc/drive_override(mob/driver, dir)
+	return FALSE
+
+/**
+ * post drive
+ */
+/obj/vehicle/ridden/proc/drive_after(mob/driver, dir, success)
+	return
