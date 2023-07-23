@@ -96,6 +96,7 @@
 	add_control_flags(M, control_flags)
 	after_add_occupant(M)
 	grant_passenger_actions(M)
+	investigate_log("occupant mounted [M] ([control_flags])")
 	return TRUE
 
 /obj/vehicle/proc/after_add_occupant(mob/M)
@@ -113,6 +114,7 @@
 	occupants -= M
 	cleanup_actions_for_mob(M)
 	after_remove_occupant(M)
+	investigate_log("occupant dismounted [M]")
 	return TRUE
 
 /obj/vehicle/proc/after_remove_occupant(mob/M)

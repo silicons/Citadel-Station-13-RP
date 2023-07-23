@@ -347,8 +347,7 @@
 		return FALSE
 	// move
 	last_move_time = world.time
-	next_move_time = world.time + (last_move_diagonal? SQRT_2 : 1) * vehicle_move_delay
-	drive(M, dir)
+	next_move_time = world.time + drive(M, dir)
 	last_move_diagonal = (AM.loc == next) && (ISDIAGONALDIR(dir))
 	return TRUE
 
@@ -360,9 +359,15 @@
 
 /**
  * handle moving a direction
+ *
+ * todo: this entire proc and its interaction with ridden vehicles is hellish.
+ *
+ * return clickdelay to use, or null on fail.
  */
 /datum/component/riding_handler/proc/drive(mob/M, dir)
-	step(parent, dir)
+	if(!step(parent, dir))
+		return null
+	return (last_move_diagonal? SQRT_2 : 1) * vehicle_move_delay
 
 /**
  * handles checks/updates when we move

@@ -35,11 +35,6 @@
 
 /obj/vehicle/ridden/mob_buckled(mob/M, flags, mob/user, semantic)
 	add_occupant(M)
-	/*
-	if(M.get_num_legs() < legs_required)
-		to_chat(M, "<span class='warning'>You don't have enough legs to operate the pedals!</span>")
-		unbuckle_mob(M)
-	*/
 	return ..()
 
 /obj/vehicle/ridden/attackby(obj/item/I, mob/user, params)
@@ -68,18 +63,23 @@
 
 /obj/vehicle/ridden/proc/drive_check(mob/driver)
 	if(key_type && !is_key(inserted_key))
-		to_chat(user, SPAN_WARNING("[src] has no key inserted."))
+		to_chat(driver, SPAN_WARNING("[src] has no key inserted."))
 		return FALSE
 	return TRUE
 
 /**
  * return TRUE to stop component from moving
  */
-/obj/vehicle/ridden/proc/drive_override(mob/driver, dir)
+/obj/vehicle/ridden/proc/drive_override(mob/driver, dir, base_delay)
 	return FALSE
 
 /**
  * post drive
+ *
+ * @params
+ * * driver - person driving
+ * * dir - direction we tried to go
+ * * delay - move delay incurred; failure = null
  */
-/obj/vehicle/ridden/proc/drive_after(mob/driver, dir, success)
+/obj/vehicle/ridden/proc/drive_after(mob/driver, dir, delay)
 	return

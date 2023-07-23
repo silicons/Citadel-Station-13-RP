@@ -11,7 +11,7 @@
 
 /datum/component/riding_handler/vehicle/drive(mob/M, dir)
 	var/obj/vehicle/ridden/R = parent
-	if(R.drive_override(M, dir))
-		return TRUE
+	if(!isnull(. = R.drive_override(M, dir, vehicle_move_delay)))
+		return
 	. = ..()
 	R.drive_after(M, dir, .)

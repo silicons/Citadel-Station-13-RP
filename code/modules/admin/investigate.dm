@@ -1,3 +1,5 @@
+// todo: overhaul to code/modules/logging, have proper investigate rust log writes.
+
 /proc/investigate_subject2file(subject)
 	return file("[GLOB.log_directory]/investigate/[subject].html")
 
