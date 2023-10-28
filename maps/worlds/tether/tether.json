@@ -12,21 +12,21 @@
 	"fill_void": false,
 	"levels" : [
 		{
-			"name": ,
-			"id": ,
-			"fluff_id": ,
+			"name": "Surface 1",
+			"id": "tether_surface_1",
+			"fluff_id": "NSB Adephagia - Surface 1",
 			"map_path": "tether-01-surface1.dmm",
 			"traits": [
 				"Station",
 				"Minimap"
 			],
 			"attributes": {},
-			"base_turf": ,
-			"base_area": ,
-			"holomap_offset_x": ,
-			"holomap_offset_y": ,
-			"holomap_legend_x": ,
-			"holomap_legend_y":
+			"base_turf": "/turf/simulated/outdoors/rocks",
+			"base_area": "/area/tether/surfacebase/outside",
+			"holomap_offset_x": 80,
+			"holomap_offset_y": 30,
+			"holomap_legend_x": 220,
+			"holomap_legend_y": 160
 		},
 		{
 
