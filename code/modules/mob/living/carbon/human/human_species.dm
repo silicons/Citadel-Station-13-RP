@@ -1,3 +1,4 @@
+// todo: DEFINE_SPECIES() should do this and hook the randomizer system too.
 /mob/living/carbon/human/skrell
 	h_style = "Skrell Short Tentacles"
 	species = /datum/species/skrell

@@ -6,6 +6,19 @@
 	organ_tag = "limb"
 	decays = FALSE
 
+	//* Basics *//
+	/// the organ we're attached to, if any
+	/// if we're chest, we're not attached to anything
+	/// a mob should have one or more of these
+	/// organs should never loop in terms of what they attach to.
+	var/obj/item/organ/external/parent
+	/// the organ tag of what organ we should be attached to
+	/// there's basically never reason to change this at runtime, especially while we're attached
+	/// don't fucking do it or you'll cause a lot of problems.
+	#warn refactor BP_ define system
+	#warn how do we handle this?
+	var/parent_
+
 	//* Coverage *//
 	/// body_cover_flags that count as covering us
 	var/body_part_flags = NONE
@@ -35,10 +48,6 @@
 
 
 //! ## DAMAGE VARS
-	/// Multiplier for incoming brute damage.
-	var/brute_mod = 1
-	/// As above for burn.
-	var/burn_mod = 1
 	/// EMP damage multiplier
 	var/emp_mod = 1
 	/// Actual current brute damage.
@@ -93,8 +102,6 @@
 	var/list/markings = list()
 
 //! ## STRUCTURAL VARS
-	/// Master-limb.
-	var/obj/item/organ/external/parent
 	/// Sub-limbs.
 	var/list/children = list()
 	/// Internal organs of this body part

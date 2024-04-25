@@ -2,6 +2,12 @@
 				INTERNAL ORGANS DEFINES
 ****************************************************/
 /obj/item/organ/internal
+	//* Basics *//
+	/// the organ we're in right now
+	/// nested-internal organs are not supported right now.
+	var/obj/item/organ/external/parent
+
+
 	/// Icon to use when the organ has died.
 	var/dead_icon
 
@@ -10,12 +16,10 @@
 /obj/item/organ/internal/Destroy()
 	if(owner)
 		owner.internal_organs.Remove(src)
-		owner.internal_organs_by_name[organ_tag] = null
 		owner.internal_organs_by_name -= organ_tag
-		while(null in owner.internal_organs)
-			owner.internal_organs -= null
 		var/obj/item/organ/external/E = owner.organs_by_name[parent_organ]
-		if(istype(E)) E.internal_organs -= src
+		if(istype(E))
+			E.internal_organs -= src
 	return ..()
 
 /obj/item/organ/internal/on_die()

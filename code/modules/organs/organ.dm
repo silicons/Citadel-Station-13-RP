@@ -5,12 +5,13 @@
 	drop_sound = 'sound/items/drop/flesh.ogg'
 	pickup_sound = 'sound/items/pickup/flesh.ogg'
 
+	//* Basics *//
+	/// who we're in right now, if anyone
+	var/mob/living/carbon/human/owner
+
 //! ## STRINGS VARS
 	/// Unique identifier.
 	var/organ_tag = "organ"
-	/// The organ holding this object.
-	var/parent_organ = BP_TORSO
-
 
 //! STATUS VARS
 	/// Various status flags
@@ -30,8 +31,6 @@
 
 
 //! ##REFERENCE VARS
-	/// Current mob owning the organ.
-	var/mob/living/carbon/human/owner
 	/// Transplant match data.
 	var/list/transplant_data
 	/// Trauma data for forensics.
@@ -61,11 +60,6 @@
 	var/decays = TRUE
 	/// decay rate
 	var/decay_rate = ORGAN_DECAY_PER_SECOND_DEFAULT
-
-//! ## LANGUAGE VARS - For organs that assist with certain languages.
-	var/list/will_assist_languages = list()
-	var/list/datum/language/assists_languages = list()
-
 
 //! ## VERB VARS
 	/// Verbs added by the organ when present in the body.

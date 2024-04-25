@@ -62,14 +62,22 @@
 		carry_weight_bias /= modifier.carry_weight_bias
 
 /datum/local_physiology
+	var/brute_mod = 1
+	var/burn_mod = 1
 
 /datum/local_physiology/proc/reset()
+	brute_mod = initial(brute_mod)
+	burn_mod = initial(burn_mod)
 	return TRUE
 
 /datum/local_physiology/proc/apply(datum/physiology_modifier/modifier)
+	brute_mod *= modifier.brute_mod
+	burn_mod *= modifier.burn_mod
 	return TRUE
 
 /datum/local_physiology/proc/revert(datum/physiology_modifier/modifier)
+	brute_mod /= modifier.brute_mod
+	burn_mod /= modifier.burn_mod
 	return TRUE
 
 /**
@@ -95,19 +103,30 @@
 	var/carry_weight_factor = 1
 	var/carry_weight_bias = 1
 
+	//* -- local modifiers -- *//
+
+	var/brute_mod = 1
+	var/burn_mod = 1
+	#warn implement these!
+
 /datum/physiology_modifier/serialize()
 	. = ..()
 	if(name != initial(name))
 		.["name"] = name
-	if(carry_strength_add != initial(carry_strength_add))
-		.["carry_strength_add"] = carry_strength_add
-	if(carry_strength_factor != initial(carry_strength_factor))
-		.["carry_strength_factor"] = carry_strength_factor
+	#define SERIALIZE_IF_CHANGED(VAR, AS_STRING) if(VAR != initial(VAR)) .[AS_STRING] = VAR
+	SERIALIZE_IF_CHANGED(carry_strength_add, "carry_strength_add")
+	SERIALIZE_IF_CHANGED(carry_strength_factor, "carry_strength_factor")
+	SERIALIZE_IF_CHANGED(carry_strength_bias, "carry_strength_bias")
+	SERIALIZE_IF_CHANGED(carry_weight_add, "carry_weight_add")
+	SERIALIZE_IF_CHANGED(carry_weight_factor, "carry_weight_factor")
+	SERIALIZE_IF_CHANGED(carry_weight_bias, "carry_weight_bias")
+	#undef SERIALIZE_IF_CHANGED
 
 /datum/physiology_modifier/deserialize(list/data)
 	. = ..()
 	if(istext(data["name"]))
 		name = data["name"]
+	#define DESERIALIZE_IF_NUMBER(VAR, AS_STRING) if(is_safe_number(data[AS_STRING])) VAR = data[AS_STRING]
 	if(isnum(data["carry_strength_add"]))
 		carry_strength_add = data["carry_strength_add"]
 	if(isnum(data["carry_strength_factor"]))
@@ -120,6 +139,7 @@
 		carry_weight_factor = data["carry_weight_factor"]
 	if(isnum(data["carry_weight_bias"]))
 		carry_weight_bias = data["carry_weight_bias"]
+	#undef DESERIALIZE_IF_NUMBER
 
 /**
  * subtype for hardcoded physiology modifiers
@@ -244,12 +264,15 @@ GLOBAL_LIST_EMPTY(cached_physiology_modifiers)
 /proc/ask_admin_for_a_physiology_modifier(mob/user)
 	var/datum/tgui_dynamic_query/query = new
 	query.string("name", "Name", "Name your modifier.", 64, FALSE, "Custom Modifier")
+	//* GLOBAL *//
 	query.number("carry_strength_add", "Carry Strength - Add", "Modify the person's base carry strength. Higher is better.", default = 0)
 	query.number("carry_strength_factor", "Carry Factor - Multiply", "Multiply the person's carry weight/encumbrance to slowdown effect when carrying over their limit. Lower is better.", default = 1)
 	query.number("carry_strength_bias", "Carry Bias - Multiply", "Multiply the person's carry weight/encumbrance to slowdown bias when carrying over their limit. Lower is better.", default = 1)
 	query.number("carry_weight_add", "Carry Weight - Add", "Modify the person's base carry weight. Higher is better. This only applies to weight, not encumbrance.", default = 0)
 	query.number("carry_weight_factor", "Carry Weight - Multiply", "Multiply the person's weight to slowdown effect when carrying over their limit. Lower is better. This only applies to weight, not encumbrance.", default = 1)
 	query.number("carry_weight_bias", "Carry Weight - Bias", "Multiply the person's weight to slowdown calculation bias; lower is better.", default = 1)
+	//* LOCAL *//
+	#warn dont forget here
 
 	var/list/choices = tgui_dynamic_input(user, "Add a physiology modifier", "Add Physiology Modifier", query)
 
