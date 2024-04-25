@@ -1,5 +1,6 @@
 /mob/living/carbon/Initialize(mapload)
 	. = ..()
+	blood = new(host = src)
 	//setup reagent holders
 	bloodstr = new/datum/reagents/metabolism/bloodstream(500, src)
 	ingested = new/datum/reagents/metabolism/ingested(500, src)
@@ -7,6 +8,17 @@
 	reagents = bloodstr
 	if (!default_language && species_language)
 		default_language = SScharacters.resolve_language_name(species_language)
+
+/mob/living/carbon/Destroy()
+	QDE_NULL(blood)
+	qdel(ingested)
+	qdel(touching)
+	// We don't qdel(bloodstr) because it's the same as qdel(reagents)
+	for(var/guts in internal_organs)
+		qdel(guts)
+	for(var/food in stomach_contents)
+		qdel(food)
+	return ..()
 
 /mob/living/carbon/BiologicalLife(seconds, times_fired)
 	if((. = ..()))
@@ -17,16 +29,6 @@
 	// Increase germ_level regularly
 	if(germ_level < GERM_LEVEL_AMBIENT && prob(30))	//if you're just standing there, you shouldn't get more germs beyond an ambient level
 		germ_level++
-
-/mob/living/carbon/Destroy()
-	qdel(ingested)
-	qdel(touching)
-	// We don't qdel(bloodstr) because it's the same as qdel(reagents)
-	for(var/guts in internal_organs)
-		qdel(guts)
-	for(var/food in stomach_contents)
-		qdel(food)
-	return ..()
 
 /mob/living/carbon/gib()
 	for(var/mob/M in src)
