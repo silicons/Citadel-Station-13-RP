@@ -1,6 +1,5 @@
 //* This file is explicitly licensed under the MIT license. *//
 //* Copyright (c) 2024 silicons                             *//
 
-/datum/clockwork_invocation
-	/// the real name of the invocation
-	var/name
+/datum/clockwork_invocation/inathneq/vitality_matrix
+	name = "Vitality Matrix"
