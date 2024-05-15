@@ -27,7 +27,7 @@
 		clockwork_touch_someone_back(
 			src,
 			user,
-			SPAN_WARNING("As you touch the surface of [src], the metal seems to touch you back."),
+			SPAN_WARNING("As you touch the surface of [src], you feel [pick("the metal touching you back", "a finger touching your palm", "something crawling over your skin")]."),
 		)
 
 /**

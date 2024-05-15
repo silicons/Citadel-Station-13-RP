@@ -1,6 +1,8 @@
 //* This file is explicitly licensed under the MIT license. *//
 //* Copyright (c) 2024 silicons                             *//
 
+GLOBAL_LIST_EMPTY(clockwork_subnets)
+
 /**
  * tracks a specific segment of the hierophant network
  * this is generally shared across the same planet/overmap entity/etc
@@ -17,5 +19,8 @@
 	///
 	/// * you might run into precision issues if doing stuff with fractionals. try to have machines emitting multiples of 0.5 kj.
 	var/stored_power
-
-
+	/// power dissipation fraction per second
+	///
+	/// this is a % of current power.
+	/// 0.01, means lose 1% of current power per second.
+	var/power_dissipation = 0.005 // 0.5% = 1 MW input --> can only hold *way less than* 200MJ.
