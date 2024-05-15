@@ -67,3 +67,10 @@
 /// trait registration defines
 /// due to how defines work, this goes AFTER the trait define!
 #define DATUM_TRAIT(TYPE, TRAIT)
+
+/// trait registration defines
+/// due to how defines work, this goes AFTER the trait define!
+///
+/// registering with this prevents admins from having it pop up on a list when adding traits.
+/// use this for internal traits like cooldowns.
+#define DATUM_PRIVATE_TRAIT(TYPE, TRAIT)
