@@ -14,6 +14,8 @@ GLOBAL_LIST_EMPTY(clockwork_subnets)
  * across subnets, resolve procs are used to establish linkages
  */
 /datum/clockwork_subnet
+	/// name
+	var/name
 	/// stored power in kilojoules
 	/// because we're not animals here and don't measure storage in watts you heathens
 	///
@@ -24,3 +26,5 @@ GLOBAL_LIST_EMPTY(clockwork_subnets)
 	/// this is a % of current power.
 	/// 0.01, means lose 1% of current power per second.
 	var/power_dissipation = 0.005 // 0.5% = 1 MW input --> can only hold *way less than* 200MJ.
+
+

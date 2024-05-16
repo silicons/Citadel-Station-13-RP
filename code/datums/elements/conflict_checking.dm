@@ -1,11 +1,18 @@
 /**
  * Simple conflict checking for getting number of conflicting things on someone with the same ID.
+ *
+ * Use conflict_checking_count(id).
+ *
+ * todo: is there any cheaper way to do this? status traits-like maybe?
  */
 /datum/element/conflict_checking
-	element_flags = ELEMENT_BESPOKE | ELEMENT_DETACH
+	element_flags = ELEMENT_BESPOKE
 	id_arg_index = 1
+
 	/// we don't need to KNOW who has us, only our ID.
 	var/id
+	/// registration id
+	var/registration_id
 
 /datum/element/conflict_checking/Attach(datum/target, id)
 	. = ..()
@@ -18,18 +25,23 @@
 		CRASH("Invalid ID in conflict checking element.")
 	if(isnull(src.id))
 		src.id = id
-	RegisterSignal(target, COMSIG_CONFLICT_ELEMENT_CHECK, PROC_REF(check))
 
-/datum/element/conflict_checking/proc/check(datum/source, id_to_check)
-	if(id == id_to_check)
-		return ELEMENT_CONFLICT_FOUND
+	registration_id = "conflict-checking-[id]"
+
+	LAZYSET(target.status_store, registration_id, TRUE)
+
+/datum/element/conflict_checking/Detach(datum/source, force)
+	. = ..()
+
+	LAZYREMOVE(target.status_store, registration_id)
 
 /**
  * Counts number of conflicts on something that have a conflict checking element.
  */
-/atom/proc/ConflictElementCount(id)
+/atom/proc/conflict_checking_count(id)
 	. = 0
+	var/conflict_id = "conflict-checking-[id]"
 	for(var/i in get_all_contents())
 		var/atom/movable/AM = i
-		if(SEND_SIGNAL(AM, COMSIG_CONFLICT_ELEMENT_CHECK, id) & ELEMENT_CONFLICT_FOUND)
+		if(AM.status_store?[conflict_id])
 			++.

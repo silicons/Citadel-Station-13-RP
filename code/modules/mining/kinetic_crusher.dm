@@ -159,7 +159,7 @@
 		D.fire()
 		charged = FALSE
 		update_icon()
-		addtimer(CALLBACK(src, PROC_REF(Recharge)), charge_time * (user?.ConflictElementCount(CONFLICT_ELEMENT_CRUSHER) || 1))
+		addtimer(CALLBACK(src, PROC_REF(Recharge)), charge_time * (user?.conflict_checking_count(CONFLICT_ELEMENT_CRUSHER) || 1))
 		return
 	if((clickchain_flags & CLICKCHAIN_HAS_PROXIMITY) && isliving(target))
 		detonate(target, user)

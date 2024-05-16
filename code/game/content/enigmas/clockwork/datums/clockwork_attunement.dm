@@ -29,4 +29,3 @@
 	/// values below / above -100 and 100 should not create additional effects / be cutoffs
 	/// negative values are for when someone is even more belligerently unintelligible to clockwork entities (and vice versa)
 	var/knowledge = 0
- 

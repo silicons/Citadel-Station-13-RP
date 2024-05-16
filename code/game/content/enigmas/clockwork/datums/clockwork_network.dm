@@ -22,3 +22,15 @@ GLOBAL_DATUM_INIT(clockwork_network, /datum/clockwork_network, new)
  * including the players, as opposed to requiring global state.
  */
 /datum/clockwork_network
+
+/datum/clockwork_network/proc/subnet_for_level_index(z)
+	RETURN_TYPE(/datum/clockwork_subnet)
+	#warn impl
+
+/**
+ * call when zlevels swap around
+ *
+ * everything on the zlevel will slowly try to go to whatever new subnet is on it
+ */
+/datum/clockwork_network/proc/invalidate_subnets_for_level(z)
+	#warn impl

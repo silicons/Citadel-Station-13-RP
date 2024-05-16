@@ -1,9 +1,6 @@
 //* This file is explicitly licensed under the MIT license. *//
 //* Copyright (c) 2024 silicons                             *//
 
-/turf/simulated/wall/clockwork
-	material_outer = null
-	material_reinf = null
-	material_girder = null
+/mob/living/simple_mob/clockwork_guardian
 
-#warn impl
+// todo: holoparasite system.

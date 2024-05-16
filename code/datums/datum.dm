@@ -15,12 +15,26 @@
 	 * If this is non zero then the object has been garbage collected and is awaiting either
 	 * a hard del by the GC subsystme, or to be autocollected (if it has no references)
 	 */
-	var/gc_destroyed
+	var/tmp/gc_destroyed
 
 	/// Active timers with this datum as the target
-	var/list/active_timers
+	///
+	/// * This is explicitly never going to be persistent. Duh, it's timers. If you're doing persistent stuff, keep this in mind!
+	var/tmp/list/active_timers
+
 	/// Status traits attached to this datum. associative list of the form: list(trait name (string) = list(source1, source2, source3,...))
-	var/list/status_traits
+	///
+	/// * This is explicitly never going to be persistent. This is a temporary state store for orchestration, not durability.
+	/// * Never ever put strong (non-weak)! Text references are also forbidden unless some identifying string is added to make debugging possible!
+	var/tmp/list/status_traits
+	/// Arbitrary k-v lookup.
+	///
+	/// * The upside of this over status_traits is the implementor controls the data store, as opposed to a standard system.
+	/// * This is a downside if you don't know what you're doing. Be careful, look at existing uses.
+	/// * This is explicitly never going to be persistent. This is a temporary state store for orchestration, not durability.
+	/// * Never ever put strong (non-weak) or text references in here! It is a terrible practice.
+	/// * Use lazylist helpers to edit this.
+	var/tmp/list/status_store
 
 	/**
 	 * Components attached to this datum
