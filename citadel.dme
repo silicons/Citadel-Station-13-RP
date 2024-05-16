@@ -1040,6 +1040,7 @@
 #include "code\game\content\enigmas\clockwork\invocations\sevtug\veil.dm"
 #include "code\game\content\enigmas\clockwork\items\clockwork_cog.dm"
 #include "code\game\content\enigmas\clockwork\items\clockwork_component.dm"
+#include "code\game\content\enigmas\clockwork\items\clockwork_shards.dm"
 #include "code\game\content\enigmas\clockwork\items\clockwork_slab.dm"
 #include "code\game\content\enigmas\clockwork\items\clockwork_spear.dm"
 #include "code\game\content\enigmas\clockwork\items\clothing.dm"

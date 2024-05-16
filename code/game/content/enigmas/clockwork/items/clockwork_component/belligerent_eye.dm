@@ -2,3 +2,5 @@
 //* Copyright (c) 2024 silicons                             *//
 
 /obj/item/clockwork_component/belligerent_eye
+
+#warn impl

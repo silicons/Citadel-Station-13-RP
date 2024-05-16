@@ -2,3 +2,5 @@
 //* Copyright (c) 2024 silicons                             *//
 
 /obj/item/clockwork_component/replicant_alloy
+
+#warn impl

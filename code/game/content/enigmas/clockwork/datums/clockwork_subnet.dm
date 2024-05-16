@@ -1,8 +1,6 @@
 //* This file is explicitly licensed under the MIT license. *//
 //* Copyright (c) 2024 silicons                             *//
 
-GLOBAL_LIST_EMPTY(clockwork_subnets)
-
 /**
  * tracks a specific segment of the hierophant network
  * this is generally shared across the same planet/overmap entity/etc
@@ -27,4 +25,19 @@ GLOBAL_LIST_EMPTY(clockwork_subnets)
 	/// 0.01, means lose 1% of current power per second.
 	var/power_dissipation = 0.005 // 0.5% = 1 MW input --> can only hold *way less than* 200MJ.
 
+	/// sigils, except for
+	/// * transmission sigils
+	var/list/obj/effect/clockwork_sigil/sigils = list()
+	/// transmission sigils
+	var/list/obj/effect/clockwork_sigil/transmission/transmission_sigils = list()
+	#warn hook
 
+	/// machinery, except for
+	/// * stargazers
+	var/list/obj/machinery/clockwork/machines = list()
+	/// stargazers
+	var/list/obj/machinery/clockwork/stargazer/stargazer_machines = list()
+
+	/// all integration cogs
+	var/list/obj/item/clockwork_cog/integration_cogs = list()
+	#warn hook

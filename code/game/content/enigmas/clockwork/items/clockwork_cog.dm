@@ -30,6 +30,16 @@
 			SPAN_WARNING("As you touch the surface of [src], you feel [pick("the metal touching you back", "a finger touching your palm", "something crawling over your skin")]."),
 		)
 
+/obj/item/clockwork_cog/afterattack(atom/target, mob/user, clickchain_flags, list/params)
+	. = ..()
+
+/obj/item/clockwork_cog/proc/integrate(atom/movable/victim)
+	// perform injection
+	forceMove(victim)
+	victim.AddComponent(/datum/component/clockwork_cogged, src)
+
+#warn impl all
+
 /**
  * bind / interop component injected into entities that have been spliced with an integration cog
  */
@@ -44,3 +54,5 @@
 	if(. & COMPONENT_INCOMPATIBLE)
 		return
 	src.cog = cog
+
+#warn need a query for settings / presets to configure machines with

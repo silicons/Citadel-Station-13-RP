@@ -14,7 +14,12 @@
 	/// our personality
 	var/datum/clockwork_personality/personality
 
-/datum/component/clockwork_object/Initialize()
+/datum/component/clockwork_object/Initialize(datum/clockwork_alignment/alignment, datum/clockwork_personality/personality)
 	if(!isobj(parent))
 		return COMPONENT_INCOMPATIBLE
+	. = ..()
+	if(. & COMPONENT_INCOMPATIBLE)
+		return
+	src.alignment = alignment
+	src.personality = personality
 
