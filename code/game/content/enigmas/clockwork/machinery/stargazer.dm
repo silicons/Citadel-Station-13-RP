@@ -4,11 +4,15 @@
 // todo: it should work on planets if exposed to sun.
 // todo: don't let people cluster this too closely together
 // todo: or better yet, penalize it with a reasonable algorithm to promote fun designs instead of forcing boring grids
+CLOCKWORK_DESCRIPTION( \
+	/obj/machinery/clockwork/stargazer, \
+	"stargazer", \
+	"A power collector for the Hierophant Network. Needs to be close to space, or exposed to direct <b>star</b>light, to work." \
+)
 /obj/machinery/clockwork/stargazer
-	#warn clockwork name/desc: stargazer, ...
 	name = "solar lantern"
-	#warn change desc when active
 	desc = "A tall device made out of brass. It emits a soft, soothing hum."
+	#warn sprite + -active state
 
 	/// active?
 	var/active = FALSE
@@ -33,11 +37,14 @@
 	reconsider_starlight_at_time = world.time + rand(5 SECONDS, 15 SECONDS)
 	return ..()
 
+/obj/machinery/clockwork/stargazer/update_icon_state()
+	icon_state = "[initial(icon_state)][active? "-active" : ""]"
+
 /obj/machinery/clockwork/stargazer/process(delta_time)
 	if(reconsider_starlight_at_time <= world.time)
 		reconsider_starlight()
 		reconsider_starlight_at_time = world.time + rand(30 SECONDS, 60 SECONDS)
-	generate_power()
+	generate_power(delta_time)
 
 /obj/machinery/clockwork/stargazer/proc/reconsider_starlight()
 	set_active(has_starlight())
@@ -59,11 +66,12 @@
 		set_light(
 			l_power = 0,
 		)
+	update_icon()
 
-/obj/machinery/clockwork/stargazer/proc/generate_power()
+/obj/machinery/clockwork/stargazer/proc/generate_power(seconds)
 	if(!active)
 		return
-	#warn power gen
+	connected_subnet?.provide_power(seconds * power_generation)
 
 /obj/machinery/clockwork/stargazer/register_subnet(datum/clockwork_subnet/subnet)
 	subnet.stargazer_machines += src

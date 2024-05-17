@@ -57,4 +57,5 @@ GLOBAL_LIST_EMPTY(clockwork_subnets)
 /**
  * give power to the network
  */
-/datum/clockwork_subnet
+/datum/clockwork_subnet/proc/provide_power(kj)
+	stored_power += kj
