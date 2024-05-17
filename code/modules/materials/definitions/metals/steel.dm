@@ -1,3 +1,4 @@
+MATERIAL_MAKE_STACK_TYPES(/datum/material/steel, steel)
 /datum/material/steel
 	id = MAT_STEEL
 	name = MAT_STEEL

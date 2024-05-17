@@ -22,6 +22,11 @@
 	var/sheet_plural_name = "sheets"
 	var/is_fusion_fuel
 
+	//* Stacks / Sheets *//
+
+	#warn 1. sheet noun, 2. sheet max stack, 3. display name, 4. sheet icon, 5. sheet icon state
+	#warn and then unit test all of it.
+
 	//! Shards/tables/structures
 	/// Path of debris object.
 	var/shard_type = SHARD_SHRAPNEL

@@ -52,3 +52,16 @@
 			OUT |= __trait.INVOKE(A, A.material_traits_data, ##args); \
 		} \
 	}
+
+//* Type generation *//
+
+#define MATERIAL_MAKE_STACK_TYPES(MATPATH, STACKPATH) \
+/obj/item/stack/material/##STACKPATH { \
+	name = ##MATPATH::display_name; \
+	material = ##MATPATH; \
+} \
+/obj/item/stack/material/##STACKPATH/fifty { \
+	amount = 50; \
+}
+
+#warn icon state

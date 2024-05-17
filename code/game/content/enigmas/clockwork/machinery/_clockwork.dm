@@ -9,7 +9,10 @@
 
 	/// shards to drop on destruction
 	var/drop_shard_count = 3
-	#warn hook
+	/// sheets of epoch metal to drop on destruction
+	var/drop_metal_count = 0
+	/// sheets of epoch glass to drop on destruction
+	var/drop_glass_count = 0
 
 /obj/machinery/clockwork/Initialize()
 	connect_subnet()
@@ -25,6 +28,15 @@
 		disconnect_subnet()
 	else
 		connect_subnet()
+
+/obj/machinery/clockwork/drop_products(method, atom/where)
+	. = ..()
+	if(drop_shard_count > 0)
+		new /obj/item/trash/clockwork_shards(where, drop_shard_count)
+	if(drop_metal_count > 0)
+		new /obj/item/stack/material/clockwork_metal
+	if(drop_glass_count > 0)
+		new /obj/item/stack/material/clockwork_glass
 
 /obj/machinery/clockwork/proc/connect_subnet()
 	if(!isnull(connected_subnet))

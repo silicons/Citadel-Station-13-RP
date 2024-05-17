@@ -211,6 +211,7 @@
 	apply_colour = 1
 	no_variants = FALSE
 
+#warn rid of this.
 /obj/item/stack/material/steel
 	name = MAT_STEEL
 	icon_state = "sheet-metal"

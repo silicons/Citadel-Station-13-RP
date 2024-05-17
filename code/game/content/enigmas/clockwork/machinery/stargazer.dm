@@ -4,6 +4,7 @@
 // todo: it should work on planets if exposed to sun.
 // todo: don't let people cluster this too closely together
 // todo: or better yet, penalize it with a reasonable algorithm to promote fun designs instead of forcing boring grids
+// todo: instead of processing all of these, these should provide 'static' power area-machine style, and the network should tick it.
 CLOCKWORK_DESCRIPTION( \
 	/obj/machinery/clockwork/stargazer, \
 	"stargazer", \
@@ -39,6 +40,7 @@ CLOCKWORK_DESCRIPTION( \
 
 /obj/machinery/clockwork/stargazer/update_icon_state()
 	icon_state = "[initial(icon_state)][active? "-active" : ""]"
+	return ..()
 
 /obj/machinery/clockwork/stargazer/process(delta_time)
 	if(reconsider_starlight_at_time <= world.time)
