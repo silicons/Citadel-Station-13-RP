@@ -1,6 +1,14 @@
 //* This file is explicitly licensed under the MIT license. *//
 //* Copyright (c) 2024 silicons                             *//
 
+//* Helpers *//
+
+#define CLOCKWORK_DESCRIPTION(PATH, NAME, DESC_OR_LIST) \
+##PATH/examine(mob/user, dist) { \
+	. = ..(); \
+}
+#warn deal with name / desc
+
 //* Invocations *//
 
 /// targets mobs

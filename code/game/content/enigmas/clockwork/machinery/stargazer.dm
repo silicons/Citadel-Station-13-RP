@@ -23,6 +23,9 @@
 	/// glow power when on_standalone
 	var/active_glow_power = 0.35
 
+	/// LoS distance range
+	var/collection_radius = 3
+
 	/// base power generation in kilowatts
 	var/power_generation = 5
 
@@ -38,6 +41,9 @@
 
 /obj/machinery/clockwork/stargazer/proc/reconsider_starlight()
 	set_active(has_starlight())
+
+/obj/machinery/clockwork/stargazer/proc/has_starlight()
+	return locate(/turf/space) in view(min(35, collection_radius), src)
 
 /obj/machinery/clockwork/stargazer/proc/set_active(value)
 	if(src.active == value)

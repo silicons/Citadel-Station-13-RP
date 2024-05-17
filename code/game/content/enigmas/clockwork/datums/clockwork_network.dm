@@ -40,10 +40,10 @@ GLOBAL_DATUM_INIT(clockwork_network, /datum/clockwork_network, new)
 	var/list/subnet_lookup = list()
 
 /datum/clockwork_network/New()
-	START_PROCESSING(SSobjs, src)
+	START_PROCESSING(SSobj, src)
 
 /datum/clockwork_network/Destroy()
-	STOP_PROCESSING(SSobjs, src)
+	STOP_PROCESSING(SSobj, src)
 	return ..()
 
 /datum/clockwork_network/process(delta_time)

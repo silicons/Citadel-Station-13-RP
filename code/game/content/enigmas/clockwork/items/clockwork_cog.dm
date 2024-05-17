@@ -8,9 +8,15 @@
  * Unlike most items, these have no alignment until spliced.
  * This also is not important enough to have a personality.
  */
+CLOCKWORK_DESCRIPTION( \
+	/obj/item/clockwork_cog, \
+	"integration cog", \
+	list( \
+		"A small, sharp cog made out of replicant alloy.", \
+		"Inserting this into a machine will allow the Hierophant Network to assert control over it.", \
+	) \
+)
 /obj/item/clockwork_cog
-	#warn need knowledge backend for examine names! real name: 'integration cog'
-	#warn while active, for a while, set it to 'vibrant cog' or something
 	name = "dull cog"
 	desc = "A strange cog made out of brass. It's quite dull."
 

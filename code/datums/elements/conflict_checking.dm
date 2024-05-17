@@ -25,15 +25,12 @@
 		CRASH("Invalid ID in conflict checking element.")
 	if(isnull(src.id))
 		src.id = id
-
 	registration_id = "conflict-checking-[id]"
-
 	LAZYSET(target.status_store, registration_id, TRUE)
 
 /datum/element/conflict_checking/Detach(datum/source, force)
 	. = ..()
-
-	LAZYREMOVE(target.status_store, registration_id)
+	LAZYREMOVE(source.status_store, registration_id)
 
 /**
  * Counts number of conflicts on something that have a conflict checking element.

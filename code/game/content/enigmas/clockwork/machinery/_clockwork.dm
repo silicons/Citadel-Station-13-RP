@@ -16,7 +16,7 @@
 	return ..()
 
 /obj/machinery/clockwork/Destroy()
-	disconenct_subnet()
+	disconnect_subnet()
 	return ..()
 
 /obj/machinery/clockwork/on_changed_z_level(old_z, new_z)
