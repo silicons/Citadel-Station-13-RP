@@ -52,6 +52,8 @@ CLOCKWORK_DESCRIPTION( \
 /datum/component/clockwork_cogged
 	/// the cog we are made from
 	var/obj/item/clockwork_cog/cog
+	/// k-v list for settings
+	var/list/settings
 
 /datum/component/clockwork_cogged/Initialize(obj/item/clockwork_cog/cog)
 	if(!ismovable(parent))
@@ -62,3 +64,41 @@ CLOCKWORK_DESCRIPTION( \
 	src.cog = cog
 
 #warn need a query for settings / presets to configure machines with
+
+//* Obj Hooks *//
+
+GLOBAL_LIST_EMPTY(clockwork_integration_lookup)
+
+/obj/proc/clockwork_integration_query()
+	RETURN_TYPE(/datum/clockwork_integration)
+
+	if(isnull(GLOB.clockwork_integration_lookup[type]))
+		GLOB.clockwork_integration_lookup[type] = clockwork_integration_construct()
+	return GLOB.clockwork_integration_lookup[type]
+
+/**
+ * returns /datum/clockwork_integration, which is then cached **by type**.
+ */
+/obj/proc/clockwork_integration_construct()
+	RETURN_TYPE(/datum/clockwork_integration)
+
+//* Integration Data *//
+
+/datum/clockwork_integration
+	/// presets
+	var/list/datum/clockwork_integration_preset/presets
+
+#warn impl
+
+/datum/clockwork_integration_preset
+	/// name
+	var/name
+	/// k-v options list
+	var/list/options
+	/// rendering image
+	var/image/visual
+
+/datum/clockwork_integration_preset/New(name, list/options, image/visual)
+	src.name = name
+	src.options = options
+	src.visual = visual
