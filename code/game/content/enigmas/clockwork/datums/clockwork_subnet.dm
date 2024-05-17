@@ -1,6 +1,8 @@
 //* This file is explicitly licensed under the MIT license. *//
 //* Copyright (c) 2024 silicons                             *//
 
+GLOBAL_LIST_EMPTY(clockwork_subnets)
+
 /**
  * tracks a specific segment of the hierophant network
  * this is generally shared across the same planet/overmap entity/etc
@@ -24,6 +26,7 @@
 	/// this is a % of current power.
 	/// 0.01, means lose 1% of current power per second.
 	var/power_dissipation = 0.005 // 0.5% = 1 MW input --> can only hold *way less than* 200MJ.
+	/// last power dissipation tick
 
 	/// sigils, except for
 	/// * transmission sigils
@@ -41,3 +44,17 @@
 	/// all integration cogs
 	var/list/obj/item/clockwork_cog/integration_cogs = list()
 	#warn hook
+
+/datum/clockwork_subnet/process(delta_time)
+	stored_power = round(stored_power * (1 - power_dissipation), 0.01)
+
+/**
+ * tl;dr "our level is no longer a real level can everything gtfo please"
+ */
+/datum/clockwork_subnet/proc/evict_everything()
+	#warn impl
+
+/**
+ * give power to the network
+ */
+/datum/clockwork_subnet
