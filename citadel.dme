@@ -1014,6 +1014,7 @@
 #include "code\game\content\enigmas\clockwork\datums\clockwork_subnet.dm"
 #include "code\game\content\enigmas\clockwork\datums\epoch_glass.dm"
 #include "code\game\content\enigmas\clockwork\datums\epoch_metal.dm"
+#include "code\game\content\enigmas\clockwork\helpers\mobs.dm"
 #include "code\game\content\enigmas\clockwork\helpers\objects.dm"
 #include "code\game\content\enigmas\clockwork\invocations\clockwork_invocation.dm"
 #include "code\game\content\enigmas\clockwork\invocations\inathneq.dm"

@@ -59,3 +59,9 @@ GLOBAL_LIST_EMPTY(clockwork_subnets)
  */
 /datum/clockwork_subnet/proc/provide_power(kj)
 	stored_power += kj
+
+/**
+ * draw power from the network
+ */
+/datum/clockwork_subnet/proc/draw_power(kj)
+	#warn impl
