@@ -9,5 +9,4 @@ CLOCKWORK_DESCRIPTION( \
 /obj/item/clockwork_component/hierophant_ansible
 	name = "signal receiver"
 	desc = "An old fashioned receiver of some kind."
-
-#warn impl
+	icon_state = "ansible"

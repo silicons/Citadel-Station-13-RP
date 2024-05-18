@@ -9,5 +9,4 @@ CLOCKWORK_DESCRIPTION( \
 /obj/item/clockwork_component/belligerent_eye
 	name = "mechanical eye"
 	desc = "A strange eye ornament made out of brass."
-
-#warn impl
+	icon_state = "eye"

@@ -9,5 +9,4 @@ CLOCKWORK_DESCRIPTION( \
 /obj/item/clockwork_component/vanguard_cogwheel
 	name = "large cogwheel"
 	desc = "A large cogwheel used in some archaic machine."
-
-#warn impl
+	icon_state = "cogwheel"

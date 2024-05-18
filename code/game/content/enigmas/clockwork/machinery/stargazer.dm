@@ -39,8 +39,29 @@ CLOCKWORK_DESCRIPTION( \
 	return ..()
 
 /obj/machinery/clockwork/stargazer/update_icon_state()
-	icon_state = "[initial(icon_state)][active? "-active" : ""]"
+	if(!anchoreD)
+		icon_state = "[initial(icon_state)]-unwrenched"
+	else
+		icon_state = "[initial(icon_state)]"
 	return ..()
+
+/obj/machinery/clockwork/stargazer/update_overlays()
+	. = ..()
+	if(!active)
+		return
+	. += "[initial(icon_state)]-active"
+	. += emissive_appearance(
+		icon,
+		"[initial(icon_state)]-active",
+		layer = MANGLE_PLANE_AND_LAYER(plane, layer),
+	)
+
+/obj/machinery/clockwork/stargazer/set_anchored(anchorvalue)
+	. = ..()
+	if(!.)
+		return
+	if(!anchored)
+		set_active(FALSE)
 
 /obj/machinery/clockwork/stargazer/process(delta_time)
 	if(reconsider_starlight_at_time <= world.time)
@@ -55,6 +76,8 @@ CLOCKWORK_DESCRIPTION( \
 	return locate(/turf/space) in view(min(35, collection_radius), src)
 
 /obj/machinery/clockwork/stargazer/proc/set_active(value)
+	if(!anchored)
+		value = FALSE
 	if(src.active == value)
 		return
 	src.active = value

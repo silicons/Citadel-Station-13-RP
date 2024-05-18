@@ -9,5 +9,4 @@ CLOCKWORK_DESCRIPTION( \
 /obj/item/clockwork_component/geis_capacitor
 	name = "machined capacitor"
 	desc = "A capacitor that looks like it came from the last era."
-
-#warn impl
+	icon_state = "capacitor"

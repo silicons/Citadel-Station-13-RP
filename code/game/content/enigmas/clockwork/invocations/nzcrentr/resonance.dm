@@ -11,3 +11,12 @@
 		"Certain materials will be temporarily strengthed by the burst.",
 		"Unlike Dissonance, this does not emit as many exotic particles.",
 	)
+
+/**
+ * @params
+ * * strength - 0 to 100, 100 max str 0 min
+ *
+ * @return 0 to 1 block, 1 = full block, 0 = pass through like air
+ */
+/obj/proc/clockwork_resonance_act(strength)
+	return 0
