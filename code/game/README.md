@@ -22,7 +22,8 @@ and then there's:
 
 and then there's:
 
-* /content/enigmas: one-off systems meant to represent weird world mechanics, like hierophant/vortex magic (to be added later), cults, the clockwork cult, etc
+* /content: basically, game factions, entities, groups, fluff, etc.
+* /content/enigmas: one-off systems meant to represent weird world mechanics, like hierophant/vortex magic (to be added later), cults, the clockwork cult, etc. this doesn't necessarily mean 'small' (clockwork cult, as an example, is a massive system); it just means 'separate' and not really a backend game system.
 * /content/factions: code for specific factions, nanotrasen included
 
 content subfolders should have their icons and sounds mapped to `icons/content/...` and `sound/content/...` respectively.
