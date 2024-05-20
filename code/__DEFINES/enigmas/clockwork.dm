@@ -58,6 +58,15 @@ DEFINE_BITFIELD_NEW(clockwork_invocation_targeting, list(
 	BITFIELD_NEW("Breaks (Machinery Harm)", CLOCKWORK_INVOCATION_HINT_BREAKS),
 ))
 
+//* Integration Cog - Preset Hostility *//
+
+/// this is a stealthy preset
+#define CLOCKWORK_INTEGRATION_PRESET_STEALTH 1
+/// this is a normal / cooperative preset
+#define CLOCKWORK_INTEGRATION_PRESET_COOPERATIVE 2
+/// this is a hostile preset
+#define CLOCKWORK_INTEGRATION_PRESET_HOSTILE 3
+
 //* Recognition Query Response *//
 // used by:
 // - clockwork_user_recognition_query

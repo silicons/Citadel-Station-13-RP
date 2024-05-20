@@ -73,8 +73,6 @@ CLOCKWORK_DESCRIPTION( \
 		return
 	src.cog = cog
 
-#warn need a query for settings / presets to configure machines with
-
 //* Obj Hooks *//
 
 GLOBAL_LIST_EMPTY(clockwork_integration_lookup)
@@ -107,8 +105,16 @@ GLOBAL_LIST_EMPTY(clockwork_integration_lookup)
 /datum/clockwork_integration/New()
 	config = new
 
+/**
+ * if name already exists, it'll be merged with options.
+ */
 /datum/clockwork_integration/proc/set_preset(name, list/options)
-	LAZYSET(presets, name, options)
+	if(!presets?[name])
+		LAZYSET(presets, name, options)
+	else
+		var/list/existing = presets[name]
+		for(var/key in options)
+			existing[key] = options[key]
 
 /datum/clockwork_integration_preset
 	/// name
