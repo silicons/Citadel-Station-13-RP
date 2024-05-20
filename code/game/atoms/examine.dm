@@ -1,4 +1,11 @@
-/atom/proc/get_examine_name(mob/user)
+/**
+ * @params
+ * * user - who's observing us
+ * * distance - their distance. 0 = they can touch us / we are reachable.
+ *
+ * @return name as string
+ */
+/atom/proc/get_examine_name(mob/user, distance)
 	. = "\a <b>[src]</b>"
 	var/list/override = list(gender == PLURAL ? "some" : "a", " ", "[name]")
 

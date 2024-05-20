@@ -6,3 +6,5 @@
 
 /proc/clockwork_draw_power_from_user(mob/user, kj)
 	#warn impl
+
+/proc/clockwork_user_recognition_query(mob/user, atom/entity)

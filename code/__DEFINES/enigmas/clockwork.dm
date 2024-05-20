@@ -57,3 +57,16 @@ DEFINE_BITFIELD_NEW(clockwork_invocation_targeting, list(
 	BITFIELD_NEW("Mends (Machinery Heal)", CLOCKWORK_INVOCATION_HINT_MENDS),
 	BITFIELD_NEW("Breaks (Machinery Harm)", CLOCKWORK_INVOCATION_HINT_BREAKS),
 ))
+
+//* Recognition Query Response *//
+// used by:
+// - clockwork_user_recognition_query
+
+/// don't know what this is at all
+#define CLOCKWORK_RECOGNITION_NONE 0
+/// know this is a clockwork item
+#define CLOCKWORK_RECOGNITION_KNOWS_ABOUT_ORIGIN 1
+/// know the name of this item
+#define CLOCKWORK_RECOGNITION_KNOWS_NAME 2
+/// know the function of this item
+#define CLOCKWORK_RECOGNITION_KNOWS_FUNCTION 3

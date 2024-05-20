@@ -44,6 +44,16 @@ CLOCKWORK_DESCRIPTION( \
 	forceMove(victim)
 	victim.AddComponent(/datum/component/clockwork_cogged, src)
 
+/**
+ * called to check if someone can discover us on a host
+ *
+ * @params
+ * * observer - who's observing us
+ * * host - the thing we're in
+ * * viewing_interior - do they have the panel open / are they able to see inside?
+ */
+/obj/item/clockwork_cog/proc/should_be_discovered(mob/observer, obj/host, viewing_interior = FALSE)
+
 #warn impl all
 
 /**
@@ -73,7 +83,9 @@ GLOBAL_LIST_EMPTY(clockwork_integration_lookup)
 	RETURN_TYPE(/datum/clockwork_integration)
 
 	if(isnull(GLOB.clockwork_integration_lookup[type]))
-		GLOB.clockwork_integration_lookup[type] = clockwork_integration_construct()
+		var/datum/clockwork_integration/constructed = clockwork_integration_construct()
+		constructed.config.compile()
+		GLOB.clockwork_integration_lookup[type] = constructed
 	return GLOB.clockwork_integration_lookup[type]
 
 /**
@@ -81,14 +93,22 @@ GLOBAL_LIST_EMPTY(clockwork_integration_lookup)
  */
 /obj/proc/clockwork_integration_construct()
 	RETURN_TYPE(/datum/clockwork_integration)
+	return new /datum/clockwork_integration
 
 //* Integration Data *//
 
 /datum/clockwork_integration
 	/// presets
 	var/list/datum/clockwork_integration_preset/presets
+	/// configuration
+	/// don't manually compile, we compile for you on /clockwork_integration_query()!
+	var/datum/tgui_dynamic_config/config
 
-#warn impl
+/datum/clockwork_integration/New()
+	config = new
+
+/datum/clockwork_integration/proc/set_preset(name, list/options)
+	LAZYSET(presets, name, options)
 
 /datum/clockwork_integration_preset
 	/// name

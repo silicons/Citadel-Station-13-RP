@@ -65,6 +65,20 @@ GLOBAL_LIST_EMPTY(clockwork_subnets)
 
 /**
  * draw power from the network
+ *
+ * @return amount drawn
  */
 /datum/clockwork_subnet/proc/draw_power(kj)
-	#warn impl
+	. = min(stored_power, kj)
+	stored_power -= kj
+
+/**
+ * draw power from the network; draws nothing if we don't have enough
+ *
+ * @return amount drawn
+ */
+/datum/clockwork_subnet/proc/draw_checked_power(kj)
+	if(stored_power < kj)
+		return 0
+	stored_power -= kj
+	return kj
