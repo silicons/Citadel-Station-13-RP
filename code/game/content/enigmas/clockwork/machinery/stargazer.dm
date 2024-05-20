@@ -13,7 +13,8 @@ CLOCKWORK_DESCRIPTION( \
 /obj/machinery/clockwork/stargazer
 	name = "solar lantern"
 	desc = "A tall device made out of brass. It emits a soft, soothing hum."
-	#warn sprite + -active state
+	icon = 'icons/content/enigmas/clockwork/machinery/stargazer.dmi'
+	icon_state = "stargazer"
 
 	/// active?
 	var/active = FALSE
@@ -39,7 +40,7 @@ CLOCKWORK_DESCRIPTION( \
 	return ..()
 
 /obj/machinery/clockwork/stargazer/update_icon_state()
-	if(!anchoreD)
+	if(!anchored)
 		icon_state = "[initial(icon_state)]-unwrenched"
 	else
 		icon_state = "[initial(icon_state)]"

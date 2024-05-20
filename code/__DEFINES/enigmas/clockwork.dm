@@ -23,7 +23,17 @@
 /// requires Reachability()
 #define CLOCKWORK_INVOCATION_TARGET_CHECK_REACHABILITY (1<<4)
 
-#warn DEFINE_BITFIELD target_validity_flags on /datum/clockwork_invocation
+DEFINE_BITFIELD_NEW(clockwork_invocation_targeting, list(
+	/datum/clockwork_invocation = list(
+		NAMEOF_STATIC(/datum/clockwork_invocation, target_validity_flags),
+	),
+), list(
+	BITFIELD_NEW("Targets Mobs", CLOCKWORK_INVOCATION_TARGET_MOBS),
+	BITFIELD_NEW("Targets Objs", CLOCKWORK_INVOCATION_TARGET_OBJS),
+	BITFIELD_NEW("Targets Turfs", CLOCKWORK_INVOCATION_TARGET_TURFS),
+	BITFIELD_NEW("Mob - Only Self", CLOCKWORK_INVOCATION_TARGET_ONLY_SELF_FOR_MOBS),
+	BITFIELD_NEW("All - Reachability()", CLOCKWORK_INVOCATION_TARGET_CHECK_REACHABILITY),
+))
 
 /// heals
 #define CLOCKWORK_INVOCATION_HINT_HEALS (1<<0)
@@ -36,4 +46,14 @@
 /// damages (machinery harm)
 #define CLOCKWORK_INVOCATION_HINT_BREAKS (1<<4)
 
-#warn DEFINE_BITFIELD effect_hint_flags on /datum/clockwork_invocation
+DEFINE_BITFIELD_NEW(clockwork_invocation_targeting, list(
+	/datum/clockwork_invocation = list(
+		NAMEOF_STATIC(/datum/clockwork_invocation, effect_hint_flags),
+	),
+), list(
+	BITFIELD_NEW("Heals (Mobs)", CLOCKWORK_INVOCATION_HINT_HEALS),
+	BITFIELD_NEW("Harms (Mobs)", CLOCKWORK_INVOCATION_HINT_HARMS),
+	BITFIELD_NEW("Stuns (Mobs)", CLOCKWORK_INVOCATION_HINT_STUNS),
+	BITFIELD_NEW("Mends (Machinery Heal)", CLOCKWORK_INVOCATION_HINT_MENDS),
+	BITFIELD_NEW("Breaks (Machinery Harm)", CLOCKWORK_INVOCATION_HINT_BREAKS),
+))

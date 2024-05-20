@@ -5,7 +5,7 @@
 DEFINE_SHARED_BITFIELD(movespeed_modifier_flags, list(
 	"movespeed_modifier_flags",
 ), list(
-	BITFIELD_NAMED("Requires Gravity", MOVESPEED_MODIFIER_REQUIRES_GRAVITY),
+	BITFIELD_NEW("Requires Gravity", MOVESPEED_MODIFIER_REQUIRES_GRAVITY),
 ))
 //* calculation_type
 

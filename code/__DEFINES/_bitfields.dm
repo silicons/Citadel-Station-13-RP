@@ -10,6 +10,12 @@
 	variables = ##v; \
 }
 
-// todo: get rid of this, rename BITFIELD_NAMED to this
+// todo: get rid of this, rename BITFIELD_NEW to this
 #define BITFIELD(thing) #thing = thing
-#define BITFIELD_NAMED(name, thing) name = thing
+
+// todo: impl
+/// KEY: must be unique, may be arbitrary; not a string, as it's used in typepath generation
+/// CONSTRAINTS: list(/type = list(varname, ...), ...)
+/// BITFIELDS: list of BITFIELD_NEW().
+#define DEFINE_BITFIELD_NEW(NAME, CONSTRAINTS, BITFIELDS)
+#define BITFIELD_NEW(name, thing) name = thing

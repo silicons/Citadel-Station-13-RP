@@ -26,7 +26,6 @@ GLOBAL_LIST_EMPTY(clockwork_subnets)
 	/// this is a % of current power.
 	/// 0.01, means lose 1% of current power per second.
 	var/power_dissipation = 0.005 // 0.5% = 1 MW input --> can only hold *way less than* 200MJ.
-	/// last power dissipation tick
 
 	/// sigils, except for
 	/// * transmission sigils
@@ -46,7 +45,11 @@ GLOBAL_LIST_EMPTY(clockwork_subnets)
 	#warn hook
 
 /datum/clockwork_subnet/process(delta_time)
-	stored_power = round(stored_power * (1 - power_dissipation), 0.01)
+	// micro-opt for avoiding an exponential if unnecessary.
+	if(delta_time != 1)
+		stored_power = round(stored_power * (1 - power_dissipation) ** delta_time, 0.01)
+	else
+		stored_power = round(stored_power * (1 - power_dissipation), 0.01)
 
 /**
  * tl;dr "our level is no longer a real level can everything gtfo please"
