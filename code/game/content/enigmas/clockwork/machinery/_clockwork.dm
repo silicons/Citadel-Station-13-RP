@@ -65,3 +65,10 @@
  */
 /obj/machinery/clockwork/proc/unregister_subnet(datum/clockwork_subnet/subnet)
 	subnet.machines -= src
+
+/obj/machinery/clockwork/proc/invalidate_subnet()
+	disconnect_subnet()
+	// delayed for staggering rebuilds
+	// this will not slow down switching networks when changing zlevels,
+	// only when a zlevel is for some reason being rebuilt with objects on it (?????)
+	addtimer(CALLBACK(src, PROC_REF(connect_subnet)), rand(1, 50))

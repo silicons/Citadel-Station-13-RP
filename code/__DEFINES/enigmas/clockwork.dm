@@ -1,6 +1,13 @@
 //* This file is explicitly licensed under the MIT license. *//
 //* Copyright (c) 2024 silicons                             *//
 
+//* Balancing *//
+
+/// max integration cog static drain in watts
+#define CLOCKWORK_INTEGRATION_COG_APC_MAX_STATIC_DRAIN 5000
+/// max integration cog dynamic drain percentage
+#define CLOCKWORK_INTEGRATION_COG_APC_MAX_DYNAMIC_RATIO 0.5
+
 //* Helpers *//
 
 #define CLOCKWORK_DESCRIPTION(PATH, NAME, DESC_OR_LIST) \

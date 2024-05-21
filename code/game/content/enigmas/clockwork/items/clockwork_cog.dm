@@ -24,6 +24,12 @@ CLOCKWORK_DESCRIPTION( \
 	var/obj/host
 	/// current alignment
 	var/datum/clockwork_alignment/alignment
+	/// connected subnet - only used when actively integrated
+	var/datum/clockwork_subnet/subnet
+
+/obj/item/clockwork_cog/Destroy()
+	remove(deleting = TRUE)
+	return ..()
 
 /obj/item/clockwork_cog/examine(mob/user, dist)
 	. = ..()
@@ -43,6 +49,26 @@ CLOCKWORK_DESCRIPTION( \
 	// perform injection
 	forceMove(victim)
 	victim.AddComponent(/datum/component/clockwork_cogged, src)
+
+/obj/item/clockwork_cog/proc/remove(atom/to_where = drop_location(), mob/put_in_hands, deleting)
+	#warn impl
+
+/obj/item/clockwork_cog/proc/connect_subnet()
+
+/obj/item/clockwork_cog/proc/disconnect_subnet()
+
+/obj/item/clockwork_cog/proc/register_subnet(datum/clockwork_subnet/subnet)
+	subnet.integration_cogs += src
+
+/obj/item/clockwork_cog/proc/unregister_subnet(datum/clockwork_subnet/subnet)
+	subnet.integration_cogs -= src
+
+/obj/item/clockwork_cog/proc/invalidate_subnet()
+	disconnect_subnet()
+	// delayed for staggering rebuilds
+	// this will not slow down switching networks when changing zlevels,
+	// only when a zlevel is for some reason being rebuilt with objects on it (?????)
+	addtimer(CALLBACK(src, PROC_REF(connect_subnet)), rand(1, 50))
 
 /**
  * called to check if someone can discover us on a host

@@ -100,7 +100,7 @@ CLOCKWORK_DESCRIPTION( \
 	connected_subnet?.provide_power(seconds * power_generation)
 
 /obj/machinery/clockwork/stargazer/register_subnet(datum/clockwork_subnet/subnet)
-	subnet.stargazer_machines += src
+	subnet.machines_stargazer += src
 
 /obj/machinery/clockwork/stargazer/unregister_subnet(datum/clockwork_subnet/subnet)
-	subnet.stargazer_machines -= src
+	subnet.machines_stargazer -= src

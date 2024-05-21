@@ -31,18 +31,17 @@ GLOBAL_LIST_EMPTY(clockwork_subnets)
 	/// * transmission sigils
 	var/list/obj/effect/clockwork_sigil/sigils = list()
 	/// transmission sigils
-	var/list/obj/effect/clockwork_sigil/transmission/transmission_sigils = list()
+	var/list/obj/effect/clockwork_sigil/transmission/sigils_transmission = list()
 	#warn hook
 
 	/// machinery, except for
 	/// * stargazers
 	var/list/obj/machinery/clockwork/machines = list()
 	/// stargazers
-	var/list/obj/machinery/clockwork/stargazer/stargazer_machines = list()
+	var/list/obj/machinery/clockwork/stargazer/machines_stargazer = list()
 
 	/// all integration cogs
 	var/list/obj/item/clockwork_cog/integration_cogs = list()
-	#warn hook
 
 /datum/clockwork_subnet/process(delta_time)
 	// micro-opt for avoiding an exponential if unnecessary.
@@ -55,6 +54,13 @@ GLOBAL_LIST_EMPTY(clockwork_subnets)
  * tl;dr "our level is no longer a real level can everything gtfo please"
  */
 /datum/clockwork_subnet/proc/evict_everything()
+	for(var/obj/machinery/clockwork/machine in ( \
+		machines + \
+		machines_stargazer \
+	))
+		machine.invalidate_subnet()
+	for(var/obj/item/clockwork_cog/cog in integration_cogs)
+		cog.invalidate_subnet()
 	#warn impl
 
 /**
