@@ -4,20 +4,20 @@
 /**
  * holder datum for clockwork data on /mind and others
  *
- * represents how well someone can affect clockwork stuff
+ * represents a mind's attunation to clockwork systems
  */
-/datum/clockwork_holder
+/datum/clockwork_memory
 	/// our attunement data
 	var/datum/clockwork_attunement/attunement = new
 	/// our knowledge data
 	var/datum/clockwork_knowledge/knowledge = new
 
-/datum/clockwork_holder/serialize()
+/datum/clockwork_memory/serialize()
 	. = ..()
 	.["attunement"] = attunement.serialize()
 	.["knowledge"] = knowledge.serialize()
 
-/datum/clockwork_holder/deserialize(list/data)
+/datum/clockwork_memory/deserialize(list/data)
 	..()
 	if(islist(data["attunement"]))
 		attunement.deserialize(data["attunement"])

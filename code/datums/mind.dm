@@ -51,7 +51,7 @@
 	//* Datastores - Enigmas *//
 	/// our clockwork data holder
 	/// we own this and it will be deleted with us!
-	var/datum/clockwork_holder/clockwork
+	var/datum/clockwork_memory/clockwork
 
 	//? Preferences
 	/**
