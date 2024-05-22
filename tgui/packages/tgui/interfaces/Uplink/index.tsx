@@ -4,7 +4,7 @@ import { GenericUplink, Item } from './GenericUplink';
 import { Component } from 'inferno';
 import { fetchRetry } from '../../http';
 import { resolveAsset } from '../../assets';
-import { BooleanLike } from 'common/react';
+import { BooleanLike } from "common/types";
 import { Box, Tabs, Button, Stack, Section, Tooltip } from '../../components';
 import { Objective, ObjectiveMenu } from './ObjectiveMenu';
 import { calculateProgression, calculateReputationLevel, reputationDefault, reputationLevelsTooltip } from './calculateReputationLevel';

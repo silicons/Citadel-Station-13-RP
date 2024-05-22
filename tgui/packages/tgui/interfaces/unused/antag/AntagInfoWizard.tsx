@@ -1,6 +1,6 @@
 import { useBackend } from '../../../backend';
 import { Section, Stack } from '../../../components';
-import { BooleanLike } from 'common/react';
+import { BooleanLike } from "common/types";
 import { Window } from '../../../layouts';
 
 const teleportstyle = {

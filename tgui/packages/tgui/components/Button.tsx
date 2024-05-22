@@ -6,7 +6,9 @@
 
 import { Placement } from '@popperjs/core';
 import { KEY_ENTER, KEY_ESCAPE, KEY_SPACE } from 'common/keycodes';
-import { BooleanLike, classes, pureComponentHooks, StrictlyStringLike } from 'common/react';
+import { classes, pureComponentHooks } from 'common/react';
+import { StrictlyStringLike } from "common/types";
+import { BooleanLike } from "common/types";
 import { Component, createRef } from 'inferno';
 import { createLogger } from '../logging';
 import { Box, BoxProps, computeBoxClassName, computeBoxProps } from './Box';

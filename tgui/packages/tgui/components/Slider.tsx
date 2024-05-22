@@ -5,7 +5,8 @@
  */
 
 import { clamp01, keyOfMatchingRange, scale } from 'common/math';
-import { BooleanLike, classes } from 'common/react';
+import { classes } from 'common/react';
+import { BooleanLike } from "common/types";
 import { BoxProps, computeBoxClassName, computeBoxProps } from './Box';
 import { DraggableControl } from './DraggableControl';
 import { NumberInput } from './NumberInput';

@@ -3,7 +3,8 @@
  * @license MIT
  */
 
-import { BooleanLike, classes } from "common/react";
+import { classes } from "common/react";
+import { BooleanLike } from "common/types";
 import { Box, BoxProps } from "./Box";
 
 interface SpriteProps extends BoxProps {

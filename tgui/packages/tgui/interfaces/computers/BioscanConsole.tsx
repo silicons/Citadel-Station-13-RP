@@ -2,7 +2,7 @@
  * @file
  * @license MIT
  */
-import { BooleanLike } from "../../../common/react";
+import { BooleanLike } from "common/types";
 import { useBackend } from "../../backend";
 import { Button, Collapsible, Input, LabeledList, Section } from "../../components";
 import { Window } from "../../layouts";

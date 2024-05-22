@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-import { BooleanLike } from 'common/react';
+import { BooleanLike } from "common/types";
 import { Component, InfernoNode } from 'inferno';
 import { Box, BoxProps } from './Box';
 import { Button, ButtonProps } from './Button';

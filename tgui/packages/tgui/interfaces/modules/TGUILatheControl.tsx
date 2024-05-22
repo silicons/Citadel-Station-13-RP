@@ -5,7 +5,7 @@
  * @license MIT
  */
 
-import { BooleanLike } from "common/react";
+import { BooleanLike } from "common/types";
 import { ModuleData, useLocalState, useModule } from "../../backend";
 import { Box, Button, Collapsible, Dropdown, Input, LabeledList, NoticeBox, NumberInput, ProgressBar, Stack, Table, Tabs } from "../../components";
 import { Section, SectionProps } from "../../components/Section";

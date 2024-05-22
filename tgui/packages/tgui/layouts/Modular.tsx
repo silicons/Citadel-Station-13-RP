@@ -3,7 +3,7 @@
  * @license MIT
  */
 
-import { BooleanLike } from "common/react";
+import { BooleanLike } from "common/types";
 import { InfernoNode } from "inferno";
 import { Section } from "../components";
 import { SectionProps } from "../components/Section";

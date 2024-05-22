@@ -3,7 +3,7 @@
  * @license MIT
  */
 
-import { BooleanLike } from "../../../common/react";
+import { BooleanLike } from "common/types";
 import { capitalize } from "../../../common/string";
 import { ModuleProps, ModuleData, useModule, useLocalState } from "../../backend";
 import { Button, Flex, Input, LabeledList, Section, Tabs } from "../../components";

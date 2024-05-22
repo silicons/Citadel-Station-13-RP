@@ -1,6 +1,6 @@
 import { sortBy } from "common/collections";
 import { KEY_DOWN, KEY_ENTER, KEY_UP } from "common/keycodes";
-import { BooleanLike } from "common/react";
+import { BooleanLike } from "common/types";
 import { Component } from "inferno";
 import { useBackend } from "../backend";
 import { Button, KeyListener, Stack } from "../components";

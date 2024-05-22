@@ -1,4 +1,5 @@
-import { BooleanLike, classes } from "common/react";
+import { classes } from "common/react";
+import { BooleanLike } from "common/types";
 import { Component } from "inferno";
 import { Section, Stack, Box, Button, Flex, Tooltip, NoticeBox, Dimmer, Icon } from "../../components";
 import { calculateProgression, getReputation, Rank } from "./calculateReputationLevel";

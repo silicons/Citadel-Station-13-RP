@@ -1,6 +1,6 @@
 import { round } from "common/math";
 import { InfernoNode } from "inferno";
-import { BooleanLike } from "../../../common/react";
+import { BooleanLike } from "common/types";
 import { useBackend } from "../../backend";
 import { AnimatedNumber, Button, LabeledList, NumberInput, ProgressBar, Section, Stack } from "../../components";
 import { ComponentProps } from "../../components/Component";

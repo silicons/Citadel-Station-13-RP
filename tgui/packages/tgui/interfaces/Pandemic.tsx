@@ -1,4 +1,4 @@
-import { BooleanLike } from '../../common/react';
+import { BooleanLike } from "common/types";
 import { useBackend, useLocalState } from '../backend';
 import { Box, Button, Collapsible, Input, LabeledList, NoticeBox, ProgressBar, Section, Stack, Tabs, Tooltip } from '../components';
 import { Window } from '../layouts';

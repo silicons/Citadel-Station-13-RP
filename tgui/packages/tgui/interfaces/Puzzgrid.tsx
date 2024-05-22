@@ -1,5 +1,5 @@
 import { range } from "common/collections";
-import { BooleanLike } from "common/react";
+import { BooleanLike } from "common/types";
 import { useBackend } from "../backend";
 import { Box, Button, FitText, Stack } from "../components";
 import { Window } from "../layouts";

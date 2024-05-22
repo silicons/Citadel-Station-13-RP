@@ -2,7 +2,7 @@ import { useBackend, useLocalState } from '../../../backend';
 import { multiline } from 'common/string';
 import { GenericUplink, Item } from '../../Uplink/GenericUplink';
 import { BlockQuote, Button, Section, Stack, Tabs } from '../../../components';
-import { BooleanLike } from 'common/react';
+import { BooleanLike } from "common/types";
 import { Window } from '../../../layouts';
 
 const allystyle = {

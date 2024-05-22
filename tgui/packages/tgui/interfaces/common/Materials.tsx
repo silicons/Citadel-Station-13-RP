@@ -2,7 +2,7 @@
  * @file
  * @license MIT
  */
-import { BooleanLike } from 'common/react';
+import { BooleanLike } from "common/types";
 import { Box, Button, NumberInput, Section, Icon, Stack, Tooltip } from '../../components';
 import { formatSiUnit } from '../../format';
 import { useLocalState, useSharedState } from '../../backend';

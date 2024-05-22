@@ -3,7 +3,7 @@
  * @license MIT
  */
 
-import { BooleanLike } from "common/react";
+import { BooleanLike } from "common/types";
 import { useBackend, useLocalState } from "../../backend";
 import { Button, NoticeBox, Section, Tabs } from "../../components";
 import { Module } from "../../components/Module";

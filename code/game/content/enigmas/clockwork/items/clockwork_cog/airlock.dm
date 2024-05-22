@@ -37,4 +37,8 @@
 	)
 	return constructing
 
+// todo: allowed() needs a look-over
+/obj/machinery/airlock/allowed(mob/M)
+	. = ..()
+
 #warn impl

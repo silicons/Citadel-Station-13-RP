@@ -3,7 +3,7 @@
  * @license MIT
  */
 
-import { BooleanLike } from "common/react";
+import { BooleanLike } from "common/types";
 import { Section } from "../../components";
 
 type IngredientRef = string;

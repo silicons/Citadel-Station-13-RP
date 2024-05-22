@@ -1,4 +1,4 @@
-import { BooleanLike } from "common/react";
+import { BooleanLike } from "common/types";
 import { sendAct } from "../../backend";
 import { Gender } from "./preferences/gender";
 

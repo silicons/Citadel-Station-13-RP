@@ -8,9 +8,9 @@
  * @license MIT
  */
 
-import { BooleanLike, classes, pureComponentHooks } from 'common/react';
+import { classes, pureComponentHooks } from 'common/react';
+import { BooleanLike } from "common/types";
 import { createVNode } from 'inferno';
-import { ChildFlags, VNodeFlags } from 'inferno-vnode-flags';
 import { CSS_COLORS } from '../constants';
 import { ComponentProps } from './Component';
 

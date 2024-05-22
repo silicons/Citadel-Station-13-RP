@@ -1,5 +1,6 @@
 import { sortBy, sortStrings } from "common/collections";
-import { BooleanLike, classes } from "common/react";
+import { classes } from "common/react";
+import { BooleanLike } from "common/types";
 import { ComponentType, createComponentVNode, InfernoNode } from "inferno";
 import { VNodeFlags } from "inferno-vnode-flags";
 import { sendAct, useBackend, useLocalState } from "../../../../backend";

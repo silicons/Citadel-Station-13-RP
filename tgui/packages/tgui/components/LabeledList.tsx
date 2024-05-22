@@ -4,7 +4,8 @@
  * @license MIT
  */
 
-import { BooleanLike, classes, pureComponentHooks } from 'common/react';
+import { classes, pureComponentHooks } from 'common/react';
+import { BooleanLike } from "common/types";
 import { InfernoNode } from 'inferno';
 import { Box, BoxStringProp, unit } from './Box';
 import { ComponentProps } from './Component';

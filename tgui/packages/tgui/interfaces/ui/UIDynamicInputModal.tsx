@@ -1,8 +1,8 @@
-import { round } from "common/math";
-import { BooleanLike } from "common/react";
 import { useBackend, useLocalState } from "../../backend";
 import { Button, Dropdown, Input, NumberInput, Section, Stack, Tooltip } from "../../components";
 import { Window } from "../../layouts";
+import { round } from "../../../common/math";
+import { BooleanLike } from "common/types";
 
 interface UIDynamicInputContext {
   title: string;

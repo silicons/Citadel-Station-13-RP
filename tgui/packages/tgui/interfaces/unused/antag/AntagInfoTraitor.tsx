@@ -1,7 +1,7 @@
 import { useBackend } from '../../../backend';
 import { multiline } from 'common/string';
 import { BlockQuote, Button, Dimmer, Section, Stack } from '../../../components';
-import { BooleanLike } from 'common/react';
+import { BooleanLike } from "common/types";
 import { Window } from '../../../layouts';
 
 const allystyle = {

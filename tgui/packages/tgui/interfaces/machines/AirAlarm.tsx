@@ -1,5 +1,5 @@
 import { round } from 'common/math';
-import { BooleanLike } from 'common/react';
+import { BooleanLike } from "common/types";
 import { Fragment } from 'inferno';
 import { useBackend, useLocalState } from '../../backend';
 import { Box, Button, LabeledList, NumberInput, Section, Stack } from '../../components';

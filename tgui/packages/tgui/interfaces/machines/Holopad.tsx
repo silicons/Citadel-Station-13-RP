@@ -2,7 +2,7 @@
  * @file
  * @license MIT
  */
-import { BooleanLike } from "common/react";
+import { BooleanLike } from "common/types";
 import { useBackend, useLocalState } from "../../backend";
 import { Button, LabeledList, NoticeBox, Section, Stack, Table, Tabs } from "../../components";
 import { Window } from "../../layouts";

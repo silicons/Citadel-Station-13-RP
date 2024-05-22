@@ -4,7 +4,8 @@
  * @license MIT
  */
 
-import { BooleanLike, classes, pureComponentHooks } from 'common/react';
+import { classes, pureComponentHooks } from 'common/react';
+import { BooleanLike } from "common/types";
 import { BoxProps, computeBoxClassName, computeBoxProps } from './Box';
 
 interface TableProps extends BoxProps {
