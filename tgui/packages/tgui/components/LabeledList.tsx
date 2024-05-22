@@ -26,7 +26,7 @@ export const LabeledList = (props: LabeledListProps) => {
 
 LabeledList.defaultHooks = pureComponentHooks;
 
-type LabeledListItemProps = {
+type LabeledListItemProps = ComponentProps & {
   readonly className?: string | BooleanLike;
   readonly label?: string | InfernoNode | BooleanLike;
   readonly labelColor?: BoxStringProp;

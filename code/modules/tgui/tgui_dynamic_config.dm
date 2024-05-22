@@ -11,7 +11,7 @@
 	/// * text for a single entry
 	/// * list for a set of equally spaced shared entries
 	/// todo: more types
-	var/list/schema = list()
+	var/list/layout = list()
 	/// are we compiled?
 	var/compiled = FALSE
 	/// items left in group
@@ -23,7 +23,7 @@
 	ASSERT(compiled)
 	return list(
 		"options" = options,
-		"schema" = schema,
+		"layout" = layout,
 	)
 
 /datum/tgui_dynamic_config/proc/compile()
@@ -48,7 +48,7 @@
 		appending = key
 
 	if(appending)
-		schema[++schema.len] = appending
+		layout[++layout.len] = appending
 
 /**
  * changes --> key = value to change
@@ -80,10 +80,35 @@
 	var/list/entry = options[key]
 	switch(entry["type"])
 		if("text")
+			// check null
+			if(isnull(next))
+				return entry["default"] || ""
+			// trim
+			return copytext_char(next, 1, 1 + entry["max"])
 		if("number")
+			// null / NaN check
+			if(!is_safe_number(next))
+				return entry["default"] || 0
+			// round
+			if(entry["round"])
+				next = round(next, entry["round"])
+			// clamp
+			return clamp(
+				next,
+				isnull(entry["min"])? -INFINITY : entry["min"],
+				isnull(entry["max"])? INFINITY : entry["max"],
+			)
 		if("toggle")
+			// check null
+			if(isnull(next))
+				return entry["default"]
+			// enforce booleanlike value
+			return !!next
 		if("dropdown")
-	#warn impl
+			// enforce in list
+			if(next in entry["options"])
+				return next
+			return entry["default"] || entry["options"][1]
 
 /datum/tgui_dynamic_config/proc/with_string(key, name, desc, max_length = 512, multi_line = FALSE, default)
 	RETURN_TYPE(/datum/tgui_dynamic_query)
