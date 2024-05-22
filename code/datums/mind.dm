@@ -39,13 +39,19 @@
 	var/mob/living/original	//TODO: remove.not used in any meaningful way ~Carn. First I'll need to tweak the way silicon-mobs handle minds.
 	var/active = FALSE
 
-	//? Characteristics
-	/// characteristics holder
-	var/datum/characteristics_holder/characteristics
-
 	//? Abilities
 	/// mind-level abilities
 	var/list/datum/ability/abilities
+
+	//* Datastores - Characteristics *//
+	/// characteristics holder
+	/// we own this and it will be deleted with us!
+	var/datum/characteristics_holder/characteristics
+
+	//* Datastores - Enigmas *//
+	/// our clockwork data holder
+	/// we own this and it will be deleted with us!
+	var/datum/clockwork_holder/clockwork
 
 	//? Preferences
 	/**
@@ -103,22 +109,14 @@
 
 /datum/mind/New(ckey)
 	src.ckey = ckey
+	characteristics = new(src)
+	clockwork = new
 
 /datum/mind/Destroy()
 	QDEL_NULL(characteristics)
+	QDEL_NULL(clockwork)
 	QDEL_LIST_NULL(abilities)
 	return ..()
-
-//? Characteristics
-
-/**
- * make sure we have a characteristics holder
- */
-/datum/mind/proc/characteristics_holder()
-	if(!characteristics)
-		characteristics = new
-		characteristics.associate_with_mind(src)
-	return characteristics
 
 //? Transfer
 

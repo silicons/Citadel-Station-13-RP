@@ -95,4 +95,4 @@
 /mob/proc/characteristics_holder()
 	if(!mind)
 		mind_initialize()
-	return mind.characteristics_holder()
+	return mind.characteristics

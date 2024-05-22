@@ -19,6 +19,10 @@
 	var/list/talents
 	// todo: modifiers
 
+/datum/characteristics_holder/New(datum/mind/owning_mind)
+	if(!isnull(owning_mind))
+		associate_with_mind(bind_to)
+
 /datum/characteristics_holder/Destroy()
 	if(mind)
 		disassociate_from_mind(mind)
