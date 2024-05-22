@@ -736,17 +736,6 @@ default behaviour is:
 		return FALSE
 	return TRUE
 
-//* Pixel Offsets
-
-/mob/living/get_centering_pixel_y_offset(dir)
-	. = ..()
-	// since we're shifted up by transforms..
-	. -= ((size_multiplier * icon_scale_y) - 1) * 16
-
-/mob/living/get_managed_pixel_y()
-	. = ..()
-	. += depth_current
-
 //TODO: maybe expand this system to be in the VV menu for event managers to mess with - provided they trust the observers enough...
 /**
  * Allows an observer to take control of the mob at any time. Must use the "existing" ghostrole subtype.
@@ -763,3 +752,18 @@ default behaviour is:
 
 /mob/living/proc/remove_ghostrole()
 	return DelComponent(/datum/component/ghostrole_spawnpoint)
+
+//* Pixel Offsets
+
+/mob/living/get_centering_pixel_y_offset(dir)
+	. = ..()
+	// since we're shifted up by transforms..
+	. -= ((size_multiplier * icon_scale_y) - 1) * 16
+
+/mob/living/get_managed_pixel_y()
+	. = ..()
+	. += depth_current
+
+//* Datastores - Enigmas *//
+
+#warn stuff
