@@ -84,8 +84,16 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 	 */
 	var/static/current_ticklimit = TICK_LIMIT_RUNNING
 
+	/// used to ensure global-ness
+	/// this is a "abcd-1234" like 4 characters dash 4 characters hexadecimal string.
+	//  todo: should this really be on the MC..
+	var/static/round_global_descriptor
 
 /datum/controller/master/New()
+	//# 0. set up round_global_descriptor
+	if(isnull(round_global_descriptor))
+		init_round_global_descriptor()
+
 	//# 1. load configs
 	if(!config_legacy)
 		load_configuration()
@@ -766,3 +774,17 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 	for (var/thing in subsystems)
 		var/datum/controller/subsystem/SS = thing
 		SS.OnConfigLoad()
+
+/datum/controller/master/proc/init_round_global_descriptor()
+	// no (real) chance of collisions
+	var/hex_string = "[num2hex(world.realtime)]"
+	var/list/built = list()
+	for(var/i in 1 to ceil(length(hex_string) / 4))
+		built += copytext(hex_string, 1 + (i - 1) * 4, 1 + (i) * 4)
+	round_global_descriptor = jointext(built, "-")
+
+/datum/controller/master/vv_edit_var(var_name, var_value, mass_edit, raw_edit)
+	switch(var_name)
+		if(NAMEOF(src, round_global_descriptor))
+			return FALSE // no
+	return ..()
