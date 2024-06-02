@@ -202,6 +202,8 @@
 #include "code\__DEFINES\fishing\aquarium.dm"
 #include "code\__DEFINES\fishing\fish.dm"
 #include "code\__DEFINES\fishing\fishing.dm"
+#include "code\__DEFINES\game\objectives.dm"
+#include "code\__DEFINES\game\system.dm"
 #include "code\__DEFINES\interface\skin.dm"
 #include "code\__DEFINES\interface\verbs.dm"
 #include "code\__DEFINES\inventory\accessories.dm"

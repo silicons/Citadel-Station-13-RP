@@ -16,6 +16,10 @@
 	var/baystation_syndrome = FALSE
 	#warn refactor that
 
+	/// innate tracking level
+	/// basically, the tracking level given if someone pulls this up on their mind panel
+	var/innate_tracking_level = GAME_SYSTEM_TRACKING_LEVEL_NONE
+
 /datum/game_objective/New(...)
 	auto_build(args.Copy())
 

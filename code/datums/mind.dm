@@ -1,4 +1,9 @@
 /**
+ * Mind Datums
+ *
+ * Tracks a character, effectively.
+ * Not all mobs have minds, but most playable mobs and complex mobs will have them.
+ *
  *!	Note from Carnie:
  * 	The way datum/mind stuff works has been changed a lot.
  * 	Minds now represent IC characters rather than following a client around constantly.
@@ -39,13 +44,25 @@
 	var/mob/living/original	//TODO: remove.not used in any meaningful way ~Carn. First I'll need to tweak the way silicon-mobs handle minds.
 	var/active = FALSE
 
+	//? Abilities
+	/// mind-level abilities
+	var/list/datum/ability/abilities
+
 	//? Characteristics
 	/// characteristics holder
 	var/datum/characteristics_holder/characteristics
 
-	//? Abilities
-	/// mind-level abilities
-	var/list/datum/ability/abilities
+	//* Game System *//
+	/// factions, which we usually want to perform the objectives / functionalities of
+	var/list/datum/game_faction/game_factions
+	/// standalone / local objectives
+	var/list/datum/game_objective/game_objectives
+	#warn impl
+
+	//* Memory *//
+	/// our memory
+	var/datum/memory/memory
+	#warn check all references
 
 	//? Preferences
 	/**
@@ -57,7 +74,6 @@
 	/// original economic modifier from backgrounds
 	var/original_pref_economic_modifier = 1
 
-	var/memory
 	var/list/learned_recipes
 
 	// todo: id, not title
@@ -735,3 +751,12 @@
 		ability.disassociate(current)
 	qdel(ability)
 	return TRUE
+
+//* Memory Datums *//
+
+/**
+ * holds mind memories
+ */
+/datum/mind_memory
+
+#warn impl
