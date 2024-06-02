@@ -4,6 +4,13 @@ SUBSYSTEM_DEF(ticker)
 	init_order = INIT_ORDER_TICKER
 	runlevels = RUNLEVEL_LOBBY | RUNLEVEL_SETUP | RUNLEVEL_GAME | RUNLEVEL_POSTGAME
 
+	//* Game System *//
+
+	/// Active factoins
+	var/static/list/datum/game_faction/game_factions = list()
+
+	//* legacy below
+
 	/// Current state of the game
 	var/static/current_state = GAME_STATE_INIT
 
@@ -67,6 +74,13 @@ SUBSYSTEM_DEF(ticker)
 	var/static/round_start_time
 	var/static/list/round_start_events
 	var/static/list/round_end_events
+
+/**
+ * @return TRUE / FALSE success / failure
+ */
+/datum/controller/subsystem/ticker/proc/register_game_faction(datum/game_faction/faction)
+
+//* Legacy below
 
 /datum/controller/subsystem/ticker/Initialize()
 	if(!syndicate_code_phrase)
