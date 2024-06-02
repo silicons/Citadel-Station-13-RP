@@ -29,6 +29,17 @@
 	/// minds
 	var/list/datum/mind/minds
 
+/datum/game_faction/New(with_id)
+	// generate an id
+	if(isnull(with_id))
+		var/static/notch = 0
+		id = "faction-[++notch]-[SSpersistence.round_global_descriptor]"
+		if(notch >= SHORT_REAL_LIMIT)
+			notch = 0
+	else
+		// must be globally unique
+		id = "[with_id]-[SSpersistence.round_global_descriptor]"
+
 /datum/game_faction/Destroy()
 	QDEL_LIST(objectives)
 	#warn clear minds

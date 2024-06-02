@@ -20,6 +20,9 @@
 	/// basically, the tracking level given if someone pulls this up on their mind panel
 	var/innate_tracking_level = GAME_SYSTEM_TRACKING_LEVEL_NONE
 
+	/// requires ticking by SSticker
+	var/requires_ticking = FALSE
+
 /datum/game_objective/New(...)
 	auto_build(args.Copy())
 

@@ -12,7 +12,7 @@
 	/// subtly obfuscated id lookup
 	var/list/obfuscation_cache
 
-// this is here so we conflict when a pr is merged to master so we cna make it grab round_global_descriptor from MC instead
+// this is here so we conflict when a pr is merged to master so we cna make it grab round_global_descriptor from SSpersistence instead
 
 /datum/controller/subsystem/mapping/PreInit(recovering)
 	. = ..()
@@ -20,7 +20,7 @@
 		obfuscation_secret = md5(GUID())
 	obfuscation_cache = recovering? ((istype(SSmapping) && SSmapping.obfuscation_cache) || list()) : list()
 
-// this is here so we conflict when a pr is merged to master so we cna make it grab round_global_descriptor from MC instead
+// this is here so we conflict when a pr is merged to master so we cna make it grab round_global_descriptor from SSpersistence instead
 
 /**
  * Generates an obfuscated but constant ID for an original ID for cases where you don't want players codediving for an ID.
@@ -34,7 +34,7 @@
 		return	// no.
 	return md5("[obfuscation_secret]%[lowertext(original)]%[lowertext(id_type)]")
 
-// this is here so we conflict when a pr is merged to master so we cna make it grab round_global_descriptor from MC instead
+// this is here so we conflict when a pr is merged to master so we cna make it grab round_global_descriptor from SSpersistence instead
 
 /**
  * more expensive obfuscation: just 4 random hexadecimals at the end.
