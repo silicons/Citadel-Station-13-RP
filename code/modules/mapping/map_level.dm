@@ -73,6 +73,13 @@
 	/// our zlevel once loaded
 	var/tmp/z_index
 
+	//* Mining *//
+	/// mineral generation to use; set to typepath to init
+	var/datum/mineral_generation/mineral_generation
+	/// generated mineral map
+	var/datum/mineral_map/mineral_map
+	#warn hook
+
 	//* Persistence *//
 	/// loaded persistence metadata, if any
 	var/datum/map_level_persistence/persistence

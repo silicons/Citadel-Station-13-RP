@@ -48,6 +48,20 @@
 	/// multiz flags
 	var/mz_flags = MZ_ATMOS_UP | MZ_OPEN_UP
 
+	//* Mining *//
+	/// underground ores
+	///
+	/// * TURF_UNDERGROUND_ORES_HAS_NONE = do not have underground ores
+	/// * TURF_UNDERGROUND_ORES_UNLOADED = yet to load
+	/// * list(ore id = amount) = has these ores
+	/// * positive number = **depleted, with that mineral_map as the ID**
+	///
+	/// we do #4 (the positive number) so swapping mineral maps
+	/// doesn't require touching every turf on the level.
+	///
+	/// this is a private var because it's so obnoxious to access.
+	VAR_PRIVATE/list/underground_ores
+
 	//* Movement / Pathfinding
 	/// How much the turf slows down movement, if any.
 	var/slowdown = 0
@@ -607,6 +621,11 @@
 		if(!O.depth_projected)
 			continue
 		. = max(., O.depth_level)
+
+//* Mining *//
+
+// See [code/modules/mining/excavation/turf.dm]
+// See [code/modules/mining/drilling/turf.dm]
 
 //* Multiz *//
 

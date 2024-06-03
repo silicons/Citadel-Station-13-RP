@@ -132,6 +132,9 @@ GLOBAL_LIST_INIT(multiz_hole_baseturfs, typecacheof(list(
 	var/old_outdoors = outdoors
 	var/old_dangerous_objects = dangerous_objects
 
+	// store mining
+	var/list/old_underground_ores = underground_ores
+
 	// prep for change
 	var/list/old_baseturfs = baseturfs
 	var/old_type = type
@@ -172,6 +175,10 @@ GLOBAL_LIST_INIT(multiz_hole_baseturfs, typecacheof(list(
 	dangerous_objects = old_dangerous_objects
 	if(flags & CHANGETURF_PRESERVE_OUTDOORS)
 		outdoors = old_outdoors
+
+	// restore mining
+	if(underground_ores != TURF_UNDERGROUND_ORES_HAS_NONE)
+		underground_ores = old_underground_ores
 
 	// Regen AO
 	if (permit_ao)
