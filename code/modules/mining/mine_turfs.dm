@@ -51,105 +51,6 @@ CREATE_STANDARD_TURFS(/turf/unsimulated/mineral)
 	var/ignore_oregen = FALSE
 	var/ignore_cavegen = FALSE
 
-/turf/simulated/mineral/rich
-	//Placeholder, go to the oregen stuff at the bottom to see the oregen weight
-
-// Alternatives that ignore ore_gen and cavegen
-/turf/simulated/mineral/ignore_oregen
-	ignore_oregen = TRUE
-
-/turf/simulated/mineral/floor/ignore_oregen
-	ignore_oregen = TRUE
-
-/turf/simulated/mineral/ignore_cavegen
-	ignore_cavegen = TRUE
-
-/turf/simulated/mineral/floor/ignore_cavegen
-	ignore_cavegen = TRUE
-
-/turf/simulated/mineral/floor/ignore_cavegen/has_air
-	initial_gas_mix = GAS_STRING_STP
-
-/turf/simulated/mineral/floor/indoors
-	outdoors = FALSE
-	name = "Depreciated, tell a mapper if you see this"
-	icon_state = ""
-
-/turf/simulated/mineral/icerock/ignore_cavegen
-	ignore_cavegen = TRUE
-
-/turf/simulated/mineral/icerock/floor/ignore_cavegen
-	ignore_cavegen = TRUE
-
-/turf/simulated/mineral/icerock/floor/ignore_cavegen/indoors
-	outdoors = FALSE
-
-
-// Alternative rock wall sprites.
-/turf/simulated/mineral/light
-	icon_state = "rock-light"
-	rock_side_icon_state = "rock_side-light"
-	sand_icon_state = "sand-light"
-	rock_icon_state = "rock-light"
-	random_icon = 1
-
-/turf/simulated/mineral/icerock
-	name = "icerock"
-	color = "#78a3b8"
-	random_icon = 1
-
-/turf/simulated/mineral/icerock/airmix
-	initial_gas_mix = GAS_STRING_STP
-/turf/unsimulated/mineral/icerock
-	name = "impassable icerock"
-	icon = 'icons/turf/walls.dmi'
-	base_icon_state = "wall"
-	density = 1
-	smoothing_flags = SMOOTH_BITMASK
-	smoothing_groups = (SMOOTH_GROUP_WALLS+ SMOOTH_GROUP_CLOSED_TURFS + SMOOTH_GROUP_MINERAL_WALLS )
-	canSmoothWith = (SMOOTH_GROUP_WALLS+ SMOOTH_GROUP_CLOSED_TURFS + SMOOTH_GROUP_MINERAL_WALLS )
-	color = COLOR_OFF_WHITE
-
-/turf/simulated/mineral/ignore_mapgen
-	ignore_mapgen = 1
-
-/turf/simulated/mineral/floor
-	name = "sand"
-	icon = 'icons/turf/flooring/asteroid.dmi'
-	icon_state = "asteroid"
-	density = 0
-	opacity = 0
-	blocks_air = 0
-	can_build_into_floor = TRUE
-
-//Alternative sand floor sprite.
-/turf/simulated/mineral/floor/light
-	icon_state = "sand-light"
-	sand_icon_state = "sand-light"
-
-/turf/simulated/mineral/floor/light_border
-	icon_state = "sand-light-border"
-	sand_icon_state = "sand-light-border"
-
-/turf/simulated/mineral/floor/light_nub
-	icon_state = "sand-light-nub"
-	sand_icon_state = "sand-light-nub"
-
-/turf/simulated/mineral/floor/light_corner
-	icon_state = "sand-light-corner"
-	sand_icon_state = "sand-light-corner"
-
-/turf/simulated/mineral/floor/ignore_mapgen
-	ignore_mapgen = 1
-
-/turf/simulated/mineral/floor/icerock
-	name = "ice"
-	icon_state = "ice"
-	sand_icon_state = "ice"
-
-/turf/simulated/mineral/floor/icerock/airmix
-	initial_gas_mix = GAS_STRING_STP
-
 /turf/simulated/mineral/proc/make_floor()
 	if(!density && !opacity)
 		return
@@ -759,3 +660,102 @@ CREATE_STANDARD_TURFS(/turf/unsimulated/mineral)
 		mineral = GLOB.ore_data[mineral_name]
 		if(atom_flags & ATOM_INITIALIZED)
 			UpdateMineral()
+
+/turf/simulated/mineral/rich
+	//Placeholder, go to the oregen stuff at the bottom to see the oregen weight
+
+// Alternatives that ignore ore_gen and cavegen
+/turf/simulated/mineral/ignore_oregen
+	ignore_oregen = TRUE
+
+/turf/simulated/mineral/floor/ignore_oregen
+	ignore_oregen = TRUE
+
+/turf/simulated/mineral/ignore_cavegen
+	ignore_cavegen = TRUE
+
+/turf/simulated/mineral/floor/ignore_cavegen
+	ignore_cavegen = TRUE
+
+/turf/simulated/mineral/floor/ignore_cavegen/has_air
+	initial_gas_mix = GAS_STRING_STP
+
+/turf/simulated/mineral/floor/indoors
+	outdoors = FALSE
+	name = "Depreciated, tell a mapper if you see this"
+	icon_state = ""
+
+/turf/simulated/mineral/icerock/ignore_cavegen
+	ignore_cavegen = TRUE
+
+/turf/simulated/mineral/icerock/floor/ignore_cavegen
+	ignore_cavegen = TRUE
+
+/turf/simulated/mineral/icerock/floor/ignore_cavegen/indoors
+	outdoors = FALSE
+
+
+// Alternative rock wall sprites.
+/turf/simulated/mineral/light
+	icon_state = "rock-light"
+	rock_side_icon_state = "rock_side-light"
+	sand_icon_state = "sand-light"
+	rock_icon_state = "rock-light"
+	random_icon = 1
+
+/turf/simulated/mineral/icerock
+	name = "icerock"
+	color = "#78a3b8"
+	random_icon = 1
+
+/turf/simulated/mineral/icerock/airmix
+	initial_gas_mix = GAS_STRING_STP
+/turf/unsimulated/mineral/icerock
+	name = "impassable icerock"
+	icon = 'icons/turf/walls.dmi'
+	base_icon_state = "wall"
+	density = 1
+	smoothing_flags = SMOOTH_BITMASK
+	smoothing_groups = (SMOOTH_GROUP_WALLS+ SMOOTH_GROUP_CLOSED_TURFS + SMOOTH_GROUP_MINERAL_WALLS )
+	canSmoothWith = (SMOOTH_GROUP_WALLS+ SMOOTH_GROUP_CLOSED_TURFS + SMOOTH_GROUP_MINERAL_WALLS )
+	color = COLOR_OFF_WHITE
+
+/turf/simulated/mineral/ignore_mapgen
+	ignore_mapgen = 1
+
+/turf/simulated/mineral/floor
+	name = "sand"
+	icon = 'icons/turf/flooring/asteroid.dmi'
+	icon_state = "asteroid"
+	density = 0
+	opacity = 0
+	blocks_air = 0
+	can_build_into_floor = TRUE
+
+//Alternative sand floor sprite.
+/turf/simulated/mineral/floor/light
+	icon_state = "sand-light"
+	sand_icon_state = "sand-light"
+
+/turf/simulated/mineral/floor/light_border
+	icon_state = "sand-light-border"
+	sand_icon_state = "sand-light-border"
+
+/turf/simulated/mineral/floor/light_nub
+	icon_state = "sand-light-nub"
+	sand_icon_state = "sand-light-nub"
+
+/turf/simulated/mineral/floor/light_corner
+	icon_state = "sand-light-corner"
+	sand_icon_state = "sand-light-corner"
+
+/turf/simulated/mineral/floor/ignore_mapgen
+	ignore_mapgen = 1
+
+/turf/simulated/mineral/floor/icerock
+	name = "ice"
+	icon_state = "ice"
+	sand_icon_state = "ice"
+
+/turf/simulated/mineral/floor/icerock/airmix
+	initial_gas_mix = GAS_STRING_STP

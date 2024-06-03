@@ -9,6 +9,7 @@
 	var/attempts = 10
 	var/codelen = 4
 	locked = 1
+	tamper_proof = 1
 
 /obj/structure/closet/crate/secure/loot/Initialize(mapload)
 	. = ..()

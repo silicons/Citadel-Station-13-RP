@@ -1,3 +1,4 @@
+#warn rename to rock_outcrop
 /obj/structure/outcrop
 	name = "outcrop"
 	desc = "A boring rocky outcrop."
