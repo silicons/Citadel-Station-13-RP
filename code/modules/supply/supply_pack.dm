@@ -57,7 +57,7 @@
 		src.contains = contains.Copy()
 	..()
 
-/datum/supply_pack2/detect_worth()
+/datum/supply_pack2/standard/detect_worth()
 	. = 0
 	for(var/path in contains)
 		var/amount = contains[path]
