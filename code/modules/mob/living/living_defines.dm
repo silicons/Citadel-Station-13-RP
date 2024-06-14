@@ -95,9 +95,6 @@
 	/// Used for buildmode AI control stuff.
 	var/image/selected_image = null
 
-	//Pending Refactor, as per Kev.
-	//var/mobility_flags = MOBILITY_FLAGS_DEFAULT
-
 	// TODO: execute iamcrystalclear for making this var
 	var/last_blood_warn = -INFINITY
 
@@ -134,6 +131,11 @@
 	var/cached_carry_encumbrance = 0
 	/// highest flat encumbrance of all items
 	var/cached_carry_flat_encumbrance = 0
+
+	//* Debris *//
+	/// stored dirt
+	var/tracking_dirt = 0
+	#warn impl
 
 	//? movement
 	/// are we currently pushing (or trying to push) (or otherwise inside Bump() handling that deals with this crap) another atom?

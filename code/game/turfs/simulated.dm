@@ -81,6 +81,7 @@
 		tracks = new typepath(src)
 	tracks.AddTracks(bloodDNA,comingdir,goingdir,bloodcolor)
 
+#warn uhh
 /turf/simulated/proc/update_dirt(increment = 1)
 	if(can_dirty)
 		dirt += increment
