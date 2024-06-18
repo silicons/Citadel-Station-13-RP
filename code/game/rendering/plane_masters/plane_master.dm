@@ -34,8 +34,12 @@
 	/// * they can include dependencies
 	var/extension_plane = FALSE
 	#warn impl
+	/// this is a shared plane; reject any edits like ambient occlusion
+	var/shared_plane = FALSE
 
 /atom/movable/screen/plane_master/proc/set_fake_ambient_occlusion(enabled)
+	if(shared_plane)
+		return
 	if(enabled && !fake_occlusion_enabled)
 		fake_occlusion_enabled = TRUE
 		filters += AMBIENT_OCCLUSION
