@@ -787,11 +787,11 @@
 	var/old_type = movement_type & MOVEMENT_TYPES
 
 	#define RESET_MOVE_TYPE(type) movement_type = (movement_type & ~(movement_type & MOVEMENT_TYPES)) | type
-	if(HAS_TRAIT(src, TRAIT_ATOM_PHASING))
+	if(HAS_TRAIT(src, TRAIT_ATOM_PHASING) || (movement_type_forced & MOVEMENT_PHASING))
 		RESET_MOVE_TYPE(MOVEMENT_PHASING)
-	else if(HAS_TRAIT(src, TRAIT_ATOM_FLYING))
+	else if(HAS_TRAIT(src, TRAIT_ATOM_FLYING) || (movement_type_forced & MOVEMENT_FLYING))
 		RESET_MOVE_TYPE(MOVEMENT_FLYING)
-	else if(HAS_TRAIT(src, TRAIT_ATOM_FLOATING))
+	else if(HAS_TRAIT(src, TRAIT_ATOM_FLOATING) || (movement_type_forced & MOVEMENT_FLOATING))
 		RESET_MOVE_TYPE(MOVEMENT_FLOATING)
 	else
 		RESET_MOVE_TYPE(MOVEMENT_GROUND)
@@ -805,6 +805,7 @@
 	on_update_movement_type(old_type, new_type)
 
 /atom/movable/proc/on_update_movement_type(old_type, new_type)
+	// todo: signal
 
 /atom/movable/proc/add_atom_flying(source)
 	ADD_TRAIT(src, TRAIT_ATOM_FLYING, source)

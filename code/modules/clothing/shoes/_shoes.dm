@@ -34,8 +34,26 @@
 	pickup_sound = 'sound/items/pickup/shoes.ogg'
 
 	//there's a snake in my boot
+	// todo: fetish code, kick this shit to modules/vore and remove the stupid hook that it uses, we use comsigs now lmao
 	var/list/inside_emotes = list()
 	var/recent_squish = 0
+
+	//* Debris Tracking *//
+
+	/// can we track debris?
+	var/tracks_debris = TRUE
+	/// dirt capacity
+	var/tracking_dirt_limit = DIRT_TRACK_CAPACITY_SHOES
+	/// % of dirt to leave behind when stepping on a turf
+	var/tracking_dirt_drop_ratio = DIRT_TRACK_DROP_RATIO_SHOES
+	/// % of dirt to pick up when stepping on a turf; we get final say
+	var/tracking_dirt_pickup_ratio = DIRT_TRACK_PICKUP_RATIO_SHOES
+	/// % of remaining capacity we can pick up on a tile
+	var/tracking_dirt_limiter_ratio = DIRT_TRACK_PICKUP_LIMITER_SHOES
+	/// amount of dirt we can always pick up regardless of limiter
+	var/tracking_dirt_always_allow = DIRT_TRACK_PICKUP_ALWAYS_SHOES
+	/// current tracking dirt
+	var/tracking_dirt = 0
 
 /obj/item/clothing/shoes/Initialize(mapload)
 	. = ..()
@@ -147,6 +165,7 @@
 
 /obj/item/clothing/shoes/clean_blood()
 	update_icon()
+	reset_tracked_debris()
 	return ..()
 
 /obj/item/clothing/shoes/proc/handle_movement(turf/walking, running)

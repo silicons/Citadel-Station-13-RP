@@ -81,13 +81,6 @@
 		tracks = new typepath(src)
 	tracks.AddTracks(bloodDNA,comingdir,goingdir,bloodcolor)
 
-#warn uhh
-/turf/simulated/proc/update_dirt(increment = 1)
-	if(can_dirty)
-		dirt += increment
-		if(dirt >= 100)
-			set_dirt_object((dirt - 50) * 5)
-
 /turf/simulated/Entered(atom/movable/AM, atom/oldLoc)
 	..()
 	if(AM.rad_insulation != 1)
@@ -100,11 +93,6 @@
 		var/mob/living/M = AM
 		if(M.lying)
 			return
-
-		if(M.dirties_floor())
-			// Dirt overlays.
-			// todo: currently nerfed
-			update_dirt(0.2)
 
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M

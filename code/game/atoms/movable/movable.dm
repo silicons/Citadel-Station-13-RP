@@ -53,11 +53,15 @@
 	/// Our default glide_size. Null to use global default.
 	var/default_glide_size
 	/// Movement types, see [code/__DEFINES/flags/movement.dm]
-	/// Do *not* manually edit this variable in most cases. Use the helpers in [code/game/atoms/atoms_movement.dm].
+	/// Do *not* manually edit this variable in most cases. Use [update_movement_type()] and traits!
 	/// todo: is there a better way to do this? what if we want to force something to be a movement type on map editor?
 	/// * this variable is a cache variable generated from movement type traits.
 	/// * this variable is not visible and should not be edited in the map editor.
 	var/tmp/movement_type = MOVEMENT_GROUND
+	/// enforced movement types
+	///
+	/// * priority is arbitrary. in general, the most 'clearing' type (phasing --> flying --> ground, etc) is prioritized
+	var/movement_type_forced = NONE
 
 	//? Spacedrift
 	/// Which direction we're drifting

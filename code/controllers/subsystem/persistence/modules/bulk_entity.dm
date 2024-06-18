@@ -1,5 +1,5 @@
 //* This file is explicitly licensed under the MIT license. *//
-//* Copyright (c) 2023 Citadel Station developers.          *//
+//* Copyright (c) 2024 silicons                             *//
 
 /**
  * bulk entity storage module
@@ -8,7 +8,7 @@
  */
 /datum/controller/subsystem/persistence
 
-/datum/controller/subsystem/persistence/proc/bulk_entity_save_chunks(list/datum/bulk_entity_chunk/chunks)
+/datum/controller/subsystem/persistence/proc/bulk_entity_save_chunks(list/datum/bulk_entity_persistence_chunk/chunks)
 	if(!SSdbcore.Connect())
 		return FALSE
 	if(!length(chunks))
@@ -17,7 +17,7 @@
 	var/intentionally_allow_admin_proccall = usr
 	usr = null
 
-	for(var/datum/bulk_entity_chunk/chunk as anything in chunks)
+	for(var/datum/bulk_entity_persistence_chunk/chunk as anything in chunks)
 		var/datum/db_query/query = SSdbcore.NewQuery(
 			"INSERT INTO [format_table_name("persistence_bulk_entity")] \
 				(generation, persistence_key, level_id, data, round_id) \
@@ -41,7 +41,7 @@
 	if(!SSdbcore.Connect())
 		return FALSE
 
-	var/list/datum/bulk_entity_chunk/chunks = list()
+	var/list/datum/bulk_entity_persistence_chunk/chunks = list()
 
 	var/intentionally_allow_admin_proccall = usr
 	usr = null
@@ -60,7 +60,7 @@
 	while(query.NextRow())
 		var/encoded_data = query.item[1]
 
-		var/datum/bulk_entity_chunk/chunk = new
+		var/datum/bulk_entity_persistence_chunk/chunk = new
 		chunk.generation = generation
 		chunk.persistence_key = persistence_key
 		chunk.data = json_decode(encoded_data)
@@ -154,10 +154,10 @@
 /**
  * @return list(count loaded, count dropped, count errored)
  */
-/datum/bulk_entity_persistence/proc/load_chunks(list/datum/bulk_entity_chunk/chunks)
+/datum/bulk_entity_persistence/proc/load_chunks(list/datum/bulk_entity_persistence_chunk/chunks)
 	return list(0, 0, 0)
 
-/datum/bulk_entity_chunk
+/datum/bulk_entity_persistence_chunk
 	//* Set by serialize_entities_into_chunks *//
 	var/level_id
 	var/list/data

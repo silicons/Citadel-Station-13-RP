@@ -133,6 +133,18 @@
 	var/cached_carry_flat_encumbrance = 0
 
 	//* Debris *//
+	/// are we capable of spreading debris?
+	var/tracks_debris = TRUE
+	/// dirt capacity
+	var/tracking_dirt_limit = DIRT_TRACK_CAPACITY_MOB
+	/// % of dirt to leave behind when stepping on a turf
+	var/tracking_dirt_drop_ratio = DIRT_TRACK_DROP_RATIO_MOB
+	/// % of dirt to pick up when stepping on a turf; we get final say
+	var/tracking_dirt_pickup_ratio = DIRT_TRACK_PICKUP_RATIO_MOB
+	/// % of remaining capacity we can pick up on a tile
+	var/tracking_dirt_limiter_ratio = DIRT_TRACK_PICKUP_LIMITER_MOB
+	/// amount of dirt we can always pick up regardless of limiter
+	var/tracking_dirt_always_allow = DIRT_TRACK_PICKUP_ALWAYS_MOB
 	/// stored dirt
 	var/tracking_dirt = 0
 	#warn impl

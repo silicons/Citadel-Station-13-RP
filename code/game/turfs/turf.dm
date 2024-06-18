@@ -42,6 +42,22 @@
 	/// are we mid changeturf?
 	var/changing_turf = FALSE
 
+	//* Debris *//
+	/// do we simulate dirt tracking at all?
+	var/tracks_dirt = FALSE
+	/// static amount of dirt we have
+	var/tracking_dirt_permanent
+	/// amount of dirt we accumulated, if we're not static
+	var/tracking_dirt
+	/// amount of dirt we can have at once
+	var/tracking_dirt_capacity = DIRT_TILE_CAPACITY
+	/// amount of dirt that it starts to show
+	var/tracking_dirt_visible = DIRT_TILE_VISIBLE
+	/// amount of dirt that we have maximum alpha
+	var/tracking_dirt_maximum_visibility = DIRT_TILE_MAXIMUM_VISIBILITY
+
+	#warn impl
+
 	//* Flags
 	/// turf flags
 	var/turf_flags = NONE

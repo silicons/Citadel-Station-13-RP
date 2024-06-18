@@ -8,6 +8,10 @@
 	icon_state = "dirt"
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	collate = TRUE
+	/// we are persisted by another bulk serializer.
+	obj_persist_status = OBJ_PERSIST_STATUS_NO_THANK_YOU
+
+#warn uhh
 
 /obj/effect/debris/cleanable/dirt/Initialize(mapload, alpha)
 	src.alpha = clamp(alpha, 0, 255)

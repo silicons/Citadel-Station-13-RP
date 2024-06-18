@@ -362,6 +362,32 @@
 	if(their_dir)
 		pushing.setDir(their_dir)
 
+//* Debris *//
+
+/**
+ * can track dirt from / onto
+ *
+ * todo: does this really need to be a proc? question for later, i can't care enough right now.
+ */
+/mob/living/proc/can_track_debris(turf/tile)
+	return tracks_debris && (movement_type == MOVEMENT_GROUND)
+
+/**
+ * called to handle debris tracking
+ *
+ * * assumes we are a single move
+ */
+/mob/living/proc/track_debris(turf/tile, force)
+	if(!force && !can_track_debris(tile))
+		return
+	#warn impl
+
+/**
+ * called to adjust a set amount of tracked dirt
+ */
+/mob/living/proc/adjust_tracking_dirt(amount)
+	tracking_dirt = clamp(tracking_dirt + amount, 0, SHORT_REAL_LIMIT)
+
 //? Depth
 
 /mob/living/proc/change_depth(new_depth)

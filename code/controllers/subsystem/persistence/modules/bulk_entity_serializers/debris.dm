@@ -1,5 +1,5 @@
 //* This file is explicitly licensed under the MIT license. *//
-//* Copyright (c) 2023 Citadel Station developers.          *//
+//* Copyright (c) 2024 silicons                             *//
 
 /**
  * /obj/effect/debris
@@ -108,7 +108,7 @@
 	return collated
 
 /datum/bulk_entity_persistence/debris/serialize_entities_into_chunks(list/atom/movable/entities, datum/map_level/level, datum/map_level_persistence/persistence)
-	var/list/datum/bulk_entity_chunk/chunks = list()
+	var/list/datum/bulk_entity_persistence_chunk/chunks = list()
 	if(!length(entities))
 		return
 	// split by area/turf
@@ -120,7 +120,7 @@
 		// limit to 500 entities per chunk
 		for(var/list/atom/movable/chunk_entities as anything in SSpersistence.entity_split_by_amount(area_turf_entities, 500))
 			// create chunk
-			var/datum/bulk_entity_chunk/chunk = new
+			var/datum/bulk_entity_persistence_chunk/chunk = new
 			chunk.level_id = persistence.level_id
 			var/list/entities_constructed = list()
 			for(var/atom/movable/entity as anything in chunk_entities)
@@ -138,10 +138,10 @@
 			chunks += chunk
 	return chunks
 
-/datum/bulk_entity_persistence/debris/load_chunks(list/datum/bulk_entity_chunk/chunks)
+/datum/bulk_entity_persistence/debris/load_chunks(list/datum/bulk_entity_persistence_chunk/chunks)
 	var/loaded = 0
 	var/dropped = 0
-	for(var/datum/bulk_entity_chunk/chunk as anything in chunks)
+	for(var/datum/bulk_entity_persistence_chunk/chunk as anything in chunks)
 		var/z_index = SSmapping.keyed_levels[chunk.level_id]?.z_index
 		var/rounds_since = chunk.rounds_since_saved
 		var/hours_since = chunk.hours_since_saved
