@@ -5,16 +5,35 @@
 	plane = -100 //Dodge just in case someone instantiates one of these accidentally, don't end up on 0 with plane_master
 	appearance_flags = PLANE_MASTER
 
+	/// unique id
+	var/id
 	/// only on clients
+	///
+	/// * this means only client plane holders will make them
 	var/client_global = FALSE
 	/// special - managed, like parallax holders
+	///
+	/// * this means no plane holder will make them
 	var/special_managed = FALSE
-	/// defaults to disabled (aka invisible)
+	/// defaults to invisible / hidden
+	///
+	/// * this will stop the plane from appearing, but it is still rendering.
 	var/default_invisible = FALSE
 	/// default alpha
+	///
+	/// * this is our visible alpha
 	var/default_alpha = 255
 	/// is occlusion on?
+	///
+	/// * fake AO just applies a filter, it's kind of ugly but players want it.
 	var/tmp/fake_occlusion_enabled = FALSE
+	/// only made if asked for
+	///
+	/// * this is basically something that is only applied to a perspective / client if there's a need
+	/// * for example, special HUDs that require weird plane rendering will do this
+	/// * they can include dependencies
+	var/extension_plane = FALSE
+	#warn impl
 
 /atom/movable/screen/plane_master/proc/set_fake_ambient_occlusion(enabled)
 	if(enabled && !fake_occlusion_enabled)
@@ -27,6 +46,7 @@
 //* KEEP THESE SORTED
 
 /atom/movable/screen/plane_master/space
+	id = "world-space"
 	plane = SPACE_PLANE
 	alpha = 255
 	mouse_opacity = MOUSE_OPACITY_ICON
@@ -34,6 +54,7 @@
 	special_managed = TRUE
 
 /atom/movable/screen/plane_master/parallax
+	id = "parallax-main"
 	plane = PARALLAX_PLANE
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	blend_mode = BLEND_MULTIPLY
@@ -42,28 +63,34 @@
 	special_managed = TRUE
 
 /atom/movable/screen/plane_master/turfs
+	id = "world-turfs"
 	plane = TURF_PLANE
 	render_target = TURF_PLANE_RENDER_TARGET
 
 /atom/movable/screen/plane_master/objs
+	id = "world-objs"
 	plane = OBJ_PLANE
 	render_target = OBJ_PLANE_RENDER_TARGET
 
 /atom/movable/screen/plane_master/mobs
+	id = "world-mobs"
 	plane = MOB_PLANE
 	render_target = MOB_PLANE_RENDER_TARGET
 
 //Cloaked atoms are visible to ghosts (or for other reasons?)
 /atom/movable/screen/plane_master/cloaked
+	id = "legacy-cloaked"
 	plane = CLOAKED_PLANE
 	default_alpha = 80
 	color = "#0000FF"
 
 // todo: remove
 /atom/movable/screen/plane_master/above
+	id = "legacy-above"
 	plane = ABOVE_PLANE
 
 /atom/movable/screen/plane_master/byond
+	id = "byond"
 	plane = BYOND_PLANE
 	render_target = BYOND_RENDER_TARGET
 	appearance_flags = PLANE_MASTER | NO_CLIENT_COLOR
@@ -73,17 +100,20 @@
 	add_filter("occlusion", 1, alpha_mask_filter(render_source = BYOND_OCCLUSION_RENDER_TARGET, flags = MASK_INVERSE))
 
 /atom/movable/screen/plane_master/byond_occlusion
+	id = "byond-occlusion"
 	plane = BYOND_OCCLUSION_PLANE
 	render_target = BYOND_OCCLUSION_RENDER_TARGET
 	appearance_flags = PLANE_MASTER | NO_CLIENT_COLOR
 
 /atom/movable/screen/plane_master/weather
+	id = "world-weather"
 	plane = WEATHER_PLANE
 
 /**
  * Handles emissive overlays and emissive blockers.
  */
 /atom/movable/screen/plane_master/emissive
+	id = "lighting-emissive"
 	name = "emissive plane master"
 	plane = EMISSIVE_PLANE
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
@@ -96,6 +126,7 @@
 	add_filter("em_block_masking", 1, color_matrix_filter(GLOB.em_mask_matrix))
 
 /atom/movable/screen/plane_master/lightmask
+	id = "render-lightmask"
 	plane = LIGHTMASK_PLANE
 	render_target = LIGHTMASK_RENDER_TARGET
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
@@ -113,6 +144,7 @@
 	)
 
 /atom/movable/screen/plane_master/lighting
+	id = "lighting"
 	plane = LIGHTING_PLANE
 	blend_mode = BLEND_MULTIPLY
 	render_target = LIGHTING_RENDER_TARGET
@@ -159,6 +191,7 @@
  * *sigh* this sucks but whatever
  */
 /atom/movable/screen/plane_master/darkvision_occlusion
+	id = "darkvision-occlusion"
 	plane = DARKVISION_OCCLUSION_PLANE
 	render_target = DARKVISION_OCCLUSION_RENDER_TARGET
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
@@ -183,12 +216,14 @@
 	add_filter("smoothing", 1, gauss_blur_filter(size = 4))
 
 /atom/movable/screen/plane_master/fov_occlusion
+	id = "darkvision-fov"
 	plane = FOV_OCCLUSION_PLANE
 	render_target = FOV_OCCLUSION_RENDER_TARGET
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	appearance_flags = PLANE_MASTER | NO_CLIENT_COLOR
 
 /atom/movable/screen/plane_master/lightless
+	id = "lightless"
 	plane = LIGHTLESS_PLANE
 	render_target = LIGHTLESS_RENDER_TARGET
 	appearance_flags = PLANE_MASTER | NO_CLIENT_COLOR
@@ -198,23 +233,28 @@
 	add_filter("mask", 1, alpha_mask_filter(render_source = LIGHTMASK_RENDER_TARGET, flags = MASK_INVERSE))
 
 /atom/movable/screen/plane_master/above_lighting
+	id = "above_lighting"
 	plane = ABOVE_LIGHTING_PLANE
 
 /atom/movable/screen/plane_master/sonar
+	id = "sonar"
 	plane = SONAR_PLANE
 	default_invisible = TRUE
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	appearance_flags = PLANE_MASTER | NO_CLIENT_COLOR
 
 /atom/movable/screen/plane_master/observer
+	id = "observer"
 	plane = OBSERVER_PLANE
 	default_invisible = TRUE
 
 /atom/movable/screen/plane_master/augmented
+	id = "augmented"
 	plane = AUGMENTED_PLANE
 	default_invisible = TRUE
 
 /atom/movable/screen/plane_master/verticality
+	id = "verticality"
 	plane = VERTICALITY_PLANE
 	alpha = 0
 	default_invisible = TRUE
@@ -223,15 +263,19 @@
 	appearance_flags = PLANE_MASTER | NO_CLIENT_COLOR
 
 /atom/movable/screen/plane_master/fullscreen
+	id = "hud-fullscreen"
 	plane = FULLSCREEN_PLANE
 	appearance_flags = PLANE_MASTER | NO_CLIENT_COLOR
 
 /atom/movable/screen/plane_master/hud
+	id = "hud-main"
 	plane = HUD_PLANE
 	appearance_flags = PLANE_MASTER | NO_CLIENT_COLOR
 
 /atom/movable/screen/plane_master/inventory
+	id = "hud-inventory"
 	plane = INVENTORY_PLANE
 
 /atom/movable/screen/plane_master/above_hud
+	id = "hud-above"
 	plane = ABOVE_HUD_PLANE

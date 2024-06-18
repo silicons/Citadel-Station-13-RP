@@ -56,7 +56,7 @@
  * BACKGROUND_LAYER 20000
  */
 
-//TODO: Deplanify. @Zandario
+// TODO: Deplanify. @Zandario
 
 // TODO: UNFUCK PLANES. HALF OF THESE HAVE NO REASON TO EXIST. WHOEVER ADDED THEM IS AN IDIOT!
 
@@ -68,7 +68,77 @@
 /// lowest reasonable plane; this should stay at -99. NO, YOU DON'T NEED MORE.
 #define LOWEST_PLANE -99
 
-//! todo: layers still need to be linear regardless of plane. stuff like projectiles DO CARE.
+//* Renderer Planes - Stack these right above LOWEST_PLANE!   *//
+//* These have render_target's that stop them from rendering! *//
+
+/**
+ *! -- Lightmask Plane
+ *
+ * lighting mask plane used for:
+ * - DARKVISION_PLANE masking
+ * - LIGHTLESS_PLANE masking
+ *
+ * this has a color matrix on it to amplify lights, making even softer lights
+ * able to fully mask the other planes.
+ *
+ * * this is just a plane that has the lighting plane forwarded onto it.
+ * * you can put special effects on it to make it act like light will in terms of masking darkvision and lightless
+ */
+#define LIGHTMASK_PLANE -98
+#define LIGHTMASK_LAYER_MAIN 1
+#define LIGHTMASK_RENDER_TARGET "*LIGHTMASK_PLANE"
+
+/**
+ *! -- Emissives Plane
+ *
+ * Description WIP.
+ */
+#define EMISSIVE_PLANE -97
+#define EMISSIVE_RENDER_TARGET "*EMISSIVE_PLANE"
+
+/**
+ *! -- Darkvision Occlusion Plane
+ *
+ * mob darkvision occlusion plane
+ * why do we need this?
+ * because while fov can be easily done using blend multiply, we need an intermediate slate
+ * to draw occlusion to, if we want sane behavior with both fovs and radii
+ *
+ * tl;dr RESET_TRANSFORM doesn't work without KEEP_APART
+ * KEEP_APART stops us from basically overlaying a no-alpha center onto a black backdrop
+ *
+ * tl;dr shit sucks
+ */
+#define DARKVISION_OCCLUSION_PLANE -96
+#define DARKVISION_OCCLUSION_LAYER_MAIN 1
+#define DARKVISION_OCCLUSION_LAYER_BLACKNESS 2
+#define DARKVISION_OCCLUSION_RENDER_TARGET "*DARKMASK_PLANE"
+
+/**
+ *! -- FOV plane
+ *
+ * we need this to have an intermediate slate that only renders to certain planes
+ * (mob, obj) rather than also turfs
+ * this makes it far less disorientating.
+ */
+#define FOV_OCCLUSION_PLANE -95
+#define FOV_OCCLUSION_LAYER_MAIN 1
+#define FOV_OCCLUSION_RENDER_TARGET "*FOVMASK_PLANE"
+
+#warn check both of the above
+
+/**
+ *! Blackness Occlusion Plane
+ *? So you know how BYOND_PLANE has blackness tiles?
+ *? We need to override that in some places. That's where this comes in.
+ */
+#define BYOND_OCCLUSION_PLANE -94
+#define BYOND_OCCLUSION_RENDER_TARGET "*NOBLACK_PLANE"
+#define BYOND_OCCLUSION_LAYER_MAIN 1
+
+// todo: layers still need to be linear regardless of plane. stuff like projectiles DO CARE.
+
+//* Service Planes - Bottom *//
 
 /**
  *! -- Click Catcher Plane
@@ -76,48 +146,56 @@
  *? This plane has NO plane master.
  *? This is the lowest "real" plane
  */
-#define CLICKCATCHER_PLANE -99
+#define CLICKCATCHER_PLANE -89
 
 /**
  *! -- Camera Background Plane
  */
-#define CAMERA_BACKGROUND_PLANE -98
+#define CAMERA_BACKGROUND_PLANE -88
 #define CAMERA_BACKGROUND_LAYER_BACK 1
 #define CAMERA_BACKGROUND_LAYER_MAP 2
+
+//* Backdrop Planes *//
 
 /**
  *! -- Space Plane
  *? For space turfs.
  */
-#define SPACE_PLANE -95 /// Reserved for use in space/parallax.
+#define SPACE_PLANE -79 /// Reserved for use in space/parallax.
 
 /**
  *! -- Parallax Plane
  *? For the parallax background.
  */
-#define PARALLAX_PLANE -90
+#define PARALLAX_PLANE -78
 
 #define PARALLAX_VIS_LAYER_BELOW -100 // Everything layering below.
 #define PARALLAX_LAYER_CENTER       0
 #define PARALLAX_VIS_LAYER_ABOVE  100 // Ditto
 
+//* Z-Mimic Planes *//
+//  These go above backdrops as they're still the game world,
+//  but below the game world as they're the levels underneath the player's
+
 /**
  *! -- Zmimic Reserved - End.
  *? Nothing must be between this and start.
  */
-#define ZMIMIC_RESERVED_PLANE_END -80
+#define ZMIMIC_RESERVED_PLANE_END -69
 
 /**
  *! -- Zmimic Reserved - Start.
  *? Nothing must be between this and end.
  */
-#define ZMIMIC_RESERVED_PLANE_START -70
+#define ZMIMIC_RESERVED_PLANE_START -60
+
+//* Game World *//
 
 /**
  *! -- Turfs Plane
  *? Turfs themselves, most flooring.
  */
-#define TURF_PLANE -45
+#define TURF_PLANE -39
 #define TURF_PLANE_RENDER_TARGET "TURF_PLANE"
 
 #define PLATING_LAYER               (AREA_LAYER)
@@ -170,7 +248,7 @@
 /**
  *! -- Obj Plane
  */
-#define OBJ_PLANE -35
+#define OBJ_PLANE -38
 #define OBJ_PLANE_RENDER_TARGET "OBJ_PLANE"
 
 #define WALL_LAYER         (TURF_LAYER+0.3) //! For walls.
@@ -195,7 +273,7 @@
 /**
  *! -- Mob Plane
 */
-#define MOB_PLANE -25
+#define MOB_PLANE -37
 #define MOB_PLANE_RENDER_TARGET "MOB_PLANE"
 
 #define BELOW_MOB_LAYER (OBJ_LAYER+0.9)
@@ -205,13 +283,13 @@
  *! -- Cloaked Plane
  *? Invisible things plane.
  */
-#define CLOAKED_PLANE -15
+#define CLOAKED_PLANE -36
 
 /**
  *! -- Above Plane
  *? In the sense that it's the highest in 'the world' and not a UI element.
  */
-#define ABOVE_PLANE -10
+#define ABOVE_PLANE -35
 
 /**
  *! -- World Threshold Plane
@@ -223,39 +301,12 @@
 #define BYOND_RENDER_TARGET "BYOND_PLANE"
 
 /**
- *! Blackness Occlusion Plane
- *? So you know how BYOND_PLANE has blackness tiles?
- *? We need to override that in some places. That's where this comes in.
- */
-#define BYOND_OCCLUSION_PLANE 1
-#define BYOND_OCCLUSION_RENDER_TARGET "*NOBLACK_PLANE"
-#define BYOND_OCCLUSION_LAYER_MAIN 1
-
-/**
  *! -- Planet Lighting Plane
  *? Lighting on planets.
  */
 #define WEATHER_PLANE 4
 
-/**
- *! -- Lightmask Plane
- *
- * lighting mask plane used for:
- * - DARKVISION_PLANE masking
- * - LIGHTLESS_PLANE masking
- *
- * this has a color matrix on it to amplify lights, making even softer lights
- * able to fully mask the other planes.
- */
-#define LIGHTMASK_PLANE 7
-#define LIGHTMASK_LAYER_MAIN 1
-#define LIGHTMASK_RENDER_TARGET "*LIGHTMASK_PLANE"
-
-/**
- *! -- Emissives Plane
- */
-#define EMISSIVE_PLANE 8
-#define EMISSIVE_RENDER_TARGET "*EMISSIVE_PLANE"
+//* Game World - Lighting *//
 
 /**
  *! -- Lighting Plane
@@ -278,33 +329,7 @@
 #define DARKVISION_LAYER_BLACKNESS 6
 #define DARKVISION_RENDER_TARGET "DARKVISION_PLANE"
 
-/**
- *! -- Darkvision Occlusion Plane
- *
- * mob darkvision occlusion plane
- * why do we need this?
- * because while fov can be easily done using blend multiply, we need an intermediate slate
- * to draw occlusion to, if we want sane behavior
- * tl;dr RESET_TRANSFORM doesn't work without KEEP_APART
- * KEEP_APART stops us from basically overlaying a no-alpha center onto a black backdrop
- *
- * tl;dr shit sucks
- */
-#define DARKVISION_OCCLUSION_PLANE 11
-#define DARKVISION_OCCLUSION_LAYER_MAIN 1
-#define DARKVISION_OCCLUSION_LAYER_BLACKNESS 2
-#define DARKVISION_OCCLUSION_RENDER_TARGET "*DARKMASK_PLANE"
-
-/**
- *! -- FOV plane
- *
- * we need this to have an intermediate slate that only renders to certain planes
- * (mob, obj) rather than also turfs
- * this makes it far less disorientating.
- */
-#define FOV_OCCLUSION_PLANE 12
-#define FOV_OCCLUSION_LAYER_MAIN 1
-#define FOV_OCCLUSION_RENDER_TARGET "*FOVMASK_PLANE"
+#warn below
 
 /**
  *! -- Lightless Plane
@@ -412,15 +437,13 @@
 
 /// Highest plane. This should stay at 99. No, you don't need more than that.
 #define HIGHEST_PLANE 99
-/// Master rendering plane - we actually render onto this plane
-// todo: unified rendering and a single game render master plane?
-// #define MASTER_RENDERER_PLANE
 
-//? Misc render sources / targets
+//* Render Sources / Targets *//
 
 #define RENDER_SOURCE_HOLOGRAM(key) "*hg_[key]"
 
-//! Helpers
+//* Helpers *//
+
 /// computed based on highest/lowest plane, and highest/lowest layer (which I assume to be 10k.)
 #define PLANE_MANGLING_FACTOR 50
 /// i don't even know how to compute this this is a wild guess that works for most
