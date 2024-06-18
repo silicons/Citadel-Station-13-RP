@@ -30,3 +30,5 @@
 #define DIRT_TILE_VISIBLE 200
 /// dirt at which visibility is maximum
 #define DIRT_TILE_MAXIMUM_VISIBILITY 700
+/// dirt at which we persist
+#define DIRT_TILE_MINIMUM_PERSIST 1
