@@ -61,6 +61,48 @@
 /datum/outfit/compare_to(datum/D)
 	return cmp_text_asc(name, D.name)
 
+/**
+ * converts data to an item
+ *
+ * see [assembled_slots()] for what data means here
+ *
+ * @return /obj/item instance
+ */
+/datum/outfit/proc/instance_from_data(data)
+	RETURN_TYPE(/obj/item)
+	#warn impl
+
+/**
+ * slot id to data needed to spawn an item
+ *
+ * does not include backpack contents
+ *
+ * "data needed to spawn an item":
+ * * /obj/item typepath, raw, to spawn an item and equip it
+ * * list("path" = typepath, ...), where '...' is
+ * * "amount" for stacks
+ * * "accessories" = list(data, ...): nested list processed the same way that this is, used for clothing accessories
+ * * "stored" = list(data, ...): nested list processed the same way that this is, used for storage contents
+ *
+ * @return list(id = data)
+ */
+/datum/outfit/proc/assembled_slots()
+	RETURN_TYPE(/list)
+	#warn impl
+
+/**
+ * backpack or other storage contents
+ *
+ * returns a list of data used to spawn entities, see [assembled_slots()] for more on what that means.
+ *
+ * @return list(data, ...)
+ */
+/datum/outfit/proc/assembled_stored()
+	RETURN_TYPE(/list)
+	#warn impl
+
+
+
 /datum/outfit/proc/pre_equip(mob/living/carbon/human/H)
 	if(flags & OUTFIT_HAS_BACKPACK)
 		switch(H.backbag)
