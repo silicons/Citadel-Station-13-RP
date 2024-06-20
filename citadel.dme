@@ -848,6 +848,7 @@
 #include "code\datums\outfits\military\fleet.dm"
 #include "code\datums\outfits\military\marines.dm"
 #include "code\datums\outfits\military\military.dm"
+#include "code\datums\outfits\military\misc.dm"
 #include "code\datums\outfits\military\sysguard.dm"
 #include "code\datums\proxfield\_proxfield.dm"
 #include "code\datums\proxfield\basic.dm"
