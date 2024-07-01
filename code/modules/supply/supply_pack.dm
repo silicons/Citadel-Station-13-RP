@@ -9,18 +9,39 @@
 /datum/supply_pack2
 	/// name of pack
 	var/name = "Supply Pack"
+	/// arbitrary category to group under
+	var/category = "Miscellaneous"
+
+	/// flags
+	var/supply_pack_flags = NONE
+
 	/// raw worth of everything in container
 	///
 	/// * if null, it will be autodetected.
 	var/worth
 
-	// todo: containers
+	/// type of the container
+	var/container_type = /obj/structure/closet/crate/plastic
+	/// override name of container
+	var/container_name
+	/// override desc of container
+	var/container_desc
+	/// set access of container
+	var/list/container_access
+	/// set req one access of container
+	var/list/container_one_access
 
-/datum/supply_pack2/New(name, worth)
+	#warn contains, contains_some_of
+
+/datum/supply_pack2/New(name, category, worth, flags)
 	if(!isnull(name))
 		src.name = name
+	if(!isnull(category))
+		src.category = category
 	if(!isnull(worth))
 		src.worth = worth
+	if(!isnull(flags))
+		src.supply_pack_flags = flags
 
 /**
  * **Always call this before using it!**
