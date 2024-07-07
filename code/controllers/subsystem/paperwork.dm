@@ -2,28 +2,26 @@
 //* Copyright (c) 2024 silicons                             *//
 
 /**
- * manages pictures / photos
+ * manages persistent paperwork and paper structs
  *
  * for full functionality, the following must be enabled and working:
  * - SQL DB for storage
  * - Round ID system
- * - picture directory that's accessible from the internet for delivery
+ * - paperworks directory that's accessible from the internet for delivery
  *
  * failure to have all of these will result in the system automatically falling back to
- * non-persistent mode and delivering pictures with browse_rsc() instead of links.
+ * non-persistent mode.
  */
-SUBSYSTEM_DEF(photography)
-	name = "Photography"
+SUBSYSTEM_DEF(paperwork)
+	name = "Paperwork"
 	subsystem_flags = SS_NO_FIRE | SS_NO_INIT
-	/// pictures loaded by hash as text
-	var/list/datum/picture/picture_cache = list()
-	/// photos loaded by id as text
-	var/list/datum/photograph/photograph_cache = list()
+
+#warn everything below; this is just a clone of SSphotography right now
 
 // todo: our config system is awful and needs a proper cache..
 // todo: cache eviction
 
-/datum/controller/subsystem/photography/proc/is_persistent()
+/datum/controller/subsystem/paperwork/proc/is_persistent()
 	return CONFIG_GET(flag/sql_enabled) && CONFIG_GET(flag/picture_persistent)
 
 /**
@@ -32,7 +30,7 @@ SUBSYSTEM_DEF(photography)
  * this is the preferred method of fetching a picture that should be stored
  * as we don't even need to grab (and cache) the datum itself.
  */
-/datum/controller/subsystem/photography/proc/url_for_photograph(id, list/client/clients)
+/datum/controller/subsystem/paperwork/proc/url_for_photograph(id, list/client/clients)
 	var/datum/photograph/loaded = load_photograph(id)
 	return loaded?.img_src(clients)
 
@@ -42,7 +40,7 @@ SUBSYSTEM_DEF(photography)
  * this is the preferred method of fetching a picture that should be stored
  * as we don't even need to grab (and cache) the datum itself.
  */
-/datum/controller/subsystem/photography/proc/url_for_picture(hash, list/client/clients)
+/datum/controller/subsystem/paperwork/proc/url_for_picture(hash, list/client/clients)
 	if(!is_persistent())
 		var/datum/picture/loaded = picture_cache[hash]
 		if(isnull(loaded))
@@ -54,7 +52,7 @@ SUBSYSTEM_DEF(photography)
 /**
  * returns path to store picture. null if we're not persistent.
  */
-/datum/controller/subsystem/photography/proc/path_for_picture(hash)
+/datum/controller/subsystem/paperwork/proc/path_for_picture(hash)
 	if(!is_persistent())
 		return
 	var/root = CONFIG_GET(string/picture_storage)
@@ -65,7 +63,7 @@ SUBSYSTEM_DEF(photography)
  *
  * @return /datum/picture instance
  */
-/datum/controller/subsystem/photography/proc/create_picture(icon/I)
+/datum/controller/subsystem/paperwork/proc/create_picture(icon/I)
 	var/datum/picture/picture = new
 	// init
 	picture.full = I
@@ -99,7 +97,7 @@ SUBSYSTEM_DEF(photography)
  *
  * @return /datum/picture instance, or null
  */
-/datum/controller/subsystem/photography/proc/resolve_picture(hash)
+/datum/controller/subsystem/paperwork/proc/resolve_picture(hash)
 	. = picture_cache[hash]
 	if(. || !is_persistent())
 		return
@@ -109,7 +107,7 @@ SUBSYSTEM_DEF(photography)
 	picture_cache[hash] = loaded
 	return loaded
 
-/datum/controller/subsystem/photography/proc/__sql_save_picture(datum/picture/pic)
+/datum/controller/subsystem/paperwork/proc/__sql_save_picture(datum/picture/pic)
 	// pause admin proccall guard
 	var/__oldusr = usr
 	usr = null
@@ -133,7 +131,7 @@ SUBSYSTEM_DEF(photography)
 	usr = __oldusr
 
 
-/datum/controller/subsystem/photography/proc/__sql_load_picture(hash)
+/datum/controller/subsystem/paperwork/proc/__sql_load_picture(hash)
 	// pause admin proccall guard
 	var/__oldusr = usr
 	usr = null
@@ -166,7 +164,7 @@ SUBSYSTEM_DEF(photography)
  *
  * photograph is immutable after.
  */
-/datum/controller/subsystem/photography/proc/save_photograph(datum/photograph/photograph)
+/datum/controller/subsystem/paperwork/proc/save_photograph(datum/photograph/photograph)
 	if(!is_persistent())
 		// just assign it a temporary id; if it collides we don't really care we did our best
 		var/static/temporary_id_next = 0
@@ -179,7 +177,7 @@ SUBSYSTEM_DEF(photography)
 /**
  * loads a photograph datum based on id
  */
-/datum/controller/subsystem/photography/proc/load_photograph(id)
+/datum/controller/subsystem/paperwork/proc/load_photograph(id)
 	. = photograph_cache[id]
 	if(. || !is_persistent())
 		return
@@ -189,7 +187,7 @@ SUBSYSTEM_DEF(photography)
 	photograph_cache[id] = loaded
 	return loaded
 
-/datum/controller/subsystem/photography/proc/__sql_save_photograph(datum/photograph/photo)
+/datum/controller/subsystem/paperwork/proc/__sql_save_photograph(datum/photograph/photo)
 	// pause admin proccall guard
 	var/__oldusr = usr
 	usr = null
@@ -213,7 +211,7 @@ SUBSYSTEM_DEF(photography)
 	// resume admin proccall guard
 	usr = __oldusr
 
-/datum/controller/subsystem/photography/proc/__sql_load_photograph(id)
+/datum/controller/subsystem/paperwork/proc/__sql_load_photograph(id)
 	// pause admin proccall guard
 	var/__oldusr = usr
 	usr = null
