@@ -7,8 +7,14 @@
  * description WIP
  */
 /datum/exotic_particle
-
 	/// name
+	var/name
 	/// polarity
 
+
+
 #warn impl all
+
+/**
+ * handle burst
+ */

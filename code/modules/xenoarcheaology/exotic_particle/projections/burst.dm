@@ -2,9 +2,8 @@
 //* Copyright (c) 2024 silicons                             *//
 
 /**
- * basically does a perpendicular radius around a projectile
- * as well as a burst on impact
+ * implementation-driven behavior by particles and effects
  */
-/datum/exotic_projection/projectile
+/datum/exotic_projection/burst
 
 #warn impl

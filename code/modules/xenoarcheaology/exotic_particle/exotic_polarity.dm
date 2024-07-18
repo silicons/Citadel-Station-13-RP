@@ -5,5 +5,11 @@
  * actual effect datums with settings
  */
 /datum/exotic_polarity
+	/// non player visible name
+	var/name
+	/// non player visible description
+	var/desc
+
+	/// settings as
 
 #warn impl
