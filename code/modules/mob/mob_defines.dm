@@ -18,6 +18,16 @@
 	/// mobs use ids as ref tags instead of actual refs.
 	var/static/next_mob_id = 0
 
+	//* Actions *//
+	/// our innate action holder; actions here aren't bound to what we're controlling / touching, but instead ourselves
+	///
+	/// * control and sight of these requires mindjacking, basically
+	var/datum/action_holder/actions_innate
+	/// our controlled action holder; actions here are bound to physical control, not our own body
+	///
+	/// * control and sight of these requires only control over motion / actions
+	var/datum/action_holder/actions_controlled
+
 	//? Rendering
 	/// Fullscreen objects
 	var/list/fullscreens = list()
@@ -201,7 +211,6 @@
 	var/sdisabilities = 0	//?Carbon
 	var/disabilities = 0	//?Carbon
 	var/transforming = null	//?Carbon
-	var/eye_blind = null	//?Carbon
 	var/eye_blurry = null	//?Carbon
 	var/ear_deaf = null		//?Carbon
 	var/ear_damage = null	//?Carbon
@@ -215,7 +224,6 @@
 	var/gen_record = ""
 	var/exploit_record = ""
 	var/exploit_addons = list()		//Assorted things that show up at the end of the exploit_record list
-	var/blinded = null
 	var/bhunger = 0			//?Carbon
 	var/ajourn = 0
 	var/druggy = 0			//?Carbon
