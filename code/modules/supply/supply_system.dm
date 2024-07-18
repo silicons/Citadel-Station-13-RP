@@ -5,5 +5,9 @@
  * a single cargo system
  */
 /datum/supply_system2
+	/// id; must be unique
+	var/id
+	/// transports; set to typepaths to init
+	var/list/datum/supply_transport2/transports
 
 #warn impl

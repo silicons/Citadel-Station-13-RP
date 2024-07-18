@@ -29,8 +29,6 @@
 		. += get_materials_worth(flags)
 	if(flags & GET_WORTH_CONTAINING)
 		. += get_containing_worth(flags)
-	if(buying)
-		. *= worth_buy_factor
 
 /**
  * estimate our raw materials worth

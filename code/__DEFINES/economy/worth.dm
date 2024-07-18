@@ -26,6 +26,8 @@
 #define ECONOMIC_CATEGORY_OBJ_OCCULT (1<<2)
 /// exotic tech / goods
 #define ECONOMIC_CATEGORY_OBJ_EXOTIC (1<<3)
+/// engineering / industrial equipment
+#define ECONOMIC_CATEGORY_OBJ_INDUSTRIAL (1<<4)
 
 /proc/economic_category_obj_name(cat)
 	switch(cat)
@@ -37,6 +39,8 @@
 			return "Occult Debris"
 		if(ECONOMIC_CATEGORY_OBJ_EXOTIC)
 			return "Exotic Goods"
+		if(ECONOMIC_CATEGORY_OBJ_INDUSTRIAL)
+			return "Industrial Equipment"
 		else
 			return "Miscellaneous"
 
@@ -45,6 +49,7 @@ DEFINE_BITFIELD(economic_category_obj, list(
 	BITFIELD(ECONOMIC_CATEGORY_OBJ_ALIEN),
 	BITFIELD(ECONOMIC_CATEGORY_OBJ_OCCULT),
 	BITFIELD(ECONOMIC_CATEGORY_OBJ_EXOTIC),
+	BITFIELD_NEW(ECONOMIC_CATEGORY_OBJ_INDUSTRIAL, "Industrial Equipment"),
 ))
 
 //? categories for items

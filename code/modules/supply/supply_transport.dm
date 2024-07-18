@@ -3,6 +3,8 @@
 
 /**
  * a way for cargo to get things from 'home' to 'station'
+ *
+ * each cargo system can have one or more of these.
  */
 /datum/supply_transport2
 
