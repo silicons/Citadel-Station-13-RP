@@ -1,6 +1,8 @@
 //* This file is explicitly licensed under the MIT license. *//
 //* Copyright (c) 2024 silicons                             *//
 
+// todo: this is obviously not usable as shuttles are a WIP right now; it's just in so we can start making shuttles.
+
 /**
  * the shuttle templates in charge of holding definitions of shuttles.
  *

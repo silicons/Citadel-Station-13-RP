@@ -4572,6 +4572,7 @@
 #include "code\modules\shuttles\shuttle\shuttle-init.dm"
 #include "code\modules\shuttles\shuttle\shuttle.dm"
 #include "code\modules\shuttles\shuttle\shuttle_descriptor.dm"
+#include "code\modules\shuttles\shuttle\shuttle_port.dm"
 #include "code\modules\shuttles\shuttle\shuttle_template.dm"
 #include "code\modules\species\abilites.dm"
 #include "code\modules\species\character_species.dm"
