@@ -2,10 +2,6 @@
 "a" = (
 /turf/space/basic,
 /area/space)
-"g" = (
-/obj/machinery/power/apc/critical/south_bump,
-/turf/simulated/floor/plating/indoors,
-/area/space)
 "h" = (
 /obj/structure/handrail{
 	dir = 8
@@ -17,7 +13,6 @@
 /area/space)
 "j" = (
 /obj/machinery/shipsensors,
-/turf/simulated/floor/plating/outdoors,
 /area/space)
 "k" = (
 /obj/structure/handrail{
@@ -710,7 +705,7 @@ a
 B
 w
 E
-g
+E
 i
 w
 E
