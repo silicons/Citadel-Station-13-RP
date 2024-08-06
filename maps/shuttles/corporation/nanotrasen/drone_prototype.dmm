@@ -2,14 +2,25 @@
 "a" = (
 /turf/space/basic,
 /area/space)
+"b" = (
+/obj/machinery/power/smes/buildable/power_shuttle,
+/turf/simulated/floor/plating/indoors,
+/area/space)
+"g" = (
+/obj/machinery/ion_engine{
+	dir = 1
+	},
+/turf/simulated/floor/plating/indoors,
+/area/space)
 "h" = (
 /obj/structure/handrail{
 	dir = 8
 	},
+/obj/structure/closet/walllocker_double/medical/east,
 /turf/simulated/floor/plating/indoors,
 /area/space)
 "i" = (
-/turf/simulated/shuttle/wall/voidcraft,
+/turf/simulated/wall/r_wall,
 /area/space)
 "j" = (
 /obj/machinery/shipsensors,
@@ -18,7 +29,20 @@
 /obj/structure/handrail{
 	dir = 4
 	},
+/obj/structure/closet/walllocker/emerglocker/west,
 /turf/simulated/floor/plating/indoors,
+/area/space)
+"n" = (
+/obj/structure/handrail{
+	dir = 4
+	},
+/turf/space/basic,
+/area/space)
+"o" = (
+/obj/structure/handrail{
+	dir = 8
+	},
+/turf/space/basic,
 /area/space)
 "q" = (
 /obj/structure/railing{
@@ -36,11 +60,19 @@
 /area/space)
 "y" = (
 /obj/effect/floor_decal/industrial/warning/full,
-/turf/space/basic,
+/obj/machinery/power/apc/south_mount,
+/turf/simulated/floor/plating/indoors,
+/area/space)
+"A" = (
+/obj/machinery/computer/shuttle_control,
+/turf/simulated/floor/plating/indoors,
 /area/space)
 "B" = (
 /obj/spawner/window/low_wall/reinforced/full,
 /turf/simulated/floor/plating/indoors,
+/area/space)
+"C" = (
+/turf/simulated/wall,
 /area/space)
 "E" = (
 /turf/simulated/floor/plating/indoors,
@@ -495,10 +527,10 @@ a
 a
 a
 a
+o
 a
-y
-y
-y
+a
+a
 a
 a
 a
@@ -584,7 +616,7 @@ w
 w
 w
 i
-w
+g
 a
 a
 a
@@ -622,11 +654,11 @@ i
 L
 t
 k
-h
+E
 E
 E
 i
-w
+g
 a
 a
 a
@@ -663,9 +695,9 @@ a
 B
 w
 E
-w
-i
-w
+y
+C
+b
 E
 P
 a
@@ -703,10 +735,10 @@ a
 a
 a
 B
-w
+A
 E
 E
-i
+C
 w
 E
 P
@@ -748,11 +780,11 @@ i
 L
 t
 h
-k
+E
 E
 E
 i
-w
+g
 a
 a
 a
@@ -794,7 +826,7 @@ w
 q
 E
 i
-w
+g
 a
 a
 a
@@ -873,10 +905,10 @@ a
 a
 a
 a
+n
 a
-y
-y
-y
+a
+a
 a
 a
 a
