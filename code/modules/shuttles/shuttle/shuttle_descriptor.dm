@@ -15,7 +15,6 @@
 	/// preferred flight orientation
 	///
 	/// * null = use orientation at takeoff
-	#warn hook
 	var/preferred_orientation
 
 	//* Jumps (ferry & moving to/from overmaps)

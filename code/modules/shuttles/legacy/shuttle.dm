@@ -1,7 +1,6 @@
 //shuttle moving state defines are in setup.dm
 
 /datum/shuttle
-	var/name = ""
 	var/warmup_time = 0
 	var/moving_status = SHUTTLE_IDLE
 
