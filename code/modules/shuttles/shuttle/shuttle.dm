@@ -18,7 +18,7 @@
  * todo: serialize/deserialize, but should it be on this side or the map tempalte side? we want save/loadable.
  */
 /datum/shuttle
-	//* Intrinsics
+	//* System *//
 	/// real / code name
 	var/name = "Unnamed Shuttle"
 	/// are we mid-delete? controls whether we, and our components are immune to deletion.
@@ -31,3 +31,7 @@
 	/// our descriptor instance; this is what determines how we act
 	/// to our controller, as well as things like overmaps.
 	var/datum/shuttle_descriptor/descriptor
+
+	//* Identity *//
+	/// player-facing name
+	var/display_name

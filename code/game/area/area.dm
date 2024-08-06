@@ -34,7 +34,7 @@
 	plane = ABOVE_LIGHTING_PLANE //In case we color them
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
-	//? intrinsics
+	//* System *//
 	/// area flags
 	var/area_flags = NONE
 	/// stores the next uid to use
@@ -47,11 +47,15 @@
 	 */
 	var/unique = TRUE
 
-	//? defaults
+	//* Environment *//
 	/// outdoors by default?
 	var/initial_outdoors = FALSE
 	/// default initial gas mix
 	var/initial_gas_mix = GAS_STRING_STP
+
+	//* Identity *//
+	/// player-facing name, overrides name when / if necessary.
+	var/display_name
 
 	//? nightshift
 	/// nightshift level
