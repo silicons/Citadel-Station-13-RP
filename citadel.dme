@@ -5289,6 +5289,7 @@
 #include "maps\sectors\virgo4_140\virgo4_140.dm"
 #include "maps\sectors\wasteland_140\wasteland_140.dm"
 #include "maps\sectors\wasteland_192\wasteland_192.dm"
+#include "maps\stations\itinerant_scholar\itinerant_scholar.dm"
 #include "maps\submaps\_helpers.dm"
 #include "maps\submaps\_readme.dm"
 #include "maps\submaps\level_specific\debrisfield_vr\debrisfield_things.dm"
