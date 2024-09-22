@@ -15,3 +15,8 @@
 //* packet_data keys *//
 
 // None yet; DATANET_PACKET_DATA_* enums; annotate them with what the value will be!
+
+//* packet_domain values *//
+
+/// default packet domain
+#define DATANET_PACKET_DOMAIN_DEFAULT "default"

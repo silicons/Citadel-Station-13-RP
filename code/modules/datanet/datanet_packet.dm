@@ -13,6 +13,8 @@
 
 	/// special routing specifier
 	var/route_specifier
+	/// domain; used for broadcast filtering
+	var/packet_domain = DATANET_PACKET_DOMAIN_DEFAULT
 
 	/// encryption key
 	///
@@ -28,6 +30,7 @@
 	///
 	/// * Because data flow is unidirectional, and routing is deterministic, editing this *is* allowed.
 	var/list/packet_data = list()
+
 
 
 #warn impl

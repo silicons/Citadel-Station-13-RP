@@ -15,3 +15,8 @@
 //* socket_data keys *//
 
 // None yet; DATANET_SOCKET_DATA_* enums; annotate them with what the value will be!
+
+//* socket_domain values *//
+
+/// default packet domain
+#define DATANET_SOCKET_DOMAIN_DEFAULT "default"

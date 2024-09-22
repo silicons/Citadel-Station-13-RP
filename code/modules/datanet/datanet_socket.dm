@@ -19,6 +19,8 @@
 
 	/// special routing specifier
 	var/route_specifier
+	/// domain; used for broadcast filtering
+	var/packet_domain = DATANET_SOCKET_DOMAIN_DEFAULT
 
 	/// encryption key
 	///
