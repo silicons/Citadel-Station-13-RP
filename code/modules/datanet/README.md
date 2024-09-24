@@ -15,3 +15,12 @@ An experimental and efficient packet/socket simulation plane for the game.
   - This allows for optimized / precomputed, event-driven routing graphs.
 - Processing should be bounded time.
   - Avoid NTSL-like handling.
+
+## This readme is bad.
+
+Yeah, this readme is bad.
+
+Uh.
+
+Read the code comments honestly.
+It's better documented than telecomms, but also a good bit more complicated.
