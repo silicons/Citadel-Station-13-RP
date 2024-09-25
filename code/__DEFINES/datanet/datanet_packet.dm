@@ -2,7 +2,7 @@
 //* Copyright (c) 2024 Citadel Station Developers           *//
 
 /**
- * Things for /datum/datanet_packet
+ * Things for /datum/datanet_frame/packet
  */
 
 //* packet_type enum *//

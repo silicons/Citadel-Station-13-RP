@@ -7,7 +7,7 @@
  * * Handling for these should generally be more using 'magic lookups' rather than the actual data.
  * * The whole point for these to exist is to make things like video streams, which obviously can't be sent as simulated packets efficiently.
  */
-/datum/datanet_socket
+/datum/datanet_frame/socket
 	//* Data *//
 
 	/// arbitrary enum for what data is flowing
@@ -18,28 +18,7 @@
 	///
 	/// * rewrites are not supported; only sender should modify this
 	var/list/socket_data = list()
-
-	//* Routing *//
-
-	/// origin connection address
-	var/src_addr
-	/// origin network, if any
-	var/src_network_id
-	/// destination connection address
-	var/dst_addr
-	/// destination network, if any
-	var/dst_network_id
-	/// special routing specifier
-	var/route_specifier
 	/// domain; used for broadcast filtering
-	var/packet_domain = DATANET_SOCKET_DOMAIN_DEFAULT
-
-	//* Security *//
-
-	/// encryption key
-	///
-	/// * encryption is simulated with key matching; if you have a given key, you can read the data.
-	/// * null if unencrypted
-	var/encryption_key
+	var/socket_domain = DATANET_SOCKET_DOMAIN_DEFAULT
 
 #warn impl
