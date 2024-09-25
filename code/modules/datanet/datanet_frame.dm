@@ -7,20 +7,29 @@
 /datum/datanet_frame
 	//* Routing *//
 
-	/// origin connection address
-	var/src_
-	/// origin network, if any
+	/// origin device id
+	var/src_device_id
+	/// origin network id, if any
 	var/src_network_id
-
 	/// origin network path, if any
-	///
-	/// * this is a 24-bit bitfield
 	var/src_network_path
+	/// origin route domain
+	var/src_route_domain
+	/// origin route specifier
+	var/src_route_specifier
 
-	/// destination connection address
-	var/dst_addr
-	/// destination network, if any
+	/// destination device id, if any
+	///
+	/// * is a broadcast packet if null
+	var/dst_device_id
+	/// destination network id, if any
 	var/dst_network_id
+	/// destination network path, if any
+	var/dst_network_path
+	/// destination route domain
+	var/dst_route_domain
+	/// destination route specifier
+	var/dst_route_specifier
 
 	/// destination network, if any
 	///

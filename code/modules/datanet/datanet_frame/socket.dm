@@ -16,8 +16,13 @@
 	var/socket_type = DATANET_SOCKET_TYPE_UNKNOWN
 	/// arbitrary data flowing through the socket
 	///
-	/// * rewrites are not supported; only sender should modify this
+	/// * rewrites are not supported; only sender & receiver should modify this
 	var/list/socket_data = list()
+	/// arbitrary flags imposed by networks or other things the socket is routing through
+	///
+	/// * k-v list
+	/// * modifications must inherently track source and be removable without a full recalculation
+	var/list/socket_flags = list()
 	/// domain; used for broadcast filtering
 	var/socket_domain = DATANET_SOCKET_DOMAIN_DEFAULT
 

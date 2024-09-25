@@ -7,26 +7,6 @@
  * * Packets / sockets route through these.
  * * These cannot be terminal's for packet / sockets, other than for broadcast packets.
  * * These may rewrite packets that route through it, including to itself.
- *
- * ## Routing - Network Level
- * * Datanets have a number of bits dedicated to their internal ID
- * * Their internal ID is represented as a string for quick lookup
- * * A packet is given a network sequence to route with
- *
- * ## Routing - Overview
- * * Datanet connections have an unique ID, round-persistent.
- * * Datanets have an unique ID, round-persistent.
- *
- * ## Routing - Addressing
- *
- * Packets have the following information to determine where they're going;
- * This is stored both in source as well as destination for a given packet.
- *
- * * Connection ID: directly addressed when network is reached
- * * Network ID: player-friendly network ID. Vestigal for routing, but used for logging & presentation
- * * Route Domain: routing domain, e.g. 'go to overmaps entity', 'go to nanotrasen command', etc
- * * Route Specifier: specific thing in the domain, like a given overmap entity
- * * Route Path: volatile network path in the route specifier
  */
 /datum/datanet
 	/// our unique ID
@@ -50,6 +30,20 @@
 	/// Our upstream network ID, if any
 	var/routing_upstream_id
 
+	//* Routing - Static *//
+
+	/// our routing domain
+	///
+	/// * always inherits upstream's, if one exists
+	/// * set to a domain if no upstream by whatever is managing us
+	var/routing_domain
+	/// our routing domain specifier
+	///
+	/// * always inherits upstream's, if one exists
+	/// * set to a specifier if no upstream by whatever is managing us
+	var/routing_specifier
+	#warn setters
+
 	//* Routing - Volatile *//
 
 	/// our routing path
@@ -66,6 +60,33 @@
 
 /datum/datanet/proc/handle_inbound_packet(datum/datanet_frame/packet/packet)
 
+	var/datum/datanet/next_network = route_frame(packet)
+	if(next_network == src)
+		// intended for us
+
+		return
+
 /datum/datanet/proc/handle_inbound_socket(datum/datanet_frame/socket/socket)
+
+	var/datum/datanet/next_network = route_frame(socket)
+	if(next_network == src)
+		// intended for us
+
+		return
+
+/**
+ * @return next /datum/datanet to send to, or null if none found
+ */
+/datum/datanet/proc/route_frame(datum/datanet_frame/frame)
+	// check if we're the target network
+	var/we_are_terminal = packet.dst_network_path == routing_path \
+		&& packet.dst_route_domain == route_domain \
+		&& packet.dst_route_specifier == route_specifier
+
+	if(we_are_terminal)
+		return src
+
+
+
 
 #warn impl

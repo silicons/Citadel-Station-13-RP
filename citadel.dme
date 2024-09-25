@@ -2625,6 +2625,8 @@
 #include "code\modules\datanet\datanet_frame.dm"
 #include "code\modules\datanet\datanet_frame\packet.dm"
 #include "code\modules\datanet\datanet_frame\socket.dm"
+#include "code\modules\decision_chain\decision_chain.dm"
+#include "code\modules\decision_chain\decision_chain\datanet.dm"
 #include "code\modules\detectivework\forensics.dm"
 #include "code\modules\detectivework\microscope\dnascanner.dm"
 #include "code\modules\detectivework\microscope\microscope.dm"
