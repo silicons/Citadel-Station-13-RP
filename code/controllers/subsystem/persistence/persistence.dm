@@ -23,28 +23,13 @@ SUBSYSTEM_DEF(persistence)
 	//  todo: interface on subsystem panel
 	var/static/world_non_canon = FALSE
 
-/datum/controller/subsystem/persistence/PreInit(recovering)
-	// set up round_global_descriptor
-	// this is preinit because other subsystems require this during their init.
-	if(isnull(round_global_descriptor))
-		init_round_global_descriptor()
-	return ..()
-
-/datum/controller/subsystem/persistence/proc/init_round_global_descriptor()
-	// no (real) chance of collisions
-	var/hex_string = "[num2hex(world.realtime)]"
-	var/list/built = list()
-	for(var/i in 1 to ceil(length(hex_string) / 4))
-		built += copytext(hex_string, 1 + (i - 1) * 4, 1 + (i) * 4)
-	round_global_descriptor = jointext(built, "-")
-
-/datum/controller/subsystem/persistence/vv_edit_var(var_name, var_value, mass_edit, raw_edit)
-	switch(var_name)
-		if(NAMEOF(src, round_global_descriptor))
-			return FALSE // no
-	return ..()
+	/// prototype id to typepath
+	var/list/prototype_id_to_path
 
 /datum/controller/subsystem/persistence/Initialize()
+	/// build prototype lookup list
+	build_prototype_id_lookup()
+
 	LoadPersistence()
 
 	// todo: should this be here? save_the_world is in ticker.
