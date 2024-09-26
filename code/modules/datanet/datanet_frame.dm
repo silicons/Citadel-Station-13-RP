@@ -12,7 +12,12 @@
 	/// origin network id, if any
 	var/src_network_id
 	/// origin network path, if any
-	var/src_network_path
+	///
+	/// * read-only list, do not modify! this is re-referenced from a network
+	/// * this means that this can also uniquely identify a network as networks always 'own'
+	///   their route path reference, while we're 'borrowing' it
+	/// * god i love overcomplicating things
+	var/list/src_route_path
 	/// origin route domain
 	var/src_route_domain
 	/// origin route specifier
@@ -25,20 +30,13 @@
 	/// destination network id, if any
 	var/dst_network_id
 	/// destination network path, if any
-	var/dst_network_path
+	///
+	/// * read-only list, do not modify! this is re-referenced from a network
+	var/list/dst_route_path
 	/// destination route domain
 	var/dst_route_domain
 	/// destination route specifier
 	var/dst_route_specifier
-
-	/// destination network, if any
-	///
-	/// * this is a 24-bit bitfield
-	var/dst_network_path
-
-	#warn redo
-	/// special routing specifier
-	var/route_specifier = DATANET_ROUTE_SPECIFIER_DEFAULT
 
 	//* Security *//
 

@@ -45,21 +45,4 @@
 ///
 /// * abstract network depths can be anywhere from 0 to negative numbers
 /// * example: 'overmaps / world plane' supernetwork is depth 0
-#define DATANET_ROUTING_MAXIMUM_DEPTH 4
-/**
- * bit length allowed for a given network depth
- *
- * * 24 bit total (I hate this engine, when do I get real bitfields??)
- * * 10 bits - Overmap Entity: 1024 possible addressable overmap entities / map_struct's.
- *   Non-overmaps maps are by-struct.
- * * 4 bits - Overmap Connection / Station Network: 16 possible 'long range transreceivers'
- *   per overmap entity / struct reserved for station networks
- * * 6 bits - Division: 64 possible networks per long range connection.
- * * 3 bits - Subnet: 8 possible networks per department network
- */
-GLOBAL_REAL_LIST(datanet_routing_addressing_widths) = list(
-	2 ** 10,
-	2 ** 4,
-	2 ** 6,
-	2 ** 3,
-)
+#define DATANET_ROUTING_MAXIMUM_DEPTH 5

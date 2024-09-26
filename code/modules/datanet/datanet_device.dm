@@ -9,7 +9,7 @@
  * * You may send packets back on receive, and craft new packets. Be careful to not start an infinite loop.
  * * This is basically the abstraction of a network card.
  */
-/datum/datanet_device
+/datum/datanet_connection
 	//* Binding *//
 
 	/// bound /datum, if any
@@ -34,7 +34,7 @@
 	/// active sockets with us as the destination
 	var/list/datum/datanet_frame/socket/active_inbound_sockets
 
-/datum/datanet_device/New(datum/bind_to, use_id, important)
+/datum/datanet_connection/New(datum/bind_to, use_id, important)
 	if(!isnull(bind_to))
 		src.bound = bind_to
 	if(!isnull(use_id))
@@ -44,7 +44,7 @@
 	if(!isnull(important))
 		src.device_important = important
 
-/datum/datanet_device/Destroy()
+/datum/datanet_connection/Destroy()
 	bound = null
 	#warn terminate sockets
 	return ..()
@@ -54,7 +54,7 @@
 /**
  * Sends a packet out. Does not block.
  */
-/datum/datanet_device/proc/lazy_send_packet_async(
+/datum/datanet_connection/proc/lazy_send_packet_async(
 	target_connection_id,
 	datum/callback/on_finish,
 )
@@ -62,28 +62,28 @@
 /**
  * Sends a packet out. Blocks.
  */
-/datum/datanet_device/proc/lazy_send_packet_sync(
+/datum/datanet_connection/proc/lazy_send_packet_sync(
 	target_connection_id,
 )
 
 /**
  * Connects a socket. Does not block.
  */
-/datum/datanet_device/proc/lazy_connect_socket_async(
+/datum/datanet_connection/proc/lazy_connect_socket_async(
 	datum/callback/on_finish,
 )
 
 /**
  * Connects a socket. Blocks.
  */
-/datum/datanet_device/proc/lazy_connect_socket_sync(
+/datum/datanet_connection/proc/lazy_connect_socket_sync(
 
 )
 
 /**
  * Disconnects a socket. Does not block.
  */
-/datum/datanet_device/proc/lazy_disconnect_socket(
+/datum/datanet_connection/proc/lazy_disconnect_socket(
 
 )
 
@@ -100,7 +100,7 @@
  * * packet - outgoing packet
  * * on_finish - (optional) callback called with args (packet: /datum/datanet_frame/packet, result: DATANET_RESULT_* enum) appended on finish.
  */
-/datum/datanet_device/proc/send_packet_async(datum/datanet_frame/packet/packet, datum/callback/on_finish)
+/datum/datanet_connection/proc/send_packet_async(datum/datanet_frame/packet/packet, datum/callback/on_finish)
 	SHOULD_NOT_OVERRIDE(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
 
@@ -115,7 +115,7 @@
  *
  * @return DATANET_RESULT_* from receiver / first point of route failure
  */
-/datum/datanet_device/proc/send_packet_sync(datum/datanet_frame/packet/packet)
+/datum/datanet_connection/proc/send_packet_sync(datum/datanet_frame/packet/packet)
 	SHOULD_NOT_OVERRIDE(TRUE)
 	return send_packet(packet)
 
@@ -131,7 +131,7 @@
  *
  * @return DATANET_RESULT_* from receiver / first point of route failure
  */
-/datum/datanet_device/proc/send_packet(datum/datanet_frame/packet/packet, datum/callback/on_finish)
+/datum/datanet_connection/proc/send_packet(datum/datanet_frame/packet/packet, datum/callback/on_finish)
 	PROTECTED_PROC(TRUE)
 
 	var/result = route_packet(packet)
@@ -146,7 +146,7 @@
  *
  * @return DATANET_RESULT_*
  */
-/datum/datanet_device/proc/route_packet(datum/datanet_frame/packet/packet)
+/datum/datanet_connection/proc/route_packet(datum/datanet_frame/packet/packet)
 	return DATANET_RESULT_UNSUPPORTED_ROUTE
 
 /**
@@ -156,7 +156,7 @@
  *
  * @return DATANET_RESULT_*
  */
-/datum/datanet_device/proc/handle_packet(datum/datanet_frame/packet/packet)
+/datum/datanet_connection/proc/handle_packet(datum/datanet_frame/packet/packet)
 	return bound?.datanet_on_packet_receive(src, packet) || DATANET_RESULT_UNHANDLED
 
 //* Socket API *//
@@ -166,7 +166,7 @@
  *
  * @return DATANET_RESULT_*
  */
-/datum/datanet_device/proc/connect_socket_async(datum/datanet_frame/socket/socket, datum/callback/on_finish)
+/datum/datanet_connection/proc/connect_socket_async(datum/datanet_frame/socket/socket, datum/callback/on_finish)
 	SHOULD_NOT_OVERRIDE(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
 
@@ -178,7 +178,7 @@
  *
  * @return DATANET_RESULT_*
  */
-/datum/datanet_device/proc/connect_socket_sync(datum/datanet_frame/socket/socket)
+/datum/datanet_connection/proc/connect_socket_sync(datum/datanet_frame/socket/socket)
 	SHOULD_NOT_OVERRIDE(TRUE)
 	return connect_socket(socket)
 
@@ -191,7 +191,7 @@
  *
  * @return DATANET_RESULT_* from receiver / first point of route failure
  */
-/datum/datanet_device/proc/connect_socket(datum/datanet_frame/packet/packet, datum/callback/on_finish)
+/datum/datanet_connection/proc/connect_socket(datum/datanet_frame/packet/packet, datum/callback/on_finish)
 	PROTECTED_PROC(TRUE)
 
 	var/result = route_socket(packet)
@@ -205,7 +205,7 @@
  *
  * @return DATANET_RESULT_*
  */
-/datum/datanet_device/proc/route_socket(datum/datanet_frame/packet/packet)
+/datum/datanet_connection/proc/route_socket(datum/datanet_frame/packet/packet)
 	return DATANET_RESULT_UNSUPPORTED_ROUTE
 
 /**
@@ -213,9 +213,9 @@
  *
  * @return DATANET_RESULT_*
  */
-/datum/datanet_device/proc/disconnect_socket(datum/datanet_frame/socket/socket)
+/datum/datanet_connection/proc/disconnect_socket(datum/datanet_frame/socket/socket)
 
-/datum/datanet_device/proc/handle_socket(datum/datanet_frame/socket/socket)
+/datum/datanet_connection/proc/handle_socket(datum/datanet_frame/socket/socket)
 	#warn impl
 
 
@@ -229,21 +229,21 @@
 #warn hook below
 
 /**
- * Called from a /datum/datanet_device owned by us
+ * Called from a /datum/datanet_connection owned by us
  *
- * @return DATANET_RESULT_*; datanet_device gets final say.
+ * @return DATANET_RESULT_*; datanet_connection gets final say.
  */
-/datum/proc/datanet_on_packet_receive(datum/datanet_device/connection, datum/datanet_frame/packet/packet)
+/datum/proc/datanet_on_packet_receive(datum/datanet_connection/connection, datum/datanet_frame/packet/packet)
 	return
 
 /**
- * Called from a /datum/datanet_device owned by us
+ * Called from a /datum/datanet_connection owned by us
  */
-/datum/proc/datanet_on_socket_connect(datum/datanet_device/connection, datum/datanet_frame/socket/socket)
+/datum/proc/datanet_on_socket_connect(datum/datanet_connection/connection, datum/datanet_frame/socket/socket)
 	return
 
 /**
- * Called from a /datum/datanet_device owned by us
+ * Called from a /datum/datanet_connection owned by us
  */
-/datum/proc/datanet_on_socket_disconnect(datum/datanet_device/connection, datum/datanet_frame/socket/socket)
+/datum/proc/datanet_on_socket_disconnect(datum/datanet_connection/connection, datum/datanet_frame/socket/socket)
 	return

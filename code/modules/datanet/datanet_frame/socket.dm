@@ -26,4 +26,14 @@
 	/// domain; used for broadcast filtering
 	var/socket_domain = DATANET_SOCKET_DOMAIN_DEFAULT
 
+	//* Routing - State *//
+
+	/// list of networks we're going through
+	///
+	/// * this is a list of hops
+	/// * this is from source to destination
+	var/list/datum/datanet/hops = list()
+	/// requires reconsideration
+	var/route_dirty = FALSE
+
 #warn impl

@@ -92,16 +92,7 @@ Routing paths must be deterministic.
 - Same domain-specifier: Packets are routed up to the smallest common bit-prefix, then routed down as needed.
 - Different domain-specifier: Check above.
 
-Routing paths are a 24 bit field.
-
-- Networks have a chunk of a routing path, inheriting its prefix from networks above itself.
-- Bitfield is split into sections of bits.
-- First 12 bits: 4096 possible networks per overmap object / map struct.
-- Second 6 bits: 64 possible department networks per main network.
-- Third 6 bits: 64 possible subnets per department network.
-- This may be changed as needed relatively easily.
-- If a network attempts to nest too deep, or join a network that's already out of available routing sub-paths, it'll be suspended and will effectively not be able to join.
-  - This is why numbers are so high.
+Routing paths are a list of strings.
 
 Networks have their routing downstreams in a sorted list for quick access without string operations (binary search and bitmask check). 
 

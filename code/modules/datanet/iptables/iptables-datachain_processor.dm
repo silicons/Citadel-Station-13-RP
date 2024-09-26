@@ -2,8 +2,6 @@
 //* Copyright (c) 2024 Citadel Station Developers           *//
 
 /**
- * iptables gaming
+ * programmable rule table system
  */
-/datum/decision_chain/datanet
-
-#warn impl
+/datum/datachain_processor/iptables

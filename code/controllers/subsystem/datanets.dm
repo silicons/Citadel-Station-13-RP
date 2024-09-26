@@ -12,7 +12,7 @@ SUBSYSTEM_DEF(datanets)
 	/// * only devices with device ID's are in here
 	/// * tl;dr this should only contain stuff that persistent objects might reference by id,
 	///   like PDAs, etc
-	var/static/datum/datanet_device/datanet_device_lookup = list()
+	var/static/datum/datanet_connection/datanet_connection_lookup = list()
 
 	//* Networks *//
 
