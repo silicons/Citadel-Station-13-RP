@@ -861,6 +861,7 @@
 #include "code\datums\math\digraph.dm"
 #include "code\datums\math\graph.dm"
 #include "code\datums\math\vec2.dm"
+#include "code\datums\melee_swing\melee_swing.dm"
 #include "code\datums\mocking\client.dm"
 #include "code\datums\observation\_debug.dm"
 #include "code\datums\observation\_defines.dm"

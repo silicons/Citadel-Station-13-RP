@@ -191,6 +191,17 @@
 	#define ZAS_BREAKPOINT_HOOKS
 #endif
 
+// ## Combat
+
+/**
+ * Enables swing combat visuals
+ */
+#define CF_COMBAT_VISUALIZE_MELEE_SWINGS
+
+#ifdef CF_COMBAT_VISUALIZE_MELEE_SWINGS
+	#warn Visualization of swing combat system enabled
+#endif
+
 // ## Lighting
 
 // #define AO_USE_LIGHTING_OPACITY
