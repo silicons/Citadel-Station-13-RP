@@ -23,3 +23,5 @@
 	var/start_on_top_of_attacker = FALSE
 
 #warn impl
+
+/datum/melee_swing/simple_arc/perform_scan(list/blackboard, atom/attacker, angle, atom/target)
