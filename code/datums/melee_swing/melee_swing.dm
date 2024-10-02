@@ -22,8 +22,52 @@
  * * In chases, movement ticks can be punishing due to tick order. We have to ensure
  *   that two targets chasing one another won't result in weird situations where
  *   one's movement / click processes in a way that lets them hit while the other doesn't.
+ *
+ * ## Current Implementation
+ *
+ * * Have everything be datumized.
+ * * Allow melee swings to register to movement for an amount of time, so
+ *   if the user moves we continue the swing.
+ * * Have standard hooks and handlers, that can be overridden or skipped.
+ * * Have a standard handler for 'perform a hit'.
  */
 /datum/melee_swing
 
-#warn impl
+/**
+ * Emit audiovisual effects, including the visual effects.
+ *
+ * @params
+ * * blackboard - blackboard data from a swing cycle
+ * * attacker - the thing doing the hit; this is separate from clickchain because non-mobs can use melee swings.
+ * * clickchain - (optional) the clickchain data of who's doing the hit, who's initiating the swing, and the related params.
+ * * hit_atoms - everything that was hit.
+ */
+/datum/melee_swing/proc/perform_audiovisual(list/blackboard, atom/attacker. datum/event_args/actor/clickchain/clickchain, list/atom/hit_atoms)
+	#warn default audiovisuals
 
+/**
+ * Get hit objects from a given performer, angular target, and target atom.
+ *
+ * * Ordering does matter. If a swing should only hit one thing, the first object returned becomes that one thing.
+ *
+ * @params
+ * * blackboard - blackboard data from a swing cycle
+ * * attacker - the thing performing the melee swing. usually, but not always, a /mob.
+ * * angle - the swing angle. use the angle from performer to target if you don't have click params.
+ * * target - the originally clicked / targeted atom.
+ */
+/datum/melee_swing/proc/perform_scan(list/blackboard, atom/attacker, angle, atom/target)
+	RETURN_TYPE(/list)
+	return list()
+
+/**
+ * Perform a single hit against something.
+ *
+ * @params
+ * * blackboard - blackboard data from a swing cycle
+ * * attacker - the thing doing the hit; this is separate from clickchain because non-mobs can use melee swings.
+ * * clickchain - (optional) the clickchain data of who's doing the hit, who's initiating the swing, and the related params.
+ * * target - the thing to hit
+ */
+/datum/melee_swing/proc/perform_hit(list/blackboard, atom/attacker, datum/event_args/actor/clickchain/clickchain, atom/target)
+	return
