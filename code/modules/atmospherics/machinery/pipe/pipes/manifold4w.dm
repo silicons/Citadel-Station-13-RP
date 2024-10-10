@@ -1,6 +1,6 @@
-//
-// 4-Way Manifold Pipes - 4 way "cross" junction
-//
+/**
+ * 4-way cross joints.
+ */
 /obj/machinery/atmospherics/pipe/manifold4w
 	icon = 'icons/atmos/manifold.dmi'
 	icon_state = ""
@@ -15,6 +15,8 @@
 	construction_type = /obj/item/pipe/quaternary
 	pipe_state = "manifold4w"
 
+	var/obj/machinery/atmospherics/node1
+	var/obj/machinery/atmospherics/node2
 	var/obj/machinery/atmospherics/node3
 	var/obj/machinery/atmospherics/node4
 
