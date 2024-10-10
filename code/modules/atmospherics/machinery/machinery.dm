@@ -1,14 +1,19 @@
-/*
-Quick overview:
-
-Pipes combine to form pipelines
-Pipelines and other atmospheric objects combine to form pipe_networks
-	Note: A single pipe_network represents a completely open space
-
-Pipes -> Pipelines
-Pipelines + Other Objects -> Pipe network
-
-*/
+/**
+ * Standard atmospherics machinery.
+ *
+ * * Forms networks with other atmospherics machinery.
+ * * A 'node' is defined as an adjacent atmospherics machinery connected to this.
+ * * On a given type and all its subtypes, will obey a certain schema for 'indexing' of nodes.
+ * * Indexing must obviously be deterministic.
+ * * Indexing must identify an unique (layer, dir) tuple, and vice versa.
+ * * Machinery can be on a number of layers.
+ *   The standard pipe layer variable must be used if the machinery has layers.
+ *   If a machine has more than one layer, and is not all layer, it must implement
+ *   this behavior itself.
+ * * Standard hinting and handling is provided for single-layer and all-layer machines.
+ *   If a machine is more than one, but not all layers, across all its layers on all directions,
+ *   it must implement this itself.
+ */
 /obj/machinery/atmospherics
 	anchored = TRUE
 	idle_power_usage = 0
@@ -49,8 +54,6 @@ Pipelines + Other Objects -> Pipe network
 	var/nodealert = 0 //Apparently this is used only for plumbing or something???
 
 	var/global/datum/pipe_icon_manager/icon_manager
-	var/obj/machinery/atmospherics/node1
-	var/obj/machinery/atmospherics/node2
 
 	var/last_flow_rate_legacy = 0
 	var/last_power_draw_legacy = 0
