@@ -54,29 +54,6 @@
 	else
 		. = PROCESS_KILL
 
-/obj/machinery/atmospherics/pipe/zpipe/check_pressure(pressure)
-	var/datum/gas_mixture/environment = loc.return_air()
-
-	var/pressure_difference = pressure - environment.return_pressure()
-
-	if(pressure_difference > maximum_pressure)
-		burst()
-
-	else if(pressure_difference > fatigue_pressure)
-		//TODO: leak to turf, doing pfshhhhh
-		if(prob(5))
-			burst()
-
-	else return 1
-
-/obj/machinery/atmospherics/pipe/zpipe/proc/burst()
-	src.visible_message("<span class='warning'>\The [src] bursts!</span>");
-	playsound(src.loc, 'sound/effects/bang.ogg', 25, 1)
-	var/datum/effect_system/smoke_spread/smoke = new
-	smoke.set_up(1,0, src.loc, 0)
-	smoke.start()
-	qdel(src) // NOT qdel.
-
 /obj/machinery/atmospherics/pipe/zpipe/proc/normalize_dir()
 	if(dir == (NORTH|SOUTH))
 		setDir(NORTH)

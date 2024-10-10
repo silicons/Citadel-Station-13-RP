@@ -1,6 +1,10 @@
-//
-// Universal Pipe Adapter - Designed for connecting scrubbers, normal, and supply pipes together.
-//
+/**
+ * 2-way all-layer adapter.
+ *
+ * * Does not support bends right now.
+ * * Indices are 1 to 5 for layers 1 to 5 on forward side, 6 to 10 for layers 1 to 5 on backwards side.
+ */
+#warn /simple_adapter
 /obj/machinery/atmospherics/pipe/simple/visible/universal
 	name="Universal pipe adapter"
 	desc = "An adapter for regular, supply and scrubbers pipes"
@@ -9,6 +13,18 @@
 	pipe_flags = PIPING_ALL_LAYER|PIPING_CARDINAL_AUTONORMALIZE
 	construction_type = /obj/item/pipe/binary
 	pipe_state = "universal"
+
+	var/obj/machinery/atmospherics/node_f1
+	var/obj/machinery/atmospherics/node_f2
+	var/obj/machinery/atmospherics/node_f3
+	var/obj/machinery/atmospherics/node_f4
+	var/obj/machinery/atmospherics/node_f5
+
+	var/obj/machinery/atmospherics/node_b1
+	var/obj/machinery/atmospherics/node_b2
+	var/obj/machinery/atmospherics/node_b3
+	var/obj/machinery/atmospherics/node_b4
+	var/obj/machinery/atmospherics/node_b5
 
 /obj/machinery/atmospherics/pipe/simple/visible/universal/update_icon(safety = 0)
 	if(!check_icon_cache())

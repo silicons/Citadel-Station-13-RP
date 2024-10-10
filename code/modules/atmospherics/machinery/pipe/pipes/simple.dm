@@ -1,5 +1,5 @@
 /**
- * 2-way pipes.
+ * 2-way tube-joints.
  */
 /obj/machinery/atmospherics/pipe/simple
 	icon = 'icons/atmos/pipes.dmi'
@@ -21,6 +21,9 @@
 	var/fatigue_pressure = 55*ONE_ATMOSPHERE
 	alert_pressure = 55*ONE_ATMOSPHERE
 
+	var/obj/machinery/atmospherics/node_1
+	var/obj/machinery/atmospherics/node_2
+
 /obj/machinery/atmospherics/pipe/simple/Initialize(mapload)
 	. = ..()
 
@@ -28,21 +31,6 @@
 	//  be null. For mapping purposes color is defined in the object definitions.
 	icon = null
 	alpha = 255
-
-/obj/machinery/atmospherics/pipe/simple/check_pressure(pressure)
-	var/datum/gas_mixture/environment = loc.return_air()
-
-	var/pressure_difference = pressure - environment.return_pressure()
-
-	if(pressure_difference > maximum_pressure)
-		burst()
-
-	else if(pressure_difference > fatigue_pressure)
-		//TODO: leak to turf, doing pfshhhhh
-		if(prob(5))
-			burst()
-
-	else return 1
 
 /obj/machinery/atmospherics/pipe/simple/init_dir()
 	switch(dir)

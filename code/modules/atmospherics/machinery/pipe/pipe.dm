@@ -5,6 +5,7 @@
  *
  * * Instant flow between connected pipes.
  * * Contains a little bit of buffer volume between components.
+ * * Contains a single pipeline parent.
  */
 /obj/machinery/atmospherics/pipe
 	buckle_allowed = TRUE
@@ -21,12 +22,16 @@
 	alpha = 128 // Set for the benefit of mapping.
 	#endif
 
-	var/datum/gas_mixture/air_temporary // used when reconstructing a pipeline that broke
-	var/datum/pipeline/parent
-	var/volume = 0
+	/**
+	 * Used when reconstructing a pipeline
+	 *
+	 * * For speed, this is potentially a cached mixture.
+	 * * Do not under any circumstances mutate this gas mixture, only read from it.
+	 */
+	var/datum/gas_mixture/rebuild_air_immutable
+	var/datum/pipeline/pipeline
 
-	var/alert_pressure = 80*ONE_ATMOSPHERE
-		//minimum pressure before check_pressure(...) should be called
+	var/volume = 0
 
 /obj/machinery/atmospherics/pipe/Initialize(mapload, newdir)
 	// pipes are always underfloor if inside a wall
@@ -41,12 +46,6 @@
 // For pipes this is the same as pipeline_expansion()
 /obj/machinery/atmospherics/pipe/get_neighbor_nodes_for_init()
 	return pipeline_expansion()
-
-/obj/machinery/atmospherics/pipe/proc/check_pressure(pressure)
-	//Return 1 if parent should continue checking other pipes
-	//Return null if parent should stop checking other pipes. Recall: qdel(src) will by default return null
-
-	return 1
 
 /obj/machinery/atmospherics/pipe/return_air()
 	if(!parent)

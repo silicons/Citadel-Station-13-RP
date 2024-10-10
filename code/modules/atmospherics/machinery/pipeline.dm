@@ -22,15 +22,6 @@
 	edges = null
 	. = ..()
 
-/datum/pipeline/process(delta_time)//This use to be called called from the pipe networks
-
-	//Check to see if pressure is within acceptable limits
-	var/pressure = air.return_pressure()
-	if(pressure > alert_pressure)
-		for(var/obj/machinery/atmospherics/pipe/member in members)
-			if(!member.check_pressure(pressure))
-				break //Only delete 1 pipe per process
-
 /datum/pipeline/proc/temporarily_store_air()
 	//Update individual gas_mixtures by volume ratio
 
@@ -76,8 +67,6 @@
 
 						volume += item.volume
 						item.parent = src
-
-						alert_pressure = min(alert_pressure, item.alert_pressure)
 
 						if(item.air_temporary)
 							air.merge(item.air_temporary)

@@ -7,21 +7,6 @@
 	..(loc)
 	parent_pipe = loc
 
-/obj/machinery/atmospherics/pipe/mains_component/check_pressure(pressure)
-	var/datum/gas_mixture/environment = loc.loc.return_air()
-
-	var/pressure_difference = pressure - environment.return_pressure()
-
-	if(pressure_difference > parent_pipe.maximum_pressure)
-		mains_burst()
-
-	else if(pressure_difference > parent_pipe.fatigue_pressure)
-		//TODO: leak to turf, doing pfshhhhh
-		if(prob(5))
-			mains_burst()
-
-	else return 1
-
 /obj/machinery/atmospherics/pipe/mains_component/pipeline_expansion()
 	return nodes
 
@@ -32,6 +17,10 @@
 /obj/machinery/atmospherics/pipe/mains_component/proc/mains_burst()
 	parent_pipe.burst()
 
+/**
+ * Pipes that join layers to their respective layers.
+ */
+#warn deal with these on maps
 /obj/machinery/atmospherics/mains_pipe
 	icon = 'icons/obj/atmospherics/mainspipe.dmi'
 	plane = TURF_PLANE
@@ -39,19 +28,7 @@
 	hides_underfloor_defaulting = TRUE
 
 	var/volume = 0
-
-	var/alert_pressure = 80*ONE_ATMOSPHERE
-
 	var/initialize_mains_directions = 0
-
-	var/list/obj/machinery/atmospherics/mains_pipe/nodes = new()
-	var/obj/machinery/atmospherics/pipe/mains_component/supply
-	var/obj/machinery/atmospherics/pipe/mains_component/scrubbers
-	var/obj/machinery/atmospherics/pipe/mains_component/aux
-
-	var/maximum_pressure = 70*ONE_ATMOSPHERE
-	var/fatigue_pressure = 55*ONE_ATMOSPHERE
-	alert_pressure = 55*ONE_ATMOSPHERE
 
 /obj/machinery/atmospherics/mains_pipe/Initialize(mapload)
 	. = ..()
@@ -65,26 +42,6 @@
 	aux = new(src)
 	aux.volume = volume
 	aux.nodes.len = nodes.len
-
-/obj/machinery/atmospherics/mains_pipe/proc/burst()
-	for(var/obj/machinery/atmospherics/pipe/mains_component/pipe in contents)
-		burst()
-
-/obj/machinery/atmospherics/mains_pipe/proc/check_pressure(pressure)
-	var/datum/gas_mixture/environment = loc.return_air()
-
-	var/pressure_difference = pressure - environment.return_pressure()
-
-	if(pressure_difference > maximum_pressure)
-		burst()
-
-	else if(pressure_difference > fatigue_pressure)
-		//TODO: leak to turf, doing pfshhhhh
-		if(prob(5))
-			burst()
-
-	else
-		return 1
 
 /obj/machinery/atmospherics/mains_pipe/get_neighbor_nodes_for_init()
 	return nodes

@@ -1,6 +1,7 @@
 //
 // Tanks - These are implemented as pipes with large volume
 //
+#warn this isn't a fucking pipe, make it a /component/unary/pressure_tank
 /obj/machinery/atmospherics/pipe/tank
 	icon = 'icons/atmos/tank_vr.dmi'
 	icon_state = "air_map"

@@ -1,6 +1,10 @@
 /**
  * 3-way T-joints
+ *
+ * * Indices are
+ * * is dir,
  */
+#warn set these dirs
 /obj/machinery/atmospherics/pipe/manifold
 	icon = 'icons/atmos/manifold.dmi'
 	icon_state = ""
@@ -15,9 +19,9 @@
 	construction_type = /obj/item/pipe/trinary
 	pipe_state = "manifold"
 
-	var/obj/machinery/atmospherics/node1
-	var/obj/machinery/atmospherics/node2
-	var/obj/machinery/atmospherics/node3
+	var/obj/machinery/atmospherics/node_1
+	var/obj/machinery/atmospherics/node_2
+	var/obj/machinery/atmospherics/node_3
 
 /obj/machinery/atmospherics/pipe/manifold/Initialize(mapload)
 	. = ..()

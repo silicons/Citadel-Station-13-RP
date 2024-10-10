@@ -1,6 +1,6 @@
-//
-// Pipe Cap - They go on the end
-//
+/**
+ * 1-way cap-joints
+ */
 /obj/machinery/atmospherics/pipe/cap
 	name = "pipe endcap"
 	desc = "An endcap for pipes"
@@ -14,7 +14,7 @@
 	construction_type = /obj/item/pipe/directional
 	pipe_state = "cap"
 
-	var/obj/machinery/atmospherics/node
+	var/obj/machinery/atmospherics/node1
 
 /obj/machinery/atmospherics/pipe/cap/init_dir()
 	initialize_directions = dir
