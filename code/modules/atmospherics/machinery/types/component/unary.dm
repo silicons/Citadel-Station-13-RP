@@ -3,7 +3,6 @@
 	initialize_directions = SOUTH
 	construction_type = /obj/item/pipe/directional
 	pipe_flags = PIPE_STATIC_FLAG_DEFAULT_LAYER_ONLY|PIPE_STATIC_FLAG_ONE_PER_TURF
-	//layer = TURF_LAYER+0.1
 
 	var/obj/machinery/atmospherics/node1
 
@@ -20,7 +19,7 @@
 /obj/machinery/atmospherics/component/unary/get_neighbor_nodes_for_init()
 	return list(node)
 
-/obj/machinery/atmospherics/component/unary/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
+/obj/machinery/atmospherics/component/unary/network_expand(datum/pipenet/new_network, obj/machinery/atmospherics/pipe/reference)
 	if(reference == node)
 		network = new_network
 
@@ -69,13 +68,13 @@
 
 	return null
 
-/obj/machinery/atmospherics/component/unary/reassign_network(datum/pipe_network/old_network, datum/pipe_network/new_network)
+/obj/machinery/atmospherics/component/unary/reassign_network(datum/pipenet/old_network, datum/pipenet/new_network)
 	if(network == old_network)
 		network = new_network
 
 	return 1
 
-/obj/machinery/atmospherics/component/unary/return_network_air(datum/pipe_network/reference)
+/obj/machinery/atmospherics/component/unary/return_network_air(datum/pipenet/reference)
 	var/list/results = list()
 
 	if(network == reference)

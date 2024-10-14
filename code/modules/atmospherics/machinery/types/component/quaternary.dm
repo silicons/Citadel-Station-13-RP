@@ -239,7 +239,7 @@
 		neighbor_nodes += P.node
 	return neighbor_nodes
 
-/obj/machinery/atmospherics/component/quaternary/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
+/obj/machinery/atmospherics/component/quaternary/network_expand(datum/pipenet/new_network, obj/machinery/atmospherics/pipe/reference)
 	for(var/datum/omni_port/P in ports)
 		if(reference == P.node)
 			P.network = new_network
@@ -293,14 +293,14 @@
 
 	return null
 
-/obj/machinery/atmospherics/component/quaternary/reassign_network(datum/pipe_network/old_network, datum/pipe_network/new_network)
+/obj/machinery/atmospherics/component/quaternary/reassign_network(datum/pipenet/old_network, datum/pipenet/new_network)
 	for(var/datum/omni_port/P in ports)
 		if(P.network == old_network)
 			P.network = new_network
 
 	return 1
 
-/obj/machinery/atmospherics/component/quaternary/return_network_air(datum/pipe_network/reference)
+/obj/machinery/atmospherics/component/quaternary/return_network_air(datum/pipenet/reference)
 	var/list/results = list()
 
 	for(var/datum/omni_port/P in ports)

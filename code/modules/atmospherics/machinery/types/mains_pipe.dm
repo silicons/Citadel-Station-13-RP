@@ -307,14 +307,7 @@
 
 /obj/machinery/atmospherics/mains_pipe/split/return_network(A)
 	return split_node.return_network(A)
-/*
-/obj/machinery/atmospherics/mains_pipe/split/supply
-	icon_type = "supply"
 
-/obj/machinery/atmospherics/mains_pipe/split/Initialize(mapload)
-	. = ..()
-	split_node = supply
-*/
 /obj/machinery/atmospherics/mains_pipe/split/hidden/supply
 	icon_state = "split-supply-f"
 /obj/machinery/atmospherics/mains_pipe/split/hidden/scrubbers

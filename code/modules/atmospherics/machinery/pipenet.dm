@@ -36,7 +36,7 @@
 	else
 		qdel(src)
 
-/datum/pipenet/proc/merge(datum/pipe_network/giver)
+/datum/pipenet/proc/merge(datum/pipenet/giver)
 	if(giver==src) return 0
 
 	normal_members |= giver.normal_members
@@ -71,8 +71,6 @@
 
 
 //*          Reconciliation        *//
-
-#define PIPENET_RECONCILE_VOLUME_SCALER (2**16)
 
 /**
  * equalize all airs inside us
@@ -130,5 +128,3 @@
 		out_air.gas = total.gas.Copy()
 		out_air.temperature = total.temperature
 		out_air.multiply(out_air.volume)
-
-#undef PIPENET_RECONCILE_VOLUME_SCALER

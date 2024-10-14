@@ -14,9 +14,11 @@
 
 	var/obj/machinery/portable_atmospherics/connected_device
 
-	var/obj/machinery/atmospherics/node
+	var/obj/machinery/atmospherics/node1
 
-	var/datum/pipenet/network
+	var/datum/gas_mixture/air1
+
+	var/datum/pipeline/line1
 
 	var/on = 0
 	use_power = USE_POWER_OFF
@@ -50,7 +52,7 @@
 /obj/machinery/atmospherics/portables_connector/get_neighbor_nodes_for_init()
 	return list(node)
 
-/obj/machinery/atmospherics/portables_connector/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
+/obj/machinery/atmospherics/portables_connector/network_expand(datum/pipenet/new_network, obj/machinery/atmospherics/pipe/reference)
 	if(reference == node)
 		network = new_network
 
@@ -105,13 +107,13 @@
 
 	return null
 
-/obj/machinery/atmospherics/portables_connector/reassign_network(datum/pipe_network/old_network, datum/pipe_network/new_network)
+/obj/machinery/atmospherics/portables_connector/reassign_network(datum/pipenet/old_network, datum/pipenet/new_network)
 	if(network == old_network)
 		network = new_network
 
 	return 1
 
-/obj/machinery/atmospherics/portables_connector/return_network_air(datum/pipe_network/reference)
+/obj/machinery/atmospherics/portables_connector/return_network_air(datum/pipenet/reference)
 	var/list/results = list()
 
 	if(connected_device)

@@ -31,17 +31,31 @@
 	/// * this handles the actual equalization
 	/// * set this to be `update = TRUE` to mark it for update.
 	var/datum/pipenet/network
+	/// are we queued for rebuild?
+	var/network_rebuild_queued = FALSE
+
+/datum/pipeline/New()
+	line_air = new
+	edge_airs = list()
+	line_members = list()
+	edge_members = list()
+	potential_borders = list()
 
 /datum/pipeline/Destroy()
+	// our network needs to go
 	QDEL_NULL(network)
+	// store air in pipes
+	if(line_air.volume)
+	#warn rest
 
+	if()
 	if(air && air.volume)
 		temporarily_store_air()
 	for(var/obj/machinery/atmospherics/pipe/P in members)
 		P.parent = null
 	members = null
 	edges = null
-	. = ..()
+	return ..()
 
 /datum/pipeline/proc/temporarily_store_air()
 	//Update individual gas_mixtures by volume ratio
@@ -102,7 +116,7 @@
 
 	air.volume = volume
 
-/datum/pipeline/proc/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
+/datum/pipeline/proc/network_expand(datum/pipenet/new_network, obj/machinery/atmospherics/pipe/reference)
 
 	if(new_network.line_members.Find(src))
 		return 0

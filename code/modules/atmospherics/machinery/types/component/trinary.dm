@@ -66,7 +66,7 @@
 /obj/machinery/atmospherics/component/trinary/get_neighbor_nodes_for_init()
 	return list(node1, node2, node3)
 
-/obj/machinery/atmospherics/component/trinary/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
+/obj/machinery/atmospherics/component/trinary/network_expand(datum/pipenet/new_network, obj/machinery/atmospherics/pipe/reference)
 	if(reference == node1)
 		network1 = new_network
 
@@ -149,7 +149,7 @@
 
 	return null
 
-/obj/machinery/atmospherics/component/trinary/reassign_network(datum/pipe_network/old_network, datum/pipe_network/new_network)
+/obj/machinery/atmospherics/component/trinary/reassign_network(datum/pipenet/old_network, datum/pipenet/new_network)
 	if(network1 == old_network)
 		network1 = new_network
 	if(network2 == old_network)
@@ -159,7 +159,7 @@
 
 	return 1
 
-/obj/machinery/atmospherics/component/trinary/return_network_air(datum/pipe_network/reference)
+/obj/machinery/atmospherics/component/trinary/return_network_air(datum/pipenet/reference)
 	var/list/results = list()
 
 	if(network1 == reference)

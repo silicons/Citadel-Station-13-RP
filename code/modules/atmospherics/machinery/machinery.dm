@@ -156,7 +156,7 @@
 
 	build_network()
 
-/obj/machinery/atmospherics/proc/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
+/obj/machinery/atmospherics/proc/network_expand(datum/pipenet/new_network, obj/machinery/atmospherics/pipe/reference)
 	// Check to see if should be added to network. Add self if so and adjust variables appropriately.
 	// Note don't forget to have neighbors look as well!
 
@@ -174,10 +174,10 @@
 
 	return null
 
-/obj/machinery/atmospherics/proc/reassign_network(datum/pipe_network/old_network, datum/pipe_network/new_network)
+/obj/machinery/atmospherics/proc/reassign_network(datum/pipenet/old_network, datum/pipenet/new_network)
 	// Used when two pipe_networks are combining
 
-/obj/machinery/atmospherics/proc/return_network_air(datum/pipe_network/reference)
+/obj/machinery/atmospherics/proc/return_network_air(datum/pipenet/reference)
 	// Return a list of gas_mixture(s) in the object
 	//		associated with reference pipe_network for use in rebuilding the networks gases list
 	// Is permitted to return null

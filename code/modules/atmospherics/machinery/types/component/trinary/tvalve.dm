@@ -50,7 +50,7 @@
 /obj/machinery/atmospherics/tvalve/get_neighbor_nodes_for_init()
 	return list(node1, node2, node3)
 
-/obj/machinery/atmospherics/tvalve/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
+/obj/machinery/atmospherics/tvalve/network_expand(datum/pipenet/new_network, obj/machinery/atmospherics/pipe/reference)
 	if(reference == node1)
 		network_node1 = new_network
 		if(state)
@@ -219,7 +219,7 @@
 
 	return null
 
-/obj/machinery/atmospherics/tvalve/reassign_network(datum/pipe_network/old_network, datum/pipe_network/new_network)
+/obj/machinery/atmospherics/tvalve/reassign_network(datum/pipenet/old_network, datum/pipenet/new_network)
 	if(network_node1 == old_network)
 		network_node1 = new_network
 	if(network_node2 == old_network)
@@ -229,7 +229,7 @@
 
 	return 1
 
-/obj/machinery/atmospherics/tvalve/return_network_air(datum/pipe_network/reference)
+/obj/machinery/atmospherics/tvalve/return_network_air(datum/pipenet/reference)
 	return null
 
 /obj/machinery/atmospherics/tvalve/disconnect(obj/machinery/atmospherics/reference)
