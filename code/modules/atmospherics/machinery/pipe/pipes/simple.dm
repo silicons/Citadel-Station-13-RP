@@ -8,12 +8,12 @@
 	name = "pipe"
 	desc = "A one meter section of regular pipe"
 
-	volume = ATMOS_DEFAULT_VOLUME_PIPE
+	volume = ATMOS_DEFAULT_VOLUME_PIPE_PER_SIDE * 2
 
 	dir = SOUTH
 	initialize_directions = SOUTH|NORTH
 
-	pipe_flags = PIPING_CARDINAL_AUTONORMALIZE
+	pipe_flags = PIPE_STATIC_FLAG_CARDINAL_AUTONORMALIZE
 	construction_type = /obj/item/pipe/binary/bendable
 	pipe_state = "simple"
 

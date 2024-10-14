@@ -1,15 +1,35 @@
+#warn CF_ATMOS_PIPENET_VISUALS
+
 /**
- * A continuous
+ * A continuous section of superconducting sections of air.
+ *
+ * What this means is everything in a pipeline equalizes every tick, all the time, entirely.
  */
 /datum/pipeline
-	var/datum/gas_mixture/air
+	/// line air; this is the air in our pipes
+	var/datum/gas_mixture/line_air
+	/// air in our components-edges
+	var/list/datum/gas_mixture/edge_airs
 
-	var/list/obj/machinery/atmospherics/pipe/members
-	var/list/obj/machinery/atmospherics/pipe/edges //Used for building networks
+	/// pipes - any of these being destroyed triggers an immediate pipeline rebuild.
+	var/list/obj/machinery/atmospherics/pipe/line_members
+	/// components - these can be in multiple pipelines.
+	///
+	/// * this is only here for book-keeping, we don't use them.
+	var/list/obj/machinery/atmospherics/component/edge_members
+	/// components which can potentially join us to a pipenet.
+	///
+	/// * this is for optimization reasons, so opening / closing a valve doesn't require
+	///   a full rebuild of every member, instead of just querying these.
+	/// * these can never be pipes, as i cannot think of a good reason for a pipe
+	///   to be joining pipelines conditionally when pipes are meant to be simple
+	///   line members of a single pipeline.
+	var/list/obj/machinery/atmospherics/component/potential_borders
 
-	var/datum/pipe_network/network
-
-	var/alert_pressure = 0
+	/// our pipenet; this is a collection of pipelines.
+	///
+	/// * this handles the actual equalization
+	var/datum/pipenet/network
 
 /datum/pipeline/Destroy()
 	QDEL_NULL(network)
@@ -99,7 +119,7 @@
 
 /datum/pipeline/proc/return_network(obj/machinery/atmospherics/reference)
 	if(!network)
-		network = new /datum/pipe_network()
+		network = new /datum/pipenet()
 		network.build_network(src, null)
 			//technically passing these parameters should not be allowed
 			//however pipe_network.build_network(..) and pipeline.network_extend(...)

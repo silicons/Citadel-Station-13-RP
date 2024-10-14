@@ -12,6 +12,7 @@
 
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_AUX
 	hides_underfloor_underlays = TRUE
+	pipe_static_flags = NONE
 
 	use_power = USE_POWER_OFF
 	//Internal circuitry, friction losses and stuff

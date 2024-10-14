@@ -1,17 +1,3 @@
-/*
-Every cycle, the pump uses the air in air_in to try and make air_out the perfect pressure.
-
-node1, air1, network1 correspond to input
-node2, air2, network2 correspond to output
-
-Thus, the two variables affect pump operation are set in New():
-	air1.volume
-		This is the volume of gas available to the pump that may be transfered to the output
-	air2.volume
-		Higher quantities of this cause more air to be perfected later
-			but overall network volume is also increased as this increases...
-*/
-
 /obj/machinery/atmospherics/component/binary/pump
 	icon = 'icons/atmos/pump.dmi'
 	icon_state = "map_off"
@@ -22,6 +8,7 @@ Thus, the two variables affect pump operation are set in New():
 
 	name = "gas pump"
 	desc = "A pump"
+	pipe_static_flags = NONE
 
 	var/target_pressure = ONE_ATMOSPHERE
 
@@ -76,30 +63,6 @@ Thus, the two variables affect pump operation are set in New():
 /obj/machinery/atmospherics/component/binary/pump/Destroy()
 	unregister_radio(src, frequency)
 	. = ..()
-
-/obj/machinery/atmospherics/component/binary/pump/on
-	icon_state = "map_on"
-	use_power = USE_POWER_IDLE
-
-/obj/machinery/atmospherics/component/binary/pump/fuel
-	icon_state = "map_off-fuel"
-	base_icon = "pump-fuel"
-	icon_connect_type = "-fuel"
-	connect_types = CONNECT_TYPE_FUEL
-
-/obj/machinery/atmospherics/component/binary/pump/fuel/on
-	icon_state = "map_on-fuel"
-	use_power = 1
-
-/obj/machinery/atmospherics/component/binary/pump/aux
-	icon_state = "map_off-aux"
-	base_icon = "pump-aux"
-	icon_connect_type = "-aux"
-	connect_types = CONNECT_TYPE_AUX
-
-/obj/machinery/atmospherics/component/binary/pump/aux/on
-	icon_state = "map_on-aux"
-	use_power = 1
 
 /obj/machinery/atmospherics/component/binary/pump/update_icon()
 	if(!powered())
@@ -288,3 +251,27 @@ Thus, the two variables affect pump operation are set in New():
 			"<span class='notice'>You have unfastened \the [src].</span>", \
 			"You hear ratchet.")
 		deconstruct()
+
+/obj/machinery/atmospherics/component/binary/pump/on
+	icon_state = "map_on"
+	use_power = USE_POWER_IDLE
+
+/obj/machinery/atmospherics/component/binary/pump/fuel
+	icon_state = "map_off-fuel"
+	base_icon = "pump-fuel"
+	icon_connect_type = "-fuel"
+	connect_types = CONNECT_TYPE_FUEL
+
+/obj/machinery/atmospherics/component/binary/pump/fuel/on
+	icon_state = "map_on-fuel"
+	use_power = 1
+
+/obj/machinery/atmospherics/component/binary/pump/aux
+	icon_state = "map_off-aux"
+	base_icon = "pump-aux"
+	icon_connect_type = "-aux"
+	connect_types = CONNECT_TYPE_AUX
+
+/obj/machinery/atmospherics/component/binary/pump/aux/on
+	icon_state = "map_on-aux"
+	use_power = 1

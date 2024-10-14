@@ -7,10 +7,11 @@
 	pipe_icon = "hepipe"
 	color = "#404040"
 	hides_underfloor = OBJ_UNDERFLOOR_NEVER
-	connect_types = CONNECT_TYPE_HE
-	pipe_flags = PIPING_DEFAULT_LAYER_ONLY
+	pipe_flags = PIPE_STATIC_FLAG_DEFAULT_LAYER_ONLY
 	construction_type = /obj/item/pipe/binary/bendable
 	pipe_state = "he"
+
+	volume = ATMOS_DEFAULT_VOLUME_EXCHANGER_PIPE_PER_SIDE * 2
 
 	layer = PIPES_HE_LAYER
 	var/initialize_directions_he

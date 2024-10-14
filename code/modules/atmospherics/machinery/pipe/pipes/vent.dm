@@ -1,6 +1,7 @@
 //
 // Vent Pipe - Unpowered vent
 //
+#warn this isn't a fucking pipe, it's a component
 /obj/machinery/atmospherics/pipe/vent
 	icon = 'icons/obj/atmospherics/pipe_vent.dmi'
 	icon_state = "intact"
@@ -12,7 +13,7 @@
 
 	dir = SOUTH
 	initialize_directions = SOUTH
-	pipe_flags = PIPING_DEFAULT_LAYER_ONLY
+	pipe_flags = PIPE_STATIC_FLAG_DEFAULT_LAYER_ONLY
 	construction_type = /obj/item/pipe/directional
 	pipe_state = "passive vent"
 	hides_underfloor_defaulting = FALSE

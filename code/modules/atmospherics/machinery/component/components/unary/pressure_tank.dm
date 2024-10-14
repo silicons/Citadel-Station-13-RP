@@ -14,10 +14,12 @@
 	layer = EXPOSED_PIPE_LAYER
 	dir = SOUTH
 	initialize_directions = SOUTH
-	pipe_flags = PIPING_DEFAULT_LAYER_ONLY
+	pipe_flags = PIPE_STATIC_FLAG_DEFAULT_LAYER_ONLY
 	density = TRUE
 	hides_underfloor_underlays = TRUE
 	hides_underfloor_defaulting = FALSE
+
+	pipe_static_flags = PIPE_STATIC_FLAG_ONE_PER_TURF
 
 	var/start_pressure = 75*ONE_ATMOSPHERE
 
@@ -27,13 +29,6 @@
 
 /obj/machinery/atmospherics/pipe/tank/init_dir()
 	initialize_directions = dir
-
-/obj/machinery/atmospherics/pipe/tank/Destroy()
-	if(node1)
-		node1.disconnect(src)
-		node1 = null
-
-	. = ..()
 
 /obj/machinery/atmospherics/pipe/tank/pipeline_expansion()
 	return list(node1)

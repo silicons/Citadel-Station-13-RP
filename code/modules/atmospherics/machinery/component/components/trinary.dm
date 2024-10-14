@@ -2,21 +2,23 @@
 	dir = SOUTH
 	initialize_directions = SOUTH|NORTH|WEST
 	use_power = USE_POWER_OFF
-	pipe_flags = PIPING_DEFAULT_LAYER_ONLY|PIPING_ONE_PER_TURF
+	pipe_flags = PIPE_STATIC_FLAG_DEFAULT_LAYER_ONLY|PIPE_STATIC_FLAG_ONE_PER_TURF
 	hides_underfloor_underlays = TRUE
 
 	var/mirrored = FALSE
 	var/tee = FALSE
 
+	var/obj/machinery/atmospherics/node1
+	var/obj/machinery/atmospherics/node2
+	var/obj/machinery/atmospherics/node3
+
 	var/datum/gas_mixture/air1
 	var/datum/gas_mixture/air2
 	var/datum/gas_mixture/air3
 
-	var/obj/machinery/atmospherics/node3
-
-	var/datum/pipe_network/network1
-	var/datum/pipe_network/network2
-	var/datum/pipe_network/network3
+	var/datum/pipeline/line1
+	var/datum/pipeline/line2
+	var/datum/pipeline/line3
 
 /obj/machinery/atmospherics/component/trinary/Initialize(mapload)
 	air1 = new(200)
@@ -118,17 +120,17 @@
 
 /obj/machinery/atmospherics/component/trinary/build_network()
 	if(!network1 && node1)
-		network1 = new /datum/pipe_network()
+		network1 = new /datum/pipenet()
 		network1.normal_members += src
 		network1.build_network(node1, src)
 
 	if(!network2 && node2)
-		network2 = new /datum/pipe_network()
+		network2 = new /datum/pipenet()
 		network2.normal_members += src
 		network2.build_network(node2, src)
 
 	if(!network3 && node3)
-		network3 = new /datum/pipe_network()
+		network3 = new /datum/pipenet()
 		network3.normal_members += src
 		network3.build_network(node3, src)
 
@@ -239,3 +241,8 @@
 		node2_connect = turn(dir, -90)
 		node3_connect = dir
 	return list(node1_connect, node2_connect, node3_connect)
+
+/obj/machinery/atmospherics/component/trinary/create_airs()
+	air1 = new(default_volume)
+	air2 = new(default_volume)
+	air3 = new(default_volume)

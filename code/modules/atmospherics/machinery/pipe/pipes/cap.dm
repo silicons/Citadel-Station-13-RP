@@ -6,7 +6,7 @@
 	desc = "An endcap for pipes"
 	icon = 'icons/atmos/pipes.dmi'
 	icon_state = ""
-	volume = 35
+	volume = ATMOS_DEFAULT_VOLUME_PIPE_PER_SIDE
 
 	dir = SOUTH
 	initialize_directions = SOUTH

@@ -9,7 +9,7 @@
 	name = "4-way pipe manifold"
 	desc = "A manifold composed of regular pipes"
 
-	volume = ATMOS_DEFAULT_VOLUME_PIPE * 2
+	volume = ATMOS_DEFAULT_VOLUME_PIPE_PER_SIDE * 4
 
 	dir = SOUTH
 	initialize_directions = NORTH|SOUTH|EAST|WEST

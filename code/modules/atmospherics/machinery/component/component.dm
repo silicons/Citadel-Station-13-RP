@@ -1,6 +1,9 @@
 //* This file is explicitly licensed under the MIT license. *//
 //* Copyright (c) 2023 Citadel Station developers.          *//
 
+/**
+ * ## Atmospherics Machinery - Components
+ */
 /obj/machinery/atmospherics/component
 	obj_flags = OBJ_ON_BLUEPRINTS | OBJ_MELEE_TARGETABLE | OBJ_RANGE_TARGETABLE
 	interaction_flags_machine = INTERACT_MACHINE_ALLOW_SILICON | INTERACT_MACHINE_OPEN | INTERACT_MACHINE_OPEN_SILICON | INTERACT_MACHINE_OFFLINE | INTERACT_MACHINE_OFFLINE_SILICON
@@ -10,6 +13,11 @@
 	tool_unanchor = null
 	default_panel = null
 	tool_panel = null
+	pipe_static_flags = PIPE_STATIC_FLAG_ONE_PER_TURF
+
+	//* air *//
+	/// default volume per side / on the mixtures for each node
+	var/default_volume = ATMOS_DEFAULT_VOLUME_COMPONENT
 
 	/// allow multitool "hijacking" even if this is controlled by something else
 	/// set to non-null for delay, 0 for instant.
@@ -44,6 +52,7 @@
 
 /obj/machinery/atmospherics/component/Initialize(mapload, newdir)
 	. = ..()
+	create_airs()
 	if(isnull(power_setting))
 		power_setting = power_maximum
 	//! LEGACY IF STATEMENT
@@ -151,3 +160,13 @@
 	// todo: uh, this obviously needs a wrapper
 	ui_interact(e_args.initiator)
 	return TRUE
+
+#warn vent air to turf on deconstruct, but not Destroy()
+
+//* Air Handling *//
+
+/**
+ * create our air mixtures
+ */
+/obj/machinery/atmospherics/component/proc/create_airs()
+	return

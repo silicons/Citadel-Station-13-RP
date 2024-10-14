@@ -13,6 +13,9 @@
  * * Standard hinting and handling is provided for single-layer and all-layer machines.
  *   If a machine is more than one, but not all layers, across all its layers on all directions,
  *   it must implement this itself.
+ * * By convention, single-layer-only machinery are on layer 3. This is not always the case,
+ *   the implementor has the right to change this.
+ * * By convention, all-layer machinery get set to layer 3. This however should not be relied on.
  */
 /obj/machinery/atmospherics
 	anchored = TRUE
@@ -30,18 +33,27 @@
 	hides_underfloor = OBJ_UNDERFLOOR_UNLESS_PLACED_ONTOP
 	hides_underfloor_defaulting = FALSE
 
+	//* Intrinsics *//
+	/// The flags of the machine (pipe / component / other)
+	///
+	/// * This never changes at runtime.
+	/// * This is used for non-proc-based behavior switching.
+	var/pipe_static_flags = PIPE_STATIC_FLAG_DEFAULT_LAYER_ONLY
+	/// The runtime flags for this machine (pipe / component / other)
+	var/pipe_flags = PIPE_FLAG_REBUILD_QUEUED
+
+	//* Directions *//
+
+	//* Layer *//
+	///What layer the pipe is in (from 1 to 5, default 3)
+	var/piping_layer = PIPING_LAYER_DEFAULT
+
 	//* Underfloor *//
 	/// automatically update_underlays() during update_underfloor
 	var/hides_underfloor_underlays = FALSE
 
 	///The color of the pipe
 	var/pipe_color
-	///The flags of the pipe/component (PIPING_ALL_LAYER | PIPING_ONE_PER_TURF | PIPING_DEFAULT_LAYER_ONLY | PIPING_CARDINAL_AUTONORMALIZE)
-	var/pipe_flags = PIPING_DEFAULT_LAYER_ONLY
-	///What pipe layer can this connect to.
-	var/connect_types = CONNECT_TYPE_REGULAR
-	///What layer the pipe is in (from 1 to 5, default 3)
-	var/piping_layer = PIPING_LAYER_DEFAULT
 	///"-supply" or "-scrubbers"
 	var/icon_connect_type = ""
 	///The type path of the pipe item when this is deconstructed.
@@ -50,8 +62,6 @@
 	var/pipe_state
 	///Bitflag of the initialized directions (NORTH | SOUTH | EAST | WEST)
 	var/initialize_directions = 0
-
-	var/nodealert = 0 //Apparently this is used only for plumbing or something???
 
 	var/global/datum/pipe_icon_manager/icon_manager
 
@@ -212,7 +222,7 @@
 
 // This sets our piping layer.  Hopefully its cool.
 /obj/machinery/atmospherics/proc/setPipingLayer(new_layer)
-	if(pipe_flags & (PIPING_DEFAULT_LAYER_ONLY|PIPING_ALL_LAYER))
+	if(pipe_flags & (PIPE_STATIC_FLAG_DEFAULT_LAYER_ONLY|PIPE_STATIC_FLAG_ALL_LAYER))
 		new_layer = PIPING_LAYER_DEFAULT
 	piping_layer = new_layer
 	switch(piping_layer)
@@ -236,7 +246,7 @@
 			connect_types = CONNECT_TYPE_AUX
 			layer = PIPES_AUX_LAYER
 			icon_connect_type = "-aux"
-	if(pipe_flags & PIPING_ALL_LAYER)
+	if(pipe_flags & PIPE_STATIC_FLAG_ALL_LAYER)
 		connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL|CONNECT_TYPE_AUX
 	// Or if we were to do it the TG way...
 	// pixel_x = PIPE_PIXEL_OFFSET_X(piping_layer)
@@ -277,3 +287,247 @@
  */
 /obj/machinery/atmospherics/proc/ui_settings_updated()
 	// todo: implement
+
+//*                          Init / Build                         *//
+
+/**
+ * Queues a rebuild.
+ */
+/obj/machinery/atmospherics/proc/queue_rebuild()
+	if(pipe_flags & PIPE_FLAG_REBUILD_QUEUED)
+		return
+	if(QDESTROYING(src))
+		return
+	pipe_flags |= PIPE_FLAG_REBUILD_QUEUED
+	#warn impl
+
+/**
+ * Performs a rebuild
+ */
+/obj/machinery/atmospherics/proc/trigger_rebuild()
+	pipe_flags &= ~PIPE_FLAG_REBUILD_QUEUED
+	// no longer necessary
+	if(pipe_flags & PIPE_FLAG_NETWORK_JOINED)
+		return
+	build_network(TRUE)
+
+//*                  Init / Build - Abstraction                   *//
+
+/**
+ * Abstraction proc.
+ *
+ * Preconditions:
+ * * We are in a valid position.
+ *
+ * Here's what you **must** implement;
+ *
+ * * Detect and connect nodes, bidirectionally.
+ * * create any pipelines; they'll automatically queue a pipenet build.
+ *
+ * Notes:
+ * * 'destroying' is provided but it's almost never even remotely necessary to use it.
+ *   Special behavior should not be in here; this proc is only for pipenet operations.
+ *
+ * @params
+ * * rebuild - this is a queued rebuild
+ */
+/obj/machinery/atmospherics/proc/build_network(rebuild)
+	SHOULD_CALL_PARENT(TRUE)
+	pipe_flags |= PIPE_FLAG_NETWORK_JOINED
+
+
+/**
+ * Abstraction proc.
+ *
+ * Preconditions:
+ * * We are still in a valid position.
+ *
+ * Here's what you **must** implement;
+ *
+ * * qdel() any pipelines.
+ * * null out references to existing nodes, bidirectionally.
+ *
+ * Notes:
+ * * 'destroying' is provided but it's almost never even remotely necessary to use it.
+ *   Special behavior should not be in here; this proc is only for pipenet operations.
+ * * Do not under any circumstances queue a rebuild here. This is not this proc's job.
+ *
+ * @params
+ * * destroying - we're being deleted
+ */
+/obj/machinery/atmospherics/proc/dispose_network(destroying)
+	SHOULD_CALL_PARENT(TRUE)
+	pipe_flags &= ~PIPE_FLAG_NETWORK_JOINED
+
+//*                  Connections - Abstraction                    *//
+//* These must be overridden for new types with unique behaviors. *//
+
+// dir+layer from index / node is not supported right now due to the lack of need.
+
+/**
+ * Can a specific machinery be our node?
+ *
+ * * This is position-sensitive; both machines must be in where they should be!
+ * * This must be bidirectionally true. Do cheaper checks first so we bail quickly.
+ */
+/obj/machinery/atmospherics/proc/can_be_node(obj/machinery/atmospherics/target)
+	#warn impl
+
+#warn below
+
+/**
+ * Get node at index
+ */
+/obj/machinery/atmospherics/proc/get_node(index)
+	CRASH("unimplemented proc")
+
+/**
+ * Set node at index
+ *
+ * * Should only set variable reference, don't do anything else.
+ */
+/obj/machinery/atmospherics/proc/set_node(obj/machinery/atmospherics/node, index)
+	CRASH("unimplemented proc")
+
+/**
+ * Clear node references
+ */
+
+/**
+ * Get index of a specific node.
+ *
+ * * Generally slow, avoid outside of necessity.
+ */
+/obj/machinery/atmospherics/proc/get_index_of_node(obj/machinery/atmospherics/node)
+	CRASH("unimplemented proc")
+
+/**
+ * Get index of a specific direction and layer.
+ */
+/obj/machinery/atmospherics/proc/get_index(dir, layer)
+	CRASH("unimplemented proc")
+
+/**
+ * Get an attached node on a specific index.
+ */
+/obj/machinery/atmospherics/proc/get_node_of_index(index)
+	CRASH("unimplemented proc")
+
+/**
+ * Get an attached node of a specific direction and layer.
+ */
+/obj/machinery/atmospherics/proc/get_node(dir, layer)
+	CRASH("unimplemented proc")
+
+/**
+ * Get connections from surroundings.
+ *
+ * * For speed, directly sets variables.
+ */
+/obj/machinery/atmospherics/proc/
+
+/**
+ * Gets indexed list of nodes.
+ *
+ * * Generally for debugging only. This is relatively inefficient and slow.
+ */
+/obj/machinery/atmospherics/proc/get_indexed_nodes()
+	CRASH("unimplemented proc")
+
+#warn above
+
+/**
+ * Checks if we're on a pipeline.
+ *
+ * * This is an extremely often called proc. Make it fast.
+ * * This is a core abstraction proc. Make it as safe as possible.
+ * * When in doubt, make it safer than it is fast.
+ */
+/obj/machinery/atmospherics/proc/is_in_pipeline(datum/pipeline/pipeline)
+	CRASH("unimplemented proc")
+
+/**
+ * Destroy pipe networks. Unlike dispose_network(), this leaves pipelines alone.
+ *
+ * * Use this to queue network rebuilds when closing valves.
+ * * While this works when opening valves, you want expand_pipe_networks() for that.
+ */
+/obj/machinery/atmospherics/proc/destroy_pipe_networks()
+	CRASH("unimplemented proc")
+
+/**
+ * Cause pipe networks to try to expand. Unlike dispose_network(), this leaves pipelines alone.
+ *
+ * * Use this to queue network rebuilds when opening valves.
+ * * Do not use this when closing valves. You want destroy_pipe_networks() for that.
+ */
+/obj/machinery/atmospherics/proc/expand_pipe_networks()
+	CRASH("unimplemented proc")
+
+/**
+ * get list of things to expand a pipeline to
+ *
+ * * these are direct, superconducting joints. gas flows across to these instantly.
+ * * pipelines form across to these from this machine.
+ *
+ * What you should do in this;
+ *
+ * * inject your edge air for that pipeline into edge_airs if you have one
+ * * null out your air_temporary if you're a pipe / similar after you return it.
+ * * blindly inject all connected nodes into 'next'. the pipeline side will check it already.
+ *
+ * As an example, you should be doing this.
+ *
+ * ```
+ * . = air_temporary
+ * air_temporary = null
+ * ```
+ *
+ * Do not qdel() the air temporary / returned value. You should have only had one reference to it
+ * anyways; the pipeline takes over processing from there.
+ *
+ * What you should not do in this;
+ *
+ * * manually check if you're already in the pipeline. you did override is_in_pipeline(), right?
+ *   the pipeline will call that on this machine to check for you.
+ * * touch border_members on the pipeline
+ * * touch any *_members on the pipeline.
+ * * touch literally any variable on the pipeline manually
+ *
+ * @params
+ * * source - the machine the expansion is coming from.
+ * * pipeline - the pipeline being propagated
+ * * airs - the edge airs list on the pipeline. you can inject into this if you have an edge air for it.
+ * * next - the list to inject our nodes into.
+ *
+ * @return a /datum/gas_mixture to be assimilated into the pipeline.
+ */
+/obj/machinery/atmospherics/proc/pipeline_expansion(obj/machinery/atmospherics/source, datum/pipeline/pipeline, list/datum/gas_mixture/airs, list/obj/machinery/atmospherics/next)
+	return
+
+/**
+ * Pipenet expansion; only called on border members.
+ *
+ * @params
+ * * pipeline - the source pipeline that is expanding
+ * * next - the list to inject pipelines into
+ */
+/obj/machinery/atmospherics/proc/pipenet_expansion(datum/pipeline/pipeline)
+	return
+
+//*                            Hooks                          *//
+
+/obj/machinery/atmospherics/doMove(atom/dest)
+	// we don't care about result, a failed move is still a sign to rebuild.
+	dispose_network()
+	. = ..()
+	if(isturf(loc))
+		queue_rebuild()
+
+/obj/machinery/atmospherics/grid_move(grid_flags, turf/new_turf)
+	dispose_network()
+	..()
+
+/obj/machinery/atmospherics/grid_after(grid_flags, rotation_angle, list/late_call_hooks)
+	..()
+	queue_rebuild()

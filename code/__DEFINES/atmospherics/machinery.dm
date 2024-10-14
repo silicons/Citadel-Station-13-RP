@@ -1,64 +1,23 @@
-//* Balancing - Efficiency *//
+//* /obj/machinery/atmospherics pipe_static_flags; these never change at runtime *//
 
-/// Global power efficiency of pumps - enforced by transfer helpers, not the machine!
-#define ATMOS_ABSTRACT_PUMP_EFFICIENCY   2.5
-/// Global power efficiency of scrubbing - enforced by transfer helpers, not the machine!
-#define ATMOS_ABSTRACT_SCRUB_EFFICIENCY  2.5
-/// Global power efficiency of filtering - enforced by transfer helpers, not the machine!
-#define ATMOS_ABSTRACT_FILTER_EFFICIENCY 2.5
+/// intended to connect with all layers, check for all instead of just one.
+#define PIPE_STATIC_FLAG_ALL_LAYER (1<<0)
+/// can only be built if nothing else with this flag is on the tile already.
+#define PIPE_STATIC_FLAG_ONE_PER_TURF (1<<1)
+/// can only exist at PIPING_LAYER_DEFAULT
+#define PIPE_STATIC_FLAG_DEFAULT_LAYER_ONLY (1<<2)
+/// north/south east/west doesn't matter, auto normalize on build.
+#define PIPE_STATIC_FLAG_CARDINAL_AUTONORMALIZE (1<<3)
+/// this is a border member.
+///
+/// * makes pipelines query this machine when rebuilding networks
+/// * use this on things like valves or anything that conditionally joins two pipelines
+///   together, but will not allow a pipeline to form across it.
+#define PIPE_STATIC_FLAG_BORDER_MEMBER (1<<4)
 
-//* /obj/machinery/atmospherics/component atmos_component_ui_flags
+//* /obj/machinery/atmospherics pipe_flags; these do change at runtime *//
 
-/// allow toggling power
-#define ATMOS_COMPONENT_UI_TOGGLE_POWER (1<<0)
-/// allow setting power. implies SEE_POWER.
-#define ATMOS_COMPONENT_UI_SET_POWER (1<<1)
-/// render power usage
-#define ATMOS_COMPONENT_UI_SEE_POWER (1<<2)
-
-DEFINE_BITFIELD(atmos_component_ui_flags, list(
-	BITFIELD(ATMOS_COMPONENT_UI_TOGGLE_POWER),
-	BITFIELD(ATMOS_COMPONENT_UI_SET_POWER),
-	BITFIELD(ATMOS_COMPONENT_UI_SEE_POWER),
-))
-
-//* /obj/machinery/portable_atmospherics atmos_portable_ui_flags
-
-/// view flow
-#define ATMOS_PORTABLE_UI_SEE_FLOW (1<<0)
-/// toggle on/off
-#define ATMOS_PORTABLE_UI_TOGGLE_POWER (1<<1)
-/// adjust flow. implies SEE_FLOW.
-#define ATMOS_PORTABLE_UI_SET_FLOW (1<<2)
-/// adjust power. implies SEE_POWER.
-#define ATMOS_PORTABLE_UI_SET_POWER (1<<3)
-/// see power
-#define ATMOS_PORTABLE_UI_SEE_POWER (1<<4)
-
-DEFINE_BITFIELD(atmos_portable_ui_flags, list(
-	BITFIELD(ATMOS_PORTABLE_UI_SEE_FLOW),
-	BITFIELD(ATMOS_PORTABLE_UI_TOGGLE_POWER),
-	BITFIELD(ATMOS_PORTABLE_UI_SET_FLOW),
-	BITFIELD(ATMOS_PORTABLE_UI_SET_POWER),
-	BITFIELD(ATMOS_PORTABLE_UI_SEE_POWER),
-))
-
-//! legacy
-
-// Will not bother pumping or filtering if the gas source as fewer than this amount of moles, to help with performance.
-#define MINIMUM_MOLES_TO_PUMP		0.00001
-#define MINIMUM_MOLES_TO_FILTER		0.00001
-#define MINIMUM_MOLES_TO_SCRUB		0.00001
-// fire sparking
-#define MINIMUM_MOLES_TO_SPARK		0.015
-
-// The flow rate/effectiveness of various atmos devices is limited by their internal volume,
-// so for many atmos devices these will control maximum flow rates in L/s.
-/// Liters.
-#define ATMOS_DEFAULT_VOLUME_PUMP   200
-/// L.
-#define ATMOS_DEFAULT_VOLUME_FILTER 200
-/// L.
-#define ATMOS_DEFAULT_VOLUME_MIXER  200
-/// L.
-#define ATMOS_DEFAULT_VOLUME_PIPE   70
+/// we're currently joined to the network.
+#define PIPE_FLAG_NETWORK_JOINED (1<<0)
+/// queued for rebuild
+#define PIPE_FLAG_REBUILD_QUEUED (1<<1)

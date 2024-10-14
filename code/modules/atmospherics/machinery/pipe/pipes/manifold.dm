@@ -11,7 +11,7 @@
 	name = "pipe manifold"
 	desc = "A manifold composed of regular pipes"
 
-	volume = ATMOS_DEFAULT_VOLUME_PIPE * 1.5
+	volume = ATMOS_DEFAULT_VOLUME_PIPE_PER_SIDE * 3
 
 	dir = SOUTH
 	initialize_directions = EAST|NORTH|WEST

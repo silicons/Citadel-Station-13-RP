@@ -65,19 +65,6 @@
 /// Additional information of the tank.
 #define TANK_RESULTS_MISC 2
 
-//PIPE FLAGS
-/// intended to connect with all layers, check for all instead of just one.
-#define PIPING_ALL_LAYER (1<<0)
-/// can only be built if nothing else with this flag is on the tile already.
-#define PIPING_ONE_PER_TURF (1<<1)
-/// can only exist at PIPING_LAYER_DEFAULT
-#define PIPING_DEFAULT_LAYER_ONLY (1<<2)
-/// north/south east/west doesn't matter, auto normalize on build.
-#define PIPING_CARDINAL_AUTONORMALIZE (1<<3)
-/// intended to connect with everything, both layers and colors
-//#define PIPING_ALL_COLORS (1<<4)
-/// can bridge over pipenets
-//#define PIPING_BRIDGE (1<<5)
 
 // Ventcrawling bitflags, handled in var/vent_movement
 ///Allows for ventcrawling to occur. All atmospheric machines have this flag on by default. Cryo is the exception

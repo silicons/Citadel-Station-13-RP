@@ -10,9 +10,10 @@
 	desc = "An adapter for regular, supply and scrubbers pipes"
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL|CONNECT_TYPE_AUX
 	icon_state = "map_universal"
-	pipe_flags = PIPING_ALL_LAYER|PIPING_CARDINAL_AUTONORMALIZE
+	pipe_flags = PIPE_STATIC_FLAG_ALL_LAYER|PIPE_STATIC_FLAG_CARDINAL_AUTONORMALIZE
 	construction_type = /obj/item/pipe/binary
 	pipe_state = "universal"
+	volume = ATMOS_DEFAULT_VOLUME_PIPE_PER_SIDE * 5 * 2
 
 	var/obj/machinery/atmospherics/node_f1
 	var/obj/machinery/atmospherics/node_f2
@@ -60,7 +61,7 @@
 	desc = "An adapter for regular, supply and scrubbers pipes"
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL|CONNECT_TYPE_AUX
 	icon_state = "map_universal"
-	pipe_flags = PIPING_ALL_LAYER|PIPING_CARDINAL_AUTONORMALIZE
+	pipe_flags = PIPE_STATIC_FLAG_ALL_LAYER|PIPE_STATIC_FLAG_CARDINAL_AUTONORMALIZE
 	construction_type = /obj/item/pipe/binary
 	pipe_state = "universal"
 

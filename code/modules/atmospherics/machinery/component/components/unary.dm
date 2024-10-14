@@ -2,20 +2,16 @@
 	dir = SOUTH
 	initialize_directions = SOUTH
 	construction_type = /obj/item/pipe/directional
-	pipe_flags = PIPING_DEFAULT_LAYER_ONLY|PIPING_ONE_PER_TURF
+	pipe_flags = PIPE_STATIC_FLAG_DEFAULT_LAYER_ONLY|PIPE_STATIC_FLAG_ONE_PER_TURF
 	//layer = TURF_LAYER+0.1
 
-	var/datum/gas_mixture/air_contents
+	var/obj/machinery/atmospherics/node1
 
-	var/obj/machinery/atmospherics/node
+	var/datum/gas_mixture/air1
 
-	var/datum/pipe_network/network
+	var/datum/pipeline/line1
 
 	var/welded = 0 //defining this here for ventcrawl stuff
-
-/obj/machinery/atmospherics/component/unary/Initialize(mapload)
-	air_contents = new(200)
-	return ..()
 
 /obj/machinery/atmospherics/component/unary/init_dir()
 	initialize_directions = dir
@@ -60,7 +56,7 @@
 
 /obj/machinery/atmospherics/component/unary/build_network()
 	if(!network && node)
-		network = new /datum/pipe_network()
+		network = new /datum/pipenet()
 		network.normal_members += src
 		network.build_network(node, src)
 
@@ -103,12 +99,15 @@
 /obj/machinery/atmospherics/component/unary/proc/check_for_obstacles()
 	for(var/obj/machinery/atmospherics/M in loc)
 		if(M == src) continue
-		if((M.pipe_flags & pipe_flags & PIPING_ONE_PER_TURF))	//Only one dense/requires density object per tile, eg connectors/cryo/heater/coolers.
+		if((M.pipe_flags & pipe_flags & PIPE_STATIC_FLAG_ONE_PER_TURF))	//Only one dense/requires density object per tile, eg connectors/cryo/heater/coolers.
 			visible_message("<span class='warning'>\The [src]'s cannot be connected, something is hogging the tile!</span>")
 			return TRUE
-		if((M.piping_layer != piping_layer) && !((M.pipe_flags | pipe_flags) & PIPING_ALL_LAYER)) // Pipes on different layers can't block each other unless they are ALL_LAYER
+		if((M.piping_layer != piping_layer) && !((M.pipe_flags | pipe_flags) & PIPE_STATIC_FLAG_ALL_LAYER)) // Pipes on different layers can't block each other unless they are ALL_LAYER
 			continue
 		if(M.get_init_dirs() & get_init_dirs())	// matches at least one direction on either type of pipe
 			visible_message("<span class='warning'>\The [src]'s connector can't be connected, there is already a pipe at that location!</span>")
 			return TRUE
 	return FALSE
+
+/obj/machinery/atmospherics/component/unary/create_airs()
+	air1 = new(default_volume)

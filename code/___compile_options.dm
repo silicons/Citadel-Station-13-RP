@@ -168,7 +168,16 @@
 //? Gasmixtures
 
 /// Enable general assertions.
-#define CF_ATMOS_DEBUG_ASSERTIONS
+#define CF_ATMOS_GASMIXTURE_ASSERTIONS
+
+//? Machinery
+
+/// Enable visualization of pipenets
+#define CF_ATMOS_PIPENET_VISUALS
+
+#ifdef CF_ATMOS_PIPENET_VISUALS
+	#warn Visualization of pipelines / pipenets enabled.
+#endif
 
 
 //? ZAS (Environmental)

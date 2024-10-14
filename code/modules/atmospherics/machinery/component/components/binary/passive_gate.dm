@@ -12,6 +12,7 @@
 	name = "pressure regulator"
 	desc = "A one-way air valve that can be used to regulate input or output pressure, and flow rate. Does not require power."
 	hides_underfloor_underlays = TRUE
+	pipe_static_flags = NONE
 
 	use_power = USE_POWER_OFF
 

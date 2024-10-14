@@ -15,8 +15,8 @@
 	var/openDuringInit = 0
 
 
-	var/datum/pipe_network/network_node1
-	var/datum/pipe_network/network_node2
+	var/datum/pipenet/network_node1
+	var/datum/pipenet/network_node2
 
 /obj/machinery/atmospherics/valve/open
 	open = 1
@@ -170,12 +170,12 @@
 
 /obj/machinery/atmospherics/valve/build_network()
 	if(!network_node1 && node1)
-		network_node1 = new /datum/pipe_network()
+		network_node1 = new /datum/pipenet()
 		network_node1.normal_members += src
 		network_node1.build_network(node1, src)
 
 	if(!network_node2 && node2)
-		network_node2 = new /datum/pipe_network()
+		network_node2 = new /datum/pipenet()
 		network_node2.normal_members += src
 		network_node2.build_network(node2, src)
 

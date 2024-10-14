@@ -175,7 +175,7 @@ var/list/ventcrawl_machinery = list(
 /mob/living/proc/add_ventcrawl(obj/machinery/atmospherics/starting_machine)
 	is_ventcrawling = 1
 	//candrop = 0
-	var/datum/pipe_network/network = starting_machine.return_network(starting_machine)
+	var/datum/pipenet/network = starting_machine.return_network(starting_machine)
 	if(!network)
 		return
 	for(var/datum/pipeline/pipeline in network.line_members)

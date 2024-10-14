@@ -4,17 +4,14 @@
 	use_power = USE_POWER_IDLE
 	layer = EXPOSED_ATMOS_LAYER
 
+	var/obj/machinery/atmospherics/node1
+	var/obj/machinery/atmospherics/node2
+
 	var/datum/gas_mixture/air1
 	var/datum/gas_mixture/air2
 
-	var/datum/pipe_network/network1
-	var/datum/pipe_network/network2
-
-/obj/machinery/atmospherics/component/binary/Initialize(mapload)
-	air1 = new(200)
-	air2 = new(200)
-
-	return ..()
+	var/datum/pipeline/line1
+	var/datum/pipeline/line2
 
 /obj/machinery/atmospherics/component/binary/init_dir()
 	switch(dir)
@@ -73,12 +70,12 @@
 
 /obj/machinery/atmospherics/component/binary/build_network()
 	if(!network1 && node1)
-		network1 = new /datum/pipe_network()
+		network1 = new /datum/pipenet()
 		network1.normal_members += src
 		network1.build_network(node1, src)
 
 	if(!network2 && node2)
-		network2 = new /datum/pipe_network()
+		network2 = new /datum/pipenet()
 		network2.normal_members += src
 		network2.build_network(node2, src)
 
@@ -125,3 +122,7 @@
 	update_underlays()
 
 	return null
+	
+/obj/machinery/atmospherics/component/binary/create_airs()
+	air1 = new(default_volume)
+	air2 = new(default_volume)

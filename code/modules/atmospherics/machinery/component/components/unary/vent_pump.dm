@@ -17,6 +17,7 @@
 	tgui_interface = "AtmosVentPump"
 	atmos_component_ui_flags = NONE
 	hides_underfloor_underlays = TRUE
+	pipe_static_flags = PIPE_STATIC_FLAG_ONE_PER_TURF
 
 	/// registered area
 	var/area/registered_area

@@ -16,7 +16,7 @@
 	hides_underfloor_update_icon = TRUE
 	hides_underfloor_defaulting = TRUE
 
-	pipe_flags = NONE // Does not have PIPING_DEFAULT_LAYER_ONLY flag.
+	pipe_flags = NONE // Does not have PIPE_STATIC_FLAG_DEFAULT_LAYER_ONLY flag.
 
 	#ifdef IN_MAP_EDITOR
 	alpha = 128 // Set for the benefit of mapping.
@@ -29,9 +29,12 @@
 	 * * Do not under any circumstances mutate this gas mixture, only read from it.
 	 */
 	var/datum/gas_mixture/rebuild_air_immutable
+	/**
+	 * Our pipeline.
+	 */
 	var/datum/pipeline/pipeline
-
-	var/volume = 0
+	/// Our volume, in liters.
+	var/volume = ATMOS_DEFAULT_VOLUME_PIPE_PER_SIDE
 
 /obj/machinery/atmospherics/pipe/Initialize(mapload, newdir)
 	// pipes are always underfloor if inside a wall
@@ -40,51 +43,23 @@
 		hides_underfloor = OBJ_UNDERFLOOR_ALWAYS
 	return ..()
 
-/obj/machinery/atmospherics/pipe/proc/pipeline_expansion()
-	return null
+/obj/machinery/atmospherics/pipe/examine(mob/user, dist)
+	. = ..()
+	. += SPAN_NOTICE("This one has a volume of [volume]L.")
 
 // For pipes this is the same as pipeline_expansion()
 /obj/machinery/atmospherics/pipe/get_neighbor_nodes_for_init()
 	return pipeline_expansion()
 
-/obj/machinery/atmospherics/pipe/return_air()
-	if(!parent)
-		parent = new /datum/pipeline()
-		parent.build_pipeline(src)
-
-	return parent.air
-
-/obj/machinery/atmospherics/pipe/build_network()
-	if(!parent)
-		parent = new /datum/pipeline()
-		parent.build_pipeline(src)
-
-	return parent.return_network()
-
-/obj/machinery/atmospherics/pipe/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
-	if(!parent)
-		parent = new /datum/pipeline()
-		parent.build_pipeline(src)
-
-	return parent.network_expand(new_network, reference)
-
-/obj/machinery/atmospherics/pipe/return_network(obj/machinery/atmospherics/reference)
-	if(!parent)
-		parent = new /datum/pipeline()
-		parent.build_pipeline(src)
-
-	return parent.return_network(reference)
-
 /obj/machinery/atmospherics/pipe/Destroy()
-	QDEL_NULL(parent)
-	if(air_temporary)
-		loc.assume_air(air_temporary)
 	for(var/obj/machinery/meter/meter in loc)
 		if(meter.target == src)
 			var/obj/item/pipe_meter/PM = new /obj/item/pipe_meter(loc)
 			meter.transfer_fingerprints_to(PM)
 			qdel(meter)
 	. = ..()
+
+#warn vent air to turf on deconstruct, but not Destroy()
 
 /obj/machinery/atmospherics/pipe/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	if (istype(src, /obj/machinery/atmospherics/pipe/tank))
@@ -132,15 +107,17 @@
 	else
 		return pipe_color
 
-/obj/machinery/atmospherics/pipe/process(delta_time)
-	if(!parent) //This should cut back on the overhead calling build_network thousands of times per cycle
-		..()
-	else
-		. = PROCESS_KILL
-
 /obj/machinery/atmospherics/pipe/attack_ghost(mob/user)
 	. = ..()
 	if(user.client && user.client.inquisitive_ghost)
 		analyze_gases_ghost(src, user)
 	else
-		to_chat(user, "<span class='warning'>[src] doesn't have a pipenet, which is probably a bug.</span>")
+		to_chat(user, "<span class='warning'>[src] doesn't have a pipenet, which is probably a bug if this doesn't stop showing up in the next few seconds.</span>")
+
+//*                  Init / Build - Abstraction                   *//
+
+#warn impl
+
+//*                  Connections - Abstraction                    *//
+
+#warn impl

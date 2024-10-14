@@ -173,7 +173,7 @@
 	anchored = 1 //Prevent movement
 
 	//Actually enforce the air sharing
-	var/datum/pipe_network/network = connected_port.return_network(src)
+	var/datum/pipenet/network = connected_port.return_network(src)
 	if(network && !network.gases.Find(air_contents))
 		network.gases += air_contents
 		network.update = 1
@@ -184,7 +184,7 @@
 	if(!connected_port)
 		return 0
 
-	var/datum/pipe_network/network = connected_port.return_network(src)
+	var/datum/pipenet/network = connected_port.return_network(src)
 	if(network)
 		network.gases -= air_contents
 
@@ -199,7 +199,7 @@
 	if(!connected_port)
 		return
 
-	var/datum/pipe_network/network = connected_port.return_network(src)
+	var/datum/pipenet/network = connected_port.return_network(src)
 	if (network)
 		network.update = 1
 

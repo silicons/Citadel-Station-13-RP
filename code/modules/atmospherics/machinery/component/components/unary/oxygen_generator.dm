@@ -11,6 +11,8 @@
 
 	var/oxygen_content = 10
 
+	pipe_static_flags = PIPE_STATIC_FLAG_ONE_PER_TURF
+
 /obj/machinery/atmospherics/component/unary/oxygen_generator/update_icon()
 	if(node)
 		icon_state = "intact_[on?("on"):("off")]"

@@ -235,7 +235,7 @@
 
 	if(connected_port && connected_port.network.line_members.len)
 		var/list/members = list()
-		var/datum/pipe_network/Net = connected_port.network
+		var/datum/pipenet/Net = connected_port.network
 		members = Net.line_members.Copy()
 
 		for(var/datum/pipeline/Line in members)

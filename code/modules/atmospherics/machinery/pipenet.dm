@@ -1,7 +1,9 @@
-var/global/list/datum/pipe_network/pipe_networks = list()	// TODO - Move into SSmachines
+#warn CF_ATMOS_PIPENET_VISUALS
+
+var/global/list/datum/pipenet/pipe_networks = list()	// TODO - Move into SSmachines
 
 // todo: /datum/pipenet
-/datum/pipe_network
+/datum/pipenet
 	var/list/datum/gas_mixture/gases = list() //All of the gas_mixtures continuously connected in this network
 	var/volume = 0	//caches the total volume for atmos machines to use in gas calculations
 
@@ -12,7 +14,7 @@ var/global/list/datum/pipe_network/pipe_networks = list()	// TODO - Move into SS
 	var/update = 1
 	//var/datum/gas_mixture/air_transient = null
 
-/datum/pipe_network/Destroy()
+/datum/pipenet/Destroy()
 	STOP_PROCESSING_PIPENET(src)
 	for(var/datum/pipeline/line_member in line_members)
 		line_member.network = null
@@ -21,7 +23,7 @@ var/global/list/datum/pipe_network/pipe_networks = list()	// TODO - Move into SS
 	gases.Cut()  // Do not qdel the gases, we don't own them
 	return ..()
 
-/datum/pipe_network/process(delta_time)
+/datum/pipenet/process(delta_time)
 	//Equalize gases amongst pipe if called for
 	if(update)
 		update = 0
@@ -33,7 +35,7 @@ var/global/list/datum/pipe_network/pipe_networks = list()	// TODO - Move into SS
 	//for(var/datum/pipeline/line_member in line_members)
 	//	line_member.process()
 
-/datum/pipe_network/proc/build_network(obj/machinery/atmospherics/start_normal, obj/machinery/atmospherics/reference)
+/datum/pipenet/proc/build_network(obj/machinery/atmospherics/start_normal, obj/machinery/atmospherics/reference)
 	//Purpose: Generate membership roster
 	//Notes: Assuming that members will add themselves to appropriate roster in network_expand()
 
@@ -50,7 +52,7 @@ var/global/list/datum/pipe_network/pipe_networks = list()	// TODO - Move into SS
 	else
 		qdel(src)
 
-/datum/pipe_network/proc/merge(datum/pipe_network/giver)
+/datum/pipenet/proc/merge(datum/pipe_network/giver)
 	if(giver==src) return 0
 
 	normal_members |= giver.normal_members
@@ -67,7 +69,7 @@ var/global/list/datum/pipe_network/pipe_networks = list()	// TODO - Move into SS
 	update_network_gases()
 	return 1
 
-/datum/pipe_network/proc/update_network_gases()
+/datum/pipenet/proc/update_network_gases()
 	//Go through membership roster and make sure gases is up to date
 
 	gases = list()
@@ -83,5 +85,5 @@ var/global/list/datum/pipe_network/pipe_networks = list()	// TODO - Move into SS
 	for(var/datum/gas_mixture/air in gases)
 		volume += air.volume
 
-/datum/pipe_network/proc/reconcile_air()
+/datum/pipenet/proc/reconcile_air()
 	equalize_gases(gases)

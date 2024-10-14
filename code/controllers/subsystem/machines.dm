@@ -3,13 +3,40 @@
 #define SSMACHINES_POWERNETS     3
 #define SSMACHINES_POWER_OBJECTS 4
 
-//
-// SSmachines subsystem - Processing machines, pipenets, and powernets!
-//
-// Implementation Plan:
-// PHASE 1 - Add subsystem using the existing global list vars
-// PHASE 2 - Move the global list vars into the subsystem.
-
+/**
+ * ## Machinery Subsystem
+ *
+ * "What in the world is going on here?"
+ *
+ * The game's machinery need to run lockstepped unless specially designed to support
+ * multiple tick timings.
+ *
+ * As an example, anything interacting with radiation must have their own orchestration,
+ * as radiation doesn't tick at the same rate as machines do.
+ *
+ * At time of writing, these things are lockstepped (with the given reasons);
+ *
+ * * powernets: machines must be lockstepped with this for power processing to work,
+ *              as powernets are per-tick datastructures
+ * * pipenets: it's frankly easier for all involved to have pipenets on machines instead of
+ *             atmos environmental subsystem, as they often interact with machines
+ *             (and therefore the powernet)
+ * * machines: self-explanatory
+ *
+ * These things interact specially.
+ * * powernets are rebuilt at start of a cycle
+ * * pipelines and pipenets are rebuilt at the start of a cycle
+ * * if a powernet / pipeline / pipenet is torn down mid-cycle, things should simply
+ *   yield until it's rebuilt. we do not want to have weird behavior mid-cycle,
+ *   and yielding for a tick and making things slower is better than eagerly rebuilding it
+ *   and potentially having weird race conditions from people wrenching / unwrenching pipes.
+ * * pipenets are always built after pipelines, as pipelines are static until a member machine
+ *   is removed (triggering a deletion and rebuild), while pipenets are static until a pipeline
+ *   inside it is deleted / rebuilt.
+ *
+ * TODO: variable tick system for things that need to run faster / slower like gyrotrons?
+ *       or, maybe another way instead, as we don't want to bloat the subsystem.
+ */
 SUBSYSTEM_DEF(machines)
 	name = "Machines"
 	priority = FIRE_PRIORITY_MACHINES
@@ -31,6 +58,12 @@ SUBSYSTEM_DEF(machines)
 	// var/list/power_objects = list()
 
 	var/list/current_run = list()
+
+	/// queued atmos machinery rebuilds
+	var/static/list/obj/machinery/atmospherics/queued_atmos_rebuilds = list()
+	/// queued atmos pipenet rebuilds
+	var/static/list/datum/pipeline/queued_pipeline_rebuilds = list()
+	#warn impl these two; build at init too
 
 /datum/controller/subsystem/machines/stat_entry()
 	var/msg = list(
@@ -96,7 +129,7 @@ SUBSYSTEM_DEF(machines)
 	var/list/current_run = src.current_run
 	var/dt = nominal_dt_s
 	while(current_run.len)
-		var/datum/pipe_network/PN = current_run[current_run.len]
+		var/datum/pipenet/PN = current_run[current_run.len]
 		current_run.len--
 		if(istype(PN) && !QDELETED(PN))
 			PN.process(dt)

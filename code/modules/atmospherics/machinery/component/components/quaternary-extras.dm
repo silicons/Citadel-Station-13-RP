@@ -28,7 +28,7 @@
 	var/transfer_moles = 0
 	var/datum/gas_mixture/air
 	var/obj/machinery/atmospherics/node
-	var/datum/pipe_network/network
+	var/datum/pipenet/network
 
 /datum/omni_port/New(var/obj/machinery/atmospherics/component/quaternary/M, var/direction = NORTH)
 	..()

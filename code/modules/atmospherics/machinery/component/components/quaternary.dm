@@ -7,9 +7,24 @@
 	icon_state = "base"
 	use_power = USE_POWER_IDLE
 	initialize_directions = 0
-	pipe_flags = PIPING_DEFAULT_LAYER_ONLY | PIPING_ONE_PER_TURF
+	pipe_flags = PIPE_STATIC_FLAG_DEFAULT_LAYER_ONLY | PIPE_STATIC_FLAG_ONE_PER_TURF
 	construction_type = /obj/item/pipe/quaternary
 	hides_underfloor_underlays = TRUE
+
+	var/obj/machinery/atmospherics/node1
+	var/obj/machinery/atmospherics/node2
+	var/obj/machinery/atmospherics/node3
+	var/obj/machinery/atmospherics/node4
+
+	var/datum/gas_mixture/air1
+	var/datum/gas_mixture/air2
+	var/datum/gas_mixture/air3
+	var/datum/gas_mixture/air4
+
+	var/datum/pipeline/line1
+	var/datum/pipeline/line2
+	var/datum/pipeline/line3
+	var/datum/pipeline/line4
 
 	var/configuring = 0
 	//var/target_pressure = ONE_ATMOSPHERE	//a base type as abstract as this should NOT be making these kinds of assumptions
@@ -265,7 +280,7 @@
 /obj/machinery/atmospherics/component/quaternary/build_network()
 	for(var/datum/omni_port/P in ports)
 		if(!P.network && P.node)
-			P.network = new /datum/pipe_network()
+			P.network = new /datum/pipenet()
 			P.network.normal_members += src
 			P.network.build_network(P.node, src)
 
@@ -305,3 +320,9 @@
 	update_ports()
 
 	return null
+
+/obj/machinery/atmospherics/component/quaternary/create_airs()
+	air1 = new(default_volume)
+	air2 = new(default_volume)
+	air3 = new(default_volume)
+	air4 = new(default_volume)
