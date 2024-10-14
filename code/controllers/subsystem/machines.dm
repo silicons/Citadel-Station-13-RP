@@ -59,6 +59,11 @@ SUBSYSTEM_DEF(machines)
 
 	var/list/current_run = list()
 
+	//* pipes *//
+	/// all pipenets
+	var/static/list/datum/pipenet/pipenets = list()
+
+	//* rebuild queues *//
 	/// queued atmos machinery rebuilds
 	var/static/list/obj/machinery/atmospherics/queued_atmos_rebuilds = list()
 	/// queued atmos pipenet rebuilds

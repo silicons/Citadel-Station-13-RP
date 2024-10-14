@@ -1,18 +1,10 @@
 #warn CF_ATMOS_PIPENET_VISUALS
 
-var/global/list/datum/pipenet/pipe_networks = list()	// TODO - Move into SSmachines
-
-// todo: /datum/pipenet
 /datum/pipenet
-	var/list/datum/gas_mixture/gases = list() //All of the gas_mixtures continuously connected in this network
-	var/volume = 0	//caches the total volume for atmos machines to use in gas calculations
-
-	var/list/obj/machinery/atmospherics/normal_members = list()
-	var/list/datum/pipeline/line_members = list()
-		//membership roster to go through for updates and what not
-
-	var/update = 1
-	//var/datum/gas_mixture/air_transient = null
+	/// all pipelines in us
+	var/list/datum/pipeline/pipelines = list()
+	/// are we queued for update?
+	var/update = TRUE
 
 /datum/pipenet/Destroy()
 	STOP_PROCESSING_PIPENET(src)
@@ -24,16 +16,8 @@ var/global/list/datum/pipenet/pipe_networks = list()	// TODO - Move into SSmachi
 	return ..()
 
 /datum/pipenet/process(delta_time)
-	//Equalize gases amongst pipe if called for
-	if(update)
-		update = 0
-		reconcile_air() //equalize_gases(gases)
-
-	//listclearnulls(leaks) // Let's not have forever-seals.
-
-	//Give pipelines their process call for pressure checking and what not. Have to remove pressure checks for the time being as pipes dont radiate heat - Mport
-	//for(var/datum/pipeline/line_member in line_members)
-	//	line_member.process()
+	update = FALSE
+	reconcile_air()
 
 /datum/pipenet/proc/build_network(obj/machinery/atmospherics/start_normal, obj/machinery/atmospherics/reference)
 	//Purpose: Generate membership roster
@@ -85,5 +69,66 @@ var/global/list/datum/pipenet/pipe_networks = list()	// TODO - Move into SSmachi
 	for(var/datum/gas_mixture/air in gases)
 		volume += air.volume
 
+
+//*          Reconciliation        *//
+
+#define PIPENET_RECONCILE_VOLUME_SCALER (2**16)
+
+/**
+ * equalize all airs inside us
+ *
+ * * process reactions as well
+ * * does not take group_multiplier into account, as we're entirely operating in pipes!
+ */
 /datum/pipenet/proc/reconcile_air()
-	equalize_gases(gases)
+	// special equalization-reaction proc
+	var/list/gases = list()
+	var/thermal_energy = 0
+	var/heat_capacity = 0
+	var/volume = 0
+
+	var/list/datum/gas_mixture/collected = list()
+
+	// collect
+	for(var/datum/pipeline/pipeline in pipelines)
+		var/datum/gas_mixture/line_air = pipeline.line_air
+		var/line_heat_capacity = line_air.heat_capacity_singular()
+		collected += line_air
+		for(var/gas in line_air.gas)
+			gases[gas] += line_air.gas
+		thermal_energy += line_heat_capacity * line_air.temperature
+		heat_capacity += line_heat_capacity
+		volume += line_air.volume
+
+		for(var/datum/gas_mixture/mixture in pipeline.edge_airs)
+			var/mixture_heat_capacity = mixture.heat_capacity_singular()
+			collected += mixture
+			for(var/gas in mixture.gas)
+				gases[gas] += mixture.gas[gas]
+			thermal_energy += mixture_heat_capacity * mixture.temperature
+			heat_capacity += mixture_heat_capacity
+			volume += mixture.volume
+
+	// if we're empty, bail
+	if(!heat_capacity)
+		return
+
+	// combine
+	var/datum/gas_mixture/total = new(volume)
+	total.gas = collected
+	total.temperature = thermal_energy / heat_capacity
+
+	// react
+	total.react()
+
+	// average out gases so that we can multiply it out later with one operation
+	for(var/gas in total.gas)
+		total.gas[gas] /= volume
+
+	// send back out to collected
+	for(var/datum/gas_mixture/out_air in collected)
+		out_air.gas = total.gas.Copy()
+		out_air.temperature = total.temperature
+		out_air.multiply(out_air.volume)
+
+#undef PIPENET_RECONCILE_VOLUME_SCALER
