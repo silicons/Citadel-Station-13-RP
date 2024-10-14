@@ -56,9 +56,9 @@
 		flow_current = (1 - air1.total_moles / old_mols) * air1.volume
 
 		// todo: better API for this
-		network1?.update = TRUE
-		network2?.update = TRUE
-		network3?.update = TRUE
+		if(line1 && mixing_inputs[air1] && (line1.network?.update = TRUE)) {}
+		if(line2 && mixing_inputs[air2] && (line2.network?.update = TRUE)) {}
+		line3?.network?.update = TRUE
 
 	if(power_current)
 		use_power(power_current)

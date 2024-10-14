@@ -72,17 +72,17 @@
 	// this is the data which will be sent to the ui
 	var/data[0]
 	data["on"] = use_power ? 1 : 0
-	data["gasPressure"] = round(air_contents.return_pressure())
-	data["gasTemperature"] = round(air_contents.temperature)
+	data["gasPressure"] = round(air1.return_pressure())
+	data["gasTemperature"] = round(air1.temperature)
 	data["minGasTemperature"] = 0
 	data["maxGasTemperature"] = round(T20C+500)
 	data["targetGasTemperature"] = round(set_temperature)
 	data["powerSetting"] = power_setting_legacy
 
 	var/temp_class = "good"
-	if(air_contents.temperature > (T0C - 20))
+	if(air1.temperature > (T0C - 20))
 		temp_class = "bad"
-	else if(air_contents.temperature < (T0C - 20) && air_contents.temperature > (T0C - 100))
+	else if(air1.temperature < (T0C - 20) && air1.temperature > (T0C - 100))
 		temp_class = "average"
 	data["gasTemperatureClass"] = temp_class
 
@@ -115,17 +115,17 @@
 		update_icon()
 		return
 
-	if(network && air_contents.temperature > set_temperature)
+	if(network && air1.temperature > set_temperature)
 		cooling = 1
 
-		var/heat_transfer = max( -air_contents.get_thermal_energy_change(set_temperature - 5), 0 )
+		var/heat_transfer = max( -air1.get_thermal_energy_change(set_temperature - 5), 0 )
 		//Assume the heat is being pumped into the hull which is fixed at heatsink_temperature
 		//not /really/ proper thermodynamics but whatever
 		CACHE_VSC_PROP(atmos_vsc, /atmos/thermomachine_cheat_factor, cheat_factor)
-		var/cop = cheat_factor * air_contents.temperature/heatsink_temperature	//heatpump coefficient of performance from thermodynamics -> power used = heat_transfer/cop
+		var/cop = cheat_factor * air1.temperature/heatsink_temperature	//heatpump coefficient of performance from thermodynamics -> power used = heat_transfer/cop
 		heat_transfer = min(heat_transfer, cop * power_rating)	//limit heat transfer by available power
 
-		var/removed = -air_contents.adjust_thermal_energy(-heat_transfer)		//remove the heat
+		var/removed = -air1.adjust_thermal_energy(-heat_transfer)		//remove the heat
 		if(debug)
 			visible_message("[src]: Removing [removed] W.")
 
@@ -154,7 +154,7 @@
 
 	max_power_rating = initial(max_power_rating) * cap_rating / 2			//more powerful
 	heatsink_temperature = initial(heatsink_temperature) / ((manip_rating + bin_rating) / 2)	//more efficient
-	air_contents.volume = max(initial(internal_volume) - 200, 0) + 200 * bin_rating
+	air1.volume = max(initial(internal_volume) - 200, 0) + 200 * bin_rating
 	set_power_level(power_setting_legacy)
 
 /obj/machinery/atmospherics/component/unary/freezer/proc/set_power_level(var/new_power_setting_legacy)

@@ -57,10 +57,10 @@
 		update_icon()
 		return
 
-	if(network && air_contents.total_moles && air_contents.temperature < set_temperature)
+	if(network && air1.total_moles && air1.temperature < set_temperature)
 		CACHE_VSC_PROP(atmos_vsc, /atmos/thermomachine_cheat_factor, cheat_factor)
-		var/limit = clamp(air_contents.heat_capacity() * (set_temperature - air_contents.temperature), 0, power_rating * cheat_factor)
-		air_contents.adjust_thermal_energy(limit)
+		var/limit = clamp(air1.heat_capacity() * (set_temperature - air1.temperature), 0, power_rating * cheat_factor)
+		air1.adjust_thermal_energy(limit)
 		use_power(power_rating)
 
 		heating = 1
@@ -86,15 +86,15 @@
 	var/list/data = list()
 
 	data["on"] = use_power ? 1 : 0
-	data["gasPressure"] = round(air_contents.return_pressure())
-	data["gasTemperature"] = round(air_contents.temperature)
+	data["gasPressure"] = round(air1.return_pressure())
+	data["gasTemperature"] = round(air1.temperature)
 	data["minGasTemperature"] = 0
 	data["maxGasTemperature"] = round(max_temperature)
 	data["targetGasTemperature"] = round(set_temperature)
 	data["powerSetting"] = power_setting_legacy
 
 	var/temp_class = "average"
-	if(air_contents.temperature > (T20C+40))
+	if(air1.temperature > (T20C+40))
 		temp_class = "bad"
 	data["gasTemperatureClass"] = temp_class
 
@@ -133,7 +133,7 @@
 
 	max_power_rating = initial(max_power_rating) * cap_rating / 2
 	max_temperature = max(initial(max_temperature) - T20C, 0) * ((bin_rating * 4 + cap_rating) / 5) + T20C
-	air_contents.volume = max(initial(internal_volume) - 200, 0) + 200 * bin_rating
+	air1.volume = max(initial(internal_volume) - 200, 0) + 200 * bin_rating
 	set_power_level(power_setting_legacy)
 
 /obj/machinery/atmospherics/component/unary/heater/proc/set_power_level(var/new_power_setting_legacy)

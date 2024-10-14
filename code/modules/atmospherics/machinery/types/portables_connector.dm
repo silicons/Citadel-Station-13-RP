@@ -21,20 +21,6 @@
 	var/on = 0
 	use_power = USE_POWER_OFF
 
-/obj/machinery/atmospherics/portables_connector/fuel
-	icon_state = "map_connector-fuel"
-	pipe_state = "connector-fuel"
-	icon_connect_type = "-fuel"
-	pipe_flags = PIPE_STATIC_FLAG_ONE_PER_TURF
-	connect_types = CONNECT_TYPE_FUEL
-
-/obj/machinery/atmospherics/portables_connector/aux
-	icon_state = "map_connector-aux"
-	pipe_state = "connector-aux"
-	icon_connect_type = "-aux"
-	pipe_flags = PIPE_STATIC_FLAG_ONE_PER_TURF
-	connect_types = CONNECT_TYPE_AUX
-
 /obj/machinery/atmospherics/portables_connector/init_dir()
 	initialize_directions = dir
 
@@ -162,3 +148,17 @@
 			"<span class='notice'>You have unfastened \the [src].</span>", \
 			"You hear a ratchet.")
 		deconstruct()
+
+/obj/machinery/atmospherics/portables_connector/fuel
+	icon_state = "map_connector-fuel"
+	pipe_state = "connector-fuel"
+	icon_connect_type = "-fuel"
+	pipe_flags = PIPE_STATIC_FLAG_ONE_PER_TURF
+	connect_types = CONNECT_TYPE_FUEL
+
+/obj/machinery/atmospherics/portables_connector/aux
+	icon_state = "map_connector-aux"
+	pipe_state = "connector-aux"
+	icon_connect_type = "-aux"
+	pipe_flags = PIPE_STATIC_FLAG_ONE_PER_TURF
+	connect_types = CONNECT_TYPE_AUX

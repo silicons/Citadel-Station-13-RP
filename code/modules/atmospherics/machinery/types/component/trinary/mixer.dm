@@ -61,14 +61,10 @@
 	if (transfer_moles > MINIMUM_MOLES_TO_FILTER)
 		power_draw = mix_gas(src, mixing_inputs, air3, transfer_moles, power_rating)
 
-		if(network1 && mixing_inputs[air1])
-			network1.update = 1
-
-		if(network2 && mixing_inputs[air2])
-			network2.update = 1
-
-		if(network3)
-			network3.update = 1
+		// todo: better API for this
+		if(line1 && mixing_inputs[air1] && (line1.network?.update = TRUE)) {}
+		if(line2 && mixing_inputs[air2] && (line2.network?.update = TRUE)) {}
+		line3?.network?.update = TRUE
 
 	if (power_draw >= 0)
 		last_power_draw_legacy = power_draw

@@ -66,13 +66,13 @@
 		if(occupant.stat != 2)
 			process_occupant()
 
-	if(air_contents)
-		temperature_archived = air_contents.temperature
+	if(air1)
+		temperature_archived = air1.temperature
 		heat_gas_contents()
 		expel_gas()
 		update_icon()
 
-	if(abs(temperature_archived-air_contents.temperature) > 1)
+	if(abs(temperature_archived-air1.temperature) > 1)
 		network.update = TRUE
 
 	return TRUE
@@ -120,11 +120,11 @@
 		occupantData["bodyTemperature"] = occupant.bodytemperature
 	data["occupant"] = occupantData;
 
-	data["cellTemperature"] = round(air_contents.temperature)
+	data["cellTemperature"] = round(air1.temperature)
 	data["cellTemperatureStatus"] = "good"
-	if(air_contents.temperature > T0C) // if greater than 273.15 kelvin (0 celcius)
+	if(air1.temperature > T0C) // if greater than 273.15 kelvin (0 celcius)
 		data["cellTemperatureStatus"] = "bad"
-	else if(air_contents.temperature > 225)
+	else if(air1.temperature > 225)
 		data["cellTemperatureStatus"] = "average"
 
 	data["isBeakerLoaded"] = beaker ? TRUE : FALSE
@@ -216,14 +216,14 @@
 /obj/machinery/atmospherics/component/unary/cryo_cell/update_icon()
 	cut_overlay(fluid)
 	fluid.color = null
-	fluid.alpha = max(255 - air_contents.temperature, 50)
+	fluid.alpha = max(255 - air1.temperature, 50)
 	if(on)
 		if(beaker)
 			fluid.color = beaker.reagents.get_color()
 		add_overlay(fluid)
 
 /obj/machinery/atmospherics/component/unary/cryo_cell/proc/process_occupant()
-	if(air_contents.total_moles < 10)
+	if(air1.total_moles < 10)
 		return
 	if(occupant)
 		if(occupant.stat >= DEAD)
@@ -231,15 +231,15 @@
 		// todo :kill bodyetmperature and rewrite it from scratch this is not real holy shit
 		var/cooling_power = clamp(
 			-(4 + ((occupant.nominal_bodytemperature() - occupant.bodytemperature) / BODYTEMP_AUTORECOVERY_DIVISOR)),
-			(air_contents.temperature - occupant.bodytemperature),
-			(air_contents.temperature - occupant.bodytemperature) * 0.5,
+			(air1.temperature - occupant.bodytemperature),
+			(air1.temperature - occupant.bodytemperature) * 0.5,
 		)
 		occupant.adjust_bodytemperature(cooling_power)
 		occupant.setDir(src.dir)
 		if(occupant.bodytemperature < T0C)
 			occupant.afflict_sleeping(20 * max(5, (1/occupant.bodytemperature)*2000))
 			occupant.afflict_unconscious(20 * max(5, (1/occupant.bodytemperature)*3000))
-			if(air_contents.gas[GAS_ID_OXYGEN] > 2)
+			if(air1.gas[GAS_ID_OXYGEN] > 2)
 				if(occupant.getOxyLoss())
 					occupant.adjustOxyLoss(-1)
 			else
@@ -258,20 +258,20 @@
 			beaker.reagents.trans_to_mob(occupant, 1, CHEM_INJECT, 10)
 
 /obj/machinery/atmospherics/component/unary/cryo_cell/proc/heat_gas_contents()
-	if(air_contents.total_moles < 1)
+	if(air1.total_moles < 1)
 		return
-	var/air_heat_capacity = air_contents.heat_capacity()
+	var/air_heat_capacity = air1.heat_capacity()
 	var/combined_heat_capacity = current_heat_capacity + air_heat_capacity
 	if(combined_heat_capacity > 0)
-		var/combined_energy = T20C*current_heat_capacity + air_heat_capacity*air_contents.temperature
-		air_contents.temperature = combined_energy/combined_heat_capacity
+		var/combined_energy = T20C*current_heat_capacity + air_heat_capacity*air1.temperature
+		air1.temperature = combined_energy/combined_heat_capacity
 
 /obj/machinery/atmospherics/component/unary/cryo_cell/proc/expel_gas()
-	if(air_contents.total_moles < 1)
+	if(air1.total_moles < 1)
 		return
 //	var/datum/gas_mixture/expel_gas = new
-//	var/remove_amount = air_contents.total_moles()/50
-//	expel_gas = air_contents.remove(remove_amount)
+//	var/remove_amount = air1.total_moles()/50
+//	expel_gas = air1.remove(remove_amount)
 
 	// Just have the gas disappear to nowhere.
 	//expel_gas.temperature = T20C // Lets expel hot gas and see if that helps people not die as they are removed

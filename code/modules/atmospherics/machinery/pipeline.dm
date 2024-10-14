@@ -29,6 +29,7 @@
 	/// our pipenet; this is a collection of pipelines.
 	///
 	/// * this handles the actual equalization
+	/// * set this to be `update = TRUE` to mark it for update.
 	var/datum/pipenet/network
 
 /datum/pipeline/Destroy()
