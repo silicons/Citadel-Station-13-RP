@@ -5248,6 +5248,8 @@
 #include "code\modules\xenoarcheaology\effects\stun.dm"
 #include "code\modules\xenoarcheaology\effects\teleport.dm"
 #include "code\modules\xenoarcheaology\exotic_particle\exotic_effect.dm"
+#include "code\modules\xenoarcheaology\exotic_particle\exotic_effect_instance.dm"
+#include "code\modules\xenoarcheaology\exotic_particle\exotic_effect_polarity.dm"
 #include "code\modules\xenoarcheaology\exotic_particle\exotic_turf_visuals.dm"
 #include "code\modules\xenoarcheaology\exotic_particle\effects\living\harm.dm"
 #include "code\modules\xenoarcheaology\exotic_particle\effects\living\heal.dm"

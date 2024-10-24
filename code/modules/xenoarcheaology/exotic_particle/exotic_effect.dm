@@ -1,14 +1,23 @@
 //* This file is explicitly licensed under the MIT license. *//
-//* Copyright (c) 2024 silicons                             *//
+//* Copyright (c) 2024 Citadel Station Developers          *//
 
 /**
  * xenoarcheology core: exotic effects
  *
- * description WIP
+ * An effect. Configured by inbound polarity variables.
+ * Acts on entities to produce effects.
  */
 /datum/exotic_effect
 	/// name
 	var/name
+
+	//* Polarity *//
+	/// polarity settings
+	///
+	/// * these are not ICly visible *directly*
+	/// * make these human-readable-dash-notation
+	/// * key = /datum/exotic_effect_polarity instance, path, or anonymous type
+	var/list/polarity_settings = list()
 
 	//* Visuals *//
 

@@ -1,8 +1,16 @@
 //* This file is explicitly licensed under the MIT license. *//
-//* Copyright (c) 2024 silicons                             *//
+//* Copyright (c) 2024 Citadel Station Developers          *//
 
 #warn woo
 
+//*                         particle polarity datatypes                            *//
+
+#define EXOTIC_POLARITY_DATATYPE_STRING "string"
+#define EXOTIC_POLARITY_DATATYPE_NUMBER "number"
+#define EXOTIC_POLARITY_DATATYPE_COLOR "color"
+#define EXOTIC_POLARITY_DATATYPE_TOGGLE "toggle"
+
+#warn DEFINE_BITFIELD_NEW
 
 //*                          particle qualities                                    *//
 //*                                                                                *//
