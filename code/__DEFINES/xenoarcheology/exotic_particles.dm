@@ -3,6 +3,17 @@
 
 #warn woo
 
+//*                         particle effector API                                  *//
+
+/// AoE bursts
+#define EXOTIC_EFFECTOR_API_BURST (1<<0)
+/// Single targets
+#define EXOTIC_EFFECTOR_API_SINGLE (1<<1)
+/// Arbitary tile-effects
+#define EXOTIC_EFFECTOR_API_TILE (1<<2)
+/// Arbitrary projectiles
+#define EXOTIC_EFFECTOR_API_PROJECTILE (1<<3)
+
 //*                         particle polarity datatypes                            *//
 
 #define EXOTIC_POLARITY_DATATYPE_STRING "string"

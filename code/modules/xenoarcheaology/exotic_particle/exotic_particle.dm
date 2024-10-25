@@ -26,7 +26,3 @@
 	var/color = "#ffffff"
 
 #warn impl all
-
-/**
- * handle burst
- */

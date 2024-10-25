@@ -2,8 +2,12 @@
 //* Copyright (c) 2024 Citadel Station Developers          *//
 
 /**
- * turf-based projections
+ * * no delay is supported
  */
-/datum/exotic_projection/turf_based
+/datum/exotic_tile_projection/rectangle
+	/// lower left
+	var/turf/bottom_left
+	/// upper right
+	var/turf/top_right
 
 #warn impl

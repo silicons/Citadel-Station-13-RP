@@ -11,6 +11,10 @@
 	/// name
 	var/name
 
+	//* Effect API Reflection *//
+	/// Supported effector APIs
+	var/effect_api = NONE
+
 	//* Polarity *//
 	/// polarity settings
 	///
@@ -32,3 +36,5 @@
 
 
 #warn impl all
+
+

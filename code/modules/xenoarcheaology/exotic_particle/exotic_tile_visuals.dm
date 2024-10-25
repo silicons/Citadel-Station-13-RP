@@ -7,7 +7,7 @@
  * * the strongest effect of a particle generally gets priority on visual
  * * this way we have everything orchestrated and not weird
  */
-/datum/exotic_turf_visuals
+/datum/exotic_tile_visuals
 
 #warn impl
 
