@@ -4131,6 +4131,7 @@
 #include "code\modules\nanites\chamber_control.dm"
 #include "code\modules\nanites\nanoswarm\nanoswarm.dm"
 #include "code\modules\nanites\nanoswarm\nanoswarm_chain.dm"
+#include "code\modules\nanites\nanoswarm\nanoswarm_effect.dm"
 #include "code\modules\nanites\nanoswarm\nanoswarm_glyph.dm"
 #include "code\modules\nanites\nanoswarm\nanoswarm_program.dm"
 #include "code\modules\nano\nanoexternal.dm"
