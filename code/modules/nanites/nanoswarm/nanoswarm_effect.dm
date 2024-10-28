@@ -2,7 +2,7 @@
 //* Copyright (c) 2024 Citadel Station Developers           *//
 
 /datum/nanoswarm_effect
-	
+	/// 
 
 #warn impl
 

@@ -30,6 +30,11 @@
 
 	//* Contents *//
 
+	/// our orchestration pattern
+	///
+	/// * can be any string, as this is internally run through some dumb algorithm,
+	///   but we prefer a "xxxx-xxxx" pattern
+	var/orchestration_pattern
 	/// list of glyphs by id
 	///
 	/// * this is ordered.
