@@ -12,6 +12,14 @@
  *
  * All of these are performed on an abstracted datastructure, which is then 'realized'
  * to form a map.
+ *
+ * ## Biomes
+ *
+ * Biomes are intentionally not defined, as this lets you define them in your code.
+ * That said, these biomes are internally used, and are constant:
+ *
+ * * 'unknown': for unset
+ * * 'ignore': used on anything that is mapgen blocked.
  */
 /datum/mapgen_pattern
 	/// terrain layers

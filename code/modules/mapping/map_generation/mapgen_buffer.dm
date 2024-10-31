@@ -11,7 +11,17 @@
 	/// height
 	var/height
 
-	/// turf lookup
+	//* Generation *//
+
+	/// arbitrary blackboard preserved through the whole generation process
+	var/list/generate_blackboard = list()
+	/// row-major y = 1 to y = maximum lookup list
+	///
+	/// * basically, L[x + (y - 1) * width] = your turf
+	/// * entry can be terrain descriptor or null
+	var/list/datum/mapgen_terrain_descriptor/generate_terrain = list()
+	/// list of spot descriptors generated
+	var/list/datum/mapgen_spot_descriptor/generate_spot = list()
 
 	//* Realization *//
 
@@ -28,6 +38,9 @@
 	/// end REALTIMEOFDAY
 	var/realize_end_realtimeofday
 
+/datum/mapgen_buffer/proc/seal
+
 /datum/mapgen_buffer/proc/realize(turf/lower_left, turf/upper_right)
+
 
 #warn impl
