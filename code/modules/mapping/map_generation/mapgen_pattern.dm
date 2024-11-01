@@ -13,6 +13,10 @@
  * All of these are performed on an abstracted datastructure, which is then 'applied'
  * to form a map.
  *
+ * While it would be more modular and less rigid to not have a linear generation phase
+ * system like this, performance trumps the already copious amout of overengineering
+ * in practice here.
+ *
  * ## Biomes
  *
  * Biomes are intentionally not defined, as this lets you define them in your code.

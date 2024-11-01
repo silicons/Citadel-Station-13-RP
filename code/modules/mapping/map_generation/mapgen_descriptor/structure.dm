@@ -24,7 +24,7 @@
  * * base_y - base y; this is the y - 1 of the lower left corner, e.g. 0, 0 + offset 1 = 1, 1.
  * * base_z - base z;
  */
-/datum/mapgen_descriptor/structure/proc/realize(base_x, base_y, base_z)
+/datum/mapgen_descriptor/structure/proc/apply(base_x, base_y, base_z)
 	CRASH("unimplemented proc called")
 
 /datum/mapgen_descriptor/structure/template
