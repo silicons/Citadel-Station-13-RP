@@ -1,6 +1,11 @@
 //* This file is explicitly licensed under the MIT license. *//
 //* Copyright (c) 2024 Citadel Station Developers           *//
 
-/datum/mapgen_layer/mapgen_structure_layer
+/**
+ * Generates caves in a section of the buffer.
+ *
+ * Kinda simple, eh?
+ */
+/datum/mapgen_layer/terrain/caves
 
 #warn impl

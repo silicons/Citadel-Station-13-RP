@@ -7,6 +7,6 @@
  * Special biomes:
  * * "caves-generate" will trigger cave generation instead of flat terrain.
  */
-/datum/mapgen_layer/mapgen_terrain_layer/perlin_bilayer
+/datum/mapgen_layer/terrain/perlin_bilayer
 
 #warn impl

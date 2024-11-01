@@ -1,7 +1,7 @@
 //* This file is explicitly licensed under the MIT license. *//
 //* Copyright (c) 2024 Citadel Station Developers           *//
 
-/datum/mapgen_terrain_descriptor
+/datum/mapgen_descriptor/terrain
 	/// our biome string
 	var/biome = "unknown"
 	/// our turf type
@@ -14,13 +14,13 @@
 	///   but further layers should not touch the tile.
 	var/sealed = FALSE
 	/// static sealed descriptor
-	var/static/datum/mapgen_terrain_descriptor/SEALED_DESCRIPTOR = new /datum/mapgen_terrain_descriptor/sealed
+	var/static/datum/mapgen_descriptor/terrain/SEALED_DESCRIPTOR = new /datum/mapgen_descriptor/terrain/sealed
 	/// static baseturf descriptor
-	var/static/datum/mapgen_terrain_descriptor/BASETURF_DESCRIPTOR = new /datum/mapgen_terrain_descriptor/baseturf
+	var/static/datum/mapgen_descriptor/terrain/BASETURF_DESCRIPTOR = new /datum/mapgen_descriptor/terrain/baseturf
 	/// static descriptor for seal + use baseturf
-	var/static/datum/mapgen_terrain_descriptor/SEALED_BASETURF_DESCRIPTOR = /datum/mapgen_terrain_descriptor/baseturf/sealed
+	var/static/datum/mapgen_descriptor/terrain/SEALED_BASETURF_DESCRIPTOR = /datum/mapgen_descriptor/terrain/baseturf/sealed
 
-/datum/mapgen_terrain_descriptor/proc/realize(turf/location)
+/datum/mapgen_descriptor/terrain/proc/realize(turf/location)
 	return
 
 #warn impl
@@ -28,17 +28,17 @@
 /**
  * used if a descriptor doesn't exist, but we want to seal a turf
  */
-/datum/mapgen_terrain_descriptor/sealed
+/datum/mapgen_descriptor/terrain/sealed
 	sealed = TRUE
 
 /**
  * used if we just want to flatten an area to the base turf of the level
  */
-/datum/mapgen_terrain_descriptor/baseturf
+/datum/mapgen_descriptor/terrain/baseturf
 	turf_type = /turf/baseturf_bottom
 
 /**
  * used if we want to flatten an area, and also prevent further mapgen from happening on it
  */
-/datum/mapgen_terrain_descriptor/baseturf/sealed
+/datum/mapgen_descriptor/terrain/baseturf/sealed
 	sealed = TRUE

@@ -1,7 +1,7 @@
 //* This file is explicitly licensed under the MIT license. *//
 //* Copyright (c) 2024 Citadel Station Developers           *//
 
-/datum/mapgen_spot_descriptor
+/datum/mapgen_descriptor/spot
 	/// atom type to spawn
 	var/spawn_path
 	/// args to pass into `new` if any
@@ -13,7 +13,7 @@
 	/// y offset
 	var/y_offset
 
-/datum/mapgen_spot_descriptor/New(spawn_path, x, y, spawn_args, preview_color)
+/datum/mapgen_descriptor/spot/New(spawn_path, x, y, spawn_args, preview_color)
 	src.spawn_path = spawn_path
 	src.spawn_args = spawn_args
 	src.x_offset = x
@@ -30,7 +30,7 @@
  * * base_y - base y; this is the y - 1 of the lower left corner, e.g. 0, 0 + offset 1 = 1, 1.
  * * base_z - base z;
  */
-/datum/mapgen_spot_descriptor/proc/realize(base_x, base_y, base_z)
+/datum/mapgen_descriptor/spot/proc/realize(base_x, base_y, base_z)
 	var/turf/location = locate(base_x + x_offset, base_y + y_offset, base_z)
 	if(spawn_args)
 		new spawn_path(arglist(list(location) + spawn_args))

@@ -10,7 +10,7 @@
  * * Structure: Structure descriptors are 'seeded' as needed.
  * * Spot: Any remaining things like flora, fauna, etc, are placed.
  *
- * All of these are performed on an abstracted datastructure, which is then 'realized'
+ * All of these are performed on an abstracted datastructure, which is then 'applied'
  * to form a map.
  *
  * ## Biomes
@@ -23,11 +23,11 @@
  */
 /datum/mapgen_pattern
 	/// terrain layers
-	var/list/datum/mapgen_layer/mapgen_terrain_layer/terrain_layers = list()
+	var/list/datum/mapgen_layer/terrain/terrain_layers = list()
 	/// structure layers
-	var/list/datum/mapgen_layer/mapgen_structure_layer/structure_layers = list()
+	var/list/datum/mapgen_layer/structure/structure_layers = list()
 	/// spot layers
-	var/list/datum/mapgen_layer/mapgen_spot_layer/spot_layers = list()
+	var/list/datum/mapgen_layer/spot/spot_layers = list()
 
 /datum/mapgen_pattern/proc/generate(base_x = 0, base_y = 0, width = world.maxx, height = world.maxy) as /datum/mapgen_buffer
 	var/datum/mapgen_buffer/buffer = new
@@ -36,12 +36,14 @@
 	buffer.width = width
 	buffer.height = height
 
-	for(var/datum/mapgen_layer/layer as anything in terrain_layers)
+	var/start_tick_usage
+	var/end_tick_usage
+
+	for(var/datum/mapgen_layer/layer as anything in terrain_layers + structure_layers + spot_layers)
+		start_tick_usage = world.tick_usage
 		layer.draw(buffer)
-	for(var/datum/mapgen_layer/layer as anything in structure_layers)
-		layer.draw(buffer)
-	for(var/datum/mapgen_layer/layer as anything in spot_layers)
-		layer.draw(buffer)
+		end_tick_usage = world.tick_usage
+		buffer[layer] = TICK_DELTA_TO_MS(end_tick_usage - start_tick_usage)
 
 	return buffer
 

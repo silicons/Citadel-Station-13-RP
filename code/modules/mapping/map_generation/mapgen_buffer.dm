@@ -19,28 +19,64 @@
 	///
 	/// * basically, L[x + (y - 1) * width] = your turf
 	/// * entry can be terrain descriptor or null
-	var/list/datum/mapgen_terrain_descriptor/generate_terrain = list()
+	var/list/datum/mapgen_descriptor/terrain/generate_terrain = list()
+	/// list of structure descriptors generated
+	var/list/datum/mapgen_descriptor/structure/generate_structure = list()
 	/// list of spot descriptors generated
-	var/list/datum/mapgen_spot_descriptor/generate_spot = list()
+	var/list/datum/mapgen_descriptor/spot/generate_spot = list()
+	/// start REALTIMEOFDAY
+	var/generate_start_realtimeofday
+	/// end REALTIMEOFDAY
+	var/generate_end_realtimeofday
+	/// list of deciseconds taken per layer; ordered per layers, with layer associated to time
+	var/list/datum/mapgen_layer/generate_layer_timings = list()
 
-	//* Realization *//
+	//* Application *//
 
 	/// arbitrary blackboard preserved through the whole load process
-	var/list/realize_blackboard = list()
+	var/list/apply_blackboard = list()
 	/// stat tracking: total turf changes
-	var/realize_turf_spawn_count = 0
+	var/apply_turf_spawn_count = 0
 	/// stat tracking: total structure instantiations
-	var/realize_structure_spawn_count = 0
+	var/apply_structure_spawn_count = 0
 	/// stat tracking: total spot instantiations
-	var/realize_spot_spawn_count = 0
+	var/apply_spot_spawn_count = 0
 	/// start REALTIMEOFDAY
-	var/realize_start_realtimeofday
+	var/apply_start_realtimeofday
 	/// end REALTIMEOFDAY
-	var/realize_end_realtimeofday
+	var/apply_end_realtimeofday
 
-/datum/mapgen_buffer/proc/seal
+//* Generation - Terrain Helpers *//
 
-/datum/mapgen_buffer/proc/realize(turf/lower_left, turf/upper_right)
+/datum/mapgen_buffer/proc/terrain_seal(x1, y1, x2, y2)
+	if(x2 || y2)
+		// block mode
+		ASSERT(x1 <= x2)
+		ASSERT(y1 <= y2)
+	else
+		// turf mode
+
+/datum/mapgen_buffer/proc/terrain_fill_turf(x1, y1, x2, y2, turf_type)
+	ASSERT(x1 <= x2)
+	ASSERT(y1 <= y2)
+
+/datum/mapgen_buffer/proc/terrain_fill_biome(x1, y1, x2, y2, biome)
+	ASSERT(x1 <= x2)
+	ASSERT(y1 <= y2)
+
+/datum/mapgen_buffer/proc/terrain_fill(x1, y1, x2, y2, turf_type, biome)
+	ASSERT(x1 <= x2)
+	ASSERT(y1 <= y2)
+
+/datum/mapgen_buffer/proc/terrain_set_turf(x, y, turf_type)
+
+/datum/mapgen_buffer/proc/terrain_set_biome(x, y, biome)
+
+/datum/mapgen_buffer/proc/terrain_set(x, y, turf_type, biome)
+
+//* Application *//
+
+/datum/mapgen_buffer/proc/apply(turf/lower_left, turf/upper_right)
 
 
 #warn impl
