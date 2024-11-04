@@ -30,20 +30,26 @@
  * * 'ignore': used on anything that is mapgen blocked.
  */
 /datum/mapgen_pattern
-	/// are we ready?
-	///
-	/// * layers are not mutable while ready.
-	/// * if you change a layer, set ready to FALSE again.
-	var/ready = FALSE
 	/// layers
 	var/list/datum/mapgen_layer/layers = list()
 
 /**
  * prepare all layers
+ *
+ * @return TRUE / FALSE on success / failure.
  */
 /datum/mapgen_pattern/proc/ready()
-	#warn preprocess layers (anonymous types, etc)
-	ready = TRUE
+	for(var/i in 1 to length(layers))
+		var/datum/mapgen_layer/layer = layers[i]
+		if(ispath(layer))
+			layer = new layer
+			layers[i] = layer
+		else if(IS_ANONYMOUS_TYPEPATH(layer))
+			layer = new layer
+			layers[i] = layer
+		if(!layer.ready())
+			return FALSE
+	return TRUE
 
 /**
  * generate a buffer
@@ -59,6 +65,9 @@
  *             mapgen taking more CPU than we usually want.
  */
 /datum/mapgen_pattern/proc/generate(seed = "default", base_x = 0, base_y = 0, width = world.maxx, height = world.maxy, datum/mapgen_context/context) as /datum/mapgen_buffer
+	if(!ready())
+		CRASH("failed to ready a mapgen pattern.")
+
 	var/datum/mapgen_buffer/buffer = new(seed, base_x, base_y, width, height)
 	var/datum/mapgen_context/context = new
 

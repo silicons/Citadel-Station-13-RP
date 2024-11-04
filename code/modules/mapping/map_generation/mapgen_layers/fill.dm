@@ -1,7 +1,7 @@
 //* This file is explicitly licensed under the MIT license. *//
 //* Copyright (c) 2024 Citadel Station Developers           *//
 
-/datum/mapgen_layer/terrain
+/datum/mapgen_layer/fill
 	/// lower left x
 	var/ll_x = -INFINITY
 	/// lower left y
@@ -11,6 +11,11 @@
 	/// upper right y
 	var/ur_y = INFINITY
 
-/datum/mapgen_layer/terrain/draw(datum/mapgen_buffer/buffer)
-	return
-	
+/datum/mapgen_layer/fill/ready()
+	. = ..()
+	if(!.)
+		return
+	if(ll_x > ur_x)
+		CRASH("llx > urx")
+	if(ll_y > ur_y)
+		CRASH("lly > ury")
