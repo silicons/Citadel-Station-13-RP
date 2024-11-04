@@ -4,18 +4,22 @@
 /**
  * A map generation pattern.
  *
- * Map generation is done in three phases.
+ * Map generation is done by:
  *
- * * Terrain: A requested square is 'painted' with the right turfs, biomes, etc.
- * * Structure: Structure descriptors are 'seeded' as needed.
- * * Spot: Any remaining things like flora, fauna, etc, are placed.
+ * * painting an ordered list of layers into a pattern, producing a buffer
+ * * 'applying' a buffer, which actually loads it into the 'real world'.
  *
- * All of these are performed on an abstracted datastructure, which is then 'applied'
- * to form a map.
+ * Map generation is done with a seed, base x / y for where in the abstract 2d plane
+ * of that seed the level is in, and finally, a width and a height.
  *
- * While it would be more modular and less rigid to not have a linear generation phase
- * system like this, performance trumps the already copious amout of overengineering
- * in practice here.
+ * There's three separate sets of buffers in a mapgen buffer:
+ *
+ * * terrain; a dense 2d grid of generated terrain tuples
+ * * structure; a list of structures to load in
+ * * spot; a list of spots to .. well, do things to.
+ *
+ * Terrain, structure, and spot are applied in that order, but can be staged
+ * by layers in any order.
  *
  * ## Biomes
  *
@@ -26,35 +30,68 @@
  * * 'ignore': used on anything that is mapgen blocked.
  */
 /datum/mapgen_pattern
-	/// terrain layers
-	var/list/datum/mapgen_layer/terrain/terrain_layers = list()
-	/// structure layers
-	var/list/datum/mapgen_layer/structure/structure_layers = list()
-	/// spot layers
-	var/list/datum/mapgen_layer/spot/spot_layers = list()
+	/// are we ready?
+	///
+	/// * layers are not mutable while ready.
+	/// * if you change a layer, set ready to FALSE again.
+	var/ready = FALSE
+	/// layers
+	var/list/datum/mapgen_layer/layers = list()
 
-/datum/mapgen_pattern/proc/generate(base_x = 0, base_y = 0, width = world.maxx, height = world.maxy) as /datum/mapgen_buffer
-	var/datum/mapgen_buffer/buffer = new
-	buffer.base_x = base_x
-	buffer.base_y = base_y
-	buffer.width = width
-	buffer.height = height
+/**
+ * prepare all layers
+ */
+/datum/mapgen_pattern/proc/ready()
+	#warn preprocess layers (anonymous types, etc)
+	ready = TRUE
+
+/**
+ * generate a buffer
+ *
+ * @params
+ * * seed - the seed to use
+ * * base_x - the offset of the 0, 0 of the buffer, where 1, 1 is the first lower-left turf.
+ * * base_y - the offset of the 0, 0 of the buffer, where 1, 1 is the first lower-left turf.
+ * * width - buffer size
+ * * height - buffer size
+ * * context - (optional) context passed through for the purposes of subsystemizing / tick checking. currently does nothing.
+ *             if context is not provided, we will use default CHECK_TICK, which may result in
+ *             mapgen taking more CPU than we usually want.
+ */
+/datum/mapgen_pattern/proc/generate(seed = "default", base_x = 0, base_y = 0, width = world.maxx, height = world.maxy, datum/mapgen_context/context) as /datum/mapgen_buffer
+	var/datum/mapgen_buffer/buffer = new(seed, base_x, base_y, width, height)
+	var/datum/mapgen_context/context = new
 
 	var/start_tick_usage
 	var/end_tick_usage
 
-	for(var/datum/mapgen_layer/layer as anything in terrain_layers + structure_layers + spot_layers)
+	for(var/datum/mapgen_layer/layer as anything in layers)
 		start_tick_usage = world.tick_usage
-		layer.draw(buffer)
+		layer.draw(buffer, context)
 		end_tick_usage = world.tick_usage
-		buffer[layer] = TICK_DELTA_TO_MS(end_tick_usage - start_tick_usage)
+		buffer.generate_deciseconds_spent_on_layer[layer] = TICK_DELTA_TO_MS(end_tick_usage - start_tick_usage)
 
 	return buffer
 
 // vv wrapper
-/datum/mapgen_pattern/proc/__debug_generate_chunk(ll_x, ll_y, ur_x, ur_y, z)
+// very dangerous, will trample everything underneath. use with extreme caution.
+// can be called with (ll_x, ll_y, ur_x, ur_y, z, seed)
+// can be called with (turf/lower_left, width, height, seed)
+/datum/mapgen_pattern/proc/__debug_generate_chunk(ll_x, ll_y, ur_x, ur_y, z, seed)
+	if(isturf(ll_x))
+		// remap parameters, end to start
+		seed = ur_y
+		z = ll_x:z
+		ur_y = ll_x:y + ur_x - 1
+		ur_x = ll_x:x + ll_y - 1
+		ll_y = ll_x:y
+		ll_x = ll_x:x
+
 	#warn impl
 
 // vv wrapper
-/datum/mapgen_pattern/proc/__debug_generate_level(z)
-	#warn impl
+// very dangerous, will trample everything underneath. use with extreme caution.
+/datum/mapgen_pattern/proc/__debug_generate_level(z, seed)
+	if(isturf(z))
+		z = z:z
+	__debug_generate_chunk(1, 1, world.maxx, world.maxy, z, seed)

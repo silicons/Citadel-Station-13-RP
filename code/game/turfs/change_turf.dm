@@ -12,17 +12,32 @@ GLOBAL_LIST_INIT(multiz_hole_baseturfs, typecacheof(list(
 	/turf/baseturf_bottom,
 )))
 
-/turf/proc/empty(turf_type=/turf/space, baseturf_type, list/ignore_typecache, flags)
-	// Remove all atoms except observers, landmarks, docking ports
-	var/static/list/ignored_atoms = typecacheof(list(/mob/observer, /obj/landmark, /atom/movable/lighting_overlay, /obj/effect/shuttle_landmark))
-	var/list/allowed_contents = typecache_filter_list_reverse(get_all_contents_ignoring(ignore_typecache), ignored_atoms)
-	allowed_contents -= src
-	for(var/i in 1 to allowed_contents.len)
-		var/thing = allowed_contents[i]
-		qdel(thing, force=TRUE)
+/**
+ * Obliterate a turf and its contents.
+ *
+ * @params
+ * * change_type - change this turf to that type while we're emptying
+ * * change_base - passed in as second argument to change_turf if `change_type` is set
+ * * change_flags - passed in as third argument to change_turf if `change_type` is set
+ * * ignore_typecache - typecache of things to ignore
+ */
+/turf/proc/empty(change_type, change_base, change_flags, list/ignore_typecache)
+	// special fast inlined checks
+	if(ignore_typecache)
+		for(var/atom/movable/AM as anything in contents)
+			if(AM.atom_flags & (ATOM_ABSTRACT | ATOM_NONWORLD))
+				continue
+			if(ignore_typecache[AM.type])
+				continue
+			qdel(AM)
+	else
+		for(var/atom/movable/AM as anything in contents)
+			if(AM.atom_flags & (ATOM_ABSTRACT | ATOM_NONWORLD))
+				continue
+			qdel(AM)
 
-	if(turf_type)
-		ChangeTurf(turf_type)
+	if(change_type)
+		ChangeTurf(change_type, change_base, change_flags)
 
 /**
  * @params

@@ -2,8 +2,8 @@
 //* Copyright (c) 2024 Citadel Station Developers           *//
 
 /**
- * Acts like a 'loot table' for spot layers.
+ * Acts like a 'loot table' for structures
  */
-/datum/mapgen_entity_draw
+/datum/mapgen_inventory
 
 #warn impl
