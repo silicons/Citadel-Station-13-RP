@@ -8,13 +8,17 @@
 	name = "Block: Fill Terrain"
 
 	var/turf_type
-	var/biome_type
+	var/biome
 
 /datum/mapgen_layer/fill/flat_block/draw(datum/mapgen_buffer/buffer)
-	if(turf_type)
-		if(biome_type)
-			buffer.fill_terrain(ll_x, ll_y, ur_x, ur_y, turf_type, biome_type)
-		else
-			buffer.fill_turf(ll_x, ll_y, ur_x, ur_y, turf_type)
-	else if(biome_type)
-		buffer.fill_biome(ll_x, ll_y, ur_x, ur_y, biome_type)
+	var/datum/mapgen_descriptor/terrain/descriptor = new
+	descriptor.biome = biome_type
+	descriptor.turf_type = turf_type
+
+	var/width = ur_x - ll_x + 1
+	var/height = ur_y - ll_y + 1
+	var/offset_x = ll_x - 1
+	var/offset_y = ll_y - 1
+	for(var/x in 1 to width)
+		for(var/y in 1 to height)
+			buffer.generate_terrain[(x + offset_x) + ((y + offset_y) - 1) * width] = descriptor
