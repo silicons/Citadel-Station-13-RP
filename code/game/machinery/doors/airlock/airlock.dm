@@ -977,7 +977,7 @@ About the new airlock wires panel:
 	. = ..()
 	damage_integrity(crush_damage)
 
-/obj/effect/energy_field/airlock_crush(var/crush_damage)
+/obj/effect/legacy_energy_shield/airlock_crush(var/crush_damage)
 	adjust_strength(crush_damage)
 
 /obj/structure/closet/airlock_crush(var/crush_damage)

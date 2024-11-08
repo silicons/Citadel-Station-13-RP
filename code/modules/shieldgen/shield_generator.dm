@@ -87,7 +87,7 @@
 
 // Shuts down the shield, removing all shield segments and unlocking generator settings.
 /obj/machinery/power/shield_generator/proc/shutdown_field()
-	for(var/obj/effect/shield/S in field_segments)
+	for(var/obj/effect/energy_shield/S in field_segments)
 		qdel(S)
 
 	running = SHIELD_OFF
@@ -101,7 +101,7 @@
 // TODO: Make this use TG Smoothing.
 // Generates the field objects. Deletes existing field, if applicable.
 /obj/machinery/power/shield_generator/proc/regenerate_field()
-	for(var/obj/effect/shield/S in field_segments)
+	for(var/obj/effect/energy_shield/S in field_segments)
 		qdel(S)
 	var/list/shielded_turfs
 
@@ -111,7 +111,7 @@
 		shielded_turfs = fieldtype_square()
 
 	for(var/turf/T in shielded_turfs)
-		var/obj/effect/shield/S = new(T)
+		var/obj/effect/energy_shield/S = new(T)
 		S.gen = src
 		S.flags_updated()
 		field_segments |= S
@@ -123,11 +123,11 @@
 		var/list/corners = list()
 		var/list/horror = list()
 
-		for(var/obj/effect/shield/SE in field_segments)
+		for(var/obj/effect/energy_shield/SE in field_segments)
 			var/adjacent_fields = 0
 			for(var/direction in GLOB.cardinal)
 				var/turf/T = get_step(SE, direction)
-				var/obj/effect/shield/S = locate() in T
+				var/obj/effect/energy_shield/S = locate() in T
 				if(S)
 					adjacent_fields |= direction
 
@@ -151,7 +151,7 @@
 				startends[SE] = adjacent_fields
 
 		//Midsections go first
-		for(var/obj/effect/shield/SE in midsections)
+		for(var/obj/effect/energy_shield/SE in midsections)
 			var/adjacent = midsections[SE]
 			var/turf/L = get_step(SE, ~adjacent & (SOUTH|WEST))
 			var/turf/R = get_step(SE, ~adjacent & (NORTH|EAST))
@@ -175,11 +175,11 @@
 			midsections -= SE
 
 		//Some unhandled error state
-		for(var/obj/effect/shield/SE in midsections)
+		for(var/obj/effect/energy_shield/SE in midsections)
 			SE.enabled_icon_state = "arrow" //Error state/unhandled
 
 		//Corners
-		for(var/obj/effect/shield/S in corners)
+		for(var/obj/effect/energy_shield/S in corners)
 			var/adjacent = corners[S]
 			if(adjacent in GLOB.cornerdirs)
 				do_corner_shield(S, adjacent) //Dir is adjacent fields direction
@@ -192,7 +192,7 @@
 						//What's this mysterious 3rd shield touching us?
 						var/dir_to_them = turn(nonshield, 180)
 						var/turf/T = get_step(S, dir_to_them)
-						var/obj/effect/shield/SO = locate() in T
+						var/obj/effect/energy_shield/SO = locate() in T
 						//They are a corner
 						if((SO.dir & (SO.dir - 1)) != 0)
 							continue
@@ -215,11 +215,11 @@
 					// Not actually a corner... It has MULTIPLE!
 					S.enabled_icon_state = "arrow" //Error state/unhandled
 
-		for(var/obj/effect/shield/S in startends)
+		for(var/obj/effect/energy_shield/S in startends)
 			var/adjacent = startends[S]
 			log_debug(SPAN_DEBUGINFO("Processing startend [S] at [S?.x],[S?.y] adjacent=[adjacent]"))
 			var/turf/T = get_step(S, adjacent)
-			var/obj/effect/shield/SO = locate() in T
+			var/obj/effect/energy_shield/SO = locate() in T
 			S.setDir(SO.dir)
 			if(S.dir == adjacent) //Flowing into them
 				S.enabled_icon_state = "shield_start"
@@ -227,7 +227,7 @@
 				S.enabled_icon_state = "shield_end"
 	else
 		var/turf/gen_turf = get_turf(src)
-		for(var/obj/effect/shield/SE in field_segments)
+		for(var/obj/effect/energy_shield/SE in field_segments)
 			var/new_dir = 0
 			if(SE.x == gen_turf.x - field_radius)
 				new_dir |= NORTH
@@ -242,13 +242,13 @@
 			else
 				do_corner_shield(SE, turn(new_dir, -90), TRUE) // All our corners are outside, don't check turf type.
 
-	for(var/obj/effect/shield/SE in field_segments)
+	for(var/obj/effect/energy_shield/SE in field_segments)
 		SE.update_visuals()
 
 	//Phew, update our own icon
 	update_icon()
 
-/obj/machinery/power/shield_generator/proc/do_corner_shield(var/obj/effect/shield/S, var/new_dir, var/force_outside)
+/obj/machinery/power/shield_generator/proc/do_corner_shield(var/obj/effect/energy_shield/S, var/new_dir, var/force_outside)
 	S.enabled_icon_state = "blank"
 	S.setDir(new_dir)
 	var/inside = force_outside ? FALSE : isspaceturf(get_step(S, new_dir))
@@ -347,7 +347,7 @@
 		energy_failure()
 
 	if(!overloaded)
-		for(var/obj/effect/shield/S in damaged_segments)
+		for(var/obj/effect/energy_shield/S in damaged_segments)
 			S.regenerate()
 	else if (field_integrity() > 25)
 		overloaded = 0
@@ -379,7 +379,7 @@
 	else
 		current_energy = 0
 		overloaded = TRUE
-		for(var/obj/effect/shield/S in field_segments)
+		for(var/obj/effect/energy_shield/S in field_segments)
 			S.fail(1)
 
 /obj/machinery/power/shield_generator/proc/set_idle(var/new_state)
@@ -387,7 +387,7 @@
 		if(running == SHIELD_IDLE)
 			return
 		running = SHIELD_IDLE
-		for(var/obj/effect/shield/S in field_segments)
+		for(var/obj/effect/energy_shield/S in field_segments)
 			qdel(S)
 	else
 		if(running != SHIELD_IDLE)
@@ -584,7 +584,7 @@
 /obj/machinery/power/shield_generator/proc/toggle_flag(var/flag)
 	shield_modes ^= flag
 	update_upkeep_multiplier()
-	for(var/obj/effect/shield/S in field_segments)
+	for(var/obj/effect/energy_shield/S in field_segments)
 		S.flags_updated()
 
 	if((flag & (MODEFLAG_HULL|MODEFLAG_MULTIZ)) && (running == SHIELD_RUNNING))

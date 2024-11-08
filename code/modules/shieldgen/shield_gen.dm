@@ -191,7 +191,7 @@
 		var/renwick_increase_per_field = total_renwick_increase/field.len //per field tile
 
 		average_field_strength = 0 //recalculate the average field strength
-		for(var/obj/effect/energy_field/E in field)
+		for(var/obj/effect/legacy_energy_shield/E in field)
 			E.max_strength = target_field_strength
 			var/amount_to_strengthen = renwick_increase_per_field - renwick_upkeep_per_field
 			if(E.ticks_recovering > 0 && amount_to_strengthen > 0)
@@ -246,16 +246,16 @@
 		if(T in covered_turfs)
 			covered_turfs.Remove(T)
 		for(var/turf/O in covered_turfs)
-			var/obj/effect/energy_field/E = new(O, src)
+			var/obj/effect/legacy_energy_shield/E = new(O, src)
 			field.Add(E)
 		covered_turfs = null
 
 		for(var/mob/M in view(5,src))
 			to_chat(M, "[icon2html(thing = src, target = M)] You hear heavy droning start up.")
-		for(var/obj/effect/energy_field/E in field) // Update the icons here to ensure all the shields have been made already.
+		for(var/obj/effect/legacy_energy_shield/E in field) // Update the icons here to ensure all the shields have been made already.
 			E.update_icon()
 	else
-		for(var/obj/effect/energy_field/D in field)
+		for(var/obj/effect/legacy_energy_shield/D in field)
 			field.Remove(D)
 			//D.loc = null
 			qdel(D)

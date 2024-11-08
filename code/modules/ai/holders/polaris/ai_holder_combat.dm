@@ -316,13 +316,13 @@
 				return holder.IAttack(W)
 
 		// Kill hull shields in the way.
-		for(var/obj/effect/energy_field/shield in problem_turf)
+		for(var/obj/effect/legacy_energy_shield/shield in problem_turf)
 			if(shield.density) // Don't attack shields that are already down.
 				ai_log("destroy_surroundings() : Attacking hull shield.", AI_LOG_INFO)
 				return holder.IAttack(shield)
 
 		// Kill energy shields in the way.
-		for(var/obj/effect/shield/S in problem_turf)
+		for(var/obj/effect/energy_shield/S in problem_turf)
 			if(S.density) // Don't attack shields that are already down.
 				ai_log("destroy_surroundings() : Attacking energy shield.", AI_LOG_INFO)
 				return melee_attack(S)

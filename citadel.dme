@@ -4746,6 +4746,7 @@
 #include "code\modules\shieldgen\shield_gen_external.dm"
 #include "code\modules\shieldgen\shield_generator.dm"
 #include "code\modules\shieldgen\shield_modes.dm"
+#include "code\modules\shieldgen\helpers\calculate_wrapped_shieldgen_boundaries.dm"
 #include "code\modules\shuttles\antagonist.dm"
 #include "code\modules\shuttles\crashes.dm"
 #include "code\modules\shuttles\departmental.dm"

@@ -10,13 +10,13 @@
 /datum/artifact_effect/forcefield/ToggleActivate()
 	..()
 	if(created_field.len)
-		for(var/obj/effect/energy_field/F in created_field)
+		for(var/obj/effect/legacy_energy_shield/F in created_field)
 			created_field.Remove(F)
 			qdel(F)
 	else if(holder)
 		var/turf/T = get_turf(holder)
 		while(created_field.len < 16)
-			var/obj/effect/energy_field/E = new (locate(T.x,T.y,T.z))
+			var/obj/effect/legacy_energy_shield/E = new (locate(T.x,T.y,T.z))
 			created_field.Add(E)
 			E.strength = 1
 			E.density = 1
@@ -27,7 +27,7 @@
 
 /datum/artifact_effect/forcefield/process(delta_time)
 	..()
-	for(var/obj/effect/energy_field/E in created_field)
+	for(var/obj/effect/legacy_energy_shield/E in created_field)
 		if(E.strength < 2)
 			E.adjust_strength(0.15, 0)
 		else if(E.strength < 10)
@@ -38,13 +38,13 @@
 		var/turf/T = get_turf(holder)
 		while(created_field.len < 16)
 			//for now, just instantly respawn the fields when they get destroyed
-			var/obj/effect/energy_field/E = new (locate(T.x,T.y,T))
+			var/obj/effect/legacy_energy_shield/E = new (locate(T.x,T.y,T))
 			created_field.Add(E)
 			E.anchored = 1
 			E.density = 1
 			E.invisibility = 0
 
-		var/obj/effect/energy_field/E = created_field[1]
+		var/obj/effect/legacy_energy_shield/E = created_field[1]
 		E.loc = locate(T.x + 2,T.y + 2,T.z)
 		E = created_field[2]
 		E.loc = locate(T.x + 2,T.y + 1,T.z)

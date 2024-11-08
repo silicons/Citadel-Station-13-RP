@@ -1,4 +1,4 @@
-/obj/machinery/shield
+/obj/effect/legacy_hull_shield
 	name = "Emergency energy shield"
 	desc = "An energy shield used to contain hull breaches."
 	icon = 'icons/effects/effects.dmi'
@@ -18,18 +18,18 @@
 	var/shield_generate_power = 7500	//how much power we use when regenerating
 	var/shield_idle_power = 1500		//how much power we use when just being sustained.
 
-/obj/machinery/shield/Initialize(mapload)
+/obj/effect/legacy_hull_shield/Initialize(mapload)
 	. = ..()
 	setDir(pick(1,2,3,4))
 	update_nearby_tiles()
 
-/obj/machinery/shield/Destroy()
+/obj/effect/legacy_hull_shield/Destroy()
 	CanAtmosPass = ATMOS_PASS_NOT_BLOCKED
 	CanAtmosPassVertical = ATMOS_PASS_NOT_BLOCKED
 	update_nearby_tiles()
 	return ..()
 
-/obj/machinery/shield/emp_act(severity)
+/obj/effect/legacy_hull_shield/emp_act(severity)
 	switch(severity)
 		if(1)
 			qdel(src)
@@ -43,11 +43,11 @@
 			if(prob(25))
 				qdel(src)
 
-/obj/machinery/shield/malfai
+/obj/effect/legacy_hull_shield/malfai
 	name = "emergency forcefield"
 	desc = "A weak forcefield which seems to be projected by the station's emergency atmosphere containment field"
 
-/obj/machinery/shield/malfai/process(delta_time)
+/obj/effect/legacy_hull_shield/malfai/process(delta_time)
 	damage_integrity(0.5, TRUE)
 
 /obj/machinery/shieldgen
@@ -91,7 +91,7 @@
 	create_shields()
 
 	idle_power_usage = 0
-	for(var/obj/machinery/shield/shield_tile in deployed_shields)
+	for(var/obj/effect/legacy_hull_shield/shield_tile in deployed_shields)
 		idle_power_usage += shield_tile.shield_idle_power
 	update_use_power(USE_POWER_IDLE)
 
@@ -107,14 +107,14 @@
 
 /obj/machinery/shieldgen/proc/create_shields()
 	for(var/turf/target_tile in range(2, src))
-		if (is_type_in_list(target_tile,blockedturfs) && !(locate(/obj/machinery/shield) in target_tile))
+		if (is_type_in_list(target_tile,blockedturfs) && !(locate(/obj/effect/legacy_hull_shield) in target_tile))
 			if (malfunction && prob(33) || !malfunction)
-				var/obj/machinery/shield/S = new/obj/machinery/shield(target_tile)
+				var/obj/effect/legacy_hull_shield/S = new/obj/effect/legacy_hull_shield(target_tile)
 				deployed_shields += S
 				use_power(S.shield_generate_power)
 
 /obj/machinery/shieldgen/proc/collapse_shields()
-	for(var/obj/machinery/shield/shield_tile in deployed_shields)
+	for(var/obj/effect/legacy_hull_shield/shield_tile in deployed_shields)
 		qdel(shield_tile)
 
 /obj/machinery/shieldgen/power_change()
@@ -138,7 +138,7 @@
 			create_shields()
 
 			var/new_power_usage = 0
-			for(var/obj/machinery/shield/shield_tile in deployed_shields)
+			for(var/obj/effect/legacy_hull_shield/shield_tile in deployed_shields)
 				new_power_usage += shield_tile.shield_idle_power
 
 			if (new_power_usage != idle_power_usage)

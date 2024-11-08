@@ -1,7 +1,7 @@
 //
 // This is the shield effect object for the supercool shield gens.
 //
-/obj/effect/shield
+/obj/effect/energy_shield
 	name = "energy shield"
 	desc = "An impenetrable field of energy, capable of blocking anything as long as it's active."
 	icon = 'icons/obj/machines/shielding_vr.dmi'
@@ -18,13 +18,13 @@
 	var/enabled_icon_state
 	var/list/pending_overlays
 
-/obj/effect/shield/proc/update_visuals()
+/obj/effect/energy_shield/proc/update_visuals()
 	update_iconstate()
 	update_color()
 	update_glow()
 	update_opacity()
 
-/obj/effect/shield/proc/update_iconstate()
+/obj/effect/energy_shield/proc/update_iconstate()
 	if(!enabled_icon_state)
 		enabled_icon_state = icon_state
 
@@ -41,7 +41,7 @@
 			set_overlays(pending_overlays)
 			pending_overlays = null
 
-/obj/effect/shield/proc/update_color()
+/obj/effect/energy_shield/proc/update_color()
 	if(disabled_for || diffused_for)
 		color = "#FFA500"
 	else if(gen?.check_flag(MODEFLAG_OVERCHARGE))
@@ -49,13 +49,13 @@
 	else
 		color = "#00AAFF"
 
-/obj/effect/shield/proc/update_glow()
+/obj/effect/energy_shield/proc/update_glow()
 	if(density)
 		set_light(3, 3, "#66FFFF")
 	else
 		set_light(0)
 
-/obj/effect/shield/proc/update_opacity()
+/obj/effect/energy_shield/proc/update_opacity()
 	if(gen?.check_flag(MODEFLAG_PHOTONIC) && !disabled_for && !diffused_for)
 		set_opacity(1)
 	else
@@ -63,12 +63,12 @@
 
 // Prevents singularities and pretty much everything else from moving the field segments away.
 // The only thing that is allowed to move us is the Destroy() proc.
-/obj/effect/shield/forceMove()
+/obj/effect/energy_shield/forceMove()
 	if(QDELING(src))
 		return ..()
 	return FALSE
 
-/obj/effect/shield/Destroy()
+/obj/effect/energy_shield/Destroy()
 	if(CanAtmosPass != ATMOS_PASS_NOT_BLOCKED)
 		update_nearby_tiles() //Force ZAS update
 	. = ..()
@@ -80,7 +80,7 @@
 		gen = null
 
 // Temporarily collapses this shield segment.
-/obj/effect/shield/proc/fail(var/duration)
+/obj/effect/energy_shield/proc/fail(var/duration)
 	if(duration <= 0)
 		return
 
@@ -94,7 +94,7 @@
 	update_explosion_resistance()
 
 // Regenerates this shield segment.
-/obj/effect/shield/proc/regenerate()
+/obj/effect/energy_shield/proc/regenerate()
 	if(!gen)
 		return
 
@@ -108,7 +108,7 @@
 		update_explosion_resistance()
 		gen.damaged_segments -= src
 
-/obj/effect/shield/proc/diffuse(var/duration)
+/obj/effect/energy_shield/proc/diffuse(var/duration)
 	// The shield is trying to counter diffusers. Cause lasting stress on the shield.
 	if(gen?.check_flag(MODEFLAG_BYPASS) && !disabled_for)
 		take_damage_legacy(duration * rand(8, 12), SHIELD_DAMTYPE_EM)
@@ -122,7 +122,7 @@
 	update_nearby_tiles() //Force ZAS update
 	update_explosion_resistance()
 
-/obj/effect/shield/attack_generic(var/source, var/damage, var/emote)
+/obj/effect/energy_shield/attack_generic(var/source, var/damage, var/emote)
 	take_damage_legacy(damage, SHIELD_DAMTYPE_PHYSICAL)
 	if(gen.check_flag(MODEFLAG_OVERCHARGE) && istype(source, /mob/living/))
 		overcharge_shock(source)
@@ -130,14 +130,14 @@
 
 
 // Fails shield segments in specific range. Range of 1 affects the shielded turf only.
-/obj/effect/shield/proc/fail_adjacent_segments(var/range, var/hitby = null)
+/obj/effect/energy_shield/proc/fail_adjacent_segments(var/range, var/hitby = null)
 	if(hitby)
 		visible_message("<span class='danger'>\The [src] flashes a bit as \the [hitby] collides with it, eventually fading out in a rain of sparks!</span>")
 	else
 		visible_message("<span class='danger'>\The [src] flashes a bit as it eventually fades out in a rain of sparks!</span>")
 	fail(range * 2)
 
-	for(var/obj/effect/shield/S in range(range, src))
+	for(var/obj/effect/energy_shield/S in range(range, src))
 		// Don't affect shields owned by other shield generators
 		if(S.gen != src.gen)
 			continue
@@ -145,9 +145,9 @@
 		S.fail(-(-range + get_dist(src, S)) * 2)
 
 // Small visual effect, makes the shield tiles brighten up by becoming more opaque for a moment, and spreads to nearby shields.
-/obj/effect/shield/proc/flash_adjacent_segments(var/range)
+/obj/effect/energy_shield/proc/flash_adjacent_segments(var/range)
 	range = between(1, range, 10) // Sanity check
-	for(var/obj/effect/shield/S in range(range, src))
+	for(var/obj/effect/energy_shield/S in range(range, src))
 		// Don't affect shields owned by other shield generators
 		if(S.gen != src.gen || S == src)
 			continue
@@ -157,15 +157,15 @@
 	impact_flash()
 
 // Small visual effect, makes the shield tiles brighten up by becoming more opaque for a moment
-/obj/effect/shield/proc/impact_flash()
+/obj/effect/energy_shield/proc/impact_flash()
 	alpha = 100
 	animate(src, alpha = initial(alpha), time = 1 SECOND)
 
 // Just for fun
-/obj/effect/shield/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
+/obj/effect/energy_shield/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
 	flash_adjacent_segments(3)
 
-/obj/effect/shield/proc/take_damage_legacy(var/damage, var/damtype, var/hitby)
+/obj/effect/energy_shield/proc/take_damage_legacy(var/damage, var/damtype, var/hitby)
 	if(!gen)
 		qdel(src)
 		return
@@ -199,7 +199,7 @@
 
 
 // As we have various shield modes, this handles whether specific things can pass or not.
-/obj/effect/shield/CanAllowThrough(var/atom/movable/mover, var/turf/target)
+/obj/effect/energy_shield/CanAllowThrough(var/atom/movable/mover, var/turf/target)
 	. = ..()
 	// Somehow we don't have a generator. This shouldn't happen. Delete the shield.
 	if(!gen)
@@ -213,7 +213,7 @@
 		return mover.can_pass_shield(gen)
 	return 1
 
-/obj/effect/shield/proc/set_can_atmos_pass(var/new_value)
+/obj/effect/energy_shield/proc/set_can_atmos_pass(var/new_value)
 	if(new_value == CanAtmosPass)
 		return
 	CanAtmosPass = new_value
@@ -221,23 +221,23 @@
 
 
 // EMP. It may seem weak but keep in mind that multiple shield segments are likely to be affected.
-/obj/effect/shield/emp_act(var/severity)
+/obj/effect/energy_shield/emp_act(var/severity)
 	if(!disabled_for)
 		take_damage_legacy(rand(30,60) / severity, SHIELD_DAMTYPE_EM)
 
 
 // Explosions
-/obj/effect/shield/legacy_ex_act(var/severity)
+/obj/effect/energy_shield/legacy_ex_act(var/severity)
 	if(!disabled_for)
 		take_damage_legacy(rand(10,15) / severity, SHIELD_DAMTYPE_PHYSICAL)
 
 // Fire
-/obj/effect/shield/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+/obj/effect/energy_shield/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(!disabled_for)
 		take_damage_legacy(rand(5,10), SHIELD_DAMTYPE_HEAT)
 
 // Projectiles
-/obj/effect/shield/on_bullet_act(obj/projectile/proj, impact_flags, list/bullet_act_args)
+/obj/effect/energy_shield/on_bullet_act(obj/projectile/proj, impact_flags, list/bullet_act_args)
 	impact_flags &= ~PROJECTILE_IMPACT_FLAGS_SHOULD_NOT_HIT
 	. = ..()
 	if(proj.damage_type == DAMAGE_TYPE_BURN)
@@ -248,7 +248,7 @@
 		take_damage_legacy(proj.get_structure_damage(), SHIELD_DAMTYPE_EM)
 
 // Attacks with hand tools. Blocked by Hyperkinetic flag.
-/obj/effect/shield/attackby(var/obj/item/I as obj, var/mob/user as mob)
+/obj/effect/energy_shield/attackby(var/obj/item/I as obj, var/mob/user as mob)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(src)
 
@@ -265,7 +265,7 @@
 
 
 // Special treatment for meteors because they would otherwise penetrate right through the shield.
-/obj/effect/shield/Bumped(var/atom/movable/mover)
+/obj/effect/energy_shield/Bumped(var/atom/movable/mover)
 	if(!gen)
 		qdel(src)
 		return FALSE
@@ -273,18 +273,18 @@
 	return ..()
 
 // Meteors call this instad of Bumped for some reason
-/obj/effect/shield/handle_meteor_impact(var/obj/effect/meteor/meteor)
+/obj/effect/energy_shield/handle_meteor_impact(var/obj/effect/meteor/meteor)
 	meteor.shield_impact(src)
 	return !QDELETED(meteor) // If it was stopped it will have been deleted
 
-/obj/effect/shield/proc/overcharge_shock(var/mob/living/M)
+/obj/effect/energy_shield/proc/overcharge_shock(var/mob/living/M)
 	M.adjustFireLoss(rand(20, 40))
 	M.afflict_paralyze(20 * 5)
 	to_chat(M, "<span class='danger'>As you come into contact with \the [src] a surge of energy paralyses you!</span>")
 	take_damage_legacy(10, SHIELD_DAMTYPE_EM)
 
 // Called when a flag is toggled. Can be used to add on-toggle behavior, such as visual changes.
-/obj/effect/shield/proc/flags_updated()
+/obj/effect/energy_shield/proc/flags_updated()
 	if(!gen)
 		qdel(src)
 		return
@@ -294,7 +294,7 @@
 	update_visuals()
 	update_explosion_resistance()
 
-/obj/effect/shield/proc/update_explosion_resistance()
+/obj/effect/energy_shield/proc/update_explosion_resistance()
 	if(gen && gen.check_flag(MODEFLAG_HYPERKINETIC))
 		explosion_resistance = INFINITY
 	else
@@ -346,15 +346,15 @@
 
 
 // Shield on-impact logic here. This is called only if the object is actually blocked by the field (can_pass_shield applies first)
-/atom/movable/proc/shield_impact(var/obj/effect/shield/S)
+/atom/movable/proc/shield_impact(var/obj/effect/energy_shield/S)
 	return
 
-/mob/living/shield_impact(var/obj/effect/shield/S)
+/mob/living/shield_impact(var/obj/effect/energy_shield/S)
 	if(!S.gen.check_flag(MODEFLAG_OVERCHARGE))
 		return
 	S.overcharge_shock(src)
 
-/obj/effect/meteor/shield_impact(var/obj/effect/shield/S)
+/obj/effect/meteor/shield_impact(var/obj/effect/energy_shield/S)
 	if(!S.gen.check_flag(MODEFLAG_HYPERKINETIC))
 		return
 	S.take_damage_legacy(get_shield_damage(), SHIELD_DAMTYPE_PHYSICAL, src)

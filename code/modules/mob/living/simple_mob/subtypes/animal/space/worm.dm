@@ -308,8 +308,8 @@
 						D.open(TRUE)
 						break
 
-			if(istype(objectOrMob, /obj/effect/energy_field))
-				var/obj/effect/energy_field/EF = objectOrMob
+			if(istype(objectOrMob, /obj/effect/legacy_energy_shield))
+				var/obj/effect/legacy_energy_shield/EF = objectOrMob
 				objectOrMob = null	// No eating shields.
 				if(EF.opacity)
 					EF.visible_message("<span class='danger'>Something begins forcing itself through \the [EF]!</span>")

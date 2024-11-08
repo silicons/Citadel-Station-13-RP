@@ -30,11 +30,11 @@
 
 	for(var/direction in GLOB.cardinal)
 		var/turf/simulated/shielded_tile = get_step(get_turf(src), direction)
-		for(var/obj/effect/shield/S in shielded_tile)
+		for(var/obj/effect/energy_shield/S in shielded_tile)
 			if(istype(S) && !S.diffused_for && !S.disabled_for && cell.checked_use_scaled(CELL_COST_SHIELD_DIFFUSION))
 				S.diffuse(20)
 		// Legacy shield support
-		for(var/obj/effect/energy_field/S in shielded_tile)
+		for(var/obj/effect/legacy_energy_shield/S in shielded_tile)
 			if(istype(S) && cell.checked_use_scaled(CELL_COST_SHIELD_DIFFUSION))
 				qdel(S)
 

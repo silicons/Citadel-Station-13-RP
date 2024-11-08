@@ -123,7 +123,7 @@
 		return
 
 	to_chat(user, "Emergency forcefield projection completed.")
-	new/obj/machinery/shield/malfai(T)
+	new/obj/effect/legacy_hull_shield/malfai(T)
 	user.hacking = 1
 	spawn(20)
 		user.hacking = 0
