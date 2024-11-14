@@ -2,15 +2,16 @@
 //* Copyright (c) 2024 Citadel Station Developers           *//
 
 /**
- * AI holders
+ * # AI Holders
  *
  * Generic AI holders that can bind to the /movable level
  *
  * Most, however, are probably on /mob.
  *
- * Base API:
- * * IFF API is a standard system for AI holders to identify who's a friend / foe. It can be overridden
- *   as needed on subtypes, but has a default implementation.
+ * ## Base API
+ *
+ * * Adapter API is a capability discovery system for AI holders to scan for what they can do with a given agent.
+ * * IFF API is a standard system for AI holders to identify who's a friend / foe. It can be overridden as needed on subtypes, but has a default implementation.
  * * Movement API allows registering on the movement subsystem, as well as efficient, variable-length 're-schedule' delays.
  * * Networking API allows networking AIs together so they can share data.
  * * Pathfinding API allows AIs to request pathfinding.
@@ -19,20 +20,12 @@
  * * Pathfinding API allows using various pathfinding datums to perform pathfinding. Please use it instead of raw calls for timekeeping purposes.
  * * Scheduling API allows for efficiently scheduling short-term callbacks to execute on the holder.
  *
- * Base features:
- * * base /datum/ai_holder, meant for movable atoms; usually this is however, for mobs and certain objs.
- * * base /datum/ai_network, meant to stitch multiple AIs together.
- * * base /datum/ai_pathing, meant to encapsulate pathfinding results.
- * * base /datum/ai_steering, meant for encapsulating and abstracting movement loops.
- * * base /datum/ai_targeting, meant to be used to track a moving target for.
- *   heuristic aiming
+ * ## Limitations
  *
- * Services
- *
- * Limitations
  * * Right now, these can only bind to a /movable, not a /datum. There's little need to have /datum level AI. Yet.
  *
- * Notes:
+ * ## Notes
+ *
  * * When implementing an ai_holder, feel free to cast all 'agent' accesses into the real type that it is, as opposed to just /atom/movable.
  */
 /datum/ai_holder

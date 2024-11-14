@@ -29,7 +29,7 @@
 /datum/ai_holder/proc/telegraph(time, priority, flags, datum/callback/on_success, datum/callback/on_finish)
 	set waitfor = FALSE
 	var/result = telegraph_sync(time, priority)
-	if(result == AI_TELEGRAPH_SUCCESS)
+	if(result == AI_TELEGRAPH_STATUS_SUCCESS)
 		on_success?.InvokeAsync()
 	on_finish?.InvokeAsync(result)
 
@@ -66,7 +66,7 @@
 
 	var/our_notch = telegraph_notch
 	while(world.time < end_time)
-		sleep(min(end_time - world.time, 1 SECONDS)0)
+		sleep(min(end_time - world.time, 1 SECONDS))
 		if(our_notch != telegraph_notch)
 			return AI_TELEGRAPH_STATUS_INTERRUPTED
 
