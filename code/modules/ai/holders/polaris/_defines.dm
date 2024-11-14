@@ -10,17 +10,17 @@
 
 // Logging level defines.
 /// Don't show anything.
-#define AI_LOG_OFF		0
+#define AI_LOG_LEGACY_OFF		0
 /// Show logs of things likely causing the mob to not be functioning correctly.
-#define AI_LOG_ERROR	1
+#define AI_LOG_LEGACY_ERROR	1
 /// Show less serious but still helpful to know issues that might be causing things to work incorrectly.
-#define AI_LOG_WARNING	2
+#define AI_LOG_LEGACY_WARNING	2
 /// Important regular events, like selecting a target or switching stances.
-#define AI_LOG_INFO		3
+#define AI_LOG_LEGACY_INFO		3
 /// More detailed information about the flow of execution.
-#define AI_LOG_DEBUG	4
+#define AI_LOG_LEGACY_DEBUG	4
 /// Even more detailed than the last. Will absolutely flood your chatlog.
-#define AI_LOG_TRACE	5
+#define AI_LOG_LEGACY_TRACE	5
 // Results of pre-movement checks.
 // Todo: Move outside AI code?
 /// Recently moved and needs to try again soon.

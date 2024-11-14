@@ -7,54 +7,54 @@
 	var/follow_until_time = 0			// world.time when the mob will stop following leader. 0 means it won't time out.
 
 /datum/ai_holder/polaris/proc/walk_to_leader()
-	ai_log("walk_to_leader() : Entering.",AI_LOG_TRACE)
+	ai_log("walk_to_leader() : Entering.",AI_LOG_LEGACY_TRACE)
 	if(!leader)
-		ai_log("walk_to_leader() : No leader.", AI_LOG_WARNING)
+		ai_log("walk_to_leader() : No leader.", AI_LOG_LEGACY_WARNING)
 		forget_path()
 		set_stance(STANCE_IDLE)
-		ai_log("walk_to_leader() : Exiting.", AI_LOG_TRACE)
+		ai_log("walk_to_leader() : Exiting.", AI_LOG_LEGACY_TRACE)
 		return
 
 	// Did we time out?
 	if(follow_until_time && world.time > follow_until_time)
-		ai_log("walk_to_leader() : Follow timed out, losing leader.", AI_LOG_INFO)
+		ai_log("walk_to_leader() : Follow timed out, losing leader.", AI_LOG_LEGACY_INFO)
 		lose_follow()
 		set_stance(STANCE_IDLE)
-		ai_log("walk_to_leader() : Exiting.", AI_LOG_TRACE)
+		ai_log("walk_to_leader() : Exiting.", AI_LOG_LEGACY_TRACE)
 		return
 
 	var/get_to = follow_distance
 	var/distance = get_dist(holder, leader)
-	ai_log("walk_to_leader() : get_to is [get_to].", AI_LOG_TRACE)
+	ai_log("walk_to_leader() : get_to is [get_to].", AI_LOG_LEGACY_TRACE)
 
 	// We're here!
 	if(distance <= get_to)
 		give_up_movement()
 		set_stance(STANCE_IDLE)
-		ai_log("walk_to_leader() : Within range, exiting.", AI_LOG_INFO)
+		ai_log("walk_to_leader() : Within range, exiting.", AI_LOG_LEGACY_INFO)
 		return
 
-	ai_log("walk_to_leader() : Walking.", AI_LOG_TRACE)
+	ai_log("walk_to_leader() : Walking.", AI_LOG_LEGACY_TRACE)
 	walk_path(leader, get_to)
-	ai_log("walk_to_leader() : Exiting.",AI_LOG_DEBUG)
+	ai_log("walk_to_leader() : Exiting.",AI_LOG_LEGACY_DEBUG)
 
 /datum/ai_holder/polaris/proc/set_follow(mob/living/L, follow_for = 0)
-	ai_log("set_follow() : Entered.", AI_LOG_DEBUG)
+	ai_log("set_follow() : Entered.", AI_LOG_LEGACY_DEBUG)
 	if(!L)
-		ai_log("set_follow() : Was told to follow a nonexistant mob.", AI_LOG_ERROR)
+		ai_log("set_follow() : Was told to follow a nonexistant mob.", AI_LOG_LEGACY_ERROR)
 		return FALSE
 
 	leader = L
 	follow_until_time = !follow_for ? 0 : world.time + follow_for
-	ai_log("set_follow() : Exited.", AI_LOG_DEBUG)
+	ai_log("set_follow() : Exited.", AI_LOG_LEGACY_DEBUG)
 	return TRUE
 
 /datum/ai_holder/polaris/proc/lose_follow()
-	ai_log("lose_follow() : Entered.", AI_LOG_DEBUG)
-	ai_log("lose_follow() : Going to lose leader [leader].", AI_LOG_INFO)
+	ai_log("lose_follow() : Entered.", AI_LOG_LEGACY_DEBUG)
+	ai_log("lose_follow() : Going to lose leader [leader].", AI_LOG_LEGACY_INFO)
 	leader = null
 	give_up_movement()
-	ai_log("lose_follow() : Exited.", AI_LOG_DEBUG)
+	ai_log("lose_follow() : Exited.", AI_LOG_LEGACY_DEBUG)
 
 /datum/ai_holder/polaris/proc/should_follow_leader()
 	if(!leader)

@@ -170,7 +170,7 @@ SUBSYSTEM_DEF(ai_movement)
  */
 /datum/controller/subsystem/ai_movement/proc/register_moving(datum/ai_holder/holder, delay, allow_load_balancing = TRUE, load_balancing_low = 0, load_balancing_high = 2)
 	if(holder.movement_ticking)
-		return FALSE
+		return TRUE
 	// allow load balancing basically just tells ai movement that it can delay us by a
 	// tick or two to spread the work over more ticks.
 	//
@@ -199,7 +199,7 @@ SUBSYSTEM_DEF(ai_movement)
 
 /datum/controller/subsystem/ai_movement/proc/unregister_moving(datum/ai_holder/holder)
 	if(!holder.movement_ticking)
-		return FALSE
+		return TRUE
 	var/datum/ai_holder/next
 	if(holder.movement_bucket_position)
 		if(holder.movement_bucket_next != holder)

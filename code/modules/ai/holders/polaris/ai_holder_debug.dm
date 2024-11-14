@@ -12,7 +12,7 @@
 
 	var/stance_coloring = FALSE						// Colors the mob depending on its stance.
 
-	var/debug_ai = AI_LOG_OFF						// The level of debugging information to display to people who can see log_debug().
+	var/debug_ai = AI_LOG_LEGACY_OFF						// The level of debugging information to display to people who can see log_debug().
 
 /datum/ai_holder/polaris/New()
 	..()
@@ -25,20 +25,20 @@
 	return ..()
 
 //For debug purposes!
-/datum/ai_holder/polaris/proc/ai_log_output(var/msg = "missing message", var/ver = AI_LOG_INFO)
+/datum/ai_holder/polaris/proc/ai_log_output(var/msg = "missing message", var/ver = AI_LOG_LEGACY_INFO)
 	var/span_type
 	switch(ver)
-		if(AI_LOG_OFF)
+		if(AI_LOG_LEGACY_OFF)
 			return
-		if(AI_LOG_ERROR)
+		if(AI_LOG_LEGACY_ERROR)
 			span_type = "debug_error"
-		if(AI_LOG_WARNING)
+		if(AI_LOG_LEGACY_WARNING)
 			span_type = "debug_warning"
-		if(AI_LOG_INFO)
+		if(AI_LOG_LEGACY_INFO)
 			span_type = "debug_info"
-		if(AI_LOG_DEBUG)
+		if(AI_LOG_LEGACY_DEBUG)
 			span_type = "debug_debug" // RAS syndrome at work.
-		if(AI_LOG_TRACE)
+		if(AI_LOG_LEGACY_TRACE)
 			span_type = "debug_trace"
 	if(ver <= debug_ai)
 		log_debug("<span class='[span_type]'>AI: ([holder]:\ref[holder] | [holder.x],[holder.y],[holder.z])(@[world.time]): [msg] </span>")
@@ -75,7 +75,7 @@
 	stance_coloring = TRUE
 	path_display = TRUE
 	last_turf_display = TRUE
-	debug_ai = AI_LOG_INFO
+	debug_ai = AI_LOG_LEGACY_INFO
 
 /datum/ai_holder/polaris/hostile/debug
 	wander = FALSE
@@ -85,5 +85,5 @@
 	stance_coloring = TRUE
 	path_display = TRUE
 	last_turf_display = TRUE
-	debug_ai = AI_LOG_INFO
+	debug_ai = AI_LOG_LEGACY_INFO
 

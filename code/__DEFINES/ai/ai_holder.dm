@@ -1,7 +1,40 @@
 //* This file is explicitly licensed under the MIT license. *//
-//* Copyright (c) 2024 silicons                             *//
+//* Copyright (c) 2024 Citadel Station Developers           *//
 
-//* Ticking
+//* IFF - Results *//
+
+#define AI_IFF_ALLIED 4
+#define AI_IFF_FRIENDLY 3
+#define AI_IFF_NEUTRAL 2
+#define AI_IFF_HOSTILE 1
+
+//* Telegraph - Priority *//
+
+/// do random crap
+#define AI_TELEGRAPH_PRIORITY_BACKGROUND -10
+/// use med item
+#define AI_TELEGRAPH_PRIORITY_RECOVERY -10
+/// throw grenade
+#define AI_TELEGRAPH_PRIORITY_ATTACK -5
+/// default priority for AI telegraphs
+#define AI_TELEGRAPH_PRIORITY_DEFAULT 0
+/// livesaving actions
+#define AI_TELEGRAPH_PRIORITY_SURVIVAL 5
+
+//* Telegraph - Flags *//
+
+#warn impl
+
+//* Telegraph - Status *//
+
+/// successful telegraph
+#define AI_TELEGRAPH_STATUS_SUCCESS 1
+/// we were interrupted by a higher priority telegraph or interrupt
+#define AI_TELEGRAPH_STATUS_INTERRUPTED 2
+/// a higher priority telegraph was already ongoing
+#define AI_TELEGRAPH_STATUS_YIELDED 3
+
+//* Ticking *//
 
 /// AI scheduling bucket limit
 ///

@@ -16,6 +16,34 @@
 
 	iff_factions = MOB_IFF_FACTION_BIND_AUTO
 
+	//* AI Holders *//
+
+	/// AI network ID.
+	///
+	/// * We will network with any mob in the same mapload with the same network ID, if set
+	/// * This will be mangled by the same mapload unit. This means that we cannot have
+	///   automatic AI networks that span further than a map template / level / map, depending
+	///   on what dmm_context is used at the time of load.
+	/// * This is for mappers only.
+	///
+	/// todo: a way to do a global network ID? this is an optimization issue due to
+	///       the issues of having AI holders spread out across multiple zlevels
+	///       while on the same network, but might be useful for things like having
+	///       templates able to reinforce each other.
+	VAR_PRIVATE/ai_holder_mapload_network_id
+	/// Global networking enable flag.
+	///
+	/// * Instead of forming a network with only our dmm_context,
+	///   this makes the AI holder network with anything logically within reach,
+	///   which is usually any other AI holder with the same network ID within
+	///   the same sector.
+	/// * This is for mappers only.
+	///
+	/// todo: This is only half-implemented. See above.
+	VAR_PRIVATE/ai_holder_mapload_network_global = FALSE
+
+	#warn impl & hook
+
 	//? Attacks - Basic
 	/// melee style
 	var/datum/unarmed_attack/melee_style

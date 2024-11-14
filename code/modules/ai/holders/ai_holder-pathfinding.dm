@@ -1,6 +1,5 @@
-
 //* This file is explicitly licensed under the MIT license. *//
-//* Copyright (c) 2024 Citadel Station developers.          *//
+//* Copyright (c) 2024 Citadel Station Developers           *//
 
 /datum/ai_holder
 	/// our default pathfinding type
