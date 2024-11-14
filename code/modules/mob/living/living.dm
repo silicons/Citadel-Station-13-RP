@@ -4,7 +4,7 @@ TYPE_REGISTER_SPATIAL_GRID(/mob/living, SSspatial_grids.living)
 	// make radiation sensitive
 	AddComponent(/datum/component/radiation_listener)
 	AddElement(/datum/element/z_radiation_listener)
-
+	
 	if(ai_holder_type && !ai_holder)
 		ai_holder = new ai_holder_type(src)
 

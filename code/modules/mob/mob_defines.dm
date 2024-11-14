@@ -14,6 +14,13 @@
 	rad_flags = NONE
 	atom_colouration_system = TRUE
 
+	//* AI Holders *//
+	/// Our intrinsic AI adapter, if any. Set to typepath for lazy init.
+	///
+	/// * This should never be edited whether by admins or mappers, as this describes an API adapter.
+	var/tmp/datum/ai_adapter/ai_holder_adapter
+	#warn impl and hook
+
 	//? Core
 	/// mobs use ids as ref tags instead of actual refs.
 	var/static/next_mob_id = 0

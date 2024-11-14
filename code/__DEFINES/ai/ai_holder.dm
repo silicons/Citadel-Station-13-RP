@@ -4,9 +4,8 @@
 //* Adapter Types *//
 
 #define AI_ADAPTER_TYPE_ATTACK (1<<0)
-#define AI_ADAPTER_TYPE_DEFENSE (1<<1)
-#define AI_ADAPTER_TYPE_RECOVERY (1<<2)
-#define AI_ADAPTER_TYPE_MANEUVER (1<<3)
+#define AI_ADAPTER_TYPE_MANEUVER (1<<1)
+#define AI_ADAPTER_TYPE_SPLASH (1<<2)
 
 //* IFF - Results *//
 
