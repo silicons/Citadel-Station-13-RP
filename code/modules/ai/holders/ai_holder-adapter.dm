@@ -8,3 +8,8 @@
 	var/adapter_types = NONE
 
 #warn impl
+
+
+/datum/ai_holder/proc/register_adapter(datum/ai_adapter/adapter)
+
+/datum/ai_holder/proc/unregister_adapter(datum/ai_adapter/adapter)

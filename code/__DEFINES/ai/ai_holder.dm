@@ -1,12 +1,6 @@
 //* This file is explicitly licensed under the MIT license. *//
 //* Copyright (c) 2024 Citadel Station Developers           *//
 
-//* Adapter Types *//
-
-#define AI_ADAPTER_TYPE_ATTACK (1<<0)
-#define AI_ADAPTER_TYPE_MANEUVER (1<<1)
-#define AI_ADAPTER_TYPE_SPLASH (1<<2)
-
 //* IFF - Results *//
 
 #define AI_IFF_FRIENDLY 3

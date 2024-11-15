@@ -1,6 +1,7 @@
-// Reorganized and somewhat cleaned up.
-// AI code has been made into a datum, inside the AI module folder.
-
+/**
+ * Simple mobs. They don't have species, have default and simple (as name implies) handling for melee
+ * and ranged attacks, simplified Life() and processing, etc.
+ */
 /mob/living/simple_mob
 	name = "animal"
 	desc = ""
@@ -18,6 +19,7 @@
 
 	//* AI Holders *//
 
+	ai_holder_adapter = /datum/ai_adapter/simple_mob
 	/// AI network ID.
 	///
 	/// * We will network with any mob in the same mapload with the same network ID, if set

@@ -17,8 +17,14 @@
 	/// * This is used for prefiltering. The actual check happens in a proc.
 	var/maneuver_range_high
 
+/**
+ * @return AI_ADAPTER_STATUS_* or /datum/ai_adapter_return
+ */
 /datum/ai_adapter/proc/query_maneuver(datum/ai_holder/requesting, turf/target)
 
+/**
+ * @return AI_ADAPTER_STATUS_* or /datum/ai_adapter_return
+ */
 /datum/ai_adapter/proc/run_maneuver(datum/ai_holder/requesting, turf/target)
 
 #warn impl
