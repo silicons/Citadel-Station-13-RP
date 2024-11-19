@@ -15,7 +15,7 @@
 	if(istype(target,/mob/living))
 		var/mob/living/M = target
 		if(M.stat>1) return
-		if(chassis.occupant_legacy.a_intent == INTENT_HARM || istype(chassis.occupant_legacy,/mob/living/carbon/brain)) //No tactile feedback for brains
+		if(chassis.occupant_legacy.a_intent == INTENT_HARM || istype(chassis.occupant_legacy,/mob/brain)) //No tactile feedback for brains
 			M.apply_damage(dam_force, DAMAGE_TYPE_BRUTE)
 			M.adjustOxyLoss(round(dam_force/2))
 			M.update_health()
@@ -80,7 +80,7 @@
 	if(istype(target,/mob/living))
 		var/mob/living/M = target
 		if(M.stat>1) return
-		if(chassis.occupant_legacy.a_intent == INTENT_HARM || istype(chassis.occupant_legacy,/mob/living/carbon/brain)) //No tactile feedback for brains
+		if(chassis.occupant_legacy.a_intent == INTENT_HARM || istype(chassis.occupant_legacy,/mob/brain)) //No tactile feedback for brains
 			M.apply_damage(dam_force, DAMAGE_TYPE_BURN)
 			M.adjust_fire_stacks(1)
 			M.update_health()

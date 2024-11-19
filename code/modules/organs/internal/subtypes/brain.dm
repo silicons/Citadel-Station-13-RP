@@ -15,7 +15,7 @@
 	attack_verb = list("attacked", "slapped", "whacked")
 	var/health = 400 //They need to live awhile longer than other organs. Is this even used by organ code anymore?
 	var/clone_source = FALSE
-	var/mob/living/carbon/brain/brainmob = null
+	var/mob/brain/brainmob = null
 	var/can_assist = TRUE
 
 /obj/item/organ/internal/brain/Initialize(mapload, ...)

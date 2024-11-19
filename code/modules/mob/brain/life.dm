@@ -1,7 +1,7 @@
-/mob/living/carbon/brain/handle_breathing()
+/mob/brain/handle_breathing()
 	return
 
-/mob/living/carbon/brain/handle_mutations_and_radiation(seconds)
+/mob/brain/handle_mutations_and_radiation(seconds)
 	// todo; deal with this
 	// removed for now because why do we even tick brains this way??
 
@@ -37,7 +37,7 @@
 	// 			update_health()
 
 
-/mob/living/carbon/brain/handle_environment(datum/gas_mixture/environment)
+/mob/brain/handle_environment(datum/gas_mixture/environment)
 	if(!environment)
 		return
 	var/environment_heat_capacity = environment.heat_capacity()
@@ -53,11 +53,7 @@
 	if(stat==2)
 		bodytemperature += 0.1*(environment.temperature - bodytemperature)*environment_heat_capacity/(environment_heat_capacity + 270000)
 
-	//Account for massive pressure differences
-
-	return //TODO: DEFERRED
-
-/mob/living/carbon/brain/proc/handle_temperature_damage(body_part, exposed_temperature, exposed_intensity)
+/mob/brain/proc/handle_temperature_damage(body_part, exposed_temperature, exposed_intensity)
 	if(status_flags & STATUS_GODMODE) return
 
 	if(exposed_temperature > bodytemperature)
@@ -65,20 +61,13 @@
 		//adjustFireLoss(2.5*discomfort)
 		//adjustFireLoss(5.0*discomfort)
 		adjustFireLoss(20.0*discomfort)
-
 	else
 		var/discomfort = min( abs(exposed_temperature - bodytemperature)*(exposed_intensity)/2000000, 1.0)
 		//adjustFireLoss(2.5*discomfort)
 		adjustFireLoss(5.0*discomfort)
 
 
-/mob/living/carbon/brain/handle_chemicals_in_body()
-	chem_effects.Cut()
-
-	if(touching) touching.metabolize()
-	if(ingested) ingested.metabolize()
-	if(bloodstr) bloodstr.metabolize()
-
+/mob/brain/handle_chemicals_in_body()
 	// decrement dizziness counter, clamped to 0
 	if(resting)
 		dizziness = max(0, dizziness - 5)
@@ -87,9 +76,7 @@
 
 	update_health()
 
-	return //TODO: DEFERRED
-
-/mob/living/carbon/brain/handle_regular_UI_updates()	//TODO: comment out the unused bits >_>
+/mob/brain/handle_regular_UI_updates()	//TODO: comment out the unused bits >_>
 	update_health()
 
 	if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
@@ -154,7 +141,7 @@
 
 	return 1
 
-/mob/living/carbon/brain/handle_regular_hud_updates()
+/mob/brain/handle_regular_hud_updates()
 	if (healths)
 		if (stat != DEAD)
 			switch(health)

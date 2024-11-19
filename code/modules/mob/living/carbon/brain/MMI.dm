@@ -1,3 +1,35 @@
+/datum/category_item/catalogue/fauna/brain
+	name = "Heuristic Processor"
+	desc = "Sapient life in all of its many forms requires some version \
+	of heuristic learning mechanism. From organic neural tissue to silicon \
+	chips with personality matrices, this processor may take any number of \
+	forms."
+	value = CATALOGUER_REWARD_TRIVIAL
+	unlocked_by_any = list(/datum/category_item/catalogue/fauna/brain)
+
+// Obtained by scanning all Brains.
+/datum/category_item/catalogue/fauna/all_brains
+	name = "Collection - Heuristics"
+	desc = "You have scanned a large array of different types of heuristic \
+	processor, and therefore you have been granted a fair sum of points, \
+	through this entry."
+	value = CATALOGUER_REWARD_EASY
+	unlocked_by_all = list(
+		/datum/category_item/catalogue/fauna/brain/organic,
+		/datum/category_item/catalogue/fauna/brain/assisted,
+		/datum/category_item/catalogue/fauna/brain/posibrain,
+		/datum/category_item/catalogue/fauna/brain/robotic
+		)
+
+/datum/category_item/catalogue/fauna/brain/organic
+	name = "Heuristics - Organic"
+	desc = "Generally the most recognizable form of processor, the brain \
+	is a densely packed network of neurons which fire electrical impulses \
+	between themselves in a complex pseudo-quantum method of rapid computation. \
+	Although other organic life forms possess similar analogues, the Galactic \
+	community refers to the organic processor by the human term: 'brain'."
+	value = CATALOGUER_REWARD_TRIVIAL
+
 /datum/category_item/catalogue/fauna/brain/assisted
 	name = "Heuristics - Assisted"
 	desc = "The Man Machine Interface, or MMI, is comparatively ancient \
@@ -24,7 +56,7 @@
 
 	var/locked = FALSE
 	/// The current occupant.
-	var/mob/living/carbon/brain/brainmob = null
+	var/mob/brain/brainmob = null
 	/// The current brain organ.
 	var/obj/item/organ/internal/brain/brainobj = null
 	/// This does not appear to be used outside of reference in mecha.dm.
@@ -220,7 +252,7 @@
 	if(radio)
 		. += SPAN_NOTICE("There is a switch to toggle the radio system [radio.radio_enabled ? "off" : "on"].[brainobj ? " It is currently being covered by [brainobj]." : null]")
 	if(brainmob)
-		var/mob/living/carbon/brain/B = brainmob
+		var/mob/brain/B = brainmob
 		if(!B.key || !B.mind || B.stat == DEAD)
 			. += SPAN_WARNING("\The [src] indicates that the brain is completely unresponsive.")
 		else if(!B.client)

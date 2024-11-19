@@ -36,7 +36,7 @@
 		if(occupant_legacy)
 			pilot_image = get_compound_icon(occupant_legacy)
 
-			if(!istype(occupant_legacy, /mob/living/carbon/brain))
+			if(!istype(occupant_legacy, /mob/brain))
 
 				var/icon/Cutter
 

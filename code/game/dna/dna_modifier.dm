@@ -181,7 +181,7 @@
 /obj/machinery/dna_scannernew/proc/go_out()
 	if(!occupant|| locked)
 		return
-	if(istype(occupant,/mob/living/carbon/brain))
+	if(istype(occupant,/mob/brain))
 		for(var/obj/O in src)
 			if(istype(O,/obj/item/organ/internal/brain))
 				O.forceMove(loc)

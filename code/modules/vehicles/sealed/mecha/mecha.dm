@@ -674,7 +674,7 @@
 
 /obj/vehicle/sealed/mecha/relaymove(mob/user,direction)
 	if(user != src.occupant_legacy) //While not "realistic", this piece is player friendly.
-		if(istype(user,/mob/living/carbon/brain))
+		if(istype(user,/mob/brain))
 			to_chat(user, "<span class='warning'>You try to move, but you are not the pilot! The exosuit doesn't respond.</span>")
 			return 0
 		user.forceMove(get_turf(src))

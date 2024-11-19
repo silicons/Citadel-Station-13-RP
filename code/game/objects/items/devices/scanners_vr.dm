@@ -107,7 +107,7 @@ var/global/mob/living/carbon/human/dummy/mannequin/sleevemate_mob
 		if(SC)
 			output += "<br>"
 			output += "<b>Soulcatcher detected ([SC.brainmobs.len] minds)</b><br>"
-			for(var/mob/living/carbon/brain/caught_soul/mind in SC.brainmobs)
+			for(var/mob/brain/caught_soul/mind in SC.brainmobs)
 				output += "<i>[mind.name]: </i> [mind.transient == FALSE ? "\[<a href='?src=\ref[src];target=\ref[H];mindrelease=[mind.name]'>Load</a>\]" : "<span class='warning'>Incompatible</span>"]<br>"
 
 			if(stored_mind)
@@ -255,7 +255,7 @@ var/global/mob/living/carbon/human/dummy/mannequin/sleevemate_mob
 		var/datum/nifsoft/soulcatcher/SC = H.nif.imp_check(NIF_SOULCATCHER)
 		if(!SC)
 			return
-		for(var/mob/living/carbon/brain/caught_soul/soul in SC.brainmobs)
+		for(var/mob/brain/caught_soul/soul in SC.brainmobs)
 			if(soul.name == href_list["mindrelease"])
 				stored_mind = soul.mind
 				stored_mind.current = null
