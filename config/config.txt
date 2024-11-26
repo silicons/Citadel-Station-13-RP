@@ -1,6 +1,7 @@
 # You can use the "$include" directive to split your configs however you want
 
 $include entries/admin.txt
+$include entries/backend.txt
 $include entries/chat_bridge.txt
 $include entries/cross_server.txt
 $include entries/database.txt

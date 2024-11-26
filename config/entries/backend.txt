@@ -1,0 +1,5 @@
+### Filestores ###
+
+# backend.filestore.active
+# backend.filestore.root data/filestores
+# backend.filestore.webroot

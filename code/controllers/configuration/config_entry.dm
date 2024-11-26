@@ -10,8 +10,12 @@
 	/// Do not instantiate if type matches this.
 	abstract_type = /datum/config_entry
 
-	/// Read-only, this is determined by the last portion of the derived entry type
+	/// Our name / entry key.
+	///
+	/// * If not specified, this is determined by the last portion of the derived entry type
 	var/name
+	#warn patch this to not always default, and be case insensitive
+
 	/// The configured value for this entry. This shouldn't be initialized in code, instead set default
 	var/config_entry_value
 	/// Read-only default value for this config entry, used for resetting value to defaults when necessary. This is what config_entry_value is initially set to
@@ -245,7 +249,8 @@
 				new_value = new_list
 				continue_check_value = new_list.len
 		if(continue_check_value && continue_check_key && ValidateListEntry(new_key, new_value))
-			config_entry_value[new_key] = new_value
+			config_e
+ntry_value[new_key] = new_value
 			return TRUE
 	return FALSE
 
