@@ -249,8 +249,7 @@
 				new_value = new_list
 				continue_check_value = new_list.len
 		if(continue_check_value && continue_check_key && ValidateListEntry(new_key, new_value))
-			config_e
-ntry_value[new_key] = new_value
+			config_entry_value[new_key] = new_value
 			return TRUE
 	return FALSE
 
