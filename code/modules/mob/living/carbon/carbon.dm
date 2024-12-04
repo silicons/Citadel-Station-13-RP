@@ -1,5 +1,11 @@
+/mob/living/carbon
+	//* State *//
+	/// Food / nutrition / satiety holder.
+	var/datum/nutrition_holder/nutrition_holder
+
 /mob/living/carbon/Initialize(mapload)
 	. = ..()
+	nutrition_holder = new
 	//setup reagent holders
 	bloodstr = new/datum/reagent_holder/metabolism/bloodstream(500, src)
 	ingested = new/datum/reagent_holder/metabolism/ingested(500, src)
@@ -16,6 +22,7 @@
 		qdel(guts)
 	for(var/food in stomach_contents)
 		qdel(food)
+	QDEL_NULL(nutrition_holder)
 	return ..()
 
 /mob/living/carbon/init_inventory()
