@@ -24,11 +24,25 @@
 
 	// todo: above is legacy
 
-	//* Eating
+	//* Eating *//
+
 	/// eating bite sound
 	var/bite_sound = 'sound/items/eatfood.ogg'
 
+	//* Nutrition / Reagents / Effects *//
+
+	/// Nutrient types.
+	///
+	/// * These are effectively arbitrary tags. They can have behavior, be fluff, or just be inert.
+	/// * This is a flat list of `NUTRIENT_*`'s, associated to a value.
+	/// * This is automatically typelist/dedupe'd at runtime. This will then be **nulled out.**
+	///   Use inbuilt procs to manipulate this variable.
+	var/list/nutrient_types
+	/// Global cache for nutrient types
+	var/static/list/initial_nutrient_types = list()
+
 /obj/item/reagent_containers/food/Initialize(mapload, cooked)
+	#warn dedupe nutrient_types
 	if(length(center_of_mass) && !pixel_x && !pixel_y)
 		src.pixel_x = rand(-6.0, 6) //Randomizes postion
 		src.pixel_y = rand(-6.0, 6)
@@ -37,6 +51,7 @@
 	for(var/key in cooked? inherent_reagents : inherent_reagents | prefill_reagents)
 		reagents.add_reagent(key, inherent_reagents[key])
 
+#warn deal with
 /obj/item/reagent_containers/food/afterattack(atom/target, mob/user, clickchain_flags, list/params)
 	if(center_of_mass.len && (clickchain_flags & CLICKCHAIN_HAS_PROXIMITY) && istype(target, /obj/structure/table))
 		//Places the item on a grid
@@ -54,7 +69,27 @@
 		pixel_x = (CELLSIZE * (0.5 + cell_x)) - center_of_mass["x"]
 		pixel_y = (CELLSIZE * (0.5 + cell_y)) - center_of_mass["y"]
 
-BLOCK_BYOND_BUG_2072419
+/**
+ * Passed in list will be copied, not directly referenced.
+ */
+/obj/item/reagent_containers/food/proc/set_nutrient_types(list/new_nutrient_types)
+	nutrient_types = new_nutrient_types.Copy()
+
+/**
+ * Gets an immutable copy.
+ *
+ * @return list(NUTRIENT_TYPE_* = val, ...) or null
+ */
+/obj/item/reagent_containers/food/proc/get_nutrient_types_immutable() as /list
+	return initial_nutrient_types[type] || nutrient_types
+
+/**
+ * Gets an immutable mutable copy.
+ *
+ * @return list(NUTRIENT_TYPE_* = val, ...) or null
+ */
+/obj/item/reagent_containers/food/proc/get_initial_nutrient_types_immutable() as /list
+	return initial_nutrient_types[type]
 
 #undef CELLS
 #undef CELLSIZE
