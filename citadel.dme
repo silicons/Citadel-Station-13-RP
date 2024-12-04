@@ -49,6 +49,7 @@
 #include "code\__DEFINES\directional.dm"
 #include "code\__DEFINES\dna.dm"
 #include "code\__DEFINES\fonts.dm"
+#include "code\__DEFINES\food.dm"
 #include "code\__DEFINES\frames.dm"
 #include "code\__DEFINES\gamemode.dm"
 #include "code\__DEFINES\holidays.dm"

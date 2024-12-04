@@ -186,8 +186,12 @@
 	/// Default pixel y shifting for the atom's icon.
 	var/base_pixel_y = 0
 	/// expected icon width; centering offsets will be calculated from this and our base pixel x.
+	/// * This is on /atom because while right now /atom's are usually always 32x32 (not /movable, but /atom, aka tiled),
+	///   this might not be the case in the future.
 	var/icon_x_dimension = 32
 	/// expected icon height; centering offsets will be calculated from this and our base pixel y.
+	/// * This is on /atom because while right now /atom's are usually always 32x32 (not /movable, but /atom, aka tiled),
+	///   this might not be the case in the future.
 	var/icon_y_dimension = 32
 
 	//? Misc
@@ -905,6 +909,7 @@
 	pixel_y = pixel_y + base_pixel_y - .
 
 /// forcefully center us
+#warn this breaks base pixel x/y
 /atom/proc/auto_pixel_offset_to_center()
 	set_base_pixel_y(get_centering_pixel_y_offset())
 	set_base_pixel_x(get_centering_pixel_x_offset())

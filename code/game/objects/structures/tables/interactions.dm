@@ -119,5 +119,10 @@
 		return
 	return ..()
 
+/obj/structure/table/proc/handle_item_pixel_place(mob/performer, obj/item/item)
+	if(!performer.transfer_item_to_loc(item, loc))
+		return
+	
+
 /obj/structure/table/attack_tk() // no telehulk sorry
 	return
