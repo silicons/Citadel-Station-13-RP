@@ -909,7 +909,13 @@
 	pixel_y = pixel_y + base_pixel_y - .
 
 /// forcefully center us
-#warn this breaks base pixel x/y
 /atom/proc/auto_pixel_offset_to_center()
+	#warn this breaks base pixel x/y
 	set_base_pixel_y(get_centering_pixel_y_offset())
 	set_base_pixel_x(get_centering_pixel_x_offset())
+
+/**
+ * Center us on a certain pixel offset from our tile and step_x/y
+ */
+/atom/proc/auto_pixel_offset_center_on(x, y)
+	#warn impl

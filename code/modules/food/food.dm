@@ -72,7 +72,7 @@
 /**
  * Passed in list will be copied, not directly referenced.
  */
-/obj/item/reagent_containers/food/proc/set_nutrient_types(list/new_nutrient_types)
+/obj/item/reagent_containers/food/proc/set_self_nutrient_types(list/new_nutrient_types)
 	nutrient_types = new_nutrient_types.Copy()
 
 /**
@@ -80,7 +80,7 @@
  *
  * @return list(NUTRIENT_TYPE_* = val, ...) or null
  */
-/obj/item/reagent_containers/food/proc/get_nutrient_types_immutable() as /list
+/obj/item/reagent_containers/food/proc/get_self_nutrient_types_immutable() as /list
 	return initial_nutrient_types[type] || nutrient_types
 
 /**
@@ -88,7 +88,7 @@
  *
  * @return list(NUTRIENT_TYPE_* = val, ...) or null
  */
-/obj/item/reagent_containers/food/proc/get_initial_nutrient_types_immutable() as /list
+/obj/item/reagent_containers/food/proc/get_initial_self_nutrient_types_immutable() as /list
 	return initial_nutrient_types[type]
 
 #undef CELLS
