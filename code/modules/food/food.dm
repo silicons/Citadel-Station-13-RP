@@ -1,6 +1,7 @@
 #define CELLS 8
 #define CELLSIZE (32/CELLS)
 
+// todo: rename to /obj/item/food
 /obj/item/reagent_containers/food
 	armor_type = /datum/armor/none
 	possible_transfer_amounts = null
@@ -69,14 +70,40 @@
 		pixel_x = (CELLSIZE * (0.5 + cell_x)) - center_of_mass["x"]
 		pixel_y = (CELLSIZE * (0.5 + cell_y)) - center_of_mass["y"]
 
+
+#undef CELLS
+#undef CELLSIZE
+
+//* Nutrient Types *//
+
 /**
- * Passed in list will be copied, not directly referenced.
+ * Get overall nutrients. This can cache!
+ *
+ * * Gets an immutable copy. Do not modify it.
+ */
+/obj/item/reagent_containers/food/proc/get_nutrient_types_immutable()
+	return get_self_nutrient_types_immutable()
+
+/**
+ * Invalidate nutrient types cache.
+ *
+ * * This doesn't regenerate it immediately, when it's regenerated is implementation defined.
+ */
+/obj/item/reagent_containers/food/proc/invalidate_cached_nutrient_types()
+	return // no cache for now
+
+/**
+ * * Passed in list will be copied, not directly referenced.
+ * * This is for ourselves, and does not include our ingredients.
  */
 /obj/item/reagent_containers/food/proc/set_self_nutrient_types(list/new_nutrient_types)
 	nutrient_types = new_nutrient_types.Copy()
 
 /**
- * Gets an immutable copy.
+ * Gets our nutrient types.
+ *
+ * * Gets an immutable copy. Do not modify it.
+ * * This is for ourselves, not including our ingredients.
  *
  * @return list(NUTRIENT_TYPE_* = val, ...) or null
  */
@@ -84,12 +111,12 @@
 	return initial_nutrient_types[type] || nutrient_types
 
 /**
- * Gets an immutable mutable copy.
+ * Gets our default hardcoded nutrient types.
+ *
+ * * Gets an immutable copy. Do not modify it.
+ * * This is for ourselves, not including our ingredients.
  *
  * @return list(NUTRIENT_TYPE_* = val, ...) or null
  */
 /obj/item/reagent_containers/food/proc/get_initial_self_nutrient_types_immutable() as /list
 	return initial_nutrient_types[type]
-
-#undef CELLS
-#undef CELLSIZE

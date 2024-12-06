@@ -12,9 +12,10 @@
 //* determines what happens.                                                                      *//
 //*                                                                                               *//
 //* Nutrient types are additive. Read the below categories carefully.                             *//
+//*                                                                                               *//
+//* Nutrient types are multipliers on a given food's total satiety.                               *//
 
 //*                     metabolism - checked for energy satiety                                 *//
-//* These should be associated to a multiplier for total satiety of this type for a given food. *//
 
 /// Just generic nutrition. This just stands for 'has some kind of energy most organics can break down'.
 #define NUTRIENT_METABOLIZE_ORGANIC "m-generic"
@@ -26,7 +27,6 @@
 #define NUTRIENT_METABOLIZE_ELECTRIC "m-electric"
 
 //*             food groups - checked for fluff & satiety rewards sometimes                     *//
-//* These should be associated to a multiplier for total satiety of this type for a given food. *//
 
 #define NUTRIENT_FOOD_FRUIT "f-fruit"
 #define NUTRIENT_FOOD_VEGETABLE "f-vegetable"

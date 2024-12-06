@@ -826,9 +826,20 @@
 /atom/proc/decay_persisted(rounds_since_saved, hours_since_saved)
 	return
 
-//? Pixel Offsets
+//*                                        Pixel Offsets                                           *//
+//*                                                                                                *//
+//* Concepts:                                                                                      *//
+//* Pixel x/y: byond-native pixelshifting for visual pixel offsets.                                *//
+//* Step x/y: byond-native pixel movement. This does offset visually, but is a physical move!      *//
+//* Base pixel x/y: The 'standard pixel x/y' that we apply to atoms supporting the system.         *//
+//*                    Usually we use this to align something to how it should look when           *//
+//*                    standing on a given tile.                                                   *//
+//* Centering pixel x/y: The pixel x/y offsets needed to move something from its sprite with       *//
+//*                      its base pixel x/y offsets to the very center of its location.            *//
+//*                      This is needed to allow things to align with each other programmatically. *//
 
-// todo: at some point we need to optimize this entire chain of bullshit, proccalls are expensive yo
+// todo: rework all of this on 516 when we get pixloc.
+// todo: decide if we need to move this to /movable
 
 /atom/proc/set_pixel_x(val)
 	pixel_x = val + get_managed_pixel_x()
@@ -908,14 +919,11 @@
 
 	pixel_y = pixel_y + base_pixel_y - .
 
-/// forcefully center us
-/atom/proc/auto_pixel_offset_to_center()
-	#warn this breaks base pixel x/y
-	set_base_pixel_y(get_centering_pixel_y_offset())
-	set_base_pixel_x(get_centering_pixel_x_offset())
-
 /**
- * Center us on a certain pixel offset from our tile and step_x/y
+ * Set our pixel x/y to center ourselves on our location.
+ *
+ * * Location, because contrary to popular belief, pixel movement exists and can infact hurt you.
  */
-/atom/proc/auto_pixel_offset_center_on(x, y)
-	#warn impl
+/atom/proc/set_pixel_offsets_center_on_loc(extra_offset_x, extra_offset_y)
+	set_pixel_x(get_centering_pixel_x_offset() + extra_offset_x)
+	set_pixel_y(get_centering_pixel_y_offset() + extra_offset_y)
