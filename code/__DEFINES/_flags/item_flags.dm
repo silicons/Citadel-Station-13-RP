@@ -50,44 +50,49 @@ DEFINE_BITFIELD(item_flags, list(
 //! Flags for the clothing_flags var on /obj/item
 /// Blocks the effect that chemical clouds would have on a mob --glasses, mask and helmets ONLY! (NOTE: flag shared with ONESIZEFITSALL)
 /// ignores "is this limb here" for equip.
-#define CLOTHING_IGNORE_DELIMB		(1<<1)
+#define CLOTHING_IGNORE_DELIMB			(1<<1)
 /// ignores "do we have a jumpsuit" for belt
-#define CLOTHING_IGNORE_BELTLINK	(1<<2)
+#define CLOTHING_IGNORE_BELTLINK		(1<<2)
 /// for plural limbs, wearable with just one
-#define CLOTHING_ALLOW_SINGLE_LIMB	(1<<3)
+#define CLOTHING_ALLOW_SINGLE_LIMB		(1<<3)
 /// Prevents syringes, parapens and hyposprays.
-#define CLOTHING_THICK_MATERIAL		(1<<4)
+/// * If combined with [CLOTHING_HAS_INJECTION_PORT], syringes/similar can pass through an injection port, but not be stabbed through haphazardly.
+#define CLOTHING_IS_THICK_MATERIAL		(1<<4)
 /// Syringes / hyposprays / etc can get through, but need to pass through an injection port.
-#define CLOTHING_INJECTION_PORT		(1<<5)
+/// * This is often, but not always, combined with [CLOTHING_IS_THICK_MATERIAL]
+#define CLOTHING_HAS_INJECTION_PORT		(1<<5)
+/// Allow special things like survivalfoods with straws/whatever
+/// to go through via interface port.
+#define CLOTHING_HAS_INTERFACE_PORT		(1<<7)
+/// Allows **all** food, patches, etc, through.
+/// * This is proabbly not something you want on hard armors.
+/// * Avoid combining with THICK_MATERIAL for balance reasons.
+#define CLOTHING_FLEXIBLE_MATERIAL		(1<<8)
+
 // todo: audit
-#define BLOCK_GAS_SMOKE_EFFECT	(1<<6)
+#define BLOCK_GAS_SMOKE_EFFECT	(1<<20)
 /// Mask allows internals
 // todo: audit
-#define ALLOWINTERNALS			(1<<7)
+#define ALLOWINTERNALS			(1<<21)
 /// Prevents from slipping on wet floors, in space etc
 // todo: audit
-#define NOSLIP					(1<<8)
+#define NOSLIP					(1<<22)
 /// Allows helmets and glasses to scan reagents.
 // todo: audit
-#define SCAN_REAGENTS			(1<<9)
-/// At the moment, masks with this flag will not prevent eating even if they are covering your face.
-// todo: audit
-#define FLEXIBLEMATERIAL		(1<<10)
-/// Allows special survival food items to be eaten through it
-// todo: audit
-#define ALLOW_SURVIVALFOOD		(1<<11)
+#define SCAN_REAGENTS			(1<<23)
 
 DEFINE_BITFIELD(clothing_flags, list(
 	BITFIELD(BLOCK_GAS_SMOKE_EFFECT),
 	BITFIELD(ALLOWINTERNALS),
 	BITFIELD(NOSLIP),
-	BITFIELD(CLOTHING_THICK_MATERIAL),
 	BITFIELD(SCAN_REAGENTS),
-	BITFIELD(FLEXIBLEMATERIAL),
-	BITFIELD(ALLOW_SURVIVALFOOD),
 	BITFIELD(CLOTHING_IGNORE_DELIMB),
 	BITFIELD(CLOTHING_IGNORE_BELTLINK),
 	BITFIELD(CLOTHING_ALLOW_SINGLE_LIMB),
+	BITFIELD(CLOTHING_IS_THICK_MATERIAL),
+	BITFIELD(CLOTHING_HAS_INJECTION_PORT),
+	BITFIELD(CLOTHING_HAS_INTERFACE_PORT),
+	BITFIELD(CLOTHING_FLEXIBLE_MATERIAL),
 ))
 
 //!# bitflags for the /obj/item/var/inv_hide_flags variable. These determine when a piece of clothing hides another, i.e. a helmet hiding glasses.

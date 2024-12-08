@@ -168,7 +168,7 @@
 	inject_message = "[user] starts to [inject_verb] [target] with \the [src]."
 	var/block_flags = NONE
 	for(var/obj/item/I as anything in target.inventory.items_that_cover(limb.body_part_flags))
-		block_flags |= (I.clothing_flags & (CLOTHING_THICK_MATERIAL | CLOTHING_INJECTION_PORT))
+		block_flags |= (I.clothing_flags & (CLOTHING_IS_THICK_MATERIAL | CLOTHING_INJECTION_PORT))
 	// got all coverage, proceed.
 	var/delay = injection_time
 	if(block_flags & CLOTHING_INJECTION_PORT)
@@ -178,7 +178,7 @@
 		delay += port_add_time
 		// todo: 'friendly name' so limbs can stay concealed of their true names while under clothing?
 		inject_message = SPAN_NOTICE("[user] starts to search for an injection port on [target]'s [limb.name].")
-	else if(block_flags & CLOTHING_THICK_MATERIAL)
+	else if(block_flags & CLOTHING_IS_THICK_MATERIAL)
 		if(isnull(thick_add_time))
 			user.action_feedback(SPAN_WARNING("[src] can't [inject_verb] through something that thick!"), src)
 			return FALSE

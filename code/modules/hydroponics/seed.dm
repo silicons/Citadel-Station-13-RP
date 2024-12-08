@@ -156,7 +156,7 @@
 		for(var/obj/item/clothing/clothes in target)
 			if(target.is_holding(clothes))
 				return
-			if(clothes.clothing_flags & CLOTHING_THICK_MATERIAL)
+			if(clothes.clothing_flags & CLOTHING_IS_THICK_MATERIAL)
 				body_coverage &= ~(clothes.body_cover_flags)
 
 		if(!body_coverage)

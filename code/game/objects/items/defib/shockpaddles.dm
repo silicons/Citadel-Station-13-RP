@@ -109,7 +109,7 @@
 			/datum/inventory_slot/inventory/uniform,
 			/datum/inventory_slot/inventory/suit,
 		))
-			if((cloth.body_cover_flags & UPPER_TORSO) && (cloth.clothing_flags & CLOTHING_THICK_MATERIAL))
+			if((cloth.body_cover_flags & UPPER_TORSO) && (cloth.clothing_flags & CLOTHING_IS_THICK_MATERIAL))
 				return FALSE
 	return TRUE
 
