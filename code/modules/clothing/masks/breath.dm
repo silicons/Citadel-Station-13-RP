@@ -3,7 +3,7 @@
 	name = "breath mask"
 	icon_state = "breath"
 	item_state_slots = list(SLOT_ID_RIGHT_HAND = "breath", SLOT_ID_LEFT_HAND = "breath")
-	clothing_flags = ALLOWINTERNALS|FLEXIBLEMATERIAL
+	clothing_flags = ALLOWINTERNALS|CLOTHING_FLEXIBLE_MATERIAL
 	body_cover_flags = FACE
 	w_class = WEIGHT_CLASS_SMALL
 	gas_transfer_coefficient = 0.10

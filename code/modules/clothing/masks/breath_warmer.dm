@@ -6,7 +6,7 @@
 	item_state_slots = list(SLOT_ID_RIGHT_HAND = "sterile", SLOT_ID_LEFT_HAND = "sterile")
 	w_class = WEIGHT_CLASS_SMALL
 	body_cover_flags = FACE
-	clothing_flags = FLEXIBLEMATERIAL
+	clothing_flags = CLOTHING_FLEXIBLE_MATERIAL
 
 //Warms with 1000 watts
 /obj/item/clothing/mask/warmer/process_air(datum/gas_mixture/air)

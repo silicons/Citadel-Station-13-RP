@@ -234,7 +234,7 @@ var/const/MAX_ACTIVE_TIME = 400
 
 	if(ishuman(C))
 		var/mob/living/carbon/human/H = C
-		if(H.head && (H.head.body_cover_flags & FACE) && !(H.head.clothing_flags & FLEXIBLEMATERIAL))
+		if(H.head && (H.head.body_cover_flags & FACE) && !(H.head.clothing_flags & CLOTHING_FLEXIBLE_MATERIAL))
 			return 0
 	return 1
 
@@ -506,7 +506,7 @@ var/const/MAX_ACTIVE_TIME = 400
 
 	if(ishuman(C))
 		var/mob/living/carbon/human/H = C
-		if(H.head && (H.head.body_cover_flags & FACE) && !(H.head.clothing_flags & FLEXIBLEMATERIAL))
+		if(H.head && (H.head.body_cover_flags & FACE) && !(H.head.clothing_flags & CLOTHING_FLEXIBLE_MATERIAL))
 			return 0
 	return 1
 */

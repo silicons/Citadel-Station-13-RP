@@ -574,14 +574,14 @@
 			if(H.head.body_cover_flags & EYES)
 				eyes_covered = 1
 				safe_thing = H.head
-			if((H.head.body_cover_flags & FACE) && !(H.head.clothing_flags & FLEXIBLEMATERIAL))
+			if((H.head.body_cover_flags & FACE) && !(H.head.clothing_flags & CLOTHING_FLEXIBLE_MATERIAL))
 				mouth_covered = 1
 				safe_thing = H.head
 		if(H.wear_mask)
 			if(!eyes_covered && H.wear_mask.body_cover_flags & EYES)
 				eyes_covered = 1
 				safe_thing = H.wear_mask
-			if(!mouth_covered && (H.wear_mask.body_cover_flags & FACE) && !(H.wear_mask.clothing_flags & FLEXIBLEMATERIAL))
+			if(!mouth_covered && (H.wear_mask.body_cover_flags & FACE) && !(H.wear_mask.clothing_flags & CLOTHING_FLEXIBLE_MATERIAL))
 				mouth_covered = 1
 				safe_thing = H.wear_mask
 		if(H.glasses && H.glasses.body_cover_flags & EYES)

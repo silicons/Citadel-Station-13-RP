@@ -154,7 +154,7 @@
 	var/obj/item/organ/external/H = organs_by_name[BP_HEAD]
 	var/list/protective_gear = H.get_covering_clothing(FACE)
 	for(var/obj/item/gear in protective_gear)
-		if(istype(gear) && (gear.body_cover_flags & FACE) && !(gear.clothing_flags & FLEXIBLEMATERIAL))
+		if(istype(gear) && (gear.body_cover_flags & FACE) && !(gear.clothing_flags & CLOTHING_FLEXIBLE_MATERIAL))
 			return gear
 	return null
 
@@ -162,7 +162,7 @@
 	var/obj/item/organ/external/H = organs_by_name[BP_HEAD]
 	var/list/protective_gear = H.get_covering_clothing(FACE)
 	for(var/obj/item/gear in protective_gear)
-		if(istype(gear) && (gear.body_cover_flags & FACE) && !(gear.clothing_flags & FLEXIBLEMATERIAL) && !(gear.clothing_flags & ALLOW_SURVIVALFOOD))
+		if(istype(gear) && (gear.body_cover_flags & FACE) && !(gear.clothing_flags & CLOTHING_FLEXIBLE_MATERIAL) && !(gear.clothing_flags & ALLOW_SURVIVALFOOD))
 			return gear
 	return null
 

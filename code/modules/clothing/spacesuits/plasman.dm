@@ -33,7 +33,7 @@
 	icon_state = "plasmaman_helmet"
 	icon_override = 'icons/mob/plasmeme/helmet.dmi'
 	desc = "A helmet designed by NT to keep phoronoids from coming into contact with incompatible atmosphere. Comes with a little light built in!"
-	clothing_flags = ALLOWINTERNALS | FLEXIBLEMATERIAL
+	clothing_flags = ALLOWINTERNALS | CLOTHING_FLEXIBLE_MATERIAL
 	armor_type = /datum/armor/phoronoid
 	light_overlay = "plasmaman_overlay"
 	weight = ITEM_WEIGHT_PHORONOID_HELMET
