@@ -11,6 +11,10 @@
     "inferno-vnode-flags": "^7.4.8",
     "js-yaml": "^4.1.0",
     "marked": "^4.0.10",
+    "prosemirror-history": "^1.4.1",
+    "prosemirror-model": "^1.24.1",
+    "prosemirror-state": "^1.4.3",
+    "prosemirror-view": "^1.37.0",
     "tgui-dev-server": "workspace:*",
     "tgui-polyfill": "workspace:*"
   }

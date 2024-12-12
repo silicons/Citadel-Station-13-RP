@@ -83,6 +83,7 @@
  * vertices: "x1 y1 x2 y2 ..." must be even number (duh); offsets are pixel from top left
  */
 /datum/document_fragment/polyline
+	key = "polyline"
 	var/style = "solid"
 	var/color = "#000000"
 	var/vertices
