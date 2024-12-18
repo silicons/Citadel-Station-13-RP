@@ -93,7 +93,7 @@ GLOBAL_REAL_VAR(airlock_typecache) = typecacheof(list(
 	var/stripe_color = null
 	var/symbol_color = null
 	var/window_color = GLASS_COLOR
-	var/window_material = /datum/material/glass
+	var/window_material = /datum/prototype/material/glass
 
 	var/fill_file = 'icons/obj/doors/station/fill_steel.dmi'
 	var/color_file = 'icons/obj/doors/station/color.dmi'
@@ -1220,3 +1220,10 @@ About the new airlock wires panel:
 
 /obj/machinery/door/airlock/glass_external/public
 	req_one_access = list()
+
+/obj/machinery/door/airlock/hatch/supermatter_access
+	name = "Supermatter Access"
+	desc = "A reinforced hatch designed to withstand severe environmental hazards."
+	icon_state = "door_locked"
+	locked = TRUE
+	heat_resistance = 120000
