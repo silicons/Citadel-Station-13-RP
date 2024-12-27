@@ -67,7 +67,7 @@
 		if("Supreme Commander")
 			return get_all_centcom_access()
 
-/proc/get_access_ids(access_types = ACCESS_TYPE_ALL)
+/proc/get_access_ids(access_types = ACCESS_DOMAIN_ALL)
 	// todo: remove this proc
 	RETURN_TYPE(/list)
 	return SSjob.access_ids_of_type(access_types)
@@ -75,27 +75,27 @@
 /proc/get_all_accesses()
 	// todo: remove this proc
 	RETURN_TYPE(/list)
-	return SSjob.access_ids_of_type(ACCESS_TYPE_ALL)
+	return SSjob.access_ids_of_type(ACCESS_DOMAIN_ALL)
 
 /proc/get_all_station_access()
 	// todo: remove this proc
 	RETURN_TYPE(/list)
-	return SSjob.access_ids_of_type(ACCESS_TYPE_STATION)
+	return SSjob.access_ids_of_type(ACCESS_DOMAIN_STATION)
 
 /proc/get_all_centcom_access()
 	// todo: remove this proc
 	RETURN_TYPE(/list)
-	return SSjob.access_ids_of_type(ACCESS_TYPE_CENTCOM)
+	return SSjob.access_ids_of_type(ACCESS_DOMAIN_CENTCOM)
 
 /proc/get_all_syndicate_access()
 	// todo: remove this proc
 	RETURN_TYPE(/list)
-	return SSjob.access_ids_of_type(ACCESS_TYPE_SYNDICATE)
+	return SSjob.access_ids_of_type(ACCESS_DOMAIN_SYNDICATE)
 
 /proc/get_all_private_access()
 	// todo: remove this proc
 	RETURN_TYPE(/list)
-	return SSjob.access_ids_of_type(ACCESS_TYPE_PRIVATE)
+	return SSjob.access_ids_of_type(ACCESS_DOMAIN_PRIVATE)
 
 /proc/get_region_accesses(region)
 	// todo: remove this proc

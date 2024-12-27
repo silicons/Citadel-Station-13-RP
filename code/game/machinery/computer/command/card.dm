@@ -217,10 +217,10 @@
 	"}
 	var/list/by_cat = list()
 	var/list/joining = list()
-	for(var/datum/access/A in SSjob.access_lookup_multiple(editing.access))
+	for(var/datum/prototype/access/A in SSjob.access_lookup_multiple(editing.access))
 		LAZYADD(by_cat[A.access_category], A)
 	for(var/category in by_cat)
 		joining += "<b>[category]:</b><br>"
-		for(var/datum/access/A as anything in by_cat[category])
+		for(var/datum/prototype/access/A as anything in by_cat[category])
 			joining += "- [A.access_name]<br>"
 	P.info += jointext(joining, "")

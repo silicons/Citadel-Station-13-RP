@@ -42,28 +42,28 @@ GLOBAL_LIST_INIT(access_region_names, list(
 //* For custom accesses, use none.
 //* Keep this synced with [tgui/packages/tgui/constants/access.ts]
 
-#define ACCESS_TYPE_NONE (0)
-#define ACCESS_TYPE_ALL (~0)
-#define ACCESS_TYPE_CENTCOM (1<<0)
-#define ACCESS_TYPE_STATION (1<<1)
-#define ACCESS_TYPE_SYNDICATE (1<<2)
-#define ACCESS_TYPE_PRIVATE (1<<3)
+#define ACCESS_DOMAIN_NONE (0)
+#define ACCESS_DOMAIN_ALL (~0)
+#define ACCESS_DOMAIN_CENTCOM (1<<0)
+#define ACCESS_DOMAIN_STATION (1<<1)
+#define ACCESS_DOMAIN_SYNDICATE (1<<2)
+#define ACCESS_DOMAIN_PRIVATE (1<<3)
 
-DEFINE_SHARED_BITFIELD(access_type, list(
-	"access_type",
+DEFINE_SHARED_BITFIELD(access_domain, list(
+	"access_domain",
 	"access_edit_type"
 ), list(
-	BITFIELD(ACCESS_TYPE_CENTCOM),
-	BITFIELD(ACCESS_TYPE_STATION),
-	BITFIELD(ACCESS_TYPE_SYNDICATE),
-	BITFIELD(ACCESS_TYPE_PRIVATE),
+	BITFIELD(ACCESS_DOMAIN_CENTCOM),
+	BITFIELD(ACCESS_DOMAIN_STATION),
+	BITFIELD(ACCESS_DOMAIN_SYNDICATE),
+	BITFIELD(ACCESS_DOMAIN_PRIVATE),
 ))
 
 GLOBAL_LIST_INIT(access_type_names, list(
-	"[ACCESS_TYPE_CENTCOM]" = "Central Command",
-	"[ACCESS_TYPE_STATION]" = "Station",
-	"[ACCESS_TYPE_SYNDICATE]" = "Mercenary",
-	"[ACCESS_TYPE_PRIVATE]" = "Unknown",
+	"[ACCESS_DOMAIN_CENTCOM]" = "Central Command",
+	"[ACCESS_DOMAIN_STATION]" = "Station",
+	"[ACCESS_DOMAIN_SYNDICATE]" = "Mercenary",
+	"[ACCESS_DOMAIN_PRIVATE]" = "Unknown",
 ))
 
 //? Access Values - constants & datums                ?//
@@ -83,11 +83,11 @@ GLOBAL_LIST_INIT(access_type_names, list(
 //       as it's bound to break stuff.
 
 #define STANDARD_ACCESS_DATUM(value, type, desc) \
-/datum/access/##type { \
+/datum/prototype/access/##type { \
 	access_name = desc; \
 	access_value = value; \
 } \
-/datum/access/##type
+/datum/prototype/access/##type
 
 //* STATION *//
 
@@ -120,9 +120,9 @@ STANDARD_ACCESS_DATUM(ACCESS_GENERAL_EXPLORER, station/general/explorer, "Explor
 #define ACCESS_GENERAL_PATHFINDER 44
 STANDARD_ACCESS_DATUM(ACCESS_GENERAL_PATHFINDER, station/general/pathfinder, "Pathfinder")
 	access_edit_list = list(
-		/datum/access/station/general/explorer,
-		/datum/access/station/general/pilot,
-		/datum/access/station/general/pathfinder,
+		/datum/prototype/access/station/general/explorer,
+		/datum/prototype/access/station/general/pilot,
+		/datum/prototype/access/station/general/pathfinder,
 	)
 
 #define ACCESS_GENERAL_GATEWAY 62
@@ -147,13 +147,13 @@ STANDARD_ACCESS_DATUM(ACCESS_GENERAL_TOMFOOLERY, station/general/tomfoolery, "To
 STANDARD_ACCESS_DATUM(ACCESS_GENERAL_EDIT, station/general/edit, "General - Access Edit")
 	sort_order = -1000
 	access_edit_region = ACCESS_REGION_GENERAL
-	access_edit_type = ACCESS_TYPE_STATION
+	access_edit_type = ACCESS_DOMAIN_STATION
 
 //? Command
 
 #define ACCESS_COMMAND_CARDMOD 15
 STANDARD_ACCESS_DATUM(ACCESS_COMMAND_CARDMOD, station/command/cardmod, "ID Modification")
-	access_edit_type = ACCESS_TYPE_STATION
+	access_edit_type = ACCESS_DOMAIN_STATION
 	access_edit_region = ACCESS_REGION_ALL
 
 #define ACCESS_COMMAND_UPLOAD 16
@@ -227,7 +227,7 @@ STANDARD_ACCESS_DATUM(ACCESS_SECURITY_GENPOP_EXIT, station/security/genpop_exit,
 STANDARD_ACCESS_DATUM(ACCESS_SECURITY_EDIT, station/security/edit, "Security - Access Edit")
 	sort_order = -1000
 	access_edit_region = ACCESS_REGION_SECURITY
-	access_edit_type = ACCESS_TYPE_STATION
+	access_edit_type = ACCESS_DOMAIN_STATION
 
 //? Engineering
 
@@ -265,7 +265,7 @@ STANDARD_ACCESS_DATUM(ACCESS_ENGINEERING_CE, station/engineering/ce, "Chief Engi
 STANDARD_ACCESS_DATUM(ACCESS_ENGINEERING_EDIT, station/engineering/edit, "Engineering - Access Edit")
 	sort_order = -1000
 	access_edit_region = ACCESS_REGION_ENGINEERING
-	access_edit_type = ACCESS_TYPE_STATION
+	access_edit_type = ACCESS_DOMAIN_STATION
 
 //? Medical
 
@@ -300,7 +300,7 @@ STANDARD_ACCESS_DATUM(ACCESS_MEDICAL_EQUIPMENT, station/medical/equipment, "Medi
 STANDARD_ACCESS_DATUM(ACCESS_MEDICAL_EDIT, station/medical/edit, "Medical - Access Edit")
 	sort_order = -1000
 	access_edit_region = ACCESS_REGION_MEDBAY
-	access_edit_type = ACCESS_TYPE_STATION
+	access_edit_type = ACCESS_DOMAIN_STATION
 
 //? Science
 
@@ -335,7 +335,7 @@ STANDARD_ACCESS_DATUM(ACCESS_SCIENCE_XENOBOTANY, station/science/xenobotany, "Xe
 STANDARD_ACCESS_DATUM(ACCESS_SCIENCE_EDIT, station/science/edit, "Science - Access Edit")
 	sort_order = -1000
 	access_edit_region = ACCESS_REGION_RESEARCH
-	access_edit_type = ACCESS_TYPE_STATION
+	access_edit_type = ACCESS_DOMAIN_STATION
 
 //? Supply
 
@@ -361,7 +361,7 @@ STANDARD_ACCESS_DATUM(ACCESS_SUPPLY_MINE_OUTPOST, station/supply/mining_outpost,
 STANDARD_ACCESS_DATUM(ACCESS_SUPPLY_EDIT, station/supply/edit, "Supply - Access Edit")
 	sort_order = -1000
 	access_edit_region = ACCESS_REGION_SUPPLY
-	access_edit_type = ACCESS_TYPE_STATION
+	access_edit_type = ACCESS_DOMAIN_STATION
 
 //* CENTCOM *//
 
@@ -392,7 +392,7 @@ STANDARD_ACCESS_DATUM(ACCESS_CENTCOM_ERT_LEAD, centcom/ert_lead, "ERT Administra
 #define ACCESS_CENTCOM_ADMIRAL 109
 STANDARD_ACCESS_DATUM(ACCESS_CENTCOM_ADMIRAL, centcom/admiral, "Admiral")
 	access_edit_region = ACCESS_REGION_ALL
-	access_edit_type = ACCESS_TYPE_CENTCOM | ACCESS_TYPE_STATION
+	access_edit_type = ACCESS_DOMAIN_CENTCOM | ACCESS_DOMAIN_STATION
 
 //* FACTIONS *//
 

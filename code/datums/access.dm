@@ -1,5 +1,5 @@
-/datum/access
-	abstract_type = /datum/access
+/datum/prototype/access
+	abstract_type = /datum/prototype/access
 
 	/// access constnat
 	var/access_value
@@ -8,7 +8,7 @@
 	/// access category
 	var/access_category = "Misc"
 	/// access type
-	var/access_type = ACCESS_TYPE_NONE
+	var/access_domain = ACCESS_DOMAIN_NONE
 	/// access name
 	var/access_name = "Unknown"
 
@@ -36,75 +36,75 @@
 	/// a single access category that's set to allow easily setting categorical edit without edit_list
 	var/access_edit_category
 
-/datum/access/compare_to(datum/access/D)
+/datum/prototype/access/compare_to(datum/prototype/access/D)
 	return (src.sort_order == D.sort_order)? (sorttext(D.access_name, src.access_name)) : (D.sort_order - src.sort_order)
 
 /**
  * check if we're able to grant permission to edit atleast one other access
  */
-/datum/access/proc/is_edit_relevant()
+/datum/prototype/access/proc/is_edit_relevant()
 	return access_edit_region || access_edit_type || access_edit_category || length(access_edit_list)
 
-/datum/access/station
-	abstract_type = /datum/access/station
-	access_type = ACCESS_TYPE_STATION
+/datum/prototype/access/station
+	abstract_type = /datum/prototype/access/station
+	access_domain = ACCESS_DOMAIN_STATION
 
-/datum/access/station/security
-	abstract_type = /datum/access/station/security
+/datum/prototype/access/station/security
+	abstract_type = /datum/prototype/access/station/security
 	access_region = ACCESS_REGION_SECURITY
 	access_category = "Security"
 
-/datum/access/station/general
-	abstract_type = /datum/access/station/general
+/datum/prototype/access/station/general
+	abstract_type = /datum/prototype/access/station/general
 	access_region = ACCESS_REGION_GENERAL
 	access_category = "General"
 
-/datum/access/station/command
-	abstract_type = /datum/access/station/command
+/datum/prototype/access/station/command
+	abstract_type = /datum/prototype/access/station/command
 	access_region = ACCESS_REGION_COMMAND
 	access_category = "Command"
 
-/datum/access/station/medical
-	abstract_type = /datum/access/station/medical
+/datum/prototype/access/station/medical
+	abstract_type = /datum/prototype/access/station/medical
 	access_region = ACCESS_REGION_MEDBAY
 	access_category = "Medical"
 
-/datum/access/station/supply
-	abstract_type = /datum/access/station/supply
+/datum/prototype/access/station/supply
+	abstract_type = /datum/prototype/access/station/supply
 	access_region = ACCESS_REGION_SUPPLY
 	access_category = "Supply"
 
-/datum/access/station/engineering
-	abstract_type = /datum/access/station/engineering
+/datum/prototype/access/station/engineering
+	abstract_type = /datum/prototype/access/station/engineering
 	access_region = ACCESS_REGION_ENGINEERING
 	access_category = "Engineering"
 
-/datum/access/station/science
-	abstract_type = /datum/access/station/science
+/datum/prototype/access/station/science
+	abstract_type = /datum/prototype/access/station/science
 	access_region = ACCESS_REGION_RESEARCH
 	access_category = "Science"
 
-/datum/access/centcom
-	abstract_type = /datum/access/centcom
-	access_type = ACCESS_TYPE_CENTCOM
+/datum/prototype/access/centcom
+	abstract_type = /datum/prototype/access/centcom
+	access_domain = ACCESS_DOMAIN_CENTCOM
 	access_category = "Centcom"
 
-/datum/access/syndicate
-	abstract_type = /datum/access/syndicate
-	access_type = ACCESS_TYPE_SYNDICATE
+/datum/prototype/access/syndicate
+	abstract_type = /datum/prototype/access/syndicate
+	access_domain = ACCESS_DOMAIN_SYNDICATE
 	access_category = "Syndicate"
 
-/datum/access/faction
-	abstract_type = /datum/access/faction
-	access_type = ACCESS_TYPE_PRIVATE
+/datum/prototype/access/faction
+	abstract_type = /datum/prototype/access/faction
+	access_domain = ACCESS_DOMAIN_PRIVATE
 	access_category = "Faction"
 
-/datum/access/misc
-	abstract_type = /datum/access/misc
-	access_type = ACCESS_TYPE_NONE
+/datum/prototype/access/misc
+	abstract_type = /datum/prototype/access/misc
+	access_domain = ACCESS_DOMAIN_NONE
 	access_category = "Unknown"
 
-/datum/access/special
-	abstract_type = /datum/access/special
-	access_type = ACCESS_TYPE_NONE
+/datum/prototype/access/special
+	abstract_type = /datum/prototype/access/special
+	access_domain = ACCESS_DOMAIN_NONE
 	access_category = "Special"
