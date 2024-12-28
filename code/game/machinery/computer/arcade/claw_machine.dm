@@ -28,8 +28,8 @@
 		var/obj/item/card/id/W = I.GetID()
 		if(W) //for IDs and PDAs and wallets with IDs
 			paid = pay_with_card(W,I)
-		else if(istype(I, /obj/item/cash/ewallet))
-			var/obj/item/cash/ewallet/C = I
+		else if(istype(I, /obj/item/cash/holochips))
+			var/obj/item/cash/holochips/C = I
 			paid = pay_with_ewallet(C)
 		else if(istype(I, /obj/item/cash))
 			var/obj/item/cash/C = I

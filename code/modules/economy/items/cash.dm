@@ -20,7 +20,7 @@
 
 /obj/item/cash/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/cash))
-		if(istype(W, /obj/item/cash/ewallet)) return 0
+		if(istype(W, /obj/item/cash/holochips)) return 0
 
 		var/obj/item/cash/SC = W
 
@@ -179,7 +179,7 @@
 	if (ishuman(human_user) && !human_user.get_active_held_item())
 		human_user.put_in_hands(SC)
 
-/obj/item/cash/ewallet
+/obj/item/cash/holochips
 	name = "charge card"
 	icon_state = "efundcard"
 	desc = "A card that holds an amount of money."
@@ -187,34 +187,34 @@
 	pickup_sound = 'sound/items/pickup/card.ogg'
 	var/owner_name = "" //So the ATM can set it so the EFTPOS can put a valid name on transactions.
 
-/obj/item/cash/ewallet/attack_self(mob/user, datum/event_args/actor/actor)
+/obj/item/cash/holochips/attack_self(mob/user, datum/event_args/actor/actor)
 	. = ..()
 	if(.)
 		return
 	return //Don't act
 
-/obj/item/cash/ewallet/attackby()
+/obj/item/cash/holochips/attackby()
 	return //like actual
 
-/obj/item/cash/ewallet/update_icon()
+/obj/item/cash/holochips/update_icon()
 	return //space cash
 
-/obj/item/cash/ewallet/examine(mob/user, dist)
+/obj/item/cash/holochips/examine(mob/user, dist)
 	. = ..()
 	if (!(user in view(2)) && user!=src.loc)
 		return
 	. += "<font color=#4F49AF>Charge card's owner: [src.owner_name]. Thalers remaining: [src.worth].</font>"
 
-/obj/item/cash/ewallet/is_static_currency(prevent_types)
+/obj/item/cash/holochips/is_static_currency(prevent_types)
 	return (prevent_types & PAYMENT_TYPE_CHARGE_CARD)? NOT_STATIC_CURRENCY : DISCRETE_STATIC_CURRENCY
 
-/obj/item/cash/ewallet/do_static_currency_feedback(amount, mob/user, atom/target, range)
+/obj/item/cash/holochips/do_static_currency_feedback(amount, mob/user, atom/target, range)
 	visible_message(SPAN_NOTICE("[user] swipes [src] through [target]."), SPAN_NOTICE("You swipe [src] through [target]."), SPAN_NOTICE("You hear a card swipe."), range)
 
-/obj/item/cash/ewallet/amount_static_currency()
+/obj/item/cash/holochips/amount_static_currency()
 	return worth
 
-/obj/item/cash/ewallet/consume_static_currency(amount, force, mob/user, atom/target, range)
+/obj/item/cash/holochips/consume_static_currency(amount, force, mob/user, atom/target, range)
 	if(force)
 		amount = min(amount, worth)
 	if(amount > worth)
