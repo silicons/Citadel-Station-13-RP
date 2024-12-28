@@ -46,8 +46,9 @@
  *
  * @params
  * * actor - actor event args used for rendering feedback and providing AV redirect
- * * amount - amount paid
  * * target - target atom
+ * * amount - amount paid
+ * * payment_flags - PAYMENT_FLAG_*'s; check this for message/sound suppression.
  */
-/obj/item/proc/static_currency_feedback(datum/event_args/actor/actor, amount, atom/target)
+/obj/item/proc/static_currency_feedback(datum/event_args/actor/actor, atom/target, amount, payment_flags)
 	SHOULD_NOT_SLEEP(TRUE)

@@ -16,14 +16,16 @@
 //* Currency Types *//
 
 /// hard currency.
-#define CURRENCY_TYPE_CASH               (1<<1)
+#define CURRENCY_TYPE_CASH               (1<<0)
 /// bitcoin wallet-likes
-#define CURRENCY_TYPE_EWALLET            (1<<2)
+#define CURRENCY_TYPE_EWALLET            (1<<1)
 /// some kind of bank-linking card
-#define CURRENCY_TYPE_ELINK              (1<<3)
+#define CURRENCY_TYPE_ELINK              (1<<2)
+
+//* Currency Hints *//
 
 /// hints to the backend that this currency is 'all or nothing', and can't be partial'd.
-#define CURRECNY_HINT_DISCRETE      (1<<23)
+#define CURRECNY_HINT_DISCRETE           (1<<0)
 
 //* static_currency_query return indices *//
 
