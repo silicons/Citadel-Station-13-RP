@@ -51,14 +51,17 @@ var/datum/antagonist/trader/traders
 
 	create_radio(FREQ_COMMON, player) //Assume they tune their headsets into the station's public radio as they approach
 
+	var/obj/item/storage/wallet/W = new(player)
+
 	var/obj/item/card/id/id = create_id("Trader", player, equip = 0)
 	id.name = "[player.real_name]'s Passport"
 	id.assignment = "Trader"
 	id.access |= ACCESS_FACTION_TRADER
-	var/obj/item/storage/wallet/W = new(player)
 	W.obj_storage.insert(id)
+
+	new /obj/item/cash(W, rand(50, 150) * 10)
+
 	player.equip_to_slot_or_del(W, SLOT_ID_WORN_ID)
-	spawn_money(rand(50,150)*10,W)
 
 	return 1
 

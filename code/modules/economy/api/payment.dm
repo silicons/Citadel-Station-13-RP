@@ -6,42 +6,23 @@
  *
  * @params
  * * actor - actor event_args
+ * * target - target entity. must be a movable atom.
  * * using_item - thing being used as currency
  * * amount - amount required
+ * * currency_types - CURRENCY_TYPE_*'s allowed
  * * payment_flags - PAYMENT_FLAG_*'s
  * *
+ * * handler -
+ *
+ * @return amount paid, or null on a full invocation failure
  */
 /datum/controller/subsystem/economy/proc/attempt_actor_currency_payment(
 	datum/event_args/actor/actor,
+	atom/movable/target,
 	obj/item/using_item,
 	amount,
+	currency_types,
 	payment_flags,
-
 )
 
 #warn impl
-
-
-/**
- * consumes our value as currency
- * this **can** cause us to delete!
- *
- * @params
- * - amount - amount to consume
- * - force - consume even if there isn't enough. use INFINITY and force = TRUE for things like ATM deposits
- * - user - used for visual feedback
- * - target - used for visual feedback
- * - range - used for visual feedback
- *
- * @return amount consumed, or a payment status enum
- */
-/obj/item/proc/consume_static_currency(amount, force, mob/user, atom/target, range)
-	return PAYMENT_NOT_CURRENCY
-
-/**
- * displays feedback upon being used as static currency by a person
- *
- * **due to consume_static_currency potentially deleting us, it is on the item to call this proc, not the main proc!**
- */
-/obj/item/proc/do_static_currency_feedback(amount, mob/user, atom/target, range)
-	return

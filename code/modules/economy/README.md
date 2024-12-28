@@ -2,6 +2,13 @@
 
 All core code for in-game money simulation.
 
+## Core API
+
+This codebase is built to:
+
+- Support a single currency type (called Thalers in the lore of the repository's host server) generically.
+- Support many various forms of transaction handlers like account-linking chargecards and other things.
+
 ## Balancing Guidelines
 
 Here's some rough costs in whatever money unit of choice the lore team has bikeshedded the codebase to in a given year.

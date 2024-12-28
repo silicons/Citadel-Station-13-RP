@@ -45,7 +45,7 @@
 
 	if(cash_open)
 		if(cash_stored)
-			spawn_money(cash_stored, loc, user)
+			user.put_in_hands_or_drop(new /obj/item/cash(user, cash_stored), specific_index = user.active_hand)
 			cash_stored = 0
 			cut_overlay("register_cash")
 		else
@@ -170,8 +170,8 @@
 	var/obj/item/card/id/I = O.GetID()
 	if(I)
 		scan_card(I, O)
-	else if (istype(O, /obj/item/cash/holochips))
-		var/obj/item/cash/holochips/E = O
+	else if (istype(O, /obj/item/cash/ewallet))
+		var/obj/item/cash/ewallet/E = O
 		scan_wallet(E)
 	else if (istype(O, /obj/item/cash))
 		var/obj/item/cash/SC = O

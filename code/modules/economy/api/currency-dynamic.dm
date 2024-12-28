@@ -20,8 +20,6 @@
  * force - charge even if amount is under, use for stuff like atm deposits/money drains
  * prevent_types - payment_types to block
  * data - arbitrary list provided by the predicate, fed back into it during query_transaction_details. the proc **can** feed things back into it, like error messages!
- * silent - suppress all feedback
- * visual_range - feedback/message range
  *
  * @returns amount paid
  */

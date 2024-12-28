@@ -249,9 +249,11 @@ GLOBAL_LIST_INIT(atm_sounds, list('sound/items/polaroid1.ogg', 'sound/items/pola
 					authenticated_account.money -= amount
 
 					if(text2num(params["form_ewallet"]))
-						spawn_ewallet(amount,src.loc,user)
+						var/obj/item/cash/ewallet/holochips = new /obj/item/cash/ewallet(null, amount)
+						holochips.owner_name = authenticated_account.owner_name
+						user.put_in_hands_or_drop(holochips, specific_index = user.active_hand)
 					else
-						spawn_money(amount,src.loc,user)
+						user.put_in_hands_or_drop(new /obj/item/cash(null, amount), specific_index = user.active_hand)
 
 					//create an entry in the account transaction log
 					var/datum/transaction/T = new()
@@ -333,14 +335,6 @@ GLOBAL_LIST_INIT(atm_sounds, list('sound/items/polaroid1.ogg', 'sound/items/pola
 	if(ishuman(human_user) && !human_user.get_active_held_item())
 		human_user.put_in_hands(held_card)
 	held_card = null
-
-
-/obj/machinery/atm/proc/spawn_ewallet(var/sum, loc, mob/living/carbon/human/human_user as mob)
-	var/obj/item/cash/holochips/E = new /obj/item/cash/holochips(loc)
-	if(ishuman(human_user) && !human_user.get_active_held_item())
-		human_user.put_in_hands(E)
-	E.worth = sum
-	E.owner_name = authenticated_account.owner_name
 
 /obj/machinery/atm/proc/attempt_authentication(var/mob/user, var/input_pin, var/input_acc)
 	var/obj/item/card/id/login_card

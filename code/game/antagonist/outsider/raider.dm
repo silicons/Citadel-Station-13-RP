@@ -226,13 +226,17 @@ var/datum/antagonist/raider/raiders
 		player.equip_to_slot_or_del(new new_suit(player),SLOT_ID_SUIT)
 		equip_weapons(player)
 
+	var/obj/item/storage/wallet/W = new(player)
+
 	var/obj/item/card/id/id = create_id("Visitor", player, equip = 0)
 	id.name = "[player.real_name]'s Passport"
 	id.assignment = "Visitor"
-	var/obj/item/storage/wallet/W = new(player)
 	W.obj_storage.insert(id)
+
+	new /obj/item/cash(W, rand(50, 150))
+
 	player.equip_to_slot_or_del(W, SLOT_ID_WORN_ID)
-	spawn_money(rand(50,150)*10,W)
+
 	create_radio(FREQ_RAIDER, player)
 
 	return 1
