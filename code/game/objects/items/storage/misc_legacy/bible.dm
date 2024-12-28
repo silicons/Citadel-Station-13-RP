@@ -14,9 +14,9 @@
 	starts_with = list(
 		/obj/item/reagent_containers/food/drinks/bottle/small/beer,
 		/obj/item/reagent_containers/food/drinks/bottle/small/beer,
-		/obj/item/spacecash/c100,
-		/obj/item/spacecash/c100,
-		/obj/item/spacecash/c100
+		/obj/item/cash/c100,
+		/obj/item/cash/c100,
+		/obj/item/cash/c100
 	)
 
 /obj/item/storage/bible/afterattack(atom/target, mob/user, clickchain_flags, list/params)

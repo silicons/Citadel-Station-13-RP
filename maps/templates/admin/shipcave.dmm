@@ -1659,7 +1659,7 @@
 /area/awaymission/shipcave/ship/ammo)
 "pL" = (
 /obj/structure/table/borosilicate,
-/obj/item/spacecash/c100,
+/obj/item/cash/c100,
 /turf/simulated/floor/wood,
 /area/awaymission/shipcave/ship/bar)
 "pN" = (
@@ -2428,7 +2428,7 @@
 /area/awaymission/shipcave/ship/bridge)
 "yC" = (
 /obj/structure/table/borosilicate,
-/obj/item/spacecash/c20,
+/obj/item/cash/c20,
 /turf/simulated/floor/wood,
 /area/awaymission/shipcave/ship/bar)
 "yF" = (
@@ -2454,7 +2454,7 @@
 /area/awaymission/shipcave/ship/execution)
 "yR" = (
 /obj/structure/table/borosilicate,
-/obj/item/spacecash/c50,
+/obj/item/cash/c50,
 /turf/simulated/floor/wood,
 /area/awaymission/shipcave/ship/bar)
 "yS" = (
@@ -3140,7 +3140,7 @@
 /area/awaymission/shipcave/ship/canteen)
 "FD" = (
 /obj/structure/table/borosilicate,
-/obj/item/spacecash/c10,
+/obj/item/cash/c10,
 /turf/simulated/floor/wood,
 /area/awaymission/shipcave/ship/bar)
 "FF" = (
@@ -4111,7 +4111,7 @@
 /area/awaymission/shipcave/ship/crew)
 "QM" = (
 /obj/structure/table/borosilicate,
-/obj/item/spacecash/c1,
+/obj/item/cash/c1,
 /turf/simulated/floor/wood,
 /area/awaymission/shipcave/ship/bar)
 "QO" = (

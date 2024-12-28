@@ -50,16 +50,16 @@
 "ai" = (
 /obj/structure/table/marble,
 /obj/structure/safe/floor,
-/obj/item/spacecash/c1000,
-/obj/item/spacecash/c1000,
-/obj/item/spacecash/c1000,
-/obj/item/spacecash/c1000,
-/obj/item/spacecash/c1000,
-/obj/item/spacecash/c1000,
-/obj/item/spacecash/c1000,
-/obj/item/spacecash/c1000,
-/obj/item/spacecash/c1000,
-/obj/item/spacecash/c1000,
+/obj/item/cash/c1000,
+/obj/item/cash/c1000,
+/obj/item/cash/c1000,
+/obj/item/cash/c1000,
+/obj/item/cash/c1000,
+/obj/item/cash/c1000,
+/obj/item/cash/c1000,
+/obj/item/cash/c1000,
+/obj/item/cash/c1000,
+/obj/item/cash/c1000,
 /obj/item/card/emag,
 /obj/item/beartrap,
 /obj/item/grenade/spawnergrenade/spesscarp,
@@ -236,8 +236,8 @@
 /area/awaymission/zoo/pirateship)
 "aJ" = (
 /obj/structure/table/woodentable,
-/obj/item/spacecash/c500,
-/obj/item/spacecash/c100,
+/obj/item/cash/c500,
+/obj/item/cash/c100,
 /obj/item/reagent_containers/food/drinks/bottle/small/beer,
 /turf/simulated/floor/wood,
 /area/awaymission/zoo/pirateship)
@@ -2289,18 +2289,18 @@
 /area/awaymission/zoo/pirateship)
 "gT" = (
 /obj/structure/closet/crate,
-/obj/item/spacecash/c10,
-/obj/item/spacecash/c200,
+/obj/item/cash/c10,
+/obj/item/cash/c200,
 /turf/simulated/floor/tiled/steel,
 /area/awaymission/zoo/pirateship)
 "gU" = (
 /obj/structure/closet/crate,
-/obj/item/spacecash/c10,
+/obj/item/cash/c10,
 /turf/simulated/floor/tiled/steel,
 /area/awaymission/zoo/pirateship)
 "gV" = (
 /obj/structure/closet/crate,
-/obj/item/spacecash/c1000,
+/obj/item/cash/c1000,
 /turf/simulated/floor/tiled/steel,
 /area/awaymission/zoo/pirateship)
 "gW" = (

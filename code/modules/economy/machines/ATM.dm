@@ -54,7 +54,7 @@ GLOBAL_LIST_INIT(atm_sounds, list('sound/items/polaroid1.ogg', 'sound/items/pola
 		if(ticks_left_locked_down <= 0)
 			number_incorrect_tries = 0
 
-	for(var/obj/item/spacecash/S in src)
+	for(var/obj/item/cash/S in src)
 		S.loc = src.loc
 		playsound(loc, pick(GLOB.atm_sounds), 50, 1)
 
@@ -336,7 +336,7 @@ GLOBAL_LIST_INIT(atm_sounds, list('sound/items/polaroid1.ogg', 'sound/items/pola
 
 
 /obj/machinery/atm/proc/spawn_ewallet(var/sum, loc, mob/living/carbon/human/human_user as mob)
-	var/obj/item/spacecash/ewallet/E = new /obj/item/spacecash/ewallet(loc)
+	var/obj/item/cash/ewallet/E = new /obj/item/cash/ewallet(loc)
 	if(ishuman(human_user) && !human_user.get_active_held_item())
 		human_user.put_in_hands(E)
 	E.worth = sum

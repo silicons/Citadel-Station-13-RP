@@ -17,8 +17,8 @@
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/submap/cave/Scave1)
 "f" = (
-/obj/item/spacecash/c100,
-/obj/item/spacecash/c100,
+/obj/item/cash/c100,
+/obj/item/cash/c100,
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/submap/cave/Scave1)
 "g" = (
@@ -26,9 +26,9 @@
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/submap/cave/Scave1)
 "h" = (
-/obj/item/spacecash/c100,
-/obj/item/spacecash/c100,
-/obj/item/spacecash/c100,
+/obj/item/cash/c100,
+/obj/item/cash/c100,
+/obj/item/cash/c100,
 /obj/effect/decal/remains,
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/submap/cave/Scave1)

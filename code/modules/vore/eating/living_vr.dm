@@ -690,7 +690,7 @@
 			to_chat(src, "<span class='notice'>You can taste the flavor of couture and style. Toddler at the make-up bag style.</span>")
 		else if(istype(I,/obj/item/soap))
 			to_chat(src, "<span class='notice'>You can taste the bitter flavor of verbal purification.</span>")
-		else if(istype(I,/obj/item/spacecash) || istype(I,/obj/item/storage/wallet))
+		else if(istype(I,/obj/item/cash) || istype(I,/obj/item/storage/wallet))
 			to_chat(src, "<span class='notice'>You can taste the flavor of wealth and reckless waste.</span>")
 		else if(istype(I,/obj/item/broken_bottle) || istype(I,/obj/item/material/shard))
 			to_chat(src, "<span class='notice'>You can taste the flavor of pain. This can't possibly be healthy for your guts.</span>")

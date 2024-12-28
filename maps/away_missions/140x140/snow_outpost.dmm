@@ -2066,8 +2066,8 @@
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/awaymission/snow_outpost/outside)
 "hO" = (
-/obj/item/spacecash/c100,
-/obj/item/spacecash/c100,
+/obj/item/cash/c100,
+/obj/item/cash/c100,
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/awaymission/snow_outpost/dark)
 "hP" = (
@@ -2075,9 +2075,9 @@
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/awaymission/snow_outpost/outside)
 "hQ" = (
-/obj/item/spacecash/c100,
-/obj/item/spacecash/c100,
-/obj/item/spacecash/c100,
+/obj/item/cash/c100,
+/obj/item/cash/c100,
+/obj/item/cash/c100,
 /obj/effect/decal/remains,
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/awaymission/snow_outpost/dark)

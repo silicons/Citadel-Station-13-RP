@@ -134,8 +134,8 @@ SUBSYSTEM_DEF(supply)
 							EC.value += EC.contents[EC.contents.len]["value"]
 
 					// Sell spacebucks
-					if(istype(A, /obj/item/spacecash))
-						var/obj/item/spacecash/cashmoney = A
+					if(istype(A, /obj/item/cash))
+						var/obj/item/cash/cashmoney = A
 						EC.contents[EC.contents.len]["value"] = cashmoney.worth * points_per_money
 						EC.contents[EC.contents.len]["quantity"] = cashmoney.worth
 						EC.value += EC.contents[EC.contents.len]["value"]

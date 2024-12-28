@@ -139,9 +139,9 @@
 							),
 				prob(4);list(
 							/obj/item/storage/bag/cash,
-							/obj/item/spacecash/c500,
-							/obj/item/spacecash/c100,
-							/obj/item/spacecash/c50
+							/obj/item/cash/c500,
+							/obj/item/cash/c100,
+							/obj/item/cash/c50
 							),
 				prob(3);list(
 							/obj/item/clothing/head/hardhat/orange,

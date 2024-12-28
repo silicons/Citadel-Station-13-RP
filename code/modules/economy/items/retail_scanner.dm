@@ -164,10 +164,10 @@
 	var/obj/item/card/id/I = O.GetID()
 	if(I)
 		scan_card(I, O)
-	else if (istype(O, /obj/item/spacecash/ewallet))
-		var/obj/item/spacecash/ewallet/E = O
+	else if (istype(O, /obj/item/cash/ewallet))
+		var/obj/item/cash/ewallet/E = O
 		scan_wallet(E)
-	else if (istype(O, /obj/item/spacecash))
+	else if (istype(O, /obj/item/cash))
 		to_chat(usr, "<span class='warning'>This device does not accept cash.</span>")
 
 	else if(istype(O, /obj/item/card/emag))
@@ -252,7 +252,7 @@
 					transaction_complete()
 
 
-/obj/item/retail_scanner/proc/scan_wallet(var/obj/item/spacecash/ewallet/E)
+/obj/item/retail_scanner/proc/scan_wallet(var/obj/item/cash/ewallet/E)
 	if (!transaction_amount)
 		return
 

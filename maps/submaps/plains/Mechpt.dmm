@@ -34,8 +34,8 @@
 "h" = (
 /obj/structure/railing,
 /obj/structure/table/woodentable,
-/obj/item/spacecash/c10,
-/obj/item/spacecash/c10,
+/obj/item/cash/c10,
+/obj/item/cash/c10,
 /turf/template_noop,
 /area/submap/Mechpt)
 "i" = (
@@ -101,7 +101,7 @@
 	dir = 1
 	},
 /obj/structure/table/woodentable,
-/obj/item/spacecash/c50,
+/obj/item/cash/c50,
 /turf/template_noop,
 /area/submap/Mechpt)
 "u" = (

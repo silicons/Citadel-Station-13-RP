@@ -51,7 +51,7 @@
 /area/submap/Smol3)
 "j" = (
 /obj/structure/table/woodentable,
-/obj/item/spacecash/c200,
+/obj/item/cash/c200,
 /turf/simulated/floor/outdoors/dirt,
 /area/submap/Smol3)
 

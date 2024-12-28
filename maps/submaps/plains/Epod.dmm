@@ -68,7 +68,7 @@
 	pixel_y = 0
 	},
 /obj/item/storage/backpack/satchel,
-/obj/item/spacecash/c100,
+/obj/item/cash/c100,
 /turf/simulated/shuttle/floor,
 /area/submap/Epod1)
 "m" = (

@@ -6,7 +6,7 @@
 		/obj/item/clothing/mask/luchador,
 		/obj/item/storage/belt/champion,
 		/obj/item/clothing/gloves/boxing,
-		/obj/item/spacecash/c1000,
+		/obj/item/cash/c1000,
 		/obj/item/stack/material/gold = 5,
 	)
 

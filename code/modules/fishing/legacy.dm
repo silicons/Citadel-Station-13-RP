@@ -32,9 +32,9 @@ GLOBAL_LIST_INIT(generic_fishing_pool_list, list(
 		/obj/item/toy/plushie/carp = 20,
 		/obj/random/junk = 80,
 		/obj/random/trash = 80,
-		/obj/item/spacecash/c1 = 10,
-		/obj/item/spacecash/c10 = 5,
-		/obj/item/spacecash/c100 = 1))
+		/obj/item/cash/c1 = 10,
+		/obj/item/cash/c10 = 5,
+		/obj/item/cash/c100 = 1))
 
 /obj/random/fishing_junk
 	name = "junk"

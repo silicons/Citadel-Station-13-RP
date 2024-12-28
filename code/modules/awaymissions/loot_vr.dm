@@ -61,7 +61,7 @@
 				//credits
 				var/amount = rand(2,6)
 				var/list/possible_spawns = list()
-				for(var/cash_type in typesof(/obj/item/spacecash) - /obj/item/spacecash)
+				for(var/cash_type in typesof(/obj/item/cash) - /obj/item/cash)
 					possible_spawns += cash_type
 
 				var/cash_type = pick(possible_spawns)

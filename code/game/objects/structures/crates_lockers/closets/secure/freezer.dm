@@ -38,6 +38,6 @@
 
 
 	starts_with = list(
-		/obj/item/spacecash/c1000 = 3,
-		/obj/item/spacecash/c500 = 4,
-		/obj/item/spacecash/c200 = 5)
+		/obj/item/cash/c1000 = 3,
+		/obj/item/cash/c500 = 4,
+		/obj/item/cash/c200 = 5)

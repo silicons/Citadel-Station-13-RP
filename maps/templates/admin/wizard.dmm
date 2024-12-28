@@ -182,7 +182,7 @@
 "av" = (
 /obj/structure/table/woodentable,
 /obj/item/radio/headset,
-/obj/item/spacecash/c500,
+/obj/item/cash/c500,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"

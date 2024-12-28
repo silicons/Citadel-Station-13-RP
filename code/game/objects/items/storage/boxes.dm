@@ -679,7 +679,7 @@
 	)
 
 /obj/item/storage/secure/briefcase/trashmoney
-	starts_with = list(/obj/item/spacecash/c200 = 10)
+	starts_with = list(/obj/item/cash/c200 = 10)
 
 /obj/item/storage/box/rainponcho
 	name = "foil raincoat pouch"

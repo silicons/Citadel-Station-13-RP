@@ -1125,8 +1125,8 @@
 /area/awaymission/spacebattle/cruiser)
 "gI" = (
 /obj/structure/closet/crate,
-/obj/item/spacecash/c10,
-/obj/item/spacecash/c10,
+/obj/item/cash/c10,
+/obj/item/cash/c10,
 /turf/simulated/floor/plating,
 /area/awaymission/spacebattle/cruiser)
 "gJ" = (

@@ -9,20 +9,6 @@
  */
 
 /**
- * dynamic currency
- *
- * this is where the fun/anguish/coder tears begin
- *
- * dynamic currency is currency that can potentially require logic during payment and whose value can be different due to payment types
- * and all sorts of situations that are absolutely dreadful to handle in code
- *
- * this, ofcourse, means that generalized component signals are supported
- * **however.**
- *
- * this also means that we lose estimation capabiltiies whatsoever, because we won't know if we can handle a payment request until it actually happens.
- */
-
-/**
  * dynamic payment proc - this **can** block since some methods **will** query the user for details!
  *
  * behold, a trainwreck.

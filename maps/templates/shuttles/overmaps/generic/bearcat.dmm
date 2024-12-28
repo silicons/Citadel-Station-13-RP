@@ -328,7 +328,7 @@
 	icon_state = "0-8"
 	},
 /obj/machinery/power/apc/alarms_hidden/east_mount{
-	
+
 	},
 /turf/simulated/floor/wood,
 /area/shuttle/bearcat/command_captain)
@@ -2311,7 +2311,7 @@
 "fR" = (
 /obj/structure/table/reinforced,
 /obj/item/flashlight/lamp,
-/obj/item/spacecash/c1000,
+/obj/item/cash/c1000,
 /turf/simulated/floor/tiled/techfloor,
 /area/shuttle/bearcat/unused2)
 "fS" = (

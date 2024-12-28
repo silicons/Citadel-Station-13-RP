@@ -41,7 +41,7 @@
 		new /datum/data/mining_equipment("Digital Tablet - Advanced",	/obj/item/modular_computer/tablet/preset/custom_loadout/advanced,				100),
 		new /datum/data/mining_equipment("Nanopaste Tube",				/obj/item/stack/nanopaste,									100),
 		new /datum/data/mining_equipment("Binoculars",					/obj/item/binoculars,										100),
-		new /datum/data/mining_equipment("100 Thalers",					/obj/item/spacecash/c100,									100),
+		new /datum/data/mining_equipment("100 Thalers",					/obj/item/cash/c100,									100),
 		new /datum/data/mining_equipment("Defense Equipment - Razor Drone Deployer",	/obj/item/grenade/spawnergrenade/manhacks/station/locked,		100),
 		new /datum/data/mining_equipment("Mini-Translocator",			/obj/item/perfect_tele/one_beacon,							120),
 		new /datum/data/mining_equipment("Extraction Equipment - Fulton Pack",		/obj/item/extraction_pack,						125),
@@ -60,7 +60,7 @@
 		new	/datum/data/mining_equipment("Gateway Guardian Pack",		/obj/item/storage/lockbox/gateway,							800),
 		new	/datum/data/mining_equipment("Cyan Posse Pack",				/obj/item/storage/lockbox/cowboy,							800),
 		new /datum/data/mining_equipment("Bar Shelter Capsule",			/obj/item/survivalcapsule/luxurybar,						1000),
-		new /datum/data/mining_equipment("1000 Thalers",				/obj/item/spacecash/c1000,									1000),
+		new /datum/data/mining_equipment("1000 Thalers",				/obj/item/cash/c1000,									1000),
 		new /datum/data/mining_equipment("Defense Equipment - Marksman Box",	/obj/item/gunbox/marksman,							1000),
 		)
 /obj/machinery/mineral/equipment_vendor/survey/interact(mob/user)

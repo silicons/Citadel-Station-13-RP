@@ -286,8 +286,8 @@
 /area/awaymission/BMPship3)
 "bk" = (
 /obj/structure/table/woodentable,
-/obj/item/spacecash/c500,
-/obj/item/spacecash/c100,
+/obj/item/cash/c500,
+/obj/item/cash/c100,
 /turf/simulated/floor/wood,
 /area/awaymission/BMPship3)
 "bl" = (
@@ -431,8 +431,8 @@
 /area/awaymission/BMPship1)
 "bN" = (
 /obj/structure/closet/crate,
-/obj/item/spacecash/c1000,
-/obj/item/spacecash/c50,
+/obj/item/cash/c1000,
+/obj/item/cash/c50,
 /turf/simulated/floor/plating{
 	dir = 4
 	},
@@ -558,14 +558,14 @@
 "cr" = (
 /obj/structure/closet/crate,
 /obj/item/atmos_analyzer,
-/obj/item/spacecash/c10,
+/obj/item/cash/c10,
 /turf/simulated/floor/tiled/dark,
 /area/awaymission/BMPship1)
 "cs" = (
 /obj/structure/closet/crate,
-/obj/item/spacecash/c1000,
-/obj/item/spacecash/c200,
-/obj/item/spacecash/c500,
+/obj/item/cash/c1000,
+/obj/item/cash/c200,
+/obj/item/cash/c500,
 /turf/simulated/floor/tiled/dark,
 /area/awaymission/BMPship1)
 "ct" = (
@@ -2030,13 +2030,13 @@
 /area/awaymission)
 "iy" = (
 /obj/structure/closet/crate,
-/obj/item/spacecash/c10,
-/obj/item/spacecash/c200,
+/obj/item/cash/c10,
+/obj/item/cash/c200,
 /turf/simulated/floor,
 /area/awaymission/BMPship1)
 "iz" = (
 /obj/structure/closet/crate,
-/obj/item/spacecash/c10,
+/obj/item/cash/c10,
 /turf/simulated/floor,
 /area/awaymission/BMPship1)
 "iA" = (

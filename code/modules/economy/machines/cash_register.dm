@@ -170,11 +170,11 @@
 	var/obj/item/card/id/I = O.GetID()
 	if(I)
 		scan_card(I, O)
-	else if (istype(O, /obj/item/spacecash/ewallet))
-		var/obj/item/spacecash/ewallet/E = O
+	else if (istype(O, /obj/item/cash/ewallet))
+		var/obj/item/cash/ewallet/E = O
 		scan_wallet(E)
-	else if (istype(O, /obj/item/spacecash))
-		var/obj/item/spacecash/SC = O
+	else if (istype(O, /obj/item/cash))
+		var/obj/item/cash/SC = O
 		if(cash_open)
 			to_chat(user, "You neatly sort the cash into the box.")
 			cash_stored += SC.worth
@@ -272,7 +272,7 @@
 					transaction_complete()
 
 
-/obj/machinery/cash_register/proc/scan_wallet(obj/item/spacecash/ewallet/E)
+/obj/machinery/cash_register/proc/scan_wallet(obj/item/cash/ewallet/E)
 	if (!transaction_amount)
 		return
 
@@ -310,7 +310,7 @@
 			transaction_complete()
 
 
-/obj/machinery/cash_register/proc/scan_cash(obj/item/spacecash/SC)
+/obj/machinery/cash_register/proc/scan_cash(obj/item/cash/SC)
 	if (!transaction_amount)
 		return
 

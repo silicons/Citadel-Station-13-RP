@@ -287,11 +287,11 @@
 
 /obj/random/cash/item_to_spawn()
 	return pick(prob(320);/obj/random/maintenance/clean,
-				prob(12);/obj/item/spacecash/c1,
-				prob(8);/obj/item/spacecash/c10,
-				prob(4);/obj/item/spacecash/c20,
-				prob(1);/obj/item/spacecash/c50,
-				prob(1);/obj/item/spacecash/c100)
+				prob(12);/obj/item/cash/c1,
+				prob(8);/obj/item/cash/c10,
+				prob(4);/obj/item/cash/c20,
+				prob(1);/obj/item/cash/c50,
+				prob(1);/obj/item/cash/c100)
 
 /obj/random/soap
 	name = "Random Soap"
@@ -1170,9 +1170,9 @@
 							),
 				prob(4);list(
 							/obj/item/storage/bag/cash,
-							/obj/item/spacecash/c500,
-							/obj/item/spacecash/c100,
-							/obj/item/spacecash/c50
+							/obj/item/cash/c500,
+							/obj/item/cash/c100,
+							/obj/item/cash/c50
 							),
 				prob(3);list(
 							/obj/item/clothing/head/hardhat/orange,

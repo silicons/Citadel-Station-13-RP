@@ -11,53 +11,44 @@
  */
 
 /**
- * static currency
- *
- * these procs are used to determine if something is considered static currency and how much it's worth
- * static currency should never need logic to determine payment ability and/or worth
- *
- * because i hate everyone and myself but not *that* much, static currency can either logically be
- * a stack (cash, holochips, chargecards), or a discrete object like a coin
- *
- * i would code support for "stack of objects" to force people to roleplay counting dollar bills but that's too CPU-intensive to calculate
- * (see: coin counting problem)
+ * @return CURRENCY_STATIC_TYPE_* we are
  */
+/obj/item/proc/static_currency_query()
+	return NONE
 
 /**
- * returns if we are valid static currency for the given payment types
- *
- * @params
- * - prevent_types - these types aren't allowed
+ * @return amount of static currency we count as
  */
-/obj/item/proc/is_static_currency(prevent_types)
-	return NOT_STATIC_CURRENCY
-
-/**
- * returns our value as currency
- */
-/obj/item/proc/amount_static_currency()
+/obj/item/proc/static_currency_amount()
 	return 0
 
 /**
- * consumes our value as currency
- * this **can** cause us to delete!
- *
- * @params
- * - amount - amount to consume
- * - force - consume even if there isn't enough. use INFINITY and force = TRUE for things like ATM deposits
- * - user - used for visual feedback
- * - target - used for visual feedback
- * - range - used for visual feedback
- *
- * @return amount consumed, or a payment status enum
+ * @return amount of static currency used
  */
-/obj/item/proc/consume_static_currency(amount, force, mob/user, atom/target, range)
-	return PAYMENT_NOT_CURRENCY
+/obj/item/proc/static_currency_use_checked(amount, require_remaining)
+	return static_currency_amount() >= (amount + require_remaining) ? static_currency_use(amount) : 0
 
 /**
- * displays feedback upon being used as static currency by a person
- *
- * **due to consume_static_currency potentially deleting us, it is on the item to call this proc, not the main proc!**
+ * @return amount of static currency used
  */
-/obj/item/proc/do_static_currency_feedback(amount, mob/user, atom/target, range)
+/obj/item/proc/static_currency_use(amount, require_remaining)
+	return 0
+
+/**
+ * displays / broadcasts default feedback from someone using us as static currency
+ *
+ * * can be called after qdel.
+ * * it is recommended to not use this if you know the currency type and want something special,
+ *   as the feedback done in this way is generally extremely generic.
+ * * target must be supplied; it is **not** inferred from a clickchain event_args even if one is provided!
+ *
+ * @params
+ * * actor - actor event args used for rendering feedback and providing AV redirect
+ * * amount - amount paid
+ * * target - target atom
+ * * fail_reason - (optional) if specified, we failed; emit a fail message instead.
+ * * range - (optional) range to emit; this is a suggestion, and the item being used as currency
+ *           reserves the right to force its own ranges.
+ */
+/obj/item/proc/static_currency_emit_feedback(datum/event_args/actor/actor, amount, atom/target, fail_reason, range)
 	return

@@ -211,7 +211,7 @@
 			SSnanoui.update_uis(src)
 			return // don't smack that machine with your 2 thalers
 
-	if(I || istype(W, /obj/item/spacecash))
+	if(I || istype(W, /obj/item/cash))
 		attack_hand(user)
 		return
 	else if(W.is_screwdriver())

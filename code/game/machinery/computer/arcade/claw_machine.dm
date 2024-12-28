@@ -28,11 +28,11 @@
 		var/obj/item/card/id/W = I.GetID()
 		if(W) //for IDs and PDAs and wallets with IDs
 			paid = pay_with_card(W,I)
-		else if(istype(I, /obj/item/spacecash/ewallet))
-			var/obj/item/spacecash/ewallet/C = I
+		else if(istype(I, /obj/item/cash/ewallet))
+			var/obj/item/cash/ewallet/C = I
 			paid = pay_with_ewallet(C)
-		else if(istype(I, /obj/item/spacecash))
-			var/obj/item/spacecash/C = I
+		else if(istype(I, /obj/item/cash))
+			var/obj/item/cash/C = I
 			paid = pay_with_cash(C, user)
 		if(paid)
 			gamepaid = 1
@@ -41,7 +41,7 @@
 		return
 
 // Cash
-/obj/machinery/computer/arcade/clawmachine/proc/pay_with_cash(obj/item/spacecash/cashmoney, mob/user)
+/obj/machinery/computer/arcade/clawmachine/proc/pay_with_cash(obj/item/cash/cashmoney, mob/user)
 	if(!emagged)
 		if(gameprice > cashmoney.worth)
 
@@ -50,7 +50,7 @@
 			to_chat(usr, "[icon2base64(cashmoney)] [SPAN_WARNING("That is not enough money.")]")
 			return FALSE
 
-		if(istype(cashmoney, /obj/item/spacecash))
+		if(istype(cashmoney, /obj/item/cash))
 
 			visible_message(SPAN_INFO("\The [usr] inserts some cash into \the [src]."))
 			cashmoney.worth -= gameprice
@@ -70,7 +70,7 @@
 
 
 ///// Ewallet
-/obj/machinery/computer/arcade/clawmachine/proc/pay_with_ewallet(obj/item/spacecash/ewallet/wallet)
+/obj/machinery/computer/arcade/clawmachine/proc/pay_with_ewallet(obj/item/cash/ewallet/wallet)
 	if(!emagged)
 		visible_message(SPAN_INFO("\The [usr] swipes \the [wallet] through \the [src]."))
 		playsound(src, 'sound/machines/id_swipe.ogg', 50, TRUE)

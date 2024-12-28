@@ -273,7 +273,7 @@
 	max_combined_volume = WEIGHT_VOLUME_NORMAL * 25
 	max_single_weight_class = WEIGHT_CLASS_NORMAL
 	w_class = WEIGHT_CLASS_SMALL
-	insertion_whitelist = list(/obj/item/coin,/obj/item/spacecash)
+	insertion_whitelist = list(/obj/item/coin,/obj/item/cash)
 
 	// -----------------------------
 	//           Chemistry Bag
@@ -344,5 +344,5 @@
 	max_single_weight_class = WEIGHT_CLASS_NORMAL
 	w_class = WEIGHT_CLASS_SMALL
 	insertion_whitelist = list(/obj/item/reagent_containers/food/snacks,/obj/item/reagent_containers/food/condiment,
-	/obj/item/reagent_containers/glass/beaker,/obj/item/reagent_containers/glass/bottle,/obj/item/coin,/obj/item/spacecash,
+	/obj/item/reagent_containers/glass/beaker,/obj/item/reagent_containers/glass/bottle,/obj/item/coin,/obj/item/cash,
 	/obj/item/reagent_containers/food/snacks/grown,/obj/item/seeds,/obj/item/grown,/obj/item/reagent_containers/pill)
