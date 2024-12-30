@@ -48,6 +48,19 @@
 	//! legacy : spawn these shuttle datums on load
 	var/list/legacy_assert_shuttle_datums
 
+	//* Integration Tests *//
+	/// Supports automated map tests
+	var/supports_automated_testing = FALSE
+	/// Integration Tests - Expected: number of mains markers
+	/// * Must be set. This enforces not accidentally copy-pasting testing markers.
+	var/integration_tests_marker_expect_powernet_mains = 0
+	/// Integration Tests - Expected: number of mains markers
+	/// * Must be set. This enforces not accidentally copy-pasting testing markers.
+	var/integration_tests_marker_expect_pipenet_distro = 0
+	/// Integration Tests - Expected: number of mains markers
+	/// * Must be set. This enforces not accidentally copy-pasting testing markers.
+	var/integration_tests_marker_expect_pipenet_scrubber = 0
+
 /datum/map/New()
 	// immediately resolve dependencies / lateload
 	for(var/i in 1 to length(dependencies))

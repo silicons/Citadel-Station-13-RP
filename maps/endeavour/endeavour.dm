@@ -27,6 +27,7 @@
 		/datum/map/sector/roguemining_192/one,
 	)
 
+	supports_automated_testing = TRUE
 	// todo: remove after dev is done
 	allow_random_draw = FALSE
 

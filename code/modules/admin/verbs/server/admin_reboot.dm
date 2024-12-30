@@ -5,8 +5,12 @@
 	if (!usr.client.holder)
 		return
 
-	var/localhost_addresses = list("127.0.0.1", "::1")
-	var/list/options = list("Regular Restart", "Regular Restart (with delay)", "Hard Restart (No Delay/Feeback Reason)", "Hardest Restart (No actions, just reboot)")
+	var/list/options = list(
+		"Regular Restart",
+		"Regular Restart (with delay)",
+		"Hard Restart (No Delay/Feeback Reason)",
+		"Hardest Restart (No actions, just reboot)",
+	)
 	if(world.TgsAvailable())
 		options += "Server Restart (Kill and restart DD)";
 
@@ -20,7 +24,7 @@
 		var/init_by = "Initiated by [usr.key]."
 		switch(result)
 			if("Regular Restart")
-				if(!(isnull(usr.client.address) || (usr.client.address in localhost_addresses)))
+				if(!usr.client.is_localhost())
 					if(alert(usr, "Are you sure you want to restart the server?","This server is live", "Restart", "Cancel") != "Restart")
 						return FALSE
 				SSticker.Reboot(init_by, "admin reboot - by [usr.key] [usr.client.holder.fakekey ? "(stealth)" : ""]", 1 SECOND)
@@ -28,7 +32,7 @@
 				var/delay = input("What delay should the restart have (in seconds)?", "Restart Delay", 5) as num|null
 				if(!delay)
 					return FALSE
-				if(!(isnull(usr.client.address) || (usr.client.address in localhost_addresses)))
+				if(!usr.client.is_localhost())
 					if(alert(usr,"Are you sure you want to restart the server?","This server is live", "Restart", "Cancel") != "Restart")
 						return FALSE
 				SSticker.Reboot(init_by, "admin reboot - by [usr.key] [usr.client.holder.fakekey ? "(stealth)" : ""]", delay * 10)

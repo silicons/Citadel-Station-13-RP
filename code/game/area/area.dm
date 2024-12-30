@@ -57,6 +57,10 @@
 	/// player-facing name, overrides name when / if necessary.
 	var/display_name
 
+	//* Integration Testing *//
+
+	#warn impl
+
 	//? nightshift
 	/// nightshift level
 	/// in general, nightshift must be at or above this level for it to proc on areas.
