@@ -2155,7 +2155,7 @@
 #include "code\map_tests\markers\pipenet.dm"
 #include "code\map_tests\markers\powernet.dm"
 #include "code\map_tests\markers\zone.dm"
-#include "code\map_tests\tests\all_apcs_shall_be_connected.dm"
+#include "code\map_tests\tests\all_apcs_shall_be_connected_to_mains.dm"
 #include "code\map_tests\tests\all_areas_shall_have_apcs.dm"
 #include "code\map_tests\tests\atmos_alarms_shall_be_nominal.dm"
 #include "code\map_tests\tests\atmos_mains_distro_integrity.dm"

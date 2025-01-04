@@ -6,3 +6,5 @@
 /obj/map_test_marker/zone/allow_no_fire_alarm
 
 /obj/map_test_marker/zone/allow_no_air_alarm
+
+#warn impl

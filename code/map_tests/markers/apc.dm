@@ -3,4 +3,13 @@
 
 /obj/map_test_marker/apc
 
-/obj/map_test_marker/apc/allow_unconnected
+/obj/map_test_marker/apc/allow_unconnected_mains
+
+/obj/map_test_marker/apc/allow_unconnected_mains/Initialize(mapload)
+	..()
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/map_test_marker/apc/allow_unconnected_mains/LateInitialize()
+	var/obj/machinery/power/apc/apc = locate() in loc
+	apc?.test_allow_unconnected_mains = TRUE
+	..()

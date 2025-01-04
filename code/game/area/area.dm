@@ -58,6 +58,7 @@
 	var/display_name
 
 	//* Integration Testing *//
+	var/tmp/test_allow_no_apc = FALSE
 
 	#warn impl
 

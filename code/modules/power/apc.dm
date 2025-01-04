@@ -111,6 +111,13 @@ CREATE_WALL_MOUNTING_TYPES_SHIFTED(/obj/machinery/power/apc, 22)
 /obj/machinery/power/apc
 	name = "area power controller"
 	desc = "A control terminal for the area electrical systems."
+	description_info = "An APC (Area Power Controller) regulates and supplies backup power for the area they are in. Their power channels are divided \
+	out into 'environmental' (Items that manipulate airflow and temperature), 'lighting' (the lights), and 'equipment' (Everything else that consumes power).  \
+	Power consumption and backup power cell charge can be seen from the interface, further controls (turning a specific channel on, off or automatic, \
+	toggling the APC's ability to charge the backup cell, or toggling power for the entire area via master breaker) first requires the interface to be unlocked \
+	with an ID with Engineering access or by one of the station's robots or the artificial intelligence."
+	description_antag = "This can be emagged to unlock it.  It will cause the APC to have a blue error screen. \
+	Wires can be pulsed remotely with a signaler attached to it.  A powersink will also drain any APCs connected to the same wire the powersink is on."
 	icon = 'icons/obj/apc.dmi'
 	icon_state = "apc0"
 	plane = TURF_PLANE
@@ -179,6 +186,10 @@ CREATE_WALL_MOUNTING_TYPES_SHIFTED(/obj/machinery/power/apc, 22)
 	//Used for shuttles, workaround for broken mounting
 	//TODO: Remove when legacy walls are nuked
 	var/old_wall = FALSE
+
+	//* Integration Testing *//
+	/// Allow unconnected mains
+	var/tmp/test_allow_unconnected_mains
 
 /obj/machinery/power/apc/updateDialog()
 	if (machine_stat & (BROKEN|MAINT))

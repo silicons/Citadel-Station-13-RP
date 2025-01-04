@@ -12,7 +12,20 @@
 	/// * will use run_level(z) instead of run()
 	var/granular_to_level = FALSE
 
-/datum/map_test/proc/fail(turf/location, reason)
+/**
+ * Category required, reason is not.
+ */
+/datum/map_test/proc/emit_notice(where, category, reason)
+
+/**
+ * Category required, reason is not.
+ */
+/datum/map_test/proc/emit_warn(where, category, reason)
+
+/**
+ * Category required, reason is not.
+ */
+/datum/map_test/proc/emit_fail(where, category, reason)
 
 /datum/map_test/proc/run(list/zlevels)
 
