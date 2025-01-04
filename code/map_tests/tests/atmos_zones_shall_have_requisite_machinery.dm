@@ -44,6 +44,8 @@
 	// if zone.contents[1] runtimes let it; empty zones are a ZAS issue and we want to know about it
 
 	for(var/datum/zas_zone/zone as anything in no_fire_alarm)
+		if(!(zone.contents[1]:z in zlevels))
+			continue
 		if(length(zone.contents) < zone_size_threshold)
 			emit_notice(pick(zone.contents), "No Fire Alarm - Allowed (Too Small)")
 			continue
@@ -56,6 +58,8 @@
 		emit_error(pick(zone.contents), "No Fire Alarm", "This atmos zone lacks a fire alarm.")
 
 	for(var/datum/zas_zone/zone as anything in no_air_alarm)
+		if(!(zone.contents[1]:z in zlevels))
+			continue
 		if(length(zone.contents) < zone_size_threshold)
 			emit_notice(pick(zone.contents), "No Air Alarm - Allowed (Too Small)")
 			continue
