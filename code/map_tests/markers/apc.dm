@@ -5,6 +5,8 @@
 
 /obj/map_test_marker/apc/allow_unconnected_mains
 
+#warn sprite
+
 /obj/map_test_marker/apc/allow_unconnected_mains/Initialize(mapload)
 	..()
 	return INITIALIZE_HINT_LATELOAD

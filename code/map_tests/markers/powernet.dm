@@ -5,4 +5,6 @@
 
 /obj/map_test_marker/powernet/mains_marker
 
+/obj/map_test_marker/powernet/terminate_loop_check
+
 #warn impl
