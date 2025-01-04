@@ -1,0 +1,196 @@
+{
+	"adj-place": [
+		"Airborne",
+		"Astral",
+		"Deep",
+		"Earthly",
+		"Floating",
+		"Heavenly",
+		"Levitating",
+		"Lunar",
+		"Oceanic",
+		"Stellar",
+		"Subnautical",
+		"Subterranean",
+		"Suspended"
+	],
+	"adj-intensity": [
+		"Insignificant",
+		"Mild",
+		"Moderate",
+		"Most",
+		"Non-existent",
+		"Significant",
+		"Slight"
+	],
+	"adj-intensity-prefix": {
+		"Insignificantly": [
+			"Insignificant"
+		],
+		"Mildly": [
+			"Mild"
+		],
+		"Moderately": [
+			"Moderate"
+		],
+		"Mostly": [
+			"Most"
+		],
+		"No": [
+			"Non-existent"
+		],
+		"Significantly": [
+			"Significant"
+		],
+		"Slightly": [
+			"Slight"
+		]
+	},
+	"adj": [
+		"Bright",
+		"Comedic",
+		"Conventional",
+		"Dry",
+		"Dusklight",
+		"Intense",
+		"Luminant",
+		"Metallic",
+		"Moonlit",
+		"Nonchalant",
+		"Resplendent",
+		"Shielded",
+		"Stellar",
+		"Stoic",
+		"Unconventional",
+		"Wayfaring",
+		"Wet"
+	],
+	"adj-formation": [
+		"Two-Armed",
+		"Four-Armed",
+		"Six-Armed",
+		"Circular",
+		"Cross",
+		"Elliptical",
+		"Irregular",
+		"Linear",
+		"Rectangular",
+		"Star-Shaped",
+		"Spiral",
+		"Square",
+		"Uniform"
+	],
+	"adj-terrain": [
+		"Flat",
+		"Hilly",
+		"Irregular",
+		"Mountainous",
+		"Porous"
+	],
+	"noun-object-plural": [
+		"Canopies",
+		"Constructions",
+		"Deserts",
+		"Forests",
+		"Grasslands",
+		"Hills",
+		"Horizons",
+		"Image",
+		"Jungles",
+		"Mountains",
+		"Pebbles",
+		"Plains",
+		"Planes",
+		"Planets",
+		"Prairies",
+		"Reflections",
+		"Refractions",
+		"Ships",
+		"Singularities",
+		"Stars",
+		"Starships",
+		"Stations",
+		"Trees",
+		"Tundra",
+		"Vectors",
+		"Vessels"
+	],
+	"noun-object-singular": [
+		"Canopy",
+		"Construction",
+		"Desert",
+		"Forest",
+		"Grassland",
+		"Hill",
+		"Horizon",
+		"Image",
+		"Jungle",
+		"Mountain",
+		"Pebble",
+		"Plain",
+		"Plane",
+		"Planet",
+		"Prairie",
+		"Reflection",
+		"Refraction",
+		"Ship",
+		"Singularity",
+		"Star",
+		"Starship",
+		"Station",
+		"Tree",
+		"Tundras",
+		"Vector",
+		"Vessel"
+	],
+	"position-physical": [
+		"Behind",
+		"Eclipsing",
+		"Over",
+		"Overlooking",
+		"Projecting",
+		"Under",
+		"Underlying"
+	],
+	"position-temporal": [
+		"After",
+		"Before",
+		"Foreshadowing"
+	],
+	"quantifier": [
+		"One",
+		"Two",
+		"Three",
+		"Four",
+		"Five",
+		"Six",
+		"Seven",
+		"Eight",
+		"Nine",
+		"Ten",
+		"Eleven",
+		"Twelve",
+		"Thirteen",
+		"Fourteen",
+		"Fifteen",
+		"Sixteen"
+	],
+	"ordering": [
+		"First",
+		"Second",
+		"Third",
+		"Fourth",
+		"Fifth",
+		"Sixth",
+		"Seventh",
+		"Eighth",
+		"Nineth",
+		"Tenth",
+		"Eleventh",
+		"Twelvth",
+		"Thirteenth",
+		"Fourteenth",
+		"Fifteenth",
+		"Sixteenth"
+	]
+}

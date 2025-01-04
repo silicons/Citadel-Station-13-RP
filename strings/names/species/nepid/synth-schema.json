@@ -1,0 +1,69 @@
+{
+	"length-limit": 64,
+	"word-limit": 10,
+	"fragments": {
+		"adj-any": {
+			"group": true,
+			"group-fragments": [
+				"adj-place",
+				"adj-intensity",
+				"adj-intensity-prefix",
+				"adj",
+				"adj-formation",
+				"adj-terrain"
+			]
+		},
+		"adj-place": {},
+		"adj-intensity": {},
+		"adj-intensity-prefix": {},
+		"adj": {
+			"start": true,
+			"next": {
+				"noun-object-plural": {
+					"cannot-terminate": true
+				}
+			}
+		},
+		"adj-formation": {},
+		"adj-terrain": {},
+		"noun-object-plural": {
+			"next": {
+				"position-physical": {},
+				"position-temporal": {}
+			},
+			"terminal": true
+		},
+		"noun-object-singular": {
+			"prefix": [
+				"a",
+				"the"
+			],
+			"next": {
+				"position-physical": {},
+				"position-temporal": {}
+			},
+			"terminal": true
+		},
+		"position-physical": {
+			"next": {
+				"adj-any": {}
+			}
+		},
+		"position-temporal": {
+			"next": {
+				"adj-any": {}
+			}
+		},
+		"quantifier": {
+			"start": true,
+			"next": {
+				"adj": {},
+				"adj-place": {},
+				"adj-intensity": {},
+				"adj-formation": {},
+				"adj-terrain": {}
+			}
+		},
+		"ordering": {}
+	}
+}

@@ -1,0 +1,18 @@
+{
+	"universal": [
+		"AVX",
+		"DOT",
+		"ECS",
+		"FAR",
+		"IMM",
+		"KEY",
+		"LOG",
+		"MPI",
+		"OPT",
+		"PTR",
+		"RAFT",
+		"SAR",
+		"TKV",
+		"VAL"
+	]
+}
