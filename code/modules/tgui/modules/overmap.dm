@@ -365,7 +365,7 @@
 		if("move")
 			var/ndir = text2num(params["dir"])
 			ndir = turn(ndir,pick(90,-90))
-			linked.relaymove(usr, ndir, accellimit)
+			linked.relaymove_legacy(usr, ndir, accellimit)
 			. = TRUE
 
 		if("brake")

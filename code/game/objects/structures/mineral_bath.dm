@@ -88,7 +88,7 @@
 /obj/structure/adherent_bath/MouseDroppedOnLegacy(var/atom/movable/O, var/mob/user)
 	enter_bath(O, user)
 
-/obj/structure/adherent_bath/relaymove(var/mob/user)
+/obj/structure/adherent_bath/relaymove_legacy(var/mob/user)
 	if(user == occupant)
 		eject_occupant()
 

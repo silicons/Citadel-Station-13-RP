@@ -1149,7 +1149,7 @@
 	// Inside an object, tell it we moved.
 	if(isobj(wearer.loc) || ismob(wearer.loc))
 		var/atom/O = wearer.loc
-		return O.relaymove(wearer, direction)
+		return O.relaymove_legacy(wearer, direction)
 
 	if(isturf(wearer.loc))
 		if(wearer.restrained())//Why being pulled while cuffed prevents you from moving
@@ -1172,17 +1172,17 @@
 		//manually set move_delay for vehicles so we don't inherit any mob movement penalties
 		//specific vehicle move delays are set in code\modules\vehicles\vehicle.dm
 		wearer_move_delay = world.time
-		return wearer.buckled.relaymove(wearer, direction)
+		return wearer.buckled.relaymove_legacy(wearer, direction)
 
 	if(istype(wearer.machine, /obj/machinery))
-		if(wearer.machine.relaymove(wearer, direction))
+		if(wearer.machine.relaymove_legacy(wearer, direction))
 			return
 
 	if(wearer.pulledby || wearer.buckled) // Wheelchair driving!
 		if(istype(wearer.loc, /turf/space))
 			return // No wheelchair driving in space
 		if(istype(wearer.pulledby, /obj/structure/bed/chair/wheelchair))
-			return wearer.pulledby.relaymove(wearer, direction)
+			return wearer.pulledby.relaymove_legacy(wearer, direction)
 		else if(istype(wearer.buckled, /obj/structure/bed/chair/wheelchair))
 			if(ishuman(wearer.buckled))
 				var/obj/item/organ/external/l_hand = wearer.get_organ("l_hand")
@@ -1190,7 +1190,7 @@
 				if((!l_hand || (l_hand.status & ORGAN_DESTROYED)) && (!r_hand || (r_hand.status & ORGAN_DESTROYED)))
 					return // No hands to drive your chair? Tough luck!
 			wearer_move_delay += 2
-			return wearer.buckled.relaymove(wearer,direction)
+			return wearer.buckled.relaymove_legacy(wearer,direction)
 
 	var/power_cost = 200
 	if(!ai_moving)

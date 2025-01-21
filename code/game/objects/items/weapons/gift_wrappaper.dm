@@ -54,7 +54,7 @@
 /obj/item/a_gift/legacy_ex_act()
 	qdel(src)
 
-/obj/effect/spresent/relaymove(mob/user as mob)
+/obj/effect/spresent/relaymove_legacy(mob/user as mob)
 	if (user.stat)
 		return
 	to_chat(user, "<span class='warning'>You can't move.</span>")

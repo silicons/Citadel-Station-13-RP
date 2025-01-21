@@ -347,7 +347,7 @@
 //  if it is, check the direction. If the direction matches the direction of
 //  the station, try to exit. If the direction matches one of the station's
 //  tube directions, launch the pod in that direction.
-/obj/structure/transit_tube_pod/relaymove(mob/mob, direction)
+/obj/structure/transit_tube_pod/relaymove_legacy(mob/mob, direction)
 	if(istype(mob, /mob) && mob.client)
 		// If the pod is not in a tube at all, you can get out at any time.
 		if(!(locate(/obj/structure/transit_tube) in loc))

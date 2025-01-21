@@ -43,7 +43,7 @@
 	for(var/mob/living/L in contents)
 		L.adjust_instability(2)
 
-/obj/effect/phase_shift/relaymove(mob/user as mob)
+/obj/effect/phase_shift/relaymove_legacy(mob/user as mob)
 	if(user.stat)
 		return
 

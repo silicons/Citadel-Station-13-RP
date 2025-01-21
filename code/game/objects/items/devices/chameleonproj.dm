@@ -126,7 +126,7 @@
 		to_chat(M, "<span class='warning'>Your chameleon-projector deactivates.</span>")
 	master.disrupt()
 
-/obj/effect/dummy/chameleon/relaymove(var/mob/user, direction)
+/obj/effect/dummy/chameleon/relaymove_legacy(var/mob/user, direction)
 	if(istype(loc, /turf/space)) return //No magical space movement!
 
 	if(can_move)

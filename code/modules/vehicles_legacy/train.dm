@@ -80,7 +80,7 @@
 //-------------------------------------------
 // Interaction procs
 //-------------------------------------------
-/obj/vehicle_old/train/relaymove(mob/user, direction)
+/obj/vehicle_old/train/relaymove_legacy(mob/user, direction)
 	var/turf/T = get_step_to(src, get_step(src, direction))
 	if(!T)
 		to_chat(user, "You can't find a clear area to step onto.")

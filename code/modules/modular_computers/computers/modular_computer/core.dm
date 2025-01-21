@@ -257,9 +257,9 @@
 	else
 		return ..()
 
-/obj/item/modular_computer/relaymove(var/mob/user, direction)
+/obj/item/modular_computer/relaymove_legacy(var/mob/user, direction)
 	if(active_program)
-		return active_program.relaymove(user, direction)
+		return active_program.relaymove_legacy(user, direction)
 
 /obj/item/modular_computer/proc/set_autorun(program)
 	if(!hard_drive)

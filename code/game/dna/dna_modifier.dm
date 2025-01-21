@@ -57,7 +57,7 @@
 	var/mob/living/carbon/occupant = null
 	var/obj/item/reagent_containers/glass/beaker = null
 
-/obj/machinery/dna_scannernew/relaymove(mob/user)
+/obj/machinery/dna_scannernew/relaymove_legacy(mob/user)
 	if (user.stat)
 		return
 	src.go_out()

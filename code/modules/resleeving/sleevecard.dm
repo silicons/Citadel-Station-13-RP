@@ -22,7 +22,7 @@
 
 	materials_base = list(MAT_STEEL = 4000, MAT_GLASS = 4000)
 
-/obj/item/sleevecard/relaymove(var/mob/user, var/direction)
+/obj/item/sleevecard/relaymove_legacy(var/mob/user, var/direction)
 	if(!CHECK_MOBILITY(user, MOBILITY_CAN_MOVE))
 		return
 	var/obj/item/hardsuit/hardsuit = src.get_hardsuit()

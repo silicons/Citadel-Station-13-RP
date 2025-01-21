@@ -193,7 +193,7 @@
 //-------------------------------------------
 // Interaction procs
 //-------------------------------------------
-/obj/vehicle_old/train/security/engine/relaymove(mob/user, direction)
+/obj/vehicle_old/train/security/engine/relaymove_legacy(mob/user, direction)
 	if(user != load)
 		return 0
 

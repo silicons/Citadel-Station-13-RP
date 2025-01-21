@@ -218,7 +218,7 @@ GLOBAL_LIST_BOILERPLATE(all_janitorial_carts, /obj/structure/janitorialcart)
 	else
 		..()
 
-/obj/structure/bed/chair/janicart/relaymove(mob/living/user, direction)
+/obj/structure/bed/chair/janicart/relaymove_legacy(mob/living/user, direction)
 	if(!CHECK_MOBILITY(user, MOBILITY_CAN_USE))
 		unbuckle_mob()
 	if(user.get_held_item_of_type(/obj/item/key))

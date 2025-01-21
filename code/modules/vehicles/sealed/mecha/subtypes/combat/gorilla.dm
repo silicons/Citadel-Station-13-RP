@@ -54,7 +54,7 @@
 	playsound(src,"mechstep",40,1)
 
 
-/obj/vehicle/sealed/mecha/combat/gorilla/relaymove(mob/user,direction)
+/obj/vehicle/sealed/mecha/combat/gorilla/relaymove_legacy(mob/user,direction)
 	if(user != src.occupant_legacy)
 		user.loc = get_turf(src)
 		to_chat(user, "You climb out from [src]")

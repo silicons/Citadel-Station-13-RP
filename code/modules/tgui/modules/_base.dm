@@ -85,5 +85,5 @@ Code is pretty much ripped verbatim from nano modules, but with un-needed stuff 
 		ui = new(user, src, tgui_id, name, parent_ui)
 		ui.open()
 
-/datum/tgui_module_old/proc/relaymove(mob/user, direction)
+/datum/tgui_module_old/proc/relaymove_legacy(mob/user, direction)
 	return FALSE

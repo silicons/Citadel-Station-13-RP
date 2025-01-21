@@ -305,7 +305,7 @@
 	for(var/obj/item/stack/material/matstack in held_items)
 		.[matstack.material.id] += matstack.amount * SHEET_MATERIAL_AMOUNT
 
-/obj/machinery/nanite_chamber/relaymove_from_contents(mob/user, direction)
+/obj/machinery/nanite_chamber/relaymove_from_contents(mob/user, direction, datum/event_args/actor/actor)
 	if(open(user))
 		return TRUE
 	if(!(world.time % 5))

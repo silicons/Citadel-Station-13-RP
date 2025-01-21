@@ -80,7 +80,7 @@
 	mech_faction = MECH_FACTION_SYNDI
 
 //I'll break this down later
-/obj/vehicle/sealed/mecha/combat/marauder/relaymove(mob/user,direction)
+/obj/vehicle/sealed/mecha/combat/marauder/relaymove_legacy(mob/user,direction)
 	if(user != src.occupant_legacy) //While not "realistic", this piece is player friendly.
 		user.loc = get_turf(src)
 		to_chat(user, "You climb out from [src]")

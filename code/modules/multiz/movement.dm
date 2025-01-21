@@ -18,7 +18,7 @@
 
 	if(istype(loc,/obj/vehicle/sealed/mecha))
 		var/obj/vehicle/sealed/mecha/mech = loc
-		return mech.relaymove(src,direction)
+		return mech.relaymove_legacy(src,direction)
 
 	if(!can_ztravel())
 		to_chat(src, SPAN_WARNING("You lack means of travel in that direction."))

@@ -357,15 +357,6 @@
 		unbuckle_mob(M, flags, user, buckled_mobs[M])
 
 /**
- * called when a buckled mob tries to move
- */
-/atom/movable/proc/relaymove_from_buckled(mob/user, direction)
-	. = SEND_SIGNAL(src, COMSIG_ATOM_RELAYMOVE_FROM_BUCKLED, user, direction)
-	if(. & COMPONENT_RELAYMOVE_HANDLED)
-		return TRUE
-	return relaymove(user, direction)
-
-/**
  * call when you uncuff/whatever someone
  */
 /atom/movable/proc/buckled_reconsider_restraints(mob/user)

@@ -87,7 +87,7 @@
 /obj/structure/closet/statue/MouseDroppedOnLegacy()
 	return
 
-/obj/structure/closet/statue/relaymove()
+/obj/structure/closet/statue/relaymove_legacy()
 	return
 
 /obj/structure/closet/statue/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)

@@ -239,9 +239,9 @@
 ////
 //// Relaying movements to the UAV
 ////
-/datum/nano_module/uav/relaymove(var/mob/user, direction)
+/datum/nano_module/uav/relaymove_legacy(var/mob/user, direction)
 	if(current_uav)
-		return current_uav.relaymove(user, direction, signal_strength)
+		return current_uav.relaymove_legacy(user, direction, signal_strength)
 
 ////
 ////  The effects when looking through a UAV

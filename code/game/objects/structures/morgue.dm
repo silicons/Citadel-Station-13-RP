@@ -149,7 +149,7 @@
 	src.add_fingerprint(user)
 	return
 
-/obj/structure/morgue/relaymove(mob/user as mob)
+/obj/structure/morgue/relaymove_legacy(mob/user as mob)
 	if (user.stat)
 		return
 	if (user in src.occupants)
@@ -277,7 +277,7 @@ GLOBAL_LIST_BOILERPLATE(all_crematoriums, /obj/structure/morgue/crematorium)
 	add_fingerprint(user)
 	return
 
-/obj/structure/morgue/crematorium/relaymove(mob/user as mob)
+/obj/structure/morgue/crematorium/relaymove_legacy(mob/user as mob)
 	if (user.stat || locked)
 		return
 	src.connected = new /obj/structure/m_tray/c_tray( src.loc )

@@ -123,7 +123,7 @@ TYPE_REGISTER_SPATIAL_GRID(/obj/vehicle, SSspatial_grids.vehicles)
 	if(driver_amount() < max_drivers)
 		add_control_flags(M, VEHICLE_CONTROL_DRIVE | VEHICLE_CONTROL_USE_HUDS | VEHICLE_CONTROL_EXIT)
 
-/obj/vehicle/relaymove(mob/user, direction)
+/obj/vehicle/relaymove_legacy(mob/user, direction)
 	if(is_driver(user))
 		return driver_move(user, direction)
 	return FALSE

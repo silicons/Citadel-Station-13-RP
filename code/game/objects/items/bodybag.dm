@@ -97,9 +97,9 @@
 			qdel(src)
 		return folded
 
-/obj/structure/closet/body_bag/relaymove(mob/user,direction)
+/obj/structure/closet/body_bag/relaymove_legacy(mob/user,direction)
 	if(src.loc != get_turf(src))
-		src.loc.relaymove(user,direction)
+		src.loc.relaymove_legacy(user,direction)
 	else
 		..()
 

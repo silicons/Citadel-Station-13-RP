@@ -410,7 +410,7 @@
 	if(Adjacent(user))
 		attack_hand(user)
 
-/obj/structure/closet/relaymove(mob/user as mob)
+/obj/structure/closet/relaymove_legacy(mob/user as mob)
 	if(user.stat || !isturf(loc))
 		return
 

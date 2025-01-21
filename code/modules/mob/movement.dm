@@ -151,7 +151,7 @@
 	// remote controlling something; relay move to that
 /*
 	if(mob.remote_control)					//we're controlling something, our movement is relayed to it
-		return mob.remote_control.relaymove(mob, direct)
+		return mob.remote_control.relaymove_legacy(mob, direct)
 */
 	// we have an eye; relay to that
 	if(mob.eyeobj)
@@ -182,6 +182,7 @@
 	// buckled ; relaymove to buckled
 	if(mob.buckled)
 		return mob.buckled.relaymove_from_buckled(mob, direct)
+		#warn not here
 
 	// todo: move to mob
 	// mobility check
@@ -197,7 +198,7 @@
 	// todo: proper relaymove handling
 	// machine might process relaymove
 	if(mob.machine)
-		var/result = mob.machine.relaymove(mob, direct)
+		var/result = mob.machine.relaymove_legacy(mob, direct)
 		if(result)
 			return result
 
@@ -206,6 +207,7 @@
 	if(!isturf(mob.loc))
 		var/atom/A = mob.loc
 		return A.relaymove_from_contents(mob, direct)
+		#warn not here
 
 	// todo: this should probably be on mob or something
 	// check for gravity
@@ -246,7 +248,7 @@
 		if(istype(mob.loc, /turf/space))
 			return // No wheelchair driving in space
 		if(istype(mob.pulledby, /obj/structure/bed/chair/wheelchair))
-			return mob.pulledby.relaymove(mob, direct)
+			return mob.pulledby.relaymove_legacy(mob, direct)
 		else if(istype(mob.buckled, /obj/structure/bed/chair/wheelchair))
 			if(ishuman(mob))
 				var/mob/living/carbon/human/driver = mob
@@ -266,7 +268,7 @@
 							to_chat(src, SPAN_WARNING("You stumble around confusedly."))
 							direct = turn(direct, pick(90, -90))
 			add_delay += 2
-			return mob.buckled.relaymove(mob,direct)
+			return mob.buckled.relaymove_legacy(mob,direct)
 	//! oh god I hate this so much todo proper relaymove system for pulling fr fr
 
 	//! WARNING: LEGACY CODE I give up at this point
@@ -352,11 +354,7 @@
 	mob.last_self_move = world.time
 
 /mob/proc/SelfMove(turf/T, dir)
-	in_selfmove = TRUE
-	. = Move(T, dir)
-	in_selfmove = FALSE
-	if(.)
-		throwing?.terminate()
+	return self_move_new(dir) !+ null
 
 ///Process_Incorpmove
 ///Called by client/Move()

@@ -60,7 +60,7 @@
 
 
 
-/obj/machinery/sleeper/relaymove(mob/user)
+/obj/machinery/sleeper/relaymove_legacy(mob/user)
 	..()
 	if(usr.incapacitated())
 		return
@@ -107,7 +107,7 @@
 	go_in(usr, usr)
 	add_fingerprint(usr)
 
-/obj/machinery/vr_sleeper/relaymove(mob/user)
+/obj/machinery/vr_sleeper/relaymove_legacy(mob/user)
 	if(user.incapacitated())
 		return 0 //maybe they should be able to get out with cuffs, but whatever
 	go_out()

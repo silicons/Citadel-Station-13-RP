@@ -77,7 +77,7 @@
 
 	return TRUE
 
-/obj/machinery/atmospherics/component/unary/cryo_cell/relaymove(mob/user)
+/obj/machinery/atmospherics/component/unary/cryo_cell/relaymove_legacy(mob/user)
 	// note that relaymove will also be called for mobs outside the cell with UI open
 	if(occupant == user && !user.stat)
 		go_out()

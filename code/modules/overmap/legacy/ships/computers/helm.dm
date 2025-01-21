@@ -226,7 +226,7 @@ GLOBAL_LIST_EMPTY(all_waypoints)
 
 		if("move")
 			var/ndir = text2num(params["dir"])
-			linked.relaymove(usr, ndir, accellimit)
+			linked.relaymove_legacy(usr, ndir, accellimit)
 			. = TRUE
 
 		if("brake")

@@ -2,7 +2,11 @@
 	//* Impairments *//
 	/// active feign_impairment types
 	/// * lazy list
-	var/list/impairments_feigned
+	var/tmp/list/impairments_feigned
+
+	//* Movement *//
+	/// We are currently in self_move()
+	var/tmp/in_selfmove = FALSE
 
 /**
  * Intialize a mob

@@ -210,7 +210,7 @@
 	RemoveBrain()
 	..()
 
-/obj/item/integrated_circuit/input/mmi_tank/relaymove(var/n,var/dir)
+/obj/item/integrated_circuit/input/mmi_tank/relaymove_legacy(var/n,var/dir)
 	set_pin_data(IC_OUTPUT, 2, dir)
 	do_work(1)
 	switch(dir)
@@ -333,7 +333,7 @@
 	else
 		to_chat(user, "<span class='notice'>The connection port is empty.</span>")
 
-/obj/item/integrated_circuit/input/pAI_connector/relaymove(var/n,var/dir)
+/obj/item/integrated_circuit/input/pAI_connector/relaymove_legacy(var/n,var/dir)
 	set_pin_data(IC_OUTPUT, 2, dir)
 	do_work(1)
 	switch(dir)

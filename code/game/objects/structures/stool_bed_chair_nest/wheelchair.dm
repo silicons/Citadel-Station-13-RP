@@ -28,7 +28,7 @@
 		return
 	..()
 
-/obj/structure/bed/chair/wheelchair/relaymove(mob/user, direction)
+/obj/structure/bed/chair/wheelchair/relaymove_legacy(mob/user, direction)
 	if(world.time < last_active_move + move_delay)
 		return
 	last_active_move = world.time

@@ -254,7 +254,7 @@
 
 		blood_splatter(src, M, 1)
 
-/mob/living/bot/mulebot/relaymove(var/mob/user, var/direction)
+/mob/living/bot/mulebot/relaymove_legacy(var/mob/user, var/direction)
 	if(load == user)
 		unload(direction)
 

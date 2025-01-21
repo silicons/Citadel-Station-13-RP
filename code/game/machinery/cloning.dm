@@ -408,7 +408,7 @@
 			qdel(occupant)
 	return
 
-/obj/machinery/clonepod/relaymove(mob/user as mob)
+/obj/machinery/clonepod/relaymove_legacy(mob/user as mob)
 	if(user.stat)
 		return
 	go_out()

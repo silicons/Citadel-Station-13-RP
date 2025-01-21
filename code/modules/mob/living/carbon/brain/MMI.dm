@@ -150,7 +150,7 @@
 	locked = 1
 	return
 
-/obj/item/mmi/relaymove(var/mob/user, var/direction)
+/obj/item/mmi/relaymove_legacy(var/mob/user, var/direction)
 	if(!CHECK_MOBILITY(user, MOBILITY_CAN_MOVE))
 		return
 	var/obj/item/hardsuit/hardsuit = src.get_hardsuit()

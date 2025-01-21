@@ -54,7 +54,7 @@
 	else if(!load && load(user, user))
 		to_chat(user, "You buckle yourself to \the [src].")
 
-/obj/vehicle_old/skateboard/relaymove(mob/user, direction)
+/obj/vehicle_old/skateboard/relaymove_legacy(mob/user, direction)
 	if(user != load || grinding || world.time < next_crash)
 		return 0
 	if(Move(get_step(src, direction), direction))

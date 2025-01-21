@@ -232,9 +232,9 @@
 /obj/item/modular_computer/update_layout()
 	return TRUE
 
-/datum/computer_file/program/proc/relaymove(var/mob/M, direction)
+/datum/computer_file/program/proc/relaymove_legacy(var/mob/M, direction)
 	if(TM)
-		return TM.relaymove(M, direction)
+		return TM.relaymove_legacy(M, direction)
 
 /datum/nano_module/program
 	/// Program-Based computer program that runs this nano module. Defaults to null.

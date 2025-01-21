@@ -56,7 +56,7 @@
 	. = ..()
 
 //? todo why tf is this relaymove
-/obj/overmap/entity/visitable/ship/relaymove(mob/user, direction, accel_limit)
+/obj/overmap/entity/visitable/ship/relaymove_legacy(mob/user, direction, accel_limit)
 	accelerate(direction, accel_limit)
 
 /obj/overmap/entity/visitable/ship/get_scan_data(mob/user)

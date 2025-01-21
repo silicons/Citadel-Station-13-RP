@@ -100,7 +100,7 @@
 	playsound(src, 'sound/machines/medbayscanner1.ogg', 50) // Beepboop you're being scanned. <3
 	add_fingerprint(user)
 
-/obj/machinery/bodyscanner/relaymove(mob/user as mob)
+/obj/machinery/bodyscanner/relaymove_legacy(mob/user as mob)
 	if(user.incapacitated())
 		return FALSE //maybe they should be able to get out with cuffs, but whatever
 	go_out()

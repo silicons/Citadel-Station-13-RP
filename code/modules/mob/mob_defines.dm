@@ -385,10 +385,6 @@
 	var/typing = FALSE
 	var/mutable_appearance/typing_indicator
 
-	//? Movement
-	/// Is self-moving.
-	var/in_selfmove
-
 	var/is_jittery = 0
 	var/jitteriness = 0
 

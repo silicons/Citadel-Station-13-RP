@@ -253,7 +253,7 @@
 /obj/item/uav/get_cell(inducer)
 	return cell
 
-/obj/item/uav/relaymove(var/mob/user, direction, signal = 1)
+/obj/item/uav/relaymove_legacy(var/mob/user, direction, signal = 1)
 	if(signal && state == UAV_ON && (WEAKREF(user) in masters))
 		if(next_move <= world.time)
 			next_move = world.time + (1 SECOND/signal)

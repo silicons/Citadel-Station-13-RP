@@ -309,15 +309,6 @@
 			found += A.search_contents_for(path,filter_path)
 	return found
 
-
-// called by mobs when e.g. having the atom as their machine, pulledby, loc (AKA mob being inside the atom) or buckled var set.
-// see code/modules/mob/mob_movement.dm for more.
-/atom/proc/relaymove()
-	return
-
-/atom/proc/relaymove_from_contents(mob/user, direction)
-	return relaymove(user, direction)
-
 ///Setter for the `density` variable to append behavior related to its changing.
 /atom/proc/set_density(new_value)
 	SHOULD_CALL_PARENT(TRUE)
@@ -326,17 +317,9 @@
 	. = density
 	density = new_value
 
-// Called to set the atom's invisibility and usd to add behavior to invisibility changes.
-/atom/proc/set_invisibility(var/new_invisibility)
-	if(invisibility == new_invisibility)
-		return FALSE
-	invisibility = new_invisibility
-	return TRUE
-
 // todo: this really needs to be refactored
 /atom/proc/emag_act(var/remaining_charges, var/mob/user, var/emag_source)
 	return -1
-
 
 // Returns an assoc list of RCD information.
 // Example would be: list(RCD_VALUE_MODE = RCD_DECONSTRUCT, RCD_VALUE_DELAY = 50, RCD_VALUE_COST = RCD_SHEETS_PER_MATTER_UNIT * 4)

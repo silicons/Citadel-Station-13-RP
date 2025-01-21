@@ -332,7 +332,7 @@
 		return
 	go_in(target, user)
 
-/obj/machinery/sleeper/relaymove(var/mob/user)
+/obj/machinery/sleeper/relaymove_legacy(var/mob/user)
 	..()
 	go_out()
 

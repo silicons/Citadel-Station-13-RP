@@ -231,9 +231,9 @@
 ////
 //// Relaying movements to the UAV
 ////
-/datum/tgui_module_old/uav/relaymove(var/mob/user, direction)
+/datum/tgui_module_old/uav/relaymove_legacy(var/mob/user, direction)
 	if(current_uav)
-		return current_uav.relaymove(user, direction, signal_strength)
+		return current_uav.relaymove_legacy(user, direction, signal_strength)
 
 ////
 ////  The effects when looking through a UAV

@@ -163,7 +163,7 @@
 	return TRUE
 
 //micros in shoes
-/obj/item/clothing/relaymove(var/mob/living/user,var/direction)
+/obj/item/clothing/relaymove_legacy(var/mob/living/user,var/direction)
 	if(recent_struggle)
 		return
 

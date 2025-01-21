@@ -127,7 +127,7 @@
 	else if(!load && load(user, user))
 		to_chat(user, "You buckle yourself to \the [src].")
 
-/obj/vehicle_old/bike/relaymove(mob/user, direction)
+/obj/vehicle_old/bike/relaymove_legacy(mob/user, direction)
 	if(user != load || !on)
 		return 0
 	if(Move(get_step(src, direction), direction))

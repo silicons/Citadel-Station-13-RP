@@ -34,7 +34,7 @@
 			sleep(2)
 			del(src)
 
-/obj/machinery/transportpod/relaymove(mob/user)
+/obj/machinery/transportpod/relaymove_legacy(mob/user)
 	if(user.stat)
 		return
 	go_out()

@@ -160,7 +160,7 @@
 		carded_ai.show_message(rendered, type)
 	..()
 
-/obj/item/aicard/relaymove(var/mob/user, var/direction)
+/obj/item/aicard/relaymove_legacy(var/mob/user, var/direction)
 	if(!CHECK_MOBILITY(user, MOBILITY_CAN_MOVE))
 		return
 	var/obj/item/hardsuit/hardsuit = src.get_hardsuit()
