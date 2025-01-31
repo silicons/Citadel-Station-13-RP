@@ -9,6 +9,10 @@
 # The underscore in the name is so that typing `bootstrap/python` into
 # PowerShell finds the `.bat` file first, which ensures this script executes
 # regardless of ExecutionPolicy.
+#
+# Environment Variables:
+# TG_BOOTSTRAP_CACHE: Force the usage of another cache directory,
+#                     rather than the default location.
 
 $host.ui.RawUI.WindowTitle = "starting :: python $args"
 $ErrorActionPreference = "Stop"

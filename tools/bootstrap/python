@@ -7,23 +7,33 @@
 # If a python.exe installed by `python_.ps1` is present, it will be used.
 # Otherwise, this script requires a system `python3` and `pip` to be provided,
 # and will create a standard virtualenv in which to install `requirements.txt`.
+#
+# Environment Variables:
+# TG_BOOTSTRAP_CACHE: Force the usage of another cache directory,
+#                     rather than the default location.
+
 set -e
 
-# Convenience variables
-Bootstrap="$(dirname "$0")"
-Sdk="$(dirname "$Bootstrap")"
-Cache="$Bootstrap/.cache"
+BOOTSTRAP_DIR="$(dirname "$0")"
+INVOKE_DIR="$PWD"
+TOOLS_DIR="$(dirname "$BOOTSTRAP_DIR")"
+
 if [ "$TG_BOOTSTRAP_CACHE" ]; then
-	Cache="$TG_BOOTSTRAP_CACHE"
-fi
-OldPWD="$PWD"
-cd "$Bootstrap/../.."
-. ./dependencies.sh  # sets PYTHON_VERSION
-cd "$OldPWD"
+	CACHE_DIR="$TG_BOOTSTRAP_CACHE"
+else
+	CACHE_DIR="$BOOTSTRAP_DIR/.cache"
+fi;
+
+echo "bootstrap-python: invoked (relative) from $INVOKE_DIR"
+echo "bootstrap-python: ./tools (relative) in $TOOLS_DIR"
+
+# load dependencies, which sets PYTHON_VERSION
+. "$BOOTSTRAP_DIR/../../dependencies.sh"
+
 PythonVersion="$PYTHON_VERSION"
-PythonDir="$Cache/python-$PythonVersion"
+PythonDir="$CACHE_DIR/python-$PythonVersion"
 PythonExe="$PythonDir/python.exe"
-Log="$Cache/last-command.log"
+Log="$CACHE_DIR/last-command.log"
 
 # If a portable Python for Windows is not present, search on $PATH.
 if [ "$(uname)" = "Linux" ] || [ ! -f "$PythonExe" ]; then
@@ -59,7 +69,7 @@ if [ "$(uname)" = "Linux" ] || [ ! -f "$PythonExe" ]; then
 	fi
 
 	# Create a venv and activate it
-	PythonDir="$Cache/venv"
+	PythonDir="$CACHE_DIR/venv"
 	if [ ! -d "$PythonDir" ]; then
 		echo "Creating virtualenv..."
 		"$PythonExe" -m venv "$PythonDir"
@@ -75,11 +85,11 @@ if [ "$(uname)" = "Linux" ] || [ ! -f "$PythonExe" ]; then
 fi
 
 # Use pip to install our requirements
-if [ ! -f "$PythonDir/requirements.txt" ] || [ "$(b2sum < "$Sdk/requirements.txt")" != "$(b2sum < "$PythonDir/requirements.txt")" ]; then
+if [ ! -f "$PythonDir/requirements.txt" ] || [ "$(b2sum < "$TOOLS_DIR/requirements.txt")" != "$(b2sum < "$PythonDir/requirements.txt")" ]; then
 	echo "Updating dependencies..."
 	"$PythonExe" -m pip install -U wheel
-	"$PythonExe" -m pip install -U pip -r "$Sdk/requirements.txt"
-	cp "$Sdk/requirements.txt" "$PythonDir/requirements.txt"
+	"$PythonExe" -m pip install -U pip -r "$TOOLS_DIR/requirements.txt"
+	cp "$TOOLS_DIR/requirements.txt" "$PythonDir/requirements.txt"
 	echo "---"
 fi
 
@@ -108,8 +118,8 @@ if ! command -v tee >/dev/null 2>&1; then
 fi
 
 # Invoke python with all command-line arguments
-export PYTHONPATH="$Sdk$PATHSEP${PYTHONPATH:-}"
-mkdir -p "$Cache"
+export PYTHONPATH="$TOOLS_DIR$PATHSEP${PYTHONPATH:-}"
+mkdir -p "$CACHE_DIR"
 printf '%s\n' "$PythonExe" "$@" > "$Log"
 printf -- '---\n' >> "$Log"
 exec 4>&1
