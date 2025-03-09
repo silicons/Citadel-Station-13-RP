@@ -1986,7 +1986,7 @@
 #include "code\game\objects\structures\safe.dm"
 #include "code\game\objects\structures\salvageable.dm"
 #include "code\game\objects\structures\signs.dm"
-#include "code\game\objects\structures\simple_doors.dm"
+#include "code\game\objects\structures\simple_door.dm"
 #include "code\game\objects\structures\snowman.dm"
 #include "code\game\objects\structures\spiritboard.dm"
 #include "code\game\objects\structures\stasis_cage.dm"

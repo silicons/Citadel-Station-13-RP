@@ -1,12 +1,14 @@
-#warn typegen this for the material
+#warn typegen this for the material, separate logic into material
 /obj/structure/simple_door
 	name = "door"
 	density = 1
 	anchored = 1
 	CanAtmosPass = ATMOS_PASS_DENSITY
 
-	icon = 'icons/obj/doors/material_doors.dmi'
-	icon_state = "metal"
+	icon = 'icons/structures/simple_door.dmi'
+	icon_state = "door-closed"
+	base_icon_state = "door"
+	#warn set icon staet based on base state
 
 	material_parts = MATERIAL_DEFAULT_NONE
 	material_primary = MATERIAL_PART_DEFAULT
@@ -48,7 +50,6 @@
 	..()
 	if(!state)
 		return TryToSwitchState(user)
-	return
 
 /obj/structure/simple_door/attack_ai(mob/user as mob) //those aren't machinery, they're just big fucking slabs of a mineral
 	if(isAI(user)) //so the AI can't open it
@@ -147,6 +148,10 @@
 	. = ..()
 	var/datum/prototype/material/material = get_primary_material()
 	material?.place_dismantled_product(where, method == ATOM_DECONSTRUCT_DISASSEMBLED? 10 : 6)
+
+/obj/structure/simple_door/material
+
+#warn get rid of these, generate under /material
 
 /obj/structure/simple_door/iron
 	material_parts = /datum/prototype/material/iron
