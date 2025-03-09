@@ -18,6 +18,7 @@ GLOBAL_LIST_INIT(firelock_align_types, typecacheof(list(
 #define FIREDOOR_ALERT_HOT		1
 #define FIREDOOR_ALERT_COLD		2
 // Not used #define FIREDOOR_ALERT_LOWPRESS 4
+#warn refactor
 
 /obj/machinery/door/firedoor
 	name = "\improper Emergency Shutter"
@@ -501,6 +502,7 @@ GLOBAL_LIST_INIT(firelock_align_types, typecacheof(list(
 	if(do_set_light)
 		set_light(2, 0.25, COLOR_SUN)
 
+#warn fix this!!
 /obj/machinery/door/firedoor/border_only
 /*
 	icon = 'icons/obj/doors/edge_Doorfire.dmi'
