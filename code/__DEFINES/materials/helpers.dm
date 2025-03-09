@@ -14,7 +14,7 @@
  * * a defined `display_name`
  * * a defined `sheet_singular_name`
  * * a defined `sheet_plural_name`
- * * a defined `icon`
+ * * a defined `icon_stack`
  * * a defined `icon_stack_count`
  */
 #define GENERATE_MATERIAL_STACKS(PATH_FRAGMENT) \
@@ -31,6 +31,17 @@
 	icon_state = "stack"; \
 	amount = 50; \
 }
+
+/**
+ * Generates simple material doors for a material.
+ *
+ * The material must have:
+ *
+ * * a defined `display_name`
+ * * a defined `icon_door`
+ */
+#warn this
+#define GENERATE_MATERIAL_DOORS(PATH_FRAGMENT)
 
 //* Material Traits - Checks *//
 

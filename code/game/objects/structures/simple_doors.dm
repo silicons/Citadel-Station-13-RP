@@ -1,3 +1,4 @@
+#warn typegen this for the material
 /obj/structure/simple_door
 	name = "door"
 	density = 1
@@ -14,6 +15,8 @@
 	var/state = 0 //closed, 1 == open
 	var/isSwitchingStates = 0
 	var/oreAmount = 7
+
+#warn hook material door icon
 
 /obj/structure/simple_door/Initialize(mapload, datum/prototype/material/material_like)
 	if(!isnull(material_like))

@@ -18,3 +18,7 @@
 
 /datum/stack_recipe/material/make(atom/where, amount, obj/item/stack/material/stack, mob/user, silent, use_dir, list/created = list())
 	return ..()
+
+#warn hook
+/datum/stack_recipe/material/proc/is_compatible(datum/prototype/material/mtaerial)
+	return TRUE

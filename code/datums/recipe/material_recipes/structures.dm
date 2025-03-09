@@ -15,6 +15,9 @@
 		created += new /obj/structure/simple_door(where, stack.material)
 	return TRUE
 
+/datum/stack_recipe/material/structure/door/is_compatible(datum/prototype/material/material)
+	return material.icon_door && ..()
+
 /datum/stack_recipe/material/structure/barricade
 	name = "barricade"
 	result_type = /obj/structure/barricade

@@ -76,6 +76,7 @@
 	for(var/datum/stack_recipe/recipe as anything in material.get_recipes())
 		assembled[++assembled.len] = recipe.tgui_recipe_data()
 	for(var/datum/stack_recipe/material/recipe as anything in SSmaterials.material_stack_recipes)
+		#warn compatibility check
 		assembled[++assembled.len] = recipe.tgui_recipe_data()
 	return assembled
 
