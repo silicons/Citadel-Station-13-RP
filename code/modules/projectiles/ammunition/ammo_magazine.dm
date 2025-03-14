@@ -37,38 +37,31 @@
 	/// * uses MAGAZINE_CLASS_* flags
 	/// * if our requested class isn't on a gun, the gun reserves the right to render us as the default class ('-mag')
 	var/magazine_class = MAGAZINE_CLASS_GENERIC
+	/// are we an internal magazine?
+	var/magazine_internal = FALSE
 
-	//* for magazines *//
+	//* load config *//
 
 	/// magazine restrict - must match gun's to be fitted into it, if gun's is.
 	//  todo: implement when we need multi-restrictions, single-typepath-and-subtypes works for now; maybe rename to magazine_tags or magazine_allow?
-	// var/magazine_restrict
+	// var/load_magazine_restrict
 	/// Inherent insert / remove delay
 	//  todo: impl
-	var/magazine_delay = 0
-	/// Inherent removal delay
-	/// * Defaults to [magazine_delay], overrides it if non-null
-	//  todo: impl
-	var/magazine_remove_delay
-
-	//* for speedloaders *//
-
+	var/load_magazine_delay = 0
 	/// speedloader type - must match gun's to fit ammo in, if gun's is set
 	//  todo: implement when we need multi-restrictions, single-typepath-and-subtypes works for now; maybe rename to magazine_tags or magazine_allow?
-	// var/speedloader_restrict
+	// var/load_speedloader_restrict
 	/// inherent speedloader delay, added to gun's speedloaders_delay
-	var/speedloader_delay = 0
-
-	//* for stripper clips / usage as single loader *//
+	var/load_speedloader_delay = 0
 	/// inherent delay on each shell loaded
-	var/clip_delay = 0
+	var/load_clip_delay = 0
 
-	//* loading *//
+	//* unload config *//
 
-	/// sound for loading a piece of ammo
-	var/load_sound = 'sound/weapons/flipblade.ogg'
-	/// should we auto-collect spent casings?
-	var/should_collect_spent = FALSE
+	/// Inherent removal delay
+	/// * Defaults to [load_magazine_delay], overrides it if non-null
+	//  todo: impl
+	var/unload_magazine_delay
 
 	//* Ammo *//
 
@@ -103,6 +96,14 @@
 	var/ammo_restrict
 	/// if set and ammo_restrict uses typepaths, doesn't allow subtypes
 	var/ammo_restrict_no_subtypes = FALSE
+	/// preload ammo_internal and allow vector access
+	var/ammo_vector = FALSE
+	/// current index to pull from for revolver-like vector access
+	var/ammo_vector_circular_index
+	/// sound for loading a piece of ammo
+	var/ammo_load_sound = 'sound/weapons/flipblade.ogg'
+	/// should we auto-collect spent casings?
+	var/ammo_collect_spent = FALSE
 
 	//* Rendering *//
 
@@ -144,9 +145,10 @@
 		if(rendering_static_overlay_color)
 			static_overlay.color = rendering_static_overlay_color
 		add_overlay(static_overlay, TRUE)
-
 	if(isnull(ammo_current))
 		ammo_current = ammo_max
+	if(ammo_vector)
+		instantiate_internal_list()
 
 	update_icon()
 
@@ -179,29 +181,6 @@
 	. += "There [(amount_left == 1)? "is" : "are"] [amount_left] round\s left!"
 
 /**
- * transfer as many rounds to another magazine as possible
- *
- * * This proc must do safety checks like caliber. The receiving side does not!
- *
- * @params
- * * receiver - receiving mag
- * * update_icon - update icons for both us and receiver
- *
- * @return rounds transferred
- */
-/obj/item/ammo_magazine/proc/transfer_rounds_to(obj/item/ammo_magazine/receiver, update_icon)
-	. = 0
-	var/get_amount_missing = receiver.get_amount_missing()
-	// todo: mixed caliber support
-	if(!receiver.loads_caliber(ammo_caliber))
-		return
-	for(var/i in 1 to min(get_amount_missing, get_amount_remaining()))
-		receiver.push(pop(receiver, TRUE), TRUE)
-		++.
-	update_icon()
-	receiver.update_icon()
-
-/**
  * create casing when we draw into non-instantiated part of the mag
  */
 /obj/item/ammo_magazine/proc/instantiate_casing(atom/newloc)
@@ -232,7 +211,7 @@
  * @return null for success, a string describing why not otherwise.
  */
 /obj/item/ammo_magazine/proc/why_cant_load_casing(obj/item/ammo_casing/casing)
-	if(!loads_caliber(casing.casing_caliber))
+	if(!accepts_caliber(casing.casing_caliber))
 		return "mismatched caliber"
 	if(ammo_restrict && (ammo_restrict_no_subtypes ? casing.type != ammo_restrict : !istype(casing, ammo_restrict)))
 		return "mismatched ammo"
@@ -283,7 +262,7 @@
 			to_chat(user, SPAN_WARNING("You fail to insert [I] into [src]!"))
 			return
 		// todo: variable load sounds
-		playsound(src, load_sound, 50, 1)
+		playsound(src, ammo_load_sound, 50, 1)
 		to_chat(user, SPAN_NOTICE("You put [I] into [src]"))
 		return CLICKCHAIN_DO_NOT_PROPAGATE | CLICKCHAIN_DID_SOMETHING
 	else if(istype(I, /obj/item/ammo_magazine))
@@ -319,7 +298,7 @@
 	for(var/obj/item/ammo_casing/casing in where)
 		if(. > needed)
 			break
-		if(!casing.is_loaded() && !should_collect_spent)
+		if(!casing.is_loaded() && !ammo_collect_spent)
 			continue
 		if(!isnull(why_cant_load_casing(casing)))
 			continue
@@ -358,87 +337,7 @@
 					py += rendering_segment_y_offset
 	return ..()
 
-//*                 Accessors - Top of Mag                   *//
-//* This is the preferred way to interact with a magazine.   *//
-
-/**
- * peek top ammo casing
- */
-/obj/item/ammo_magazine/proc/peek()
-	RETURN_TYPE(/obj/item/ammo_casing)
-	if(!length(ammo_internal))
-		// list empty, see if we have one to inject
-		if(!ammo_current || !ammo_preload)
-			// we're empty
-			return
-		var/obj/item/ammo_casing/created = instantiate_casing()
-		if(isnull(ammo_internal))
-			ammo_internal = list(created)
-		else
-			ammo_internal += created
-		--ammo_current
-		return created
-	return ammo_internal[length(ammo_internal)]
-
-/**
- * get and eject top casing
- */
-/obj/item/ammo_magazine/proc/pop(atom/newloc, no_update)
-	RETURN_TYPE(/obj/item/ammo_casing)
-	if(length(ammo_internal))
-		// list filled
-		. = ammo_internal[length(ammo_internal)]
-		--ammo_internal.len
-		update_icon()
-		return
-	// list empty
-	if(!ammo_current || !ammo_preload)
-		return
-	. = instantiate_casing(newloc)
-	--ammo_current
-	if(!no_update)
-		update_icon()
-
-/**
- * put a casing into top
- *
- * @return TRUE/FALSE on success/failure
- */
-/obj/item/ammo_magazine/proc/push(obj/item/ammo_casing/casing, no_update, force)
-	if(get_amount_remaining() >= ammo_max && !force)
-		return FALSE
-	LAZYADD(ammo_internal, casing)
-	if(casing.loc != src)
-		casing.forceMove(src)
-	if(!no_update)
-		update_icon()
-	return TRUE
-
-/**
- * replace the first spent casing from the top or insert top depending on if there's room
- *
- * @return TRUE/FALSE on success/failure
- */
-/obj/item/ammo_magazine/proc/push_resupply(obj/item/ammo_casing/casing, no_update, atom/transfer_old_to)
-	// try to resupply
-	for(var/i in length(ammo_internal) to 1 step -1)
-		var/obj/item/ammo_casing/loaded = ammo_internal[i]
-		if(loaded.is_loaded())
-			continue
-		loaded.forceMove(transfer_old_to || drop_location())
-		ammo_internal[i] = casing
-		if(casing.loc != src)
-			casing.forceMove(src)
-		return TRUE
-	if(!no_update)
-		update_icon()
-	// try to insert
-	return push(casing, no_update)
-
-//* Ammo - Getters *//
-
-/obj/item/ammo_magazine/proc/is_full()
-	return get_amount_remaining() >= ammo_max
+//* Amount *//
 
 /obj/item/ammo_magazine/proc/get_amount_remaining(live_only)
 	if(!live_only)
@@ -448,31 +347,43 @@
 		if(casing.is_loaded())
 			.++
 
-/obj/item/ammo_magazine/proc/get_amount_missing(live_only)
-	return ammo_max - get_amount_remaining(live_only)
+/obj/item/ammo_magazine/proc/get_amount_missing(include_spent)
+	return ammo_max - get_amount_remaining(include_spent)
 
-/**
- * Gets the predicted typepath of a casing a given index from the top, where 1 is the top.
- *
- * * Real casings are read.
- * * Fake casings are predicted from the type that would have been lazy-generated.
- * * Null if something isn't there / left
- */
-/obj/item/ammo_magazine/proc/peek_path_of_position(index)
-	if(index > length(ammo_internal))
-		return (index - length(ammo_internal)) >= ammo_current ? ammo_preload : null
-	return ammo_internal[length(ammo_internal) - index]?.type
+/obj/item/ammo_magazine/proc/is_full(live_only)
+	return get_amount_remaining(live_only) >= ammo_max
 
-/**
- * Returns a direct reference to our loaded list.
- * * You shouldn't be using this, more or less.
- */
-/obj/item/ammo_magazine/proc/unsafe_get_ammo_internal_ref()
-	return ammo_internal
+/obj/item/ammo_magazine/proc/is_empty(ignore_spent)
+	return get_amount_remaining(ignore_spent) <= 0
 
 //* Caliber *//
 
-/obj/item/ammo_magazine/proc/loads_caliber(datum/ammo_caliber/caliberlike)
+/obj/item/ammo_magazine/proc/accepts_caliber(datum/ammo_caliber/caliberlike)
 	var/datum/ammo_caliber/ours = resolve_caliber(ammo_caliber)
 	var/datum/ammo_caliber/theirs = resolve_caliber(caliberlike)
 	return ours.equivalent(theirs)
+
+//* Transfer *//
+
+/**
+ * transfer as many rounds to another magazine as possible
+ *
+ * * This proc must do safety checks like caliber. The receiving side does not!
+ *
+ * @params
+ * * receiver - receiving mag
+ * * update_icon - update icons for both us and receiver
+ *
+ * @return rounds transferred
+ */
+/obj/item/ammo_magazine/proc/transfer_rounds_to(obj/item/ammo_magazine/receiver, update_icon)
+	. = 0
+	var/get_amount_missing = receiver.get_amount_missing()
+	// todo: mixed caliber support
+	if(!receiver.accepts_caliber(ammo_caliber))
+		return
+	for(var/i in 1 to min(get_amount_missing, get_amount_remaining()))
+		receiver.push(pop(receiver, TRUE), TRUE)
+		++.
+	update_icon()
+	receiver.update_icon()

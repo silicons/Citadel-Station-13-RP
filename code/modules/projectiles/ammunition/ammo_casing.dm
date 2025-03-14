@@ -11,6 +11,7 @@
 	pickup_sound = 'sound/items/pickup/ring.ogg'
 
 	//* Casing *//
+
 	/// casing flags - see __DEFINES/projectiles/ammo_casing.dm
 	var/casing_flags = NONE
 	/// what types of primer we react to
@@ -30,6 +31,7 @@
 	var/casing_effective_mass_multiplier = 1
 
 	//* Projectile *//
+
 	/// projectile type
 	var/projectile_type
 	/// stored projectile - either null for un-init'd, FALSE for empty, or an instance
@@ -38,8 +40,10 @@
 	var/list/projectile_effects_add
 
 	//* Icon *//
+
 	/// switch to "[initial(state)]-spent" after expenditure
 	var/icon_spent = TRUE
+	// todo: icon_static_overlay, icon_static_overlay_color
 
 	//! unsorted / legacy
 	var/leaves_residue = 1

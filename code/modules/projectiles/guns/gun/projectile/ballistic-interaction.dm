@@ -116,7 +116,7 @@
 			)
 		return CLICKCHAIN_DID_SOMETHING
 
-	if(!do_after(actor.performer, speedloader_delay + magazine.speedloader_delay, src, mobility_flags = MOBILITY_CAN_USE))
+	if(!do_after(actor.performer, speedloader_delay + magazine.load_speedloader_delay, src, mobility_flags = MOBILITY_CAN_USE))
 		return CLICKCHAIN_DID_SOMETHING
 
 	var/loaded = insert_speedloader(magazine, no_sound)

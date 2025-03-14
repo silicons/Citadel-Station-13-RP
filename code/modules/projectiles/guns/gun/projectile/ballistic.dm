@@ -102,42 +102,16 @@
 	/// * If this is 0 and so is a clip's, clips act like speedloaders.
 	var/single_load_delay = 0
 
-	//* Ammunition - Internal *//
+	//* Internal Magazine *//
 
-	/// If set, we use an internal magazine.
-	/// * Changing this post-Initialize() is considered undefined behavior.
-	/// * Only internal magazine guns work with speedloaders.
-	//  todo: evaluate if internal magazines should just be a special magazine object
-	//        as the current way of doing it leads to a lot of unnecessary logic
-	var/internal_magazine = FALSE
-	/// Sets our internal magazine size.
-	/// * Changing this post-Initialize() is considered undefined behavior.
-	/// * Size 0 internal magazines are used for single shot guns, if they use chamber sim,
-	///   as the chamber is technically the first / only slot for a casing.
-	var/internal_magazine_size = 0
-	/// Internal magazine list
-	/// * This is an indexed list. Non-revolverlikes will trim the list as
-	///   needed, while revolverlikes will keep the list size static.
-	/// * This is separate from [magazine] on purpose.
-	/// * The top round is the bottom of the list, ergo last element.
-	///   This makes insertion and removal very fast.
-	var/list/obj/item/ammo_casing/internal_magazine_vec
-	/// Preloads internal magazine with this ammo type
-	var/internal_magazine_preload_ammo
-	/// The internal magazine should act like a looping list
-	/// rather than being a stack.
-	/// * Changing this post-Initialize() is considered undefined behavior.
-	/// * Basically, makes this act like a revolver. Round ejection still works.
-	/// * This forces the chamber to always be empty, and the 'chambered round' to always actually just
-	///   be the round at [internal_magazine_revolver_offset].
-	///   Basically, [chamber_simulation] is disabled if this is on.
-	var/internal_magazine_revolver_mode = FALSE
-	/// The current position in [internal_magazine_vec] we are at.
-	/// * This is to avoid duplicate references, as those are pretty much asking for trouble.
-	/// * This is only used if [internal_magazine_revolver_mode] is enabled.
-	/// * This normally goes **forwards**. This means that it goes from say,
-	///   1 to 10, then wraps back to 1.
-	var/internal_magazine_revolver_offset
+	/// Use internal magazine? Set to size if so
+	/// * Should not be set along with an external magazine preload.
+	var/internal_magazine
+	/// Internal magazine preload ammo type, if any
+	var/internal_magazine_preload
+	/// Internal magazine is revolver-like
+	/// * Will internally set the internal magazine to vector-mode.
+	var/internal_magazine_is_revolver
 
 	//* Bolt *//
 
@@ -179,23 +153,13 @@
 	var/chamber_simulation = TRUE
 	/// Chambered round
 	/// * This is considered an internal variable; use getters / setters to manipulate it.
+	/// * This can be set to a typepath to instance that round on init.
+	///
 	/// How this works:
-	/// * This is filled on cycle if it's an external magazine and chamber is separated from magazine.
-	/// * Ditto for internal magazine, if chamber is separated.
-	/// * If [chamber_simulation] is off, this variable will never be filled until firing.
-	///   get_chambered(), eject_chamber(), etc, will all return the first in magazine.
-	/// * If [internal_magazine] and [internal_magazine_revolver_mode] are both on, this variable will never be filled until firing.
-	///   get_chambered(), eject_chamber(), etc, will all return the current revolver offset.
-	/// Caveats
-	/// * Internally, if this variable is filled, it'll be returned.
-	///   Even if it should be using something else. This is so things don't runtime when there's
-	///   invalid behavior, instead just acting weirdly. You can technically use this to
-	///   make custom behaviors, but it's not recommended.
-	/// * Internally, this variable is filled during firing with chamber simulation off, as it's how we keep track
-	///   of what we're currently firing.
+	/// * Used by [consume_next_projectile()].
+	/// * Always filled during a firing cycle, and should not be filled outside of that if
+	///   [chamber_simulation] is off.
 	VAR_PROTECTED/obj/item/ammo_casing/chamber
-	/// Preload with this ammo casing type.
-	var/chamber_preload_ammo
 	/// Cycle the chamber on a successful live fire.
 	var/chamber_cycle_after_fire = TRUE
 	/// Cycle the chamber on an unsuccessful inert fire.
