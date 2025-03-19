@@ -1,6 +1,6 @@
 //* This file is explicitly licensed under the MIT license. *//
 //* Copyright (c) 2025 Citadel Station Developers           *//
 
-/datum/computer
+// todo: replace /obj/item/pda
+/obj/item/pda_new
 
-#warn impl
