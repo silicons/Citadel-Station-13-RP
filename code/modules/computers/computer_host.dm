@@ -41,3 +41,6 @@
 	SHOULD_CALL_PARENT(TRUE)
 
 #warn impl
+
+
+#warn fuck it just do items get rid of partition/peripheral host lol
