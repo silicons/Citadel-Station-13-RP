@@ -8,3 +8,5 @@
 	/// volume modulator
 	/// * 0 is normal negative is less positive is more
 	var/volume_mod
+
+/obj/item/computer_peripheral/speaker/proc/play_sound(sfx, volume, volume)
