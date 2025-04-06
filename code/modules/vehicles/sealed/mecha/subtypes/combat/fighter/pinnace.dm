@@ -12,7 +12,7 @@
 	max_special_equip = 1
 
 	catalogue_data = list(/datum/category_item/catalogue/technology/pinnace)
-	wreckage = /obj/effect/decal/mecha_wreckage/pinnace
+	wreckage = /obj/structure/vehicle_wreckage/pinnace
 
 	ground_capable = TRUE
 
@@ -21,7 +21,7 @@
 	var/obj/item/vehicle_module/ME = new /obj/item/vehicle_module/tool/passenger
 	ME.attach(src)
 
-/obj/effect/decal/mecha_wreckage/pinnace
+/obj/structure/vehicle_wreckage/pinnace
 	name = "pinnace wreckage"
 	desc = "Remains of some unfortunate ship's boat. Completely unrepairable."
 	icon = 'icons/mecha/fighters64x64.dmi'

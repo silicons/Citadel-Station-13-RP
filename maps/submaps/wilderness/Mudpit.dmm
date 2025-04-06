@@ -59,7 +59,7 @@
 /turf/simulated/floor/outdoors/dirt,
 /area/submap/Mudpit)
 "o" = (
-/obj/effect/decal/mecha_wreckage/ripley/firefighter,
+/obj/structure/vehicle_wreckage/ripley/firefighter,
 /turf/simulated/floor/outdoors/dirt,
 /area/submap/Mudpit)
 

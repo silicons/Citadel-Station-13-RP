@@ -37,9 +37,9 @@ TYPE_REGISTER_SPATIAL_GRID(/obj/vehicle, SSspatial_grids.vehicles)
 	var/datum/prototype/vehicle_chassis/chassis
 	/// All installed modules.
 	/// * Set to list to init.
-	var/list/obj/item/vehicle_module/modules
+	var/list/obj/item/vehicle_module/modules = list()
 	/// module by hardpoint ID lookup
-	var/list/modules_by_hardpoint_id
+	var/list/modules_by_hardpoint_id = list()
 
 	var/max_occupants = 1
 	var/max_drivers = 1
@@ -61,7 +61,21 @@ TYPE_REGISTER_SPATIAL_GRID(/obj/vehicle, SSspatial_grids.vehicles)
 
 /obj/vehicle/Initialize(mapload)
 	. = ..()
-	#warn init chassis and modules
+	#warn init chassis
+
+	for(var/obj/item/vehicle_module/module_path as anything in modules?.Copy())
+		if(!ispath(module_path))
+			if(!istype(module_path))
+				stack_trace("invalid module path [module_path] in modules")
+				modules -= module_path
+			continue
+		modules -= module_path
+		var/obj/item/vehicle_module/module_init = new module_path(src)
+		if(!attach_module(module_init))
+			stack_trace("couldn't attach module [module_init] ([module_path]) in init")
+			qdel(module_init)
+			continue
+
 	initialize_occupant_actions()
 	occupants = list()
 	autogrant_actions_passenger = list()

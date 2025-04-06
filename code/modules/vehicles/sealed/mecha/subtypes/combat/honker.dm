@@ -11,7 +11,7 @@
 	damage_absorption = list("brute"=0.75,"fire"=1,"bullet"=0.8,"laser"=0.7,"energy"=0.85,"bomb"=1)
 	max_temperature = 25000
 	infra_luminosity = 6
-	wreckage = /obj/effect/decal/mecha_wreckage/honker
+	wreckage = /obj/structure/vehicle_wreckage/honker
 	internal_damage_threshold = 35
 	max_equip = 4
 
@@ -46,7 +46,7 @@
 	damage_absorption = list("brute"=0.6,"fire"=0.8,"bullet"=0.6,"laser"=0.5,"energy"=0.65,"bomb"=0.8)
 	max_temperature = 45000
 	overload_coeff = 1
-	wreckage = /obj/effect/decal/mecha_wreckage/honker/cluwne
+	wreckage = /obj/structure/vehicle_wreckage/honker/cluwne
 	max_equip = 4
 	step_energy_drain = 5
 

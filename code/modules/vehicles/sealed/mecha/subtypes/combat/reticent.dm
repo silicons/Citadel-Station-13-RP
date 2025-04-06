@@ -11,7 +11,7 @@
 	damage_absorption = list("brute"=1,"fire"=0.75,"bullet"=0.85,"laser"=0.8,"energy"=0.7,"bomb"=1)
 	max_temperature = 25000
 	infra_luminosity = 6
-	wreckage = /obj/effect/decal/mecha_wreckage/reticent
+	wreckage = /obj/structure/vehicle_wreckage/reticent
 	internal_damage_threshold = 35
 	max_equip = 4
 
@@ -48,7 +48,7 @@
 	damage_absorption = list("brute"=0.8,"fire"=0.6,"bullet"=0.5,"laser"=0.65,"energy"=0.6,"bomb"=0.8)
 	max_temperature = 45000
 	overload_coeff = 1
-	wreckage = /obj/effect/decal/mecha_wreckage/reticent/reticence
+	wreckage = /obj/structure/vehicle_wreckage/reticent/reticence
 	max_equip = 4
 	step_energy_drain = 5
 

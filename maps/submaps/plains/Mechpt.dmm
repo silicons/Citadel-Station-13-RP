@@ -68,11 +68,11 @@
 /turf/simulated/floor/outdoors/dirt,
 /area/submap/Mechpt)
 "o" = (
-/obj/effect/decal/mecha_wreckage/ripley/deathripley,
+/obj/structure/vehicle_wreckage/ripley/deathripley,
 /turf/simulated/floor/outdoors/dirt,
 /area/submap/Mechpt)
 "p" = (
-/obj/effect/decal/mecha_wreckage/ripley/firefighter,
+/obj/structure/vehicle_wreckage/ripley/firefighter,
 /turf/simulated/floor/outdoors/dirt,
 /area/submap/Mechpt)
 "q" = (

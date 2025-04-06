@@ -158,6 +158,6 @@
 		playsound(src,'sound/mecha/mechmove04.ogg',40,1)
 	return result
 
-/obj/effect/decal/mecha_wreckage/micro
+/obj/structure/vehicle_wreckage/micro
 	icon = 'icons/mecha/micro.dmi'
 

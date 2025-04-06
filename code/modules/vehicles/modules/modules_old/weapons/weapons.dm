@@ -1,6 +1,6 @@
 /obj/item/vehicle_module/weapon
 	name = "mecha weapon"
-	range = RANGED
+	range = MECH_LEGACY_COMP_RANGED
 	origin_tech = list(TECH_MATERIAL = 3, TECH_COMBAT = 3)
 	var/projectile //Type of projectile fired.
 	var/projectiles = 1 //Amount of projectiles loaded.

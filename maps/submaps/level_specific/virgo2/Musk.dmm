@@ -7,7 +7,7 @@
 /turf/template_noop,
 /area/template_noop)
 "c" = (
-/obj/effect/decal/mecha_wreckage/gygax,
+/obj/structure/vehicle_wreckage/gygax,
 /turf/template_noop,
 /area/template_noop)
 "d" = (

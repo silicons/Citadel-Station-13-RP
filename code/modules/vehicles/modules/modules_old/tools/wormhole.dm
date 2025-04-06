@@ -5,7 +5,7 @@
 	origin_tech = list(TECH_BLUESPACE = 3)
 	equip_cooldown = 50
 	energy_drain = 300
-	range = RANGED
+	range = MECH_LEGACY_COMP_RANGED
 
 	equip_type = EQUIP_SPECIAL
 

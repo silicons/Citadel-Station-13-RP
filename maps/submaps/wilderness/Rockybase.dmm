@@ -499,7 +499,7 @@
 /turf/simulated/floor/tiled,
 /area/submap/Rockybase)
 "bJ" = (
-/obj/effect/decal/mecha_wreckage/hoverpod,
+/obj/structure/vehicle_wreckage/hoverpod,
 /turf/template_noop,
 /area/template_noop)
 "bK" = (

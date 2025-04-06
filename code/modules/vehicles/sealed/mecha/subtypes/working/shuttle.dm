@@ -12,7 +12,7 @@
 	integrity = 300
 	integrity_max = 300
 	infra_luminosity = 6
-	wreckage = /obj/effect/decal/mecha_wreckage/shuttlecraft
+	wreckage = /obj/structure/vehicle_wreckage/shuttlecraft
 	cargo_capacity = 3
 	max_equip = 3
 

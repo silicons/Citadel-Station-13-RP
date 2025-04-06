@@ -318,7 +318,7 @@
 /turf/simulated/floor/outdoors/rocks,
 /area/submap/CrashedMedShuttle)
 "bi" = (
-/obj/effect/decal/mecha_wreckage/odysseus,
+/obj/structure/vehicle_wreckage/odysseus,
 /obj/effect/debris/cleanable/blood/oil,
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/submap/CrashedMedShuttle)

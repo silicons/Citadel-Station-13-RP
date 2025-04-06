@@ -227,7 +227,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/submap/cave/cultmine)
 "aS" = (
-/obj/effect/decal/mecha_wreckage/ripley/deathripley,
+/obj/structure/vehicle_wreckage/ripley/deathripley,
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/submap/cave/cultmine)
 "aT" = (
@@ -339,7 +339,7 @@
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/submap/cave/cultmine)
 "bo" = (
-/obj/effect/decal/mecha_wreckage/ripley/deathripley,
+/obj/structure/vehicle_wreckage/ripley/deathripley,
 /obj/effect/debris/cleanable/liquid_fuel,
 /obj/effect/debris/cleanable/blood/oil,
 /turf/simulated/mineral/floor/ignore_mapgen,
@@ -907,7 +907,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/submap/cave/cultmine)
 "dt" = (
-/obj/effect/decal/mecha_wreckage/gorilla,
+/obj/structure/vehicle_wreckage/gorilla,
 /obj/effect/debris/cleanable/blood/oil,
 /obj/effect/debris/cleanable/generic,
 /obj/effect/decal/remains/robot,

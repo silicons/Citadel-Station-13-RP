@@ -220,11 +220,11 @@
 /turf/simulated/floor/tiled/steel_dirty/virgo3b,
 /area/mine/explored/underdark)
 "ba" = (
-/obj/effect/decal/mecha_wreckage/gygax/adv,
+/obj/structure/vehicle_wreckage/gygax/adv,
 /turf/simulated/floor/tiled/steel_dirty/virgo3b,
 /area/mine/explored/underdark)
 "bb" = (
-/obj/effect/decal/mecha_wreckage/ripley,
+/obj/structure/vehicle_wreckage/ripley,
 /turf/simulated/floor/tiled/steel_dirty/virgo3b,
 /area/mine/explored/underdark)
 "bc" = (

@@ -8,7 +8,7 @@
 	max_temperature = 20000
 	integrity = 200
 	integrity_max = 200		//Don't forget to update the /old variant if  you change this number.
-	wreckage = /obj/effect/decal/mecha_wreckage/ripley
+	wreckage = /obj/structure/vehicle_wreckage/ripley
 	cargo_capacity = 10
 	var/obj/item/mining_scanner/orescanner
 
@@ -49,7 +49,7 @@
 	step_in = 2
 	opacity=0
 	lights_power = 60
-	wreckage = /obj/effect/decal/mecha_wreckage/ripley/deathripley
+	wreckage = /obj/structure/vehicle_wreckage/ripley/deathripley
 	step_energy_drain = 0
 	max_hull_equip = 1
 	max_weapon_equip = 1

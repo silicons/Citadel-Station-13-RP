@@ -15,11 +15,11 @@
 	max_special_equip = 0
 
 	catalogue_data = list(/datum/category_item/catalogue/technology/cludge)
-	wreckage = /obj/effect/decal/mecha_wreckage/cludge
+	wreckage = /obj/structure/vehicle_wreckage/cludge
 
 	ground_capable = TRUE
 
-/obj/effect/decal/mecha_wreckage/cludge
+/obj/structure/vehicle_wreckage/cludge
 	name = "Cludge wreckage"
 	desc = "It doesn't look much different than it normally does. Completely unrepairable."
 	icon = 'icons/mecha/fighters64x64.dmi'

@@ -36,7 +36,7 @@
 	var/energy_drain = 0
 	//* LEGACY: DO NOT USE
 	var/obj/vehicle/sealed/mecha/chassis = null
-	var/range = MELEE //bitflags
+	var/range = MECH_LEGACY_COMP_MELEE //bitflags
 	/// Bitflag. Used by exosuit fabricator to assign sub-categories based on which exosuits can equip this.
 	var/mech_flags = NONE
 	var/salvageable = TRUE
@@ -127,24 +127,23 @@
 					src.chassis.occupant_legacy  << sound('sound/mecha/critdestrsyndi.ogg',volume=70)
 				else
 					src.chassis.occupant_legacy  << sound('sound/mecha/critdestr.ogg',volume=50)
-	spawn
+	spawn(0)
 		qdel(src)
-	return
 
 /obj/item/vehicle_module/proc/critfail()
 	if(chassis)
 		log_message("Critical failure",1)
-	return
 
 /obj/item/vehicle_module/proc/get_equip_info()
-	if(!chassis) return
+	if(!chassis)
+		return
 	return "<span style=\"color:[equip_ready?"#0f0":"#f00"];\">*</span>&nbsp;[chassis.selected==src?"<b>":"<a href='?src=\ref[chassis];select_equip=\ref[src]'>"][src.name][chassis.selected==src?"</b>":"</a>"]"
 
 /obj/item/vehicle_module/proc/is_ranged()//add a distance restricted equipment. Why not?
-	return range&RANGED
+	return range & MECH_LEGACY_COMP_RANGED
 
 /obj/item/vehicle_module/proc/is_melee()
-	return range&MELEE
+	return range & MECH_LEGACY_COMP_MELEE
 
 /obj/item/vehicle_module/proc/enable_special_checks(atom/target)
 	if(ispath(required_type))

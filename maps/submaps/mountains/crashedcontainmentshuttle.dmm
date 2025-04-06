@@ -102,7 +102,7 @@
 /turf/simulated/shuttle/wall/dark,
 /area/submap/crashedcontainmentshuttle)
 "ay" = (
-/obj/effect/decal/mecha_wreckage/gygax{
+/obj/structure/vehicle_wreckage/gygax{
 	anchored = 1
 	},
 /turf/simulated/shuttle/floor/black,

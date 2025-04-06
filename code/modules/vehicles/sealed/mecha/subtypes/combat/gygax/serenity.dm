@@ -16,7 +16,7 @@
 	damage_absorption = list("brute"=0.9,"fire"=1,"bullet"=0.9,"laser"=0.8,"energy"=0.9,"bomb"=1)
 	max_temperature = 20000
 	overload_coeff = 1
-	wreckage = /obj/effect/decal/mecha_wreckage/gygax/serenity
+	wreckage = /obj/structure/vehicle_wreckage/gygax/serenity
 	max_equip = 3
 	step_energy_drain = 8
 	cargo_capacity = 2

@@ -955,7 +955,7 @@
 /turf/simulated/wall/r_wall,
 /area/awaymission/wwrefine)
 "eK" = (
-/obj/effect/decal/mecha_wreckage/gygax{
+/obj/structure/vehicle_wreckage/gygax{
 	anchored = 1
 	},
 /turf/simulated/floor/plating,
@@ -1008,7 +1008,7 @@
 /turf/simulated/floor,
 /area/awaymission/wwrefine)
 "eT" = (
-/obj/effect/decal/mecha_wreckage/gygax{
+/obj/structure/vehicle_wreckage/gygax{
 	anchored = 1
 	},
 /turf/simulated/floor/wood,
@@ -1038,7 +1038,7 @@
 /turf/simulated/floor/wood,
 /area/awaymission/wwmines)
 "ff" = (
-/obj/effect/decal/mecha_wreckage/durand{
+/obj/structure/vehicle_wreckage/durand{
 	anchored = 1
 	},
 /turf/simulated/floor/wood,
@@ -1064,13 +1064,13 @@
 /turf/simulated/floor,
 /area/awaymission/wwrefine)
 "fk" = (
-/obj/effect/decal/mecha_wreckage/seraph{
+/obj/structure/vehicle_wreckage/seraph{
 	anchored = 1
 	},
 /turf/simulated/floor/plating,
 /area/awaymission/wwmines)
 "fl" = (
-/obj/effect/decal/mecha_wreckage/ripley/deathripley{
+/obj/structure/vehicle_wreckage/ripley/deathripley{
 	anchored = 1
 	},
 /turf/simulated/floor/wood,
@@ -1099,7 +1099,7 @@
 /turf/simulated/floor/wood,
 /area/awaymission/wwmines)
 "fr" = (
-/obj/effect/decal/mecha_wreckage/ripley/deathripley{
+/obj/structure/vehicle_wreckage/ripley/deathripley{
 	anchored = 1
 	},
 /turf/simulated/floor/plating,
@@ -1142,7 +1142,7 @@
 /turf/simulated/floor,
 /area/awaymission/wwrefine)
 "fD" = (
-/obj/effect/decal/mecha_wreckage/mauler{
+/obj/structure/vehicle_wreckage/mauler{
 	anchored = 1
 	},
 /turf/simulated/floor/plating,
@@ -1186,7 +1186,7 @@
 /turf/simulated/floor,
 /area/awaymission/wwrefine)
 "fP" = (
-/obj/effect/decal/mecha_wreckage/ripley/deathripley{
+/obj/structure/vehicle_wreckage/ripley/deathripley{
 	anchored = 1
 	},
 /obj/effect/debris/cleanable/blood,

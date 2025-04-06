@@ -894,7 +894,7 @@
 /turf/template_noop,
 /area/template_noop)
 "LC" = (
-/obj/effect/decal/mecha_wreckage/durand,
+/obj/structure/vehicle_wreckage/durand,
 /turf/simulated/floor/outdoors/dirt,
 /area/template_noop)
 "LF" = (

@@ -70,7 +70,7 @@
 /obj/structure/HonkMother/Base
 	icon_state = "HonkMotherBase"
 
-/obj/effect/decal/mecha_wreckage/honker/cluwne
+/obj/structure/vehicle_wreckage/honker/cluwne
 	name = "cluwne mech wreckage"
 	icon_state = "cluwne-broken"
 	desc = "Not so funny anymore."
@@ -112,7 +112,7 @@
 	max_temperature = 25000
 	infra_luminosity = 5
 	operation_req_access = list(ACCESS_CENTCOM_ERT_LEAD)
-	wreckage = /obj/effect/decal/mecha_wreckage/honker/cluwne
+	wreckage = /obj/structure/vehicle_wreckage/honker/cluwne
 	max_equip = 4
 
 /obj/vehicle/sealed/mecha/combat/honker/cluwne/Initialize(mapload)
@@ -148,7 +148,7 @@
 	icon_state = "mecha_honker"
 	energy_drain = 200
 	equip_cooldown = 150
-	range = MELEE|RANGED
+	range = MECH_LEGACY_COMP_MELEE|MECH_LEGACY_COMP_RANGED
 
 	can_attach(obj/vehicle/sealed/mecha/combat/honker/M as obj)
 		if(!istype(M))

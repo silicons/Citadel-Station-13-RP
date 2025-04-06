@@ -60,7 +60,6 @@ CREATE_WALL_MOUNTING_TYPES_SHIFTED(/obj/machinery/air_alarm, 26)
 	var/aidisabled = FALSE
 	var/shorted = FALSE
 	circuit = /obj/item/circuitboard/airalarm
-	//armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 100, BOMB = 0, BIO = 100, FIRE = 90, ACID = 30)
 
 	var/datum/wires/alarm/wires
 

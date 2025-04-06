@@ -10,7 +10,7 @@
 /turf/simulated/mineral/floor/ignore_cavegen/virgo3b,
 /area/mine/explored/underdark)
 "d" = (
-/obj/effect/decal/mecha_wreckage/ripley,
+/obj/structure/vehicle_wreckage/ripley,
 /turf/simulated/mineral/floor/ignore_cavegen/virgo3b,
 /area/mine/explored/underdark)
 

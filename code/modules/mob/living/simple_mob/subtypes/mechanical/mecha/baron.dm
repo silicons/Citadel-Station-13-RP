@@ -14,7 +14,7 @@
 	icon_state = "baron"
 	color = "#5a4f2e"
 	movement_cooldown = 1
-	wreckage = /obj/effect/decal/mecha_wreckage/baron
+	wreckage = /obj/structure/vehicle_wreckage/baron
 	catalogue_data = list(/datum/category_item/catalogue/technology/baron/pirate)
 
 	maxHealth = 200

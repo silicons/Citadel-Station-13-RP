@@ -12,7 +12,7 @@
 	damage_absorption = list("brute"=0.6,"fire"=0.7,"bullet"=0.7,"laser"=0.9,"energy"=0.7,"bomb"=0.5)
 	max_temperature = 10000
 	infra_luminosity = 3
-	wreckage = /obj/effect/decal/mecha_wreckage/janus
+	wreckage = /obj/structure/vehicle_wreckage/janus
 	internal_damage_threshold = 25
 	force = 20
 	phasing_energy_drain = 300

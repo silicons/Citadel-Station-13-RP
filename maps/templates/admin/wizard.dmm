@@ -1049,7 +1049,7 @@
 	},
 /area/wizard_station)
 "cu" = (
-/obj/effect/decal/mecha_wreckage/phazon,
+/obj/structure/vehicle_wreckage/phazon,
 /turf/unsimulated/floor{
 	icon_state = "plating";
 	name = "plating"

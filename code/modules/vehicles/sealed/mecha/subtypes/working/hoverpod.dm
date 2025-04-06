@@ -11,7 +11,7 @@
 	integrity = 150
 	integrity_max = 150
 	infra_luminosity = 6
-	wreckage = /obj/effect/decal/mecha_wreckage/hoverpod
+	wreckage = /obj/structure/vehicle_wreckage/hoverpod
 	cargo_capacity = 5
 	max_equip = 3
 	var/datum/effect_system/ion_trail_follow/ion_trail

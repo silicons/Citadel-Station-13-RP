@@ -104,7 +104,7 @@
 /obj/structure/HonkMother/Base
 	icon_state = "HonkMotherBase"
 
-/obj/effect/decal/mecha_wreckage/honker/cluwne
+/obj/structure/vehicle_wreckage/honker/cluwne
 	name = "cluwne mech wreckage"
 	icon_state = "cluwne-broken"
 	desc = "Not so funny anymore."

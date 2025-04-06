@@ -677,7 +677,7 @@
 /turf/simulated/floor/plating/outdoors,
 /area/debrisfield/derelict)
 "Qq" = (
-/obj/effect/decal/mecha_wreckage/gygax/adv,
+/obj/structure/vehicle_wreckage/gygax/adv,
 /turf/simulated/floor/plating/outdoors,
 /area/debrisfield/derelict)
 "TG" = (

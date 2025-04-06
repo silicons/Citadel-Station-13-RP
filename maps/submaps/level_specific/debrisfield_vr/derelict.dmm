@@ -260,7 +260,7 @@
 /turf/simulated/floor/plating,
 /area/submap/debrisfield_vr/derelict/interior)
 "aS" = (
-/obj/effect/decal/mecha_wreckage/gygax/adv,
+/obj/structure/vehicle_wreckage/gygax/adv,
 /turf/simulated/floor/plating,
 /area/submap/debrisfield_vr/derelict/interior)
 "aT" = (

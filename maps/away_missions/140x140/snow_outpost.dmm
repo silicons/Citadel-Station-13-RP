@@ -601,7 +601,7 @@
 /area/awaymission/snow_outpost/dark)
 "cI" = (
 /obj/structure/boulder,
-/obj/effect/decal/mecha_wreckage/ripley,
+/obj/structure/vehicle_wreckage/ripley,
 /turf/simulated/floor/snow/snow2,
 /area/awaymission/snow_outpost/dark)
 "cJ" = (
@@ -2094,7 +2094,7 @@
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/awaymission/snow_outpost/dark)
 "hU" = (
-/obj/effect/decal/mecha_wreckage/ripley,
+/obj/structure/vehicle_wreckage/ripley,
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/awaymission/snow_outpost/dark)
 "hV" = (

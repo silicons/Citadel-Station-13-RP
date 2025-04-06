@@ -157,7 +157,7 @@
 /turf/simulated/floor/reinforced,
 /area/submap/skyplanet/poi/cludge)
 "H" = (
-/obj/effect/decal/mecha_wreckage/cludge,
+/obj/structure/vehicle_wreckage/cludge,
 /turf/simulated/floor/reinforced,
 /area/submap/skyplanet/poi/cludge)
 "J" = (
@@ -192,7 +192,7 @@
 /turf/simulated/floor/reinforced,
 /area/submap/skyplanet/poi/cludge)
 "T" = (
-/obj/effect/decal/mecha_wreckage/cludge,
+/obj/structure/vehicle_wreckage/cludge,
 /obj/machinery/light/spot{
 	dir = 8
 	},

@@ -17,7 +17,7 @@
 	max_special_equip = 0
 
 	catalogue_data = list(/datum/category_item/catalogue/technology/duke)
-	wreckage = /obj/effect/decal/mecha_wreckage/duke
+	wreckage = /obj/structure/vehicle_wreckage/duke
 
 	ground_capable = FALSE
 
@@ -33,7 +33,7 @@
 	desc = "A Duke heavy fighter decorated with the common 'Deep Blue' customization kit, both designed and sold by Hephaestus Industries. This paint scheme pays homage to one of the first supercomputing systems that dared to push the boundaries of what it meant to think. Think 40 steps ahead of your enemy with these colorations, just as Deep Blue did so many years ago."
 	icon_state = "duke_db"
 	initial_icon = "duke_db"
-	wreckage = /obj/effect/decal/mecha_wreckage/duke/db
+	wreckage = /obj/structure/vehicle_wreckage/duke/db
 
 /obj/vehicle/sealed/mecha/combat/fighter/duke/db/loaded/Initialize(mapload) //Loaded version with guns
 	. = ..()
@@ -47,7 +47,7 @@
 	desc = "A Duke heavy fighter decorated with the rare 'Clockwork' customization kit, both designed and sold by Hephaestus Industries. Textured paint with accurate colorations and reflectiveness to brass makes this Duke Heavy Fighter stand out amongst the competition in any conflict."
 	icon_state = "duke_cw"
 	initial_icon = "duke_cw"
-	wreckage = /obj/effect/decal/mecha_wreckage/duke/cw
+	wreckage = /obj/structure/vehicle_wreckage/duke/cw
 
 /obj/vehicle/sealed/mecha/combat/fighter/duke/cw/loaded/Initialize(mapload) //Loaded version with guns
 	. = ..()
@@ -56,7 +56,7 @@
 	ME = new /obj/item/vehicle_module/weapon/ballistic/missile_rack/explosive
 	ME.attach(src)
 
-/obj/effect/decal/mecha_wreckage/duke
+/obj/structure/vehicle_wreckage/duke
 	name = "Duke wreckage"
 	desc = "Remains of some unfortunate fighter. Completely unrepairable."
 	icon = 'icons/mecha/fighters64x64.dmi'
@@ -64,7 +64,7 @@
 	bound_width = 64
 	bound_height = 64
 
-/obj/effect/decal/mecha_wreckage/duke/db
+/obj/structure/vehicle_wreckage/duke/db
 	name = "Duke wreckage"
 	desc = "Remains of some unfortunate fighter. Completely unrepairable."
 	icon = 'icons/mecha/fighters64x64.dmi'
@@ -72,7 +72,7 @@
 	bound_width = 64
 	bound_height = 64
 
-/obj/effect/decal/mecha_wreckage/duke/cw
+/obj/structure/vehicle_wreckage/duke/cw
 	name = "Duke wreckage"
 	desc = "Remains of some unfortunate fighter. Completely unrepairable."
 	icon = 'icons/mecha/fighters64x64.dmi'

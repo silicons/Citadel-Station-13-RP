@@ -22,7 +22,7 @@
 
 	opacity = FALSE
 
-	wreckage = /obj/effect/decal/mecha_wreckage/gunpod
+	wreckage = /obj/structure/vehicle_wreckage/gunpod
 
 	stomp_sound = 'sound/mecha/fighter/engine_mid_fighter_move.ogg'
 	swivel_sound = 'sound/mecha/fighter/engine_mid_boost_01.ogg'
@@ -191,7 +191,7 @@
 	initial_icon = "gunpod"
 
 	catalogue_data = list(/datum/category_item/catalogue/technology/gunpod)
-	wreckage = /obj/effect/decal/mecha_wreckage/gunpod
+	wreckage = /obj/structure/vehicle_wreckage/gunpod
 
 	step_in = 3 //Slightly slower than others
 
@@ -249,7 +249,7 @@
 		update_icon()
 	else ..()
 
-/obj/effect/decal/mecha_wreckage/gunpod
+/obj/structure/vehicle_wreckage/gunpod
 	name = "Gunpod wreckage"
 	desc = "Remains of some unfortunate gunpod. Completely unrepairable."
 	icon = 'icons/mecha/fighters64x64.dmi'

@@ -8,7 +8,7 @@
 	icon_state = "mecha_coil"
 	equip_cooldown = 10
 	energy_drain = 100
-	range = RANGED
+	range = MECH_LEGACY_COMP_RANGED
 	origin_tech = list(TECH_COMBAT = 3, TECH_POWER = 6)
 	var/shock_damage = 15
 	var/active

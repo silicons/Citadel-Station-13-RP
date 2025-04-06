@@ -45,7 +45,7 @@
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/submap/cave/Scave1)
 "l" = (
-/obj/effect/decal/mecha_wreckage/ripley,
+/obj/structure/vehicle_wreckage/ripley,
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/submap/cave/Scave1)
 "m" = (

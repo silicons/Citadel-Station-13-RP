@@ -1134,7 +1134,7 @@
 /turf/simulated/floor/tiled,
 /area/submap/debrisfield_vr/tinyshuttle/crew)
 "cl" = (
-/obj/effect/decal/mecha_wreckage/baron,
+/obj/structure/vehicle_wreckage/baron,
 /turf/simulated/shuttle/plating/airless/carry,
 /area/submap/debrisfield_vr/tinyshuttle/hangar)
 "cm" = (

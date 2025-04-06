@@ -9857,7 +9857,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/main_map/maintenance/deck_four)
 "HL" = (
-/obj/effect/decal/mecha_wreckage/cludge{
+/obj/structure/vehicle_wreckage/cludge{
 	dir = 1
 	},
 /turf/simulated/floor/reinforced/overhang,
@@ -13041,7 +13041,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/rnd/xenobiology)
 "SF" = (
-/obj/effect/decal/mecha_wreckage/shuttlecraft,
+/obj/structure/vehicle_wreckage/shuttlecraft,
 /turf/simulated/floor/reinforced/overhang,
 /area/main_map/maintenance/deck_four/starboard)
 "SG" = (

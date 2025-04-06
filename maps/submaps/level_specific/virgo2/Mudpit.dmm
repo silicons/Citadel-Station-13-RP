@@ -56,7 +56,7 @@
 /turf/simulated/mineral/floor/ignore_mapgen/virgo2,
 /area/submap/virgo2/Mudpit)
 "n" = (
-/obj/effect/decal/mecha_wreckage/ripley/firefighter,
+/obj/structure/vehicle_wreckage/ripley/firefighter,
 /turf/simulated/mineral/floor/ignore_mapgen/virgo2,
 /area/submap/virgo2/Mudpit)
 

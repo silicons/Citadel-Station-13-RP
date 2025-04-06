@@ -1924,7 +1924,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/awaymission/BMPship3)
 "hY" = (
-/obj/effect/decal/mecha_wreckage/ripley,
+/obj/structure/vehicle_wreckage/ripley,
 /turf/simulated/floor/airless,
 /area/awaymission)
 "hZ" = (

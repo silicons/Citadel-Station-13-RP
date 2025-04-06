@@ -12,7 +12,7 @@
 	max_temperature = 60000
 	infra_luminosity = 3
 	operation_req_access = list(ACCESS_CENTCOM_ERT)
-	wreckage = /obj/effect/decal/mecha_wreckage/marauder
+	wreckage = /obj/structure/vehicle_wreckage/marauder
 	add_req_access = 0
 	internal_damage_threshold = 25
 	force = 45
@@ -56,7 +56,7 @@
 	operation_req_access = list(ACCESS_CENTCOM_ERT_LEAD)
 	step_in = 3
 	integrity = 450
-	wreckage = /obj/effect/decal/mecha_wreckage/seraph
+	wreckage = /obj/structure/vehicle_wreckage/seraph
 	internal_damage_threshold = 20
 	force = 55
 	max_equip = 5
@@ -76,7 +76,7 @@
 	icon_state = "mauler"
 	initial_icon = "mauler"
 	operation_req_access = list(ACCESS_FACTION_SYNDICATE)
-	wreckage = /obj/effect/decal/mecha_wreckage/mauler
+	wreckage = /obj/structure/vehicle_wreckage/mauler
 	mech_faction = MECH_FACTION_SYNDI
 
 //I'll break this down later

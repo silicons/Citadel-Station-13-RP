@@ -6,7 +6,7 @@
 /turf/simulated/floor/outdoors/classd,
 /area/class_d/explored)
 "d" = (
-/obj/effect/decal/mecha_wreckage/ripley,
+/obj/structure/vehicle_wreckage/ripley,
 /obj/random/ammo_all,
 /obj/random/tool/alien,
 /turf/simulated/floor/outdoors/classd,

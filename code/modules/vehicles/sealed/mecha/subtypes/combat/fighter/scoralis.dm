@@ -6,7 +6,7 @@
 	initial_icon = "scoralis"
 
 	catalogue_data = list(/datum/category_item/catalogue/technology/scoralis)
-	wreckage = /obj/effect/decal/mecha_wreckage/scoralis
+	wreckage = /obj/structure/vehicle_wreckage/scoralis
 
 	ground_capable = FALSE
 
@@ -17,7 +17,7 @@
 	ME = new /obj/item/vehicle_module/cloak
 	ME.attach(src)
 
-/obj/effect/decal/mecha_wreckage/scoralis
+/obj/structure/vehicle_wreckage/scoralis
 	name = "scoralis wreckage"
 	desc = "Remains of some unfortunate fighter. Completely unrepairable."
 	icon = 'icons/mecha/fighters64x64.dmi'

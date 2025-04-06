@@ -668,7 +668,7 @@
 /area/submap/debrisfiled_vr/clownshuttle/engine)
 "HK" = (
 /obj/machinery/mech_recharger,
-/obj/effect/decal/mecha_wreckage/honker/cluwne,
+/obj/structure/vehicle_wreckage/honker/cluwne,
 /turf/simulated/floor/bluegrid,
 /area/submap/debrisfiled_vr/clownshuttle/engine)
 "HT" = (

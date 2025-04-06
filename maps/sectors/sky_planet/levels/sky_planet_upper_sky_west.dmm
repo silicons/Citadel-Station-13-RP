@@ -1923,7 +1923,7 @@
 /turf/simulated/floor/wood/indoors,
 /area/sector/sky_planet/station_city/appartement)
 "lm" = (
-/obj/effect/decal/mecha_wreckage/cludge{
+/obj/structure/vehicle_wreckage/cludge{
 	dir = 1
 	},
 /turf/simulated/floor/reinforced,
@@ -3275,7 +3275,7 @@
 /turf/simulated/floor/beach/sand/dirt,
 /area/sector/sky_planet/station_city/street)
 "sL" = (
-/obj/effect/decal/mecha_wreckage/cludge{
+/obj/structure/vehicle_wreckage/cludge{
 	dir = 8
 	},
 /turf/simulated/floor/reinforced,
@@ -3492,7 +3492,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/sector/sky_planet/outpost/docking_port1)
 "tP" = (
-/obj/effect/decal/mecha_wreckage/cludge{
+/obj/structure/vehicle_wreckage/cludge{
 	dir = 1
 	},
 /turf/simulated/floor/reinforced,
@@ -6302,7 +6302,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/sector/sky_planet/outpost/docking_port1)
 "Jw" = (
-/obj/effect/decal/mecha_wreckage/cludge,
+/obj/structure/vehicle_wreckage/cludge,
 /turf/simulated/floor/tiled/techfloor,
 /area/sector/sky_planet/racing_station/dock2)
 "Jz" = (
@@ -8261,7 +8261,7 @@
 /turf/simulated/floor/carpet/patterened/blue,
 /area/sector/sky_planet/station_city/offices)
 "TD" = (
-/obj/effect/decal/mecha_wreckage/cludge{
+/obj/structure/vehicle_wreckage/cludge{
 	dir = 4
 	},
 /turf/simulated/floor/reinforced,

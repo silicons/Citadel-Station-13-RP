@@ -675,7 +675,7 @@
 /turf/simulated/floor/classd/indoors,
 /area/class_d/wildcat_mining_base/exterior_power)
 "wK" = (
-/obj/effect/decal/mecha_wreckage/ripley,
+/obj/structure/vehicle_wreckage/ripley,
 /obj/effect/floor_decal/corner_kafel/yellow/diagonal,
 /turf/simulated/floor/tiled/classd/indoors,
 /area/class_d/wildcat_mining_base/exterior_workshop)

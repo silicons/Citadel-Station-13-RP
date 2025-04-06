@@ -3,7 +3,7 @@
 	name = "Scuttlebug"
 	icon_state = "scuttlebug"
 	initial_icon = "scuttlebug"
-	wreckage = /obj/effect/decal/mecha_wreckage/phazon/scree
+	wreckage = /obj/structure/vehicle_wreckage/phazon/scree
 	icon = 'icons/mecha/mecha_vr.dmi'
 
 
@@ -14,7 +14,7 @@
 	ME = new /obj/item/vehicle_module/tesla_energy_relay
 	ME.attach(src)
 
-/obj/effect/decal/mecha_wreckage/phazon/scree
+/obj/structure/vehicle_wreckage/phazon/scree
 	name = "Scuttlebug wreckage"
 	icon_state = "scuttlebug-broken"
 	icon = 'icons/mecha/mecha_vr.dmi'

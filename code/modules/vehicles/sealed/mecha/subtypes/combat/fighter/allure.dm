@@ -6,7 +6,7 @@
 	initial_icon = "allure"
 
 	catalogue_data = list(/datum/category_item/catalogue/technology/allure)
-	wreckage = /obj/effect/decal/mecha_wreckage/allure
+	wreckage = /obj/structure/vehicle_wreckage/allure
 
 	ground_capable = FALSE
 
@@ -23,14 +23,14 @@
 	desc = "A limited edition purple design with gold inlay that embodies the same colorations and pattern designs of royalty skrellian during the time of the Allure's initial release."
 	icon_state = "allure_royalty"
 	initial_icon = "allure_royalty"
-	wreckage = /obj/effect/decal/mecha_wreckage/allure/royalty
+	wreckage = /obj/structure/vehicle_wreckage/allure/royalty
 
 /obj/vehicle/sealed/mecha/combat/fighter/allure/royalty/loaded/Initialize(mapload) //Loaded version with guns
 	. = ..()
 	var/obj/item/vehicle_module/ME = new /obj/item/vehicle_module/cloak
 	ME.attach(src)
 
-/obj/effect/decal/mecha_wreckage/allure
+/obj/structure/vehicle_wreckage/allure
 	name = "allure wreckage"
 	desc = "Remains of some unfortunate fighter. Completely unrepairable."
 	icon = 'icons/mecha/fighters64x64.dmi'
@@ -38,7 +38,7 @@
 	bound_width = 64
 	bound_height = 64
 
-/obj/effect/decal/mecha_wreckage/allure/royalty
+/obj/structure/vehicle_wreckage/allure/royalty
 	icon_state = "allure_royalty-broken"
 
 /datum/category_item/catalogue/technology/allure

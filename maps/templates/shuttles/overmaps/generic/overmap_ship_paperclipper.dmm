@@ -417,7 +417,7 @@
 /turf/simulated/floor/plating,
 /area/shuttle/paper_clipper)
 "qP" = (
-/obj/effect/decal/mecha_wreckage/gunpod,
+/obj/structure/vehicle_wreckage/gunpod,
 /turf/simulated/floor/reinforced,
 /area/shuttle/paper_clipper)
 "rf" = (

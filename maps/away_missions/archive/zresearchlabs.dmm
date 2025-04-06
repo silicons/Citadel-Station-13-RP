@@ -1495,7 +1495,7 @@
 	},
 /area/awaymission/labs/militarydivision)
 "eR" = (
-/obj/effect/decal/mecha_wreckage/durand,
+/obj/structure/vehicle_wreckage/durand,
 /turf/simulated/floor/airless{
 	icon_state = "damaged3"
 	},
@@ -4428,7 +4428,7 @@
 	},
 /area/awaymission/labs/cargo)
 "mF" = (
-/obj/effect/decal/mecha_wreckage/ripley,
+/obj/structure/vehicle_wreckage/ripley,
 /turf/space,
 /area/awaymission/labs/cargo)
 "mG" = (
@@ -5496,7 +5496,7 @@
 /turf/simulated/floor/outdoors/dirt,
 /area/awaymission/desert)
 "pF" = (
-/obj/effect/decal/mecha_wreckage/ripley,
+/obj/structure/vehicle_wreckage/ripley,
 /turf/simulated/floor/outdoors/dirt,
 /area/awaymission/labs/cave)
 "pG" = (
@@ -6077,7 +6077,7 @@
 	},
 /area/awaymission/labs/command)
 "rt" = (
-/obj/effect/decal/mecha_wreckage/gygax,
+/obj/structure/vehicle_wreckage/gygax,
 /turf/simulated/floor/airless{
 	icon_state = "damaged3"
 	},

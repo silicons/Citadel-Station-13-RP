@@ -9,7 +9,7 @@
 	integrity_max = 600
 
 	catalogue_data = list(/datum/category_item/catalogue/technology/baron)
-	wreckage = /obj/effect/decal/mecha_wreckage/baron
+	wreckage = /obj/structure/vehicle_wreckage/baron
 
 	ground_capable = FALSE
 
@@ -20,7 +20,7 @@
 	ME = new /obj/item/vehicle_module/omni_shield
 	ME.attach(src)
 
-/obj/effect/decal/mecha_wreckage/baron
+/obj/structure/vehicle_wreckage/baron
 	name = "Baron wreckage"
 	desc = "Remains of some unfortunate fighter. Completely unrepairable."
 	icon = 'icons/mecha/fighters64x64.dmi'

@@ -12,7 +12,7 @@
 	max_temperature = 30000
 	infra_luminosity = 8
 	force = 40
-	wreckage = /obj/effect/decal/mecha_wreckage/durand
+	wreckage = /obj/structure/vehicle_wreckage/durand
 
 	damage_minimum = 15			//Big stompy
 	minimum_penetration = 25

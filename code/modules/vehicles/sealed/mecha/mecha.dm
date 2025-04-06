@@ -5,8 +5,8 @@
 #define MECHA_INT_TANK_BREACH 8
 #define MECHA_INT_CONTROL_LOST 16
 
-#define MELEE 1
-#define RANGED 2
+#define MECH_LEGACY_COMP_MELEE 1
+#define MECH_LEGACY_COMP_RANGED 2
 
 #define MECHA_OPERATING     0
 #define MECHA_BOLTS_SECURED 1
@@ -322,7 +322,7 @@
 		explosion(get_turf(loc), 0, 0, 1, 3)
 
 	if(wreckage)
-		var/obj/effect/decal/mecha_wreckage/WR = new wreckage(loc)
+		var/obj/structure/vehicle_wreckage/WR = new wreckage(loc)
 		hull_equipment.Cut()
 		weapon_equipment.Cut()
 		utility_equipment.Cut()

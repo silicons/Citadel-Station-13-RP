@@ -35,7 +35,7 @@
 	say_list_type = /datum/say_list/malf_drone
 
 	var/datum/effect_system/spark_spread/sparks
-	var/wreckage = /obj/effect/decal/mecha_wreckage/gygax/dark
+	var/wreckage = /obj/structure/vehicle_wreckage/gygax/dark
 	var/pilot_type = null // Set to spawn a pilot when destroyed. Setting this also makes the mecha vulnerable to things that affect sentient minds.
 	var/deflect_chance = 10 // Chance to outright stop an attack, just like a normal exosuit.
 	var/has_repair_droid = FALSE // If true, heals 2 damage every tick and gets a repair droid overlay.
