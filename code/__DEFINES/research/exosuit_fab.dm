@@ -34,11 +34,3 @@
 #define EXOSUIT_MODULE_MEDICAL		EXOSUIT_MODULE_ODYSSEUS
 /// Module is compatible with "Fighters" Fighter models - Pinnace, Baron, Duke
 #define EXOSUIT_MODULE_FIGHTER		EXOSUIT_MODULE_PINNACE | EXOSUIT_MODULE_BARON | EXOSUIT_MODULE_DUKE
-
-// Defines for Exosuit components.
-
-#define MECH_HULL		"Hull"
-#define MECH_ACTUATOR	"Actuator"
-#define MECH_ARMOR		"Plating"
-#define MECH_GAS		"Life Support"
-#define MECH_ELECTRIC	"Firmware"

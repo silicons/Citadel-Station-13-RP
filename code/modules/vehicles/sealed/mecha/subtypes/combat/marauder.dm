@@ -30,11 +30,11 @@
 	thrusters_possible = 1
 
 	starting_components = list(
-		/obj/item/vehicle_component/hull/durable,
-		/obj/item/vehicle_component/actuator,
-		/obj/item/vehicle_component/armor/military,
-		/obj/item/vehicle_component/gas,
-		/obj/item/vehicle_component/electrical
+		/obj/item/vehicle_module/component/hull/durable,
+		/obj/item/vehicle_module/component/actuator,
+		/obj/item/vehicle_module/component/armor/military,
+		/obj/item/vehicle_module/component/gas,
+		/obj/item/vehicle_module/component/electrical
 		)
 
 	starting_equipment = list(

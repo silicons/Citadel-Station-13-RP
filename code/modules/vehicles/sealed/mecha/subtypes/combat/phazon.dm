@@ -28,11 +28,11 @@
 	encumbrance_gap = 2
 
 	starting_components = list(
-		/obj/item/vehicle_component/hull/durable,
-		/obj/item/vehicle_component/actuator,
-		/obj/item/vehicle_component/armor/alien,
-		/obj/item/vehicle_component/gas,
-		/obj/item/vehicle_component/electrical
+		/obj/item/vehicle_module/component/hull/durable,
+		/obj/item/vehicle_module/component/actuator,
+		/obj/item/vehicle_module/component/armor/alien,
+		/obj/item/vehicle_module/component/gas,
+		/obj/item/vehicle_module/component/electrical
 		)
 
 	cloak_possible = TRUE

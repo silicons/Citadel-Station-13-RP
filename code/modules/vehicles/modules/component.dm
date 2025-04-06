@@ -1,12 +1,22 @@
-
-/obj/item/vehicle_component
+/**
+ * # Vehicle Components
+ *
+ * Vehicle components are one-per-slot special handlers that can be installed on a vehicle with room for
+ * that component.
+ *
+ * They are a special type of module.
+ */
+/obj/item/vehicle_module/component
 	name = "mecha component"
 	icon = 'icons/mecha/mech_component.dmi'
 	icon_state = "component"
 	w_class = WEIGHT_CLASS_HUGE
 	origin_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
 
-	var/component_type = null
+	/**
+	 * The slot we take up on a vehicle.
+	 */
+	var/component_slot
 
 	var/obj/vehicle/sealed/mecha/chassis = null
 	var/start_damaged = FALSE
@@ -25,7 +35,7 @@
 
 	var/internal_damage_flag	// If set, the component will toggle the flag on or off if it is destroyed / severely damaged.
 
-/obj/item/vehicle_component/examine(mob/user, dist)
+/obj/item/vehicle_module/component/examine(mob/user, dist)
 	. = ..()
 	var/show_integrity = round(integrity/integrity_max*100, 0.1)
 	switch(show_integrity)
@@ -42,20 +52,20 @@
 		if(0 to 1)
 			. += "<span class='warning'><b>It is completely destroyed.</b></span>"
 
-/obj/item/vehicle_component/Initialize(mapload)
+/obj/item/vehicle_module/component/Initialize(mapload)
 	. = ..()
 	integrity = integrity_max
 
 	if(start_damaged)
 		integrity = round(integrity * integrity_danger_mod)
 
-/obj/item/vehicle_component/Destroy()
+/obj/item/vehicle_module/component/Destroy()
 	detach()
 	return ..()
 
 // Damage code.
 
-/obj/item/vehicle_component/emp_act(var/severity = 4)
+/obj/item/vehicle_module/component/emp_act(var/severity = 4)
 	if(severity + emp_resistance > 4)
 		return
 
@@ -63,11 +73,11 @@
 
 	damage_integrity((4 - severity) * round(integrity * 0.1, 0.1))
 
-/obj/item/vehicle_component/proc/adjust_integrity_mecha(var/amt = 0)
+/obj/item/vehicle_module/component/proc/adjust_integrity_mecha(var/amt = 0)
 	integrity = clamp(integrity + amt, 0, integrity_max)
 	return
 
-/obj/item/vehicle_component/proc/damage_part(var/dam_amt = 0, var/type = DAMAGE_TYPE_BRUTE)
+/obj/item/vehicle_module/component/proc/damage_part(var/dam_amt = 0, var/type = DAMAGE_TYPE_BRUTE)
 	if(dam_amt <= 0)
 		return FALSE
 
@@ -79,7 +89,7 @@
 
 	return TRUE
 
-/obj/item/vehicle_component/proc/get_efficiency()
+/obj/item/vehicle_module/component/proc/get_efficiency()
 	var/integ_limit = round(integrity_max * integrity_danger_mod)
 
 	if(integrity < integ_limit)
@@ -91,7 +101,7 @@
 
 // Attach/Detach code.
 
-/obj/item/vehicle_component/proc/attach(var/obj/vehicle/sealed/mecha/target, var/mob/living/user)
+/obj/item/vehicle_module/component/proc/attach(var/obj/vehicle/sealed/mecha/target, var/mob/living/user)
 	if(target)
 		if(!(component_type in target.internal_components))
 			if(user)
@@ -123,7 +133,7 @@
 		return TRUE
 	return FALSE
 
-/obj/item/vehicle_component/proc/detach()
+/obj/item/vehicle_module/component/proc/detach()
 	if(chassis)
 		chassis.internal_components[component_type] = null
 
@@ -135,7 +145,7 @@
 	return TRUE
 
 
-/obj/item/vehicle_component/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/vehicle_module/component/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/stack/nanopaste))
 		var/obj/item/stack/nanopaste/NP = W
 
@@ -150,8 +160,8 @@
 
 // Various procs to handle different calls by Exosuits. IE, movement actions, damage actions, etc.
 
-/obj/item/vehicle_component/proc/get_step_delay()
+/obj/item/vehicle_module/component/proc/get_step_delay()
 	return step_delay
 
-/obj/item/vehicle_component/proc/handle_move()
+/obj/item/vehicle_module/component/proc/handle_move()
 	return

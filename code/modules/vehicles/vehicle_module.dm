@@ -8,6 +8,9 @@
 #define EQUIP_MICRO_UTILITY	"micro_utility"
 #define EQUIP_MICRO_WEAPON	"micro_weapon"
 
+/**
+ * Modules that can be attached to a vehicle and used.
+ */
 /obj/item/vehicle_module
 	name = "mecha equipment"
 	icon = 'icons/mecha/mecha_equipment.dmi'
@@ -15,9 +18,23 @@
 	damage_force = 5
 	origin_tech = list(TECH_MATERIAL = 2)
 	description_info = "Some equipment may gain new abilities or advantages if equipped to certain types of Exosuits."
+
+	/**
+	 * The vehicle we're attached to
+	 */
+	var/obj/vehicle/vehicle
+
+	/**
+	 * Requires a hardpoint of a given classifier.
+	 */
+	var/mount_via_hardpoint_classifier
+
+
+
 	var/equip_cooldown = 0
 	var/equip_ready = TRUE
 	var/energy_drain = 0
+	//* LEGACY: DO NOT USE
 	var/obj/vehicle/sealed/mecha/chassis = null
 	var/range = MELEE //bitflags
 	/// Bitflag. Used by exosuit fabricator to assign sub-categories based on which exosuits can equip this.

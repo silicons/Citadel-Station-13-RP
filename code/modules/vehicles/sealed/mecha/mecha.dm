@@ -171,11 +171,11 @@
 		MECH_ELECTRIC = null
 		)
 	var/list/starting_components = list(
-		/obj/item/vehicle_component/hull,
-		/obj/item/vehicle_component/actuator,
-		/obj/item/vehicle_component/armor,
-		/obj/item/vehicle_component/gas,
-		/obj/item/vehicle_component/electrical
+		/obj/item/vehicle_module/component/hull,
+		/obj/item/vehicle_module/component/actuator,
+		/obj/item/vehicle_module/component/armor,
+		/obj/item/vehicle_module/component/gas,
+		/obj/item/vehicle_module/component/electrical
 		)
 
 //Working exosuit vars
@@ -338,7 +338,7 @@
 				E.destroy()
 
 		for(var/slot in internal_components)
-			var/obj/item/vehicle_component/C = internal_components[slot]
+			var/obj/item/vehicle_module/component/C = internal_components[slot]
 			if(istype(C))
 				C.damage_part(rand(10, 20))
 				C.detach()
@@ -357,7 +357,7 @@
 			E.detach(loc)
 			E.destroy()
 		for(var/slot in internal_components)
-			var/obj/item/vehicle_component/C = internal_components[slot]
+			var/obj/item/vehicle_module/component/C = internal_components[slot]
 			if(istype(C))
 				C.detach()
 				qdel(C)
@@ -386,7 +386,7 @@
 // VEHICLE MECHS WHEN?
 /obj/vehicle/sealed/mecha/proc/create_components()
 	for(var/path in starting_components)
-		var/obj/item/vehicle_component/C = new path(src)
+		var/obj/item/vehicle_module/component/C = new path(src)
 		C.attach(src)
 
 	if(starting_equipment && LAZYLEN(starting_equipment))
@@ -476,9 +476,9 @@
 /obj/vehicle/sealed/mecha/examine(mob/user, dist)
 	. = ..()
 
-	var/obj/item/vehicle_component/armor/AC = internal_components[MECH_ARMOR]
+	var/obj/item/vehicle_module/component/armor/AC = internal_components[MECH_ARMOR]
 
-	var/obj/item/vehicle_component/hull/HC = internal_components[MECH_HULL]
+	var/obj/item/vehicle_module/component/hull/HC = internal_components[MECH_HULL]
 
 	if(AC)
 		. += "It has [AC] attached. [AC.get_efficiency()<0.5?"It is severely damaged.":""]"
@@ -655,7 +655,7 @@
 		to_chat(user, "You climb out from [src]")
 		return 0
 
-	var/obj/item/vehicle_component/hull/HC = internal_components[MECH_HULL]
+	var/obj/item/vehicle_module/component/hull/HC = internal_components[MECH_HULL]
 	if(!HC)
 		occupant_message("<span class='notice'>You can't operate an exosuit that doesn't have a hull!</span>")
 		return
@@ -700,11 +700,11 @@
 			tally -= encumbrance_gap
 
 	for(var/slot in internal_components)
-		var/obj/item/vehicle_component/C = internal_components[slot]
+		var/obj/item/vehicle_module/component/C = internal_components[slot]
 		if(C && C.get_step_delay())
 			tally += C.get_step_delay()
 
-	var/obj/item/vehicle_component/actuator/actuator = internal_components[MECH_ACTUATOR]
+	var/obj/item/vehicle_module/component/actuator/actuator = internal_components[MECH_ACTUATOR]
 
 	if(!actuator)	// Relying purely on hydraulic pumps. You're going nowhere fast.
 		tally = 2 SECONDS
@@ -953,7 +953,7 @@
 	return
 
 /obj/vehicle/sealed/mecha/proc/components_handle_damage(var/damage, var/type = DAMAGE_TYPE_BRUTE)
-	var/obj/item/vehicle_component/armor/AC = internal_components[MECH_ARMOR]
+	var/obj/item/vehicle_module/component/armor/AC = internal_components[MECH_ARMOR]
 
 	if(AC)
 		var/armor_efficiency = AC.get_efficiency()
@@ -961,7 +961,7 @@
 		AC.damage_part(damage_change, type)
 		damage -= damage_change
 
-	var/obj/item/vehicle_component/hull/HC = internal_components[MECH_HULL]
+	var/obj/item/vehicle_module/component/hull/HC = internal_components[MECH_HULL]
 
 	if(HC)
 		if(HC.integrity)
@@ -969,7 +969,7 @@
 			HC.damage_part(hull_absorb, type)
 			damage -= hull_absorb
 
-	for(var/obj/item/vehicle_component/C in (internal_components - list(MECH_HULL, MECH_ARMOR)))
+	for(var/obj/item/vehicle_module/component/C in (internal_components - list(MECH_HULL, MECH_ARMOR)))
 		if(prob(C.relative_size))
 			var/damage_part_amt = round(damage / 4, 0.1)
 			C.damage_part(damage_part_amt)
@@ -978,7 +978,7 @@
 	return damage
 
 /obj/vehicle/sealed/mecha/proc/get_damage_absorption()
-	var/obj/item/vehicle_component/armor/AC = internal_components[MECH_ARMOR]
+	var/obj/item/vehicle_module/component/armor/AC = internal_components[MECH_ARMOR]
 
 	if(!istype(AC))
 		return
@@ -1017,7 +1017,7 @@
 	user.setClickCooldown(user.get_attack_speed())
 	src.log_message("Attack by hand/paw. Attacker - [user].",1)
 
-	var/obj/item/vehicle_component/armor/ArmC = internal_components[MECH_ARMOR]
+	var/obj/item/vehicle_module/component/armor/ArmC = internal_components[MECH_ARMOR]
 
 	var/temp_deflect_chance = deflect_chance
 
@@ -1064,7 +1064,7 @@
 
 //I think this is relative to throws.
 /obj/vehicle/sealed/mecha/proc/dynhitby(atom/movable/A)
-	var/obj/item/vehicle_component/armor/ArmC = internal_components[MECH_ARMOR]
+	var/obj/item/vehicle_module/component/armor/ArmC = internal_components[MECH_ARMOR]
 
 	var/temp_deflect_chance = deflect_chance
 	var/temp_damage_minimum = damage_minimum
@@ -1131,7 +1131,7 @@
 	return ..()
 
 /obj/vehicle/sealed/mecha/proc/dynbulletdamage(var/obj/projectile/Proj)
-	var/obj/item/vehicle_component/armor/ArmC = internal_components[MECH_ARMOR]
+	var/obj/item/vehicle_module/component/armor/ArmC = internal_components[MECH_ARMOR]
 
 	var/temp_deflect_chance = deflect_chance
 	var/temp_damage_minimum = damage_minimum
@@ -1207,7 +1207,7 @@
 
 //This refer to whenever you are caught in an explosion.
 /obj/vehicle/sealed/mecha/legacy_ex_act(severity)
-	var/obj/item/vehicle_component/armor/ArmC = internal_components[MECH_ARMOR]
+	var/obj/item/vehicle_module/component/armor/ArmC = internal_components[MECH_ARMOR]
 
 	var/temp_deflect_chance = deflect_chance
 
@@ -1275,7 +1275,7 @@
 	src.log_message("Attacked by [W]. Attacker - [user]")
 	var/pass_damage_reduc_mod			//Modifer for failing to bring AP.
 
-	var/obj/item/vehicle_component/armor/ArmC = internal_components[MECH_ARMOR]
+	var/obj/item/vehicle_module/component/armor/ArmC = internal_components[MECH_ARMOR]
 
 	var/temp_deflect_chance = deflect_chance
 	var/temp_damage_minimum = damage_minimum
@@ -1348,8 +1348,8 @@
 			to_chat(user, "You were unable to attach [W] to [src]")
 		return
 
-	if(istype(W, /obj/item/vehicle_component) && state == MECHA_CELL_OUT)
-		var/obj/item/vehicle_component/MC = W
+	if(istype(W, /obj/item/vehicle_module/component) && state == MECHA_CELL_OUT)
+		var/obj/item/vehicle_module/component/MC = W
 		if(MC.attach(src))
 			user.transfer_item_to_loc(W, src, INV_OP_FORCE)
 			user.visible_message("[user] installs \the [W] in \the [src]", "You install \the [W] in \the [src].")
@@ -1392,7 +1392,7 @@
 		else if(state==MECHA_CELL_OUT)
 			var/list/removable_components = list()
 			for(var/slot in internal_components)
-				var/obj/item/vehicle_component/MC = internal_components[slot]
+				var/obj/item/vehicle_module/component/MC = internal_components[slot]
 				if(istype(MC))
 					removable_components[MC.name] = MC
 				else
@@ -1402,7 +1402,7 @@
 			if(!remove)
 				return
 
-			var/obj/item/vehicle_component/RmC = removable_components[remove]
+			var/obj/item/vehicle_module/component/RmC = removable_components[remove]
 			RmC.detach()
 
 		return
@@ -1481,7 +1481,7 @@
 			var/obj/item/stack/nanopaste/NP = W
 
 			for(var/slot in internal_components)
-				var/obj/item/vehicle_component/C = internal_components[slot]
+				var/obj/item/vehicle_module/component/C = internal_components[slot]
 
 				if(C)
 
@@ -1537,7 +1537,7 @@
 
 /obj/vehicle/sealed/mecha/return_air()
 	RETURN_TYPE(/datum/gas_mixture)
-	var/obj/item/vehicle_component/gas/GC = internal_components[MECH_GAS]
+	var/obj/item/vehicle_module/component/gas/GC = internal_components[MECH_GAS]
 	if(use_internal_tank && GC && prob(GC.get_efficiency() * 100))
 		return cabin_air
 	return loc?.return_air()
@@ -1596,7 +1596,7 @@
 	if(usr != occupant_legacy)
 		return
 
-	var/obj/item/vehicle_component/gas/GC = internal_components[MECH_GAS]
+	var/obj/item/vehicle_module/component/gas/GC = internal_components[MECH_GAS]
 	if(!GC)
 		return
 
@@ -1663,7 +1663,7 @@
 	if(usr!=src.occupant_legacy)
 		return
 
-	var/obj/item/vehicle_component/gas/GC = internal_components[MECH_GAS]
+	var/obj/item/vehicle_module/component/gas/GC = internal_components[MECH_GAS]
 	if(!GC)
 		to_chat(occupant_legacy, "<span class='warning'>The life support systems don't seem to respond.</span>")
 		return
@@ -1871,8 +1871,8 @@
 	var/tank_temperature = internal_tank ? internal_tank.return_temperature() : "Unknown"
 	var/cabin_pressure = round(return_pressure(),0.01)
 
-	var/obj/item/vehicle_component/hull/HC = internal_components[MECH_HULL]
-	var/obj/item/vehicle_component/armor/AC = internal_components[MECH_ARMOR]
+	var/obj/item/vehicle_module/component/hull/HC = internal_components[MECH_HULL]
+	var/obj/item/vehicle_module/component/armor/AC = internal_components[MECH_ARMOR]
 
 	var/output_text = {"[report_internal_damage()]
 						<b>Armor Integrity: </b>[AC?"[round(AC.integrity / AC.integrity_max * 100, 0.1)]%":"<span class='warning'>ARMOR MISSING</span>"]<br>
@@ -2357,7 +2357,7 @@
 
 /obj/vehicle/sealed/mecha/proc/dynusepower(amount)
 	update_cell_alerts()
-	var/obj/item/vehicle_component/electrical/EC = internal_components[MECH_ELECTRIC]
+	var/obj/item/vehicle_module/component/electrical/EC = internal_components[MECH_ELECTRIC]
 
 	if(EC)
 		amount = amount * (2 - EC.get_efficiency()) * EC.charge_cost_mod
@@ -2371,7 +2371,7 @@
 
 /obj/vehicle/sealed/mecha/proc/give_power(amount)
 	update_cell_alerts()
-	var/obj/item/vehicle_component/electrical/EC = internal_components[MECH_ELECTRIC]
+	var/obj/item/vehicle_module/component/electrical/EC = internal_components[MECH_ELECTRIC]
 
 	if(!EC)
 		amount /= 4
@@ -2386,7 +2386,7 @@
 //This is for mobs mostly.
 /obj/vehicle/sealed/mecha/attack_generic(var/mob/user, var/damage, var/attack_message)
 
-	var/obj/item/vehicle_component/armor/ArmC = internal_components[MECH_ARMOR]
+	var/obj/item/vehicle_module/component/armor/ArmC = internal_components[MECH_ARMOR]
 
 	var/temp_deflect_chance = deflect_chance
 	var/temp_damage_minimum = damage_minimum

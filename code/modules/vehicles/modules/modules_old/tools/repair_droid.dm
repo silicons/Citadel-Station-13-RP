@@ -83,8 +83,8 @@
 				repaired = 1
 				break
 
-	var/obj/item/vehicle_component/AC = RD.chassis.internal_components[MECH_ARMOR]
-	var/obj/item/vehicle_component/HC = RD.chassis.internal_components[MECH_HULL]
+	var/obj/item/vehicle_module/component/AC = RD.chassis.internal_components[MECH_ARMOR]
+	var/obj/item/vehicle_module/component/HC = RD.chassis.internal_components[MECH_HULL]
 
 	var/damaged_armor = AC.integrity < AC.integrity_max
 

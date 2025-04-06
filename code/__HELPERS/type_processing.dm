@@ -19,7 +19,7 @@
 		/obj/vehicle = "//vehicle",
 		/obj/item/vehicle_chassis = "//vehicle_chassis",
 		/obj/item/vehicle_part = "//vehicle_part",
-		/obj/item/vehicle_component  = "//vehicle_component",
+		/obj/item/vehicle_module/component  = "//vehicle_component",
 		/obj/item/vehicle_module = "//vehicle_module",
 		/obj/item/vehicle_module/weapon = "//vehicle_weapon",
 		/obj/item/organ = "//organ",

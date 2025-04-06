@@ -30,6 +30,17 @@ TYPE_REGISTER_SPATIAL_GRID(/obj/vehicle, SSspatial_grids.vehicles)
 	/// list of typepaths or ids of /datum/atom_hud_providers that occupants with [VEHICLE_CONTROL_USE_HUDS] get added to their perspective
 	var/list/occupant_huds
 
+	//* Composition *//
+	/// Our chassis def.
+	/// * Set to type to init.
+	#warn hook
+	var/datum/prototype/vehicle_chassis/chassis
+	/// All installed modules.
+	/// * Set to list to init.
+	var/list/obj/item/vehicle_module/modules
+	/// module by hardpoint ID lookup
+	var/list/modules_by_hardpoint_id
+
 	var/max_occupants = 1
 	var/max_drivers = 1
 	var/movedelay = 2
@@ -50,6 +61,7 @@ TYPE_REGISTER_SPATIAL_GRID(/obj/vehicle, SSspatial_grids.vehicles)
 
 /obj/vehicle/Initialize(mapload)
 	. = ..()
+	#warn init chassis and modules
 	initialize_occupant_actions()
 	occupants = list()
 	autogrant_actions_passenger = list()
@@ -75,18 +87,7 @@ TYPE_REGISTER_SPATIAL_GRID(/obj/vehicle, SSspatial_grids.vehicles)
 
 /obj/vehicle/examine(mob/user, dist)
 	. = ..()
-	/*
-	if(resistance_flags & ON_FIRE)
-		. += "<span class='warning'>It's on fire!</span>"
-	var/healthpercent = obj_integrity/integrity_max * 100
-	switch(healthpercent)
-		if(50 to 99)
-			. += "It looks slightly damaged."
-		if(25 to 50)
-			. += "It appears heavily damaged."
-		if(0 to 25)
-			. += "<span class='warning'>It's falling apart!</span>"
-	*/
+	#warn hardpoint examine
 
 /obj/vehicle/proc/is_key(obj/item/I)
 	return I? (key_type_exact? (I.type == key_type) : istype(I, key_type)) : FALSE
