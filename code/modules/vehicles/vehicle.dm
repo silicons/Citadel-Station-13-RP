@@ -35,6 +35,12 @@ TYPE_REGISTER_SPATIAL_GRID(/obj/vehicle, SSspatial_grids.vehicles)
 	/// * Set to type to init.
 	#warn hook
 	var/datum/prototype/vehicle_chassis/chassis
+	/// Registered hardpoints
+	/// * A module in a hardpoint usually consumes no normal slots.
+	/// * A module in a hardpoint is **deleted** if the hardpoint is deleted.
+	///   Make sure to manually eject them if doing module-provided hardpoints.
+	#warn hook add/remove procs in
+	var/list/datum/vehicle_hardpoint/hardpoints
 	/// All installed modules.
 	/// * Set to list to init.
 	var/list/obj/item/vehicle_module/modules = list()

@@ -26,6 +26,7 @@
 
 	/**
 	 * Requires a hardpoint of a given classifier.
+	 * * This can be a list.
 	 */
 	var/mount_via_hardpoint_classifier
 

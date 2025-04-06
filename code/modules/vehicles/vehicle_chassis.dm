@@ -8,9 +8,10 @@
  */
 /datum/prototype/vehicle_chassis
 	/// an unkeyed list of hardpoints
-	/// * set to list of types to init
-	/// * ids must be manually set; recommended syntax is `/datum/vehicle_hardpoint/your/type{id = "some-string"}`.
-	var/list/datum/vehicle_hardpoint/hardpoints = list()
+	/// * set to list of `/datum/vehicle_hardpoint` types to init
+	/// * `/obj/item/vehicle_module`'s can dynamically register new hardpoints; use that if needed
+	var/list/intrinsic_hardpoints = list()
 
 /datum/prototype/vehicle_chassis/New()
-	#warn init hardpoints
+
+#warn impl all.

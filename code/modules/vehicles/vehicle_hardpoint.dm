@@ -13,7 +13,11 @@
 /datum/vehicle_hardpoint
 	/// hardpoint id
 	/// * must be unique on a chassis
+	/// * auto-generated
 	var/id
+	/// was this provided by chassis?
+	/// * chassis intrinsic ones are recreated if a vehicle's chassis, for whatever reason, is changed
+	var/chassis_intrinsic = FALSE
 	/// hardpoint type
 	/// * these are not defined enums; use type::classifier to set to their value
 	var/classifier = "unknown"
@@ -23,3 +27,5 @@
 	/// * "this is a [vehicle], with an empty [hardpoint.display_name] [hardpoint.location_phrase]"
 	/// * "this is a [vehicle], with \an [module.name] on its [hardpoint.location_phrase]"
 	var/location_phrase = "on its body"
+
+	/// Is this currently retracted?
