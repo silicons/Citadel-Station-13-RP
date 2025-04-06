@@ -38,8 +38,8 @@
 		)
 
 	starting_equipment = list(
-		/obj/item/vehicle_module/weapon/energy/pulse,
-		/obj/item/vehicle_module/weapon/ballistic/missile_rack/explosive,
+		/obj/item/vehicle_module/legacy/weapon/energy/pulse,
+		/obj/item/vehicle_module/legacy/weapon/ballistic/missile_rack/explosive,
 		/obj/item/vehicle_module/tesla_energy_relay,
 		/obj/item/vehicle_module/antiproj_armor_booster
 		)
@@ -62,8 +62,8 @@
 	max_equip = 5
 
 	starting_equipment = list(
-		/obj/item/vehicle_module/weapon/ballistic/scattershot,
-		/obj/item/vehicle_module/weapon/ballistic/missile_rack/explosive,
+		/obj/item/vehicle_module/legacy/weapon/ballistic/scattershot,
+		/obj/item/vehicle_module/legacy/weapon/ballistic/missile_rack/explosive,
 		/obj/item/vehicle_module/tesla_energy_relay,
 		/obj/item/vehicle_module/antiproj_armor_booster,
 		/obj/item/vehicle_module/teleporter

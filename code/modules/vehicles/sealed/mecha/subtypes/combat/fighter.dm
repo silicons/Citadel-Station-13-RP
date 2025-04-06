@@ -205,9 +205,9 @@
 
 /obj/vehicle/sealed/mecha/combat/fighter/gunpod/loaded/Initialize(mapload) //Loaded version with guns
 	. = ..()
-	var/obj/item/vehicle_module/ME = new /obj/item/vehicle_module/weapon/energy/laser
+	var/obj/item/vehicle_module/ME = new /obj/item/vehicle_module/legacy/weapon/energy/laser
 	ME.attach(src)
-	ME = new /obj/item/vehicle_module/weapon/ballistic/missile_rack/explosive
+	ME = new /obj/item/vehicle_module/legacy/weapon/ballistic/missile_rack/explosive
 	ME.attach(src)
 
 /obj/vehicle/sealed/mecha/combat/fighter/gunpod/recon

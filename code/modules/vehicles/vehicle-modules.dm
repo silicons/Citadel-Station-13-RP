@@ -42,4 +42,4 @@
 	#warn hardpoint
 	modules -= module
 	module.vehicle = null
-	return module
+	return module.vehicle_detaching_cleanup(src, actor, hardpoint_id, silent)

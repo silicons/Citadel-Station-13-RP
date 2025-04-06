@@ -42,7 +42,7 @@
 /obj/vehicle/sealed/mecha/combat/phazon/equipped/Initialize(mapload)
 	. = ..()
 	starting_equipment = list(
-		/obj/item/vehicle_module/tool/rcd,
+		/obj/item/vehicle_module/legacy/tool/rcd,
 		/obj/item/vehicle_module/gravcatapult
 		)
 	return

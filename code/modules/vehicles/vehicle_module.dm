@@ -111,7 +111,7 @@
 		src.update_chassis_page()
 		chassis.occupant_message(SPAN_DANGER("The [src] is destroyed!"))
 		chassis.log_append_to_last("[src] is destroyed.",1)
-		if(istype(src, /obj/item/vehicle_module/weapon))//Gun
+		if(istype(src, /obj/item/vehicle_module/legacy/weapon))//Gun
 			switch(chassis.mech_faction)
 				if(MECH_FACTION_NT)
 					src.chassis.occupant_legacy << sound('sound/mecha/weapdestrnano.ogg',volume=70)
@@ -267,23 +267,19 @@
 /obj/item/vehicle_module/Topic(href,href_list)
 	if(href_list["detach"])
 		src.detach()
-	return
 
 /obj/item/vehicle_module/proc/set_ready_state(state)
 	equip_ready = state
 	if(chassis)
 		send_byjax(chassis.occupant_legacy,"exosuit.browser","\ref[src]",src.get_equip_info())
-	return
 
 /obj/item/vehicle_module/proc/occupant_message(message)
 	if(chassis)
 		chassis.occupant_message("[icon2html(src, world)] [message]")
-	return
 
 /obj/item/vehicle_module/proc/log_message(message)
 	if(chassis)
 		chassis.log_message("<i>[src]:</i> [message]")
-	return
 
 ///Allows mech equipment to do an action upon the mech moving
 /obj/item/vehicle_module/proc/MoveAction()
@@ -292,6 +288,26 @@
 ///Equipment returns its slowdown or speedboost.
 /obj/item/vehicle_module/proc/get_step_delay()
 	return step_delay
+
+//* Attach / Detach *//
+
+#warn impl all
+
+/obj/item/vehicle_module/proc/on_vehicle_attach(obj/vehicle/vehicle, datum/event_args/actor/actor, hardpoint_id, silent)
+
+/obj/item/vehicle_module/proc/on_vehicle_detach(obj/vehicle/vehicle, datum/event_args/actor/actor, hardpoint_id, silent)
+
+/obj/item/vehicle_module/proc/can_vehicle_attach(obj/vehicle/vehicle, datum/event_args/actor/actor, hardpoint_id, silent, vehicle_opinion)
+
+/obj/item/vehicle_module/proc/can_vehicle_detach(obj/vehicle/vehicle, datum/event_args/actor/actor, hardpoint_id, silent, vehicle_opinion)
+
+/**
+ * * This is allowed to qdel(src).
+ *
+ * @return the item to give back to the user
+ */
+/obj/item/vehicle_module/proc/vehicle_detaching_cleanup(obj/vehicle/vehicle, datum/event_args/actor/actor, hardpoint_id, silent)
+	return src
 
 //* Chassis - Physicality *//
 

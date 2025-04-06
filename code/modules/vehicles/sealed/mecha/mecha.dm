@@ -678,7 +678,7 @@
 	return domove(direction)
 
 /obj/vehicle/sealed/mecha/proc/can_ztravel()
-	for(var/obj/item/vehicle_module/tool/jetpack/jp in equipment)
+	for(var/obj/item/vehicle_module/legacy/tool/jetpack/jp in equipment)
 		return jp.equip_ready
 	return FALSE
 
@@ -2038,7 +2038,7 @@
 	if(!id_card || !user) return
 
 	var/maint_options = "<a href='?src=\ref[src];set_internal_tank_valve=1;user=\ref[user]'>Set Cabin Air Pressure</a>"
-	if (locate(/obj/item/vehicle_module/tool/passenger) in contents)
+	if (locate(/obj/item/vehicle_module/legacy/tool/passenger) in contents)
 		maint_options += "<a href='?src=\ref[src];remove_passenger=1;user=\ref[user]'>Remove Passenger</a>"
 
 	var/output_text = {"<html>
@@ -2214,7 +2214,7 @@
 	if(href_list["remove_passenger"] && state >= MECHA_BOLTS_SECURED)
 		var/mob/user = top_filter.getMob("user")
 		var/list/passengers = list()
-		for (var/obj/item/vehicle_module/tool/passenger/P in contents)
+		for (var/obj/item/vehicle_module/legacy/tool/passenger/P in contents)
 			if (P.occupant_legacy)
 				passengers["[P.occupant_legacy]"] = P
 
@@ -2227,7 +2227,7 @@
 		if (!pname)
 			return
 
-		var/obj/item/vehicle_module/tool/passenger/P = passengers[pname]
+		var/obj/item/vehicle_module/legacy/tool/passenger/P = passengers[pname]
 		var/mob/occupant_legacy = P.occupant_legacy
 
 		user.visible_message("<span class='notice'>\The [user] begins opening the hatch on \the [P]...</span>", "<span class='notice'>You begin opening the hatch on \the [P]...</span>")

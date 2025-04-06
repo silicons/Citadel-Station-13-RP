@@ -1,4 +1,4 @@
-/obj/item/vehicle_module/tool/syringe_gun
+/obj/item/vehicle_module/legacy/tool/syringe_gun
 	name = "syringe gun"
 	desc = "Exosuit-mounted chem synthesizer with syringe gun. Reagents inside are held in stasis, so no reactions will occur. (Can be attached to: Medical Exosuits)"
 	mech_flags = EXOSUIT_MODULE_MEDICAL
@@ -18,7 +18,7 @@
 	origin_tech = list(TECH_MATERIAL = 3, TECH_BIO = 4, TECH_MAGNET = 4, TECH_DATA = 3)
 	required_type = list(/obj/vehicle/sealed/mecha/medical)
 
-/obj/item/vehicle_module/tool/syringe_gun/Initialize(mapload)
+/obj/item/vehicle_module/legacy/tool/syringe_gun/Initialize(mapload)
 	. = ..()
 	atom_flags |= NOREACT
 	syringes = new
@@ -27,22 +27,22 @@
 	create_reagents(max_volume)
 	synth = new (list(src),0)
 
-/obj/item/vehicle_module/tool/syringe_gun/detach()
+/obj/item/vehicle_module/legacy/tool/syringe_gun/detach()
 	synth.stop()
 	return ..()
 
-/obj/item/vehicle_module/tool/syringe_gun/critfail()
+/obj/item/vehicle_module/legacy/tool/syringe_gun/critfail()
 	..()
 	atom_flags &= ~NOREACT
 	return
 
-/obj/item/vehicle_module/tool/syringe_gun/get_equip_info()
+/obj/item/vehicle_module/legacy/tool/syringe_gun/get_equip_info()
 	var/output = ..()
 	if(output)
 		return "[output] \[<a href=\"?src=\ref[src];toggle_mode=1\">[mode? "Analyze" : "Launch"]</a>\]<br />\[Syringes: [syringes.len]/[max_syringes] | Reagents: [reagents.total_volume]/[reagents.maximum_volume]\]<br /><a href='?src=\ref[src];show_reagents=1'>Reagents list</a>"
 	return
 
-/obj/item/vehicle_module/tool/syringe_gun/action(atom/movable/target)
+/obj/item/vehicle_module/legacy/tool/syringe_gun/action(atom/movable/target)
 	if(!action_checks(target))
 		return
 	if(istype(target,/obj/item/reagent_containers/syringe))
@@ -102,7 +102,7 @@
 	return 1
 
 
-/obj/item/vehicle_module/tool/syringe_gun/Topic(href,href_list)
+/obj/item/vehicle_module/legacy/tool/syringe_gun/Topic(href,href_list)
 	..()
 	var/datum/topic_input/top_filter = new (href,href_list)
 	if(top_filter.get("toggle_mode"))
@@ -140,7 +140,7 @@
 		return
 	return
 
-/obj/item/vehicle_module/tool/syringe_gun/proc/get_reagents_page()
+/obj/item/vehicle_module/legacy/tool/syringe_gun/proc/get_reagents_page()
 	var/output = {"<html>
 						<head>
 						<title>Reagent Synthesizer</title>
@@ -168,7 +168,7 @@
 						"}
 	return output
 
-/obj/item/vehicle_module/tool/syringe_gun/proc/get_reagents_form()
+/obj/item/vehicle_module/legacy/tool/syringe_gun/proc/get_reagents_form()
 	var/r_list = get_reagents_list()
 	var/inputs
 	if(r_list)
@@ -183,14 +183,14 @@
 						"}
 	return output
 
-/obj/item/vehicle_module/tool/syringe_gun/proc/get_reagents_list()
+/obj/item/vehicle_module/legacy/tool/syringe_gun/proc/get_reagents_list()
 	var/output
 	for(var/i=1 to known_reagents.len)
 		var/reagent_id = known_reagents[i]
 		output += {"<input type="checkbox" value="[reagent_id]" name="reagent_[i]" [(reagent_id in processed_reagents)? "checked=\"1\"" : null]> [known_reagents[reagent_id]]<br />"}
 	return output
 
-/obj/item/vehicle_module/tool/syringe_gun/proc/get_current_reagents()
+/obj/item/vehicle_module/legacy/tool/syringe_gun/proc/get_current_reagents()
 	var/output
 	for(var/datum/reagent/R in reagents.get_reagent_datums())
 		output += "[R]: [round(reagents.reagent_volumes[R.id],0.001)] - <a href=\"?src=\ref[src];purge_reagent=[R.id]\">Purge Reagent</a><br />"
@@ -198,7 +198,7 @@
 		output += "Total: [round(reagents.total_volume,0.001)]/[reagents.maximum_volume] - <a href=\"?src=\ref[src];purge_all=1\">Purge All</a>"
 	return output || "None"
 
-/obj/item/vehicle_module/tool/syringe_gun/proc/load_syringe(obj/item/reagent_containers/syringe/S)
+/obj/item/vehicle_module/legacy/tool/syringe_gun/proc/load_syringe(obj/item/reagent_containers/syringe/S)
 	if(syringes.len<max_syringes)
 		if(get_dist(src,S) >= 2)
 			occupant_message("The syringe is too far away.")
@@ -220,7 +220,7 @@
 	occupant_message("The [src] syringe chamber is full.")
 	return 0
 
-/obj/item/vehicle_module/tool/syringe_gun/proc/analyze_reagents(atom/A)
+/obj/item/vehicle_module/legacy/tool/syringe_gun/proc/analyze_reagents(atom/A)
 	if(get_dist(src,A) >= 4)
 		occupant_message("The object is too far away.")
 		return 0
@@ -239,7 +239,7 @@
 	occupant_message("Analysis complete.")
 	return 1
 
-/obj/item/vehicle_module/tool/syringe_gun/proc/add_known_reagent(r_id,r_name)
+/obj/item/vehicle_module/legacy/tool/syringe_gun/proc/add_known_reagent(r_id,r_name)
 	set_ready_state(0)
 	do_after_cooldown()
 	if(!(r_id in known_reagents))
@@ -249,14 +249,14 @@
 	return 0
 
 
-/obj/item/vehicle_module/tool/syringe_gun/update_equip_info()
+/obj/item/vehicle_module/legacy/tool/syringe_gun/update_equip_info()
 	if(..())
 		send_byjax(chassis.occupant_legacy,"msyringegun.browser","reagents",get_current_reagents())
 		send_byjax(chassis.occupant_legacy,"msyringegun.browser","reagents_form",get_reagents_form())
 		return 1
 	return
 
-/obj/item/vehicle_module/tool/syringe_gun/on_reagent_change()
+/obj/item/vehicle_module/legacy/tool/syringe_gun/on_reagent_change()
 	..()
 	update_equip_info()
 	return
@@ -264,7 +264,7 @@
 /datum/global_iterator/mech_synth
 	delay = 100
 
-/datum/global_iterator/mech_synth/process(var/obj/item/vehicle_module/tool/syringe_gun/S)
+/datum/global_iterator/mech_synth/process(var/obj/item/vehicle_module/legacy/tool/syringe_gun/S)
 	if(!S.chassis)
 		return stop()
 	var/energy_drain = S.energy_drain*10
@@ -496,7 +496,7 @@
 	clone_heal = 0.2
 	hal_heal = 0.2
 
-/obj/item/vehicle_module/tool/powertool/medanalyzer
+/obj/item/vehicle_module/legacy/tool/powertool/medanalyzer
 	name = "mounted humanoid scanner"
 	desc = "An exosuit-mounted scanning device."
 	icon_state = "mecha_analyzer_health"
