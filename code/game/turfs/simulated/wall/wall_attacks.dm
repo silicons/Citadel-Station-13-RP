@@ -39,20 +39,8 @@
 
 	underlays += under_ma
 
-
 /turf/simulated/wall/proc/update_air()
 	queue_zone_update()
-	// old code left below because it's by time we had a hall of shame
-	// "turf in loc" on a turf
-	// you for real?
-/*
-	if(!SSair)
-		return
-
-	for(var/turf/simulated/turf in loc)
-		update_thermal(turf)
-		SSair.mark_for_update(turf)
-*/
 
 /turf/simulated/wall/proc/try_touch(var/mob/user, var/rotting)
 
@@ -71,7 +59,6 @@
 		return 0
 
 	toggle_open(user)
-
 	return 0
 
 /turf/simulated/wall/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
@@ -233,12 +220,9 @@
 			cut_delay *= 0.5
 		else if(istype(I,/obj/item/pickaxe))
 			var/obj/item/pickaxe/P = I
-			if(!active)
-				return
-			else
-				dismantle_verb = P.drill_verb
-				dismantle_sound = P.drill_sound
-				cut_delay -= P.digspeed
+			dismantle_verb = P.drill_verb
+			dismantle_sound = P.drill_sound
+			cut_delay -= P.digspeed
 
 		if(dismantle_verb)
 
@@ -298,10 +282,7 @@
 						to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
 						return
 				else if (istype(I, /obj/item/pickaxe/plasmacutter))
-					if(!active)
-						return
-					else
-						cut_cover = 1
+					cut_cover = 1
 				else if (istype(I, /obj/item/melee/thermalcutter))
 					var/obj/item/melee/thermalcutter/TC = I
 					if(!TC.isOn())
@@ -363,10 +344,7 @@
 						to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
 						return
 				else if(istype(I, /obj/item/pickaxe/plasmacutter))
-					if(!active)
-						return
-					else
-						cut_cover = 1
+					cut_cover = 1
 				if(cut_cover)
 					to_chat(user, "<span class='notice'>You begin slicing through the support rods.</span>")
 					playsound(src, I.tool_sound, 100, 1)

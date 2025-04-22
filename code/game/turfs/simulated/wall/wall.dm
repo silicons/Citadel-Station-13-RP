@@ -46,9 +46,6 @@
 	// Damage overlays are cached.
 	var/global/damage_overlays[16]
 
-	var/active
-	var/can_open = FALSE
-
 	/// The material of the girders that are produced when the wall is dismantled.
 	var/datum/prototype/material/material_girder = /datum/prototype/material/steel
 	/// The base material of the wall.
