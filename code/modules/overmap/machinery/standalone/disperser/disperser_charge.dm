@@ -1,3 +1,4 @@
+#warn rename to /obj/structure/disperser_charge
 /obj/structure/ship_munition/disperser_charge
 	name = "unknown disperser charge"
 	desc = "A charge to power the obstruction removal ballista with. It looks impossibly round and shiny. This charge does not have a defined purpose."
