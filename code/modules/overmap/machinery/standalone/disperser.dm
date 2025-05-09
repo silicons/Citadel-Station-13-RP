@@ -4,3 +4,4 @@
 /obj/machinery/overmap/disperser
 
 #warn impl
+#warn firing anim time is 28 frames
