@@ -315,19 +315,14 @@ Ccomp's first proc.
 
 	GLOB.respawn_timers -= target
 
-	var/found_client = FALSE
-	for(var/c in GLOB.clients)
-		var/client/C = c
-		if(C.ckey == target)
-			found_client = C
-			to_chat(C, "<span class='notice'><B>You may now respawn. You should roleplay as if you learned nothing about the round during your time with the dead.</B></span>")
-			if(isobserver(C.mob))
-				var/mob/observer/dead/G = C.mob
-				G.can_reenter_corpse = 1
-				to_chat(C, "<span class='notice'><B>You can also re-enter your corpse, if you still have one!</B></span>")
-			break
-
-	if(!found_client)
+	if(GLOB.directory[target])
+		var/client/C = GLOB.directory[target]
+		to_chat(C, "<span class='notice'><B>You may now respawn. You should roleplay as if you learned nothing about the round during your time with the dead.</B></span>")
+		if(isobserver(C.mob))
+			var/mob/observer/dead/G = C.mob
+			G.can_reenter_corpse = 1
+			to_chat(C, "<span class='notice'><B>You can also re-enter your corpse, if you still have one!</B></span>")
+	else
 		to_chat(src, "<span class='notice'>The associated client didn't appear to be connected, so they couldn't be notified, but they can now respawn if they reconnect.</span>")
 
 	log_admin("[key_name(usr)] allowed [found_client ? key_name(found_client) : target] to bypass the respawn time limit")

@@ -294,7 +294,7 @@ var/global/floorIsLava = 0
 
 	var/p_age = "unknown"
 	for(var/client/C in GLOB.clients)
-		if(C.ckey == key)
+		if(C.get_real_ckey() == key)
 			p_age = C.player.player_age
 			break
 	dat +="<span style='color:#000000; font-weight: bold'>Player age: [p_age]</span><br>"

@@ -24,12 +24,12 @@
 			if(null)
 				return
 			if("")
-				F.dir.Remove(ckey)
+				F.dir.Remove(get_real_ckey())
 				to_chat(src, "<b>Memo removed</b>")
 				return
 		if( findtext(memo,"<script",1,0) )
 			return
-		F[ckey] << "[key] on [time2text(world.realtime,"(DDD) DD MMM hh:mm")]<br>[memo]"
+		F[get_real_ckey()] << "[key] on [time2text(world.realtime,"(DDD) DD MMM hh:mm")]<br>[memo]"
 		message_admins("[key] set an admin memo:<br>[memo]")
 
 //show all memos
@@ -49,7 +49,7 @@
 		if(check_rights(R_SERVER,0))	//high ranking admins can delete other admin's memos
 			ckey = input(src,"Whose memo shall we remove?","Remove Memo",null) as null|anything in F.dir
 		else
-			ckey = src.ckey
+			ckey = src.get_real_ckey()
 		if(ckey)
 			F.dir.Remove(ckey)
 			to_chat(src, "<b>Removed Memo created by [ckey].</b>")

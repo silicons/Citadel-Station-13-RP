@@ -602,7 +602,7 @@ var/list/admin_verbs_event_manager = list(
 		for(var/P in GLOB.stealthminID)
 			if(GLOB.stealthminID[P] == txt)
 				return P
-	txt = GLOB.stealthminID[ckey]
+	txt = GLOB.stealthminID[get_real_ckey()]
 	return txt
 
 /client/proc/createStealthKey()
@@ -614,7 +614,7 @@ var/list/admin_verbs_event_manager = list(
 			if(num == GLOB.stealthminID[P])
 				num++
 				i = 0
-	GLOB.stealthminID["[ckey]"] = "@[num2text(num)]"
+	GLOB.stealthminID["[get_real_ckey()]"] = "@[num2text(num)]"
 
 /client/proc/stealth()
 	set category = "Admin"

@@ -1,3 +1,4 @@
+#warn integrate to boot sequence
 /**
  * Panic bunker is special: We can defer the check until IPIntel comes back.
  */

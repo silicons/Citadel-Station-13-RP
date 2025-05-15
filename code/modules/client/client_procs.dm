@@ -193,7 +193,9 @@
 	spawn(0.5 SECONDS)
 		to_chat(src, "<font color='red'>If the title screen is black, resources are still downloading. Please be patient until the title screen appears.</font>")
 	// Register in globals.
+	#warn how to handle this
 	GLOB.clients += src
+	#warn how to handle this
 	GLOB.directory[ckey] = src
 
 	//* record their existence (tm)
@@ -208,8 +210,6 @@
 
 	//* Resolve storage datums *//
 
-	persistent = resolve_client_data(ckey, key)
-	player = resolve_player_data(ckey, key)
 	player.log_connect()
 	preferences = SSpreferences.resolve_game_preferences(key, ckey)
 	//? WARNING: SHITCODE ALERT ?//
@@ -323,17 +323,6 @@
 	spawn(5)
 		winset(src, null, "command=\".configure graphics-hwmode on\"")
 
-	if(holder)
-		add_admin_verbs()
-		admin_memo_show()
-		// to_chat(src, get_message_output("memo"))
-		// adminGreet()
-
-	if(custom_event_msg && custom_event_msg != "")
-		to_chat(src, "<h1 class='alert'>Custom Event</h1>")
-		to_chat(src, "<h2 class='alert'>A custom event is taking place. OOC Info:</h2>")
-		to_chat(src, "<span class='alert'>[custom_event_msg]</span>")
-		to_chat(src, "<br>")
 
 	// Preload resources.
 	// todo: re-evaluate this

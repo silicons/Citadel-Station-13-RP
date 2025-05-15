@@ -10,6 +10,28 @@
  *
  * All client topic calls go through [/client/Topic] first, so a lot of our specialised
  * topic handling starts here
+ *
+ * ## BYOND Client Login Proces
+ *
+ * 1. world.IsBanned() is called by BYOND
+ * 2. client/New() is called
+ * 3. When client/New() calls ..(), mob.Login() is called by whichever mob owns the client,
+ *    or a /mob/new_player is made for them if not.
+ * 4. rest of client/New() runs under the ..()
+ *
+ * ## Citadel Client Login Process
+ *
+ * We made some modifications.
+ *
+ * 1. BYOND client login runs. The client is immediately disassociated from the mob it's in
+ *    if there is any, pending authentication.
+ * 2. client/authenticate() is called to either admit the player as a hub authentication,
+ *    or call manual authentication on them.
+ * 3. If authentication fails, they are booted.
+ * 4. client/initialize() is called after successful authentication to load their data in.
+ * 5. If initialization fails, they are booted.
+ * 5. client/on_ready() is called after successful initialization, and the new player panel
+ *    loads
  */
 /client
 
@@ -36,14 +58,6 @@
 	parent_type = /datum
 	show_verb_panel = FALSE
 
-	//? Intrinsics
-	/// did New() finish?
-	var/initialized = FALSE
-	/// Persistent round-by-round data holder
-	var/datum/client_data/persistent
-	/// Database data
-	var/datum/player_data/player
-
 	//? Connection
 	/// queued client security kick
 	var/queued_security_kick
@@ -56,6 +70,18 @@
 	/// our action holder
 	var/datum/action_holder/action_holder
 
+	//* Authentication *//
+	#warn link system
+	#warn vv guard
+	#warn impl
+	/// are we properly authenticated?
+	var/authenticated = FALSE
+	/// authenticated username
+	/// * This should generally be used in place of 'ckey' for when hub auth is down.
+	var/authenticated_ckey
+	/// strongly authenticated via byond hub, rather than with manual login
+	var/authenticated_via_hub = FALSE
+
 	//* Context Menus *//
 	/// open context menu
 	var/datum/radial_menu/context_menu/context_menu
@@ -63,6 +89,10 @@
 	//* HUDs *//
 	/// active atom HUD providers associated to a list of ids or paths of atom huds that's providing it.
 	var/list/datum/atom_hud_provider/atom_hud_providers
+
+	//* Initialization *//
+	/// are we ready?
+	var/ready = FALSE
 
 	//? Rendering
 	/// Click catcher
@@ -73,6 +103,12 @@
 	var/datum/perspective/using_perspective
 	/// Client global planes
 	var/datum/plane_holder/client_global/global_planes
+
+	//* Storage *//
+	/// Persistent round-by-round data holder
+	var/datum/client_data/persistent
+	/// Database data
+	var/datum/player_data/player
 
 	//? Viewport
 	/// what we *think* their current viewport size is in pixels
@@ -215,80 +251,8 @@
 			return TRUE
 	return ..()
 
-
-//* Is-rank helpers *//
-
 /**
- * are we a guest account?
+ * Checks if we're ready.
  */
-/client/proc/is_guest()
-	return IsGuestKey(key)
-
-/**
- * are we localhost?
- */
-/client/proc/is_localhost()
-	return isnull(address) || (address in list("127.0.0.1", "::1"))
-
-/**
- * are we any sort of staff rank?
- */
-/client/proc/is_staff()
-	return !isnull(holder)
-
-//* Atom HUDs *//
-
-/client/proc/add_atom_hud(datum/atom_hud/hud, source)
-	ASSERT(istext(source))
-	if(isnull(atom_hud_providers))
-		atom_hud_providers = list()
-	var/list/datum/atom_hud_provider/providers = hud.resolve_providers()
-	for(var/datum/atom_hud_provider/provider as anything in providers)
-		var/already_there = atom_hud_providers[provider]
-		if(already_there)
-			atom_hud_providers[provider] |= source
-		else
-			atom_hud_providers[provider] = list(source)
-			provider.add_client(src)
-
-/client/proc/remove_atom_hud(datum/atom_hud/hud, source)
-	ASSERT(istext(source))
-	if(!length(atom_hud_providers))
-		return
-	if(!hud)
-		// remove all of source
-		for(var/datum/atom_hud_provider/provider as anything in atom_hud_providers)
-			if(!(source in atom_hud_providers[provider]))
-				continue
-			atom_hud_providers[provider] -= source
-			if(!length(atom_hud_providers[provider]))
-				atom_hud_providers -= provider
-				provider.remove_client(src)
-		return
-	hud = fetch_atom_hud(hud)
-	var/list/datum/atom_hud_provider/providers = hud.resolve_providers()
-	for(var/datum/atom_hud_provider/provider as anything in providers)
-		if(!length(atom_hud_providers[provider]))
-			continue
-		atom_hud_providers[provider] -= source
-		if(!length(atom_hud_providers[provider]))
-			atom_hud_providers -= provider
-			provider.remove_client(src)
-
-// todo: add_atom_hud_provider, remove_atom_hud_provider
-
-/client/proc/clear_atom_hud_providers()
-	for(var/datum/atom_hud_provider/provider as anything in atom_hud_providers)
-		provider.remove_client(src)
-	atom_hud_providers = null
-
-//* Transfer *//
-
-/**
- * transfers us to a mob
- *
- * **never directly set ckey on a client or mob!**
- */
-/client/proc/transfer_to(mob/moving_to)
-	var/mob/moving_from = mob
-	return moving_from.transfer_client_to(moving_to)
+/client/proc/is_ready()
+	return ready

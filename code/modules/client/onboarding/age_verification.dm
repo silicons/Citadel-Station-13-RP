@@ -1,3 +1,4 @@
+#warn integrate to boot sequence
 /client/proc/age_verification()
 	set waitfor = FALSE
 	age_verification_impl()

@@ -4,11 +4,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	"1428" = "a bug causing right-click menus to show too many verbs that's been fixed in version 1429",
 	))
 
-/client/proc/security_checks()
-	set waitfor = FALSE
-	security_checks_impl()
-
-/client/proc/security_checks_impl()
+/client/proc/boot_version_check()
 	if(byond_version < 513)
 		security_kick("BYOND 512 and prior clients are too outdated.", tell_user = TRUE)
 		return FALSE
