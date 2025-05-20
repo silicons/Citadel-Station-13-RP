@@ -1,9 +1,9 @@
 
-/datum/loadout_entry/pipe
+/datum/prototype/character_loadout_entry/pipe
 	name = "Pipe"
 	path = /obj/item/clothing/mask/smokable/pipe
 
-/datum/loadout_entry/pipe/New()
+/datum/prototype/character_loadout_entry/pipe/New()
 	..()
 	var/list/pipes = list()
 	for(var/pipe_style in typesof(/obj/item/clothing/mask/smokable/pipe))
@@ -11,19 +11,19 @@
 		pipes[initial(pipe.name)] = pipe
 	tweaks += new/datum/loadout_tweak/path(tim_sort(pipes, GLOBAL_PROC_REF(cmp_text_asc)))
 
-/datum/loadout_entry/matchbook
+/datum/prototype/character_loadout_entry/matchbook
 	name = "Matchbook"
 	path = /obj/item/storage/box/matches
 
-/datum/loadout_entry/lighter
+/datum/prototype/character_loadout_entry/lighter
 	name = "Cheap Lighter"
 	path = /obj/item/flame/lighter
 
-/datum/loadout_entry/lighter/zippo
+/datum/prototype/character_loadout_entry/lighter/zippo
 	name = "Zippo Selection"
 	path = /obj/item/flame/lighter/zippo
 
-/datum/loadout_entry/lighter/zippo/New()
+/datum/prototype/character_loadout_entry/lighter/zippo/New()
 	..()
 	var/list/zippos = list()
 	for(var/zippo in typesof(/obj/item/flame/lighter/zippo))
@@ -33,24 +33,24 @@
 		zippos[initial(zippo_type.name)] = zippo_type
 	tweaks += new/datum/loadout_tweak/path(tim_sort(zippos, GLOBAL_PROC_REF(cmp_text_asc)))
 
-/datum/loadout_entry/ashtray
+/datum/prototype/character_loadout_entry/ashtray
 	name = "Plastic Ashtray"
 	path = /obj/item/material/ashtray/plastic
 
-/datum/loadout_entry/cigar
+/datum/prototype/character_loadout_entry/cigar
 	name = "Cigar"
 	path = /obj/item/clothing/mask/smokable/cigarette/cigar
 
-/datum/loadout_entry/cigarcase
+/datum/prototype/character_loadout_entry/cigarcase
 	name = "Cigar Case"
 	path = /obj/item/storage/fancy/cigar
 	cost = 3
 
-/datum/loadout_entry/cigarettes
+/datum/prototype/character_loadout_entry/cigarettes
 	name = "Cigarette Selection"
 	path = /obj/item/storage/fancy/cigarettes
 
-/datum/loadout_entry/cigarettes/New()
+/datum/prototype/character_loadout_entry/cigarettes/New()
 	..()
 	var/list/cigarettes = list()
 	for(var/cigarette in (typesof(/obj/item/storage/fancy/cigarettes) - typesof(/obj/item/storage/fancy/cigarettes/killthroat)))

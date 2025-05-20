@@ -1,5 +1,5 @@
-/datum/loadout_entry
-	abstract_type = /datum/loadout_entry
+/datum/prototype/character_loadout_entry
+	abstract_type = /datum/prototype/character_loadout_entry
 
 	/// unique id - must be unique (duh)
 	var/id
@@ -8,10 +8,6 @@
 
 	/// name used for save/load don't change this or everyone loses it
 	var/name
-	/// what we display our name as. feel free to change this. defaults to name.
-	var/display_name
-	/// Description of this gear. If left blank will default to the description of the pathed item.
-	var/description
 	/// Path to item.
 	var/path
 	/// Number of points used. Items in general cost 1 point, storage/armor/gloves/special use costs 2 points.
@@ -36,10 +32,10 @@
 	/// Seasonal whitelist - only create if holiday is active. NOTE: This IGNORES ALLOW_HOLIDAYS config! This is because character setup isn't subsystem-init-synced so we must init all of this dumb shit before config loads.
 	var/list/holiday_whitelist
 
-/datum/loadout_entry/New()
+/datum/prototype/character_loadout_entry/New()
 	if(!description)
 		var/obj/O = path
-		description = initial(O.desc)
+		display_desc = initial(O.desc)
 	if(!name)
 		var/obj/O = path
 		name = initial(O.name)
@@ -49,13 +45,13 @@
 /**
  * remove & regex this to just directly access the `.id` variable when we have id's on every entry.
  */
-/datum/loadout_entry/proc/legacy_get_id()
+/datum/prototype/character_loadout_entry/proc/legacy_get_id()
 	return name
 
 /**
  * encodes data for tgui/interfaces/CharacterSetup/CharacterLoadout.tsx's [LoadoutEntry] interface.
  */
-/datum/loadout_entry/proc/tgui_entry_data()
+/datum/prototype/character_loadout_entry/proc/tgui_entry_data()
 	var/list/tweaks = list()
 	for(var/datum/loadout_tweak/tweak as anything in src.tweaks)
 		tweaks += tweak.id
@@ -70,7 +66,7 @@
 		"tweaks" = tweaks,
 	)
 
-/datum/loadout_entry/proc/instantiate(atom/where, list/entry_data)
+/datum/prototype/character_loadout_entry/proc/instantiate(atom/where, list/entry_data)
 	var/path = src.path
 	var/list/tweak_assembled = list()
 	for(var/datum/loadout_tweak/tweak as anything in tweaks)
@@ -103,8 +99,8 @@
 /hook/startup/proc/populate_gear_list()
 
 	// Create a list of gear datums to sort
-	for(var/geartype in typesof(/datum/loadout_entry)-/datum/loadout_entry)
-		var/datum/loadout_entry/G = geartype
+	for(var/geartype in typesof(/datum/prototype/character_loadout_entry)-/datum/prototype/character_loadout_entry)
+		var/datum/prototype/character_loadout_entry/G = geartype
 		if(initial(G.abstract_type) == geartype)
 			continue
 		G = new geartype

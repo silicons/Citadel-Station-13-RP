@@ -1,8 +1,8 @@
-/datum/loadout_entry/accessory/insignia
+/datum/prototype/character_loadout_entry/accessory/insignia
 	name = "Insignia Selection"
 	path = /obj/item/clothing/accessory/oricon/department
 
-/datum/loadout_entry/accessory/insignia/New()
+/datum/prototype/character_loadout_entry/accessory/insignia/New()
 	..()
 	var/insignia = list()
 	insignia["Command - Crew"] = /obj/item/clothing/accessory/oricon/department/command/crew
@@ -39,11 +39,11 @@
 	insignia["Service - Echelons"] = /obj/item/clothing/accessory/oricon/department/service/marine
 	tweaks += new/datum/loadout_tweak/path(insignia)
 
-/datum/loadout_entry/accessory/insigniacolored
+/datum/prototype/character_loadout_entry/accessory/insigniacolored
 	name = "Insignia - Colorable"
 	path = /obj/item/clothing/accessory/oricon/department/colorable
 
-/datum/loadout_entry/accessory/insigniacolored/New()
+/datum/prototype/character_loadout_entry/accessory/insigniacolored/New()
 	..()
 	var/insignia = list()
 	insignia["Colorable - Crew"] = /obj/item/clothing/accessory/oricon/department/colorable

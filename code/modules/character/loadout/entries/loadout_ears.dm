@@ -1,26 +1,26 @@
 // Stuff worn on the ears. Items here go in the "ears" sort_category but they must not use
 // the SLOT_ID_RIGHT_EAR or SLOT_ID_LEFT_EAR as the slot, or else players will spawn with no headset.
-/datum/loadout_entry/ears
+/datum/prototype/character_loadout_entry/ears
 	name = "Earmuffs"
 	path = /obj/item/clothing/ears/earmuffs
 	category = LOADOUT_CATEGORY_EARS
 	slot = SLOT_ID_RIGHT_EAR
 
-/datum/loadout_entry/ears/headphones
+/datum/prototype/character_loadout_entry/ears/headphones
 	name = "Headphones"
 	path = /obj/item/clothing/ears/earmuffs/headphones
 
-/datum/loadout_entry/ears/circuitry
+/datum/prototype/character_loadout_entry/ears/circuitry
 	name = "Earwear - Circuitry"
 	path = /obj/item/clothing/ears/circuitry
 
 
-/datum/loadout_entry/ears/earrings
+/datum/prototype/character_loadout_entry/ears/earrings
 	name = "Earring Selection"
-	description = "A selection of eye-catching earrings."
+	display_desc = "A selection of eye-catching earrings."
 	path = /obj/item/clothing/ears/earring
 
-/datum/loadout_entry/ears/earrings/New()
+/datum/prototype/character_loadout_entry/ears/earrings/New()
 	..()
 	var/earrings = list()
 	earrings["Stud - Pearl"] = /obj/item/clothing/ears/earring/stud
@@ -43,12 +43,12 @@
 	tweaks += new/datum/loadout_tweak/path(earrings)
 
 
-/datum/loadout_entry/ears/laurel
+/datum/prototype/character_loadout_entry/ears/laurel
 	name = "Laurel Wreath Selection"
-	description = "A selection of leaf-like headwear."
+	display_desc = "A selection of leaf-like headwear."
 	path = /obj/item/clothing/ears/laurel
 
-/datum/loadout_entry/ears/laurel/New()
+/datum/prototype/character_loadout_entry/ears/laurel/New()
 	..()
 	var/laurel = list()
 	laurel["Laurel Wreath - Leaf"] = /obj/item/clothing/ears/laurel

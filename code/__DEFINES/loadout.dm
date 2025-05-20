@@ -19,6 +19,7 @@
 #define LOADOUT_CATEGORY_UNIFORMS "Uniforms and Casual Dress"
 #define LOADOUT_CATEGORY_UTILITY "Utility"
 #define LOADOUT_CATEGORY_XENOWEAR "Xenowear"
+#warn don't #define these
 
 /// allow customizing name
 #define LOADOUT_CUSTOMIZE_NAME (1<<0)
