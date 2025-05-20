@@ -21,6 +21,8 @@
 #define LOADOUT_CATEGORY_XENOWEAR "Xenowear"
 #warn don't #define these
 
+//* loadout customize flags *//
+
 /// allow customizing name
 #define LOADOUT_CUSTOMIZE_NAME (1<<0)
 /// allow customizing desc
@@ -33,6 +35,8 @@ DEFINE_BITFIELD(loadout_customize_flags, list(
 	BITFIELD(LOADOUT_CUSTOMIZE_DESC),
 	BITFIELD(LOADOUT_CUSTOMIZE_COLOR),
 ))
+
+//* loadout constants *//
 
 // *DO NOT RAISE THIS. This is for performance reasons.* //
 #define LOADOUT_MAX_SLOTS 16
