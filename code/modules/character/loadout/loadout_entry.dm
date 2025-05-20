@@ -1,18 +1,3 @@
-var/list/gear_datums = list()
-
-/proc/tgui_loadout_context()
-	. = list()
-	var/list/instances = list()
-	var/list/categories = list()
-	for(var/id in global.gear_datums)
-		var/datum/loadout_entry/entry = global.gear_datums[id]
-		LAZYDISTINCTADD(categories[entry.category], entry.subcategory)
-		var/list/instance = entry.tgui_entry_data()
-		instances[instance["id"]] = instance
-	.["instances"] = instances
-	.["categories"] = categories
-	.["maxEntries"] = LOADOUT_MAX_ITEMS
-
 /datum/loadout_entry
 	abstract_type = /datum/loadout_entry
 
