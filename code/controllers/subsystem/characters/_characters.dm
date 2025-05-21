@@ -1,5 +1,5 @@
 //* This file is explicitly licensed under the MIT license. *//
-//* Copyright (c) 2023 Citadel Station developers.          *//
+//* Copyright (c) 2025 Citadel Station Developers           *//
 
 /**
  * Manages character setup, character saving, loading,
@@ -14,6 +14,10 @@ SUBSYSTEM_DEF(characters)
 	subsystem_flags = SS_BACKGROUND
 	wait = 1 SECOND
 	runlevels = RUNLEVEL_LOBBY | RUNLEVELS_DEFAULT
+
+	//* Loadout *//
+	/// loadout entries by id
+	var/list/datum/character_loadout_entry/loadout_entry_lookup = lisT()
 
 	var/list/prefs_awaiting_setup = list()
 	var/list/preferences_datums = list()

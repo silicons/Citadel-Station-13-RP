@@ -1,11 +1,4 @@
-/datum/prototype/character_loadout_entry
-	abstract_type = /datum/prototype/character_loadout_entry
-
-	/// unique id - must be unique (duh)
-	var/id
-	/// allowed standard customizations
-	var/loadout_customize_flags = LOADOUT_CUSTOMIZE_COLOR | LOADOUT_CUSTOMIZE_DESC | LOADOUT_CUSTOMIZE_NAME
-
+/datum/character_loadout_entry
 	/// name used for save/load don't change this or everyone loses it
 	var/name
 	/// Path to item.

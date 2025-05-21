@@ -54,3 +54,5 @@ DEFINE_BITFIELD(loadout_customize_flags, list(
 #define LOADOUT_ENTRYDATA_REDESC "redesc"
 #define LOADOUT_ENTRYDATA_RECOLOR "recolor"
 #define LOADOUT_ENTRYDATA_TWEAKS "tweaks"
+
+

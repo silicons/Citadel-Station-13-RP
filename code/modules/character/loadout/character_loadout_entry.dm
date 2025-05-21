@@ -1,8 +1,13 @@
+//* This file is explicitly licensed under the MIT license. *//
+//* Copyright (c) 2025 Citadel Station Developers           *//
+
 /**
- * 
+ * an item you can grab from the loadout
  */
-/datum/prototype/character_loadout_entry
+/datum/character_loadout_entry
 	//* identity *//
+	/// unique id - must be unique (duh)
+	var/id
 	/// display name
 	var/display_name
 	/// description to show
