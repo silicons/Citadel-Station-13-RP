@@ -165,7 +165,8 @@
 /**
  * scale: watts
  */
-/proc/tesla_zap(atom/source, zap_range = 3, power, explosive = FALSE, stun_mobs = TRUE)
+#warn remove this, as the name implies
+/proc/old_remove_this_tesla_zap(atom/source, zap_range = 3, power, explosive = FALSE, stun_mobs = TRUE)
 	. = source.dir
 	if(power < 1000)
 		return

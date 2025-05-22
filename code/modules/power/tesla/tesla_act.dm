@@ -1,3 +1,7 @@
+/atom/movable/proc/tesla_act_new()
+	#warn impl
+
+
 ////////////////////////////////////////
 // Vars and Default tesla_act behavior
 ////////////////////////////////////////
@@ -5,7 +9,11 @@
 /obj
 	var/being_shocked = FALSE
 
+
+
+#warn deal with this
 /obj/proc/tesla_act(var/power)
+	SHOULD_NOT_OVERRIDE(TRUE)
 	being_shocked = TRUE
 	var/power_bounced = power / 2
 	tesla_zap(src, 3, power_bounced)
