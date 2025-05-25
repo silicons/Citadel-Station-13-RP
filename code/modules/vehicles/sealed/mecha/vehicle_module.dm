@@ -94,7 +94,7 @@
 		src.update_chassis_page()
 		chassis.occupant_message(SPAN_DANGER("The [src] is destroyed!"))
 		chassis.log_append_to_last("[src] is destroyed.",1)
-		if(istype(src, /obj/item/vehicle_module/weapon))//Gun
+		if(istype(src, /obj/item/vehicle_module/weapon/ranged))//Gun
 			switch(chassis.mech_faction)
 				if(MECH_FACTION_NT)
 					src.chassis.occupant_legacy << sound('sound/mecha/weapdestrnano.ogg',volume=70)

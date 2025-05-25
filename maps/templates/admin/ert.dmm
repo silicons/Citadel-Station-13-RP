@@ -709,8 +709,8 @@
 /obj/item/vehicle_module/tool/extinguisher,
 /obj/item/vehicle_module/tool/extinguisher,
 /obj/item/vehicle_module/tool/powertool/medanalyzer,
-/obj/item/vehicle_module/weapon/ballistic/missile_rack/flare,
-/obj/item/vehicle_module/weapon/energy/medigun,
+/obj/item/vehicle_module/weapon/ranged/ballistic/missile_rack/flare,
+/obj/item/vehicle_module/weapon/ranged/energy/medigun,
 /obj/item/vehicle_module/tool/sleeper,
 /obj/item/vehicle_module/tool/sleeper,
 /obj/item/vehicle_module/tool/syringe_gun,
@@ -747,8 +747,8 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/item/vehicle_module/weapon/energy/pulse,
-/obj/item/vehicle_module/weapon/energy/pulse,
+/obj/item/vehicle_module/weapon/ranged/energy/pulse,
+/obj/item/vehicle_module/weapon/ranged/energy/pulse,
 /obj/effect/floor_decal/industrial/outline/red,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/ert/mech_bay)
@@ -1149,11 +1149,11 @@
 /area/ship/ert/med)
 "kn" = (
 /obj/structure/table/rack/steel,
-/obj/item/vehicle_module/weapon/ballistic/missile_rack/explosive,
-/obj/item/vehicle_module/weapon/ballistic/missile_rack/explosive,
-/obj/item/vehicle_module/weapon/ballistic/lmg,
-/obj/item/vehicle_module/weapon/ballistic/lmg,
-/obj/item/vehicle_module/weapon/ballistic/mortar,
+/obj/item/vehicle_module/weapon/ranged/ballistic/missile_rack/explosive,
+/obj/item/vehicle_module/weapon/ranged/ballistic/missile_rack/explosive,
+/obj/item/vehicle_module/weapon/ranged/ballistic/lmg,
+/obj/item/vehicle_module/weapon/ranged/ballistic/lmg,
+/obj/item/vehicle_module/weapon/ranged/ballistic/mortar,
 /obj/effect/floor_decal/industrial/outline/red,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/ert/mech_bay)
@@ -2244,11 +2244,11 @@
 /area/ship/ert/mech_bay)
 "qE" = (
 /obj/structure/table/rack/steel,
-/obj/item/vehicle_module/weapon/energy/taser,
-/obj/item/vehicle_module/weapon/energy/taser,
-/obj/item/vehicle_module/weapon/ballistic/missile_rack/grenade/clusterbang,
+/obj/item/vehicle_module/weapon/ranged/energy/taser,
+/obj/item/vehicle_module/weapon/ranged/energy/taser,
+/obj/item/vehicle_module/weapon/ranged/ballistic/missile_rack/grenade/clusterbang,
 /obj/effect/floor_decal/industrial/outline/red,
-/obj/item/vehicle_module/weapon/ballistic/missile_rack/grenade/clusterbang,
+/obj/item/vehicle_module/weapon/ranged/ballistic/missile_rack/grenade/clusterbang,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/ert/mech_bay)
 "qF" = (
@@ -2289,19 +2289,19 @@
 /area/ship/ert/mech_bay)
 "rp" = (
 /obj/structure/table/rack/steel,
-/obj/item/vehicle_module/weapon/energy/ion,
-/obj/item/vehicle_module/weapon/energy/ion,
+/obj/item/vehicle_module/weapon/ranged/energy/ion,
+/obj/item/vehicle_module/weapon/ranged/energy/ion,
 /obj/effect/floor_decal/industrial/outline/red,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/ert/mech_bay)
 "rr" = (
 /obj/structure/table/rack/steel,
-/obj/item/vehicle_module/weapon/energy/laser/heavy,
-/obj/item/vehicle_module/weapon/energy/laser/heavy,
-/obj/item/vehicle_module/weapon/energy/laser,
-/obj/item/vehicle_module/weapon/energy/laser,
-/obj/item/vehicle_module/weapon/energy/laser/xray,
-/obj/item/vehicle_module/weapon/energy/laser/xray,
+/obj/item/vehicle_module/weapon/ranged/energy/laser/heavy,
+/obj/item/vehicle_module/weapon/ranged/energy/laser/heavy,
+/obj/item/vehicle_module/weapon/ranged/energy/laser,
+/obj/item/vehicle_module/weapon/ranged/energy/laser,
+/obj/item/vehicle_module/weapon/ranged/energy/laser/xray,
+/obj/item/vehicle_module/weapon/ranged/energy/laser/xray,
 /obj/machinery/light,
 /obj/effect/floor_decal/industrial/outline/red,
 /turf/simulated/floor/tiled/techfloor,
@@ -3569,8 +3569,8 @@
 /area/ship/ert/eng_storage)
 "Bl" = (
 /obj/structure/table/rack/steel,
-/obj/item/vehicle_module/weapon/ballistic/missile_rack/grenade/frag,
-/obj/item/vehicle_module/weapon/ballistic/missile_rack/grenade/frag,
+/obj/item/vehicle_module/weapon/ranged/ballistic/missile_rack/grenade/frag,
+/obj/item/vehicle_module/weapon/ranged/ballistic/missile_rack/grenade/frag,
 /obj/effect/floor_decal/industrial/outline/red,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/ert/mech_bay)

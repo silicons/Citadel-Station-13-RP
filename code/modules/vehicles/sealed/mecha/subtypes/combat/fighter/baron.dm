@@ -15,7 +15,7 @@
 
 /obj/vehicle/sealed/mecha/combat/fighter/baron/loaded/Initialize(mapload) //Loaded version with guns
 	. = ..()
-	var/obj/item/vehicle_module/ME = new /obj/item/vehicle_module/weapon/energy/laser
+	var/obj/item/vehicle_module/ME = new /obj/item/vehicle_module/weapon/ranged/energy/laser
 	ME.attach(src)
 	ME = new /obj/item/vehicle_module/omni_shield
 	ME.attach(src)
@@ -34,9 +34,9 @@
 
 /obj/vehicle/sealed/mecha/combat/fighter/baron/sec/loaded/Initialize(mapload) //Loaded version with guns
 	. = ..()
-	var/obj/item/vehicle_module/ME = new /obj/item/vehicle_module/weapon/energy/laser
+	var/obj/item/vehicle_module/ME = new /obj/item/vehicle_module/weapon/ranged/energy/laser
 	ME.attach(src)
-	ME = new /obj/item/vehicle_module/weapon/energy/phase
+	ME = new /obj/item/vehicle_module/weapon/ranged/energy/phase
 	ME.attach(src)
 
 /datum/category_item/catalogue/technology/baron

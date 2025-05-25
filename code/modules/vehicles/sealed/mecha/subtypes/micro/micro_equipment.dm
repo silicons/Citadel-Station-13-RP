@@ -4,7 +4,7 @@
 ////    WEAPONS BELOW    ////
 /////////////////////////////
 
-/obj/item/vehicle_module/weapon/energy/microlaser
+/obj/item/vehicle_module/weapon/ranged/energy/microlaser
 	w_class = WEIGHT_CLASS_BULKY
 	desc = "A mounted laser-carbine for light exosuits."
 	equip_cooldown = 10 // same as the laser carbine
@@ -17,7 +17,7 @@
 	equip_type = EQUIP_MICRO_WEAPON
 	required_type = list(/obj/vehicle/sealed/mecha/micro/sec)
 
-/obj/item/vehicle_module/weapon/energy/laser/microheavy
+/obj/item/vehicle_module/weapon/ranged/energy/laser/microheavy
 	w_class = WEIGHT_CLASS_BULKY
 	desc = "A mounted laser cannon for light exosuits."
 	equip_cooldown = 30 // same as portable
@@ -30,7 +30,7 @@
 	equip_type = EQUIP_MICRO_WEAPON
 	required_type = list(/obj/vehicle/sealed/mecha/micro/sec)
 
-/obj/item/vehicle_module/weapon/energy/microtaser
+/obj/item/vehicle_module/weapon/ranged/energy/microtaser
 	w_class = WEIGHT_CLASS_BULKY
 	desc = "A mounted taser for light exosuits."
 	name = "\improper TS-12 \"Suppressor\" integrated taser"
@@ -43,7 +43,7 @@
 	equip_type = EQUIP_MICRO_WEAPON
 	required_type = list(/obj/vehicle/sealed/mecha/micro/sec)
 
-/obj/item/vehicle_module/weapon/ballistic/microshotgun
+/obj/item/vehicle_module/weapon/ranged/ballistic/microshotgun
 	w_class = WEIGHT_CLASS_BULKY
 	desc = "A mounted combat shotgun with integrated ammo-lathe."
 	name = "\improper Remington C-12 \"Boomstick\""
@@ -61,7 +61,7 @@
 	equip_type = EQUIP_MICRO_WEAPON
 	required_type = list(/obj/vehicle/sealed/mecha/micro/sec)
 
-/obj/item/vehicle_module/weapon/ballistic/microshotgun/Topic(href,href_list)
+/obj/item/vehicle_module/weapon/ranged/ballistic/microshotgun/Topic(href,href_list)
 	..()
 	if(href_list["mode"])
 		mode = text2num(href_list["mode"])
@@ -78,11 +78,11 @@
 
 	return
 
-/obj/item/vehicle_module/weapon/ballistic/microshotgun/get_equip_info()
+/obj/item/vehicle_module/weapon/ranged/ballistic/microshotgun/get_equip_info()
 	return "[..()] \[<a href='?src=\ref[src];mode=0'>BS</a>|<a href='?src=\ref[src];mode=1'>BB</a>|<a href='?src=\ref[src];mode=2'>S</a>\]"
 
 
-/obj/item/vehicle_module/weapon/ballistic/missile_rack/grenade/microflashbang
+/obj/item/vehicle_module/weapon/ranged/ballistic/missile_rack/grenade/microflashbang
 	w_class = WEIGHT_CLASS_BULKY
 	desc = "A mounted grenade launcher for smaller mechs."
 	name = "\improper FP-20 mounted grenade launcher"

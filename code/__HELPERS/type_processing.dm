@@ -21,7 +21,7 @@
 		/obj/item/vehicle_part = "//vehicle_part",
 		/obj/item/vehicle_component  = "//vehicle_component",
 		/obj/item/vehicle_module = "//vehicle_module",
-		/obj/item/vehicle_module/weapon = "//vehicle_weapon",
+		/obj/item/vehicle_module/weapon/ranged = "//vehicle_weapon",
 		/obj/item/organ = "//organ",
 		/obj/item/gun_attachment = "//gun-attachment",
 		/obj/item/gun_component = "//gun-component",

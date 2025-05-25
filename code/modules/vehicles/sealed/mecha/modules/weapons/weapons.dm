@@ -1,4 +1,7 @@
-/obj/item/vehicle_module/weapon
+/**
+ * master supertype of all weapons, melee and ranged
+ */
+/obj/item/vehicle_module/weapon/ranged
 	name = "mecha weapon"
 	range = RANGED
 	origin_tech = list(TECH_MATERIAL = 3, TECH_COMBAT = 3)
@@ -16,12 +19,12 @@
 
 	equip_type = EQUIP_WEAPON
 
-/obj/item/vehicle_module/weapon/action_checks(atom/target)
+/obj/item/vehicle_module/weapon/ranged/action_checks(atom/target)
 	if(projectiles <= 0)
 		return 0
 	return ..()
 
-/obj/item/vehicle_module/weapon/action(atom/target, params)
+/obj/item/vehicle_module/weapon/ranged/action(atom/target, params)
 	if(!action_checks(target))
 		return
 	var/turf/curloc = chassis.loc
@@ -68,7 +71,7 @@
 
 	return
 
-/obj/item/vehicle_module/weapon/proc/Fire(atom/A, atom/target, params)
+/obj/item/vehicle_module/weapon/ranged/proc/Fire(atom/A, atom/target, params)
 	if(istype(A, /obj/projectile))	// Sanity.
 		var/obj/projectile/P = A
 		P.dispersion = deviation
@@ -78,7 +81,7 @@
 		var/atom/movable/AM = A
 		AM.throw_at_old(target, 7, 1, chassis)
 
-/obj/item/vehicle_module/weapon/proc/process_accuracy(obj/projectile, mob/living/user, atom/target)
+/obj/item/vehicle_module/weapon/ranged/proc/process_accuracy(obj/projectile, mob/living/user, atom/target)
 	var/obj/projectile/P = projectile
 	if(!istype(P))
 		return

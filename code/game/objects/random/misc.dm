@@ -1207,11 +1207,11 @@
 				prob(12);list(/obj/item/vehicle_module/tool/drill),
 				prob(10);list(/obj/item/vehicle_module/tool/hydraulic_clamp),
 				prob(8);list(/obj/item/vehicle_module/generator),
-				prob(7);list(/obj/item/vehicle_module/weapon/ballistic/scattershot/rigged),
+				prob(7);list(/obj/item/vehicle_module/weapon/ranged/ballistic/scattershot/rigged),
 				prob(6);list(/obj/item/vehicle_module/repair_droid),
 				prob(3);list(/obj/item/vehicle_module/gravcatapult),
-				prob(2);list(/obj/item/vehicle_module/weapon/energy/riggedlaser),
-				prob(2);list(/obj/item/vehicle_module/weapon/energy/flamer/rigged),
+				prob(2);list(/obj/item/vehicle_module/weapon/ranged/energy/riggedlaser),
+				prob(2);list(/obj/item/vehicle_module/weapon/ranged/energy/flamer/rigged),
 				prob(1);list(/obj/item/vehicle_module/tool/drill/diamonddrill),
 				)
 
