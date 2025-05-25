@@ -1,5 +1,5 @@
 /**
- * master supertype of all weapons, melee and ranged
+ * supertype of most simple ranged weapons
  */
 /obj/item/vehicle_module/weapon/ranged
 	name = "mecha weapon"
