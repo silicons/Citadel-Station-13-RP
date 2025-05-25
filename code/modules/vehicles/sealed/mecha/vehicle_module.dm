@@ -94,7 +94,7 @@
 		src.update_chassis_page()
 		chassis.occupant_message(SPAN_DANGER("The [src] is destroyed!"))
 		chassis.log_append_to_last("[src] is destroyed.",1)
-		if(istype(src, /obj/item/vehicle_module/weapon/ranged))//Gun
+		if(istype(src, /obj/item/vehicle_module/weapon/ranged/legacy))//Gun
 			switch(chassis.mech_faction)
 				if(MECH_FACTION_NT)
 					src.chassis.occupant_legacy << sound('sound/mecha/weapdestrnano.ogg',volume=70)
@@ -287,3 +287,23 @@
  */
 /obj/item/vehicle_module/proc/sufficiently_adjacent(atom/entity)
 	return chassis?.sufficiently_adjacent(entity)
+
+//* Usage - World *//
+
+/**
+ * Called when being used by a pilot on the world.
+ * * This is a very complex binding because we are not necessarily mounted or used by a vehicle
+ *   when this happens.
+ * * We can, however, expect that we are properly item-mounted; use abstraction procs as needed
+ *   for power-draw and whatnot.
+ *
+ * @params
+ * * mounted_on - what to treat as the root object. this is a mob if it's mounted on a rigsuit, ourselves
+ *                if we're not ontop of anything, a vehicle if we're on a vehicle, etc. This should only be
+ *                used for adjacency checks in general; avoid using typecasts or directly accessing this.
+ * * clickchain - data of the click.
+ *
+ * @return CLICKCHAIN_* flags
+ */
+/obj/item/vehicle_module/proc/module_attack_chain(atom/movable/mounted_on, datum/event_args/actor/clickchain/clickchain)
+	return NONE

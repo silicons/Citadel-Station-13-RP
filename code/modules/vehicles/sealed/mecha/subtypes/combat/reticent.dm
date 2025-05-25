@@ -59,8 +59,8 @@
 	max_special_equip = 2
 
 	starting_equipment = list(
-		/obj/item/vehicle_module/weapon/ranged/whisperblade,
-		/obj/item/vehicle_module/weapon/ranged/infernoblade,
+		/obj/item/vehicle_module/weapon/ranged/legacy/whisperblade,
+		/obj/item/vehicle_module/weapon/ranged/legacy/infernoblade,
 		/obj/item/vehicle_module/omni_shield/reticence,
 		/obj/item/vehicle_module/cloak
 		)

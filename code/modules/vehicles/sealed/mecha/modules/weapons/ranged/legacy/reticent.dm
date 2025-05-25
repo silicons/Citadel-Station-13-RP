@@ -1,4 +1,4 @@
-/obj/item/vehicle_module/weapon/ranged/whisperblade
+/obj/item/vehicle_module/weapon/ranged/legacy/whisperblade
 	name = "whisper blade"
 	desc = "This blade's fractal edging allows it to slice through heavy armor plating like butter without a sound."
 	icon_state = "mecha_whisper"
@@ -9,7 +9,7 @@
 
 	equip_type = EQUIP_SPECIAL
 
-/obj/item/vehicle_module/weapon/ranged/whisperblade/action(atom/target)
+/obj/item/vehicle_module/weapon/ranged/legacy/whisperblade/action(atom/target)
 	if(!action_checks(target)) return
 
 	if(istype(target,/mob/living))
@@ -42,7 +42,7 @@
 
 //Recode using the drill, in case I want that later?
 /*
-/obj/item/vehicle_module/weapon/ranged/whisperblade/proc/slice_mob(mob/living/target, mob/user)
+/obj/item/vehicle_module/weapon/ranged/legacy/whisperblade/proc/slice_mob(mob/living/target, mob/user)
 	add_attack_logs(user, target, "attacked", "[name]", "(INTENT: [uppertext(user.a_intent)]) (DAMTYPE: [uppertext(damtype)])")
 	var/blade_force = force	//Couldn't manage it otherwise.
 	if(ishuman(target))
@@ -63,7 +63,7 @@
 			return
 */
 
-/obj/item/vehicle_module/weapon/ranged/infernoblade
+/obj/item/vehicle_module/weapon/ranged/legacy/infernoblade
 	name = "inferno blade"
 	desc = "This blade's edge has been replaced with a rapid-activation heating element designed for industrial cutting."
 	icon_state = "mecha_inferno"
@@ -74,7 +74,7 @@
 
 	equip_type = EQUIP_SPECIAL
 
-/obj/item/vehicle_module/weapon/ranged/infernoblade/action(atom/target)
+/obj/item/vehicle_module/weapon/ranged/legacy/infernoblade/action(atom/target)
 	if(!action_checks(target)) return
 
 	if(istype(target,/mob/living))

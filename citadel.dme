@@ -5368,6 +5368,7 @@
 #include "code\modules\vehicles\sealed\mecha\modules\tools\wormhole.dm"
 #include "code\modules\vehicles\sealed\mecha\modules\weapons\ranged.dm"
 #include "code\modules\vehicles\sealed\mecha\modules\weapons\ranged\gun.dm"
+#include "code\modules\vehicles\sealed\mecha\modules\weapons\ranged\legacy.dm"
 #include "code\modules\vehicles\sealed\mecha\modules\weapons\ranged\legacy\automatic.dm"
 #include "code\modules\vehicles\sealed\mecha\modules\weapons\ranged\legacy\ballistic.dm"
 #include "code\modules\vehicles\sealed\mecha\modules\weapons\ranged\legacy\energy.dm"

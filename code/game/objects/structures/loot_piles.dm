@@ -430,7 +430,7 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		/obj/item/borg/upgrade/advhealth,
 		/obj/item/borg/upgrade/vtec,
 		/obj/item/borg/upgrade/tasercooler,
-		/obj/item/vehicle_module/weapon/ranged/energy/riggedlaser,
+		/obj/item/vehicle_module/weapon/ranged/legacy/energy/riggedlaser,
 		/obj/item/vehicle_module/tool/drill/diamonddrill,
 		/obj/item/hardsuit_module/device/drill,
 		/obj/item/hardsuit_module/device/plasmacutter,
@@ -629,15 +629,15 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		)
 
 	uncommon_loot = list(
-		/obj/item/vehicle_module/weapon/ranged/energy/taser,
-		/obj/item/vehicle_module/weapon/ranged/energy/riggedlaser,
+		/obj/item/vehicle_module/weapon/ranged/legacy/energy/taser,
+		/obj/item/vehicle_module/weapon/ranged/legacy/energy/riggedlaser,
 		/obj/item/vehicle_module/tool/hydraulic_clamp,
 		/obj/item/vehicle_module/tool/drill,
 		/obj/item/vehicle_module/generator
 		)
 
 	rare_loot = list(
-		/obj/item/vehicle_module/weapon/ranged/energy/laser,
+		/obj/item/vehicle_module/weapon/ranged/legacy/energy/laser,
 		/obj/item/vehicle_module/generator/nuclear,
 		/obj/item/vehicle_module/tool/jetpack
 		)
@@ -677,7 +677,7 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 	rare_loot = list(
 		/obj/item/vehicle_module/gravcatapult,
 		/obj/item/vehicle_module/tool/rcd,
-		/obj/item/vehicle_module/weapon/ranged/energy/flamer/rigged
+		/obj/item/vehicle_module/weapon/ranged/legacy/energy/flamer/rigged
 		)
 
 /obj/structure/loot_pile/mecha/ripley/firefighter
@@ -713,7 +713,7 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		)
 
 	uncommon_loot = list(
-		/obj/item/vehicle_module/weapon/ranged/energy/riggedlaser,
+		/obj/item/vehicle_module/weapon/ranged/legacy/energy/riggedlaser,
 		/obj/item/vehicle_module/repair_droid,
 		/obj/item/vehicle_module/tesla_energy_relay
 		)
@@ -721,7 +721,7 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 	rare_loot = list(
 		/obj/item/vehicle_module/tool/rcd,
 		/obj/item/vehicle_module/wormhole_generator,
-		/obj/item/vehicle_module/weapon/ranged/energy/flamer/rigged
+		/obj/item/vehicle_module/weapon/ranged/legacy/energy/flamer/rigged
 		)
 
 /obj/structure/loot_pile/mecha/odysseus
@@ -749,7 +749,7 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 	uncommon_loot = list(
 		/obj/item/vehicle_module/tool/sleeper,
 		/obj/item/vehicle_module/tool/syringe_gun,
-		/obj/item/vehicle_module/weapon/ranged/ballistic/missile_rack/flare,
+		/obj/item/vehicle_module/weapon/ranged/legacy/ballistic/missile_rack/flare,
 		/obj/item/vehicle_module/tool/extinguisher,
 		)
 
@@ -792,18 +792,18 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 
 	uncommon_loot = list(
 		/obj/item/vehicle_module/shocker,
-		/obj/item/vehicle_module/weapon/ranged/ballistic/missile_rack/grenade,
-		/obj/item/vehicle_module/weapon/ranged/energy/laser,
-		/obj/item/vehicle_module/weapon/ranged/energy/taser,
+		/obj/item/vehicle_module/weapon/ranged/legacy/ballistic/missile_rack/grenade,
+		/obj/item/vehicle_module/weapon/ranged/legacy/energy/laser,
+		/obj/item/vehicle_module/weapon/ranged/legacy/energy/taser,
 		/obj/random/paintkit/gygax,
 		/obj/random/paintkit/gygax
 		)
 
 	rare_loot = list(
 		/obj/item/vehicle_module/tesla_energy_relay,
-		/obj/item/vehicle_module/weapon/ranged/ballistic/lmg,
+		/obj/item/vehicle_module/weapon/ranged/legacy/ballistic/lmg,
 		/obj/item/vehicle_module/repair_droid,
-		/obj/item/vehicle_module/weapon/ranged/energy/laser/heavy
+		/obj/item/vehicle_module/weapon/ranged/legacy/energy/laser/heavy
 		)
 
 /obj/structure/loot_pile/mecha/gygax/dark
@@ -847,8 +847,8 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 
 	uncommon_loot = list(
 		/obj/item/vehicle_module/shocker,
-		/obj/item/vehicle_module/weapon/ranged/ballistic/missile_rack/grenade,
-		/obj/item/vehicle_module/weapon/ranged/energy/laser,
+		/obj/item/vehicle_module/weapon/ranged/legacy/ballistic/missile_rack/grenade,
+		/obj/item/vehicle_module/weapon/ranged/legacy/energy/laser,
 		/obj/item/vehicle_module/antiproj_armor_booster,
 		/obj/random/paintkit/durand,
 		/obj/random/paintkit/durand
@@ -856,9 +856,9 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 
 	rare_loot = list(
 		/obj/item/vehicle_module/tesla_energy_relay,
-		/obj/item/vehicle_module/weapon/ranged/ballistic/scattershot,
+		/obj/item/vehicle_module/weapon/ranged/legacy/ballistic/scattershot,
 		/obj/item/vehicle_module/repair_droid,
-		/obj/item/vehicle_module/weapon/ranged/energy/laser/heavy
+		/obj/item/vehicle_module/weapon/ranged/legacy/energy/laser/heavy
 		)
 
 /obj/structure/loot_pile/mecha/marauder
@@ -897,14 +897,14 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 
 	uncommon_loot = list(
 		/obj/item/vehicle_module/shocker,
-		/obj/item/vehicle_module/weapon/ranged/energy/flamer/rigged,
-		/obj/item/vehicle_module/weapon/ranged/energy/laser/heavy,
+		/obj/item/vehicle_module/weapon/ranged/legacy/energy/flamer/rigged,
+		/obj/item/vehicle_module/weapon/ranged/legacy/energy/laser/heavy,
 		/obj/item/vehicle_module/antiproj_armor_booster
 		)
 
 	rare_loot = list(
 		/obj/item/vehicle_module/tesla_energy_relay,
-		/obj/item/vehicle_module/weapon/ranged/energy/ion,
+		/obj/item/vehicle_module/weapon/ranged/legacy/energy/ion,
 		/obj/item/vehicle_module/repair_droid,
 		/obj/item/vehicle_module/teleporter
 		)
@@ -933,8 +933,8 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		)
 
 	uncommon_loot = list(
-		/obj/item/vehicle_module/weapon/ranged/ballistic/missile_rack/grenade/banana,
-		/obj/item/vehicle_module/weapon/ranged/honker,
+		/obj/item/vehicle_module/weapon/ranged/legacy/ballistic/missile_rack/grenade/banana,
+		/obj/item/vehicle_module/weapon/ranged/legacy/honker,
 		/obj/item/vehicle_part/honker_armour
 		)
 
@@ -971,8 +971,8 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		)
 
 	uncommon_loot = list(
-		/obj/item/vehicle_module/weapon/ranged/whisperblade,
-		/obj/item/vehicle_module/weapon/ranged/infernoblade,
+		/obj/item/vehicle_module/weapon/ranged/legacy/whisperblade,
+		/obj/item/vehicle_module/weapon/ranged/legacy/infernoblade,
 		/obj/item/vehicle_part/reticent_armour
 		)
 
@@ -1013,12 +1013,12 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		)
 
 	uncommon_loot = list(
-		/obj/item/vehicle_module/weapon/ranged/ballistic/lmg/rigged,
+		/obj/item/vehicle_module/weapon/ranged/legacy/ballistic/lmg/rigged,
 		/obj/item/vehicle_module/generator
 		)
 
 	rare_loot = list(
-		/obj/item/vehicle_module/weapon/ranged/ballistic/lmg,
+		/obj/item/vehicle_module/weapon/ranged/legacy/ballistic/lmg,
 		/obj/item/vehicle_module/generator/nuclear
 		)
 
@@ -1048,12 +1048,12 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		)
 
 	uncommon_loot = list(
-		/obj/item/vehicle_module/weapon/ranged/energy/flamer/rigged,
+		/obj/item/vehicle_module/weapon/ranged/legacy/energy/flamer/rigged,
 		/obj/item/vehicle_module/tool/extinguisher
 		)
 
 	rare_loot = list(
-		/obj/item/vehicle_module/weapon/ranged/energy/flamer,
+		/obj/item/vehicle_module/weapon/ranged/legacy/energy/flamer,
 		/obj/item/vehicle_module/generator
 		)
 
@@ -1085,7 +1085,7 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 
 	uncommon_loot = list(
 		/obj/item/ammo_magazine/a75,
-		/obj/item/vehicle_module/weapon/ranged/ballistic/mortar
+		/obj/item/vehicle_module/weapon/ranged/legacy/ballistic/mortar
 		)
 
 	rare_loot = list(

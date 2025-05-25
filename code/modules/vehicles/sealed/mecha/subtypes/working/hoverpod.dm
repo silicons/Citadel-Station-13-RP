@@ -121,9 +121,9 @@
 
 /obj/vehicle/sealed/mecha/working/hoverpod/combatpod/Initialize(mapload)
 	. = ..()
-	var/obj/item/vehicle_module/ME = new /obj/item/vehicle_module/weapon/ranged/energy/laser
+	var/obj/item/vehicle_module/ME = new /obj/item/vehicle_module/weapon/ranged/legacy/energy/laser
 	ME.attach(src)
-	ME = new /obj/item/vehicle_module/weapon/ranged/ballistic/missile_rack/explosive
+	ME = new /obj/item/vehicle_module/weapon/ranged/legacy/ballistic/missile_rack/explosive
 	ME.attach(src)
 
 

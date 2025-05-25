@@ -470,7 +470,7 @@
 /datum/prototype/design/science/mecha/flaregun
 	design_name = "Flare Launcher"
 	id = "mecha_flare_gun"
-	build_path = /obj/item/vehicle_module/weapon/ranged/ballistic/missile_rack/flare
+	build_path = /obj/item/vehicle_module/weapon/ranged/legacy/ballistic/missile_rack/flare
 	materials_base = list(MAT_STEEL = 9375)
 
 /datum/prototype/design/science/mecha/sleeper
@@ -495,12 +495,12 @@
 /datum/prototype/design/science/mecha/taser
 	design_name = "PBT \"Pacifier\" Mounted Taser"
 	id = "mech_taser"
-	build_path = /obj/item/vehicle_module/weapon/ranged/energy/taser
+	build_path = /obj/item/vehicle_module/weapon/ranged/legacy/energy/taser
 
 /datum/prototype/design/science/mecha/rigged_taser
 	design_name = "Jury-Rigged Taser"
 	id = "mech_taser-r"
-	build_path = /obj/item/vehicle_module/weapon/ranged/energy/taser/rigged
+	build_path = /obj/item/vehicle_module/weapon/ranged/legacy/energy/taser/rigged
 
 /datum/prototype/design/science/mecha/shocker
 	design_name = "Exosuit Electrifier"
@@ -513,24 +513,24 @@
 /datum/prototype/design/science/mecha/lmg
 	design_name = "Ultra AC 2"
 	id = "mech_lmg"
-	build_path = /obj/item/vehicle_module/weapon/ranged/ballistic/lmg
+	build_path = /obj/item/vehicle_module/weapon/ranged/legacy/ballistic/lmg
 
 /datum/prototype/design/science/mecha/lmg_heavy
 	design_name = "AC 10"
 	id = "mech_lmg_heavy"
-	build_path = /obj/item/vehicle_module/weapon/ranged/ballistic/lmg_heavy
+	build_path = /obj/item/vehicle_module/weapon/ranged/legacy/ballistic/lmg_heavy
 	materials_base = list(MAT_STEEL = 12000, MAT_GLASS = 4000, MAT_PLASTIC = 3000, MAT_SILVER = 1500, MAT_COPPER = 4000)
 
 /datum/prototype/design/science/mecha/gauss_rifle
 	design_name = "Gauss Rifle"
 	id = "mech_gauss_rifle"
-	build_path = /obj/item/vehicle_module/weapon/ranged/ballistic/gauss_rifle
+	build_path = /obj/item/vehicle_module/weapon/ranged/legacy/ballistic/gauss_rifle
 	materials_base = list(MAT_STEEL = 16000, MAT_GLASS = 8000, MAT_PLASTIC = 4000, MAT_SILVER = 3500, MAT_COPPER = 8000)
 
 /datum/prototype/design/science/mecha/rigged_lmg
 	design_name = "Jury-Rigged Machinegun"
 	id = "mech_lmg-r"
-	build_path = /obj/item/vehicle_module/weapon/ranged/ballistic/lmg/rigged
+	build_path = /obj/item/vehicle_module/weapon/ranged/legacy/ballistic/lmg/rigged
 
 /datum/prototype/design/science/mecha/weapon
 	abstract_type = /datum/prototype/design/science/mecha/weapon
@@ -542,21 +542,21 @@
 	design_name = "LBX AC 10 \"Scattershot\""
 	id = "mech_scattershot"
 	req_tech = list(TECH_COMBAT = 4)
-	build_path = /obj/item/vehicle_module/weapon/ranged/ballistic/scattershot
+	build_path = /obj/item/vehicle_module/weapon/ranged/legacy/ballistic/scattershot
 	materials_base = list(MAT_STEEL = 8000, MAT_GLASS = 3000, MAT_PLASTIC = 2000, MAT_SILVER = 2500)
 
 /datum/prototype/design/science/mecha/weapon/rigged_scattershot
 	design_name = "Jury-Rigged Shrapnel Cannon"
 	id = "mech_scattershot-r"
 	req_tech = list(TECH_COMBAT = 4)
-	build_path = /obj/item/vehicle_module/weapon/ranged/ballistic/scattershot/rigged
+	build_path = /obj/item/vehicle_module/weapon/ranged/legacy/ballistic/scattershot/rigged
 	materials_base = list(MAT_STEEL = 7000, MAT_GLASS = 2000, MAT_PLASTIC = 2000, MAT_SILVER = 2000)
 
 /datum/prototype/design/science/mecha/weapon/laser
 	design_name = "CH-PS \"Immolator\" Laser"
 	id = "mech_laser"
 	req_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 3)
-	build_path = /obj/item/vehicle_module/weapon/ranged/energy/laser
+	build_path = /obj/item/vehicle_module/weapon/ranged/legacy/energy/laser
 	materials_base = list(MAT_STEEL = 8000, MAT_GLASS = 3000, MAT_PLASTIC = 2000)
 
 /datum/prototype/design/science/mecha/weapon/laser_rigged
@@ -564,90 +564,90 @@
 	desc = "Allows for the construction of a welder-laser assembly package for non-combat exosuits."
 	id = "mech_laser_rigged"
 	req_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 2)
-	build_path = /obj/item/vehicle_module/weapon/ranged/energy/riggedlaser
+	build_path = /obj/item/vehicle_module/weapon/ranged/legacy/energy/riggedlaser
 
 /datum/prototype/design/science/mecha/weapon/laser_heavy
 	design_name = "CH-LC \"Solaris\" Laser Cannon"
 	id = "mech_laser_heavy"
 	req_tech = list(TECH_COMBAT = 4, TECH_MAGNET = 4)
-	build_path = /obj/item/vehicle_module/weapon/ranged/energy/laser/heavy
+	build_path = /obj/item/vehicle_module/weapon/ranged/legacy/energy/laser/heavy
 	materials_base = list(MAT_STEEL = 10000, MAT_GLASS = 3000, MAT_DIAMOND = 2000, MAT_OSMIUM = 5000, MAT_PLASTIC = 2000)
 
 /datum/prototype/design/science/mecha/weapon/rigged_laser_heavy
 	design_name = "Jury-Rigged Emitter Cannon"
 	id = "mech_laser_heavy-r"
 	req_tech = list(TECH_COMBAT = 4, TECH_MAGNET = 4, TECH_PHORON = 3, TECH_ILLEGAL = 1)
-	build_path = /obj/item/vehicle_module/weapon/ranged/energy/laser/heavy/rigged
+	build_path = /obj/item/vehicle_module/weapon/ranged/legacy/energy/laser/heavy/rigged
 	materials_base = list(MAT_STEEL = 8000, MAT_GLASS = 4000, MAT_DIAMOND = 1500, MAT_OSMIUM = 4000, MAT_PLASTIC = 2000)
 
 /datum/prototype/design/science/mecha/weapon/laser_xray
 	design_name = "CH-XS \"Penetrator\" Laser"
 	id = "mech_laser_xray"
 	req_tech = list(TECH_MATERIAL = 3, TECH_COMBAT = 3, TECH_PHORON = 3, TECH_POWER = 4)
-	build_path = /obj/item/vehicle_module/weapon/ranged/energy/laser/xray
+	build_path = /obj/item/vehicle_module/weapon/ranged/legacy/energy/laser/xray
 	materials_base = list(MAT_STEEL = 9000, MAT_GLASS = 3000, MAT_PHORON = 1000, MAT_SILVER = 1500, MAT_GOLD = 2500, MAT_PLASTIC = 2000)
 
 /datum/prototype/design/science/mecha/weapon/rigged_laser_xray
 	design_name = "Jury-Rigged Xray Rifle"
 	id = "mech_laser_xray-r"
 	req_tech = list(TECH_MATERIAL = 3, TECH_COMBAT = 3, TECH_PHORON = 3, TECH_POWER = 4)
-	build_path = /obj/item/vehicle_module/weapon/ranged/energy/laser/xray/rigged
+	build_path = /obj/item/vehicle_module/weapon/ranged/legacy/energy/laser/xray/rigged
 	materials_base = list(MAT_STEEL = 8500, MAT_GLASS = 2500, MAT_PHORON = 1000, MAT_SILVER = 1250, MAT_GOLD = 2000, MAT_PLASTIC = 2000)
 
 /datum/prototype/design/science/mecha/weapon/phase
 	design_name = "NT-PE \"Scorpio\" Phase-Emitter"
 	id = "mech_phase"
 	req_tech = list(TECH_MATERIAL = 1, TECH_COMBAT = 2, TECH_MAGNET = 2)
-	build_path = /obj/item/vehicle_module/weapon/ranged/energy/phase
+	build_path = /obj/item/vehicle_module/weapon/ranged/legacy/energy/phase
 	materials_base = list(MAT_STEEL = 6000, MAT_GLASS = 3000, MAT_PLASTIC = 3000)
 
 /datum/prototype/design/science/mecha/weapon/ion
 	design_name = "MK-IV Ion Heavy Cannon"
 	id = "mech_ion"
 	req_tech = list(TECH_COMBAT = 4, TECH_MAGNET = 4)
-	build_path = /obj/item/vehicle_module/weapon/ranged/energy/ion
+	build_path = /obj/item/vehicle_module/weapon/ranged/legacy/energy/ion
 	materials_base = list(MAT_STEEL = 15000, MAT_URANIUM = 2000, MAT_SILVER = 2000, MAT_OSMIUM = 4500, MAT_PLASTIC = 2000)
 
 /datum/prototype/design/science/mecha/weapon/rigged_ion
 	design_name = "Jury-Rigged Ion Cannon"
 	id = "mech_ion-r"
 	req_tech = list(TECH_COMBAT = 4, TECH_MAGNET = 4)
-	build_path = /obj/item/vehicle_module/weapon/ranged/energy/ion/rigged
+	build_path = /obj/item/vehicle_module/weapon/ranged/legacy/energy/ion/rigged
 	materials_base = list(MAT_STEEL = 13000, MAT_URANIUM = 1000, MAT_SILVER = 1000, MAT_OSMIUM = 3000, MAT_PLASTIC = 2000)
 
 /datum/prototype/design/science/mecha/weapon/sound_cannon
 	design_name = "H.O.N.K. Sound Cannon"
 	id = "mech_soundcannon"
 	req_tech = list(TECH_COMBAT = 4, TECH_MAGNET = 4, TECH_ILLEGAL = 3)
-	build_path = /obj/item/vehicle_module/weapon/ranged/honker
+	build_path = /obj/item/vehicle_module/weapon/ranged/legacy/honker
 	materials_base = list(MAT_STEEL = 13000, MAT_SILVER = 1000, MAT_OSMIUM = 3000, MAT_PLASTIC = 2000, MAT_BANANIUM = 4000)
 
 /datum/prototype/design/science/mecha/weapon/whisper_blade
 	design_name = "Reticent Whisper Blade"
 	id = "mech_whisper"
 	req_tech = list(TECH_COMBAT = 5, TECH_MAGNET = 4, TECH_ILLEGAL = 4)
-	build_path = /obj/item/vehicle_module/weapon/ranged/whisperblade
+	build_path = /obj/item/vehicle_module/weapon/ranged/legacy/whisperblade
 	materials_base = list(MAT_STEEL = 13000, MAT_GOLD = 1000, MAT_OSMIUM = 3000, MAT_PLASTEEL = 2000, MAT_SILENCIUM = 4000)
 
 /datum/prototype/design/science/mecha/weapon/inferno_blade
 	design_name = "Reticent Inferno Blade"
 	id = "mech_inferno"
 	req_tech = list(TECH_COMBAT = 5, TECH_MAGNET = 4, TECH_ILLEGAL = 4)
-	build_path = /obj/item/vehicle_module/weapon/ranged/infernoblade
+	build_path = /obj/item/vehicle_module/weapon/ranged/legacy/infernoblade
 	materials_base = list(MAT_STEEL = 13000, MAT_GOLD = 1000, MAT_LEAD = 3000, MAT_PLASTEEL = 2000, MAT_SILENCIUM = 4000)
 
 /datum/prototype/design/science/mecha/weapon/grenade_launcher
 	design_name = "SGL-6 Grenade Launcher"
 	id = "mech_grenade_launcher"
 	req_tech = list(TECH_COMBAT = 3)
-	build_path = /obj/item/vehicle_module/weapon/ranged/ballistic/missile_rack/grenade
+	build_path = /obj/item/vehicle_module/weapon/ranged/legacy/ballistic/missile_rack/grenade
 	materials_base = list(MAT_STEEL = 7000, MAT_GOLD = 2000, MAT_PLASTIC = 3000)
 
 /datum/prototype/design/science/mecha/weapon/rigged_grenade_launcher
 	design_name = "Jury-Rigged Pneumatic Flashlauncher"
 	id = "mech_grenade_launcher-hardsuit"
 	req_tech = list(TECH_COMBAT = 3)
-	build_path = /obj/item/vehicle_module/weapon/ranged/ballistic/missile_rack/grenade/rigged
+	build_path = /obj/item/vehicle_module/weapon/ranged/legacy/ballistic/missile_rack/grenade/rigged
 	materials_base = list(MAT_STEEL = 5000, MAT_GOLD = 2000, MAT_PLASTIC = 2000)
 
 /datum/prototype/design/science/mecha/weapon/clusterbang_launcher
@@ -656,34 +656,34 @@
 	id = "clusterbang_launcher"
 	req_tech = list(TECH_COMBAT= 5, TECH_MATERIAL = 5, TECH_ILLEGAL = 3)
 	materials_base = list(MAT_STEEL = 15000, MAT_GOLD = 4500, MAT_URANIUM = 4500)
-	build_path = /obj/item/vehicle_module/weapon/ranged/ballistic/missile_rack/grenade/clusterbang/limited
+	build_path = /obj/item/vehicle_module/weapon/ranged/legacy/ballistic/missile_rack/grenade/clusterbang/limited
 
 /datum/prototype/design/science/mecha/weapon/conc_grenade_launcher
 	design_name = "SGL-9 Grenade Launcher"
 	id = "mech_grenade_launcher_conc"
 	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 4, TECH_ILLEGAL = 1)
-	build_path = /obj/item/vehicle_module/weapon/ranged/ballistic/missile_rack/grenade/concussion
+	build_path = /obj/item/vehicle_module/weapon/ranged/legacy/ballistic/missile_rack/grenade/concussion
 	materials_base = list(MAT_STEEL = 9000, MAT_GOLD = 1000, MAT_OSMIUM = 1000, MAT_PLASTIC = 3000)
 
 /datum/prototype/design/science/mecha/weapon/frag_grenade_launcher
 	design_name = "HEP-MI 6 Grenade Launcher"
 	id = "mech_grenade_launcher_frag"
 	req_tech = list(TECH_COMBAT = 4, TECH_ENGINEERING = 2, TECH_MATERIAL = 3, TECH_ILLEGAL = 2)
-	build_path = /obj/item/vehicle_module/weapon/ranged/ballistic/missile_rack/grenade/frag/mini
+	build_path = /obj/item/vehicle_module/weapon/ranged/legacy/ballistic/missile_rack/grenade/frag/mini
 	materials_base = list(MAT_STEEL = 10000, MAT_GOLD = 2500, MAT_URANIUM = 3000, MAT_OSMIUM = 3000, MAT_PLASTIC = 3000)
 
 /datum/prototype/design/science/mecha/weapon/banana_launcher
 	design_name = "WSS-2 Banana Peel Launcher"
 	id = "mech_banana_launcher"
 	req_tech = list(TECH_COMBAT = 3, TECH_ILLEGAL = 3)
-	build_path = /obj/item/vehicle_module/weapon/ranged/ballistic/missile_rack/grenade/banana
+	build_path = /obj/item/vehicle_module/weapon/ranged/legacy/ballistic/missile_rack/grenade/banana
 	materials_base = list(MAT_STEEL = 7000, MAT_GOLD = 2000, MAT_OSMIUM = 1000, MAT_PLASTIC = 5000, MAT_BANANIUM = 4000)
 
 /datum/prototype/design/science/mecha/weapon/mousetrap_launcher
 	design_name = "WSS-5 Mouse Trap Launcher"
 	id = "mech_mousetrap_launcher"
 	req_tech = list(TECH_COMBAT = 3, TECH_ILLEGAL = 3)
-	build_path = /obj/item/vehicle_module/weapon/ranged/ballistic/missile_rack/grenade/mousetrap
+	build_path = /obj/item/vehicle_module/weapon/ranged/legacy/ballistic/missile_rack/grenade/mousetrap
 	materials_base = list(MAT_STEEL = 7000, MAT_GOLD = 2000, MAT_OSMIUM = 1000, MAT_PLASTIC = 5000, MAT_BANANIUM = 4000)
 
 /datum/prototype/design/science/mecha/weapon/flamer
@@ -692,7 +692,7 @@
 	id = "mech_flamer_full"
 	req_tech = list(TECH_MATERIAL = 4, TECH_COMBAT = 6, TECH_PHORON = 4, TECH_ILLEGAL = 4)
 	materials_base = list(MAT_STEEL = 10000, MAT_GOLD = 2000, MAT_URANIUM = 3000, MAT_PHORON = 8000)
-	build_path = /obj/item/vehicle_module/weapon/ranged/energy/flamer
+	build_path = /obj/item/vehicle_module/weapon/ranged/legacy/energy/flamer
 
 /datum/prototype/design/science/mecha/weapon/flamer_rigged
 	design_name = "AA-CR-1 Mark 4 Flamethrower"
@@ -700,7 +700,7 @@
 	id = "mech_flamer_rigged"
 	req_tech = list(TECH_MATERIAL = 3, TECH_COMBAT = 3, TECH_PHORON = 3, TECH_ILLEGAL = 2)
 	materials_base = list(MAT_STEEL = 8000, MAT_GOLD = 1500, MAT_SILVER = 1500, MAT_URANIUM = 2000, MAT_PHORON = 6000)
-	build_path = /obj/item/vehicle_module/weapon/ranged/energy/flamer/rigged
+	build_path = /obj/item/vehicle_module/weapon/ranged/legacy/energy/flamer/rigged
 
 /datum/prototype/design/science/mecha/weapon/flame_mg
 	design_name = "DR-AC 3 Incendiary Rotary MG"
@@ -708,7 +708,7 @@
 	id = "mech_lmg_flamer"
 	req_tech = list(TECH_MATERIAL = 4, TECH_COMBAT = 5, TECH_PHORON = 2, TECH_ILLEGAL = 1)
 	materials_base = list(MAT_STEEL = 8000, MAT_GOLD = 2000, MAT_SILVER = 1750, MAT_URANIUM = 1500, MAT_PHORON = 4000)
-	build_path = /obj/item/vehicle_module/weapon/ranged/ballistic/incendiary
+	build_path = /obj/item/vehicle_module/weapon/ranged/legacy/ballistic/incendiary
 
 // *** Nonweapon modules
 /datum/prototype/design/science/mecha/wormhole_gen

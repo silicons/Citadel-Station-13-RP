@@ -23,9 +23,9 @@
 
 /obj/vehicle/sealed/mecha/combat/fighter/duke/loaded/Initialize(mapload) //Loaded version with guns
 	. = ..()
-	var/obj/item/vehicle_module/ME = new /obj/item/vehicle_module/weapon/ranged/energy/laser
+	var/obj/item/vehicle_module/ME = new /obj/item/vehicle_module/weapon/ranged/legacy/energy/laser
 	ME.attach(src)
-	ME = new /obj/item/vehicle_module/weapon/ranged/ballistic/missile_rack/explosive
+	ME = new /obj/item/vehicle_module/weapon/ranged/legacy/ballistic/missile_rack/explosive
 	ME.attach(src)
 
 /obj/vehicle/sealed/mecha/combat/fighter/duke/db
@@ -37,9 +37,9 @@
 
 /obj/vehicle/sealed/mecha/combat/fighter/duke/db/loaded/Initialize(mapload) //Loaded version with guns
 	. = ..()
-	var/obj/item/vehicle_module/ME = new /obj/item/vehicle_module/weapon/ranged/energy/laser
+	var/obj/item/vehicle_module/ME = new /obj/item/vehicle_module/weapon/ranged/legacy/energy/laser
 	ME.attach(src)
-	ME = new /obj/item/vehicle_module/weapon/ranged/ballistic/missile_rack/explosive
+	ME = new /obj/item/vehicle_module/weapon/ranged/legacy/ballistic/missile_rack/explosive
 	ME.attach(src)
 
 /obj/vehicle/sealed/mecha/combat/fighter/duke/cw
@@ -51,9 +51,9 @@
 
 /obj/vehicle/sealed/mecha/combat/fighter/duke/cw/loaded/Initialize(mapload) //Loaded version with guns
 	. = ..()
-	var/obj/item/vehicle_module/ME = new /obj/item/vehicle_module/weapon/ranged/energy/laser
+	var/obj/item/vehicle_module/ME = new /obj/item/vehicle_module/weapon/ranged/legacy/energy/laser
 	ME.attach(src)
-	ME = new /obj/item/vehicle_module/weapon/ranged/ballistic/missile_rack/explosive
+	ME = new /obj/item/vehicle_module/weapon/ranged/legacy/ballistic/missile_rack/explosive
 	ME.attach(src)
 
 /obj/effect/decal/mecha_wreckage/duke

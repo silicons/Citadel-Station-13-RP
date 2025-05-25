@@ -1,4 +1,4 @@
-/obj/item/vehicle_module/weapon/ranged/energy/pulse
+/obj/item/vehicle_module/weapon/ranged/legacy/energy/pulse
 	equip_cooldown = 30
 	name = "eZ-13 mk2 heavy pulse rifle"
 	desc = "An experimental Anti-Everything weapon."

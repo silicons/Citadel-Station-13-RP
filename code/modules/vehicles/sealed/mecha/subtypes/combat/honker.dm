@@ -57,9 +57,9 @@
 	max_special_equip = 2
 
 	starting_equipment = list(
-		/obj/item/vehicle_module/weapon/ranged/honker,
-		/obj/item/vehicle_module/weapon/ranged/ballistic/missile_rack/grenade/banana,
-		/obj/item/vehicle_module/weapon/ranged/ballistic/scattershot,
+		/obj/item/vehicle_module/weapon/ranged/legacy/honker,
+		/obj/item/vehicle_module/weapon/ranged/legacy/ballistic/missile_rack/grenade/banana,
+		/obj/item/vehicle_module/weapon/ranged/legacy/ballistic/scattershot,
 		/obj/item/vehicle_module/tesla_energy_relay,
 		/obj/item/vehicle_module/teleporter
 		)
