@@ -1,3 +1,6 @@
+//* This file is explicitly licensed under the MIT license. *//
+//* Copyright (c) 2025 Citadel Station Developers           *//
+
 /**
  * default ranged weapon supertype that has functional binds to use a gun.
  */
@@ -19,14 +22,14 @@
 	///   are treated as a normal magazine.
 	/// * key is caliber
 	/// TODO: ammotype switching support, the magazine should probably handle it for us
-	var/list/obj/item/ammo_magazine/vehicle_internal/ballistic_ammo_magazines
+	var/list/obj/item/ammo_magazine/vehicle/ballistic_ammo_magazines
 
 /obj/item/vehicle_module/weapon/ranged/gun/
 
 /obj/item/vehicle_module/weapon/ranged/gun/proc/attempt_reload(datum/event_args/actor/actor, obj/item/gun/reloading, obj/item/ammo_magazine/vehicle_internal/use_magazine)
 
-/**
- * special magazine for vehicle modules' internal magazines
- * do not use unless you know what you're doing
- */
-/obj/item/ammo_magazine/vehicle_internal
+/obj/item/vehicle_module/weapon/ranged/gun/receive_using_item_on(obj/item/using, datum/event_args/actor/clickchain/clickchain, clickchain_flags, atom/movable/from_mounted_on)
+	. = ..()
+	if(. & CLICKCHAIN_FLAGS_INTERACT_ABORT)
+		return
+	#warn handle reload
