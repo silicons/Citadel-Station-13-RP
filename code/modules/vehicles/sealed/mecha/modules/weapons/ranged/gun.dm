@@ -5,4 +5,28 @@
 	/// bound gun
 	var/obj/item/gun/internal_gun
 
-#warn impl
+	/// attempt to auto-generate ammo storage
+	var/ammo_magazines_should_auto_generate = TRUE
+	/// remove the need to manually reload and have the gun directly feed from magazines
+	/// * overrides gun settings and will use ballistic API invasively to modify the gun.
+	///   this should generally not be used.
+	var/ammo_magazines_directly_feed = FALSE
+
+	/// ammo storage magazines for ballistic (/obj/item/ammo_casing) ammo
+	/// * these are external to the gun
+	/// * the gun has its own magazine
+	/// * we do not support revolver/microbattery/special magazine handling; all magazines
+	///   are treated as a normal magazine.
+	/// * key is caliber
+	/// TODO: ammotype switching support, the magazine should probably handle it for us
+	var/list/obj/item/ammo_magazine/vehicle_internal/ballistic_ammo_magazines
+
+/obj/item/vehicle_module/weapon/ranged/gun/
+
+/obj/item/vehicle_module/weapon/ranged/gun/proc/attempt_reload(datum/event_args/actor/actor, obj/item/gun/reloading, obj/item/ammo_magazine/vehicle_internal/use_magazine)
+
+/**
+ * special magazine for vehicle modules' internal magazines
+ * do not use unless you know what you're doing
+ */
+/obj/item/ammo_magazine/vehicle_internal
