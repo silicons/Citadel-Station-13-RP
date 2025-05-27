@@ -50,3 +50,15 @@
  */
 /datum/event_args/tesla_zap/proc/clone_as_fork()
 	#warn impl
+
+/**
+ * get fork chance at given node
+ */
+/datum/event_args/tesla_zap/proc/get_fork_chance(atom/movable/current)
+	return 20
+
+/**
+ * get fork amount at given node
+ */
+/datum/event_args/tesla_zap/proc/get_fork_amount(atom/movable/current)
+	return 2

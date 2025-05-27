@@ -897,6 +897,7 @@
 #include "code\datums\event_args\clickchain.dm"
 #include "code\datums\event_args\tesla_zap.dm"
 #include "code\datums\event_args\tesla_zap_initiation.dm"
+#include "code\datums\event_args\tesla_zap_result.dm"
 #include "code\datums\helper_datums\construction_datum.dm"
 #include "code\datums\helper_datums\events.dm"
 #include "code\datums\helper_datums\getrev.dm"
