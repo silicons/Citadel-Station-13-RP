@@ -189,7 +189,7 @@
 	abstract_type = /datum/supply_pack/nanotrasen/engineering/engine
 	container_type = /obj/structure/closet/crate/secure/engineering
 	container_access = list(
-		/datum/access/station/engineering/engine,
+		/datum/prototype/access/station/engineering/engine,
 	)
 	supply_pack_flags = SUPPLY_PACK_LOCK_PRIVATE_ORDERS
 

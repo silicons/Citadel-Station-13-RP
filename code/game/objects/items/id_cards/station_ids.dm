@@ -7,8 +7,10 @@
 		SLOT_ID_WORN_ID = "id"
 	)
 
-	/// Access levels held by this card.
-	var/list/access = list()
+	/// Access IDs encoded onto this card.
+	/// * Lazy list.
+	var/list/access_ids
+
 	/// The name registered_name on the card.
 	var/registered_name = "Unknown"
 	slot_flags = SLOT_ID | SLOT_EARS

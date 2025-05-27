@@ -3,17 +3,17 @@
 
 /datum/controller/subsystem/job
 	/// all access datums
-	var/tmp/list/datum/access/access_datums
+	var/tmp/list/datum/prototype/access/access_datums
 	/// access datums by path
 	var/tmp/list/access_path_lookup
 	/// access datum by "[id]"
 	var/tmp/list/access_id_lookup
 	/// access datum by string'd region
-	var/tmp/list/datum/access/access_region_lists
+	var/tmp/list/datum/prototype/access/access_region_lists
 	/// access datum by string'd type
-	var/tmp/list/datum/access/access_type_lists
+	var/tmp/list/datum/prototype/access/access_type_lists
 	/// access datum by string'd category
-	var/tmp/list/datum/access/access_category_lists
+	var/tmp/list/datum/prototype/access/access_category_lists
 
 	/// cached accesses that can edit lookup by "[id]" associated to list of access ids it can edit
 	var/tmp/list/cached_access_edit_lookup
@@ -28,10 +28,10 @@
 	cached_access_edit_lookup = list()
 	cached_access_edit_relevant = list()
 
-	for(var/path in subtypesof(/datum/access))
+	for(var/path in subtypesof(/datum/prototype/access))
 		if(is_abstract(path))
 			continue
-		var/datum/access/A = new path
+		var/datum/prototype/access/A = new path
 		access_datums += A
 		access_path_lookup[A.type] = A
 		access_id_lookup["[A.access_value]"] = A
@@ -75,7 +75,7 @@
  */
 /datum/controller/subsystem/job/proc/access_ids()
 	. = list()
-	for(var/datum/access/A as anything in access_datums)
+	for(var/datum/prototype/access/A as anything in access_datums)
 		. += A.access_value
 
 /**
@@ -86,7 +86,7 @@
  */
 /datum/controller/subsystem/job/proc/access_ids_of_type(access_type)
 	. = list()
-	for(var/datum/access/A as anything in access_type_list(access_type))
+	for(var/datum/prototype/access/A as anything in access_type_list(access_type))
 		. += A.access_value
 
 /**
@@ -97,7 +97,7 @@
  */
 /datum/controller/subsystem/job/proc/access_ids_of_region(access_region)
 	. = list()
-	for(var/datum/access/A as anything in access_region_list(access_region))
+	for(var/datum/prototype/access/A as anything in access_region_list(access_region))
 		. += A.access_value
 
 /**
@@ -108,7 +108,7 @@
  */
 /datum/controller/subsystem/job/proc/access_ids_of_category(access_category)
 	. = list()
-	for(var/datum/access/A as anything in access_category_list(access_category))
+	for(var/datum/prototype/access/A as anything in access_category_list(access_category))
 		. += A.access_value
 
 /datum/controller/subsystem/job/proc/access_type_list(access_type)
@@ -119,7 +119,7 @@
 		var/list/generating = list()
 		. = generating
 		LAZYSET(access_type_lists, "[access_type]", generating)
-		for(var/datum/access/A as anything in access_datums)
+		for(var/datum/prototype/access/A as anything in access_datums)
 			if(A.access_type & access_type)
 				. += A
 		tim_sort(generating, GLOBAL_PROC_REF(cmp_auto_compare))
@@ -132,7 +132,7 @@
 		var/list/generating = list()
 		. = generating
 		LAZYSET(access_region_lists, "[access_region]", generating)
-		for(var/datum/access/A as anything in access_datums)
+		for(var/datum/prototype/access/A as anything in access_datums)
 			if(A.access_region & access_region)
 				. += A
 		tim_sort(generating, GLOBAL_PROC_REF(cmp_auto_compare))
@@ -145,7 +145,7 @@
 		var/list/generating = list()
 		. = generating
 		LAZYSET(access_category_lists, "[access_category]", generating)
-		for(var/datum/access/A as anything in access_datums)
+		for(var/datum/prototype/access/A as anything in access_datums)
 			if(A.access_category == access_category)
 				. += A
 		tim_sort(generating, GLOBAL_PROC_REF(cmp_auto_compare))
@@ -154,7 +154,7 @@
  * looks up an access datum by id or typepath
  */
 /datum/controller/subsystem/job/proc/access_lookup(id_or_path)
-	RETURN_TYPE(/datum/access)
+	RETURN_TYPE(/datum/prototype/access)
 	return ispath(id_or_path)? access_path_lookup[id_or_path] : access_id_lookup["[id_or_path]"]
 
 /**
@@ -173,7 +173,7 @@
  */
 /datum/controller/subsystem/job/proc/tgui_access_data()
 	var/list/data = list()
-	for(var/datum/access/A as anything in access_datums)
+	for(var/datum/prototype/access/A as anything in access_datums)
 		data[++data.len] = list(
 			"value" = A.access_value,
 			"name" = A.access_name,
@@ -191,13 +191,13 @@
 /datum/controller/subsystem/job/proc/editable_access_ids_by_id(id)
 	if((. = cached_access_edit_lookup["[id]"]))
 		return
-	var/datum/access/A = access_lookup(id)
+	var/datum/prototype/access/A = access_lookup(id)
 	if(!A)
 		cached_access_edit_lookup["[id]"] = list()
 		return
 	. = list()
 	// special
-	for(var/datum/access/other as anything in A.access_edit_list)
+	for(var/datum/prototype/access/other as anything in A.access_edit_list)
 		. |= isnum(other)? other : initial(other.access_value)
 	// categories
 	for(var/cat in A.access_edit_category)

@@ -114,7 +114,7 @@
 	container_type = /obj/structure/closet/crate/secure/corporate/nanotrasen
 	container_name = "Security voidsuit crate"
 	container_access = list(
-		/datum/access/station/security/equipment,
+		/datum/prototype/access/station/security/equipment,
 	)
 
 /datum/supply_pack/nanotrasen/voidsuit/single/security/crowd
@@ -185,7 +185,7 @@
 	container_type = /obj/structure/closet/crate/secure/corporate/nanotrasen
 	container_name = "Security cryosuit crate"
 	container_access = list(
-		/datum/access/station/security/equipment,
+		/datum/prototype/access/station/security/equipment,
 	)
 
 /datum/supply_pack/nanotrasen/voidsuit/single/cryoengi

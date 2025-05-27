@@ -9,7 +9,7 @@
 	supply_pack_flags = SUPPLY_PACK_LOCK_PRIVATE_ORDERS | SUPPLY_PACK_RESTRICT_PRIVATE_ORDERS
 	container_type = /obj/structure/closet/crate/secure/weapon
 	container_access = list(
-		/datum/access/station/security/armory,
+		/datum/prototype/access/station/security/armory,
 	)
 
 /datum/supply_pack/nanotrasen/munitions/egunpistol

@@ -220,7 +220,7 @@
 	worth = 750
 	container_type = /obj/structure/closet/crate/secure/gear
 	container_access = list(
-		/datum/access/station/security/equipment,
+		/datum/prototype/access/station/security/equipment,
 	)
 
 /datum/supply_pack/nanotrasen/misc/science_rig

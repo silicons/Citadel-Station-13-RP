@@ -134,7 +134,7 @@
 	container_type = /obj/structure/closet/crate/secure/corporate/nanomed
 	container_name = "Chief medical officer equipment"
 	container_access = list(
-		/datum/access/station/medical/cmo,
+		/datum/prototype/access/station/medical/cmo,
 	)
 
 /datum/supply_pack/nanotrasen/medical/doctorgear
@@ -317,7 +317,7 @@
 	container_type = /obj/structure/closet/crate/secure
 	container_name = "Virus sample crate"
 	container_access = list(
-		/datum/access/station/medical/cmo,
+		/datum/prototype/access/station/medical/cmo,
 	)
 
 /datum/supply_pack/nanotrasen/medical/defib

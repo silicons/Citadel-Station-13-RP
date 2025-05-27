@@ -137,7 +137,7 @@
 	container_type = /obj/structure/closet/crate/secure/gear
 	container_name = "Tyrmalin Mining crate"
 	container_access = list(
-		/datum/access/station/supply/mining,
+		/datum/prototype/access/station/supply/mining,
 	)
 
 /datum/supply_pack/nanotrasen/misc/mining_charges_smallbulk_tyrmalin
@@ -148,7 +148,7 @@
 	container_type = /obj/structure/closet/crate/secure/gear
 	container_name = "Tyrmalin Mining Charge crate"
 	container_access = list(
-		/datum/access/station/supply/mining,
+		/datum/prototype/access/station/supply/mining,
 	)
 
 /datum/supply_pack/nanotrasen/misc/mining_charges_largebulk_tyrmalin
@@ -159,7 +159,7 @@
 	container_type = /obj/structure/closet/crate/secure/gear
 	container_name = "Tyrmalin Mining Charge crate Bulkbuy!!!"
 	container_access = list(
-		/datum/access/station/supply/mining,
+		/datum/prototype/access/station/supply/mining,
 	)
 
 /datum/supply_pack/nanotrasen/misc/breathing_nitrogen

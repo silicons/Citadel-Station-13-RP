@@ -91,13 +91,13 @@
 	// resolve accesses
 	for(var/i in 1 to length(container_access))
 		var/key = container_access[i]
-		if(ispath(key, /datum/access))
-			var/datum/access/resolved_access = SSjob.access_path_lookup[key]
+		if(ispath(key, /datum/prototype/access))
+			var/datum/prototype/access/resolved_access = SSjob.access_path_lookup[key]
 			container_access[i] = resolved_access.access_value
 	for(var/i in 1 to length(container_one_access))
 		var/key = container_one_access[i]
-		if(ispath(key, /datum/access))
-			var/datum/access/resolved_access = SSjob.access_path_lookup[key]
+		if(ispath(key, /datum/prototype/access))
+			var/datum/prototype/access/resolved_access = SSjob.access_path_lookup[key]
 			container_one_access[i] = resolved_access.access_value
 	// auto-detect worth
 	if(isnull(worth))
@@ -159,7 +159,7 @@
 
 /**
  * todo: return list of entities?
- * 
+ *
  * @return container spawned, or null (which can also mean we don't use a container for some reason)
  */
 /datum/supply_pack/proc/instantiate_pack_at(atom/where)
