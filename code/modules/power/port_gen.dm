@@ -665,9 +665,10 @@
 /obj/machinery/power/rtg/abductor/fire_act(exposed_temperature, exposed_volume)
 	asplod()
 
-/obj/machinery/power/rtg/abductor/tesla_act()
-	..() //extend the zap
-	asplod()
+/obj/machinery/power/rtg/abductor/on_electrocute_act(efficiency, energy, damage, stun_power, flags, hit_zone, atom/movable/source, list/shared_blackboard)
+	. = ..()
+	if(energy > 0)
+		asplod()
 
 // Comes with an installed cell
 /obj/machinery/power/rtg/abductor/built

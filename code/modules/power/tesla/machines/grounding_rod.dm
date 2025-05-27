@@ -34,12 +34,13 @@
 		return
 	return ..()
 
-
-/obj/machinery/power/grounding_rod/tesla_act(var/power)
-	if(anchored && !panel_open)
-		flick("grounding_rodhit", src)
-	else
-		..()
+/obj/machinery/power/grounding_rod/tesla_act_new(datum/event_args/tesla_zap/zap_struct)
+	#warn impl
+	// if(anchored && !panel_open)
+	// 	flick("grounding_rodhit", src)
+	// else
+	// 	..()
+	#warn impl
 
 /obj/machinery/power/grounding_rod/secured
 	anchored = TRUE

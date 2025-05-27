@@ -51,6 +51,8 @@
 /datum/event_args/tesla_zap/proc/clone_as_fork()
 	#warn impl
 
+//* simulation *//
+
 /**
  * get fork chance at given node
  */

@@ -10,4 +10,6 @@
  * @return /datum/event_args/tesla_zap to give back. null to terminate.
  */
 /atom/movable/proc/tesla_act_new(datum/event_args/tesla_zap/zap_struct)
+	// var/list/shock_results =
+	#warn how do we handle this? who's doing the scaling?
 	return zap_struct

@@ -76,20 +76,22 @@
 		return
 	..()
 
-/obj/machinery/power/tesla_coil/tesla_act(var/power)
-	if(anchored && !panel_open)
-		being_shocked = TRUE
-		//don't lose arc power when it's not connected to anything
-		//please place tesla coils all around the station to maximize effectiveness
-		var/power_produced = powernet ? power / power_loss : power
-		add_avail(power_produced * input_power_multiplier * 0.001)
-		flick("coilhit", src)
-		playsound(src.loc, 'sound/effects/lightningshock.ogg', 100, 1, extrarange = 5)
-		tesla_zap(src, 5, power_produced)
-		//addtimer(CALLBACK(src, PROC_REF(reset_shocked)), 10)
-		spawn(10) reset_shocked()
-	else
-		..()
+/obj/machinery/power/tesla_coil/tesla_act_new(datum/event_args/tesla_zap/zap_struct)
+	#warn impl
+
+	// if(anchored && !panel_open)
+	// 	being_shocked = TRUE
+	// 	//don't lose arc power when it's not connected to anything
+	// 	//please place tesla coils all around the station to maximize effectiveness
+	// 	var/power_produced = powernet ? power / power_loss : power
+	// 	add_avail(power_produced * input_power_multiplier * 0.001)
+	// 	flick("coilhit", src)
+	// 	playsound(src.loc, 'sound/effects/lightningshock.ogg', 100, 1, extrarange = 5)
+	// 	tesla_zap(src, 5, power_produced)
+	// 	//addtimer(CALLBACK(src, PROC_REF(reset_shocked)), 10)
+	// 	spawn(10) reset_shocked()
+	// else
+	// 	..()
 
 /obj/machinery/power/tesla_coil/proc/zap()
 	if((last_zap + zap_cooldown) > world.time || !powernet)
