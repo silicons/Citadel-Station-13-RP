@@ -1,3 +1,6 @@
+//* This file is explicitly licensed under the MIT license. *//
+//* Copyright (c) 2024 Citadel Station Developers           *//
+
 /datum/event_args/tesla_zap
 	/// origin
 	/// * copied as ref for speed, so we know what the bolt is from.

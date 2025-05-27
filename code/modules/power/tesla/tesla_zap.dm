@@ -1,4 +1,5 @@
-
+//* This file is explicitly licensed under the MIT license. *//
+//* Copyright (c) 2024 Citadel Station Developers           *//
 
 /**
  * new tesla_zap - il vento d'orifto
@@ -13,12 +14,10 @@
  * * energy - amount of energy to bounce
  * * initiation - specify this to set advanced variables with an instance of
  *                `/datum/event_args/tesla_zap_initiation`
- * * legacy_force_explosion - hint that things should explodey; please stop relying on this,
- *                            handle based on energy.
  */
-/proc/tesla_zap_new(atom/movable/source, energy, datum/event_args/tesla_zap_initiation/initiation, legacy_force_explosion)
+/proc/tesla_zap_new(atom/movable/source, energy, datum/event_args/tesla_zap_initiation/initiation)
 
-
+	var/datum/event_args/tesla_zap/
 
 
 #warn impl
