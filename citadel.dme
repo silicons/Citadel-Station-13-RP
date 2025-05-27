@@ -4555,6 +4555,7 @@
 #include "code\modules\power\tesla\legacy\generator.dm"
 #include "code\modules\power\tesla\legacy\telsa_construction.dm"
 #include "code\modules\power\tesla\legacy\tesla_act-legacy.dm"
+#include "code\modules\power\tesla\legacy\tesla_zap-legacy.dm"
 #include "code\modules\power\tesla\machines\grounding_rod.dm"
 #include "code\modules\power\tesla\machines\tesla_coil.dm"
 #include "code\modules\preferences\_preferences.dm"
