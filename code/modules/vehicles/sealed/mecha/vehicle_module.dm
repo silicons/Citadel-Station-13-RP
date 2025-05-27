@@ -56,5 +56,5 @@
  *
  * @return CLICKCHAIN_* flags
  */
-/obj/item/vehicle_module/proc/module_attack_chain(atom/movable/mounted_on, datum/event_args/actor/clickchain/clickchain)
-	return NONE
+/obj/item/vehicle_module/proc/module_attack_chain(atom/movable/mounted_on, datum/event_args/actor/clickchain/clickchain, clickchain_flags)
+	return clickchain_flags
