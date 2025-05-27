@@ -47,7 +47,7 @@
 	 */
 	var/unique = TRUE
 
-	//* Defaults - Turfs *//
+	//* Defaults *//
 	/// outdoors by default?
 	var/initial_outdoors = FALSE
 	/// default initial gas mix
@@ -57,12 +57,7 @@
 	/// player-facing name, overrides name when / if necessary.
 	var/display_name
 
-	//? nightshift
-	/// nightshift level
-	/// in general, nightshift must be at or above this level for it to proc on areas.
-	var/nightshift_level = NIGHTSHIFT_LEVEL_UNSET
-
-	//? tracking lists for machinery
+	//* Machinery *//
 	/// holopads - lazyinit'd
 	var/list/obj/machinery/holopad/holopads
 	/// vents
@@ -73,6 +68,16 @@
 	var/list/obj/machinery/atmospherics/component/unary/vent_scrubber/vent_scrubbers
 	/// next scrubber id
 	var/vent_scrubber_next = 1
+
+	//* Nightshift *//
+	/// nightshift level
+	/// in general, nightshift must be at or above this level for it to proc on areas.
+	var/nightshift_level = NIGHTSHIFT_LEVEL_UNSET
+
+	//* Overrides *//
+	/// use access namespace that isn't the map's
+	#warn impl
+	var/override_access_namespace
 
 	//? unsorted
 	var/fire = null
