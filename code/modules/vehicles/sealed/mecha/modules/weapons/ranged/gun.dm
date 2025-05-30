@@ -35,5 +35,16 @@
 	#warn handle reload
 
 /obj/item/vehicle_module/weapon/ranged/gun/proc/attempt_fire(atom/movable/mounted_on, datum/event_args/actor/clickchain/clickchain, clickchain_flags)
+	clickchain.unpack_click_params()
 
-#warn impl all
+	var/datum/gun_firing_cycle/cycle = internal_gun.start_firing_cycle_async(
+		mounted_on,
+		clickchain.resolve_click_angle(),
+		null,
+		null,
+		clickchain.target,
+		clickchain,
+		clickchain.click_params_tile_px,
+		clickchain.click_params_tile_py,
+		clickchain.legacy_get_target_zone(),
+	)
