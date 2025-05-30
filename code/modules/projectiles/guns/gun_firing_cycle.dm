@@ -7,6 +7,8 @@
 	var/cycle_notch
 	/// start world.time
 	var/cycle_start_time
+	/// are we finished
+	var/cycle_finished = FALSE
 	/// iterations so far fired
 	///
 	/// * this is set before the fire() call, which means fire() and post_fire()

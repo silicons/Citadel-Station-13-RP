@@ -2,7 +2,6 @@
 //* Copyright (c) 2025 Citadel Station Developers           *//
 
 /**
- * special magazine for vehicle modules' internal magazines
- * do not use unless you know what you're doing
+ * vehicle weapon ammo pack
  */
 /obj/item/ammo_magazine/vehicle

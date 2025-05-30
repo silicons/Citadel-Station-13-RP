@@ -28,24 +28,6 @@
 //* Firing Cycle *//
 
 /**
- * async proc to start a firing cycle
- *
- * * firer is where the will actually come out of.
- * * if firer is a turf, projectile is centered on turf
- * * if firer is a mob, we use its calculations for that depending on how we're held
- * * if firer is ourselves, projectile comes out of us. this is implementation defined.
- *
- * todo: return firing cycle datum
- */
-/obj/item/gun/proc/start_firing_cycle_async(atom/firer, angle, firing_flags, datum/firemode/firemode, atom/target, datum/event_args/actor/actor, tile_pixel_x, tile_pixel_y, target_zone) as /datum/gun_firing_cycle
-	SHOULD_CALL_PARENT(TRUE)
-	SHOULD_NOT_SLEEP(TRUE)
-
-	// todo: return firing cycle datum; this tramples return values by the way
-	ASYNC
-		start_firing_cycle(firer, angle, firing_flags, firemode, target, actor, tile_pixel_x, tile_pixel_y, target_zone)
-
-/**
  * starts, and blocks on a firing cycle
  *
  * * firer is where the will actually come out of.
@@ -57,6 +39,24 @@
  */
 /obj/item/gun/proc/start_firing_cycle(atom/firer, angle, firing_flags, datum/firemode/firemode, atom/target, datum/event_args/actor/actor, tile_pixel_x, tile_pixel_y, target_zone) as /datum/gun_firing_cycle
 	SHOULD_CALL_PARENT(TRUE)
+
+	var/datum/gun_firing_cycle/cycle = start_firing_cycle_async(firer, angle, firing_flags, firemode, target, actor, tile_pixel_x, tile_pixel_y, target_zone)
+	UNTIL(cycle.cycle_finished)
+	return cycle
+
+/**
+ * async proc to start a firing cycle
+ *
+ * * firer is where the will actually come out of.
+ * * if firer is a turf, projectile is centered on turf
+ * * if firer is a mob, we use its calculations for that depending on how we're held
+ * * if firer is ourselves, projectile comes out of us. this is implementation defined.
+ *
+ * @return firing cycle datum
+ */
+/obj/item/gun/proc/start_firing_cycle_async(atom/firer, angle, firing_flags, datum/firemode/firemode, atom/target, datum/event_args/actor/actor, tile_pixel_x, tile_pixel_y, target_zone) as /datum/gun_firing_cycle
+	SHOULD_CALL_PARENT(TRUE)
+	SHOULD_NOT_SLEEP(TRUE)
 
 	// firing cycle ongoing: silently fail
 	if(firing_cycle)
@@ -77,7 +77,7 @@
 		return
 	//! END
 
-	return firing_cycle(firer, angle, firing_flags, firemode, target, actor, tile_pixel_x, tile_pixel_y, target_zone)
+	return firing_cycle_impl_async(firer, angle, firing_flags, firemode, target, actor, tile_pixel_x, tile_pixel_y, target_zone)
 
 /**
  * interrupts a given firing cycle ID; if none is provided, we interrupt any active firing cycle.
@@ -104,6 +104,7 @@
 	SHOULD_NOT_SLEEP(TRUE)
 	SHOULD_CALL_PARENT(TRUE)
 
+	cycle.cycle_finished = TRUE
 	update_icon()
 	if(cycle.firing_actor)
 		if(one_handed_penalty)
@@ -145,7 +146,7 @@
  *
  * @return the gun firing cycle made and used
  */
-/obj/item/gun/proc/firing_cycle(atom/firer, angle, firing_flags, datum/firemode/firemode, atom/target, datum/event_args/actor/actor, tile_pixel_x, tile_pixel_y, target_zone) as /datum/gun_firing_cycle
+/obj/item/gun/proc/firing_cycle_impl_async(atom/firer, angle, firing_flags, datum/firemode/firemode, atom/target, datum/event_args/actor/actor, tile_pixel_x, tile_pixel_y, target_zone) as /datum/gun_firing_cycle
 	SHOULD_NOT_OVERRIDE(TRUE)
 	PRIVATE_PROC(TRUE) // only base of /start_firing_cycle is allowed to call us
 
@@ -190,6 +191,11 @@
 	on_firing_cycle_start(our_cycle)
 	SEND_SIGNAL(src, COMSIG_GUN_FIRING_CYCLE_START, our_cycle)
 
+	. = our_cycle
+	ASYNC
+		firing_cycle_impl_sync(our_cycle)
+
+/obj/item/gun/proc/firing_cycle_impl_sync(datum/gun_firing_cycle/our_cycle)
 	var/safety = 50
 	var/iteration = 0
 	while(iteration < our_cycle.firing_iterations)
@@ -224,13 +230,11 @@
 	on_firing_cycle_end(our_cycle)
 	SEND_SIGNAL(src, COMSIG_GUN_FIRING_CYCLE_END, our_cycle)
 	// log
-	log_gun_firing_cycle(src, firer, our_cycle, actor)
+	log_gun_firing_cycle(src, our_cycle)
 	// set delay
 	next_fire_cycle = world.time + max(0, our_cycle.cycle_cooldown * our_cycle.overall_cooldown_multiply + our_cycle.overall_cooldown_adjust)
 	// clear
 	firing_cycle = null
-
-	return our_cycle
 
 //* Firing *//
 
