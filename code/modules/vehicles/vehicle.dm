@@ -16,6 +16,11 @@ TYPE_REGISTER_SPATIAL_GRID(/obj/vehicle, SSspatial_grids.vehicles)
 	buckle_flags = BUCKLING_PASS_PROJECTILES_UPWARDS
 	COOLDOWN_DECLARE(cooldown_vehicle_move)
 
+	//* Modules *//
+	/// Modules list; set to list of typepaths to create them at initialize
+	#warn init on initialize
+	var/list/obj/item/vehicle_module/modules
+
 	//* Occupants *//
 	/// list of mobs associated to their control flags
 	var/list/mob/occupants
@@ -29,6 +34,11 @@ TYPE_REGISTER_SPATIAL_GRID(/obj/vehicle, SSspatial_grids.vehicles)
 	//* Occupants - HUDs *//
 	/// list of typepaths or ids of /datum/atom_hud_providers that occupants with [VEHICLE_CONTROL_USE_HUDS] get added to their perspective
 	var/list/occupant_huds
+
+	//* UI *//
+	#warn ui implementation
+	/// Interface to route for TGUI.
+	var/ui_interface
 
 	var/max_occupants = 1
 	var/max_drivers = 1
@@ -327,3 +337,19 @@ TYPE_REGISTER_SPATIAL_GRID(/obj/vehicle, SSspatial_grids.vehicles)
  */
 /obj/vehicle/proc/occupant_removed(mob/removing, datum/event_args/actor/actor, control_flags, silent, suppressed)
 	SHOULD_CALL_PARENT(TRUE)
+
+//* UI *//
+
+/obj/vehicle/ui_data(mob/user, datum/tgui/ui)
+	. = ..()
+
+/obj/vehicle/ui_static_data(mob/user, datum/tgui/ui)
+	. = ..()
+
+/obj/vehicle/ui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
+	. = ..()
+
+/obj/vehicle/ui_act(action, list/params, datum/tgui/ui)
+	. = ..()
+
+#warn impl all

@@ -2,6 +2,11 @@
 //* Copyright (c) 2025 Citadel Station Developers           *//
 
 /obj/item/vehicle_module
+	//* UI *//
+	/// UI component key when being rendered
+	/// * Must route to a valid component in vehicle UI routing. Check TGUI folder for more info.
+	#warn impl
+	var/ui_component
 
 /obj/item/vehicle_module/using_item_on(obj/item/using, datum/event_args/actor/clickchain/clickchain, clickchain_flags)
 	. = ..()
@@ -58,3 +63,15 @@
  */
 /obj/item/vehicle_module/proc/module_attack_chain(atom/movable/mounted_on, datum/event_args/actor/clickchain/clickchain, clickchain_flags)
 	return clickchain_flags
+
+//* UI *//
+
+/obj/item/vehicle_module/proc/vehicle_ui_component_route()
+
+/obj/item/vehicle_module/proc/vehicle_ui_component_data()
+
+/obj/item/vehicle_module/proc/vehicle_ui_component_push(list/data)
+
+/obj/item/vehicle_module/proc/vehicle_ui_component_act(action, list/params, datum/event_args/actor/actor)
+
+#warn impl all
