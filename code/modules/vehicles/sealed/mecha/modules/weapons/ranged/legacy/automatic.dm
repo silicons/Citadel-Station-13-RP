@@ -1,3 +1,4 @@
+#warn /obj/item/vehicle_module/weapon/ranged/gun/ballistic/heph_ac2
 /obj/item/vehicle_module/weapon/ranged/legacy/ballistic/lmg
 	name = "\improper Ultra AC 2"
 	desc = "A superior version of the standard Hephaestus Autocannon MK2 design."

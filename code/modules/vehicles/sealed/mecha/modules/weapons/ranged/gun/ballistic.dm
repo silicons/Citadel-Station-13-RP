@@ -1,19 +1,9 @@
 //* This file is explicitly licensed under the MIT license. *//
 //* Copyright (c) 2025 Citadel Station Developers           *//
 
-/**
- * default ranged weapon supertype that has functional binds to use a gun.
- *
- * * for simplicity of the common case, one module can only bind one gun. multi-gun support
- *   (e.g. a machinegun with a grenade launcher) will eventually be added with module-in-module
- *   support where a module attaches another module. this way we don't need overly complex
- *   routing.
- */
 /obj/item/vehicle_module/weapon/ranged/gun/ballistic
 	/// remove the need to manually reload and have the gun directly feed from magazines
 	/// * overrides gun settings and will use ballistic API invasively to modify the gun.
-	///   this should generally not be used.
-	/// * usually,
 	var/ballistic_direct_feed = FALSE
 
 	/// ammo storage magazine for ballistic (/obj/item/ammo_casing) ammo
@@ -47,12 +37,19 @@
 	. = ..()
 	if(. & CLICKCHAIN_FLAGS_INTERACT_ABORT)
 		return
+
 	#warn handle reload
 
 /**
  * Attempts to refill our internal magazine.
  */
 /obj/item/vehicle_module/weapon/ranged/gun/ballistic/proc/attempt_refill(datum/event_args/actor/actor, obj/item/ammo_magazine/use_magazine)
+
+/**
+ * Checks if we accept refills from a given magazine. Does not check caliber.
+ */
+/obj/item/vehicle_module/weapon/ranged/gun/ballistic/proc/allow_refill(datum/event_args/actor/actor, obj/item/ammo_magazine/use_magazine, silent)
+	return TRUE
 
 /**
  * Attempts to reload the internal gun.
