@@ -1,6 +1,8 @@
 //* This file is explicitly licensed under the MIT license. *//
 //* Copyright (c) 2024 Citadel Station Developers           *//
 
+// todo: deal with below; new inventory-level api, don't just mirror from mob?
+
 //* Procs in this file are mirrored to the /mob level for ease of use.        *//
 //*                                                                           *//
 //* In the future, there should likely be a separation of concerns            *//
@@ -101,6 +103,9 @@
  */
 /mob/proc/put_in_hands_or_drop(obj/item/I, inv_op_flags, atom/drop_loc, specific_index)
 	// inventory null --> INV_RETURN_FAILED, as that's also #define'd to be null
+	if(!inventory)
+		I.forceMove(drop_loc || drop_location())
+		return INV_RETURN_FAILED
 	return inventory?.put_in_hands_or_drop(I, inv_op_flags, drop_loc, specific_index)
 
 /**
@@ -137,13 +142,13 @@
 //* oftentimes a mob has no semantic 'sided hands'. *//
 
 /mob/proc/put_in_left_hand(obj/item/I, inv_op_flags)
-	for(var/i in 1 to length(inventory?.held_items) step 2)
+	for(var/i in 1 to length(inventory?.held_items) step 2) //Odds a left hands
 		if(put_in_hand(I, i, inv_op_flags))
 			return TRUE
 	return FALSE
 
 /mob/proc/put_in_right_hand(obj/item/I, inv_op_flags)
-	for(var/i in 1 to length(inventory?.held_items) step 2)
+	for(var/i in 2 to length(inventory?.held_items) step 2) //Evens a right hands
 		if(put_in_hand(I, i, inv_op_flags))
 			return TRUE
 	return FALSE

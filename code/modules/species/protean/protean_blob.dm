@@ -143,9 +143,6 @@
 	else
 		..()
 
-/mob/living/simple_mob/protean_blob/stun_effect_act(var/stun_amount, var/agony_amount, var/def_zone, var/used_weapon=null)
-	return FALSE //ok so tasers hurt protean blobs what the fuck
-
 /mob/living/simple_mob/protean_blob/adjustBruteLoss(var/amount,var/include_robo)
 	return humanform? humanform.take_targeted_damage(brute = amount, body_zone = BP_TORSO) : ..()
 
@@ -315,6 +312,16 @@
 		blob.mob_radio = r_ear
 		if(!transfer_item_to_loc(r_ear, blob, INV_OP_FORCE | INV_OP_SHOULD_NOT_INTERCEPT | INV_OP_SILENT))
 			blob.mob_radio = null
+
+	
+
+	for(var/obj/item/pda/P in contents)
+		if(P.id)
+			var/obj/item/card/id/PID = P.id
+			blob.access_card.access += PID.access
+
+	for(var/obj/item/card/id/I in contents)
+		blob.access_card.access += I.access
 
 	//Size update
 	blob.transform = matrix()*size_multiplier
@@ -542,7 +549,7 @@
 		return
 
 	var/list/choices = list()
-	for(var/mob/living/carbon/human/M in oviewers(1))
+	for(var/mob/living/carbon/human/M in oview(1))
 		choices += M
 
 	if(!choices.len)

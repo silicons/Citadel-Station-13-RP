@@ -47,6 +47,7 @@
 	..()
 
 /obj/item/shockpaddles/update_icon()
+	. = ..()
 	icon_state = "defibpaddles[wielded]"
 	item_state = "defibpaddles[wielded]"
 	if(cooldown)
@@ -85,10 +86,10 @@
 	H.update_health()
 
 	if(H.isSynthetic())
-		if(H.health + H.getOxyLoss() + H.getToxLoss() <= config_legacy.health_threshold_dead)
+		if(H.health + H.getOxyLoss() + H.getToxLoss() <= H.getMinHealth())
 			return "buzzes, \"Resuscitation failed - Severe damage detected. Begin manual repair.\""
 
-	else if(H.health + H.getOxyLoss() <= config_legacy.health_threshold_dead || (MUTATION_HUSK in H.mutations) || !H.can_defib)
+	else if(H.health + H.getOxyLoss() <= H.getMinHealth() || (MUTATION_HUSK in H.mutations) || !H.can_defib)
 		// TODO: REFACTOR DEFIBS AND HEALTH
 		return "buzzes, \"Resuscitation failed - Severe tissue damage makes recovery of patient impossible via defibrillator.\""
 
@@ -134,7 +135,7 @@
 	if(!heart)
 		return TRUE
 
-	var/blood_volume = H.vessel.get_reagent_amount("blood")
+	var/blood_volume = H.blood_holder.get_total_volume()
 	if(!heart || heart.is_broken())
 		blood_volume *= 0.3
 	else if(heart.is_bruised())
@@ -223,7 +224,7 @@
 	H.apply_damage(burn_damage_amt, DAMAGE_TYPE_BURN, BP_TORSO)
 
 	//set oxyloss so that the patient is just barely in crit, if possible
-	var/barely_in_crit = config_legacy.health_threshold_crit - 1
+	var/barely_in_crit = H.getCritHealth() - 1
 	var/adjust_health = barely_in_crit - H.health //need to increase health by this much
 	H.adjustOxyLoss(-adjust_health)
 
@@ -275,10 +276,7 @@
 	playsound(loc, 'sound/weapons/Egloves.ogg', 100, 1, -1)
 	set_cooldown(cooldowntime)
 
-	H.stun_effect_act(2, 120, target_zone)
-	var/burn_damage = H.electrocute_act(burn_damage_amt*2, src, def_zone = target_zone)
-	if(burn_damage > 15 && H.can_feel_pain())
-		H.emote("scream")
+	H.electrocute(0, burn_damage_amt, 120, NONE, target_zone, src)
 
 	add_attack_logs(user,H,"Shocked using [name]")
 

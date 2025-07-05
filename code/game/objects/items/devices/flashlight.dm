@@ -54,7 +54,7 @@
 		if(cell.use(power_usage) != power_usage) //We weren't able to use our full power_usage amount!
 			visible_message(SPAN_WARNING("\The [src] flickers before going dull."))
 			set_light(FALSE)
-			playsound(src.loc, /datum/soundbyte/grouped/sparks, 10, 1, -3) //Small cue that your light went dull in your pocket.
+			playsound(src.loc, /datum/soundbyte/sparks, 10, 1, -3) //Small cue that your light went dull in your pocket.
 			on = FALSE
 			update_appearance()
 			return PROCESS_KILL
@@ -175,16 +175,23 @@
 				if(L.getBrainLoss() > 15)
 					to_chat(user, SPAN_NOTICE("There's visible lag between left and right pupils' reactions."))
 
-				var/list/pinpoint = list("oxycodone"=1,"tramadol"=5)
-				var/list/dilating = list("space_drugs"=5,"mindbreaker"=1)
-				if(L.reagents.has_any_reagent(pinpoint) || H.ingested.has_any_reagent(pinpoint))
+				// todo: reagent effects.
+				var/static/list/reagents_that_cause_constriction = list(
+					/datum/reagent/tramadol,
+					/datum/reagent/oxycodone,
+				)
+				var/static/list/reagents_that_cause_dilation = list(
+					/datum/reagent/space_drugs,
+					/datum/reagent/mindbreaker,
+				)
+				if(L.reagents.has_any(reagents_that_cause_constriction) || H.ingested.has_any(reagents_that_cause_constriction))
 					to_chat(user, SPAN_NOTICE("\The [L]'s pupils are already pinpoint and cannot narrow any more."))
-				else if(L.reagents.has_any_reagent(dilating) || H.ingested.has_any_reagent(dilating))
+				else if(L.reagents.has_any(reagents_that_cause_dilation) || H.ingested.has_any(reagents_that_cause_dilation))
 					to_chat(user, SPAN_NOTICE("\The [L]'s pupils narrow slightly, but are still very dilated."))
 				else
 					to_chat(user, SPAN_NOTICE("\The [L]'s pupils narrow."))
 
-			user.setClickCooldown(user.get_attack_speed(src)) //can be used offensively
+			user.setClickCooldownLegacy(user.get_attack_speed_legacy(src)) //can be used offensively
 			L.flash_eyes()
 		return CLICKCHAIN_DO_NOT_PROPAGATE
 	return ..()
@@ -383,6 +390,7 @@
 	on = FALSE
 	src.damage_force = initial(src.damage_force)
 	src.damage_type = initial(src.damage_type)
+	set_light(FALSE)
 	update_appearance()
 
 /obj/item/flashlight/flare/attack_self(mob/user, datum/event_args/actor/actor)
@@ -409,6 +417,9 @@
 	damage_type = DAMAGE_TYPE_BURN
 	START_PROCESSING(SSobj, src)
 	return TRUE
+
+/obj/item/flashlight/flare/survival
+	fuel = 15 MINUTES
 
 //Glowsticks
 

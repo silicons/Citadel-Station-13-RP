@@ -24,9 +24,11 @@
 		/datum/map/sector/frozen_192,
 		/datum/map/sector/wasteland_192,
 		/datum/map/sector/nebula_tradeport,
+		/datum/map/sector/delerict_casino,
 		/datum/map/sector/surt,
 		/datum/map/sector/miaphus,
 		/datum/map/sector/roguemining_192/one,
+		/datum/map/sector/sky_planet,
 	)
 
 	//* LEGACY BELOW *//
@@ -142,7 +144,7 @@
 
 	bot_patrolling = FALSE
 
-	allowed_spawns = list(LATEJOIN_METHOD_ARRIVALS_SHUTTLE,"Beruang Trading Corp Cryo","Cryogenic Storage")
+	allowed_spawns = list(LATEJOIN_METHOD_ARRIVALS_SHUTTLE,"Beruang Trading Corp Cryo","Cryogenic Storage","Nebula Visitor Arrival")
 	spawnpoint_died = /datum/spawnpoint/arrivals
 	spawnpoint_left = /datum/spawnpoint/arrivals
 	spawnpoint_stayed = /datum/spawnpoint/cryo

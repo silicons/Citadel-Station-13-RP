@@ -4,7 +4,7 @@
 	desc = "The practical paperwork replacement for the officer on the go."
 	icon_state = "holowarrant"
 	item_state = "flashtool"
-	item_flags = ITEM_NOBLUDGEON | ITEM_ENCUMBERS_WHILE_HELD
+	item_flags = ITEM_NO_BLUDGEON | ITEM_ENCUMBERS_WHILE_HELD
 	throw_force = 5
 	w_class = WEIGHT_CLASS_SMALL
 	throw_speed = 4
@@ -61,6 +61,7 @@
 	return CLICKCHAIN_DO_NOT_PROPAGATE
 
 /obj/item/holowarrant/update_icon()
+	. = ..()
 	if(active)
 		icon_state = "holowarrant_filled"
 	else

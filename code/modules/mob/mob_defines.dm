@@ -71,7 +71,7 @@
 	/// List of movement speed modifiers ignored by this mob. List -> List (id) -> List (sources)
 	var/list/movespeed_mod_immunities			//Lazy list, see mob_movespeed.dm
 	/// The calculated mob speed slowdown based on the modifiers list
-	var/cached_multiplicative_slowdown
+	var/cached_hyperbolic_slowdown
 	/// cached legacy movespeed multiplier -_-
 	//  todo: remove
 	var/cached_movespeed_multiply
@@ -448,3 +448,6 @@
 	//Moved from code\modules\nano\nanoexternal.dm
 	// Used by the Nano UI Manager (/datum/nanomanager) to track UIs opened by this mob
 	var/list/open_uis = list()
+
+	///List of progress bars this mob is currently seeing for actions
+	var/list/progressbars = null //for stacking do_after bars

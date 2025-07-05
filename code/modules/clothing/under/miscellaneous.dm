@@ -724,12 +724,6 @@
 	icon_state = "cuttop_red"
 	item_state_slots = list(SLOT_ID_RIGHT_HAND = "red", SLOT_ID_LEFT_HAND = "red")
 
-/obj/item/clothing/under/harness
-	name = "gear harness"
-	desc = "How... minimalist."
-	icon_state = "gear_harness"
-	body_cover_flags = 0
-
 /obj/item/clothing/under/dress/white
 	name = "white wedding dress"
 	desc = "A fancy white dress with a blue underdress."
@@ -2522,6 +2516,15 @@
 	desc = "A tight-fitting, sleeveless single-piece black uniform with striking crimson trim."
 	icon = 'icons/clothing/uniform/misc/replika.dmi'
 	icon_state = "gestalt_sleeveless"
+	worn_render_flags = WORN_RENDER_SLOT_ONE_FOR_ALL
+	worn_has_rolldown = UNIFORM_HAS_NO_ROLL
+	worn_has_rollsleeve = UNIFORM_HAS_NO_ROLL
+
+/obj/item/clothing/under/sleeveless_qipao
+	name = "sleeveless black qipao"
+	desc = "A popular dress from Old Earth China, commonly worn to festivals. Easily recognizable thanks to its intricate embroidery and bold side slits."
+	icon = 'icons/clothing/uniform/misc/sleeveless_qipao.dmi'
+	icon_state = "sleevelessqipao"
 	worn_render_flags = WORN_RENDER_SLOT_ONE_FOR_ALL
 	worn_has_rolldown = UNIFORM_HAS_NO_ROLL
 	worn_has_rollsleeve = UNIFORM_HAS_NO_ROLL

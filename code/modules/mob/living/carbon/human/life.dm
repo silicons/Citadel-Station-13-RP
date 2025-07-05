@@ -1123,14 +1123,14 @@
 	else				//ALIVE. LIGHTS ARE ON
 		update_health()	//TODO
 
-		if(health <= config_legacy.health_threshold_dead || (should_have_organ("brain") && !has_brain()))
+		if(health <= getMinHealth() || (should_have_organ("brain") && !has_brain()))
 			death()
 			apply_status_effect(/datum/status_effect/sight/blindness, 5 SECOND)
 			silent = 0
 			return 1
 
 		//UNCONSCIOUS. NO-ONE IS HOME
-		if((getOxyLoss() > (species.total_health/2)) || (health <= config_legacy.health_threshold_crit))
+		if((getOxyLoss() > (species.total_health/2)) || (health <= getCritHealth()))
 			afflict_unconscious(20 * 3)
 
 		if(hallucination)
@@ -1696,12 +1696,12 @@
 	if(!can_feel_pain())
 		return
 
-	if(health < config_legacy.health_threshold_softcrit)// health 0 makes you immediately collapse
+	if(health < getSoftCritHealth())// health 0 makes you immediately collapse
 		shock_stage = max(shock_stage, 61)
 
 	if(traumatic_shock >= 80)
 		shock_stage += 1
-	else if(health < config_legacy.health_threshold_softcrit)
+	else if(health < getSoftCritHealth())
 		shock_stage = max(shock_stage, 61)
 	else
 		shock_stage = min(shock_stage, 160)
@@ -1795,7 +1795,7 @@
 	if(Pump)
 		temp += Pump.standard_pulse_level - PULSE_NORM
 
-	if(round(vessel.get_reagent_amount("blood")) <= species.blood_volume*species.blood_level_danger)	//how much blood do we have
+	if(round(blood_holder.get_total_volume()) <= species.blood_volume*species.blood_level_danger)	//how much blood do we have
 		temp = temp + 3	//not enough :(
 
 	if(status_flags & STATUS_FAKEDEATH)
@@ -1807,7 +1807,7 @@
 	temp = max(0, temp + modifier_shift)	// No negative pulses.
 
 	if(Pump)
-		for(var/datum/reagent/R in reagents.reagent_list)
+		for(var/datum/reagent/R in reagents.get_reagent_datums())
 			if(R.id in bradycardics)
 				if(temp <= Pump.standard_pulse_level + 3 && temp >= Pump.standard_pulse_level)
 					temp--
@@ -1817,11 +1817,11 @@
 			if(R.id in heartstopper) //To avoid using fakedeath
 				temp = PULSE_NONE
 			if(R.id in cheartstopper) //Conditional heart-stoppage
-				if(R.volume >= R.overdose)
+				if(reagents.get_reagent_amount(R.id) >= R.overdose)
 					temp = PULSE_NONE
 		return temp * brain_modifier
 	//handles different chems' influence on pulse
-	for(var/datum/reagent/R in reagents.reagent_list)
+	for(var/datum/reagent/R in reagents.get_reagent_datums())
 		if(R.id in bradycardics)
 			if(temp <= PULSE_THREADY && temp >= PULSE_NORM)
 				temp--
@@ -1831,7 +1831,7 @@
 		if(R.id in heartstopper) //To avoid using fakedeath
 			temp = PULSE_NONE
 		if(R.id in cheartstopper) //Conditional heart-stoppage
-			if(R.volume >= R.overdose)
+			if(reagents.get_reagent_amount(R.id) >= R.overdose)
 				temp = PULSE_NONE
 
 	return max(0, round(temp * brain_modifier))

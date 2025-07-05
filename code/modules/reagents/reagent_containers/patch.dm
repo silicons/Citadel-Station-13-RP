@@ -53,6 +53,9 @@
 			if(affecting.robotic >= ORGAN_ROBOT)
 				to_chat(user, SPAN_WARNING("\The [src] won't work on a robotic limb!"))
 				return
+			if(affecting.behaviour_flags & BODYPART_NO_PATCH)
+				to_chat(user, SPAN_WARNING("\The [src] won't work on this limb!"))
+				return
 
 			if(!H.can_inject(user, FALSE, L.zone_sel.selecting, pierce_material))
 				to_chat(user, SPAN_NOTICE("\The [src] can't be applied through such a thick material!"))
@@ -99,7 +102,7 @@
 
 		user.visible_message(SPAN_WARNING("[user] attempts to place \the [src] onto [H]`s [affecting]."))
 
-		user.setClickCooldown(user.get_attack_speed(src))
+		user.setClickCooldownLegacy(user.get_attack_speed_legacy(src))
 		if(!do_mob(user, target))
 			return
 

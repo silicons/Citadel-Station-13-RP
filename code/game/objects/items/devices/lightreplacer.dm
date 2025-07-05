@@ -161,8 +161,8 @@
 	return new_bulbs
 
 /obj/item/lightreplacer/update_icon()
+	. = ..()
 	icon_state = "lightreplacer[emagged]"
-
 
 /obj/item/lightreplacer/proc/Use(var/mob/user)
 
@@ -199,7 +199,7 @@
 
 /obj/item/lightreplacer/emag_act(var/remaining_charges, var/mob/user)
 	emagged = !emagged
-	playsound(src.loc, /datum/soundbyte/grouped/sparks, 100, 1)
+	playsound(src.loc, /datum/soundbyte/sparks, 100, 1)
 	update_icon()
 	return 1
 
