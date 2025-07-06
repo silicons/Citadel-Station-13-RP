@@ -7,6 +7,8 @@
 /datum/prototype/character_faction/frontier
 	abstract_type = /datum/prototype/character_faction/frontier
 
+	bearing = "Frontier"
+
 	faction_tags = list(
 		"frontier",
 	)

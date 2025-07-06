@@ -7,6 +7,8 @@
 /datum/prototype/character_faction/tsc
 	abstract_type = /datum/prototype/character_faction/tsc
 
+	bearing = "Trans-Stellar"
+
 	faction_tag = list(
 		"tsc",
 	)

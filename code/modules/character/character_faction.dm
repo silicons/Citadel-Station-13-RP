@@ -14,11 +14,15 @@
 	var/name = "???"
 	/// Blurb
 	var/blurb = "Some faction of some kind."
+	/// Player-readable category / group name.
+	var/bearing = "Unknown"
 
 	/// String tags.
 	/// * These are what actually determine role eligibility and are injected
 	///   into the mind datum.
 	var/list/faction_tags = list()
+
+
 
 	#warn reconsider
 
