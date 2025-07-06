@@ -22,6 +22,11 @@
 
 	var/ran_solver = FALSE
 
+	//* Picked. Same format as /datum/character. *//
+
+	var/datum/species/c_species
+	var/datum/prototype/character_faction/c_faction
+	var/list/c_background
 
 	#warn reconsider
 
@@ -49,6 +54,9 @@
 
 	ran_solver = TRUE
 
+/datum/mob_modal/character_creator_modal/ui_state()
+	CRASH("unimplemented")
+
 /datum/mob_modal/character_creator_modal/ui_static_data(mob/user, datum/tgui/ui)
 	. = ..()
 	CRASH("unimplemented")
@@ -59,6 +67,10 @@
 
 /datum/mob_modal/character_creator_modal/ui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
 	CRASH("unimplemented")
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "")
+		ui.open()
 
 /datum/mob_modal/character_creator_modal/ui_act(action, list/params, datum/tgui/ui)
 	. = ..()
@@ -66,10 +78,22 @@
 		return
 	CRASH("unimplemented")
 
+/datum/mob_modal/character_creator_modal/proc/validate(list/out_errors)
+	if(!istype(c_species))
+		return FALSE
+	if(!istype(c_faction))
+		return FALSE
+	#warn check background against species
+
+	return TRUE
 
 /datum/mob_modal/character_creator_modal/proc/create()
 
 /datum/mob_modal/character_creator_modal/proc/new_character_impl(datum/mob_modal/character_creator_modal/modal) as /datum/character
 	#warn imprint
-	return new /datum/character
+	var/datum/character/creating = new /datum/character
+	creating.c_species = c_species
+	creating.c_faction = c_faction
+	creating.c_background = c_background.Copy()
+	return creating
 

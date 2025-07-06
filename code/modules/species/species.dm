@@ -51,14 +51,15 @@
 	///Used for metabolizing reagents.
 	var/reagent_tag
 
+	/// Species tags.
+	var/list/species_tags = list()
+
 	#warn reconsider
-	//* Characters 2.0 Staging *//
-	/// Allowed character faction ids.
-	/// * Null to allow all
-	var/list/character_faction_ids
+	//* Characters *//
 	/// Character background type prototype ids.
 	/// * Null for none.
 	/// * Associate an ID to a list to constrain it to that list.
+	/// TODO: impl
 	var/list/character_background_type_ids
 
 	//* IFF *//

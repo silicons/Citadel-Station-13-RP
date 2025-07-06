@@ -4,12 +4,14 @@
 /**
  * Background types.
  */
-/datum/prototype/character_background
-	abstract_type = /datum/prototype/character_background
+/datum/prototype/character_background_type
+	abstract_type = /datum/prototype/character_background_type
 
 	/// Name
 	var/name = "???"
 	/// Desc of what this background type is
 	var/desc = "Some faction of some kind."
+
+
 
 	#warn reconsider

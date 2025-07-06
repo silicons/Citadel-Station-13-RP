@@ -15,9 +15,14 @@
 	/// Blurb
 	var/blurb = "Some faction of some kind."
 
-	/// string tags
+	/// String tags.
 	/// * These are what actually determine role eligibility and are injected
 	///   into the mind datum.
 	var/list/faction_tags = list()
 
 	#warn reconsider
+
+	/// allowed species IDs
+	var/list/species_id_whitelist = list(
+
+	)
