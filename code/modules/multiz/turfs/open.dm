@@ -4,8 +4,8 @@
  */
 /turf/simulated/open
 	name = "open space"
-	icon = 'icons/turf/space.dmi'
-	icon_state = "opendebug"
+	icon = 'icons/turf/open_space.dmi'
+	icon_state = "open_space"
 	density = FALSE
 	turf_path_danger = TURF_PATH_DANGER_FALL
 	can_build_into_floor = TRUE

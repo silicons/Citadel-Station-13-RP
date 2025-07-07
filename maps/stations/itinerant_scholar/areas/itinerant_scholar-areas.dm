@@ -2,3 +2,4 @@
 //* Copyright (c) 2024 Citadel Station Developers           *//
 
 /area/station/itinerant_scholar
+	name = "NSV Itinerant Scholar"
