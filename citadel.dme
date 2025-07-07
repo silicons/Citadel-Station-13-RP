@@ -5697,6 +5697,7 @@
 #include "maps\stations\itinerant_scholar\areas\itinerant_scholar-areas-security.dm"
 #include "maps\stations\itinerant_scholar\areas\itinerant_scholar-areas-service.dm"
 #include "maps\stations\itinerant_scholar\areas\itinerant_scholar-areas.dm"
+#include "maps\stations\itinerant_scholar\levels\map-mock.dmm"
 #include "maps\stations\itinerant_scholar\machinery\turret.dm"
 #include "maps\strelka\strelka-areas.dm"
 #include "maps\strelka\strelka-misc.dm"
