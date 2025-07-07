@@ -80,7 +80,7 @@
 	say_list_type = /datum/say_list/goliath
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/melee/goliath
 
-	var/datum/reagents/goliath_sac = null
+	var/datum/reagent_holder/goliath_sac = null
 	var/pre_attack = 0
 	var/tentacle_warning = 0.5 SECONDS
 	var/pre_attack_icon = "goliath2"
@@ -142,7 +142,6 @@
 	goliath_sac.my_atom = src
 
 /mob/living/simple_mob/animal/goliath/attackby(obj/item/O, mob/user)
-	. = ..()
 	var/obj/item/reagent_containers/glass/G = O
 	if(stat == CONSCIOUS && istype(G) && G.is_open_container())
 		user.visible_message("<span class='notice'>[user] drains the sac of the [src] using \the [O].</span>")

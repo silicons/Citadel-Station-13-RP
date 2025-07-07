@@ -321,8 +321,6 @@ CREATE_WALL_MOUNTING_TYPES_SHIFTED(/obj/machinery/power/apc, 22)
 
 	make_terminal()
 
-	addtimer(CALLBACK(src, PROC_REF(update)), 5)
-
 /obj/machinery/power/apc/examine(mob/user, dist)
 	. = ..()
 	if(Adjacent(user))
@@ -799,7 +797,7 @@ CREATE_WALL_MOUNTING_TYPES_SHIFTED(/obj/machinery/power/apc, 22)
 		var/mob/living/carbon/human/H = user
 
 		if(H.species.can_shred(H))
-			user.setClickCooldown(user.get_attack_speed())
+			user.setClickCooldownLegacy(user.get_attack_speed_legacy())
 			user.visible_message("<span call='warning'>[user.name] slashes at the [src.name]!</span>", "<span class='notice'>You slash at the [src.name]!</span>")
 			playsound(src.loc, 'sound/weapons/slash.ogg', 100, 1)
 
@@ -1435,10 +1433,12 @@ CREATE_WALL_MOUNTING_TYPES_SHIFTED(/obj/machinery/power/apc, 22)
 		name = "[area.name] APC"
 	update()
 
-/obj/machinery/power/apc/proc/set_nightshift(on, var/automated)
+/obj/machinery/power/apc/proc/set_nightshift(on, automated)
 	set waitfor = FALSE
 	if(automated && istype(area, /area/shuttle))
 		return
+	if(nightshift_lights == on)
+		return //no change
 	nightshift_lights = on
 	update_nightshift()
 

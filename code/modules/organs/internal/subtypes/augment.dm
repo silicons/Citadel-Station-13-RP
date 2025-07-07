@@ -177,7 +177,7 @@
 
 	var/list/present_augs = list()
 
-	for(var/obj/item/organ/internal/augment/Aug in organs)
+	for(var/obj/item/organ/internal/augment/Aug in internal_organs)
 		if(Aug.my_radial_icon && !Aug.is_broken() && Aug.check_verb_compatability())
 			present_augs[Aug.radial_name] = Aug
 
@@ -218,7 +218,7 @@
 			to_chat(M, SPAN_NOTICE("You cannot use your augments when restrained."))
 			return FALSE
 
-	if((slot == /datum/inventory_slot/abstract/hand/left && l_hand) || (slot == /datum/inventory_slot/abstract/hand/right && r_hand))
+	if((slot == /datum/inventory_slot/abstract/hand/left && get_left_held_item()) || (slot == /datum/inventory_slot/abstract/hand/right && get_right_held_item()))
 		to_chat(M, SPAN_WARNING("Your hand is full.  Drop something first."))
 		return FALSE
 

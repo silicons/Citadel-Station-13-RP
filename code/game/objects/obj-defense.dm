@@ -19,7 +19,7 @@
 		return CLICKCHAIN_FULL_BLOCKED
 	// todo: maybe the item side should handle this?
 	run_damage_instance(
-		weapon.damage_force * (clickchain ? clickchain.damage_multiplier : 1),
+		weapon.damage_force * (clickchain ? clickchain.melee_damage_multiplier : 1),
 		weapon.damage_type,
 		weapon.damage_tier,
 		weapon.damage_flag,
@@ -39,7 +39,7 @@
 		return CLICKCHAIN_FULL_BLOCKED
 	// todo: maybe the unarmed_style side should handle this?
 	run_damage_instance(
-		style.get_unarmed_damage(attacker, src) * (clickchain ? clickchain.damage_multiplier : 1),
+		style.get_unarmed_damage(attacker, src) * (clickchain ? clickchain.melee_damage_multiplier : 1),
 		style.damage_type,
 		style.damage_tier,
 		style.damage_flag,
@@ -95,7 +95,7 @@
 
 /obj/hitsound_melee(obj/item/I)
 	if(!isnull(material_primary))
-		var/datum/material/primary = get_primary_material()
+		var/datum/prototype/material/primary = get_primary_material()
 		. = I.damage_type == DAMAGE_TYPE_BURN? primary.sound_melee_burn : primary.sound_melee_brute
 		if(!isnull(.))
 			return
@@ -103,7 +103,7 @@
 
 /obj/hitsound_throwhit(obj/item/I)
 	if(!isnull(material_primary))
-		var/datum/material/primary = get_primary_material()
+		var/datum/prototype/material/primary = get_primary_material()
 		. = I.damage_type == DAMAGE_TYPE_BURN? primary.sound_melee_burn : primary.sound_melee_brute
 		if(!isnull(.))
 			return
@@ -111,7 +111,7 @@
 
 /obj/hitsound_unarmed(mob/M, datum/unarmed_attack/style)
 	if(!isnull(material_primary))
-		var/datum/material/primary = get_primary_material()
+		var/datum/prototype/material/primary = get_primary_material()
 		. = style.damage_type == DAMAGE_TYPE_BURN? primary.sound_melee_burn : primary.sound_melee_brute
 		if(!isnull(.))
 			return

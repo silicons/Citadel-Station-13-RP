@@ -33,7 +33,7 @@
 /atom/proc/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
 	// todo: remove
 	if(isnull(e_args))
-		e_args = new(user)
+		e_args = user.default_clickchain_event_args(src, TRUE)
 	// end
 	if(on_attack_hand(e_args))
 		return TRUE
@@ -140,7 +140,7 @@
 	if(!..())
 		return FALSE
 
-	setClickCooldown(get_attack_speed())
+	setClickCooldownLegacy(get_attack_speed_legacy())
 	A.attack_generic(src,rand(5,6),"bitten")
 
 /*

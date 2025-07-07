@@ -62,6 +62,7 @@
 		..()
 
 /obj/item/flash/update_icon()
+	. = ..()
 	var/obj/item/cell/battery = power_supply
 
 	if(use_external_power)
@@ -71,7 +72,6 @@
 		icon_state = "[base_icon]burnt"
 	else
 		icon_state = "[base_icon]"
-	return
 
 /obj/item/flash/get_cell(inducer)
 	return power_supply
@@ -162,7 +162,7 @@
 
 	add_attack_logs(user,M,"Flashed (attempt) with [src]")
 
-	user.setClickCooldown(user.get_attack_speed(src))
+	user.setClickCooldownLegacy(user.get_attack_speed_legacy(src))
 	user.do_attack_animation(M)
 
 	if(!clown_check(user))
@@ -247,7 +247,7 @@
 	if(!user || !clown_check(user))
 		return
 
-	user.setClickCooldown(user.get_attack_speed(src))
+	user.setClickCooldownLegacy(user.get_attack_speed_legacy(src))
 
 	if(broken)
 		user.show_message("<span class='warning'>The [src.name] is broken</span>", 2)

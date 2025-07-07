@@ -45,6 +45,10 @@
 	name = "Qipao - Red"
 	path = /obj/item/clothing/under/qipao/red
 
+/datum/loadout_entry/uniform/qipao/sleeveless
+	name = "Qipao - Sleeveless Black"
+	path = /obj/item/clothing/under/sleeveless_qipao
+
 /datum/loadout_entry/uniform/croptop
 	name = "Croptop Selection"
 	description = "Light shirts which shows the midsection of the wearer."
@@ -525,6 +529,10 @@
 /datum/loadout_entry/uniform/leotardcolor
 	name = "Colored Leotard"
 	path = /obj/item/clothing/under/leotardcolor
+
+/datum/loadout_entry/uniform/leotardwindow
+	name = "Window Leotard"
+	path = /obj/item/clothing/under/leotardwindow
 
 /datum/loadout_entry/uniform/bunnysuit_f
 	name = "Bunny Leotard - Female"

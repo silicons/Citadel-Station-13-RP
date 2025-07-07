@@ -17,7 +17,7 @@
 	throw_speed = 4
 /*
 	armour_penetration = 10
-	custom_materials = list(/datum/material/iron=1150, /datum/material/glass=2075)
+	custom_materials = list(/datum/prototype/material/iron=1150, /datum/prototype/material/glass=2075)
 */
 	attack_sound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("smashed", "crushed", "cleaved", "chopped", "pulped")
@@ -325,7 +325,7 @@
 	if(isliving(target))
 		var/mob/living/L = target
 		if(hammer_synced.can_mark(L))
-			L.apply_grouped_effect(
+			L.apply_grouped_status_effect(
 				/datum/status_effect/grouped/crusher_mark,
 				WEAKREF(src),
 				TRUE,
