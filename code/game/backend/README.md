@@ -6,6 +6,8 @@ As a non-traditional ss13 server, we employ a modular approach to round flow
 
 There's some modules to note here:
 
+TODO: rename this to storyteller module
+
 ## Game
 
 This module holds the 'active' components of the game:

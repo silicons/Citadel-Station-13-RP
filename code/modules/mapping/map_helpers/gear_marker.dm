@@ -8,6 +8,9 @@
  *
  * this system is not suitable for main maps / high precision placement, it's for offmaps and templates and generally
  * places where it's assumed everyone can access / shares gear with everyone else, and default gear spread is only a suggestion.
+ *
+ * * All gear markers that use tags share tags with other gear markers. This means that 'structured' can overflow to 'distributed'
+ *   if they share the same tag; this is intended.
  */
 /obj/map_helper/gear_marker
 	icon = 'icons/mapping/helpers/gear_marker.dmi'
@@ -105,47 +108,9 @@ GLOBAL_REAL_LIST(distributed_gear_marker_usage_weights) = list(
 
 /**
  * denotes a spot where gear can be spread to
- *
- * standard gear tags:
- *
- * * mecha - a mech
- * * crate - a crate
- *
- * * weapon - weapons
- * * gun - specifically ranged weapons
- * * melee - specifically melee weapons
- * * antiarmor - specifically experimental or powerful weapons
- *
- * * stack - for /obj/item/stack storage
- *
- * * item - something that can fit into a storage container
- * * dense - something that takes the whole tile and *might* block the whole tile
- *
- * standard gear tags - special:
- *
- * * dangerous - something that can cause severe harm to the crew
- * * volatile - something that will cause severe harm to the crew or is going to actively be harmful to be around
- * * anomaly - pretty much implies volatile; anomalies always go in here.
- *
- * standard use tags:
- *
- * * equipment - immediately used gear for the crew
- * * storage - backup gear, materials, and resources for the crew
- * * cargo - something being transported by the crew
- * * product - something to be sold by the crew
- *
- * you usually want to just set list("equipment", "storage", "cargo") and call it a day,
- * as realistically most lazier ships don't need the distinction. it is, however, there if it is.
- *
- * standard use tags - roles:
- *
- * we go off of barotrauma; offmaps generally won't have more than these 4 roles, if they do, they should be
- * doing something special anyways
- *
- * * security - used for the combat role
- * * medical - used for the healing role
- * * engineer - used for the construction role
- * * captain - used for the command role
+ * * Uses 'kind' and 'place' tags.
+ * * Structured spawns falls back to distributed markers if there's no structured
+ *   markers left.
  */
 /obj/map_helper/gear_marker/distributed
 	abstract_type = /obj/map_helper/gear_marker/distributed
@@ -156,13 +121,9 @@ GLOBAL_REAL_LIST(distributed_gear_marker_usage_weights) = list(
 	/// list("mecha", "dense")
 	/// list("crate", "dense")
 	/// list("crate", "dense")
-	var/list/gear_tags = list()
+	var/list/kind_tags = list()
 	/// allow other gear types to overflow in
-	var/gear_can_be_overflow = TRUE
-
-	/// allow fulltile / dense at all?
-	var/allow_dense = TRUE
-
+	var/kind_allow_inbound_overflow = TRUE
 	/// list of tags, most to least specific
 	/// specifies what the object is for
 	///
@@ -171,16 +132,19 @@ GLOBAL_REAL_LIST(distributed_gear_marker_usage_weights) = list(
 	/// list("storage")
 	/// list("cargo")
 	/// list("product")
-	var/list/usage_tags = list()
+	#warn this used to be use_tags so switch place to kind and use to place
+	var/list/place_tags = list()
 	/// allow other uses to overflow in
-	var/use_can_be_overflow = FALSE
+	var/place_allow_inbound_overflow = FALSE
+
+	/// allow fulltile / dense at all?
+	var/allow_dense = TRUE
 
 	//* stateful *//
 
 	/// were we already used to spawn a dense object?
 	/// if so, we probably shouldn't spawn another
 	var/has_spawned_dense = FALSE
-
 
 /obj/map_helper/gear_marker/distributed/preloading_instance(datum/dmm_context/context)
 	context.distributed_gear_markers += src
@@ -234,3 +198,29 @@ GLOBAL_REAL_LIST(distributed_gear_marker_usage_weights) = list(
 
 /obj/map_helper/gear_marker/role/make_locker/ignite()
 	return new locker_type(loc, locker_appearance)
+
+/**
+ * Standard armory-like helper.
+ *
+ * This is different from the rest of our gear markers in that it uses a different
+ * process to populate everything.
+ *
+ * * allows setting tags and tag priorities; as an example, we want
+ *   energy guns to spawn together but we will allow overflow if there's no more room.
+ * * uses 'place' and 'kind' tags
+ * * structured spawns can overflow to distributed but not the other way around
+ */
+/obj/map_helper/gear_marker/structured
+	/// required place tag
+	/// * we will not allow spawning stuff that doesn't belong here in here
+	var/require_place_tag
+	/// preferred kind tag
+	/// * we will prefer spawning a given kind tag, but allow overflows
+	var/prefer_kind_tag
+
+	/// how many packs have we spawned? used for spreading/balancing
+	var/has_spawned_pack_count = 0
+	/// how many entities have we spawned? used for spreading/balancing
+	var/has_spawned_entity_count = 0
+
+#warn impl

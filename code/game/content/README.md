@@ -5,7 +5,6 @@ Content specific to Citadel RP's in-game universe go in here.
 This includes things like:
 - Faction definitions
 - Factional content (guns, mechs, etc)
-- One off gimmick content that doesn't belong to a module
 
 Basically, if the answer to 'is this only required within Citadel RP's in game lore and world' is *yes*, it goes in here.
 
@@ -16,5 +15,4 @@ As an example: Even Nanotrasen itself is not required for the **game** to work -
 ## Notes
 
 - Factions don't necessarily need to be a single faction. E.g. 'pirates' is a generic faction, but they certainly aren't just all a big allied corporation.
-- Things in here can be as small as an item, to a whole world system like the Clockwork Cult.
 - If something is in a faction it **does not mean** it's faction-exclusive. It just specifies that it either 

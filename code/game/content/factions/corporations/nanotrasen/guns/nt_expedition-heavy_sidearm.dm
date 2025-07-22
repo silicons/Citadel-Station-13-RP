@@ -125,6 +125,9 @@ GENERATE_DESIGN_FOR_AUTOLATHE(/obj/item/ammo_magazine/nt_expedition/heavy_sidear
 	render_magazine_overlay = MAGAZINE_CLASS_GENERIC
 	magazine_restrict = /obj/item/ammo_magazine/nt_expedition/heavy_sidearm/pistol
 
+/obj/item/gun/projectile/ballistic/nt_expedition/heavy_sidearm/pistol/loaded
+	magazine_type = /obj/item/ammo_magazine/nt_expedition/heavy_sidearm/pistol
+
 /obj/item/gun/projectile/ballistic/nt_expedition/heavy_sidearm/revolver
 	name = "heavy revolver"
 	desc = "The XNP Mk.5 \"Roller\" revolver; a refined design output by the Nanotrasen Research Division in conjunction with Hephaestus Industries."
@@ -178,6 +181,9 @@ GENERATE_DESIGN_FOR_AUTOLATHE(/obj/item/ammo_magazine/nt_expedition/heavy_sidear
 		/datum/firemode/nt_expedition_heavy_smg/semi_auto,
 		/datum/firemode/nt_expedition_heavy_smg/three_burst,
 	)
+
+/obj/item/gun/projectile/ballistic/nt_expedition/heavy_sidearm/smg/loaded
+	magazine_type = /obj/item/ammo_magazine/nt_expedition/heavy_sidearm/smg
 
 GENERATE_DESIGN_FOR_NT_PROTOLATHE(/obj/item/gun/projectile/ballistic/nt_expedition/heavy_sidearm/smg, /nt_expedition/heavy_smg, "nt-expeditionary-heavy_smg")
 /obj/item/gun/projectile/ballistic/nt_expedition/heavy_sidearm/smg/no_pin
