@@ -9,15 +9,8 @@
 
 	equip_type = EQUIP_SPECIAL
 
-	var/datum/global_iterator/mecha_cloak/cloak_iterator
-
-/obj/item/vehicle_module/cloak/Initialize(mapload)
-	. = ..()
-	cloak_iterator = new /datum/global_iterator/mecha_cloak(list(src),0)
-	cloak_iterator.set_delay(equip_cooldown)
-
 /obj/item/vehicle_module/cloak/Destroy()
-	QDEL_NULL(cloak_iterator)
+	STOP_PROCESSING(SSobj, src)
 	return ..()
 
 /obj/item/vehicle_module/cloak/detach()
@@ -38,13 +31,12 @@
 			start_cloak()
 		else
 			stop_cloak()
-	return
 
 /obj/item/vehicle_module/cloak/proc/start_cloak()
 	if(chassis)
 		chassis.cloak()
 	log_message("Activated.")
-	cloak_iterator.start()
+	START_PROCESSING(SSobj, src)
 	set_ready_state(0)
 	playsound(src, 'sound/effects/EMPulse.ogg', 100, 1)
 
@@ -52,19 +44,14 @@
 	if(chassis)
 		chassis.uncloak()
 	log_message("Deactivated.")
-	cloak_iterator.stop()
+	STOP_PROCESSING(SSobj, src)
 	set_ready_state(1)
 	playsound(src, 'sound/effects/EMPulse.ogg', 100, 1)
 
-// These things are so silly
-/datum/global_iterator/mecha_cloak/process(var/obj/item/vehicle_module/cloak/cloak)
-	//Removed from chassis
-	if(!cloak.chassis)
-		stop()
-		cloak.stop_cloak()
+/obj/item/vehicle_module/cloak/process(delta_time)
+	if(!chassis)
+		stop_cloak()
 		return
-	//Ran out of power
-	if(!cloak.chassis.use_power(cloak.energy_drain))
-		stop()
-		cloak.stop_cloak()
+	if(!chassis.use_power(cloak.energy_drain))
+		stop_cloak()
 		return

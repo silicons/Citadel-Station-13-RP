@@ -6,25 +6,22 @@
 	equip_cooldown = 10
 	energy_drain = 0
 	range = 0
-	var/datum/global_iterator/pr_energy_relay
 	var/coeff = 100
 	var/list/use_channels = list(EQUIP,ENVIRON,LIGHT)
 
 	equip_type = EQUIP_UTILITY
 
 /obj/item/vehicle_module/tesla_energy_relay/Initialize(mapload)
+	if(chassis)
+		START_PROCESSING(SSobj, src)
 	. = ..()
-	pr_energy_relay = new /datum/global_iterator/mecha_energy_relay(list(src),0)
-	pr_energy_relay.set_delay(equip_cooldown)
-	return
 
 /obj/item/vehicle_module/tesla_energy_relay/Destroy()
-	qdel(pr_energy_relay)
-	pr_energy_relay = null
+	STOP_PROCESSING(SSobj, src)
 	return ..()
 
 /obj/item/vehicle_module/tesla_energy_relay/detach()
-	pr_energy_relay.stop()
+	STOP_PROCESSING(SSobj, src)
 //	chassis.proc_res["dynusepower"] = null
 	chassis.proc_res["dyngetcharge"] = null
 	..()
@@ -32,6 +29,7 @@
 
 /obj/item/vehicle_module/tesla_energy_relay/attach(obj/vehicle/sealed/mecha/M)
 	..()
+	START_PROCESSING(SSobj, src)
 	chassis.proc_res["dyngetcharge"] = src
 //	chassis.proc_res["dynusepower"] = src
 	return
@@ -78,28 +76,16 @@
 	if(!chassis) return
 	return "<span style=\"color:[equip_ready?"#0f0":"#f00"];\">*</span>&nbsp;[src.name] - <a href='?src=\ref[src];toggle_relay=1'>[pr_energy_relay.active()?"Dea":"A"]ctivate</a>"
 
-/*	proc/dynusepower(amount)
-		if(!equip_ready) //enabled
-			var/area/A = get_area(chassis)
-			var/pow_chan = get_power_channel(A)
-			if(pow_chan)
-				A.master.use_power(amount*coeff, pow_chan)
-				return 1
-		return chassis.dynusepower(amount)*/
-
-/datum/global_iterator/mecha_energy_relay
-
-/datum/global_iterator/mecha_energy_relay/process(var/obj/item/vehicle_module/tesla_energy_relay/ER)
+/obj/item/vehicle_module/tesla_energy_relay/process(delta_time)
+	var/obj/item/vehicle_module/tesla_energy_relay/ER = src
 	if(!ER.chassis || ER.chassis.hasInternalDamage(MECHA_INT_SHORT_CIRCUIT))
-		stop()
 		ER.set_ready_state(1)
-		return
+		return PROCESS_KILL
 	var/cur_charge = ER.chassis.get_charge()
 	if(isnull(cur_charge) || !ER.chassis.cell)
-		stop()
 		ER.set_ready_state(1)
 		ER.occupant_message("No powercell detected.")
-		return
+		return PROCESS_KILL
 	if(cur_charge<ER.chassis.cell.maxcharge)
 		var/area/A = get_area(ER.chassis)
 		if(A)
@@ -109,7 +95,6 @@
 					pow_chan = c
 					break
 			if(pow_chan)
-				var/delta = min(12, ER.chassis.cell.maxcharge-cur_charge)
+				var/delta = min(12 * delta_time, ER.chassis.cell.maxcharge - cur_charge)
 				ER.chassis.give_power(delta)
-				A.use_power_oneoff(delta*ER.coeff, pow_chan)
-	return
+				A.use_power_oneoff(delta * ER.coeff, pow_chan)
