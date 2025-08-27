@@ -9,7 +9,7 @@
 	subcategory = GAME_PREFERENCE_SUBCATEGORY_ADMIN_GENERAL
 	admin_only = TRUE
 	default_value = TRUE
-	legacy_key = "CHAT_RLOOC"
+
 
 /datum/game_preference_entry/toggle/admin_obfuscate_stealth_dsay
 	name = "Obfuscate Stealthmin Dsay"
@@ -19,7 +19,7 @@
 	subcategory = GAME_PREFERENCE_SUBCATEGORY_ADMIN_GENERAL
 	admin_only = TRUE
 	default_value = TRUE
-	legacy_key = "OBFUSCATE_STEALTH_DSAY"
+
 
 /datum/game_preference_entry/toggle/admin_stealth_hides_ghost
 	name = "Stealthmin Hides Ghost"
@@ -38,7 +38,7 @@
 	subcategory = GAME_PREFERENCE_SUBCATEGORY_ADMIN_GENERAL
 	admin_only = TRUE
 	default_value = "#000001"
-	legacy_savefile_key = "ooccolor"
+
 
 /datum/game_preference_entry/simple_color/admin_ooc_color/is_visible(client/user)
 	return ..() && CONFIG_GET(flag/allow_admin_ooccolor)

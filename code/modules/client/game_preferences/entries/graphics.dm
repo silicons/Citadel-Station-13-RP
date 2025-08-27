@@ -35,7 +35,7 @@
 	min_value = 0
 	max_value = 180
 	round_to_nearest = 1
-	legacy_savefile_key = "client_fps"
+
 
 /datum/game_preference_entry/number/fps/on_set(client/user, value, first_init)
 	. = ..()

@@ -15,11 +15,6 @@
 	var/default_value
 	/// only visible for admins
 	var/admin_only = FALSE
-	#warn remove legacy keys after migration
-	/// legacy import id - set if it's using new global prefs system
-	var/legacy_global_key
-	/// legacy import id - set if it's using old savefile direct write
-	var/legacy_savefile_key
 
 /datum/game_preference_entry/proc/default_value(client/user)
 	return default_value

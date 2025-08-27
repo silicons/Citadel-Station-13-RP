@@ -8,7 +8,7 @@
 	default_value = TRUE
 	category = GAME_PREFERENCE_CATEGORY_OBSERVER
 	subcategory = GAME_PREFERENCE_SUBCATEGORY_OBSERVER_MAIN
-	legacy_key = "CHAT_GHOSTEARS"
+
 
 /datum/game_preference_entry/toggle/observer_ghost_sight
 	name = "See All Emotes"
@@ -17,7 +17,7 @@
 	default_value = TRUE
 	category = GAME_PREFERENCE_CATEGORY_OBSERVER
 	subcategory = GAME_PREFERENCE_SUBCATEGORY_OBSERVER_MAIN
-	legacy_key = "CHAT_GHOSTSIGHT"
+
 
 /datum/game_preference_entry/toggle/observer_ghost_radio
 	name = "Hear All Radio"
@@ -26,7 +26,7 @@
 	default_value = TRUE
 	category = GAME_PREFERENCE_CATEGORY_OBSERVER
 	subcategory = GAME_PREFERENCE_SUBCATEGORY_OBSERVER_MAIN
-	legacy_key = "CHAT_GHOSTRADIO"
+
 
 /datum/game_preference_entry/toggle/observer_ghost_subtle
 	name = "See Subtle Emotes"
@@ -35,7 +35,7 @@
 	default_value = TRUE
 	category = GAME_PREFERENCE_CATEGORY_OBSERVER
 	subcategory = GAME_PREFERENCE_SUBCATEGORY_OBSERVER_MAIN
-	legacy_key = "SUBTLE_SEE"
+
 
 /datum/game_preference_entry/toggle/presence_anonymous_ghost_chat
 	name = "Anonymous Ghost Chat"
