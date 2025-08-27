@@ -13,7 +13,7 @@
 	mid_length = 60
 	volume = 40
 	extra_range = 10
-	pref_check = /datum/game_preference_toggle/ambience/supermatter_hum
+	pref_check = /datum/game_preference_entry/toggle/ambience_supermatter_hum
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -102,4 +102,4 @@
 	mid_length = 4
 	end_sound = 'sound/machines/air_pump/airpumpshutdown.ogg'
 	volume = 15
-	pref_check = /datum/game_preference_toggle/ambience/atmospherics
+	pref_check = /datum/game_preference_entry/toggle/ambience_atmospherics

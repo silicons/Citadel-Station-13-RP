@@ -70,7 +70,7 @@
 		to_chat(src, "Guests may not use OOC.")
 		return
 
-	if(!get_preference_toggle(/datum/game_preference_toggle/chat/ooc))
+	if(!get_preference_toggle(/datum/game_preference_entry/toggle/chat_show_ooc))
 		to_chat(src, "<span class='warning'>You have OOC muted.</span>")
 		return
 
@@ -117,7 +117,7 @@
 			return
 
 
-	if(!get_preference_toggle(/datum/game_preference_toggle/chat/ooc))
+	if(!get_preference_toggle(/datum/game_preference_entry/toggle/chat_show_ooc))
 		to_chat(src, "<span class='warning'>You have OOC muted.</span>")
 		return
 
@@ -146,7 +146,7 @@
 		if(!target.initialized)
 			continue
 
-		if(target.get_preference_toggle(/datum/game_preference_toggle/chat/ooc))
+		if(target.get_preference_toggle(/datum/game_preference_entry/toggle/chat_show_ooc))
 			if(target.is_key_ignored(key)) // If we're ignored by this person, then do nothing.
 				continue
 			var/display_name
@@ -189,7 +189,7 @@
 	if(!msg)
 		return
 
-	if(!get_preference_toggle(/datum/game_preference_toggle/chat/looc))
+	if(!get_preference_toggle(/datum/game_preference_entry/toggle/chat_show_looc))
 		to_chat(src, "<span class='danger'>You have LOOC muted.</span>")
 		return
 
@@ -233,7 +233,7 @@
 
 	// Everyone in normal viewing range of the LOOC
 	for(var/mob/viewer in m_viewers)
-		if(viewer.client && viewer.client.get_preference_toggle(/datum/game_preference_toggle/chat/looc))
+		if(viewer.client && viewer.client.get_preference_toggle(/datum/game_preference_entry/toggle/chat_show_looc))
 			receivers |= viewer.client
 		else if(istype(viewer,/mob/observer/eye)) // For AI eyes and the like
 			var/mob/observer/eye/E = viewer
@@ -242,7 +242,7 @@
 
 	// Admins with RLOOC displayed who weren't already in
 	for(var/client/admin in GLOB.admins)
-		if(!(admin in receivers) && admin.get_preference_toggle(/datum/game_preference_toggle/admin/global_looc))
+		if(!(admin in receivers) && admin.get_preference_toggle(/datum/game_preference_entry/toggle/admin_global_looc))
 			r_receivers |= admin
 
 	msg = emoji_parse(msg)

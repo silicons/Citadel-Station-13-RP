@@ -71,7 +71,7 @@
 				entry += "[C.get_revealed_key()]"
 			else
 				entry += "[C.get_public_key()]"
-			if(C.get_preference_toggle(/datum/game_preference_toggle/presence/show_advanced_who))
+			if(C.get_preference_toggle(/datum/game_preference_entry/toggle/presence_show_advanced_who))
 				if(isobserver(C.mob))
 					entry += " - <font color='gray'>Observing</font>"
 				else if(istype(C.mob, /mob/new_player))

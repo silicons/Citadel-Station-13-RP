@@ -4,13 +4,14 @@ SUBSYSTEM_DEF(preferences)
 	init_stage = INIT_STAGE_EARLY
 	subsystem_flags = SS_NO_FIRE
 
+	var/datum/game_preference_backend/backend
 	var/list/datum/game_preference_entry/entries_by_key
-	var/list/datum/game_preference_toggle/toggles_by_key
 	var/static/list/datum/game_preferences/preferences_by_key = list()
 
 /datum/controller/subsystem/preferences/Initialize()
+	backend = new /datum/game_preference_backend/sqlite
+	backend.initialize()
 	init_preference_entries()
-	init_preference_toggles()
 	for(var/key in preferences_by_key)
 		var/datum/game_preferences/prefs = preferences_by_key[key]
 		prefs.initialize()
@@ -24,15 +25,6 @@ SUBSYSTEM_DEF(preferences)
 	else
 		entrylike = entries_by_key[entrylike]
 	return entrylike
-
-/datum/controller/subsystem/preferences/proc/resolve_preference_toggle(datum/game_preference_toggle/togglelike)
-	if(ispath(togglelike))
-		togglelike = initial(togglelike.key)
-		togglelike = toggles_by_key[togglelike]
-	else if(istype(togglelike))
-	else
-		togglelike = toggles_by_key[togglelike]
-	return togglelike
 
 /datum/controller/subsystem/preferences/proc/init_preference_entries()
 	. = list()
@@ -49,24 +41,15 @@ SUBSYSTEM_DEF(preferences)
 		.[casted.key] = casted
 	entries_by_key = .
 
-/datum/controller/subsystem/preferences/proc/init_preference_toggles()
-	. = list()
-	for(var/datum/game_preference_toggle/casted as anything in subtypesof(/datum/game_preference_toggle))
-		if(initial(casted.abstract_type) == casted)
-			continue
-		casted = new casted
-		if(!casted.key || !istext(casted.key))
-			STACK_TRACE("bad key: [casted.key]")
-			continue
-		if(!isnull(.[casted.key]))
-			STACK_TRACE("dupe key between [casted.type] and [.[casted.key]:type]")
-			continue
-		.[casted.key] = casted
-	toggles_by_key = .
-
-/datum/controller/subsystem/preferences/proc/resolve_game_preferences(key, ckey)
+/**
+ * @params
+ * * key - client **`key`**. **not** `ckey`! the raw key is needed for
+ *         book-keeping purposes.
+ */
+/datum/controller/subsystem/preferences/proc/resolve_game_preferences(key)
+	var/ckey = ckey(key)
 	if(!istype(preferences_by_key[ckey], /datum/game_preferences))
-		var/datum/game_preferences/initializing = new(key, ckey)
+		var/datum/game_preferences/initializing = new(key)
 		preferences_by_key[ckey] = initializing
 		if(initialized)
 			initializing.initialize()
@@ -75,10 +58,8 @@ SUBSYSTEM_DEF(preferences)
 		found.initialize()
 	return found
 
-/datum/controller/subsystem/preferences/on_sql_reconnect()
-	for(var/ckey in SSpreferences.preferences_by_key)
-		var/datum/game_preferences/preferences = SSpreferences.preferences_by_key[ckey]
-		if(!istype(preferences))
-			continue
-		preferences.oops_sql_came_back_perform_a_reload()
-	return ..()
+#warn Migration procs are only for testmerge.
+
+/datum/controller/subsystem/preferences/proc/__migrate_key(key)
+
+/datum/controller/subsystem/preferences/proc/__migrate_everything()

@@ -1,5 +1,5 @@
 /datum/looping_sound/weather
-	pref_check = /datum/game_preference_toggle/ambience/weather
+	pref_check = /datum/game_preference_entry/toggle/ambience_weather
 	soundenvwet = -10000
 	soundenvdry = 0
 

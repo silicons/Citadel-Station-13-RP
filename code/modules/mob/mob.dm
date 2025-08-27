@@ -1053,7 +1053,7 @@ GLOBAL_VAR_INIT(exploit_warn_spam_prevention, 0)
 	return TRUE
 
 /mob/MouseEntered(location, control, params)
-	if(usr != src && usr.get_preference_toggle(/datum/game_preference_toggle/game/mob_tooltips) && src.will_show_tooltip())
+	if(usr != src && usr.get_preference_toggle(/datum/game_preference_entry/toggle/tooltip_on_mobs) && src.will_show_tooltip())
 		openToolTip(user = usr, tip_src = src, params = params, title = get_nametag_name(usr), content = get_nametag_desc(usr))
 
 	..()

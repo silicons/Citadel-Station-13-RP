@@ -14,8 +14,6 @@
  * Game preferences
  *
  * Game prefs don't need an init order because unlike character setup, there's no dependencies, in theory.
- *
- * todo: rework this a bit, the way i did tgui is pretty atrocious;
  */
 /datum/game_preferences
 	//* Loading *//
@@ -25,43 +23,21 @@
 	//* Preferences *//
 	/// preferences by key - key = value
 	var/list/entries_by_key
-	/// arbitrary key access used by middleware
-	var/list/misc_by_key
-	// todo: move menu options in here and not from /datum/preferences
 
 	//* Middleware - Keybindings *//
 	/// keybindings - key to list of keybind ids
-	var/list/keybindings
-
-	//* Middleware - Toggles *//
-	/// toggles by key - TRUE or FALSE
-	var/list/toggles_by_key
+	var/list/keybindings_key_lookup
+	/// keybindings - hotkey mode
+	var/keybindings_hotkey_mode = TRUE
 
 	//* System *//
-	/// were we originally sql loaded?
-	/// used to determine if sql is authoritative when sql comes back
-	///
-	/// - if sql was originally loaded and sql comes back, we are still authoritative
-	/// - if sql wasn't originally loaded and sql comes back and a sql save exists, we are overwritten
-	/// - if a save doesn't exist, we are authoritative and are flushed to sql
-	var/authoritatively_loaded_by_sql = FALSE
-	/// something fucky wucky happened and the next time sql comes back,
-	/// we need to flush data and assert authoritativeness
-	var/sql_state_desynced = FALSE
+
 	/// our player's ckey
 	var/ckey
 	/// we are a guest
 	var/is_guest = FALSE
 	/// our active client
 	var/client/active
-	/// our player's id
-	///
-	/// set upon successful sql save
-	/// we will try to load a sql preferences of a given playerid
-	/// when we load from sql
-	var/authoritative_player_id
-	/// our prefs version
-	var/version = GAME_PREFERENCES_VERSION_CURRENT
 	/// are we saved? if TRUE, we have modified vars
 	var/is_dirty = FALSE
 
@@ -77,13 +53,15 @@
 		perform_initial_load()
 		initialized = TRUE
 
+#warn sigh new shit
+
 /datum/game_preferences/proc/on_reconnect()
 	// do not mess with client init; start a new call chain
 	spawn(0)
 		block_on_initialized()
 		initialize_client()
 
-/datum/game_preferences/proc/block_on_initialized(timeout = 10 SECONDS)
+/datum/game_preferences/proc/block_on_initialized(timeout = 5 SECONDS)
 	var/wait_until = world.time + timeout
 	UNTIL(initialized || (world.time >= wait_until))
 	if(!initialized)
@@ -149,7 +127,7 @@
 	legacy_savefile["preferences"] >> old_toggles
 	if(islist(old_toggles))
 		for(var/key in SSpreferences.toggles_by_key)
-			var/datum/game_preference_toggle/toggle = SSpreferences.toggles_by_key[key]
+			var/datum/game_preference_entry/toggle/toggle = SSpreferences.toggles_by_key[key]
 			if(!toggle.legacy_key)
 				continue
 			toggles_by_key[key] = (toggle.legacy_key in old_toggles)
@@ -265,61 +243,12 @@
 /**
  * Please use type whenever you can, do not use IDs/instances unless absolutely necessary.
  */
-/datum/game_preferences/proc/set_toggle(datum/game_preference_toggle/id_path_instance, value)
-	if(!SSpreferences.initialized)
-		return FALSE
-	var/datum/game_preference_toggle/toggle = SSpreferences.resolve_preference_toggle(id_path_instance)
-	if(isnull(toggle))
-		CRASH("invalid fetch")
-	if(!initialized)
-		return FALSE
-	toggles_by_key[toggle.key] = value
-	if(active)
-		toggle.toggled(active, value)
-	mark_dirty()
-	return TRUE
-
-/**
- * Please use type whenever you can, do not use IDs/instances unless absolutely necessary.
- */
-/datum/game_preferences/proc/toggle(datum/game_preference_toggle/id_path_instance)
-	if(!SSpreferences.initialized)
-		return FALSE
-	var/datum/game_preference_toggle/toggle = SSpreferences.resolve_preference_toggle(id_path_instance)
-	if(isnull(toggle))
-		CRASH("invalid fetch")
-	if(!initialized)
-		return FALSE
-	toggles_by_key[toggle.key] = !toggles_by_key[toggle.key]
-	if(active)
-		toggle.toggled(active, toggles_by_key[toggle.key])
-	mark_dirty()
-	return TRUE
-
-/**
- * Please use type whenever you can, do not use IDs/instances unless absolutely necessary.
- */
-/datum/game_preferences/proc/get_toggle(datum/game_preference_toggle/id_path_instance)
-	if(ispath(id_path_instance) && !SSpreferences.initialized)
-		return id_path_instance.default_value
-	var/datum/game_preference_toggle/toggle = SSpreferences.resolve_preference_toggle(id_path_instance)
-	if(isnull(toggle))
-		CRASH("invalid fetch")
-	if(!initialized)
-		return toggle.default_value
-	if(!toggle.is_visible(active, TRUE))
-		return toggle.default_value
-	return toggles_by_key[toggle.key]
-
-/**
- * Please use type whenever you can, do not use IDs/instances unless absolutely necessary.
- */
 /datum/game_preferences/proc/set_entry(datum/game_preference_entry/id_path_instance, value)
 	if(!SSpreferences.initialized)
 		return FALSE
 	var/datum/game_preference_entry/entry = SSpreferences.resolve_preference_entry(id_path_instance)
 	if(isnull(entry))
-		CRASH("invalid fetch")
+		CRASH("entry not found")
 	if(!initialized)
 		return FALSE
 	if(!entry.is_visible(active, TRUE))
@@ -340,12 +269,29 @@
 		return id_path_instance.default_value
 	var/datum/game_preference_entry/entry = SSpreferences.resolve_preference_entry(id_path_instance)
 	if(isnull(entry))
-		CRASH("invalid fetch")
+		CRASH("entry not found")
 	if(!initialized)
 		return entry.default_value(active)
 	if(!entry.is_visible(active, TRUE))
 		return entry.default_value(active)
 	return entries_by_key[entry.key]
+
+/**
+ * Please use type whenever you can, do not use IDs/instances unless absolutely necessary.
+ */
+/datum/game_preferences/proc/toggle_entry(datum/game_preference_entry/id_path_instance)
+	if(!SSpreferences.initialized)
+		return FALSE
+	var/datum/game_preference_entry/toggle/entry = SSpreferences.game_preference_entry(id_path_instance)
+	if(!istype(entry))
+		CRASH("entry not found or not a toggle")
+	if(!initialized)
+		return FALSE
+	entries_by_key[entry.key] = !entries_by_key[entry.key]
+	if(active)
+		entry.on_set(active, entries_by_key[entry.key])
+	mark_dirty()
+	return TRUE
 
 //* Save / Load *//
 
@@ -357,11 +303,25 @@
 
 /datum/game_preferences/proc/mark_dirty()
 	is_dirty = TRUE
+	last_modified = world.realtime
 	push_ui_data(data = list("dirty" = TRUE))
 
 /datum/game_preferences/proc/mark_saved()
 	is_dirty = FALSE
 	push_ui_data(data = list("dirty" = FALSE))
+
+/datum/game_preferences/proc/serialize_to_list()
+	. = list()
+	.["entries"] = entries_by_key
+	var/list/compiled_middleware = list()
+	#warn impl
+	.["middleware"] = compiled_middleware
+
+/datum/game_preferences/proc/deserialize_from_list(list/data)
+	entries_by_key = deep_copy_list(data["entries"])
+	var/list/restoring_middleware = data["middleware"]
+	for(var/middleware_key in restoring_middleware)
+	#warn impl
 
 /datum/game_preferences/proc/save()
 	if(!initialized)
@@ -603,10 +563,10 @@
 /**
  * Please use type whenever you can, do not use IDs/instances unless absolutely necessary.
  */
-/client/proc/get_preference_toggle(datum/game_preference_toggle/id_path_instance)
+/client/proc/get_preference_toggle(datum/game_preference_entry/toggle/id_path_instance)
 	if(!preferences && ispath(id_path_instance))
 		return id_path_instance.default_value
-	return preferences.get_toggle(id_path_instance)
+	return preferences.get_entry(id_path_instance)
 
 /**
  * Please use type whenever you can, do not use IDs/instances unless absolutely necessary.
@@ -621,10 +581,10 @@
 /**
  * Please use type whenever you can, do not use IDs/instances unless absolutely necessary.
  */
-/mob/proc/get_preference_toggle(datum/game_preference_toggle/id_path_instance)
+/mob/proc/get_preference_toggle(datum/game_preference_entry/toggle/id_path_instance)
 	if(!client?.preferences && ispath(id_path_instance))
 		return id_path_instance.default_value
-	return client.preferences.get_toggle(id_path_instance)
+	return client.preferences.get_entry(id_path_instance)
 
 /**
  * Please use type whenever you can, do not use IDs/instances unless absolutely necessary.

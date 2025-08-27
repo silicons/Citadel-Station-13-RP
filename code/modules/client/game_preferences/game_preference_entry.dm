@@ -13,6 +13,9 @@
 	var/priority = 0
 	/// default value
 	var/default_value
+	/// only visible for admins
+	var/admin_only = FALSE
+	#warn remove legacy keys after migration
 	/// legacy import id - set if it's using new global prefs system
 	var/legacy_global_key
 	/// legacy import id - set if it's using old savefile direct write
@@ -21,8 +24,8 @@
 /datum/game_preference_entry/proc/default_value(client/user)
 	return default_value
 
-/datum/game_preference_entry/proc/is_visible(client/user, silent)
-	return TRUE
+/datum/game_preference_entry/proc/is_visible(client/user)
+	return admin_only ? check_rights(C = user, show_msg = FALSE) : TRUE
 
 /**
  * called when a value is changed with a client active
@@ -37,9 +40,6 @@
 
 /datum/game_preference_entry/proc/filter_value(value)
 	return value
-
-/datum/game_preference_entry/proc/migrate_legacy_data(data)
-	return data
 
 /datum/game_preference_entry/proc/tgui_preference_schema()
 	return list(

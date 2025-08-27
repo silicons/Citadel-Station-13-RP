@@ -5,6 +5,14 @@
 	name = "Keybindings"
 	key = "keybindings"
 
+/datum/game_preference_middleware/keybindings/serialize_prefs_to_list(datum/game_preferences/prefs, list/errors_out)
+	. = ..()
+
+/datum/game_preference_middleware/keybindings/deserialize_prefs_from_list(datum/game_preferences/prefs, list/data, list/errors_out)
+	..()
+
+#warn impl all
+
 /datum/game_preference_middleware/keybindings/on_initial_load(datum/game_preferences/prefs)
 	prefs.active?.set_macros()
 	prefs.active?.update_movement_keys(src)
@@ -82,7 +90,7 @@
 			prefs.active?.update_movement_keys()
 			return TRUE
 
-/datum/game_preference_middleware/keybindings/handle_sanitize(datum/game_preferences/prefs)
+/datum/game_preference_middleware/keybindings/handle_sanitize(datum/game_preferences/prefs, list/errors_out)
 	. = ..()
 	prefs.misc_by_key[GAME_PREFERENCE_MISC_KEY_HOTKEY_MODE] = \
 		isnull(prefs.misc_by_key[GAME_PREFERENCE_MISC_KEY_HOTKEY_MODE])? TRUE : !!prefs.misc_by_key[GAME_PREFERENCE_MISC_KEY_HOTKEY_MODE]

@@ -17,6 +17,13 @@ GLOBAL_LIST_INIT(game_preference_middleware, init_game_preference_middleware())
 	var/name
 	/// key
 	var/key
+	///
+
+/datum/game_preference_middleware/proc/serialize_prefs_to_list(datum/game_preferences/prefs, list/errors_out)
+	return list()
+
+/datum/game_preference_middleware/proc/deserialize_prefs_from_list(datum/game_preferences/prefs, list/data, list/errors_out)
+	return
 
 /**
  * return TRUE to stop handling
@@ -31,14 +38,12 @@ GLOBAL_LIST_INIT(game_preference_middleware, init_game_preference_middleware())
  */
 /datum/game_preference_middleware/proc/handle_reset(datum/game_preferences/prefs)
 	prefs.mark_dirty()
-	return
 
 /**
  * sanitize everything
  */
-/datum/game_preference_middleware/proc/handle_sanitize(datum/game_preferences/prefs)
+/datum/game_preference_middleware/proc/handle_sanitize(datum/game_preferences/prefs, list/errors_out)
 	prefs.mark_dirty()
-	return
 
 /**
  * on initial load

@@ -407,7 +407,7 @@
 	var/list/namecounts = list()
 	for(var/mob/M in mobs)
 		// todo: stealthmin will **break** when they're logged out. we don't want this! it's a hard tell.
-		if(isobserver(M) && ghostfollow && M.client?.is_under_stealthmin() && M.get_preference_toggle(/datum/game_preference_toggle/admin/stealth_hides_ghost))
+		if(isobserver(M) && ghostfollow && M.client?.is_under_stealthmin() && M.get_preference_toggle(/datum/game_preference_entry/toggle/admin_stealth_hides_ghost))
 			continue
 		var/name = M.name
 		if (name in names)

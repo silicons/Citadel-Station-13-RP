@@ -6,7 +6,7 @@
 	description = "Render space via parallax. This should be kept on."
 	key = "enable_parallax"
 	category = GAME_PREFERENCE_CATEGORY_GRAPHICS
-	subcategory = "Parallax"
+	subcategory = GAME_PREFERENCE_SUBCATEGORY_GRAPHICS_PARALLAX
 	default_value = TRUE
 
 /datum/game_preference_entry/toggle/parallax/on_set(client/user, value, first_init)
@@ -18,7 +18,7 @@
 	description = "Fake, filter ambient occlusion. This should be kept off."
 	key = "fake_ambient_occlusion"
 	category = GAME_PREFERENCE_CATEGORY_GRAPHICS
-	subcategory = "Rendering"
+	subcategory = GAME_PREFERENCE_SUBCATEGORY_GRAPHICS_RENDERING
 	default_value = FALSE
 
 /datum/game_preference_entry/toggle/ambient_occlusion/on_set(client/user, value, first_init)
@@ -30,7 +30,7 @@
 	description = "Client rendering FPS. It is recommended to set this to a multiple of the server's tickrate. 0 to sync with server."
 	key = "client_fps"
 	category = GAME_PREFERENCE_CATEGORY_GRAPHICS
-	subcategory = "Rendering"
+	subcategory = GAME_PREFERENCE_SUBCATEGORY_GRAPHICS_RENDERING
 	default_value = 0
 	min_value = 0
 	max_value = 180

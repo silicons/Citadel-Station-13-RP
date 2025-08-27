@@ -430,7 +430,7 @@
 	if(clickchain_flags & CLICKCHAIN_HAS_PROXIMITY)
 		return
 
-	if(!user?.client?.get_preference_toggle(/datum/game_preference_toggle/game/help_intent_firing) && user.a_intent == INTENT_HELP)
+	if(!user?.client?.get_preference_toggle(/datum/game_preference_entry/toggle/behavior_help_intent_firing) && user.a_intent == INTENT_HELP)
 		to_chat(user, SPAN_WARNING("You refrain from firing [src] because your intent is set to help!"))
 		return
 
