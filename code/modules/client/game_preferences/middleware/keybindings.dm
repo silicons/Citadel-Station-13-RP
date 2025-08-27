@@ -21,16 +21,16 @@
 /datum/game_preference_middleware/keybindings/handle_reset(datum/game_preferences/prefs)
 	. = ..()
 
-	prefs.keybindings = list()
+	prefs.keybindings_key_lookup = list()
 	// don't change their hotkey mode.. unless it was never there.
 	prefs.misc_by_key[GAME_PREFERENCE_MISC_KEY_HOTKEY_MODE] = \
 		isnull(prefs.misc_by_key[GAME_PREFERENCE_MISC_KEY_HOTKEY_MODE])? TRUE : !!prefs.misc_by_key[GAME_PREFERENCE_MISC_KEY_HOTKEY_MODE]
 	var/hotkey_mode = prefs.misc_by_key[GAME_PREFERENCE_MISC_KEY_HOTKEY_MODE]
 	var/list/defaults = deep_copy_list(hotkey_mode? GLOB.hotkey_keybinding_list_by_key : GLOB.classic_keybinding_list_by_key)
-	prefs.keybindings = defaults
+	prefs.keybindings_key_lookup = defaults
 
 	prefs.push_ui_modules(updates = list((src.key) = list(
-		"bindings" = prefs.keybindings,
+		"bindings" = prefs.keybindings_key_lookup,
 		"hotkeyMode" = prefs.misc_by_key[GAME_PREFERENCE_MISC_KEY_HOTKEY_MODE],
 	)))
 
@@ -68,13 +68,13 @@
 			if(adding_key == replacing_key)
 				return TRUE
 			if(!isnull(replacing_key))
-				prefs.keybindings[replacing_key] -= keybind_id
-			if(isnull(prefs.keybindings[adding_key]))
-				prefs.keybindings[adding_key] = list()
-			if(!(keybind_id in prefs.keybindings[adding_key]))
-				prefs.keybindings[adding_key] += keybind_id
+				prefs.keybindings_key_lookup[replacing_key] -= keybind_id
+			if(isnull(prefs.keybindings_key_lookup[adding_key]))
+				prefs.keybindings_key_lookup[adding_key] = list()
+			if(!(keybind_id in prefs.keybindings_key_lookup[adding_key]))
+				prefs.keybindings_key_lookup[adding_key] += keybind_id
 			prefs.push_ui_modules(updates = list((src.key) = list(
-				"bindings" = prefs.keybindings,
+				"bindings" = prefs.keybindings_key_lookup,
 			)))
 			prefs.active?.update_movement_keys()
 			return TRUE
@@ -83,46 +83,48 @@
 			var/key = params["key"]
 			if(!key)
 				return TRUE
-			prefs.keybindings[key] -= keybind_id
+			prefs.keybindings_key_lookup[key] -= keybind_id
 			prefs.push_ui_modules(updates = list((src.key) = list(
-				"bindings" = prefs.keybindings,
+				"bindings" = prefs.keybindings_key_lookup,
 			)))
 			prefs.active?.update_movement_keys()
 			return TRUE
 
 /datum/game_preference_middleware/keybindings/handle_sanitize(datum/game_preferences/prefs, list/errors_out)
 	. = ..()
-	prefs.misc_by_key[GAME_PREFERENCE_MISC_KEY_HOTKEY_MODE] = \
-		isnull(prefs.misc_by_key[GAME_PREFERENCE_MISC_KEY_HOTKEY_MODE])? TRUE : !!prefs.misc_by_key[GAME_PREFERENCE_MISC_KEY_HOTKEY_MODE]
+	if(isnull(prefs.keybindings_hotkey_mode))
+		prefs.keybindings_hotkey_mode = TRUE
+	else
+		prefs.keybindings_hotkey_mode = !!prefs.keybindings_hotkey_mode
 	var/list/keys_by_bind_id = list()
 	//! legacy: get rid of known trash values
-	prefs.keybindings -= "Unbound"
+	prefs.keybindings_key_lookup -= "Unbound"
 	//! end
-	for(var/key in prefs.keybindings)
+	for(var/key in prefs.keybindings_key_lookup)
 		var/had_something = FALSE
-		if(islist(prefs.keybindings[key]))
-			var/list/keybind_ids = prefs.keybindings[key]
+		if(islist(prefs.keybindings_key_lookup[key]))
+			var/list/keybind_ids = prefs.keybindings_key_lookup[key]
 			if(length(keybind_ids) > MAX_COMMANDS_PER_KEY)
 				keybind_ids.len = MAX_COMMANDS_PER_KEY
-			for(var/bind_id in prefs.keybindings[key])
+			for(var/bind_id in prefs.keybindings_key_lookup[key])
 				var/datum/keybinding/found = GLOB.keybindings_by_name[bind_id]
 				if(isnull(found))
-					prefs.keybindings[key] -= bind_id
+					prefs.keybindings_key_lookup[key] -= bind_id
 					continue
 				if(isnull(keys_by_bind_id[bind_id]))
 					keys_by_bind_id[bind_id] = list()
 				if(length(keys_by_bind_id[bind_id]) > MAX_KEYS_PER_KEYBIND)
-					prefs.keybindings[key] -= bind_id
+					prefs.keybindings_key_lookup[key] -= bind_id
 					continue
 				keys_by_bind_id[bind_id] += key
 				had_something = TRUE
 		if(!had_something)
-			prefs.keybindings -= key
+			prefs.keybindings_key_lookup -= key
 
-/datum/game_preference_middleware/keybindings/ui_static_data(mob/user, datum/tgui/ui)
+/datum/game_preference_middleware/keybindings/prefs_data(mob/user, datum/tgui/ui)
 	. = ..()
 	var/datum/game_preferences/prefs = ui.src_object
-	.["bindings"] = prefs.keybindings
+	.["bindings"] = prefs.keybindings_key_lookup
 	var/list/constructed_keybinds = list()
 	for(var/key in GLOB.keybindings_by_name)
 		var/datum/keybinding/keybind = GLOB.keybindings_by_name[key]

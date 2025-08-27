@@ -75,7 +75,7 @@
 		else
 			full_key = "[AltMod][CtrlMod][ShiftMod][_key]"
 	var/keycount = 0
-	for(var/kb_name in preferences?.keybindings[full_key])
+	for(var/kb_name in preferences?.keybindings_key_lookup[full_key])
 		keycount++
 		var/datum/keybinding/kb = GLOB.keybindings_by_name[kb_name]
 		if(kb.can_use(src) && kb.down(src) && keycount >= MAX_COMMANDS_PER_KEY)
@@ -137,7 +137,7 @@
 
 	// We don't do full key for release, because for mod keys you
 	// can hold different keys and releasing any should be handled by the key binding specifically
-	for (var/kb_name in preferences?.keybindings[_key])
+	for (var/kb_name in preferences?.keybindings_key_lookup[_key])
 		var/datum/keybinding/kb = GLOB.keybindings_by_name[kb_name]
 		if(kb.can_use(src) && kb.up(src))
 			break
@@ -154,11 +154,11 @@
 
 /client/proc/update_movement_keys(datum/game_preferences/direct_prefs)
 	var/datum/game_preferences/D = preferences || direct_prefs
-	if(!D?.keybindings)
+	if(!D?.keybindings_key_lookup)
 		return
 	movement_keys = list()
-	for(var/key in D.keybindings)
-		for(var/kb_name in D.keybindings[key])
+	for(var/key in D.keybindings_key_lookup)
+		for(var/kb_name in D.keybindings_key_lookup[key])
 			switch(kb_name)
 				if("North")
 					movement_keys[key] = NORTH
@@ -177,8 +177,8 @@
 		return list()
 	var/bind_id = ispath(binding_or_path) ? binding_or_path::name : binding_or_path.name
 	. = list()
-	for(var/key in preferences.keybindings)
-		if(bind_id in preferences.keybindings[key])
+	for(var/key in preferences.keybindings_key_lookup)
+		if(bind_id in preferences.keybindings_key_lookup[key])
 			. += key
 
 /**

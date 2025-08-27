@@ -15,9 +15,8 @@ GLOBAL_LIST_INIT(game_preference_middleware, init_game_preference_middleware())
 /datum/game_preference_middleware
 	/// category name
 	var/name
-	/// key
+	/// key; used internally for lookup and tgui, this should not change without tgui-side changes
 	var/key
-	///
 
 /datum/game_preference_middleware/proc/serialize_prefs_to_list(datum/game_preferences/prefs, list/errors_out)
 	return list()
@@ -50,3 +49,15 @@ GLOBAL_LIST_INIT(game_preference_middleware, init_game_preference_middleware())
  */
 /datum/game_preference_middleware/proc/on_initial_load(datum/game_preferences/prefs)
 	return
+
+/**
+ * Initial data to send to TGUI. Not automatically updated.
+ */
+/datum/game_preference_middleware/proc/prefs_ui_data(datum/game_preferences/prefs)
+	return list()
+
+/**
+ * Push data to TGUI.
+ */
+/datum/game_preference_middleware/proc/push_prefs_ui_data(datum/game_preferences/prefs, list/data)
+	#warn impl
