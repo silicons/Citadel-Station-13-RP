@@ -23,15 +23,15 @@
 
 	prefs.keybindings_key_lookup = list()
 	// don't change their hotkey mode.. unless it was never there.
-	prefs.misc_by_key[GAME_PREFERENCE_MISC_KEY_HOTKEY_MODE] = \
-		isnull(prefs.misc_by_key[GAME_PREFERENCE_MISC_KEY_HOTKEY_MODE])? TRUE : !!prefs.misc_by_key[GAME_PREFERENCE_MISC_KEY_HOTKEY_MODE]
-	var/hotkey_mode = prefs.misc_by_key[GAME_PREFERENCE_MISC_KEY_HOTKEY_MODE]
+	prefs.keybindings_hotkey_mode = \
+		isnull(prefs.keybindings_hotkey_mode)? TRUE : !!prefs.keybindings_hotkey_mode
+	var/hotkey_mode = prefs.keybindings_hotkey_mode
 	var/list/defaults = deep_copy_list(hotkey_mode? GLOB.hotkey_keybinding_list_by_key : GLOB.classic_keybinding_list_by_key)
 	prefs.keybindings_key_lookup = defaults
 
 	prefs.push_ui_modules(updates = list((src.key) = list(
 		"bindings" = prefs.keybindings_key_lookup,
-		"hotkeyMode" = prefs.misc_by_key[GAME_PREFERENCE_MISC_KEY_HOTKEY_MODE],
+		"hotkeyMode" = prefs.keybindings_hotkey_mode,
 	)))
 
 /datum/game_preference_middleware/keybindings/handle_topic(datum/game_preferences/prefs, action, list/params)
@@ -44,9 +44,9 @@
 			return TRUE
 		if("hotkeys")
 			var/value = params["value"]
-			if(prefs.misc_by_key[GAME_PREFERENCE_MISC_KEY_HOTKEY_MODE] == value)
+			if(prefs.keybindings_hotkey_mode == value)
 				return TRUE
-			prefs.misc_by_key[GAME_PREFERENCE_MISC_KEY_HOTKEY_MODE] = !!value
+			prefs.keybindings_hotkey_mode = !!value
 			prefs.mark_dirty()
 			prefs.push_ui_modules(updates = list((src.key) = list(
 				"hotkeyMode" = value,
@@ -121,7 +121,7 @@
 		if(!had_something)
 			prefs.keybindings_key_lookup -= key
 
-/datum/game_preference_middleware/keybindings/prefs_data(mob/user, datum/tgui/ui)
+/datum/game_preference_middleware/keybindings/prefs_ui_data(mob/user, datum/tgui/ui)
 	. = ..()
 	var/datum/game_preferences/prefs = ui.src_object
 	.["bindings"] = prefs.keybindings_key_lookup
@@ -132,16 +132,16 @@
 			continue
 		constructed_keybinds[++constructed_keybinds.len] = keybind.tgui_keybinding_data()
 	.["keybinds"] = constructed_keybinds
-	.["hotkeyMode"] = prefs.misc_by_key[GAME_PREFERENCE_MISC_KEY_HOTKEY_MODE]
+	.["hotkeyMode"] = prefs.keybindings_hotkey_mode
 	.["maxBinds"] = MAX_KEYS_PER_KEYBIND
 	.["maxPerKey"] = MAX_COMMANDS_PER_KEY
 
 //? Preferences Helpers
 
-/datum/game_preferences/proc/is_hotkeys_mode()
+/datum/game_preferences/proc/keybindings_is_hotkeys_mode()
 	if(!initialized)
 		return TRUE
-	return misc_by_key[GAME_PREFERENCE_MISC_KEY_HOTKEY_MODE]
+	return keybindings_hotkey_mode
 
 //? UI Design Assertions
 

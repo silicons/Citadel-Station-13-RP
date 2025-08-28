@@ -1,5 +1,5 @@
 //* This file is explicitly licensed under the MIT license. *//
-//* Copyright (c) 2024 silicons                             *//
+//* Copyright (c) 2025 Citadel Station Developers           *//
 
 /client/on_new_hook_stability_checks()
 	// preferences are critical; if they can't load, kick them
@@ -41,8 +41,8 @@
 	/// are we saved? if TRUE, we have modified vars
 	var/is_dirty = FALSE
 
-/datum/game_preferences/New(key, ckey)
-	src.ckey = ckey
+/datum/game_preferences/New(key)
+	src.ckey = ckey(key)
 	src.is_guest = IsGuestKey(key)
 
 //* Init *//
@@ -79,68 +79,6 @@
 	for(var/key in GLOB.game_preference_middleware)
 		var/datum/game_preference_middleware/middleware = GLOB.game_preference_middleware[key]
 		middleware.on_initial_load(src)
-
-/datum/game_preferences/proc/oops_sql_came_back_perform_a_reload()
-	// if we were sql loaded, don't desync from sql
-	if(authoritatively_loaded_by_sql)
-		if(!sql_state_desynced)
-			return
-		if(active)
-			to_chat(active, SPAN_BOLDANNOUNCE("The server's SQL database has reconnected and your preferences were changed during the lapse. Your preferences has been automatically flushed to database."))
-		save_to_sql()
-		return
-	// load from sql if we can; SQL is authoritative
-	if(load_from_sql())
-		if(active)
-			to_chat(active, SPAN_BOLDANNOUNCE("The server's SQL database has reconnected and your preferences were found to be fully desynced from the copy in the database. Your preferences has been automatically reloaded from the database. Please ensure all settings are workable."))
-		return
-	// otherwise, save our current changes to SQL
-	save_to_sql()
-	if(active)
-		to_chat(active, SPAN_BOLDANNOUNCE("The server's SQL database has reconnected and your preferences were not found in them. Your preferences have been automatically saved to database."))
-
-/datum/game_preferences/proc/perform_legacy_migration()
-	if(is_guest)
-		return FALSE
-	if(!fexists("data/player_saves/[copytext(ckey, 1, 2)]/[ckey]/preferences.sav"))
-		return FALSE
-	var/savefile/legacy_savefile = new /savefile("data/player_saves/[copytext(ckey, 1, 2)]/[ckey]/preferences.sav")
-	var/list/legacy_options
-	legacy_savefile["global"] >> legacy_options
-	if(isnull(legacy_options))
-		legacy_options = list()
-
-	// we are fired after reset, but before save
-	// we assume lists are init'd
-	for(var/key in SSpreferences.entries_by_key)
-		var/datum/game_preference_entry/entry = SSpreferences.entries_by_key[key]
-		var/migrated_value
-		if(entry.legacy_global_key)
-			migrated_value = legacy_options[entry.legacy_global_key]
-		else if(entry.legacy_savefile_key)
-			legacy_savefile[entry.legacy_savefile_key] >> migrated_value
-		if(!isnull(migrated_value))
-			migrated_value = entry.filter_value(migrated_value)
-			entries_by_key[key] = migrated_value
-
-	var/list/old_toggles
-	legacy_savefile["preferences"] >> old_toggles
-	if(islist(old_toggles))
-		for(var/key in SSpreferences.toggles_by_key)
-			var/datum/game_preference_entry/toggle/toggle = SSpreferences.toggles_by_key[key]
-			if(!toggle.legacy_key)
-				continue
-			toggles_by_key[key] = (toggle.legacy_key in old_toggles)
-
-	var/list/old_keybinds
-	legacy_savefile["key_bindings"] >> old_keybinds
-	keybindings = sanitize_islist(old_keybinds)
-
-	var/old_hotkeys
-	legacy_savefile["hotkeys"] >> old_hotkeys
-	misc_by_key[GAME_PREFERENCE_MISC_KEY_HOTKEY_MODE] = !!old_hotkeys
-
-	return TRUE
 
 /datum/game_preferences/proc/perform_initial_load()
 	sleep(2 SECONDS)
@@ -199,18 +137,6 @@
 	initialize_client()
 	// initialized!
 	initialized = TRUE
-
-/**
- * @return FALSE if failed
- */
-/datum/game_preferences/proc/perform_migration_sequence()
-	if(version <= GAME_PREFERENCES_VERSION_DROP)
-		return FALSE
-	perform_migrations(version)
-	version = GAME_PREFERENCES_VERSION_CURRENT
-
-/datum/game_preferences/proc/perform_migrations(from_version)
-	PRIVATE_PROC(TRUE)
 
 //* Reset *//
 
