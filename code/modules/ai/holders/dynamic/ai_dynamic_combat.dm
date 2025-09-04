@@ -17,4 +17,27 @@ GLOBAL_LIST_INIT(ai_dynamic_combat_routines, init_ai_dynamic_combat_routines())
 	/// id. this must be unique and is how we're looked up.
 	var/id
 
+	/// automatically try to resist out of stuns and more
+	var/standard_resist_subroutines = TRUE
+	/// automatically try to take cover if under heavy fire
+	var/standard_cover_subroutines = TRUE
+	#warn impl
+	/// automatically engage targets with standard handling
+	var/standard_combat_subroutines = TRUE
+	#warn impl
+
 #warn impl
+
+/datum/ai_dynamic_combat/proc/tick_standard_subroutines()
+	if(standard_resist_subroutines)
+		standard_resist_subroutines()
+	#warn impl
+
+/datum/ai_dynamic_combat/proc/auto_standard_resist_subroutines()
+	if(standard_resist_subroutines)
+		standard_resist_subroutines()
+
+/datum/ai_dynamic_combat/proc/standard_resist_subroutines()
+	#warn impl
+
+
