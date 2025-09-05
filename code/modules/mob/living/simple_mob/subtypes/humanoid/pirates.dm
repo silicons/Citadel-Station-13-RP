@@ -155,8 +155,6 @@
 	if(O.damage_force)
 		if(prob(15))
 			visible_message("<span class='danger'>\The [src] blocks \the [O] with its shield!</span>")
-			if(user)
-				ai_holder.react_to_attack_polaris(user)
 			return
 		else
 			..()
@@ -167,8 +165,6 @@
 /mob/living/simple_mob/humanoid/merc/melee/sword/on_bullet_act(obj/projectile/proj, impact_flags, list/bullet_act_args)
 	if(prob(25))
 		visible_message("<font color='red'><B>[src] blocks [proj] with its shield!</B></font>")
-		if(proj.firer)
-			ai_holder.react_to_attack_polaris(proj.firer)
 		return PROJECTILE_IMPACT_BLOCKED
 	return ..()
 

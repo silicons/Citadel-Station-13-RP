@@ -55,8 +55,7 @@
 	if(!istype(L))
 		return
 	if(istype(L) && L.a_intent != INTENT_HELP)
-		if(ai_holder) // Using disarm, grab, or harm intent is considered a hostile action to the mob's AI.
-			ai_holder.react_to_attack_polaris(L)
+		ai_holder?.on_legacy_damage_taunt(L)
 
 /mob/living/emp_act(severity)
 	var/list/L = src.get_equipped_items(TRUE, TRUE)
@@ -186,8 +185,7 @@
 
 	adjustBruteLoss(damage)
 	add_attack_logs(user,src,"Generic attack (probably animal)", admin_notify = FALSE) //Usually due to simple_mob attacks
-	if(ai_holder)
-		ai_holder.react_to_attack_polaris(user)
+	ai_holder?.on_legacy_damage_taunt(user)
 	src.visible_message("<span class='danger'>[user] has [attack_message] [src]!</span>")
 	user.do_attack_animation(src)
 	spawn(1) update_health()

@@ -11,14 +11,6 @@
 		return COMBAT_IMPACT_FX_METAL
 	return COMBAT_IMPACT_FX_FLESH
 
-//* Melee Handling *//
-
-/mob/living/melee_act(mob/attacker, obj/item/weapon, datum/melee_attack/weapon/style, target_zone, datum/event_args/actor/clickchain/clickchain, clickchain_flags)
-	. = ..()
-	if(. & CLICKCHAIN_FLAGS_ATTACK_ABORT)
-		return
-	ai_holder?.react_to_attack_polaris(attacker)
-
 //* Projectile Handling *//
 
 /mob/living/bullet_act(obj/projectile/proj, impact_flags, def_zone, efficiency)
@@ -88,9 +80,6 @@
 			visible_message("<font color='red'>[src] triggers their deadman's switch!</font>")
 			spawn(-1)
 				signaler.signal()
-
-	if(ai_holder && proj.firer)
-		ai_holder.react_to_attack_polaris(proj.firer)
 	//! END
 
 	return ..()
@@ -158,11 +147,6 @@
 	visible_message(
 		SPAN_RED("[src] has been hit by [AM]."),
 	)
-
-	// - legacy code for reaction
-	if(ismob(TT.thrower))
-		ai_holder?.react_to_attack_polaris(TT.thrower)
-	// - end
 
 	// - legacy logging code; not amazing. all this should be replaced with logging module API calls.
 	add_attack_logs(TT.thrower, src, "hit by thrown [AM.name] ([AM.type])")

@@ -127,8 +127,6 @@
 	if(O.damage_force)
 		if(prob(20))
 			visible_message("<span class='danger'>\The [src] swats \the [O] with its sword tail!</span>")
-			if(user)
-				ai_holder.react_to_attack_polaris(user)
 			return
 		else
 			..()
@@ -139,8 +137,6 @@
 /mob/living/simple_mob/vore/aggressive/corrupthound/sword/on_bullet_act(obj/projectile/proj, impact_flags, list/bullet_act_args)
 	if(prob(35))
 		visible_message("<span class='warning'>[src] deflects [proj] with its sword tail!</span>")
-		if(proj.firer)
-			ai_holder.react_to_attack_polaris(proj.firer)
 		return PROJECTILE_IMPACT_BLOCKED
 	return ..()
 

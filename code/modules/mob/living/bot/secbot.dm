@@ -224,7 +224,7 @@
 	var/curhealth = health
 	. = ..()
 	if(health < curhealth && on == TRUE)
-		react_to_attack_polaris(user)
+		react_to_attack(user)
 
 /mob/living/bot/secbot/on_bullet_act(obj/projectile/proj, impact_flags, list/bullet_act_args)
 	var/curhealth = health
@@ -232,14 +232,14 @@
 	. = ..()
 	//if we already have a target just ignore to avoid lots of checking
 	if(!target && health < curhealth && shooter && (shooter in view(world.view, src)))
-		react_to_attack_polaris(shooter)
+		react_to_attack(shooter)
 
 /mob/living/bot/secbot/attack_generic(var/mob/attacker)
 	if(attacker)
-		react_to_attack_polaris(attacker)
+		react_to_attack(attacker)
 	..()
 
-/mob/living/bot/secbot/proc/react_to_attack_polaris(mob/attacker)
+/mob/living/bot/secbot/proc/react_to_attack(mob/attacker)
 	if(!on)		// We don't want it to react if it's off
 		return
 

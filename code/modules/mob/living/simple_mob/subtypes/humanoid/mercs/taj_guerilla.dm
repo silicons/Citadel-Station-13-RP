@@ -99,8 +99,6 @@
 	if(O.damage_force)
 		if(prob(50))
 			visible_message("<span class='danger'>\The [src] parries \the [O] with its sword!</span>")
-			if(user)
-				ai_holder.react_to_attack_polaris(user)
 			return
 		else
 			..()
@@ -111,8 +109,6 @@
 /mob/living/simple_mob/humanoid/taj_guerilla/bandit/sword/on_bullet_act(obj/projectile/proj, impact_flags, list/bullet_act_args)
 	if(prob(10))
 		visible_message("<span class='warning'>[src] deflects [proj] with its blade!</span>")
-		if(proj.firer)
-			ai_holder.react_to_attack_polaris(proj.firer)
 		return PROJECTILE_IMPACT_BLOCKED
 	return ..()
 

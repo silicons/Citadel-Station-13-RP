@@ -10,4 +10,8 @@
 /datum/ai_holder/proc/on_damage_instance(SHIELDCALL_PROC_HEADER)
 	return
 
-#warn impl / hook all
+/**
+ * 'took damage, retaliate'. this is for procs that aren't hooked into standard defense procs.
+ */
+/datum/ai_holder/proc/on_legacy_damage_taunt(atom/attacker)
+	return

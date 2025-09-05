@@ -264,9 +264,8 @@
 
 /mob/living/simple_mob/slime/xenobio/dark_blue/proc/chill(mob/living/L)
 	L.inflict_cold_damage(is_adult ? 10 : 5)
-	if(L.get_cold_protection() < 1 && L.ai_is_polaris()) // Harmful auras will make the AI react to its bearer.
-		L.ai_holder.react_to_attack_polaris(src)
-
+	if(L.get_cold_protection() < 1) // Harmful auras will make the AI react to its bearer.
+		L.ai_holder?.on_legacy_damage_taunt(src)
 
 /mob/living/simple_mob/slime/xenobio/silver
 	desc = "This slime is shiny, and can deflect lasers or other energy weapons directed at it."

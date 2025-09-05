@@ -196,8 +196,8 @@
 			holder.a_intent = INTENT_HELP
 			return FALSE // We're a good slime.
 
-/datum/ai_holder/polaris/simple_mob/xenobio_slime/react_to_attack_polaris(atom/movable/attacker)
-	. = ..(attacker)
+/datum/ai_holder/polaris/simple_mob/xenobio_slime/react_to_attack(atom/movable/attacker)
+	..()
 
 	if(ishuman(attacker))
 		var/mob/living/carbon/human/H = attacker

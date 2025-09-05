@@ -170,7 +170,7 @@ GLOBAL_LIST_EMPTY(solargrubs)
 		set_light(2.5, 1, COLOR_YELLOW)
 		return 1
 
-/datum/ai_holder/polaris/simple_mob/retaliate/solargrub/react_to_attack_polaris(atom/movable/attacker)
+/datum/ai_holder/polaris/simple_mob/retaliate/solargrub/react_to_attack(atom/movable/attacker)
 	holder.anchored = 0
 	holder.ai_polaris_set_busy(FALSE)
 	..()

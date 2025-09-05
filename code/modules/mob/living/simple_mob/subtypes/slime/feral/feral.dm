@@ -100,6 +100,5 @@
 	if(L.get_cold_protection() < 1)
 		L.add_modifier(/datum/modifier/chilled, 5 SECONDS, src)
 
-	if(L.ai_is_polaris()) // Other AIs should react to hostile auras.
-		L.ai_holder.react_to_attack_polaris(src)
+	L.ai_holder?.on_legacy_damage_taunt(src)
 

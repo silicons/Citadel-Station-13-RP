@@ -200,35 +200,32 @@
 	polaris_ai_log("lose_target_position() : Last position is being reset.", POLARIS_AI_LOG_INFO)
 	target_last_seen_turf = null
 
-/datum/ai_holder/proc/react_to_attack_polaris(atom/movable/attacker)
-	return
-
 // Responds to a hostile action against its mob.
-/datum/ai_holder/polaris/react_to_attack_polaris(atom/movable/attacker)
+/datum/ai_holder/polaris/proc/react_to_attack(atom/movable/attacker)
 	if(holder.stat) // We're dead.
-		polaris_ai_log("react_to_attack_polaris() : Was attacked by [attacker], but we are dead/unconscious.", POLARIS_AI_LOG_TRACE)
+		polaris_ai_log("react_to_attack() : Was attacked by [attacker], but we are dead/unconscious.", POLARIS_AI_LOG_TRACE)
 		return FALSE
 	if(!hostile && !retaliate) // Not allowed to defend ourselves.
-		polaris_ai_log("react_to_attack_polaris() : Was attacked by [attacker], but we are not allowed to attack back.", POLARIS_AI_LOG_TRACE)
+		polaris_ai_log("react_to_attack() : Was attacked by [attacker], but we are not allowed to attack back.", POLARIS_AI_LOG_TRACE)
 		return FALSE
-	if(ismob(attacker) && holder.ai_polaris_is_ally(attacker)) // I'll overlook it THIS time...
-		polaris_ai_log("react_to_attack_polaris() : Was attacked by [attacker], but they were an ally.", POLARIS_AI_LOG_TRACE)
+	if(ismob(attacker) && holder.ai_is_ally(attacker)) // I'll overlook it THIS time...
+		polaris_ai_log("react_to_attack() : Was attacked by [attacker], but they were an ally.", POLARIS_AI_LOG_TRACE)
 		return FALSE
 	if(target) // Already fighting someone. Switching every time we get hit would impact our combat performance.
 		if(!retaliate)	// If we don't get to fight back, we don't fight back...
-			polaris_ai_log("react_to_attack_polaris() : Was attacked by [attacker], but we already have a target.", POLARIS_AI_LOG_TRACE)
+			polaris_ai_log("react_to_attack() : Was attacked by [attacker], but we already have a target.", POLARIS_AI_LOG_TRACE)
 			on_attacked(attacker) // So we attack immediately and not threaten.
 			return FALSE
 		else if((attacker in attackers) && world.time > last_target_time + 3 SECONDS)	// Otherwise, let 'er rip
-			polaris_ai_log("react_to_attack_polaris() : Was attacked by [attacker]. Can retaliate, waited 3 seconds.", POLARIS_AI_LOG_INFO)
+			polaris_ai_log("react_to_attack() : Was attacked by [attacker]. Can retaliate, waited 3 seconds.", POLARIS_AI_LOG_INFO)
 			on_attacked(attacker) // So we attack immediately and not threaten.
 			return give_target(attacker) // Also handles setting the appropiate stance.
 
 	if(stance == STANCE_SLEEP) // If we're asleep, try waking up if someone's wailing on us.
-		polaris_ai_log("react_to_attack_polaris() : AI is asleep. Waking up.", POLARIS_AI_LOG_TRACE)
+		polaris_ai_log("react_to_attack() : AI is asleep. Waking up.", POLARIS_AI_LOG_TRACE)
 		go_wake()
 
-	polaris_ai_log("react_to_attack_polaris() : Was attacked by [attacker].", POLARIS_AI_LOG_INFO)
+	polaris_ai_log("react_to_attack() : Was attacked by [attacker].", POLARIS_AI_LOG_INFO)
 	on_attacked(attacker) // So we attack immediately and not threaten.
 	return give_target(attacker) // Also handles setting the appropiate stance.
 

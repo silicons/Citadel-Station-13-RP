@@ -168,8 +168,6 @@
 	if(O.damage_force)
 		if(prob(20))
 			visible_message("<span class='danger'>\The [src] blocks \the [O] with its shield!</span>")
-			if(user)
-				ai_holder.react_to_attack_polaris(user)
 			return
 		else
 			..()
@@ -180,8 +178,6 @@
 /mob/living/simple_mob/humanoid/merc/melee/sword/on_bullet_act(obj/projectile/proj, impact_flags, list/bullet_act_args)
 	if(prob(35))
 		visible_message("<span class='warning'>[src] blocks [proj] with its shield!</span>")
-		if(proj.firer)
-			ai_holder.react_to_attack_polaris(proj.firer)
 		return PROJECTILE_IMPACT_BLOCKED
 	return ..()
 
@@ -542,8 +538,6 @@
 	if(O.damage_force)
 		if(prob(50))
 			visible_message("<span class='danger'>\The [src] blocks \the [O] with its shield!</span>")
-			if(user)
-				ai_holder.react_to_attack_polaris(user)
 			return
 		else
 			..()
@@ -553,8 +547,6 @@
 /mob/living/simple_mob/humanoid/merc/ranged/space/suppressor/on_bullet_act(obj/projectile/proj, impact_flags, list/bullet_act_args)
 	if(prob(50))
 		visible_message("<span class='warning'>[src] blocks [proj] with its shield!</span>")
-		if(proj.firer)
-			ai_holder.react_to_attack_polaris(proj.firer)
 		return PROJECTILE_IMPACT_BLOCKED
 	return ..()
 
@@ -685,8 +677,6 @@
 	if(O.damage_force)
 		if(prob(20))
 			visible_message("<span class='danger'>\The [src] blocks \the [O] with its sword!</span>")
-			if(user)
-				ai_holder.react_to_attack_polaris(user)
 			return
 		else
 			..()
@@ -697,8 +687,6 @@
 /mob/living/simple_mob/humanoid/merc/voxpirate/boarder/on_bullet_act(obj/projectile/proj, impact_flags, list/bullet_act_args)
 	if(prob(35))
 		visible_message("<span class='warning'>[src] blocks [proj] with its sword!</span>")
-		if(proj.firer)
-			ai_holder.react_to_attack_polaris(proj.firer)
 		return PROJECTILE_IMPACT_BLOCKED
 	return ..()
 
