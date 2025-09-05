@@ -70,7 +70,6 @@
 
 		if(!path.len) // If we still don't have one, then the target's probably somewhere inaccessible to us. Get as close as we can.
 			polaris_ai_log("walk_path() : Failed to obtain path to target. Using get_step_to() instead.", POLARIS_AI_LOG_INFO)
-		//	step_to(holder, A)
 			if(holder.ai_polaris_move(get_step_to(holder, A)) == POLARIS_AI_MOVEMENT_FAILED)
 				polaris_ai_log("walk_path() : Failed to move, attempting breakthrough.", POLARIS_AI_LOG_INFO)
 				INVOKE_ASYNC(src, PROC_REF(breakthrough), A)
@@ -85,7 +84,6 @@
 				failed_steps = 0
 
 	else
-	//	step_to(holder, A)
 		polaris_ai_log("walk_path() : Going to ai_polaris_move().", POLARIS_AI_LOG_TRACE)
 		if(holder.ai_polaris_move(get_step_to(holder, A)) == POLARIS_AI_MOVEMENT_FAILED )
 			polaris_ai_log("walk_path() : Failed to move, attempting breakthrough.", POLARIS_AI_LOG_INFO)

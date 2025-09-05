@@ -1,6 +1,6 @@
 
 //* This file is explicitly licensed under the MIT license. *//
-//* Copyright (c) 2024 Citadel Station developers.          *//
+//* Copyright (c) 2024 Citadel Station Developers           *//
 
 /**
  * AI holders
@@ -40,9 +40,52 @@
 	/// expected type of movable to bind to
 	var/agent_type = /atom/movable
 	/// disabled
-	/// this is what actually tells the scheduler to drop our scheduled callbacks
-	/// make sure to set this as needed in your implementation.
+	/// * make sure to check this from procs ran by ai scheduling; ai scheduling is
+	///   a generic system and callbacks don't automatically check this.
 	var/disabled = FALSE
+
+	//* introspection *//
+	#ifdef AI_INTROSPECTION
+	/// stores last X thoughts
+	var/list/introspection_thoughts = list()
+	#endif
+
+	//* movement *//
+	/// movement subsystem registered?
+	///
+	/// warning: we can technically be moving while disabled
+	/// make sure you handle this.
+	var/movement_ticking = FALSE
+	/// bucket position
+	var/movement_bucket_position
+	/// last datum in bucket
+	///
+	/// * We are a circularly double-linked list. If we are the only one in the bucket, this is ourselves.
+	var/datum/ai_holder/movement_bucket_prev
+	/// next datum in bucket
+	///
+	/// * We are a circularly double-linked list. If we are the only one in the bucket, this is ourselves.
+	var/datum/ai_holder/movement_bucket_next
+	/// movement cycle
+	var/movement_cycle
+
+	//* pathfinding *//
+	/// our default pathfinding type
+	var/ai_pathfinder_type = /datum/ai_pathfinder/jps
+
+	//* ticking *//
+	/// what holder is running after us
+	var/datum/ai_holder/ticking_next
+	/// what holder is running before us
+	var/datum/ai_holder/ticking_previous
+	/// ticking registered; null or number for delay in deciseconds
+	var/ticking
+	/// cycles ticked; set back to 0 when ticking is stopped.
+	var/ticking_cycles
+	/// bucket position
+	var/ticking_position
+	/// allow setting to ssd
+	var/ticking_off_is_ssd = FALSE
 
 /datum/ai_holder/New(atom/movable/agent)
 	ASSERT(!agent.ai_holder)

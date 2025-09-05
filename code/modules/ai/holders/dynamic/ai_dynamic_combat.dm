@@ -1,5 +1,5 @@
 //* This file is explicitly licensed under the MIT license. *//
-//* Copyright (c) 2025 Citadel Station developers.          *//
+//* Copyright (c) 2025 Citadel Station Developers          *//
 
 GLOBAL_LIST_INIT(ai_dynamic_combat_routines, init_ai_dynamic_combat_routines())
 

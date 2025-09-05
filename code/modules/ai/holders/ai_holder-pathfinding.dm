@@ -1,9 +1,5 @@
 //* This file is explicitly licensed under the MIT license. *//
-//* Copyright (c) 2024 Citadel Station developers.          *//
-
-/datum/ai_holder
-	/// our default pathfinding type
-	var/ai_pathfinder_type = /datum/ai_pathfinder/jps
+//* Copyright (c) 2024 Citadel Station Developers          *//
 
 /**
  * @return /datum/ai_pathing results, or **null on failure**

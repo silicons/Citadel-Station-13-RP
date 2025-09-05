@@ -1,5 +1,5 @@
 //* This file is explicitly licensed under the MIT license. *//
-//* Copyright (c) 2025 Citadel Station developers.          *//
+//* Copyright (c) 2025 Citadel Station Developers          *//
 
 /**
  * context returned by ai holder dynamic combat routines

@@ -1,5 +1,5 @@
 //* This file is explicitly licensed under the MIT license. *//
-//* Copyright (c) 2025 Citadel Station developers.          *//
+//* Copyright (c) 2025 Citadel Station Developers          *//
 
 /datum/ai_holder/dynamic
 	//* system *//
@@ -7,13 +7,6 @@
 	/// default idle tick-rate. you usually shouldn't touch this.
 	/// * this is not the movement handler, this is the tick() handler.
 	var/system_idle_tick_interval = 5 SECONDS
-
-	//* introspection *//
-
-	#ifdef AI_INTROSPECTION
-	/// stores last X thoughts
-	var/list/introspection_thoughts
-	#endif
 
 	//* state *//
 

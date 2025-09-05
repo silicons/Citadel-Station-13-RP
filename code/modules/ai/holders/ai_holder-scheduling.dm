@@ -1,8 +1,6 @@
 
 //* This file is explicitly licensed under the MIT license. *//
-//* Copyright (c) 2024 Citadel Station developers.          *//
-
-/datum/ai_holder
+//* Copyright (c) 2024 Citadel Station Developers           *//
 
 /**
  * as of right now, scheduled callbacks are allowed to leak.

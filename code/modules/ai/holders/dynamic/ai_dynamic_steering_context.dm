@@ -1,5 +1,5 @@
 //* This file is explicitly licensed under the MIT license. *//
-//* Copyright (c) 2025 Citadel Station developers.          *//
+//* Copyright (c) 2025 Citadel Station Developers          *//
 
 /**
  * stores stateful information about the current steering context.
