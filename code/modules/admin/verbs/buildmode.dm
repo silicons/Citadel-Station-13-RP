@@ -528,7 +528,7 @@ GLOBAL_LIST_EMPTY(buildholders)
 					var/j = 0 // Following mobs.
 					for(var/mob/living/unit in holder.selected_mobs)
 						var/datum/ai_holder/polaris/AI = unit.ai_holder
-						if(L.IIsAlly(unit) || !AI.hostile || pa.Find("shift"))
+						if(L.ai_polaris_is_ally(unit) || !AI.hostile || pa.Find("shift"))
 							AI.set_follow(L)
 							j++
 						else

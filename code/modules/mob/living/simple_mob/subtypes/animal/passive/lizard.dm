@@ -31,7 +31,7 @@
 
 	speak_emote = list("hisses")
 
-	say_list_type = /datum/say_list/lizard
+	say_list_type = /datum/polaris_ai_say_list/lizard
 
 	meat_amount = 1
 	bone_amount = 1

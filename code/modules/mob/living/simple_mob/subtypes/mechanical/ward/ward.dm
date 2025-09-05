@@ -37,7 +37,7 @@
 	owner = null
 	return ..()
 
-/mob/living/simple_mob/mechanical/ward/IIsAlly(mob/living/L)
+/mob/living/simple_mob/mechanical/ward/ai_polaris_is_ally(mob/living/L)
 	if(owner == L)
 		return TRUE
 	return ..()

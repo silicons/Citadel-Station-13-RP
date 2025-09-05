@@ -303,10 +303,10 @@
 
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/melee
 
-	say_list_type = /datum/say_list/madcultist
+	say_list_type = /datum/polaris_ai_say_list/madcultist
 
 
-/datum/say_list/madcultist
+/datum/polaris_ai_say_list/madcultist
 	speak = list(
 		"I AM FINE. I AM NOT MAD. YOU ARE MAD. YOU SHALL DIE.",
 		"I PRAYED. HE RESPONDED. HE MADE YOU CRASH. HE LOVES ME.",

@@ -1,14 +1,14 @@
 //* This file is explicitly licensed under the MIT license. *//
 //* Copyright (c) 2025 Citadel Station developers.          *//
 
-/mob/ai_get_self_adapters() as /list
+/mob/ai_get_self_adapters()
 	. = ..()
 	for(var/datum/ability/ability as anything in abilities)
 		var/datum/ai_adapter/maybe_adapter = ability.request_ai_adapter()
 		if(maybe_adapter)
 			. += maybe_adapter
 
-/mob/ai_get_equipment_adapters() as /list
+/mob/ai_get_equipment_adapters()
 	. = ..()
 	var/list/obj/item/processing = inventory.get_everything()
 	var/safety = 2000

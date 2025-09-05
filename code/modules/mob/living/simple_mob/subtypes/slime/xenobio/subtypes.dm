@@ -544,7 +544,7 @@
 
 /mob/living/simple_mob/slime/xenobio/pink/proc/heal_aura()
 	for(var/mob/living/L in view(src, 2))
-		if(L.stat == DEAD || !IIsAlly(L))
+		if(L.stat == DEAD || !ai_polaris_is_ally(L))
 			continue
 		L.add_modifier(/datum/modifier/aura/slime_heal, null, src)
 
@@ -712,7 +712,7 @@
 
 /mob/living/simple_mob/slime/xenobio/emerald/proc/zoom_aura()
 	for(var/mob/living/L in view(src, 2))
-		if(L.stat == DEAD || !IIsAlly(L))
+		if(L.stat == DEAD || !ai_polaris_is_ally(L))
 			continue
 		L.add_modifier(/datum/modifier/technomancer/haste, 5 SECONDS, src)
 

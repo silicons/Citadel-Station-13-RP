@@ -40,7 +40,7 @@
 	legacy_melee_damage_upper = 10
 	attacktext = list("kicked","impales","gores")
 
-	say_list_type = /datum/say_list/goat
+	say_list_type = /datum/polaris_ai_say_list/goat
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/retaliate
 
 	meat_amount = 4

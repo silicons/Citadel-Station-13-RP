@@ -38,7 +38,7 @@
 	armor_legacy_mob = list(melee = 25, bullet = 25, laser = -20, bio = 100, rad = 100)
 	hovering = FALSE
 
-	say_list_type = /datum/say_list/cyber_horror
+	say_list_type = /datum/polaris_ai_say_list/cyber_horror
 
 	response_help = "pokes"
 	response_disarm = "gently pushes aside"
@@ -49,7 +49,7 @@
 	var/emp_damage = 0
 	var/nanobot_chance = 40
 
-/datum/say_list/cyber_horror
+/datum/polaris_ai_say_list/cyber_horror
 	speak = list("H@!#$$P M@!$#",
 				 "GHAA!@@#",
 				 "KR@!!N",
@@ -525,7 +525,7 @@
 
 	heat_resist = 1
 
-/datum/say_list/cyber_horror/surt
+/datum/polaris_ai_say_list/cyber_horror/surt
 	speak = list("H@!#$$P M@!$#",
 				 "GHAA!@@#",
 				 "KR@!!N",

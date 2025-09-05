@@ -32,7 +32,7 @@
 	friendly = list("nuzzles", "boops", "headbumps against", "leans on")
 
 
-	say_list_type = /datum/say_list/TinyTim
+	say_list_type = /datum/polaris_ai_say_list/TinyTim
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/horror
 
 	bone_amount = 3
@@ -63,7 +63,7 @@
 	playsound(src, 'sound/h_sounds/holla.ogg', 50, 1)
 	..()
 
-/datum/say_list/TinyTim
+/datum/polaris_ai_say_list/TinyTim
 	speak = list("Wuuuuuhhuuhhhhh?","Urk! Aaaaahaaa!", "Yuhyuhyuhyuh...")
 	emote_hear = list("shrieks", "groans in pain", "flaps", "gnashes its teeth")
 	emote_see = list("jiggles its teeth", "shakes violently", "stares aggressively")

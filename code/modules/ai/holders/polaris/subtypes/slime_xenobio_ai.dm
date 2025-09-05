@@ -65,7 +65,7 @@
 		return SLIME_COMMAND_OBEY
 //	if(commander in friends)
 //		return SLIME_COMMAND_FRIEND
-	if(holder.IIsAlly(commander))
+	if(holder.ai_polaris_is_ally(commander))
 		return SLIME_COMMAND_FACTION
 	if(discipline > resentment && obedience >= 5)
 		return SLIME_COMMAND_OBEY

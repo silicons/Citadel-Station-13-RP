@@ -51,7 +51,7 @@
 		return
 	..()
 
-/mob/living/simple_mob/mechanical/ward/monitor/crew/IIsAlly(mob/living/L)
+/mob/living/simple_mob/mechanical/ward/monitor/crew/ai_polaris_is_ally(mob/living/L)
 	. = ..()
 	if(!.)
 		if(isrobot(L)) // They ignore synths.
@@ -87,7 +87,7 @@
 		if(L.stat) // Dead mobs aren't concerning.
 			continue
 
-		if(src.IIsAlly(L))
+		if(src.ai_polaris_is_ally(L))
 			continue
 
 		// Decloak them .

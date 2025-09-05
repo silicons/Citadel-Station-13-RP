@@ -46,13 +46,13 @@
 	attack_sound = 'sound/weapons/bite.ogg'
 
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/melee
-	say_list_type = /datum/say_list/disbot
+	say_list_type = /datum/polaris_ai_say_list/disbot
 
 	var/poison_chance = 100
 	var/poison_per_bite = 10
 	var/poison_type = "expired_medicine"
 
-/datum/say_list/disbot
+/datum/polaris_ai_say_list/disbot
 	speak = list("ATTEMPTING TO CONTACT A.R.K, ATTEMPT 1e26+3","DIRT SAMPLE COLLECTED, DIRT QUOTA 124871/155 CONFIRMED.")
 	emote_see = list("scans the dirt around it","beeps as it scans a rock nearby")
 	say_maybe_target = list("BIOLOGICAL TRACES FOUND, ATTEMTPTING TO LOCATE SOURCE.","TRACE SOURCES FOUND, POWERING SCANNERS.",)

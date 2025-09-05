@@ -88,7 +88,7 @@
 		if(!path.len) // If we still don't have one, then the target's probably somewhere inaccessible to us. Get as close as we can.
 			polaris_ai_log("walk_path() : Failed to obtain path to target. Using get_step_to() instead.", POLARIS_AI_LOG_INFO)
 		//	step_to(holder, A)
-			if(holder.IMove(get_step_to(holder, A)) == POLARIS_AI_MOVEMENT_FAILED)
+			if(holder.ai_polaris_move(get_step_to(holder, A)) == POLARIS_AI_MOVEMENT_FAILED)
 				polaris_ai_log("walk_path() : Failed to move, attempting breakthrough.", POLARIS_AI_LOG_INFO)
 				INVOKE_ASYNC(src, PROC_REF(breakthrough), A)
 			return
@@ -103,8 +103,8 @@
 
 	else
 	//	step_to(holder, A)
-		polaris_ai_log("walk_path() : Going to IMove().", POLARIS_AI_LOG_TRACE)
-		if(holder.IMove(get_step_to(holder, A)) == POLARIS_AI_MOVEMENT_FAILED )
+		polaris_ai_log("walk_path() : Going to ai_polaris_move().", POLARIS_AI_LOG_TRACE)
+		if(holder.ai_polaris_move(get_step_to(holder, A)) == POLARIS_AI_MOVEMENT_FAILED )
 			polaris_ai_log("walk_path() : Failed to move, attempting breakthrough.", POLARIS_AI_LOG_INFO)
 			breakthrough(A) // We failed to move, time to smash things.
 
@@ -122,7 +122,7 @@
 		T.cut_overlay(path_overlay)
 
 //	step_towards(holder, src.path[1])
-	if(holder.IMove(get_step_towards(holder, src.path[1])) != POLARIS_AI_MOVEMENT_ON_COOLDOWN)
+	if(holder.ai_polaris_move(get_step_towards(holder, src.path[1])) != POLARIS_AI_MOVEMENT_ON_COOLDOWN)
 		if(holder.loc != src.path[1])
 			polaris_ai_log("move_once() : Failed step. Exiting.", POLARIS_AI_LOG_TRACE)
 			return POLARIS_AI_MOVEMENT_FAILED
@@ -152,7 +152,7 @@
 			var/moving_to = 0 // Apparently this is required or it always picks 4, according to the previous developer for simplemob AI.
 			moving_to = pick(GLOB.cardinal)
 			holder.setDir(moving_to)
-			holder.IMove(get_step(holder,moving_to))
+			holder.ai_polaris_move(get_step(holder,moving_to))
 			wander_delay = base_wander_delay
 	polaris_ai_log("handle_wander_movement() : Exited.", POLARIS_AI_LOG_TRACE)
 

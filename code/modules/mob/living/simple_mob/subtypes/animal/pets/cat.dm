@@ -69,7 +69,7 @@
 	else
 		..()
 
-/mob/living/simple_mob/animal/passive/cat/IIsAlly(mob/living/L)
+/mob/living/simple_mob/animal/passive/cat/ai_polaris_is_ally(mob/living/L)
 	if(L == friend) // Always be pals with our special friend.
 		return TRUE
 
@@ -160,7 +160,7 @@
 	icon_state = "kitten"
 	w_class = WEIGHT_CLASS_SMALL
 
-/datum/say_list/cat
+/datum/polaris_ai_say_list/cat
 	speak = list("Meow!","Esp!","Purr!","HSSSSS")
 	emote_hear = list("meows","mews")
 	emote_see = list("shakes their head", "shivers")

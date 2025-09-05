@@ -113,7 +113,7 @@
 	if(incapacitated(INCAPACITATION_DISABLED))
 		return 0
 
-	var/friendly = (IIsAlly(threatened) && a_intent == INTENT_HELP)
+	var/friendly = (ai_polaris_is_ally(threatened) && a_intent == INTENT_HELP)
 
 	var/threat = guess_threat_level(threatened)
 

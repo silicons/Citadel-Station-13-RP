@@ -44,9 +44,9 @@
 	attacktext = list("attacked")
 	attack_sound = 'sound/items/bikehorn.ogg'
 
-	say_list_type = /datum/say_list/clown
+	say_list_type = /datum/polaris_ai_say_list/clown
 
-/datum/say_list/clown
+/datum/polaris_ai_say_list/clown
 	speak = list("HONK", "Honk!", "Welcome to clown planet!")
 	emote_see = list("honks")
 
@@ -105,7 +105,7 @@
 	loot_list = list(/obj/item/melee/clownop = 100)	// Might as well give it the knife
 
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/merc
-	say_list_type = /datum/say_list/clownop
+	say_list_type = /datum/polaris_ai_say_list/clownop
 
 	// Grenade special attack vars
 	var/grenade_type = /obj/item/grenade/simple/chemical/premade/lube_tactical
@@ -116,7 +116,7 @@
 	special_attack_charges = 3
 
 //Clown Op Saylists
-/datum/say_list/clownop
+/datum/polaris_ai_say_list/clownop
 	speak = list("Why did the Teshari cross the road?",
 				"Knock knock.",
 				"Honk!",

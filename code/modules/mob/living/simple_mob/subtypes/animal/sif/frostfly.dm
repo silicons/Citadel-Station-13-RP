@@ -68,7 +68,7 @@
 
 	var/datum/effect_system/smoke_spread/frost/smoke_special
 
-	say_list_type = /datum/say_list/frostfly
+	say_list_type = /datum/polaris_ai_say_list/frostfly
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/ranged/kiting/threatening/frostfly
 
 /mob/living/simple_mob/animal/sif/frostfly/get_cold_protection()
@@ -80,7 +80,7 @@
 	add_verb(src, /mob/living/proc/ventcrawl)
 	add_verb(src, /mob/living/proc/hide)
 
-/datum/say_list/frostfly
+/datum/polaris_ai_say_list/frostfly
 	speak = list("Zzzz.", "Kss.", "Zzt?")
 	emote_see = list("flutters its wings","looks around", "rubs its mandibles")
 	emote_hear = list("chitters", "clicks", "chirps")
@@ -153,7 +153,7 @@
 		var/new_dir = turn(F.dir, -90)
 		if(prob(50))
 			new_dir = turn(F.dir, 90)
-		holder.IMove(get_step(holder, new_dir))
+		holder.ai_polaris_move(get_step(holder, new_dir))
 		holder.face_atom(A)
 
 	F.energy = max(0, F.energy - 1)	// The AI will eventually flee.

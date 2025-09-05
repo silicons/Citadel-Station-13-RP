@@ -159,18 +159,18 @@ controlling has hands, instead that is the mob's responsibility.
 
 Interface functions have an uppercase I at the start of the function name,
 and then the function they are bridging between the AI and the mob
-(if it exists), e.g. IMove(), IAttack(), ISay().
+(if it exists), e.g. ai_polaris_move(), ai_polaris_attack(), ai_polaris_say().
 
 Interfaces are also used for the AI to ask its mob if it can do certain
 things, without having to actually know what type of mob it is attached to.
-For example, ICheckRangedAttack() tells the AI if it is possible to do a
+For example, ai_polaris_check_ranged_attack() tells the AI if it is possible to do a
 ranged attack. For simple_mobs, they can if a ranged projectile type was set,
 where as for a human mob, it could check if a gun is in a hand. For a borg,
 it could check if a gun is inside their current module.
 
 [Say List]
 
-A /datum/say_list is a very light datum that holds a list of strings for the
+A /datum/polaris_ai_say_list is a very light datum that holds a list of strings for the
 AI to have their mob say based on certain conditions, such as when threatening
 to kill another mob. Despite the name, a say_list also can contain emotes
 and some sounds.

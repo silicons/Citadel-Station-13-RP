@@ -60,7 +60,7 @@
 	friendly = list("pokes")
 
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/melee
-	say_list_type = /datum/say_list/slime
+	say_list_type = /datum/polaris_ai_say_list/slime
 
 	var/cores = 1 // How many cores you get when placed in a Processor.
 	var/obj/item/clothing/head/hat = null // The hat the slime may be wearing.
@@ -73,7 +73,7 @@
 
 	can_enter_vent_with = list(/obj/item/clothing/head)
 
-/datum/say_list/slime
+/datum/polaris_ai_say_list/slime
 	speak = list("Blorp...", "Blop...", "Blorble...")
 	emote_see = list("bounces", "jiggles", "sways")
 	emote_hear = list("squishes")
@@ -134,7 +134,7 @@
 
 // Interface override, because slimes are supposed to attack other slimes of different color regardless of faction.
 // (unless Unified, of course).
-/mob/living/simple_mob/slime/IIsAlly(mob/living/L)
+/mob/living/simple_mob/slime/ai_polaris_is_ally(mob/living/L)
 	. = ..()
 	if(istype(L, /mob/living/simple_mob/slime)) // Slimes should care about their color subfaction compared to another's.
 		var/mob/living/simple_mob/slime/S = L

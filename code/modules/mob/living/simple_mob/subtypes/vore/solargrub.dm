@@ -53,7 +53,7 @@ GLOBAL_LIST_EMPTY(solargrubs)
 	response_harm = "roughly pushes"
 
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/retaliate/solargrub
-	say_list_type = /datum/say_list/solargrub
+	say_list_type = /datum/polaris_ai_say_list/solargrub
 
 	var/poison_per_bite = 5 //grubs cause a shock when they bite someone
 	var/poison_type = "shockchem"
@@ -73,7 +73,7 @@ GLOBAL_LIST_EMPTY(solargrubs)
 	GLOB.solargrubs -= src
 	return ..()
 
-/datum/say_list/solargrub
+/datum/polaris_ai_say_list/solargrub
 	emote_see = list("squelches", "squishes")
 
 //	This funny bit is questionable atm

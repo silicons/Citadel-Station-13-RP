@@ -52,14 +52,14 @@
 
 // Variant that is always loyal to mercenary antagonists.
 // Used for a special grenade, to ensure they don't attack the wrong thing.
-/mob/living/simple_mob/mechanical/viscerator/mercenary/IIsAlly(mob/living/L)
+/mob/living/simple_mob/mechanical/viscerator/mercenary/ai_polaris_is_ally(mob/living/L)
 	. = ..()
 	if(!.) // Not friendly, see if they're a baddie first.
 		if(L.mind && mercs.is_antagonist(L.mind))
 			return TRUE
 
 // Similar to above but for raiders.
-/mob/living/simple_mob/mechanical/viscerator/raider/IIsAlly(mob/living/L)
+/mob/living/simple_mob/mechanical/viscerator/raider/ai_polaris_is_ally(mob/living/L)
 	. = ..()
 	if(!.) // Not friendly, see if they're a baddie first.
 		if(L.mind && raiders.is_antagonist(L.mind))
@@ -77,7 +77,7 @@
 	legacy_melee_damage_upper = 5
 	base_attack_cooldown = 8
 
-/mob/living/simple_mob/mechanical/viscerator/station/IIsAlly(mob/living/L)
+/mob/living/simple_mob/mechanical/viscerator/station/ai_polaris_is_ally(mob/living/L)
 	. = ..()
 	if(!.)
 		if(isrobot(L)) // They ignore synths.
@@ -92,7 +92,7 @@
 	icon_state = "viscerator_api_attack"
 	icon_living = "viscerator_api_attack"
 
-/mob/living/simple_mob/mechanical/viscerator/apidean/IIsAlly(mob/living/L)
+/mob/living/simple_mob/mechanical/viscerator/apidean/ai_polaris_is_ally(mob/living/L)
 	. = ..()
 	if(!.)
 		if(istype(L, /mob/living/carbon/human/apidaen))

@@ -33,7 +33,7 @@
 		last_threaten_time = world.time
 
 		if(holder.say_list)
-			holder.ISay(SAFEPICK(holder.say_list.say_threaten))
+			holder.ai_polaris_say(SAFEPICK(holder.say_list.say_threaten))
 			playsound(holder.loc, holder.say_list.threaten_sound, 50, 1) // We do this twice to make the sound -very- noticable to the target.
 			playsound(target.loc, holder.say_list.threaten_sound, 50, 1) // Actual aim-mode also does that so at least it's consistant.
 	else // Otherwise we are waiting for them to go away or to wait long enough for escalate.
@@ -47,7 +47,7 @@
 				threatening = FALSE
 				set_stance(STANCE_APPROACH)
 				if(holder.say_list)
-					holder.ISay(SAFEPICK(holder.say_list.say_escalate))
+					holder.ai_polaris_say(SAFEPICK(holder.say_list.say_escalate))
 			else
 				return // Wait a bit.
 
@@ -56,7 +56,7 @@
 				threatening = FALSE
 			set_stance(STANCE_IDLE)
 			if(holder.say_list)
-				holder.ISay(SAFEPICK(holder.say_list.say_stand_down))
+				holder.ai_polaris_say(SAFEPICK(holder.say_list.say_stand_down))
 				playsound(holder.loc, holder.say_list.stand_down_sound, 50, 1) // We do this twice to make the sound -very- noticable to the target.
 				playsound(target.loc, holder.say_list.stand_down_sound, 50, 1) // Actual aim-mode also does that so at least it's consistant.
 
@@ -108,7 +108,7 @@
 
 		switch(pick(comm_types))
 			if(COMM_SAY)
-				holder.ISay(SAFEPICK(holder.say_list.speak))
+				holder.ai_polaris_say(SAFEPICK(holder.say_list.speak))
 			if(COMM_AUDIBLE_EMOTE)
 				holder.audible_emote(SAFEPICK(holder.say_list.emote_hear))
 			if(COMM_VISUAL_EMOTE)
@@ -131,4 +131,4 @@
 
 		if(speak_to)
 			holder.face_atom(speak_to)
-		holder.ISay(message)
+		holder.ai_polaris_say(message)

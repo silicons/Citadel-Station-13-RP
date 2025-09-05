@@ -29,7 +29,7 @@
 
 	has_langs = list("Dog")
 
-	say_list_type = /datum/say_list/dog
+	say_list_type = /datum/polaris_ai_say_list/dog
 
 	meat_amount = 3
 	meat_type = /obj/item/reagent_containers/food/snacks/meat/corgi
@@ -86,7 +86,7 @@
 
 
 
-/datum/say_list/dog
+/datum/polaris_ai_say_list/dog
 	speak = list("YAP", "Woof!", "Bark!", "AUUUUUU")
 	emote_hear = list("barks", "woofs", "yaps","pants")
 	emote_see = list("shakes its head", "shivers")

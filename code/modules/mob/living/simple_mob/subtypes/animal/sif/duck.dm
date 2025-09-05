@@ -39,15 +39,15 @@
 	attack_edge = 1		// Razor-edged wings, and 'claws' made for digging through ice.
 	attacktext = list("nipped", "bit", "cut", "clawed")
 
-	say_list_type = /datum/say_list/duck
+	say_list_type = /datum/polaris_ai_say_list/duck
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/retaliate/cooperative
 
-/datum/say_list/duck
+/datum/polaris_ai_say_list/duck
 	speak = list("Wack!", "Wock?", "Wack.")
 	emote_see = list("ruffles its wings","looks around", "preens itself")
 	emote_hear = list("quacks", "giggles")
 
-/mob/living/simple_mob/animal/sif/duck/IIsAlly(mob/living/L)
+/mob/living/simple_mob/animal/sif/duck/ai_polaris_is_ally(mob/living/L)
 	. = ..()
 
 	var/has_food = FALSE

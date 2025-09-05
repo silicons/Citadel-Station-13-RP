@@ -77,7 +77,7 @@
 	speak_emote = list("clicks")
 
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/melee/hooligan
-	say_list_type = /datum/say_list/crab
+	say_list_type = /datum/polaris_ai_say_list/crab
 
 	var/weaken_amount = 2 // Be careful with this number. High values will equal a permastun.
 

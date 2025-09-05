@@ -32,7 +32,7 @@
 	friendly = list("nuzzles", "boops", "headbumps against", "leans on")
 
 
-	say_list_type = /datum/say_list/Sally
+	say_list_type = /datum/polaris_ai_say_list/Sally
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/horror
 
 	hide_amount = 10
@@ -62,7 +62,7 @@
 	playsound(src, 'sound/h_sounds/holla.ogg', 50, 1)
 	..()
 
-/datum/say_list/Sally
+/datum/polaris_ai_say_list/Sally
 	speak = list("Yeeeeee?","Haaah! Gashuuuuuh!", "Gahgahgahgah...")
 	emote_hear = list("shrieks", "groans in pain", "breathes heavily", "gnashes its teeth")
 	emote_see = list("wiggles its head", "shakes violently", "stares aggressively")

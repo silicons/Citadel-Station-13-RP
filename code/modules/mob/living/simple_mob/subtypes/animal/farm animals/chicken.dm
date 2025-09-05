@@ -56,7 +56,7 @@ GLOBAL_VAR_INIT(chicken_count, 0)	// How mant chickens DO we have?
 
 	has_langs = list("Bird")
 
-	say_list_type = /datum/say_list/chicken
+	say_list_type = /datum/polaris_ai_say_list/chicken
 
 	meat_amount = 2
 	meat_type = /obj/item/reagent_containers/food/snacks/meat/chicken
@@ -151,7 +151,7 @@ GLOBAL_VAR_INIT(chicken_count, 0)	// How mant chickens DO we have?
 
 	has_langs = list("Bird")
 
-	say_list_type = /datum/say_list/chick
+	say_list_type = /datum/polaris_ai_say_list/chick
 
 	meat_amount = 1
 
@@ -173,12 +173,12 @@ GLOBAL_VAR_INIT(chicken_count, 0)	// How mant chickens DO we have?
 			qdel(src)
 
 // Say Lists
-/datum/say_list/chicken
+/datum/polaris_ai_say_list/chicken
 	speak = list("Cluck!","BWAAAAARK BWAK BWAK BWAK!","Bwaak bwak.")
 	emote_hear = list("clucks","croons")
 	emote_see = list("pecks at the ground","flaps its wings viciously")
 
-/datum/say_list/chick
+/datum/polaris_ai_say_list/chick
 	speak = list("Cherp.","Cherp?","Chirrup.","Cheep!")
 	emote_hear = list("cheeps")
 	emote_see = list("pecks at the ground","flaps its tiny wings")

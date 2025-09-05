@@ -30,7 +30,7 @@
 	legacy_melee_damage_upper = 4
 	attacktext = list("stung")
 
-	say_list_type = /datum/say_list/bee
+	say_list_type = /datum/polaris_ai_say_list/bee
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/retaliate
 
 	//Space bees aren't affected by atmos.
@@ -70,5 +70,5 @@
 		L.custom_pain(SPAN_WARNING("You feel a tiny prick."), 1, TRUE)
 		L.reagents.add_reagent(poison_type, poison_per_bite)
 
-/datum/say_list/bee
+/datum/polaris_ai_say_list/bee
 	speak = list("Buzzzz")

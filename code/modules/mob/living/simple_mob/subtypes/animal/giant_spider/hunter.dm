@@ -157,7 +157,7 @@
 	for(var/mob/living/thing in hearers(vision_range, holder))
 		if(thing == holder || thing == L) // Don't count ourselves or the thing we just started pulling.
 			continue
-		if(holder.IIsAlly(thing))
+		if(holder.ai_polaris_is_ally(thing))
 			allies += thing
 		else
 			enemies += thing

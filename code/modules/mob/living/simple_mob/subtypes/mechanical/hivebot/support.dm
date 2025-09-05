@@ -27,7 +27,7 @@
 	for(var/mob/living/L in range(4, src))
 		if(L == src)
 			continue // Don't buff ourselves.
-		if(IIsAlly(L) && L.isSynthetic()) // Don't buff enemies.
+		if(ai_polaris_is_ally(L) && L.isSynthetic()) // Don't buff enemies.
 			L.add_modifier(/datum/modifier/aura/hivebot_commander_buff, null, src)
 
 // Modifier added to friendly hivebots nearby.
@@ -84,7 +84,7 @@
 	for(var/mob/living/simple_mob/SM in hearers(resupply_range, src))
 		if(SM == src)
 			continue // We don't use charges buuuuut in case that changes in the future...
-		if(IIsAlly(SM)) // Don't resupply enemies.
+		if(ai_polaris_is_ally(SM)) // Don't resupply enemies.
 			if(!isnull(SM.special_attack_charges) && SM.special_attack_charges < initial(SM.special_attack_charges))
 				SM.special_attack_charges += 1
 				to_chat(SM, SPAN_NOTICE("\The [src] has resupplied you, and you can use your special ability one additional time."))

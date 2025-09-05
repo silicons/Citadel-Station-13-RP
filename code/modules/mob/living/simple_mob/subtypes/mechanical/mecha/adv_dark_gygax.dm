@@ -300,11 +300,11 @@
 				closest_distance = microsingulo_radius + 1
 
 		if(get_dist(holder, A) <= closest_distance)
-			holder.IMove(get_step_away(holder, A, closest_distance))
+			holder.ai_polaris_move(get_step_away(holder, A, closest_distance))
 
 	// Otherwise get up close and personal.
 	else if(get_dist(holder, A) > closest_desired_distance)
-		holder.IMove(get_step_towards(holder, A))
+		holder.ai_polaris_move(get_step_towards(holder, A))
 
 // Changes the mob's intent, which controls which special attack is used.
 // INTENT_DISARM causes Electric Defense, INTENT_GRAB causes Micro-Singularity, and INTENT_HARM causes Missile Barrage.

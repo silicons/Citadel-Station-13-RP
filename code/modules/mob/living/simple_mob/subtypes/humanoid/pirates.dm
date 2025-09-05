@@ -47,7 +47,7 @@
 	corpse = /obj/spawner/corpse/pirate/melee
 
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/merc
-	say_list_type = /datum/say_list/pirate
+	say_list_type = /datum/polaris_ai_say_list/pirate
 
 //Armored Variant
 

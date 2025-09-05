@@ -33,10 +33,10 @@
 	bone_amount = 1
 	hide_amount = 1
 
-	say_list_type = /datum/say_list/fluffy_vr
+	say_list_type = /datum/polaris_ai_say_list/fluffy_vr
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/passive
 
-/datum/say_list/fluffy_vr
+/datum/polaris_ai_say_list/fluffy_vr
 	speak = list("Squee","Arf arf","Awoo","Squeak")
 	emote_hear = list("howls","squeals","squeaks", "barks")
 	emote_see = list("puffs its fur out", "shakes its fur", "stares directly at you")

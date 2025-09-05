@@ -52,7 +52,7 @@
 		"rad" = 100
 		)
 
-	say_list_type = /datum/say_list/sakimm
+	say_list_type = /datum/polaris_ai_say_list/sakimm
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/retaliate/cooperative/sakimm
 
 	bone_amount = 2
@@ -123,7 +123,7 @@
 			else
 				to_chat(user, "<span class='warning'>You aren't holding a hat...</span>")
 
-/datum/say_list/sakimm
+/datum/polaris_ai_say_list/sakimm
 	speak = list("Shurr.", "|R|rr?", "Hss.")
 	emote_see = list("sniffs","looks around", "rubs its hands")
 	emote_hear = list("chitters", "clicks")
@@ -150,7 +150,7 @@
 	if(randomize_size)
 		adjust_scale(rand(8, 11) / 10)
 
-/mob/living/simple_mob/animal/sif/sakimm/IIsAlly(mob/living/L)
+/mob/living/simple_mob/animal/sif/sakimm/ai_polaris_is_ally(mob/living/L)
 	. = ..()
 
 	var/mob/living/carbon/human/H = L
@@ -205,7 +205,7 @@
 		I.attack_hand(holder)
 		lose_target()
 	if(istype(A,/mob/living) && holder.Adjacent(A))	// Not the dumbest tool in the shed. If we're fighting, we're gonna dance around them.
-		holder.IMove(get_step(holder, pick(GLOB.alldirs)))
+		holder.ai_polaris_move(get_step(holder, pick(GLOB.alldirs)))
 		holder.face_atom(A)
 		request_help()	// And we're going to call friends, too.
 

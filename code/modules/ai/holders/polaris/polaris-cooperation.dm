@@ -63,7 +63,7 @@
 		if(get_dist(L, holder) > call_distance) // Too far to 'hear' the call for help.
 			continue
 
-		if(holder.IIsAlly(L))
+		if(holder.ai_polaris_is_ally(L))
 			// This will currently never run sadly, until faction_friends is made to accept players too.
 			// That might be for the best since I can imagine it getting spammy in a big fight.
 			if(L.client && call_players) // Dealing with a player.
@@ -96,7 +96,7 @@
 	if(!can_act())
 		polaris_ai_log("help_requested() : Help requested by [friend] but cannot act (stunned or dead).", POLARIS_AI_LOG_INFO)
 		return
-	if(!holder.IIsAlly(friend)) // Extra sanity.
+	if(!holder.ai_polaris_is_ally(friend)) // Extra sanity.
 		polaris_ai_log("help_requested() : Help requested by [friend] but we hate them.", POLARIS_AI_LOG_INFO)
 		return
 	if(friend_ai_holder && friend_ai_holder.target && !can_attack(friend_ai_holder.target))

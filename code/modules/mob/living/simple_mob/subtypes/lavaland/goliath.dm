@@ -77,7 +77,7 @@
 	iff_factions = MOB_IFF_FACTION_BIND_TO_MAP
 
 	speak_emote = list("bellows")
-	say_list_type = /datum/say_list/goliath
+	say_list_type = /datum/polaris_ai_say_list/goliath
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/melee/goliath
 
 	var/datum/reagent_holder/goliath_sac = null
@@ -99,7 +99,7 @@
 	mauling = FALSE
 	can_flee = TRUE
 
-/datum/say_list/goliath
+/datum/polaris_ai_say_list/goliath
 	emote_hear = list("flashes briefly.", "wails!", "shudders.", "trills.")
 	emote_see = list ("glows faintly.", "rumbles.", "tenses up.")
 

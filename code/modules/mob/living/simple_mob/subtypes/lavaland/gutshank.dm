@@ -69,7 +69,7 @@
 	iff_factions = MOB_IFF_FACTION_BIND_TO_MAP
 
 	speak_emote = list("chatters")
-	say_list_type = /datum/say_list/gutshank
+	say_list_type = /datum/polaris_ai_say_list/gutshank
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/melee
 
 	var/datum/reagent_holder/shank_gland = null
@@ -77,7 +77,7 @@
 	var/amount_grown = 1
 	var/list/grow_as = list(/mob/living/simple_mob/animal/shank)
 
-/datum/say_list/gutshank
+/datum/polaris_ai_say_list/gutshank
 	emote_hear = list("rubs its mandibles together.", "skitters around.", "trills.")
 	emote_see = list ("clacks its mandibles.", "shudders and jerks.")
 
@@ -191,7 +191,7 @@
 	iff_factions = MOB_IFF_FACTION_BIND_TO_MAP
 
 	speak_emote = list("chatters")
-	say_list_type = /datum/say_list/gutshank
+	say_list_type = /datum/polaris_ai_say_list/gutshank
 	//I changed the ai_holder from simple/melee to retaliate/coop because when riding a Shank, it would override user inputs to charge non-faction mobs. Which is annoying.
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/retaliate/cooperative
 

@@ -48,7 +48,7 @@
 	response_harm = "roughly pushes"
 
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/retaliate
-	say_list_type = /datum/say_list/solarmoth
+	say_list_type = /datum/polaris_ai_say_list/solarmoth
 
 	var/poison_per_bite = 5 //Moths cause a shock when they bite someone
 	var/poison_type = "shockchem"
@@ -76,7 +76,7 @@
 				"bio" = 100,
 				"rad" = 100)
 
-/datum/say_list/solarmoth
+/datum/polaris_ai_say_list/solarmoth
 	emote_see = list("flutters")
 
 /mob/living/simple_mob/vore/solarmoth/apply_melee_effects(var/atom/A)

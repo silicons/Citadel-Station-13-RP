@@ -121,7 +121,7 @@
 		if(ishuman(L) || issilicon(L))
 			if(L.key && !L.client)	// SSD players get a pass
 				return FALSE
-		if(holder.IIsAlly(L))
+		if(holder.ai_polaris_is_ally(L))
 			return FALSE
 		if(L.stat)
 			if(L.stat == DEAD && !handle_corpse) // Leave dead things alone
@@ -235,7 +235,7 @@
 	if(!hostile && !retaliate) // Not allowed to defend ourselves.
 		polaris_ai_log("react_to_attack_polaris() : Was attacked by [attacker], but we are not allowed to attack back.", POLARIS_AI_LOG_TRACE)
 		return FALSE
-	if(ismob(attacker) && holder.IIsAlly(attacker)) // I'll overlook it THIS time...
+	if(ismob(attacker) && holder.ai_polaris_is_ally(attacker)) // I'll overlook it THIS time...
 		polaris_ai_log("react_to_attack_polaris() : Was attacked by [attacker], but they were an ally.", POLARIS_AI_LOG_TRACE)
 		return FALSE
 	if(target) // Already fighting someone. Switching every time we get hit would impact our combat performance.

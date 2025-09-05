@@ -32,13 +32,13 @@
 	icon_x_dimension = 64
 	icon_y_dimension = 64
 
-	say_list_type = /datum/say_list/panther
+	say_list_type = /datum/polaris_ai_say_list/panther
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/melee/evasive
 
 // Activate Noms!
 /mob/living/simple_mob/vore/aggressive/panther
 
-/datum/say_list/panther
+/datum/polaris_ai_say_list/panther
 	speak = list("RAWR!","Rawr!","GRR!","Growl!")
 	emote_hear = list("rawrs","rumbles","rowls","growls","roars")
 	emote_see = list("stares ferociously", "snarls")

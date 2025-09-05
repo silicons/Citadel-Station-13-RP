@@ -28,7 +28,7 @@
 	bone_amount = 1
 
 // Say list
-/datum/say_list/bird/polly
+/datum/polaris_ai_say_list/bird/polly
 	speak = list(
 		"Polly wanna cracker!",
 		"Check the singulo, you chucklefucks!",
@@ -44,7 +44,7 @@
 
 // Lets the AI use headsets.
 // Player-controlled parrots will need to do it manually.
-/mob/living/simple_mob/animal/passive/bird/parrot/ISay(message)
+/mob/living/simple_mob/animal/passive/bird/parrot/ai_polaris_say(message)
 	if(my_headset && prob(50))
 		var/list/keys = list()
 		for(var/channel in my_headset.channels)
@@ -101,7 +101,7 @@
 	if(!my_headset)
 		to_chat(user, "<span class='warning'>\The [src] doesn't have a headset to remove, thankfully.</span>")
 	else
-		ISay("BAWWWWWK LEAVE THE HEADSET BAWKKKKK!")
+		ai_polaris_say("BAWWWWWK LEAVE THE HEADSET BAWKKKKK!")
 		user.put_in_hands_or_drop(my_headset)
 		to_chat(user, SPAN_NOTICE("You take away \the [src]'s [my_headset.name]. Finally."))
 		to_chat(src, SPAN_WARNING( "\The [user] takes your [my_headset.name] away! How cruel!"))
@@ -128,7 +128,7 @@
 	icon_dead = "polly-dead"
 	tt_desc = "E Ara macao"
 	my_headset = /obj/item/radio/headset/headset_eng
-	say_list_type = /datum/say_list/bird/polly
+	say_list_type = /datum/polaris_ai_say_list/bird/polly
 	randomized = FALSE
 
 // Best Bird with best headset.
@@ -267,5 +267,5 @@
 /datum/ai_holder/polaris/simple_mob/passive/parrot/on_hear_say(mob/living/speaker, message)
 	if(holder.stat || !holder.say_list || !message || speaker == holder)
 		return
-	var/datum/say_list/S = holder.say_list
+	var/datum/polaris_ai_say_list/S = holder.say_list
 	S.speak |= message

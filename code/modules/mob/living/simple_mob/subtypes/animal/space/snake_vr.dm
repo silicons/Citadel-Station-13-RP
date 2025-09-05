@@ -33,14 +33,14 @@
 	legacy_melee_damage_upper = 3
 	attacktext = list("bitten")
 
-	say_list_type = /datum/say_list/snake
+	say_list_type = /datum/polaris_ai_say_list/snake
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/passive
 
 	bone_amount = 5
 	hide_amount = 1
 	hide_type = /obj/item/stack/hairlesshide
 
-/datum/say_list/snake
+/datum/polaris_ai_say_list/snake
 	emote_hear = list("hisses")
 
 //NOODLE IS HERE! SQUEEEEEEEE~

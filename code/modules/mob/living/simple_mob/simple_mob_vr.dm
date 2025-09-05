@@ -33,7 +33,7 @@
 		return
 
 // Checks to see if mob doesn't like this kind of turf
-/mob/living/simple_mob/IMove(turf/newloc, safety = TRUE)
+/mob/living/simple_mob/ai_polaris_move(turf/newloc, safety = TRUE)
 	if(istype(newloc,/turf/simulated/sky))
 		return POLARIS_AI_MOVEMENT_FAILED //Mobs aren't that stupid, probably
 	return ..() // Procede as normal.

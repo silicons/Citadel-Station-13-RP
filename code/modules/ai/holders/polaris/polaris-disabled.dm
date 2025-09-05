@@ -20,7 +20,7 @@
 		polaris_ai_log("can_act() : Incapacited.", POLARIS_AI_LOG_TRACE)
 		return FALSE
 
-	if(holder.instasis()) // In a stasis field.
+	if(holder.ai_polaris_in_stasis()) // In a stasis field.
 		polaris_ai_log("can_act() : In a stasis field.", POLARIS_AI_LOG_TRACE)
 		return FALSE
 
@@ -64,7 +64,7 @@
 
 					// Look for allies.
 					for(var/mob/living/L in turf_tested)
-						if(holder.IIsAlly(L))
+						if(holder.ai_polaris_is_ally(L))
 							unsafe = TRUE
 							break tile_test
 
@@ -85,7 +85,7 @@
 		else
 			// Move to the tile. Even if it's unsafe.
 			polaris_ai_log("dangerous_wander() : Going to confuse-walk to [T] ([T.x],[T.y],[T.z]).", POLARIS_AI_LOG_TRACE)
-			holder.IMove(T, safety = FALSE)
+			holder.ai_polaris_move(T, safety = FALSE)
 	polaris_ai_log("dangerous_wander() : Exited.", POLARIS_AI_LOG_DEBUG)
 
 /*
@@ -102,7 +102,7 @@
 			var/moving_to = 0 // Apparently this is required or it always picks 4, according to the previous developer for simplemob AI.
 			moving_to = pick(GLOB.cardinal)
 			holder.setDir(moving_to)
-			holder.IMove(get_step(holder,moving_to))
+			holder.ai_polaris_move(get_step(holder,moving_to))
 			wander_delay = base_wander_delay
 	polaris_ai_log("handle_wander_movement() : Exited.", POLARIS_AI_LOG_DEBUG)
 */

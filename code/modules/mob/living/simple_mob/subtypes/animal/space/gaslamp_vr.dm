@@ -41,7 +41,7 @@ TODO: Make them light up and heat the air when exposed to oxygen.
 	mod_max = 140
 	movement_base_speed = 10 / 12
 
-	say_list_type = /datum/say_list/gaslamp
+	say_list_type = /datum/polaris_ai_say_list/gaslamp
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/gaslamp
 
 	//speed = 2 not sure what this is, guessing animation, but it conflicts with new system.
@@ -69,7 +69,7 @@ TODO: Make them light up and heat the air when exposed to oxygen.
 
 	exotic_amount = 5
 
-/datum/say_list/gaslamp
+/datum/polaris_ai_say_list/gaslamp
 	emote_see = list("looms", "sways gently")
 
 /datum/ai_holder/polaris/simple_mob/gaslamp

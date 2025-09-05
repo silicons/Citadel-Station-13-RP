@@ -35,7 +35,7 @@
 	meat_amount = 1
 	bone_amount = 1
 
-/datum/say_list/goose
+/datum/polaris_ai_say_list/goose
 	speak = list("HONK!")
 	emote_hear = list("honks loudly!")
 	say_maybe_target = list("Honk?")

@@ -70,10 +70,10 @@
 	iff_factions = MOB_IFF_FACTION_BIND_TO_MAP
 
 	speak_emote = list("rumbles")
-	say_list_type = /datum/say_list/stormdrifter
+	say_list_type = /datum/polaris_ai_say_list/stormdrifter
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/stormdrifter
 
-/datum/say_list/stormdrifter
+/datum/polaris_ai_say_list/stormdrifter
 	emote_hear = list("drifts back and forth.", "gently flails its tendrils about.", "warbles.")
 	emote_see = list ("wriggles its tendrils.", "bobs up and down.")
 

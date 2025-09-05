@@ -39,13 +39,13 @@
 	bone_amount = 1
 	hide_amount = 3
 
-	say_list_type = /datum/say_list/fox
+	say_list_type = /datum/polaris_ai_say_list/fox
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/fox
 
 	var/turns_since_scan = 0
 	var/mob/flee_target
 
-/datum/say_list/fox
+/datum/polaris_ai_say_list/fox
 	speak = list("Ack-Ack","Ack-Ack-Ack-Ackawoooo","Awoo","Tchoff")
 	emote_hear = list("howls","barks","geckers",)
 	emote_see = list("shakes its head", "shivers", "geckers")
@@ -86,7 +86,7 @@
 		return //since the holder icon looks like a living cat
 	..()
 
-/mob/living/simple_mob/animal/passive/fox/renault/IIsAlly(mob/living/L)
+/mob/living/simple_mob/animal/passive/fox/renault/ai_polaris_is_ally(mob/living/L)
 	if(L == friend) // Always be pals with our special friend.
 		return TRUE
 

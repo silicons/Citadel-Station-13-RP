@@ -53,7 +53,7 @@
 
 	attacktext = list("bit", "buffeted", "slashed")
 
-	say_list_type = /datum/say_list/glitterfly
+	say_list_type = /datum/polaris_ai_say_list/glitterfly
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/melee/evasive/glitterfly
 
 /mob/living/simple_mob/animal/sif/glitterfly/Initialize(mapload)
@@ -82,7 +82,7 @@
 /mob/living/simple_mob/animal/sif/glitterfly/rare/Initialize(mapload)
 	. = ..()
 
-/datum/say_list/glitterfly
+/datum/polaris_ai_say_list/glitterfly
 	speak = list("Pi..","Po...", "Pa...")
 	emote_see = list("vibrates","flutters", "twirls")
 	emote_hear = list("pips", "clicks", "chirps")
@@ -98,7 +98,7 @@
 	if(prob(1))
 		var/friendly_animal_corpse = FALSE
 		for(var/mob/living/simple_mob/animal/A in view(vision_range,holder))
-			if(holder.IIsAlly(A) && A.stat == DEAD)
+			if(holder.ai_polaris_is_ally(A) && A.stat == DEAD)
 				friendly_animal_corpse = TRUE
 				break
 

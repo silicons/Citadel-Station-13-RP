@@ -32,7 +32,7 @@
 	friendly = list("nuzzles", "boops", "bumps against", "leans on")
 
 
-	say_list_type = /datum/say_list/Willy
+	say_list_type = /datum/polaris_ai_say_list/Willy
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/horror
 
 	meat_amount = 3
@@ -65,7 +65,7 @@
 	playsound(src, 'sound/h_sounds/holla.ogg', 50, 1)
 	..()
 
-/datum/say_list/Willy
+/datum/polaris_ai_say_list/Willy
 	speak = list("Uuurrgh?","Aauuugghh...", "AAARRRGH!")
 	emote_hear = list("shrieks horrifically", "groans in pain", "cries", "whines")
 	emote_see = list("headbobs", "shakes violently in place", "stares aggressively")

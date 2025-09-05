@@ -135,7 +135,7 @@
 	// ai move specials
 /*
 	if(isAI(mob))
-		return AIMove(n,direct,mob)
+		return Aai_polaris_move(n,direct,mob)
 */
 	//! WARNING: LEGACY CODE START
 	// unzoom

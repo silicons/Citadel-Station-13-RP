@@ -6,8 +6,8 @@
 // and now sounds because its probably better that way.
 
 /mob/living
-	var/datum/say_list/say_list = null
-	var/say_list_type = /datum/say_list	// Type to give us on initialization. Default has empty lists, so the mob will be silent.
+	var/datum/polaris_ai_say_list/say_list = null
+	var/say_list_type = /datum/polaris_ai_say_list	// Type to give us on initialization. Default has empty lists, so the mob will be silent.
 
 /mob/living/Initialize(mapload)
 	if(say_list_type)
@@ -19,7 +19,7 @@
 		QDEL_NULL(say_list)
 	return ..()
 
-/datum/say_list
+/datum/polaris_ai_say_list
 	var/list/speak = list()				// Things the mob might say if it talks while idle.
 	var/list/emote_hear = list()		// Hearable emotes it might perform
 	var/list/emote_see = list()			// Unlike speak_emote, the list of things in this variable only show by themselves with no spoken text. IE: Ian barks, Ian yaps
@@ -44,7 +44,7 @@
 // Subtypes.
 
 // This one's pretty dumb, but pirates are dumb anyways and it makes for a good test.
-/datum/say_list/pirate
+/datum/polaris_ai_say_list/pirate
 	emote_hear = list("whistles a shanty", "coughs loudly")
 	emote_see = list("scratches his ass", "spins his knife around", "spits on the floor", "taps their foot")
 
@@ -66,7 +66,7 @@
 	stand_down_sound = 'sound/effects/holster/sheathin.ogg'
 
 // Mercs!
-/datum/say_list/merc
+/datum/polaris_ai_say_list/merc
 	speak = list("When are we gonna get out of this chicken-shit outfit?",
 				"Wish I had better equipment...",
 				"I knew I should have been a line chef...",
@@ -84,7 +84,7 @@
 	threaten_sound = 'sound/weapons/TargetOn.ogg'
 	stand_down_sound = 'sound/weapons/TargetOff.ogg'
 
-/datum/say_list/merc/elite // colder. also, actually just assholes.
+/datum/polaris_ai_say_list/merc/elite // colder. also, actually just assholes.
 	speak = list("I got better pay on my last job.",
 				"So, y'think we'll get to shoot anyone today?",
 				"Fuck, I hate those guys.",
@@ -100,7 +100,7 @@
 	say_stand_down = list("Damn it, I was hoping you'd push your luck.", "What, that's it? Pussy.", "And don't come back.", "Good call. Don't do it again.", "Harrumph.", "That'll teach 'ya.")
 	say_escalate = list("Oh, I'm gonna enjoy this.", "I'm going to enjoy making you regret that.", "Last mistake you'll make.")
 
-/datum/say_list/malf_drone
+/datum/polaris_ai_say_list/malf_drone
 	speak = list("ALERT.","Hostile-ile-ile entities dee-twhoooo-wected.","Threat parameterszzzz- szzet.","Bring sub-sub-sub-systems uuuup to combat alert alpha-a-a.")
 	emote_see = list("beeps menacingly","whirrs threateningly","scans its immediate vicinity")
 
@@ -116,14 +116,14 @@
 	stand_down_sound = 'sound/effects/turret/move2.wav'
 
 
-/datum/say_list/crab
+/datum/polaris_ai_say_list/crab
 	emote_hear = list("clicks")
 	emote_see = list("clacks")
 
-/datum/say_list/spider
+/datum/polaris_ai_say_list/spider
 	emote_hear = list("chitters")
 
-/datum/say_list/hivebot
+/datum/polaris_ai_say_list/hivebot
 	speak = list(
 		"Resuming task: Protect area.",
 		"No threats found.",
@@ -136,14 +136,14 @@
 	say_maybe_target = list("Possible threat detected.  Investigating.", "Motion detected.", "Investigating.")
 	say_got_target = list("Threat detected.", "New task: Remove threat.", "Threat removal engaged.", "Engaging target.")
 
-/datum/say_list/lizard
+/datum/polaris_ai_say_list/lizard
 	emote_hear = list("hisses")
 
-/datum/say_list/crab
+/datum/polaris_ai_say_list/crab
 	emote_hear = list("hisses")
 
 //Vox Pirate Saylist
-/datum/say_list/merc/voxpirate
+/datum/polaris_ai_say_list/merc/voxpirate
 	speak = list("Lookings for scrap, yaya.",
 				"Tank is lookings low.",
 				"Knowings should haves stayed on the Ark.",
@@ -163,7 +163,7 @@
 
 	//Synth Horror Saylist
 
-/datum/say_list/cyber_horror
+/datum/polaris_ai_say_list/cyber_horror
 	speak = list("H@!#$$P M@!$#",
 				 "GHAA!@@#",
 				 "KR@!!N",
@@ -176,12 +176,12 @@
 	say_got_target = list("I *#@ Y@%","!E@#$P","F#RR @I","D0@#$ ##OK %","IT $##TS")
 
 //Roach Saylists Woo Hoo
-/datum/say_list/roach
+/datum/polaris_ai_say_list/roach
 	speak = list("Chitter!","Chk chk!","Tchk?")
 	emote_hear = list("chitters","chirps","shuffles")
 	emote_see = list("rubs its antennae", "skitters", "clacks across the floor")
 
-/datum/say_list/possessed
+/datum/polaris_ai_say_list/possessed
 	speak = list("Where am I?",
 				"Why am I here?",
 				"Where did everyone go?")
@@ -196,7 +196,7 @@
 	say_escalate = list("Help!", "I'm sorry!", "I can't stop!", "I don't want to do this!", "I don't want to go!")
 
 // Generic Lines for all Tajara mobs
-/datum/say_list/tajara
+/datum/polaris_ai_say_list/tajara
 	speak = list("So hot herrre...",
 				"Could use a nice cigarrr...",
 				"Still betterrr then the factorrries...",
@@ -207,7 +207,7 @@
 	threaten_sound = 'sound/weapons/TargetOn.ogg'
 	stand_down_sound = 'sound/weapons/TargetOff.ogg'
 
-/datum/say_list/tajara/nka
+/datum/polaris_ai_say_list/tajara/nka
 	say_understood = list("Yes sirrr my liege!", "At once sirrre!")
 	say_cannot = list("I cannot my lorrrd!")
 	say_got_target = list("Messa will take you!")
@@ -215,7 +215,7 @@
 	say_stand_down = list("S'rrrendarrr good.")
 	say_escalate = list("You'll make a fine rrrug!", "Forr Adhomai!")
 
-/datum/say_list/tajara/pra
+/datum/polaris_ai_say_list/tajara/pra
 	say_understood = list("Aye Comrrrade!", "Togetherrr!")
 	say_cannot = list("I cannot sirrr!")
 	say_got_target = list("We will be liberrated!")
@@ -223,7 +223,7 @@
 	say_stand_down = list("Grreat.")
 	say_escalate = list("Die corrporrate dog!", "Forr Adhomai!")
 
-/datum/say_list/tajara/dra
+/datum/polaris_ai_say_list/tajara/dra
 	say_understood = list("Yeah got it...", "Affirrrmative!")
 	say_cannot = list("Harrr Harrr No!")
 	say_got_target = list("Welcome to the snowfields!")

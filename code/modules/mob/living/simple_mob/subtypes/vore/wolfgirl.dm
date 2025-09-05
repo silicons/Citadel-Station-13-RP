@@ -20,7 +20,7 @@
 	legacy_melee_damage_upper = 7
 	attacktext = list("slashed")
 
-	say_list_type = /datum/say_list/wolfgirl
+	say_list_type = /datum/polaris_ai_say_list/wolfgirl
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/retaliate/cooperative/wolfgirl
 
 	var/loopstop = 0 //To prevent circular awoooos.
@@ -55,7 +55,7 @@
 	if(findtext(message, "Awoo."))
 		delayed_say(pick("Awoo?"), speaker)
 
-/datum/say_list/wolfgirl
+/datum/polaris_ai_say_list/wolfgirl
 	speak = list("AwoooOOOOoooo!","Awoo~","I'll protect the forest! ... Where's the forest again?","All I need is my sword!","Awoo?","Anyone else smell that?")
 	emote_hear = list("awoooos!","hmms to herself","plays with her sword")
 	emote_see = list("narrows her eyes","sniffs the air")

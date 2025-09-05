@@ -32,7 +32,7 @@
 	friendly = list("nuzzles", "eyeboops", "headbumps against", "leans on")
 
 
-	say_list_type = /datum/say_list/bradley
+	say_list_type = /datum/polaris_ai_say_list/bradley
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/horror
 
 	bone_amount = 4
@@ -63,7 +63,7 @@
 	playsound(src, 'sound/h_sounds/holla.ogg', 50, 1)
 	..()
 
-/datum/say_list/bradley
+/datum/polaris_ai_say_list/bradley
 	speak = list("Uuurrgh?","Aauuugghh...", "AAARRRGH!")
 	emote_hear = list("shrieks through its skin", "groans in pain", "creaks", "clanks")
 	emote_see = list("taps its limbs against the ground", "shakes", "stares aggressively")

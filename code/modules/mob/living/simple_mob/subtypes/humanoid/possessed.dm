@@ -47,7 +47,7 @@
 
 	//Simple mob merc so it stops, says something, then charges.
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/merc
-	say_list_type = /datum/say_list/possessed //Set to Null on silenced.
+	say_list_type = /datum/polaris_ai_say_list/possessed //Set to Null on silenced.
 
 //	corpse = /obj/spawner/corpse/possessed
 // Will eventually leave a full corpse with an activated RIG on it. But not yet.

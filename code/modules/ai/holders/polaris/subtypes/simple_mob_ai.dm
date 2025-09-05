@@ -89,7 +89,7 @@
 
 /datum/ai_holder/polaris/simple_mob/ranged/kiting/on_engagement(atom/A)
 	if(get_dist(holder, A) < run_if_this_close)
-		holder.IMove(get_step_away(holder, A, run_if_this_close))
+		holder.ai_polaris_move(get_step_away(holder, A, run_if_this_close))
 		if(moonwalk)
 			holder.face_atom(A)
 
@@ -100,7 +100,7 @@
 
 /datum/ai_holder/polaris/simple_mob/ranged/aggressive/on_engagement(atom/A)
 	if(get_dist(holder, A) > closest_distance)
-		holder.IMove(get_step_towards(holder, A))
+		holder.ai_polaris_move(get_step_towards(holder, A))
 		holder.face_atom(A)
 
 // Yakkity saxes while firing at you.
@@ -136,7 +136,7 @@
 
 /datum/ai_holder/polaris/simple_mob/melee/evasive/post_melee_attack(atom/A)
 	if(holder.Adjacent(A))
-		holder.IMove(get_step(holder, pick(GLOB.alldirs)))
+		holder.ai_polaris_move(get_step(holder, pick(GLOB.alldirs)))
 		holder.face_atom(A)
 
 

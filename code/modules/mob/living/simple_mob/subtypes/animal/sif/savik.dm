@@ -45,10 +45,10 @@
 	player_msg = "You have the ability to <b>berserk at will</b>, which will grant strong physical bonuses for \
 	a short period of time, however it will tire you and you will be much weaker for awhile after it expires."
 
-	say_list_type = /datum/say_list/savik
+	say_list_type = /datum/polaris_ai_say_list/savik
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/savik
 
-/datum/say_list/savik
+/datum/polaris_ai_say_list/savik
 	speak = list("Hruuugh!","Hrunnph")
 	emote_see = list("paws the ground","shakes its mane","stomps")
 	emote_hear = list("snuffles")

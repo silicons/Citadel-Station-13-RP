@@ -30,7 +30,7 @@
 	meat_amount = 1
 	meat_type = /obj/item/reagent_containers/food/snacks/meat/crab
 
-	say_list_type = /datum/say_list/crab
+	say_list_type = /datum/polaris_ai_say_list/crab
 
 //COFFEE! SQUEEEEEEEEE!
 /mob/living/simple_mob/animal/passive/crab/Coffee

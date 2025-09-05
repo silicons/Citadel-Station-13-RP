@@ -35,7 +35,7 @@
 	)
 
 // Makes the AI unable to willingly go on land.
-/mob/living/simple_mob/animal/passive/fish/IMove(turf/newloc, safety = TRUE)
+/mob/living/simple_mob/animal/passive/fish/ai_polaris_move(turf/newloc, safety = TRUE)
 	if(is_type_in_list(newloc, suitable_turf_types))
 		return ..() // Procede as normal.
 	return POLARIS_AI_MOVEMENT_FAILED // Don't leave the water!

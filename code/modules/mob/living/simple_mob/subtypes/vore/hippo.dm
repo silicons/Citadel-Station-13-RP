@@ -50,7 +50,7 @@
 	hide_amount = 6
 	hide_type = /obj/item/stack/hairlesshide
 
-	say_list_type = /datum/say_list/hippo
+	say_list_type = /datum/polaris_ai_say_list/hippo
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/retaliate
 
 // Activate Noms!
@@ -59,7 +59,7 @@
 /mob/living/simple_mob/vore/hippo/MouseDroppedOnLegacy(mob/living/M, mob/living/user)
 	return
 
-/datum/say_list/hippo
+/datum/polaris_ai_say_list/hippo
 	speak = list("UUUUUUH")
 	emote_hear = list("grunts","groans", "roars", "snorts")
 	emote_see = list("shakes its head")

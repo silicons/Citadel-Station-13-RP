@@ -32,7 +32,7 @@
 	base_pixel_x = -16
 
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/melee
-	say_list_type = /datum/say_list/dragonboss
+	say_list_type = /datum/polaris_ai_say_list/dragonboss
 
 /mob/living/simple_mob/vore/aggressive/dragon/Process_Spacemove(var/check_drift = 0)
 	return 1	//No drifting in space for space dragons!
@@ -44,5 +44,5 @@
 	maxHealth = 200
 	health = 200
 
-/datum/say_list/dragonboss
+/datum/polaris_ai_say_list/dragonboss
 	say_got_target = list("roars and snaps it jaws!")

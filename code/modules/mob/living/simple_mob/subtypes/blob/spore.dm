@@ -32,16 +32,16 @@
 
 	attacktext = list("slams into")
 	attack_sound = 'sound/effects/slime_squish.ogg'
-	say_list_type = /datum/say_list/spore
+	say_list_type = /datum/polaris_ai_say_list/spore
 
 	var/mob/living/carbon/human/infested = null // The human this thing is totally not making into a zombie.
 	var/can_infest = FALSE
 	var/is_infesting = FALSE
 
-/datum/say_list/spore
+/datum/polaris_ai_say_list/spore
 	emote_see = list("sways", "inflates briefly")
 
-/datum/say_list/infested
+/datum/polaris_ai_say_list/infested
 	emote_see = list("shambles around", "twitches", "stares")
 
 
@@ -130,7 +130,7 @@
 	H.forceMove(src)
 	infested = H
 
-	say_list = new /datum/say_list/infested()
+	say_list = new /datum/polaris_ai_say_list/infested()
 
 	update_icons()
 	visible_message(SPAN_WARNING( "The corpse of [H.name] suddenly rises!"))
@@ -144,7 +144,7 @@
 	for(var/mob/living/simple_mob/blob/spore/S in view(1, src))
 		if(S == src) // Don't count ourselves.
 			continue
-		if(!IIsAlly(S)) // Only friendly spores make us stronger.
+		if(!ai_polaris_is_ally(S)) // Only friendly spores make us stronger.
 			continue
 		// Friendly spores contribute 1/4th of their averaged attack power to our attack.
 		damage_to_do += ((S.legacy_melee_damage_lower + S.legacy_melee_damage_upper) / 2) / 4

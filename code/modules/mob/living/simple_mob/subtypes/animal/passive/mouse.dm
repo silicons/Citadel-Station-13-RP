@@ -44,7 +44,7 @@
 	bone_amount = 1
 	hide_amount = 1
 
-	say_list_type = /datum/say_list/mouse
+	say_list_type = /datum/polaris_ai_say_list/mouse
 
 	var/body_color //brown, gray and white, leave blank for random
 
@@ -140,7 +140,7 @@
 
 
 // Mouse noises
-/datum/say_list/mouse
+/datum/polaris_ai_say_list/mouse
 	speak = list("Squeek!","SQUEEK!","Squeek?")
 	emote_hear = list("squeeks","squeaks","squiks")
 	emote_see = list("runs in a circle", "shakes", "scritches at something")

@@ -39,7 +39,7 @@
 
 	var/life_since_foodscan = 0
 
-	say_list_type = /datum/say_list/rat
+	say_list_type = /datum/polaris_ai_say_list/rat
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/melee/rat
 
 /mob/living/simple_mob/vore/aggressive/rat/tame		//not quite tame but does not attack on sight
@@ -87,7 +87,7 @@
 	max_n2 = 0
 	minbodytemp = 0
 
-/datum/say_list/rat
+/datum/polaris_ai_say_list/rat
 	speak = list("Squeek!","SQUEEK!","Squeek?")
 	emote_hear = list("squeeks","squeaks","squiks")
 	emote_see = list("runs in a circle", "shakes", "scritches at something")

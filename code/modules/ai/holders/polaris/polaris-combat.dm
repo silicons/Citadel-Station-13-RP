@@ -52,7 +52,7 @@
 
 	// Do a 'special' attack, if one is allowed.
 //	if(prob(special_attack_prob) && (distance >= special_attack_min_range) && (distance <= special_attack_max_range))
-	if(holder.ICheckSpecialAttack(target))
+	if(holder.ai_polaris_check_special_attack(target))
 		polaris_ai_log("engage_target() : Attempting a special attack.", POLARIS_AI_LOG_TRACE)
 		on_engagement(target)
 		if(special_attack(target)) // If this fails, then we try a regular melee/ranged attack.
@@ -65,19 +65,19 @@
 		on_engagement(target)
 		melee_attack(target)
 
-	else if(distance <= 1 && !holder.ICheckRangedAttack(target)) // Doesn't have projectile, but is pointblank
+	else if(distance <= 1 && !holder.ai_polaris_check_ranged_attack(target)) // Doesn't have projectile, but is pointblank
 		polaris_ai_log("engage_target() : Attempting a melee attack.", POLARIS_AI_LOG_TRACE)
 		on_engagement(target)
 		melee_attack(target)
 
 	// Shoot them.
-	else if(holder.ICheckRangedAttack(target) && (distance <= max_range(target)) )
+	else if(holder.ai_polaris_check_ranged_attack(target) && (distance <= max_range(target)) )
 		on_engagement(target)
 		if(firing_lanes && !test_projectile_safety(target))
 			// Nudge them a bit, maybe they can shoot next time.
 			var/turf/T = get_step(holder, pick(GLOB.cardinal))
 			if(T)
-				holder.IMove(T) // IMove() will respect movement cooldown.
+				holder.ai_polaris_move(T) // ai_polaris_move() will respect movement cooldown.
 				holder.face_atom(target)
 			polaris_ai_log("engage_target() : Could not safely fire at target. Exiting.", POLARIS_AI_LOG_DEBUG)
 			return
@@ -93,21 +93,21 @@
 // We're not entirely sure how holder will do melee attacks since any /mob/living could be holder, but we don't have to care because Interfaces.
 /datum/ai_holder/polaris/proc/melee_attack(atom/A)
 	pre_melee_attack(A)
-	. = holder.IAttack(A)
+	. = holder.ai_polaris_attack(A)
 	if(.)
 		post_melee_attack(A)
 
 // Ditto.
 /datum/ai_holder/polaris/proc/ranged_attack(atom/A)
 	pre_ranged_attack(A)
-	. = holder.IRangedAttack(A)
+	. = holder.ai_polaris_ranged_attack(A)
 	if(.)
 		post_ranged_attack(A)
 
 // Most mobs probably won't have this defined but we don't care.
 /datum/ai_holder/polaris/proc/special_attack(atom/movable/AM)
 	pre_special_attack(AM)
-	. = holder.ISpecialAttack(AM)
+	. = holder.ai_polaris_special_attack(AM)
 	if(.)
 		post_special_attack(AM)
 
@@ -167,7 +167,7 @@
 		polaris_ai_log("test_projectile_check_safety() : Evaluating \the [A] ([A.type]).", POLARIS_AI_LOG_TRACE)
 		if(isliving(A)) // Don't shoot at our friends, even if they're behind the target, as RNG can make them get hit.
 			var/mob/living/L = A
-			if(holder.IIsAlly(L))
+			if(holder.ai_polaris_is_ally(L))
 				polaris_ai_log("test_projectile_check_safety() : Would threaten ally, exiting with FALSE.", POLARIS_AI_LOG_DEBUG)
 				return FALSE
 
@@ -185,7 +185,7 @@
 	var/distance = get_dist(holder, AM)
 	if(distance <= 1)
 		return TRUE // Can melee.
-	else if(holder.ICheckRangedAttack(AM) && distance <= max_range(AM))
+	else if(holder.ai_polaris_check_ranged_attack(AM) && distance <= max_range(AM))
 		return TRUE // Can shoot.
 	return FALSE
 
@@ -195,7 +195,7 @@
 
 // Can be used to conditionally do a ranged or melee attack.
 /datum/ai_holder/polaris/proc/max_range(atom/movable/AM)
-	return holder.ICheckRangedAttack(AM) ? max_range : 1
+	return holder.ai_polaris_check_ranged_attack(AM) ? max_range : 1
 
 // Goes to the target, to attack them.
 // Called when in STANCE_APPROACH.
@@ -219,7 +219,7 @@
 	// We're here!
 	// Special case: Our holder has a special attack that is ranged, but normally the holder uses melee.
 	// If that happens, we'll switch to STANCE_FIGHT so they can use it. If the special attack is limited, they'll likely switch back next tick.
-	if(distance <= get_to || holder.ICheckSpecialAttack(target))
+	if(distance <= get_to || holder.ai_polaris_check_special_attack(target))
 		polaris_ai_log("walk_to_target() : Within range.", POLARIS_AI_LOG_INFO)
 		forget_path()
 		set_stance(STANCE_FIGHT)
@@ -309,17 +309,17 @@
 		for(var/obj/structure/window/W in problem_turf)
 			if(W.dir == global.reverse_dir[holder.dir]) // So that windows get smashed in the right order
 				polaris_ai_log("destroy_surroundings() : Attacking side window.", POLARIS_AI_LOG_INFO)
-				return holder.IAttack(W)
+				return holder.ai_polaris_attack(W)
 
 			else if(W.fulltile)
 				polaris_ai_log("destroy_surroundings() : Attacking full tile window.", POLARIS_AI_LOG_INFO)
-				return holder.IAttack(W)
+				return holder.ai_polaris_attack(W)
 
 		// Kill hull shields in the way.
 		for(var/obj/effect/energy_field/shield in problem_turf)
 			if(shield.density) // Don't attack shields that are already down.
 				polaris_ai_log("destroy_surroundings() : Attacking hull shield.", POLARIS_AI_LOG_INFO)
-				return holder.IAttack(shield)
+				return holder.ai_polaris_attack(shield)
 
 		// Kill energy shields in the way.
 		for(var/obj/effect/shield/S in problem_turf)
@@ -331,12 +331,12 @@
 		var/obj/structure/obstacle = locate(/obj/structure, problem_turf)
 		if(istype(obstacle, /obj/structure/window) || istype(obstacle, /obj/structure/closet) || istype(obstacle, /obj/structure/table) || istype(obstacle, /obj/structure/grille))
 			polaris_ai_log("destroy_surroundings() : Attacking generic structure.", POLARIS_AI_LOG_INFO)
-			return holder.IAttack(obstacle)
+			return holder.ai_polaris_attack(obstacle)
 
 		for(var/obj/machinery/door/D in problem_turf) // Required since firelocks take up the same turf.
 			if(D.density)
 				polaris_ai_log("destroy_surroundings() : Attacking closed door.", POLARIS_AI_LOG_INFO)
-				return holder.IAttack(D)
+				return holder.ai_polaris_attack(D)
 
 	polaris_ai_log("destroy_surroundings() : Exiting due to nothing to attack.", POLARIS_AI_LOG_INFO)
 	return FALSE // Nothing to attack.

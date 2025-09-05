@@ -37,7 +37,7 @@
 		T.visible_message("\The [holder] attacks nothing around \the [T].")
 		return
 
-	if(holder.IIsAlly(L)) // Don't hurt our ally.
+	if(holder.ai_polaris_is_ally(L)) // Don't hurt our ally.
 		return
 
 	melee_attack(L)

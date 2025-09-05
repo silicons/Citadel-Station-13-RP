@@ -15,7 +15,7 @@
 
 	maxHealth = 250
 	health = 250
-	say_list_type = /datum/say_list/protean_blob
+	say_list_type = /datum/polaris_ai_say_list/protean_blob
 
 	show_stat_health = FALSE //We will do it ourselves
 	has_langs = list(LANGUAGE_GALCOM, LANGUAGE_EAL)
@@ -64,7 +64,7 @@
 	player_msg = "In this form, you can move a little faster and your health will regenerate as long as you have metal in you!"
 	holder_type = /obj/item/holder/protoblob
 
-/datum/say_list/protean_blob
+/datum/polaris_ai_say_list/protean_blob
 	speak = list("Blrb?","Sqrsh.","Glrsh!")
 	emote_hear = list("squishes softly","spluts quietly","makes wet noises")
 	emote_see = list("shifts wetly","undulates placidly")
@@ -673,7 +673,7 @@
 			chosen_list = GLOB.clothing_ears
 		if("headsets")
 			chosen_list = GLOB.clothing_headsets
-			
+
 
 	var/picked = input(src,"What clothing would you like to mimic?","Mimic Clothes") as null|anything in chosen_list
 	if(!ispath(chosen_list[picked]))
