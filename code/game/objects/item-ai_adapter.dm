@@ -13,6 +13,10 @@
 
 #warn impl
 
+/datum/ai_adapter/item/is_valid(datum/ai_holder/holder)
+	// TODO: kinda expensive? this allows the AI to pick stuff up though
+	return holder.agent.Reachability(delegate)
+
 /**
  * @params
  * * agent - (optional) entity the AI is controlling

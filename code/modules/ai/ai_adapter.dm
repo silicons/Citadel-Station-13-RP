@@ -27,6 +27,11 @@
 	/// * uses `AI_ADAPTER_BROADPHASE_*` flags.
 	var/broadphase_flags = NONE
 
+	/// offensive flags
+	var/offensive_flags = NONE
+	/// locomotion flags
+	var/locomotion_flags = NONE
+
 /datum/ai_adapter/New(datum/delegate)
 	ASSERT(istype(delegate, delegate_type))
 	src.delegate = delegate
@@ -46,17 +51,16 @@
 	return 0
 
 /datum/ai_adapter/proc/offensive_act(datum/ai_holder/holder, atom/movable/agent, list/atom/targets, offensive_flags)
-	return FALSE
+	return AI_ADAPTER_RETURN_INVALID
 
-//* mobility *//
+//* locomotion *//
 
-/datum/ai_adapter/proc/mobility_evaluate(datum/ai_holder/holder, atom/movable/agent, turf/move_to)
+/datum/ai_adapter/proc/locomotion_evaluate(datum/ai_holder/holder, atom/movable/agent, turf/move_to, locomotion_flags)
 	return 0
 
-/datum/ai_adapter/proc/mobility_act(datum/ai_holder/holder, atom/movable/agent, turf/move_to)
-	return FALSE
+/datum/ai_adapter/proc/locomotion_act(datum/ai_holder/holder, atom/movable/agent, turf/move_to, locomotion_flags)
+	return AI_ADAPTER_RETURN_INVALID
 
 //* recovery *//
-
 
 #warn impl

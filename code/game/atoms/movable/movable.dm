@@ -22,7 +22,7 @@
 	///Used for the calculate_adjacencies proc for icon smoothing.
 	var/can_be_unanchored = FALSE
 
-	//* AI Holders
+	//* AI Holders *//
 	/// AI holder bound to us
 	var/datum/ai_holder/ai_holder
 	/// AI tracking datum. Handled by procs in [code/modules/ai/ai_tracking.dm].

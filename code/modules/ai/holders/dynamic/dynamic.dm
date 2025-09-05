@@ -20,8 +20,6 @@
 	/// main state holder. unlike combat / steering routine contexts,
 	/// this doesn't get wiped.
 	var/datum/ai_dynamic_state/state
-	/// currently active task
-	var/datum/ai_dynamic_task/state_task
 
 	//* adapters *//
 
@@ -29,6 +27,10 @@
 	var/list/datum/ai_adapter/adapter_list
 	/// last adapter update
 	var/adapter_last_update = 0
+	/// last adapter gc update
+	/// * gc updates are fired off way more frequently than normal updates,
+	///   and must run every 10 or so seconds maximum
+	var/adapter_last_gc = 0
 
 	//* combat *//
 
@@ -70,14 +72,22 @@
 	/// last time movement adapters were reconsidered
 	var/steering_last_adapter_update = 0
 
+	//* tasking *//
+
+	/// currently active task
+	var/datum/ai_dynamic_task/state_task
+
 	//* tuning *//
 
-	/// reaction time low
-	var/tuning_reaction_time_low = 1.75
-	var/tuning_reaction_time_high = 3.75
+	/// reaction time low in **milliseconds**
+	var/tuning_reaction_time_low = 175
+	/// reaction time high in **milliseconds**
+	var/tuning_reaction_time_high = 375
 
-/datum/ai_holder/dynamic/proc/assign_task(datum/ai_dynamic_task/task)
-	task.assign_to_holder(src)
+/datum/ai_holder/dynamic/tick()
+	// don't you dare, guncoder
+	SHOULD_NOT_OVERRIDE(TRUE)
 
-/datum/ai_holder/dyanmic/proc/evict_active_task()
+	on_custom_tick()
+
 	#warn impl
