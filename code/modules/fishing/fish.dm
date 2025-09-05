@@ -74,7 +74,7 @@
 	/// List of fishing trait types, these modify probabilty/difficulty depending on rod/user properties
 	var/list/fishing_traits = list()
 	/// Fishing minigame AI behavior
-	var/fish_ai_type = FISH_AI_DUMB
+	var/fish_ai_type = FISH_POLARIS_AI_DUMB
 	/// Base additive modifier to fishing difficulty
 	var/fishing_difficulty_modifier = 0
 	/**

@@ -13,15 +13,15 @@
 		return TRUE
 
 	if(holder.stat) // Dead or unconscious.
-		ai_log("can_act() : Stat was non-zero ([holder.stat]).", AI_LOG_TRACE)
+		polaris_ai_log("can_act() : Stat was non-zero ([holder.stat]).", POLARIS_AI_LOG_TRACE)
 		return FALSE
 
 	if(holder.incapacitated(INCAPACITATION_DISABLED)) // Stunned in some form.
-		ai_log("can_act() : Incapacited.", AI_LOG_TRACE)
+		polaris_ai_log("can_act() : Incapacited.", POLARIS_AI_LOG_TRACE)
 		return FALSE
 
 	if(holder.instasis()) // In a stasis field.
-		ai_log("can_act() : In a stasis field.", AI_LOG_TRACE)
+		polaris_ai_log("can_act() : In a stasis field.", POLARIS_AI_LOG_TRACE)
 		return FALSE
 
 	return TRUE
@@ -48,10 +48,10 @@
 // Similar to normal wander, but will walk into tiles that are harmful, and attack anything they bump into, including allies.
 // Occurs when confused.
 /datum/ai_holder/polaris/proc/dangerous_wander()
-	ai_log("dangerous_wander() : Entered.", AI_LOG_DEBUG)
+	polaris_ai_log("dangerous_wander() : Entered.", POLARIS_AI_LOG_DEBUG)
 	if(isturf(holder.loc) && can_act())
 		// Test if we should refrain from falling/attacking allies, if we're smart enough to realize that.
-		if(intelligence_level > AI_NORMAL)
+		if(intelligence_level > POLARIS_AI_NORMAL)
 			var/unsafe = FALSE
 
 			tile_test:
@@ -70,7 +70,7 @@
 
 
 			if(unsafe)
-				ai_log("dangerous_wander() : Staying still due to risk of harm to self or allies.", AI_LOG_TRACE)
+				polaris_ai_log("dangerous_wander() : Staying still due to risk of harm to self or allies.", POLARIS_AI_LOG_TRACE)
 				return // Just stay still.
 
 		var/moving_to = 0
@@ -80,23 +80,23 @@
 		var/mob/living/L = locate() in T
 		if(L)
 			// Attack whoever's on the tile. Even if it's an ally.
-			ai_log("dangerous_wander() : Going to confuse-attack [L].", AI_LOG_TRACE)
+			polaris_ai_log("dangerous_wander() : Going to confuse-attack [L].", POLARIS_AI_LOG_TRACE)
 			melee_attack(L)
 		else
 			// Move to the tile. Even if it's unsafe.
-			ai_log("dangerous_wander() : Going to confuse-walk to [T] ([T.x],[T.y],[T.z]).", AI_LOG_TRACE)
+			polaris_ai_log("dangerous_wander() : Going to confuse-walk to [T] ([T.x],[T.y],[T.z]).", POLARIS_AI_LOG_TRACE)
 			holder.IMove(T, safety = FALSE)
-	ai_log("dangerous_wander() : Exited.", AI_LOG_DEBUG)
+	polaris_ai_log("dangerous_wander() : Exited.", POLARIS_AI_LOG_DEBUG)
 
 /*
 // Wanders randomly in cardinal directions.
 /datum/ai_holder/polaris/proc/handle_wander_movement()
-	ai_log("handle_wander_movement() : Entered.", AI_LOG_DEBUG)
+	polaris_ai_log("handle_wander_movement() : Entered.", POLARIS_AI_LOG_DEBUG)
 	if(isturf(holder.loc) && can_act())
 		wander_delay--
 		if(wander_delay <= 0)
 			if(!wander_when_pulled && holder.pulledby)
-				ai_log("handle_wander_movement() : Being pulled and cannot wander. Exiting.", AI_LOG_DEBUG)
+				polaris_ai_log("handle_wander_movement() : Being pulled and cannot wander. Exiting.", POLARIS_AI_LOG_DEBUG)
 				return
 
 			var/moving_to = 0 // Apparently this is required or it always picks 4, according to the previous developer for simplemob AI.
@@ -104,5 +104,5 @@
 			holder.setDir(moving_to)
 			holder.IMove(get_step(holder,moving_to))
 			wander_delay = base_wander_delay
-	ai_log("handle_wander_movement() : Exited.", AI_LOG_DEBUG)
+	polaris_ai_log("handle_wander_movement() : Exited.", POLARIS_AI_LOG_DEBUG)
 */

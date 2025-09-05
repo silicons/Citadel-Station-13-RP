@@ -174,34 +174,34 @@
 
 // Check if target is visible to us.
 /datum/ai_holder/polaris/proc/can_see_target(atom/movable/the_target, view_range = vision_range)
-	ai_log("can_see_target() : Entering.", AI_LOG_TRACE)
+	polaris_ai_log("can_see_target() : Entering.", POLARIS_AI_LOG_TRACE)
 
 	if(!the_target) // Nothing to target.
-		ai_log("can_see_target() : There is no target. Exiting.", AI_LOG_WARNING)
+		polaris_ai_log("can_see_target() : There is no target. Exiting.", POLARIS_AI_LOG_WARNING)
 		return FALSE
 
 	if(holder.see_invisible < the_target.invisibility) // Real invis.
-		ai_log("can_see_target() : Target ([the_target]) was invisible to holder. Exiting.", AI_LOG_TRACE)
+		polaris_ai_log("can_see_target() : Target ([the_target]) was invisible to holder. Exiting.", POLARIS_AI_LOG_TRACE)
 		return FALSE
 
 	var/turf/T = get_turf(the_target)
 	if(T.get_lumcount() <= LIGHT_THRESHOLD_MOB_AI_UNSEEN && get_dist(holder, the_target) > 2)
-		ai_log("can_see_target() : Target ([the_target]) is in an unlit turf. Exiting.", AI_LOG_TRACE)
+		polaris_ai_log("can_see_target() : Target ([the_target]) is in an unlit turf. Exiting.", POLARIS_AI_LOG_TRACE)
 		return FALSE
 
 	if(respect_alpha && the_target.alpha <= alpha_vision_threshold) // Fake invis.
-		ai_log("can_see_target() : Target ([the_target]) was sufficently transparent to holder and is hidden. Exiting.", AI_LOG_TRACE)
+		polaris_ai_log("can_see_target() : Target ([the_target]) was sufficently transparent to holder and is hidden. Exiting.", POLARIS_AI_LOG_TRACE)
 		return FALSE
 
 	if(get_dist(holder, the_target) > view_range) // Too far away.
-		ai_log("can_see_target() : Target ([the_target]) was too far from holder. Exiting.", AI_LOG_TRACE)
+		polaris_ai_log("can_see_target() : Target ([the_target]) was too far from holder. Exiting.", POLARIS_AI_LOG_TRACE)
 		return FALSE
 
 	if(!can_see(holder, the_target, view_range))
-		ai_log("can_see_target() : Target ([the_target]) failed can_see(). Exiting.", AI_LOG_TRACE)
+		polaris_ai_log("can_see_target() : Target ([the_target]) failed can_see(). Exiting.", POLARIS_AI_LOG_TRACE)
 		return FALSE
 
-	ai_log("can_see_target() : Target ([the_target]) can be seen. Exiting.", AI_LOG_TRACE)
+	polaris_ai_log("can_see_target() : Target ([the_target]) can be seen. Exiting.", POLARIS_AI_LOG_TRACE)
 	return TRUE
 
 // Updates the last known position of the target.
@@ -221,7 +221,7 @@
 /datum/ai_holder/polaris/proc/lose_target_position()
 	if(last_turf_display && target_last_seen_turf)
 		target_last_seen_turf.cut_overlay(last_turf_overlay)
-	ai_log("lose_target_position() : Last position is being reset.", AI_LOG_INFO)
+	polaris_ai_log("lose_target_position() : Last position is being reset.", POLARIS_AI_LOG_INFO)
 	target_last_seen_turf = null
 
 /datum/ai_holder/proc/react_to_attack_polaris(atom/movable/attacker)
@@ -230,29 +230,29 @@
 // Responds to a hostile action against its mob.
 /datum/ai_holder/polaris/react_to_attack_polaris(atom/movable/attacker)
 	if(holder.stat) // We're dead.
-		ai_log("react_to_attack_polaris() : Was attacked by [attacker], but we are dead/unconscious.", AI_LOG_TRACE)
+		polaris_ai_log("react_to_attack_polaris() : Was attacked by [attacker], but we are dead/unconscious.", POLARIS_AI_LOG_TRACE)
 		return FALSE
 	if(!hostile && !retaliate) // Not allowed to defend ourselves.
-		ai_log("react_to_attack_polaris() : Was attacked by [attacker], but we are not allowed to attack back.", AI_LOG_TRACE)
+		polaris_ai_log("react_to_attack_polaris() : Was attacked by [attacker], but we are not allowed to attack back.", POLARIS_AI_LOG_TRACE)
 		return FALSE
 	if(ismob(attacker) && holder.IIsAlly(attacker)) // I'll overlook it THIS time...
-		ai_log("react_to_attack_polaris() : Was attacked by [attacker], but they were an ally.", AI_LOG_TRACE)
+		polaris_ai_log("react_to_attack_polaris() : Was attacked by [attacker], but they were an ally.", POLARIS_AI_LOG_TRACE)
 		return FALSE
 	if(target) // Already fighting someone. Switching every time we get hit would impact our combat performance.
 		if(!retaliate)	// If we don't get to fight back, we don't fight back...
-			ai_log("react_to_attack_polaris() : Was attacked by [attacker], but we already have a target.", AI_LOG_TRACE)
+			polaris_ai_log("react_to_attack_polaris() : Was attacked by [attacker], but we already have a target.", POLARIS_AI_LOG_TRACE)
 			on_attacked(attacker) // So we attack immediately and not threaten.
 			return FALSE
 		else if((attacker in attackers) && world.time > last_target_time + 3 SECONDS)	// Otherwise, let 'er rip
-			ai_log("react_to_attack_polaris() : Was attacked by [attacker]. Can retaliate, waited 3 seconds.", AI_LOG_INFO)
+			polaris_ai_log("react_to_attack_polaris() : Was attacked by [attacker]. Can retaliate, waited 3 seconds.", POLARIS_AI_LOG_INFO)
 			on_attacked(attacker) // So we attack immediately and not threaten.
 			return give_target(attacker) // Also handles setting the appropiate stance.
 
 	if(stance == STANCE_SLEEP) // If we're asleep, try waking up if someone's wailing on us.
-		ai_log("react_to_attack_polaris() : AI is asleep. Waking up.", AI_LOG_TRACE)
+		polaris_ai_log("react_to_attack_polaris() : AI is asleep. Waking up.", POLARIS_AI_LOG_TRACE)
 		go_wake()
 
-	ai_log("react_to_attack_polaris() : Was attacked by [attacker].", AI_LOG_INFO)
+	polaris_ai_log("react_to_attack_polaris() : Was attacked by [attacker].", POLARIS_AI_LOG_INFO)
 	on_attacked(attacker) // So we attack immediately and not threaten.
 	return give_target(attacker) // Also handles setting the appropiate stance.
 
@@ -268,13 +268,13 @@
 // This generally occurs if more than one option is within striking distance, including the taunter.
 // Otherwise the default filter will prefer the closest target.
 /datum/ai_holder/polaris/proc/receive_taunt(atom/movable/taunter, force_target_switch = FALSE)
-	ai_log("receive_taunt() : Was taunted by [taunter].", AI_LOG_INFO)
+	polaris_ai_log("receive_taunt() : Was taunted by [taunter].", POLARIS_AI_LOG_INFO)
 	preferred_target = taunter
 	if(force_target_switch)
 		give_target(taunter)
 
 /datum/ai_holder/polaris/proc/lose_taunt()
-	ai_log("lose_taunt() : Resetting preferred_target.", AI_LOG_INFO)
+	polaris_ai_log("lose_taunt() : Resetting preferred_target.", POLARIS_AI_LOG_INFO)
 	preferred_target = null
 
 /datum/ai_holder/polaris/proc/check_attacker(var/atom/movable/A)

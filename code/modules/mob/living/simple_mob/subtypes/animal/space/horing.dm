@@ -158,7 +158,7 @@
 	can_flee = FALSE //No, we don't flee, we attack back.
 
 /datum/ai_holder/polaris/simple_mob/horing/find_target(list/possible_targets, has_targets_list)
-	ai_log("find_target() : Entered.", AI_LOG_TRACE)
+	polaris_ai_log("find_target() : Entered.", POLARIS_AI_LOG_TRACE)
 	. = list()
 	if(!has_targets_list)
 		possible_targets = list_targets()

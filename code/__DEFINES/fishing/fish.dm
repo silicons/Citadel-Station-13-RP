@@ -5,7 +5,7 @@
 
 //? /obj/item/fish/var/fish_ai_type
 
-#define FISH_AI_DUMB "dumb"
+#define FISH_POLARIS_AI_DUMB "dumb"
 #define FISH_AI_ZIPPY "zippy"
 #define FISH_AI_SLOW "slow"
 

@@ -38,7 +38,7 @@
 /mob/living/simple_mob/animal/passive/fish/IMove(turf/newloc, safety = TRUE)
 	if(is_type_in_list(newloc, suitable_turf_types))
 		return ..() // Procede as normal.
-	return MOVEMENT_FAILED // Don't leave the water!
+	return POLARIS_AI_MOVEMENT_FAILED // Don't leave the water!
 
 // Take damage if we are not in water
 /mob/living/simple_mob/animal/passive/fish/handle_breathing()

@@ -42,4 +42,4 @@
 
 /datum/ai_holder/polaris/simple_mob/passive/cookiegirl
 	base_wander_delay = 8
-	intelligence_level = AI_NORMAL //not sure why we have this, but I'm just porting.
+	intelligence_level = POLARIS_AI_NORMAL //not sure why we have this, but I'm just porting.

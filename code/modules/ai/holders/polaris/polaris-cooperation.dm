@@ -47,11 +47,11 @@
 
 // Requests help in combat from other mobs possessing ai_holders.
 /datum/ai_holder/polaris/proc/request_help()
-	ai_log("request_help() : Entering.", AI_LOG_DEBUG)
+	polaris_ai_log("request_help() : Entering.", POLARIS_AI_LOG_DEBUG)
 	if(!cooperative || ((world.time - last_helpask_time) < 10 SECONDS))
 		return
 
-	ai_log("request_help() : Asking for help.", AI_LOG_INFO)
+	polaris_ai_log("request_help() : Asking for help.", POLARIS_AI_LOG_INFO)
 	last_helpask_time = world.time
 
 //	for(var/mob/living/L in range(call_distance, holder))
@@ -67,56 +67,56 @@
 			// This will currently never run sadly, until faction_friends is made to accept players too.
 			// That might be for the best since I can imagine it getting spammy in a big fight.
 			if(L.client && call_players) // Dealing with a player.
-				ai_log("request_help() : Asking [L] (Player) for help.", AI_LOG_INFO)
+				polaris_ai_log("request_help() : Asking [L] (Player) for help.", POLARIS_AI_LOG_INFO)
 				to_chat(L, "<span class='critical'>\The [holder] [called_player_message]</span>")
 
 			else if(L.ai_holder) // Dealing with an AI.
-				ai_log("request_help() : Asking [L] (AI) for help.", AI_LOG_INFO)
+				polaris_ai_log("request_help() : Asking [L] (AI) for help.", POLARIS_AI_LOG_INFO)
 				if(istype(L.ai_holder, /datum/ai_holder/polaris))
 					var/datum/ai_holder/polaris/ai_holder = L.ai_holder
 					ai_holder.help_requested(holder)
 
-	ai_log("request_help() : Exiting.", AI_LOG_DEBUG)
+	polaris_ai_log("request_help() : Exiting.", POLARIS_AI_LOG_DEBUG)
 
 // What allies receive when someone else is calling for help.
 /datum/ai_holder/polaris/proc/help_requested(mob/living/friend)
-	ai_log("help_requested() : Entering.", AI_LOG_DEBUG)
+	polaris_ai_log("help_requested() : Entering.", POLARIS_AI_LOG_DEBUG)
 	if(!friend.has_polaris_AI())
 		return
 	var/datum/ai_holder/polaris/friend_ai_holder = friend.ai_holder
 	if(stance == STANCE_SLEEP)
-		ai_log("help_requested() : Help requested by [friend] but we are asleep.", AI_LOG_INFO)
+		polaris_ai_log("help_requested() : Help requested by [friend] but we are asleep.", POLARIS_AI_LOG_INFO)
 		return
 	if(!cooperative)
-		ai_log("help_requested() : Help requested by [friend] but we're not cooperative.", AI_LOG_INFO)
+		polaris_ai_log("help_requested() : Help requested by [friend] but we're not cooperative.", POLARIS_AI_LOG_INFO)
 		return
 	if(stance in STANCES_COMBAT)
-		ai_log("help_requested() : Help requested by [friend] but we are busy fighting something else.", AI_LOG_INFO)
+		polaris_ai_log("help_requested() : Help requested by [friend] but we are busy fighting something else.", POLARIS_AI_LOG_INFO)
 		return
 	if(!can_act())
-		ai_log("help_requested() : Help requested by [friend] but cannot act (stunned or dead).", AI_LOG_INFO)
+		polaris_ai_log("help_requested() : Help requested by [friend] but cannot act (stunned or dead).", POLARIS_AI_LOG_INFO)
 		return
 	if(!holder.IIsAlly(friend)) // Extra sanity.
-		ai_log("help_requested() : Help requested by [friend] but we hate them.", AI_LOG_INFO)
+		polaris_ai_log("help_requested() : Help requested by [friend] but we hate them.", POLARIS_AI_LOG_INFO)
 		return
 	if(friend_ai_holder && friend_ai_holder.target && !can_attack(friend_ai_holder.target))
-		ai_log("help_requested() : Help requested by [friend] but we don't want to fight their target.", AI_LOG_INFO)
+		polaris_ai_log("help_requested() : Help requested by [friend] but we don't want to fight their target.", POLARIS_AI_LOG_INFO)
 		return
 	if(get_dist(holder, friend) <= follow_distance)
-		ai_log("help_requested() : Help requested by [friend] but we're already here.", AI_LOG_INFO)
+		polaris_ai_log("help_requested() : Help requested by [friend] but we're already here.", POLARIS_AI_LOG_INFO)
 		return
 	if(get_dist(holder, friend) <= vision_range) // Within our sight.
-		ai_log("help_requested() : Help requested by [friend], and within target sharing range.", AI_LOG_INFO)
+		polaris_ai_log("help_requested() : Help requested by [friend], and within target sharing range.", POLARIS_AI_LOG_INFO)
 		if(friend_ai_holder) // AI calling for help.
 			if(friend_ai_holder.target && can_attack(friend_ai_holder.target)) // Friend wants us to attack their target.
 				last_conflict_time = world.time // So we attack immediately and not threaten.
 				give_target(friend_ai_holder.target) // This will set us to the appropiate stance.
-				ai_log("help_requested() : Given target [target] by [friend]. Exiting", AI_LOG_DEBUG)
+				polaris_ai_log("help_requested() : Given target [target] by [friend]. Exiting", POLARIS_AI_LOG_DEBUG)
 				return
 
 	// Otherwise they're outside our sight, lack a target, or aren't AI controlled, but within call range.
 	// So assuming we're AI controlled, we'll go to them and see whats wrong.
-	ai_log("help_requested() : Help requested by [friend], going to go to friend.", AI_LOG_INFO)
+	polaris_ai_log("help_requested() : Help requested by [friend], going to go to friend.", POLARIS_AI_LOG_INFO)
 	set_follow(friend, 10 SECONDS)
-	ai_log("help_requested() : Exiting.", AI_LOG_DEBUG)
+	polaris_ai_log("help_requested() : Exiting.", POLARIS_AI_LOG_DEBUG)
 

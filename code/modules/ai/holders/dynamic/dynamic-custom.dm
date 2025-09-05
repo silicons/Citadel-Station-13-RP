@@ -6,5 +6,5 @@
  * * You are allowed to assign scheduled tasks here, change / exit / enter
  *   combat routines, etc.
  */
-/datum/ai_holder/dyanmic/proc/on_custom_tick()
+/datum/ai_holder/dynamic/proc/on_custom_tick()
 	return

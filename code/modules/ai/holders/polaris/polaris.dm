@@ -5,7 +5,7 @@
 /datum/ai_holder/polaris
 	var/mob/living/holder = null		// The mob this datum is going to control.
 	var/stance = STANCE_IDLE			// Determines if the mob should be doing a specific thing, e.g. attacking, following, standing around, etc.
-	var/intelligence_level = AI_NORMAL	// Adjust to make the AI be intentionally dumber, or make it more robust (e.g. dodging grenades).
+	var/intelligence_level = POLARIS_AI_NORMAL	// Adjust to make the AI be intentionally dumber, or make it more robust (e.g. dodging grenades).
 	var/autopilot = FALSE				// If true, the AI won't be deactivated if a client gets attached to the AI's mob.
 	var/busy = FALSE					// If true, the SSticker will skip processing this mob until this is false. Good for if you need the
 										// mob to stay still (e.g. delayed attacwking). If you need the mob to be inactive for an extended period of time,
@@ -118,18 +118,18 @@
 
 // For setting the stance WITHOUT processing it
 /datum/ai_holder/polaris/proc/set_stance(var/new_stance)
-	ai_log("set_stance() : Setting stance from [stance] to [new_stance].", AI_LOG_INFO)
+	polaris_ai_log("set_stance() : Setting stance from [stance] to [new_stance].", POLARIS_AI_LOG_INFO)
 	stance = new_stance
 	if(stance_coloring) // For debugging or really weird mobs.
 		stance_color()
 
 // This is called every half a second.
 /datum/ai_holder/polaris/proc/handle_stance_tactical()
-	ai_log("========= Fast Process Beginning ==========", AI_LOG_TRACE) // This is to make it easier visually to disinguish between 'blocks' of what a tick did.
-	ai_log("handle_stance_tactical() : Called.", AI_LOG_TRACE)
+	polaris_ai_log("========= Fast Process Beginning ==========", POLARIS_AI_LOG_TRACE) // This is to make it easier visually to disinguish between 'blocks' of what a tick did.
+	polaris_ai_log("handle_stance_tactical() : Called.", POLARIS_AI_LOG_TRACE)
 
 	if(stance == STANCE_SLEEP)
-		ai_log("handle_stance_tactical() : Going to sleep.", AI_LOG_TRACE)
+		polaris_ai_log("handle_stance_tactical() : Going to sleep.", POLARIS_AI_LOG_TRACE)
 		go_sleep()
 		return
 
@@ -137,19 +137,19 @@
 		track_target_position()
 
 	if(stance != STANCE_DISABLED && is_disabled()) // Stunned/confused/etc
-		ai_log("handle_stance_tactical() : Disabled.", AI_LOG_TRACE)
+		polaris_ai_log("handle_stance_tactical() : Disabled.", POLARIS_AI_LOG_TRACE)
 		set_stance(STANCE_DISABLED)
 		return
 
 	if(stance in STANCES_COMBAT)
 		// Should resist?  We check this before fleeing so that we can actually flee and not be trapped in a chair.
 		if(holder.incapacitated(INCAPACITATION_BUCKLED_PARTIALLY) || LAZYLEN(holder.grabbed_by))
-			ai_log("handle_stance_tactical() : Going to handle_resist().", AI_LOG_TRACE)
+			polaris_ai_log("handle_stance_tactical() : Going to handle_resist().", POLARIS_AI_LOG_TRACE)
 			handle_resist()
 
 		else if(istype(holder.loc, /obj/structure/closet))
 			var/obj/structure/closet/C = holder.loc
-			ai_log("handle_stance_tactical() : Inside a closet. Going to attempt escape.", AI_LOG_TRACE)
+			polaris_ai_log("handle_stance_tactical() : Inside a closet. Going to attempt escape.", POLARIS_AI_LOG_TRACE)
 			if(C.sealed)
 				INVOKE_ASYNC(holder, /mob/living/verb/resist)
 			else
@@ -157,71 +157,71 @@
 
 		// Should we flee?
 		if(should_flee())
-			ai_log("handle_stance_tactical() : Going to flee.", AI_LOG_TRACE)
+			polaris_ai_log("handle_stance_tactical() : Going to flee.", POLARIS_AI_LOG_TRACE)
 			set_stance(STANCE_FLEE)
 			return
 	else if(stance == STANCE_DISABLED)
 		if(LAZYLEN(holder.grabbed_by))
-			ai_log("handle_stance_tactical() : Going to resist while disabled due to grab.", AI_LOG_TRACE)
+			polaris_ai_log("handle_stance_tactical() : Going to resist while disabled due to grab.", POLARIS_AI_LOG_TRACE)
 			holder.resist()
 
 	switch(stance)
 		if(STANCE_IDLE)
 			if(should_go_home())
-				ai_log("handle_stance_tactical() : STANCE_IDLE, going to go home.", AI_LOG_TRACE)
+				polaris_ai_log("handle_stance_tactical() : STANCE_IDLE, going to go home.", POLARIS_AI_LOG_TRACE)
 				go_home()
 
 			else if(should_follow_leader())
-				ai_log("handle_stance_tactical() : STANCE_IDLE, going to follow leader.", AI_LOG_TRACE)
+				polaris_ai_log("handle_stance_tactical() : STANCE_IDLE, going to follow leader.", POLARIS_AI_LOG_TRACE)
 				set_stance(STANCE_FOLLOW)
 
 			else if(should_wander())
-				ai_log("handle_stance_tactical() : STANCE_IDLE, going to wander randomly.", AI_LOG_TRACE)
+				polaris_ai_log("handle_stance_tactical() : STANCE_IDLE, going to wander randomly.", POLARIS_AI_LOG_TRACE)
 				handle_wander_movement()
 
 		if(STANCE_ALERT)
-			ai_log("handle_stance_tactical() : STANCE_ALERT, going to threaten_target().", AI_LOG_TRACE)
+			polaris_ai_log("handle_stance_tactical() : STANCE_ALERT, going to threaten_target().", POLARIS_AI_LOG_TRACE)
 			threaten_target()
 
 		if(STANCE_APPROACH)
-			ai_log("handle_stance_tactical() : STANCE_APPROACH, going to walk_to_target().", AI_LOG_TRACE)
+			polaris_ai_log("handle_stance_tactical() : STANCE_APPROACH, going to walk_to_target().", POLARIS_AI_LOG_TRACE)
 			walk_to_target()
 
 		if(STANCE_FIGHT)
-			ai_log("handle_stance_tactical() : STANCE_FIGHT, going to engage_target().", AI_LOG_TRACE)
+			polaris_ai_log("handle_stance_tactical() : STANCE_FIGHT, going to engage_target().", POLARIS_AI_LOG_TRACE)
 			engage_target()
 
 		if(STANCE_MOVE)
-			ai_log("handle_stance_tactical() : STANCE_MOVE, going to walk_to_destination().", AI_LOG_TRACE)
+			polaris_ai_log("handle_stance_tactical() : STANCE_MOVE, going to walk_to_destination().", POLARIS_AI_LOG_TRACE)
 			walk_to_destination()
 
 		if(STANCE_REPOSITION) // This is the same as above but doesn't stop if an enemy is visible since its an 'in-combat' move order.
-			ai_log("handle_stance_tactical() : STANCE_REPOSITION, going to walk_to_destination().", AI_LOG_TRACE)
+			polaris_ai_log("handle_stance_tactical() : STANCE_REPOSITION, going to walk_to_destination().", POLARIS_AI_LOG_TRACE)
 			walk_to_destination()
 
 		if(STANCE_FOLLOW)
-			ai_log("handle_stance_tactical() : STANCE_FOLLOW, going to walk_to_leader().", AI_LOG_TRACE)
+			polaris_ai_log("handle_stance_tactical() : STANCE_FOLLOW, going to walk_to_leader().", POLARIS_AI_LOG_TRACE)
 			walk_to_leader()
 
 		if(STANCE_FLEE)
-			ai_log("handle_stance_tactical() : STANCE_FLEE, going to flee_from_target().", AI_LOG_TRACE)
+			polaris_ai_log("handle_stance_tactical() : STANCE_FLEE, going to flee_from_target().", POLARIS_AI_LOG_TRACE)
 			flee_from_target()
 
 		if(STANCE_DISABLED)
-			ai_log("handle_stance_tactical() : STANCE_DISABLED.", AI_LOG_TRACE)
+			polaris_ai_log("handle_stance_tactical() : STANCE_DISABLED.", POLARIS_AI_LOG_TRACE)
 			if(!is_disabled())
-				ai_log("handle_stance_tactical() : No longer disabled.", AI_LOG_TRACE)
+				polaris_ai_log("handle_stance_tactical() : No longer disabled.", POLARIS_AI_LOG_TRACE)
 				set_stance(STANCE_IDLE)
 			else
 				handle_disabled()
 
-	ai_log("handle_stance_tactical() : Exiting.", AI_LOG_TRACE)
-	ai_log("========= Fast Process Ending ==========", AI_LOG_TRACE)
+	polaris_ai_log("handle_stance_tactical() : Exiting.", POLARIS_AI_LOG_TRACE)
+	polaris_ai_log("========= Fast Process Ending ==========", POLARIS_AI_LOG_TRACE)
 
 // This is called every two seconds.
 /datum/ai_holder/polaris/proc/handle_stance_strategical()
-	ai_log("++++++++++ Slow Process Beginning ++++++++++", AI_LOG_TRACE)
-	ai_log("handle_stance_strategical() : Called.", AI_LOG_TRACE)
+	polaris_ai_log("++++++++++ Slow Process Beginning ++++++++++", POLARIS_AI_LOG_TRACE)
+	polaris_ai_log("handle_stance_strategical() : Called.", POLARIS_AI_LOG_TRACE)
 
 	switch(stance)
 		if(STANCE_IDLE)
@@ -230,24 +230,24 @@
 				handle_idle_speaking()
 
 			if(hostile)
-				ai_log("handle_stance_strategical() : STANCE_IDLE, going to find_target().", AI_LOG_TRACE)
+				polaris_ai_log("handle_stance_strategical() : STANCE_IDLE, going to find_target().", POLARIS_AI_LOG_TRACE)
 				find_target()
 		if(STANCE_APPROACH)
 			if(target)
-				ai_log("handle_stance_strategical() : STANCE_APPROACH, going to calculate_path([target]).", AI_LOG_TRACE)
+				polaris_ai_log("handle_stance_strategical() : STANCE_APPROACH, going to calculate_path([target]).", POLARIS_AI_LOG_TRACE)
 				calculate_path(target)
 		if(STANCE_MOVE)
 			if(hostile && find_target()) // This will switch its stance.
-				ai_log("handle_stance_strategical() : STANCE_MOVE, found target and was inturrupted.", AI_LOG_TRACE)
+				polaris_ai_log("handle_stance_strategical() : STANCE_MOVE, found target and was inturrupted.", POLARIS_AI_LOG_TRACE)
 		if(STANCE_FOLLOW)
 			if(hostile && find_target()) // This will switch its stance.
-				ai_log("handle_stance_strategical() : STANCE_FOLLOW, found target and was inturrupted.", AI_LOG_TRACE)
+				polaris_ai_log("handle_stance_strategical() : STANCE_FOLLOW, found target and was inturrupted.", POLARIS_AI_LOG_TRACE)
 			else if(leader)
-				ai_log("handle_stance_strategical() : STANCE_FOLLOW, going to calculate_path([leader]).", AI_LOG_TRACE)
+				polaris_ai_log("handle_stance_strategical() : STANCE_FOLLOW, going to calculate_path([leader]).", POLARIS_AI_LOG_TRACE)
 				calculate_path(leader)
 
-	ai_log("handle_stance_strategical() : Exiting.", AI_LOG_TRACE)
-	ai_log("++++++++++ Slow Process Ending ++++++++++", AI_LOG_TRACE)
+	polaris_ai_log("handle_stance_strategical() : Exiting.", POLARIS_AI_LOG_TRACE)
+	polaris_ai_log("++++++++++ Slow Process Ending ++++++++++", POLARIS_AI_LOG_TRACE)
 
 
 // Helper proc to turn AI 'busy' mode on or off without having to check if there is an AI, to simplify writing code.

@@ -11,7 +11,7 @@
 	/// Is it finished (either by win/lose or window closing)
 	var/completed = FALSE
 	/// Fish AI type to use
-	var/fish_ai = FISH_AI_DUMB
+	var/fish_ai = FISH_POLARIS_AI_DUMB
 	/// Rule modifiers (eg weighted bait)
 	var/list/special_effects = list()
 	/// Did the game get past the baiting phase, used to track if bait should be consumed afterwards

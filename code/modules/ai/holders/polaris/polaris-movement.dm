@@ -18,28 +18,28 @@
 
 
 /datum/ai_holder/polaris/proc/walk_to_destination()
-	ai_log("walk_to_destination() : Entering.",AI_LOG_TRACE)
+	polaris_ai_log("walk_to_destination() : Entering.",POLARIS_AI_LOG_TRACE)
 	if(!destination)
-		ai_log("walk_to_destination() : No destination.", AI_LOG_WARNING)
+		polaris_ai_log("walk_to_destination() : No destination.", POLARIS_AI_LOG_WARNING)
 		forget_path()
 		set_stance(stance == STANCE_REPOSITION ? STANCE_APPROACH : STANCE_IDLE)
-		ai_log("walk_to_destination() : Exiting.", AI_LOG_TRACE)
+		polaris_ai_log("walk_to_destination() : Exiting.", POLARIS_AI_LOG_TRACE)
 		return
 
 	var/get_to = min_distance_to_destination
 	var/distance = get_dist(holder, destination)
-	ai_log("walk_to_destination() : get_to is [get_to].", AI_LOG_TRACE)
+	polaris_ai_log("walk_to_destination() : get_to is [get_to].", POLARIS_AI_LOG_TRACE)
 
 	// We're here!
 	if(distance <= get_to)
 		give_up_movement()
 		set_stance(stance == STANCE_REPOSITION ? STANCE_APPROACH : STANCE_IDLE)
-		ai_log("walk_to_destination() : Destination reached. Exiting.", AI_LOG_INFO)
+		polaris_ai_log("walk_to_destination() : Destination reached. Exiting.", POLARIS_AI_LOG_INFO)
 		return
 
-	ai_log("walk_to_destination() : Walking.", AI_LOG_TRACE)
+	polaris_ai_log("walk_to_destination() : Walking.", POLARIS_AI_LOG_TRACE)
 	walk_path(destination, get_to)
-	ai_log("walk_to_destination() : Exiting.",AI_LOG_TRACE)
+	polaris_ai_log("walk_to_destination() : Exiting.",POLARIS_AI_LOG_TRACE)
 
 /datum/ai_holder/polaris/proc/should_go_home()
 	if(!returns_home || !home_turf)
@@ -54,66 +54,66 @@
 
 /datum/ai_holder/polaris/proc/go_home()
 	if(home_turf)
-		ai_log("go_home() : Telling holder to go home.", AI_LOG_INFO)
+		polaris_ai_log("go_home() : Telling holder to go home.", POLARIS_AI_LOG_INFO)
 		lose_follow() // So they don't try to path back and forth.
 		give_destination(home_turf, max_home_distance)
 	else
-		ai_log("go_home() : Told to go home without home_turf.", AI_LOG_ERROR)
+		polaris_ai_log("go_home() : Told to go home without home_turf.", POLARIS_AI_LOG_ERROR)
 
 /datum/ai_holder/polaris/proc/give_destination(turf/new_destination, min_distance = 1, combat = FALSE)
-	ai_log("give_destination() : Entering.", AI_LOG_DEBUG)
+	polaris_ai_log("give_destination() : Entering.", POLARIS_AI_LOG_DEBUG)
 
 	destination = new_destination
 	min_distance_to_destination = min_distance
 
 	if(new_destination != null)
-		ai_log("give_destination() : Going to new destination.", AI_LOG_INFO)
+		polaris_ai_log("give_destination() : Going to new destination.", POLARIS_AI_LOG_INFO)
 		set_stance(combat ? STANCE_REPOSITION : STANCE_MOVE)
 		return TRUE
 	else
-		ai_log("give_destination() : Given null destination.", AI_LOG_ERROR)
+		polaris_ai_log("give_destination() : Given null destination.", POLARIS_AI_LOG_ERROR)
 
-	ai_log("give_destination() : Exiting.", AI_LOG_DEBUG)
+	polaris_ai_log("give_destination() : Exiting.", POLARIS_AI_LOG_DEBUG)
 
 
 // Walk towards whatever.
 /datum/ai_holder/polaris/proc/walk_path(atom/A, get_to = 1)
-	ai_log("walk_path() : Entered.", AI_LOG_TRACE)
+	polaris_ai_log("walk_path() : Entered.", POLARIS_AI_LOG_TRACE)
 
 	if(use_astar)
 		if(!path.len) // If we're missing a path, make a new one.
-			ai_log("walk_path() : No path. Attempting to calculate path.", AI_LOG_DEBUG)
+			polaris_ai_log("walk_path() : No path. Attempting to calculate path.", POLARIS_AI_LOG_DEBUG)
 			calculate_path(A, get_to)
 
 		if(!path.len) // If we still don't have one, then the target's probably somewhere inaccessible to us. Get as close as we can.
-			ai_log("walk_path() : Failed to obtain path to target. Using get_step_to() instead.", AI_LOG_INFO)
+			polaris_ai_log("walk_path() : Failed to obtain path to target. Using get_step_to() instead.", POLARIS_AI_LOG_INFO)
 		//	step_to(holder, A)
-			if(holder.IMove(get_step_to(holder, A)) == MOVEMENT_FAILED)
-				ai_log("walk_path() : Failed to move, attempting breakthrough.", AI_LOG_INFO)
+			if(holder.IMove(get_step_to(holder, A)) == POLARIS_AI_MOVEMENT_FAILED)
+				polaris_ai_log("walk_path() : Failed to move, attempting breakthrough.", POLARIS_AI_LOG_INFO)
 				INVOKE_ASYNC(src, PROC_REF(breakthrough), A)
 			return
 
 		if(move_once() == FALSE) // Start walking the path.
-			ai_log("walk_path() : Failed to step.", AI_LOG_TRACE)
+			polaris_ai_log("walk_path() : Failed to step.", POLARIS_AI_LOG_TRACE)
 			++failed_steps
 			if(failed_steps > 3) // We're probably stuck.
-				ai_log("walk_path() : Too many failed_steps.", AI_LOG_DEBUG)
+				polaris_ai_log("walk_path() : Too many failed_steps.", POLARIS_AI_LOG_DEBUG)
 				forget_path() // So lets try again with a new path.
 				failed_steps = 0
 
 	else
 	//	step_to(holder, A)
-		ai_log("walk_path() : Going to IMove().", AI_LOG_TRACE)
-		if(holder.IMove(get_step_to(holder, A)) == MOVEMENT_FAILED )
-			ai_log("walk_path() : Failed to move, attempting breakthrough.", AI_LOG_INFO)
+		polaris_ai_log("walk_path() : Going to IMove().", POLARIS_AI_LOG_TRACE)
+		if(holder.IMove(get_step_to(holder, A)) == POLARIS_AI_MOVEMENT_FAILED )
+			polaris_ai_log("walk_path() : Failed to move, attempting breakthrough.", POLARIS_AI_LOG_INFO)
 			breakthrough(A) // We failed to move, time to smash things.
 
-	ai_log("walk_path() : Exited.", AI_LOG_TRACE)
+	polaris_ai_log("walk_path() : Exited.", POLARIS_AI_LOG_TRACE)
 
 
 //Take one step along a path
 /datum/ai_holder/polaris/proc/move_once()
-	ai_log("move_once() : Entered.", AI_LOG_TRACE)
+	polaris_ai_log("move_once() : Entered.", POLARIS_AI_LOG_TRACE)
 	if(!path.len)
 		return
 
@@ -122,16 +122,16 @@
 		T.cut_overlay(path_overlay)
 
 //	step_towards(holder, src.path[1])
-	if(holder.IMove(get_step_towards(holder, src.path[1])) != MOVEMENT_ON_COOLDOWN)
+	if(holder.IMove(get_step_towards(holder, src.path[1])) != POLARIS_AI_MOVEMENT_ON_COOLDOWN)
 		if(holder.loc != src.path[1])
-			ai_log("move_once() : Failed step. Exiting.", AI_LOG_TRACE)
-			return MOVEMENT_FAILED
+			polaris_ai_log("move_once() : Failed step. Exiting.", POLARIS_AI_LOG_TRACE)
+			return POLARIS_AI_MOVEMENT_FAILED
 		else
 			path -= src.path[1]
-			ai_log("move_once() : Successful step. Exiting.", AI_LOG_TRACE)
-			return MOVEMENT_SUCCESSFUL
-	ai_log("move_once() : Mob movement on cooldown. Exiting.", AI_LOG_TRACE)
-	return MOVEMENT_ON_COOLDOWN
+			polaris_ai_log("move_once() : Successful step. Exiting.", POLARIS_AI_LOG_TRACE)
+			return POLARIS_AI_MOVEMENT_SUCCESSFUL
+	polaris_ai_log("move_once() : Mob movement on cooldown. Exiting.", POLARIS_AI_LOG_TRACE)
+	return POLARIS_AI_MOVEMENT_ON_COOLDOWN
 
 /datum/ai_holder/polaris/proc/should_wander()
 	if(HAS_TRAIT(src, TRAIT_AI_PAUSE_AUTOMATED_MOVEMENT))
@@ -141,12 +141,12 @@
 
 // Wanders randomly in cardinal directions.
 /datum/ai_holder/polaris/proc/handle_wander_movement()
-	ai_log("handle_wander_movement() : Entered.", AI_LOG_TRACE)
+	polaris_ai_log("handle_wander_movement() : Entered.", POLARIS_AI_LOG_TRACE)
 	if(isturf(holder.loc) && can_act())
 		wander_delay--
 		if(wander_delay <= 0)
 			if(!wander_when_pulled && (holder.pulledby || holder.grabbed_by.len))
-				ai_log("handle_wander_movement() : Being pulled and cannot wander. Exiting.", AI_LOG_DEBUG)
+				polaris_ai_log("handle_wander_movement() : Being pulled and cannot wander. Exiting.", POLARIS_AI_LOG_DEBUG)
 				return
 
 			var/moving_to = 0 // Apparently this is required or it always picks 4, according to the previous developer for simplemob AI.
@@ -154,7 +154,7 @@
 			holder.setDir(moving_to)
 			holder.IMove(get_step(holder,moving_to))
 			wander_delay = base_wander_delay
-	ai_log("handle_wander_movement() : Exited.", AI_LOG_TRACE)
+	polaris_ai_log("handle_wander_movement() : Exited.", POLARIS_AI_LOG_TRACE)
 
 /datum/ai_holder/polaris/proc/pause_automated_movement(source)
 	ADD_TRAIT(src, TRAIT_AI_PAUSE_AUTOMATED_MOVEMENT, source)

@@ -24,7 +24,7 @@
 
 /datum/ai_holder/polaris/simple_mob/xenobio_slime/sapphire
 	always_stun = TRUE // They know that stuns are godly.
-	intelligence_level = AI_SMART // Also knows not to walk while confused if it risks death.
+	intelligence_level = POLARIS_AI_SMART // Also knows not to walk while confused if it risks death.
 
 /datum/ai_holder/polaris/simple_mob/xenobio_slime/light_pink
 	discipline = 10
@@ -40,22 +40,22 @@
 
 // Checks if disciplining the slime would be 'justified' right now.
 /datum/ai_holder/polaris/simple_mob/xenobio_slime/proc/is_justified_to_discipline()
-	ai_log("xenobio_slime/is_justified_to_discipline() : Entered.", AI_LOG_TRACE)
+	polaris_ai_log("xenobio_slime/is_justified_to_discipline() : Entered.", POLARIS_AI_LOG_TRACE)
 	if(!can_act())
-		ai_log("xenobio_slime/is_justified_to_discipline() : Judged to be unjustified because we cannot act. Exiting.", AI_LOG_DEBUG)
+		polaris_ai_log("xenobio_slime/is_justified_to_discipline() : Judged to be unjustified because we cannot act. Exiting.", POLARIS_AI_LOG_DEBUG)
 		return FALSE // The slime considers it abuse if they get stunned while already stunned.
 	if(rabid)
-		ai_log("xenobio_slime/is_justified_to_discipline() : Judged to be justified because we're rabid. Exiting.", AI_LOG_TRACE)
+		polaris_ai_log("xenobio_slime/is_justified_to_discipline() : Judged to be justified because we're rabid. Exiting.", POLARIS_AI_LOG_TRACE)
 		return TRUE
 	if(target && can_attack(target))
 		if(ishuman(target))
 			var/mob/living/carbon/human/H = target
 			if(istype(H.species, /datum/species/monkey))
-				ai_log("xenobio_slime/is_justified_to_discipline() : Judged to be unjustified because we're targeting a monkey. Exiting.", AI_LOG_DEBUG)
+				polaris_ai_log("xenobio_slime/is_justified_to_discipline() : Judged to be unjustified because we're targeting a monkey. Exiting.", POLARIS_AI_LOG_DEBUG)
 				return FALSE // Attacking monkeys is okay.
-		ai_log("xenobio_slime/is_justified_to_discipline() : Judged to be justified because we are targeting a non-monkey. Exiting.", AI_LOG_TRACE)
+		polaris_ai_log("xenobio_slime/is_justified_to_discipline() : Judged to be justified because we are targeting a non-monkey. Exiting.", POLARIS_AI_LOG_TRACE)
 		return TRUE // Otherwise attacking other things is bad.
-	ai_log("xenobio_slime/is_justified_to_discipline() : Judged to be unjustified because we are not targeting anything. Exiting.", AI_LOG_DEBUG)
+	polaris_ai_log("xenobio_slime/is_justified_to_discipline() : Judged to be unjustified because we are not targeting anything. Exiting.", POLARIS_AI_LOG_DEBUG)
 	return FALSE // Not attacking anything.
 
 /datum/ai_holder/polaris/simple_mob/xenobio_slime/proc/can_command(mob/living/commander)
@@ -206,7 +206,7 @@
 
 // Commands, reactions, etc
 /datum/ai_holder/polaris/simple_mob/xenobio_slime/on_hear_say(mob/living/speaker, message)
-	ai_log("xenobio_slime/on_hear_say([speaker], [message]) : Entered.", AI_LOG_DEBUG)
+	polaris_ai_log("xenobio_slime/on_hear_say([speaker], [message]) : Entered.", POLARIS_AI_LOG_DEBUG)
 	var/mob/living/simple_mob/slime/xenobio/my_slime = holder
 
 	if((findtext(message, num2text(my_slime.number)) || findtext(message, my_slime.name) || findtext(message, "slimes"))) // Talking to us.
@@ -298,7 +298,7 @@
 			// If we're here, it couldn't find anyone with that name.
 			delayed_say("No... I don't know who to attack...", speaker)
 		*/
-	ai_log("xenobio_slime/on_hear_say() : Exited.", AI_LOG_DEBUG)
+	polaris_ai_log("xenobio_slime/on_hear_say() : Exited.", POLARIS_AI_LOG_DEBUG)
 
 /datum/ai_holder/polaris/simple_mob/xenobio_slime/can_violently_breakthrough()
 	if(discipline && !rabid) // Good slimes don't shatter the windows because their buddy in an adjacent cell decided to piss off Slimesky.

@@ -10,7 +10,7 @@
 /atom/movable/proc/ai_get_equipment_adapters() as /list
 	return list()
 
-/atom/movable/proc/ai_supports_basic_movement()
+/atom/movable/proc/ai_basic_move_supported()
 	return FALSE
 
 /**

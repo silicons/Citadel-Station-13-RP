@@ -31,15 +31,15 @@
 	return FALSE
 
 /datum/ai_holder/polaris/proc/flee_from_target()
-	ai_log("flee_from_target() : Entering.", AI_LOG_DEBUG)
+	polaris_ai_log("flee_from_target() : Entering.", POLARIS_AI_LOG_DEBUG)
 
 	if(!target || !should_flee() || !can_attack(target)) // can_attack() is used since it checks the same things we would need to anyways.
-		ai_log("flee_from_target() : Lost target to flee from.", AI_LOG_INFO)
+		polaris_ai_log("flee_from_target() : Lost target to flee from.", POLARIS_AI_LOG_INFO)
 		lose_target()
 		set_stance(STANCE_IDLE)
-		ai_log("flee_from_target() : Exiting.", AI_LOG_DEBUG)
+		polaris_ai_log("flee_from_target() : Exiting.", POLARIS_AI_LOG_DEBUG)
 		return
 
-	ai_log("flee_from_target() : Stepping away.", AI_LOG_TRACE)
+	polaris_ai_log("flee_from_target() : Stepping away.", POLARIS_AI_LOG_TRACE)
 	step_away(holder, target, vision_range)
-	ai_log("flee_from_target() : Exiting.", AI_LOG_DEBUG)
+	polaris_ai_log("flee_from_target() : Exiting.", POLARIS_AI_LOG_DEBUG)
