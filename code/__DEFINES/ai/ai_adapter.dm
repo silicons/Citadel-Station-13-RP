@@ -12,6 +12,8 @@
 
 /// attempting to find a less lethal option
 #define AI_ADAPTER_OFFENSIVE_FLAG_LESSLETHAL (1<<0)
+/// allow melee / 'proximity required' adapters
+#define AI_ADAPTER_OFFENSIVE_FLAG_PROXIMITY (1<<1)
 
 //* mobility *//
 

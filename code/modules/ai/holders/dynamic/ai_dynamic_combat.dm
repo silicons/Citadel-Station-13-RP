@@ -14,6 +14,13 @@ GLOBAL_LIST_INIT(ai_dynamic_combat_routines, init_ai_dynamic_combat_routines())
 /datum/ai_dynamic_combat
 	abstract_type = /datum/ai_dynamic_combat
 
+	/// tick interval. if the holder ticks slower than this,
+	/// its tickrate is boosted to this.
+	/// * this means if the holder ticks faster than this
+	///   it still ticks faster than this. do not rely on tick cycle
+	///   for timing.
+	var/request_minimum_tick_interval = 2 SECONDS
+
 	/// id. this must be unique and is how we're looked up.
 	var/id
 
@@ -28,16 +35,22 @@ GLOBAL_LIST_INIT(ai_dynamic_combat_routines, init_ai_dynamic_combat_routines())
 
 #warn impl
 
-/datum/ai_dynamic_combat/proc/tick_standard_subroutines()
+/datum/ai_dynamic_combat/proc/on_enter(datum/ai_holder/hodler)
+	return
+
+/datum/ai_dynamic_combat/proc/on_Exit(datum/ai_holder/hodler)
+	return
+
+/datum/ai_dynamic_combat/proc/tick_standard_subroutines(datum/ai_holder/holder, datum/ai_dynamic_combat_context/context)
 	if(standard_resist_subroutines)
-		standard_resist_subroutines()
+		standard_resist_subroutines(holder, context)
 	#warn impl
 
-/datum/ai_dynamic_combat/proc/auto_standard_resist_subroutines()
+/datum/ai_dynamic_combat/proc/auto_standard_resist_subroutines(datum/ai_holder/holder, datum/ai_dynamic_combat_context/context)
 	if(standard_resist_subroutines)
-		standard_resist_subroutines()
+		standard_resist_subroutines(holder, context)
 
-/datum/ai_dynamic_combat/proc/standard_resist_subroutines()
+/datum/ai_dynamic_combat/proc/standard_resist_subroutines(datum/ai_holder/holder, datum/ai_dynamic_combat_context/context)
 	#warn impl
 
 

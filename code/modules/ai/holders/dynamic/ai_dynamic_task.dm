@@ -22,12 +22,18 @@
 	/// * we can pre-empt things at or below our level
 	var/preempt_level = AI_DYNAMIC_PREEMPT_IDLE
 
-	/// override steering controller
+	/// override steering controller entirely
+	/// * you usually don't want to do this
 	var/override_steering = FALSE
 
+	/// lock steering.
+	/// * prevents assigning steering targets without 'force' parameter, which
+	///   should only be used by ourselves
+	var/lock_steering = FALSE
 	/// lock normal actions.
 	/// * this prevents the ai from doing things like swapping hands
 	///   and using items that may interrupt a do_after.
+	/// * this doesn't include locking movement. use [override_steering] for that.
 	var/lock_normal_actions = FALSE
 	/// lock special actions.
 	/// * this prevents the ai from doing things specially marked as non-interfering,
@@ -68,7 +74,8 @@
 
 /**
  * * if override_steering is enabled, this will be called in place of the normal steering cycle.
- * @return ds before movement re-schedule, or
+ * @return ds before movement re-schedule.
  */
 /datum/ai_dynamic_task/proc/on_move_override(cycles)
-	return 0
+	// randomly wait 100-300ms if we're not actually doing anything.
+	return rand(1, 3)

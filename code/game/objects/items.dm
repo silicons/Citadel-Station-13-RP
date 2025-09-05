@@ -26,6 +26,11 @@
 	/// the action will check for
 	var/item_action_mobility_flags = MOBILITY_CAN_HOLD | MOBILITY_CAN_USE
 
+	//* AI *//
+	/// our AI adapter, if any
+	var/datum/ai_adapter/ai_adapter
+	#warn impl
+
 	//* Combat *//
 	/// Amount of damage we do on melee.
 	var/damage_force = 0

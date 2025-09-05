@@ -17,3 +17,12 @@
 ///
 /// 5 seconds of tolerance is allowed before AI callbacks are dropped.
 #define AI_SCHEDULING_TOLERANCE (5 SECONDS)
+
+//* /datum/ai_callback *//
+
+/// didn't get fired yet
+#define AI_CALLBACK_PENDING 0
+/// invoked, whether or not it succeeded
+#define AI_CALLBACK_FINISHED 1
+/// dropped for one reason or another
+#define AI_CALLBACK_DROPPED 2

@@ -62,7 +62,11 @@ SUBSYSTEM_DEF(ai_scheduling)
 		var/bucket_offset = ((head_index + buckets_processed) % bucket_amount) + 1
 		var/datum/ai_callback/being_processed
 		while((being_processed = buckets[bucket_offset]))
-			being_processed.invoke()
+			if(QDELING(being_processed.parent) || being_processed.status != AI_CALLBACK_PENDING)
+				being_processed.status = AI_CALLBACK_DROPPED
+			else
+				being_processed.invoke()
+				being_processed.status = AI_CALLBACK_FINISHED
 			buckets[bucket_offset] = being_processed.next
 			if(MC_TICK_CHECK)
 				break
@@ -128,6 +132,8 @@ SUBSYSTEM_DEF(ai_scheduling)
 	var/datum/parent
 	/// next
 	var/datum/ai_callback/next
+	/// status
+	var/status = AI_CALLBACK_PENDING
 
 /datum/ai_callback/New(proc_ref, list/arguments, datum/parent)
 	src.proc_ref = proc_ref
@@ -150,3 +156,12 @@ SUBSYSTEM_DEF(ai_scheduling)
 	SHOULD_NOT_SLEEP(TRUE)
 	set waitfor = FALSE
 	call(parent, proc_ref)(arglist(arguments))
+
+/**
+ * @return TRUE if cancelled or already cancelled, FALSE if already ran
+ */
+/datum/ai_callback/proc/cancel()
+	if(status == AI_CALLBACK_FINISHED)
+		return FALSE
+	status = AI_CALLBACK_DROPPED
+	return TRUE

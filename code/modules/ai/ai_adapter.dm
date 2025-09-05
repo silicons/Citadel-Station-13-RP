@@ -19,6 +19,8 @@
 /datum/ai_adapter
 	/// bound datum, if any.
 	var/datum/delegate
+	/// expected datum type
+	var/delegate_type = /datum
 
 	/// broadphase flags; this is done to make narrowing down
 	/// a large list of ai adapters very fast.
@@ -26,11 +28,15 @@
 	var/broadphase_flags = NONE
 
 /datum/ai_adapter/New(datum/delegate)
+	ASSERT(istype(delegate, delegate_type))
 	src.delegate = delegate
 
 /datum/ai_adapter/Destroy()
 	delegate = null
 	return ..()
+
+/datum/ai_adapter/proc/is_valid(datum/ai_holder/holder)
+	. = FALSE
 
 #warn true/false return for act is not potentially the right move; if it requires a delay to do something / multi-telegraphed-steps, etc
 

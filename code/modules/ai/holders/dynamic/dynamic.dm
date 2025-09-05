@@ -4,6 +4,9 @@
 /datum/ai_holder/dynamic
 	//* system *//
 
+	/// default idle tick-rate. you usually shouldn't touch this.
+	/// * this is not the movement handler, this is the tick() handler.
+	var/system_idle_tick_interval = 5 SECONDS
 
 	//* introspection *//
 
@@ -14,28 +17,27 @@
 
 	//* state *//
 
+	/// main state holder. unlike combat / steering routine contexts,
+	/// this doesn't get wiped.
+	var/datum/ai_dynamic_state/state
 	/// currently active task
 	var/datum/ai_dynamic_task/state_task
-	/// blackboard.
-	/// * if you put a value in, you are expected to clean it up.
-	///   this (almost) never gets automatically reset
-	/// * this means if you put a reference type in you better
-	///   clean it up!!!
-	var/list/state_blackboard
+
+	//* adapters *//
+
+	/// available adapters
+	var/list/datum/ai_adapter/adapter_list
+	/// last adapter update
+	var/adapter_last_update = 0
 
 	//* combat *//
 
-	/// in combat?
-	/// * this is separate from overall state as it's
-	///   effectively an if block used to divert planning to
-	///   spend a tick now and then to perform target engagement.
-	var/combat_active = FALSE
-	/// actively engaging targets
-	var/list/atom/combat_engaging_targets
 	/// active combat routine
 	var/datum/ai_dynamic_combat/combat_routine
-	/// combat routine blackboard
-	var/list/combat_routine_blackboard
+	/// active combat routine context
+	var/datum/ai_dynamic_combat_context/combat_routine_context
+	/// last time combat adapters were reconsidered
+	var/combat_last_adapter_update = 0
 
 	//* cover *//
 
@@ -64,7 +66,9 @@
 	/// current steering routine
 	var/datum/ai_dynamic_steering/steering_routine
 	/// blackboard for steering routine
-	var/list/steering_routine_blackboard
+	var/datum/ai_dynamic_steering_context/steering_routine_context
+	/// last time movement adapters were reconsidered
+	var/steering_last_adapter_update = 0
 
 	//* tuning *//
 
