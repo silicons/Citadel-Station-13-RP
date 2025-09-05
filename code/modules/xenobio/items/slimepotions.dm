@@ -96,7 +96,7 @@
 	if(S.stat == DEAD)
 		to_chat(user, SPAN_WARNING("\The [S] is dead!"))
 		return
-	if(!S.has_polaris_AI())
+	if(!S.ai_is_polaris())
 		to_chat(user, SPAN_WARNING( "\The [S] is too strongly willed for this to affect them.")) // Most likely player controlled.
 		return
 
@@ -229,7 +229,7 @@
 	if(S.shares_iff_faction(user))
 		to_chat(user, SPAN_WARNING("\The [S] is already loyal to your species!"))
 		return
-	if(!S.has_polaris_AI())
+	if(!S.ai_is_polaris())
 		to_chat(user, SPAN_WARNING( "\The [S] is too strong-willed for this to affect them."))
 		return
 
@@ -271,7 +271,7 @@
 	if(user in S.friends)
 		to_chat(user, SPAN_WARNING("\The [S] is already loyal to you!"))
 		return
-	if(!S.has_polaris_AI())
+	if(!S.ai_is_polaris())
 		to_chat(user, SPAN_WARNING( "\The [S] is too strong-willed for this to affect them."))
 		return
 

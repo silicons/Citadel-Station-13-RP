@@ -450,7 +450,7 @@
 // The actual leaping attack.
 /mob/living/simple_mob/mechanical/hivebot/enigma/P4/Banshee/do_special_attack(atom/A)
 	set waitfor = FALSE
-	set_AI_busy(TRUE)
+	ai_polaris_set_busy(TRUE)
 
 	// Telegraph, since getting stunned suddenly feels bad.
 	do_windup_animation(A, leap_warmup)
@@ -497,7 +497,7 @@
 		to_chat(victim, SPAN_CRITICAL("\The [src] disengages its phase coils right ontop you and knocks you to the ground!"))
 		. = TRUE
 
-	set_AI_busy(FALSE)
+	ai_polaris_set_busy(FALSE)
 
 // Boss
 
@@ -597,7 +597,7 @@
 				if(L.stat)
 					continue // Otherwise it can get pretty laggy if there's loads of corpses around.
 				L.inflict_shock_damage_legacy(i * 2)
-				if(L && L.has_polaris_AI()) // Some mobs delete themselves when dying.
+				if(L && L.ai_is_polaris()) // Some mobs delete themselves when dying.
 					L.ai_holder.react_to_attack_polaris(src)
 
 			else if(istype(thing, /obj/vehicle/sealed/mecha))

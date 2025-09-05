@@ -109,7 +109,7 @@
 	..()
 	if(isliving(A))
 		var/mob/living/L = A
-		L.taunt(src, TRUE) // We're the party tank now.
+		L.ai_polaris_taunt(src, TRUE) // We're the party tank now.
 
 // Tier 2
 
@@ -264,7 +264,7 @@
 
 /mob/living/simple_mob/slime/xenobio/dark_blue/proc/chill(mob/living/L)
 	L.inflict_cold_damage(is_adult ? 10 : 5)
-	if(L.get_cold_protection() < 1 && L.has_polaris_AI()) // Harmful auras will make the AI react to its bearer.
+	if(L.get_cold_protection() < 1 && L.ai_is_polaris()) // Harmful auras will make the AI react to its bearer.
 		L.ai_holder.react_to_attack_polaris(src)
 
 
@@ -638,7 +638,7 @@
 
 		// Otherwise blow ourselves up.
 		say(pick("Sacrifice...!", "Sssss...", "Boom...!"))
-		set_AI_busy(TRUE)
+		ai_polaris_set_busy(TRUE)
 		sleep(2 SECONDS)
 		log_and_message_admins("[src] has suicide-bombed themselves while trying to kill \the [L].")
 		explode()

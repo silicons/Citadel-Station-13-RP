@@ -291,8 +291,8 @@
 	if(!isliving(target))
 		return
 	var/mob/living/L = target
-	if(active && L.has_polaris_AI())
-		L.taunt(attacker)
+	if(active && L.ai_is_polaris())
+		L.ai_polaris_taunt(attacker)
 
 // Borg version, for the lost module.
 /obj/item/melee/baton/shocker/robot

@@ -30,7 +30,7 @@
 		user.show_message("<span class='warning'>Warning: Subject is hungry.</span>")
 	user.show_message("Electric change strength: [S.power_charge]")
 
-	if(S.has_polaris_AI())
+	if(S.ai_is_polaris())
 		var/datum/ai_holder/polaris/simple_mob/xenobio_slime/AI = S.ai_holder
 		if(AI.resentment)
 			user.show_message("<span class='warning'>Warning: Subject is harboring resentment.</span>")

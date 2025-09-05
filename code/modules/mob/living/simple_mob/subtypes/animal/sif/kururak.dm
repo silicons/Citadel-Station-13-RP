@@ -127,9 +127,9 @@
 		if(INTENT_DISARM) // Ranged mob flash, will also confuse borgs rather than stun.
 			tail_flash(A)
 		if(INTENT_GRAB) // Armor-ignoring hit, causes agonizing wounds.
-			set_AI_busy(TRUE)
+			ai_polaris_set_busy(TRUE)
 			rending_strike(A)
-			set_AI_busy(FALSE)
+			ai_polaris_set_busy(FALSE)
 
 /mob/living/simple_mob/animal/sif/kururak/verb/do_flash()
 	set category = "Abilities"

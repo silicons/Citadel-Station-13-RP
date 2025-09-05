@@ -160,7 +160,7 @@
 
 /mob/living/simple_mob/proc/try_reload()
 	set waitfor = FALSE
-	set_AI_busy(TRUE)
+	ai_polaris_set_busy(TRUE)
 
 	if(do_after(src, reload_time))
 		if(reload_sound)
@@ -169,7 +169,7 @@
 		. = TRUE
 	else
 		. = FALSE
-	set_AI_busy(FALSE)
+	ai_polaris_set_busy(FALSE)
 
 /mob/living/simple_mob/proc/calculate_dispersion()
 	. = projectile_dispersion // Start with the basic var.
@@ -246,7 +246,7 @@
 // Sleeps the proc that called it for the correct amount of time.
 // Also makes sure the AI doesn't do anything stupid in the middle of the delay.
 /mob/living/simple_mob/proc/handle_attack_delay(atom/A, delay_amount)
-	set_AI_busy(TRUE)
+	ai_polaris_set_busy(TRUE)
 
 	// Click delay modifiers also affect telegraphing time.
 	// This means berserked enemies will leave less time to dodge.
@@ -259,7 +259,7 @@
 
 	sleep(true_attack_delay)
 
-	set_AI_busy(FALSE)
+	ai_polaris_set_busy(FALSE)
 
 
 // Override these four for special custom animations (like the GOLEM).

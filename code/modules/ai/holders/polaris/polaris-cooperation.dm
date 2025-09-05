@@ -27,7 +27,7 @@
 			first_friend = L
 			break
 
-	if(first_friend && first_friend.has_polaris_AI()) // Joining an already established faction.
+	if(first_friend && first_friend.ai_is_polaris()) // Joining an already established faction.
 		var/datum/ai_holder/polaris/their_holder = first_friend.ai_holder
 		faction_friends = their_holder.faction_friends
 		faction_friends |= holder
@@ -70,7 +70,7 @@
 // What allies receive when someone else is calling for help.
 /datum/ai_holder/polaris/proc/help_requested(mob/living/friend)
 	polaris_ai_log("help_requested() : Entering.", POLARIS_AI_LOG_DEBUG)
-	if(!friend.has_polaris_AI())
+	if(!friend.ai_is_polaris())
 		return
 	var/datum/ai_holder/polaris/friend_ai_holder = friend.ai_holder
 	if(stance == STANCE_SLEEP)

@@ -28,7 +28,7 @@
 	if(!(L.mob_class & allowed_mob_classes))
 		return FALSE
 
-	if(!L.has_polaris_AI())
+	if(!L.ai_is_polaris())
 		return FALSE
 
 	var/datum/ai_holder/polaris/AI = L.ai_holder
@@ -48,7 +48,7 @@
 	if(!(L in controlled_mobs))
 		return FALSE
 
-	if(L.has_polaris_AI())
+	if(L.ai_is_polaris())
 		var/datum/ai_holder/polaris/AI = L.ai_holder
 		AI.hostile = initial(AI.hostile)
 		AI.retaliate = initial(AI.retaliate)
@@ -64,7 +64,7 @@
 
 /obj/item/spell/control/proc/move_all(turf/T)
 	for(var/mob/living/L in controlled_mobs)
-		if(!L.has_polaris_AI() || L.stat)
+		if(!L.ai_is_polaris() || L.stat)
 			deselect(L)
 			continue
 		var/datum/ai_holder/polaris/ai_holder = L.ai_holder
@@ -72,7 +72,7 @@
 
 /obj/item/spell/control/proc/attack_all(mob/target)
 	for(var/mob/living/L in controlled_mobs)
-		if(!L.has_polaris_AI() || L.stat)
+		if(!L.ai_is_polaris() || L.stat)
 			deselect(L)
 			continue
 		var/datum/ai_holder/polaris/ai_holder = L.ai_holder
@@ -111,7 +111,7 @@
 				if(L.client)
 					to_chat(user, "<span class='danger'>\The [L] seems to resist you!</span>")
 					return 0
-				if(!L.has_polaris_AI())
+				if(!L.ai_is_polaris())
 					to_chat(user, SPAN_WARNING( "\The [L] seems too dim for this to work on them."))
 					return FALSE
 				if(pay_energy(500))

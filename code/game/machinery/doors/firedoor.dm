@@ -261,20 +261,20 @@ GLOBAL_LIST_INIT(firelock_align_types, typecacheof(list(
 			var/time_to_force = (2 + (2 * blocked)) * 5
 			if(src.density)
 				visible_message("<span class='danger'>\The [user] starts forcing \the [src] open!</span>")
-				user.set_AI_busy(TRUE) // If the mob doesn't have an AI attached, this won't do anything.
+				user.ai_polaris_set_busy(TRUE) // If the mob doesn't have an AI attached, this won't do anything.
 				if(do_after(user, time_to_force, src))
 					visible_message("<span class='danger'>\The [user] forces \the [src] open!</span>")
 					src.blocked = 0
 					open(1)
-				user.set_AI_busy(FALSE)
+				user.ai_polaris_set_busy(FALSE)
 			else
 				time_to_force = (time_to_force / 2)
 				visible_message("<span class='danger'>\The [user] starts forcing \the [src] closed!</span>")
-				user.set_AI_busy(TRUE) // If the mob doesn't have an AI attached, this won't do anything.
+				user.ai_polaris_set_busy(TRUE) // If the mob doesn't have an AI attached, this won't do anything.
 				if(do_after(user, time_to_force, src))
 					visible_message("<span class='danger'>\The [user] forces \the [src] closed!</span>")
 					close(1)
-				user.set_AI_busy(FALSE)
+				user.ai_polaris_set_busy(FALSE)
 		else
 			visible_message("<span class='notice'>\The [user] strains fruitlessly to force \the [src] [density ? "open" : "closed"].</span>")
 		return

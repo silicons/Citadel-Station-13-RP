@@ -222,7 +222,7 @@ GLOBAL_REAL_VAR(airlock_typecache) = typecacheof(list(
 		if(damage >= 5)
 			if(src.locked || src.welded)
 				visible_message("<span class='danger'>\The [user] begins breaking into \the [src] internals!</span>")
-				user.set_AI_busy(TRUE) // If the mob doesn't have an AI attached, this won't do anything.
+				user.ai_polaris_set_busy(TRUE) // If the mob doesn't have an AI attached, this won't do anything.
 				if(do_after(user,10 SECONDS,src))
 					src.locked = 0
 					src.welded = 0
@@ -230,7 +230,7 @@ GLOBAL_REAL_VAR(airlock_typecache) = typecacheof(list(
 					open(1)
 					if(prob(25))
 						src.shock(user, 100)
-				user.set_AI_busy(FALSE)
+				user.ai_polaris_set_busy(FALSE)
 			else if(src.density)
 				visible_message("<span class='danger'>\The [user] forces \the [src] open!</span>")
 				open(1)

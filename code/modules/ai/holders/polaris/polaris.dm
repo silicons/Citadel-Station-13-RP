@@ -122,13 +122,6 @@
 											// This uses strings and not refs to allow for disguises, and to avoid needing to use weakrefs.
 	var/destructive = FALSE					// Will target 'neutral' structures/objects and not just 'hostile' ones.
 
-/datum/ai_holder/polaris/hostile
-	hostile = TRUE
-
-/datum/ai_holder/polaris/retaliate
-	hostile = TRUE
-	retaliate = TRUE
-
 /datum/ai_holder/polaris/New(var/new_holder)
 	ASSERT(new_holder)
 	holder = new_holder
@@ -333,38 +326,3 @@
 	polaris_ai_log("handle_stance_strategical() : Exiting.", POLARIS_AI_LOG_TRACE)
 	polaris_ai_log("++++++++++ Slow Process Ending ++++++++++", POLARIS_AI_LOG_TRACE)
 
-
-// Helper proc to turn AI 'busy' mode on or off without having to check if there is an AI, to simplify writing code.
-/mob/living/proc/set_AI_busy(value)
-	var/datum/ai_holder/polaris/ai_holder = src.ai_holder
-	if(istype(ai_holder))
-		ai_holder.busy = value
-
-/mob/living/proc/is_AI_busy()
-	var/datum/ai_holder/polaris/ai_holder = src.ai_holder
-	if(!istype(ai_holder))
-		return FALSE
-	return ai_holder.busy
-
-// Helper proc to check for the AI's stance.
-// Returns null if there's no AI holder, or the mob has a player and autopilot is not on.
-// Otherwise returns the stance.
-/mob/living/proc/get_polaris_AI_stance()
-	var/datum/ai_holder/polaris/ai_holder = src.ai_holder
-	if(!istype(ai_holder))
-		return null
-	if(client && !ai_holder.autopilot)
-		return null
-	return ai_holder.stance
-
-// Similar to above but only returns 1 or 0.
-/mob/living/proc/has_polaris_AI()
-	if(!istype(ai_holder, /datum/ai_holder/polaris))
-		return FALSE
-	return get_polaris_AI_stance() ? TRUE : FALSE
-
-// 'Taunts' the AI into attacking the taunter.
-/mob/living/proc/taunt(atom/movable/taunter, force_target_switch = FALSE)
-	var/datum/ai_holder/polaris/ai_holder = src.ai_holder
-	if(istype(ai_holder))
-		ai_holder.receive_taunt(taunter, force_target_switch)

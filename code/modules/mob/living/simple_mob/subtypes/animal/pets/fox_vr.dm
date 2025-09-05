@@ -118,7 +118,7 @@
 	to_chat(L, SPAN_NOTICE("\The [src] is now your friend!"))
 	visible_emote(pick("nips [friend].", "brushes against [friend].", "tugs on [friend].", "chrrrrs."))
 
-	if(has_polaris_AI())
+	if(ai_is_polaris())
 		var/datum/ai_holder/polaris/AI = ai_holder
 		AI.set_follow(friend)
 

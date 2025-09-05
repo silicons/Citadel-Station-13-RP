@@ -95,7 +95,7 @@ GLOBAL_LIST_EMPTY(solargrubs)
 			var/turf/S = loc
 			attached = locate(/obj/structure/cable) in S
 			if(attached)
-				set_AI_busy(TRUE)
+				ai_polaris_set_busy(TRUE)
 				if(prob(2))
 					src.visible_message("<span class='notice'>\The [src] begins to sink power from the net.</span>")
 				if(prob(5))
@@ -172,5 +172,5 @@ GLOBAL_LIST_EMPTY(solargrubs)
 
 /datum/ai_holder/polaris/simple_mob/retaliate/solargrub/react_to_attack_polaris(atom/movable/attacker)
 	holder.anchored = 0
-	holder.set_AI_busy(FALSE)
+	holder.ai_polaris_set_busy(FALSE)
 	..()

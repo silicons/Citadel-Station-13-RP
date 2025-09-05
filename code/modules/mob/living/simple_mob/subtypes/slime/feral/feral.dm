@@ -33,7 +33,7 @@
 
 // Slimebatoning/xenotasing it just makes it mad at you (which can be good if you're heavily armored and your friends aren't).
 /mob/living/simple_mob/slime/feral/slimebatoned(mob/living/user, amount)
-	taunt(user, TRUE)
+	ai_polaris_taunt(user, TRUE)
 
 
 // ***********
@@ -100,6 +100,6 @@
 	if(L.get_cold_protection() < 1)
 		L.add_modifier(/datum/modifier/chilled, 5 SECONDS, src)
 
-	if(L.has_polaris_AI()) // Other AIs should react to hostile auras.
+	if(L.ai_is_polaris()) // Other AIs should react to hostile auras.
 		L.ai_holder.react_to_attack_polaris(src)
 

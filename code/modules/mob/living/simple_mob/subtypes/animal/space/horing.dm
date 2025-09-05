@@ -53,7 +53,7 @@
 
 /mob/living/simple_mob/animal/horing/do_special_attack(atom/A)
 	set waitfor = FALSE
-	set_AI_busy(TRUE)
+	ai_polaris_set_busy(TRUE)
 	charging = 1
 	movement_shake_radius = 3
 	movement_sound = 'sound/effects/mob_effects/snowbull_charge.ogg'
@@ -83,7 +83,7 @@
 	update_icon()
 	movement_shake_radius = 0
 	movement_sound = null
-	set_AI_busy(FALSE)
+	ai_polaris_set_busy(FALSE)
 
 /mob/living/simple_mob/animal/horing/Bump(atom/movable/AM)
 	if(charging)

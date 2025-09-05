@@ -99,14 +99,14 @@
 	visible_message(SPAN_NOTICE("\The [src] begins to secrete a sticky substance around \the [AM].") )
 
 	// Get our AI to stay still.
-	set_AI_busy(TRUE)
+	ai_polaris_set_busy(TRUE)
 
 	if(!do_mob(src, AM, 5 SECONDS))
-		set_AI_busy(FALSE)
+		ai_polaris_set_busy(FALSE)
 		to_chat(src, SPAN_WARNING( "You need to stay still to spin a web around \the [AM]."))
 		return FALSE
 
-	set_AI_busy(FALSE)
+	ai_polaris_set_busy(FALSE)
 
 	if(!AM) // Make sure it didn't get deleted for whatever reason.
 		to_chat(src, SPAN_WARNING( "Whatever you were spinning a web for, its no longer there..."))
@@ -149,7 +149,7 @@
 
 /mob/living/simple_mob/animal/giant_spider/nurse/handle_special()
 	set waitfor = FALSE
-	if(get_polaris_AI_stance() == STANCE_IDLE && !is_AI_busy() && isturf(loc))
+	if(ai_polaris_get_stance() == STANCE_IDLE && !ai_polaris_is_busy() && isturf(loc))
 		if(fed)
 			lay_eggs(loc)
 		else
@@ -165,10 +165,10 @@
 
 	visible_message(SPAN_NOTICE("\The [src] begins to secrete a sticky substance.") )
 	// Get our AI to stay still.
-	set_AI_busy(TRUE)
+	ai_polaris_set_busy(TRUE)
 
 	if(!do_mob(src, T, 5 SECONDS))
-		set_AI_busy(FALSE)
+		ai_polaris_set_busy(FALSE)
 		to_chat(src, SPAN_WARNING( "You need to stay still to spin a web on \the [T]."))
 		return FALSE
 
@@ -176,7 +176,7 @@
 	if(W)
 		return FALSE // Spamclick protection.
 
-	set_AI_busy(FALSE)
+	ai_polaris_set_busy(FALSE)
 	new web_type(T)
 	return TRUE
 
@@ -194,12 +194,12 @@
 
 	visible_message(SPAN_NOTICE("\The [src] begins to lay a cluster of eggs.") )
 	// Get our AI to stay still.
-	set_AI_busy(TRUE)
+	ai_polaris_set_busy(TRUE)
 	// Stop players from spamming eggs.
 	laying_eggs = TRUE
 
 	if(!do_mob(src, T, 5 SECONDS))
-		set_AI_busy(FALSE)
+		ai_polaris_set_busy(FALSE)
 		to_chat(src, SPAN_WARNING( "You need to stay still to lay eggs on \the [T]."))
 		return FALSE
 
@@ -207,7 +207,7 @@
 	if(E)
 		return FALSE // Spamclick protection.
 
-	set_AI_busy(FALSE)
+	ai_polaris_set_busy(FALSE)
 	new egg_type(T)
 	fed--
 	laying_eggs = FALSE

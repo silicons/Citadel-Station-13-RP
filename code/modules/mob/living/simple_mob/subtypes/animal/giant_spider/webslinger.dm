@@ -49,11 +49,11 @@
 // Now we've got a running human in sight, time to throw the bola
 /mob/living/simple_mob/animal/giant_spider/webslinger/do_special_attack(atom/A)
 	set waitfor = FALSE
-	set_AI_busy(TRUE)
+	ai_polaris_set_busy(TRUE)
 	var/obj/projectile/bola/B = new /obj/projectile/bola(src.loc)
 	playsound(src, 'sound/weapons/thudswoosh.ogg', 100, 1)
 	if(!B)
 		return
 	B.old_style_target(A, src)
 	B.fire()
-	set_AI_busy(FALSE)
+	ai_polaris_set_busy(FALSE)

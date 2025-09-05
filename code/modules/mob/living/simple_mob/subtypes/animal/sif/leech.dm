@@ -124,13 +124,13 @@
 	if(istype(A, /mob/living/carbon))
 		switch(a_intent)
 			if(INTENT_DISARM) // Poison
-				set_AI_busy(TRUE)
+				ai_polaris_set_busy(TRUE)
 				poison_inject(src, A)
-				set_AI_busy(FALSE)
+				ai_polaris_set_busy(FALSE)
 			if(INTENT_GRAB) // Infesting!
-				set_AI_busy(TRUE)
+				ai_polaris_set_busy(TRUE)
 				do_infest(src, A)
-				set_AI_busy(FALSE)
+				ai_polaris_set_busy(FALSE)
 
 /mob/living/simple_mob/animal/sif/leech/handle_special()
 	if(!istype(src.ai_holder, /datum/ai_holder/polaris))

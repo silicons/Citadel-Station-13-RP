@@ -158,7 +158,7 @@
 // Yes? Throw the grenade
 /mob/living/simple_mob/humanoid/clown/commando/do_special_attack(atom/A)
 	set waitfor = FALSE
-	set_AI_busy(TRUE)
+	ai_polaris_set_busy(TRUE)
 
 	var/obj/item/grenade/simple/G = new grenade_type(get_turf(src))
 	if(istype(G))
@@ -167,7 +167,7 @@
 		G.activate_inhand(new /datum/event_args/actor(src))
 		special_attack_charges = max(special_attack_charges-1, 0)
 
-	set_AI_busy(FALSE)
+	ai_polaris_set_busy(FALSE)
 
 // The actual Op mobs.
 

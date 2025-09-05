@@ -84,7 +84,7 @@
 
 /mob/living/simple_mob/animal/giant_spider/tunneler/do_special_attack(atom/A)
 	set waitfor = FALSE
-	set_AI_busy(TRUE)
+	ai_polaris_set_busy(TRUE)
 
 	// Save where we're gonna go soon.
 	var/turf/destination = get_turf(A)
@@ -99,13 +99,13 @@
 	submerge()
 
 	if(handle_tunnel(destination) == FALSE)
-		set_AI_busy(FALSE)
+		ai_polaris_set_busy(FALSE)
 		emerge()
 		return FALSE
 
 	// Did we make it?
 	if(!(src in destination))
-		set_AI_busy(FALSE)
+		ai_polaris_set_busy(FALSE)
 		emerge()
 		return FALSE
 
@@ -122,7 +122,7 @@
 		overshoot = FALSE
 
 	if(!overshoot) // We hit the target, or something, at destination, so we're done.
-		set_AI_busy(FALSE)
+		ai_polaris_set_busy(FALSE)
 		emerge()
 		return TRUE
 
@@ -134,11 +134,11 @@
 		destination = get_step(destination, dir_to_go)
 
 	if(handle_tunnel(destination) == FALSE)
-		set_AI_busy(FALSE)
+		ai_polaris_set_busy(FALSE)
 		emerge()
 		return FALSE
 
-	set_AI_busy(FALSE)
+	ai_polaris_set_busy(FALSE)
 	emerge()
 	return FALSE
 

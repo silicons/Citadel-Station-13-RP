@@ -125,7 +125,7 @@ var/global/list/grub_machine_overlays = list()
 /mob/living/simple_mob/animal/solargrub_larva/proc/enter_machine(var/obj/machinery/M)
 	if(!istype(M))
 		return
-	set_AI_busy(TRUE)
+	ai_polaris_set_busy(TRUE)
 	forceMove(M)
 	powermachine.draining = 2
 	visible_message("<span class='warning'>\The [src] finds an opening and crawls inside \the [M].</span>")
@@ -158,7 +158,7 @@ var/global/list/grub_machine_overlays = list()
 		ai_holder.target = null
 	powermachine.draining = 1
 	spawn(30)
-		set_AI_busy(FALSE)
+		ai_polaris_set_busy(FALSE)
 
 /mob/living/simple_mob/animal/solargrub_larva/proc/do_ventcrawl(var/obj/machinery/atmospherics/component/unary/vent_pump/vent)
 	if(!vent)

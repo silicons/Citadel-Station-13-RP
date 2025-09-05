@@ -181,7 +181,7 @@
 		if(INTENT_HELP)
 			if(health > 0)
 				M.visible_message("<span class='notice'>[M] [response_help] \the [src].</span>")
-				if(has_polaris_AI())
+				if(ai_is_polaris())
 					var/datum/ai_holder/polaris/AI = ai_holder
 					AI.set_stance(STANCE_IDLE)
 					if(prob(tame_chance))
@@ -195,7 +195,7 @@
 
 		if(INTENT_GRAB)
 			if(health > 0)
-				if(has_polaris_AI())
+				if(ai_is_polaris())
 					var/datum/ai_holder/polaris/AI = ai_holder
 					audible_emote("growls disapprovingly at [M].")
 					if(M == friend)

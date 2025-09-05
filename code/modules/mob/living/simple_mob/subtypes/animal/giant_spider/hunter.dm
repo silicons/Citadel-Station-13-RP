@@ -60,7 +60,7 @@
 // The actual leaping attack.
 /mob/living/simple_mob/animal/giant_spider/hunter/do_special_attack(atom/A)
 	set waitfor = FALSE
-	set_AI_busy(TRUE)
+	ai_polaris_set_busy(TRUE)
 
 	// Telegraph, since getting stunned suddenly feels bad.
 	do_windup_animation(A, leap_warmup)
@@ -107,7 +107,7 @@
 		to_chat(victim, SPAN_CRITICAL("\The [src] jumps on you!"))
 		. = TRUE
 
-	set_AI_busy(FALSE)
+	ai_polaris_set_busy(FALSE)
 
 
 

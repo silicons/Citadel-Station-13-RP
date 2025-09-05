@@ -165,7 +165,7 @@
 				if(L.stat)
 					continue // Otherwise it can get pretty laggy if there's loads of corpses around.
 				L.inflict_shock_damage_legacy(i * 2)
-				if(L && L.has_polaris_AI()) // Some mobs delete themselves when dying.
+				if(L && L.ai_is_polaris()) // Some mobs delete themselves when dying.
 					L.ai_holder.react_to_attack_polaris(src)
 
 			else if(istype(thing, /obj/vehicle/sealed/mecha))

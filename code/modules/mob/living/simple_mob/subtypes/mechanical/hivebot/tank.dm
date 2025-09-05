@@ -33,7 +33,7 @@
 /mob/living/simple_mob/mechanical/hivebot/armored/apply_melee_effects(atom/A)
 	if(isliving(A))
 		var/mob/living/L = A
-		L.taunt(src, TRUE)
+		L.ai_polaris_taunt(src, TRUE)
 		L.add_modifier(/datum/modifier/hivebot_weaken, 3 SECONDS)
 
 // Modifier applied to whatever a tank hivebot hits, intended to make the target do even less damage.

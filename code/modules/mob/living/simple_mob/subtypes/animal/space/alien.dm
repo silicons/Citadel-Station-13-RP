@@ -215,7 +215,7 @@
 	var/charge_warmup = 1 SECOND // How long the leap telegraphing is.
 	var/charge_sound = 'sound/mobs/biomorphs/breaker_charge.ogg'
 	set waitfor = FALSE
-	set_AI_busy(TRUE)
+	ai_polaris_set_busy(TRUE)
 	charging = 1
 	movement_shake_radius = 5
 	movement_sound = 'sound/mobs/biomorphs/breaker_charge.ogg'
@@ -248,7 +248,7 @@
 	update_icon()
 	movement_shake_radius = 0
 	movement_sound = 'sound/mobs/biomorphs/breaker_walk_stomp.ogg'
-	set_AI_busy(FALSE)
+	ai_polaris_set_busy(FALSE)
 
 /mob/living/simple_mob/animal/space/alien/breaker/Bump(atom/movable/AM)
 	if(charging)
@@ -406,7 +406,7 @@
 	var/charge_warmup = 0 SECOND // How long the leap telegraphing is.
 	var/charge_sound = 'sound/mobs/biomorphs/monarch_charge.ogg'
 	set waitfor = FALSE
-	set_AI_busy(TRUE)
+	ai_polaris_set_busy(TRUE)
 	charging = 1
 	movement_shake_radius = 5
 	movement_sound = 'sound/mobs/biomorphs/monarch_charge.ogg'
@@ -439,7 +439,7 @@
 	update_icon()
 	movement_shake_radius = 0
 	movement_sound = 'sound/mobs/biomorphs/monarch_move.ogg'
-	set_AI_busy(FALSE)
+	ai_polaris_set_busy(FALSE)
 
 /mob/living/simple_mob/animal/space/alien/monarch/Bump(atom/movable/AM)
 	if(charging)
@@ -541,7 +541,7 @@
 
 /mob/living/simple_mob/animal/space/alien/special/burrower/do_special_attack(atom/A)
 	set waitfor = FALSE
-	set_AI_busy(TRUE)
+	ai_polaris_set_busy(TRUE)
 
 	// Save where we're gonna go soon.
 	var/turf/destination = get_turf(A)
@@ -556,13 +556,13 @@
 	submerge()
 
 	if(handle_tunnel(destination) == FALSE)
-		set_AI_busy(FALSE)
+		ai_polaris_set_busy(FALSE)
 		emerge()
 		return FALSE
 
 	// Did we make it?
 	if(!(src in destination))
-		set_AI_busy(FALSE)
+		ai_polaris_set_busy(FALSE)
 		emerge()
 		return FALSE
 
@@ -579,7 +579,7 @@
 		overshoot = FALSE
 
 	if(!overshoot) // We hit the target, or something, at destination, so we're done.
-		set_AI_busy(FALSE)
+		ai_polaris_set_busy(FALSE)
 		emerge()
 		return TRUE
 
@@ -591,11 +591,11 @@
 		destination = get_step(destination, dir_to_go)
 
 	if(handle_tunnel(destination) == FALSE)
-		set_AI_busy(FALSE)
+		ai_polaris_set_busy(FALSE)
 		emerge()
 		return FALSE
 
-	set_AI_busy(FALSE)
+	ai_polaris_set_busy(FALSE)
 	emerge()
 	return FALSE
 

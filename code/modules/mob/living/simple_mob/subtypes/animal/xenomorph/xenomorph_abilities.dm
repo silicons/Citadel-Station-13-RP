@@ -5,7 +5,7 @@
 	var/charge_warmup = 1 SECOND // How long the leap telegraphing is.
 	var/charge_sound = 'sound/mobs/biomorphs/breaker_charge.ogg'
 	set waitfor = FALSE
-	set_AI_busy(TRUE)
+	ai_polaris_set_busy(TRUE)
 	charging = 1
 	movement_shake_radius = 5
 	movement_sound = 'sound/mobs/biomorphs/breaker_charge.ogg'
@@ -38,7 +38,7 @@
 	update_icon()
 	movement_shake_radius = 0
 	movement_sound = 'sound/mobs/biomorphs/breaker_walk_stomp.ogg'
-	set_AI_busy(FALSE)
+	ai_polaris_set_busy(FALSE)
 
 /mob/living/simple_mob/animal/space/xenomorph/breaker/Bump(atom/movable/AM)
 	if(charging)
@@ -96,7 +96,7 @@
 	var/charge_warmup = 0 SECOND // How long the leap telegraphing is.
 	var/charge_sound = 'sound/mobs/biomorphs/monarch_charge.ogg'
 	set waitfor = FALSE
-	set_AI_busy(TRUE)
+	ai_polaris_set_busy(TRUE)
 	charging = 1
 	movement_shake_radius = 5
 	movement_sound = 'sound/mobs/biomorphs/monarch_charge.ogg'
@@ -129,7 +129,7 @@
 	update_icon()
 	movement_shake_radius = 0
 	movement_sound = 'sound/mobs/biomorphs/monarch_move.ogg'
-	set_AI_busy(FALSE)
+	ai_polaris_set_busy(FALSE)
 
 /mob/living/simple_mob/animal/space/xenomorph/monarch/Bump(atom/movable/AM)
 	if(charging)
@@ -199,7 +199,7 @@
 
 /mob/living/simple_mob/animal/space/xenomorph/special/burrower/do_special_attack(atom/A)
 	set waitfor = FALSE
-	set_AI_busy(TRUE)
+	ai_polaris_set_busy(TRUE)
 
 	// Save where we're gonna go soon.
 	var/turf/destination = get_turf(A)
@@ -214,13 +214,13 @@
 	submerge()
 
 	if(handle_tunnel(destination) == FALSE)
-		set_AI_busy(FALSE)
+		ai_polaris_set_busy(FALSE)
 		emerge()
 		return FALSE
 
 	// Did we make it?
 	if(!(src in destination))
-		set_AI_busy(FALSE)
+		ai_polaris_set_busy(FALSE)
 		emerge()
 		return FALSE
 
@@ -237,7 +237,7 @@
 		overshoot = FALSE
 
 	if(!overshoot) // We hit the target, or something, at destination, so we're done.
-		set_AI_busy(FALSE)
+		ai_polaris_set_busy(FALSE)
 		emerge()
 		return TRUE
 
@@ -249,11 +249,11 @@
 		destination = get_step(destination, dir_to_go)
 
 	if(handle_tunnel(destination) == FALSE)
-		set_AI_busy(FALSE)
+		ai_polaris_set_busy(FALSE)
 		emerge()
 		return FALSE
 
-	set_AI_busy(FALSE)
+	ai_polaris_set_busy(FALSE)
 	emerge()
 	return FALSE
 
@@ -337,7 +337,7 @@
 // The actual leaping attack.
 /mob/living/simple_mob/animal/space/xenomorph/sprinter/do_special_attack(atom/A)
 	set waitfor = FALSE
-	set_AI_busy(TRUE)
+	ai_polaris_set_busy(TRUE)
 
 	// Telegraph, since getting stunned suddenly feels bad.
 	do_windup_animation(A, leap_warmup)
@@ -383,12 +383,12 @@
 		to_chat(victim, SPAN_CRITICAL("\The [src] jumps on you!"))
 		. = TRUE
 
-	set_AI_busy(FALSE)
+	ai_polaris_set_busy(FALSE)
 
 
 // Berserker Rage
 /mob/living/simple_mob/animal/space/xenomorph/berserker/handle_special()
-	if((get_polaris_AI_stance() in list(STANCE_APPROACH, STANCE_FIGHT)) && !is_AI_busy() && isturf(loc))
+	if((ai_polaris_get_stance() in list(STANCE_APPROACH, STANCE_FIGHT)) && !ai_polaris_is_busy() && isturf(loc))
 		if(health <= (maxHealth * 0.5)) // At half health, and fighting someone currently.
 			berserk()
 

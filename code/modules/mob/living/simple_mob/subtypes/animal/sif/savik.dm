@@ -54,7 +54,7 @@
 	emote_hear = list("snuffles")
 
 /mob/living/simple_mob/animal/sif/savik/handle_special()
-	if((get_polaris_AI_stance() in list(STANCE_APPROACH, STANCE_FIGHT)) && !is_AI_busy() && isturf(loc))
+	if((ai_polaris_get_stance() in list(STANCE_APPROACH, STANCE_FIGHT)) && !ai_polaris_is_busy() && isturf(loc))
 		if(health <= (maxHealth * 0.5)) // At half health, and fighting someone currently.
 			berserk()
 

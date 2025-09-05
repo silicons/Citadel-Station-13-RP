@@ -253,10 +253,10 @@
 			if(currentlyEating != obstacle)
 				currentlyEating = obstacle
 
-			set_AI_busy(TRUE)
+			ai_polaris_set_busy(TRUE)
 			if(AttemptToEat(obstacle))
 				currentlyEating = null
-			set_AI_busy(FALSE)
+			ai_polaris_set_busy(FALSE)
 	else
 		currentlyEating = null
 		. = ..(obstacle)

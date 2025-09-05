@@ -87,7 +87,7 @@
 	else if(harmless)
 		. += "It appears to have been pacified."
 	else
-		if(has_polaris_AI())
+		if(ai_is_polaris())
 			var/datum/ai_holder/polaris/simple_mob/xenobio_slime/AI = ai_holder
 			if(AI.rabid)
 				. += "It seems very, very angry and upset."
@@ -139,7 +139,7 @@
 		mood = "sad"
 	else if(harmless)
 		mood = ":33"
-	else if(has_polaris_AI())
+	else if(ai_is_polaris())
 		var/datum/ai_holder/polaris/simple_mob/xenobio_slime/AI = ai_holder
 		if(AI.rabid)
 			mood = "angry"
@@ -158,20 +158,20 @@
 /mob/living/simple_mob/slime/xenobio/proc/enrage()
 	if(harmless)
 		return
-	if(has_polaris_AI())
+	if(ai_is_polaris())
 		var/datum/ai_holder/polaris/simple_mob/xenobio_slime/AI = ai_holder
 		AI.enrage()
 
 /mob/living/simple_mob/slime/xenobio/proc/relax()
 	if(harmless)
 		return
-	if(has_polaris_AI())
+	if(ai_is_polaris())
 		var/datum/ai_holder/polaris/simple_mob/xenobio_slime/AI = ai_holder
 		AI.relax()
 
 /mob/living/simple_mob/slime/xenobio/proc/pacify()
 	harmless = TRUE
-	if(has_polaris_AI())
+	if(ai_is_polaris())
 		var/datum/ai_holder/polaris/simple_mob/xenobio_slime/AI = ai_holder
 		AI.pacify()
 

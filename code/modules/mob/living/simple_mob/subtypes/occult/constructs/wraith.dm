@@ -67,7 +67,7 @@
 
 /mob/living/simple_mob/construct/wraith/do_special_attack(atom/A)
 	set waitfor = FALSE
-	set_AI_busy(TRUE)
+	ai_polaris_set_busy(TRUE)
 
 	// Save where we're gonna go soon.
 	var/turf/destination = get_turf(A)
@@ -84,14 +84,14 @@
 	icon_state = "phase_shift"
 
 	if(handle_jaunt(destination) == FALSE)
-		set_AI_busy(FALSE)
+		ai_polaris_set_busy(FALSE)
 		flick("phase_shift2",A)
 		icon_state = "phase_shift2"
 		return FALSE
 
 	// Did we make it?
 	if(!(src in destination))
-		set_AI_busy(FALSE)
+		ai_polaris_set_busy(FALSE)
 		icon_state = "phase_shift2"
 		flick("phase_shift2",A)
 		return FALSE
@@ -109,7 +109,7 @@
 		overshoot = FALSE
 
 	if(!overshoot) // We hit the target, or something, at destination, so we're done.
-		set_AI_busy(FALSE)
+		ai_polaris_set_busy(FALSE)
 		icon_state = "phase_shift2"
 		flick("phase_shift2",A)
 		return TRUE
@@ -122,12 +122,12 @@
 		destination = get_step(destination, dir_to_go)
 
 	if(handle_jaunt(destination) == FALSE)
-		set_AI_busy(FALSE)
+		ai_polaris_set_busy(FALSE)
 		icon_state = "phase_shift2"
 		flick("phase_shift2",A)
 		return FALSE
 
-	set_AI_busy(FALSE)
+	ai_polaris_set_busy(FALSE)
 	icon_state = "phase_shift2"
 	flick("phase_shift2",A)
 	return FALSE

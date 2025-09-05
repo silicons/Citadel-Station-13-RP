@@ -43,7 +43,7 @@
 	var/mob/living/simple_mob/M = new build_path(src.loc)
 	if(!istype(M))
 		return
-	if(M.has_polaris_AI())
+	if(M.ai_is_polaris())
 		var/datum/ai_holder/polaris/AI = M.ai_holder
 		AI.go_sleep() //Don't fight eachother while we're still setting up!
 		AI.returns_home = mob_returns_home
