@@ -29,7 +29,8 @@
 	//* AI *//
 	/// our AI adapter, if any
 	var/datum/ai_adapter/ai_adapter
-	#warn impl
+	/// AI adapter type to initialize
+	var/ai_adapter_type = /datum/ai_adapter/item
 
 	//* Combat *//
 	/// Amount of damage we do on melee.
@@ -235,6 +236,8 @@
 			embed_chance = max(5, round(damage_force/(w_class*3)))
 
 /obj/item/Destroy()
+	if(ai_adapter)
+		QDEL_NULL(ai_adapter)
 	// run inventory hooks
 	if(worn_slot && !worn_hook_suppressed)
 		var/mob/M = get_worn_mob()

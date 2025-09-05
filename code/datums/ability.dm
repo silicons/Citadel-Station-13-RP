@@ -20,6 +20,12 @@
 	/// owning mob - can be null if we aren't bound / granted to anyone.
 	var/mob/owner
 
+	//* AI *//
+	/// our AI adapter, if any
+	var/datum/ai_adapter/ai_adapter
+	/// AI adapter type to initialize
+	var/ai_adapter_type
+
 	//? binding
 	/// action datum
 	var/datum/action/action
@@ -76,6 +82,8 @@
 	var/enabled = FALSE
 
 /datum/ability/Destroy()
+	if(ai_adapter)
+		QDEL_NULL(ai_adapter)
 	if(!isnull(owner))
 		disassociate(owner)
 	if(!isnull(action))
@@ -348,6 +356,11 @@
 		"name" = name,
 		"desc" = desc,
 	)
+
+/datum/ability/proc/request_ai_adapter()
+	if(!ai_adapter && ai_adapter_type)
+		ai_adapter = new ai_adapter_type
+	return ai_adapter
 
 /**
  * action datums for abilities

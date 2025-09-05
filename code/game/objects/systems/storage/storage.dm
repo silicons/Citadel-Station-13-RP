@@ -264,6 +264,13 @@
 	for(var/obj/item/inside in real_contents_loc())
 		. += inside
 
+/**
+ * iterate through what's considered inside
+ * * Do not modify returned list in any way.
+ */
+/datum/object_system/storage/proc/contents_unsafe_immutable()
+	return real_contents_loc()?.contents
+
 /datum/object_system/storage/proc/accessible_by_mob(mob/user)
 	if(IsAdminGhost(user) || (isobserver(user) && always_allow_observer_view))
 		return TRUE
@@ -696,7 +703,8 @@
 
 //* Redirection *//
 
-/datum/object_system/storage/proc/real_contents_loc()
+/datum/object_system/storage/proc/real_contents_loc() as /atom
+	RETURN_TYPE(/atom)
 	return indirection || parent
 
 //* Rendering - Object *//

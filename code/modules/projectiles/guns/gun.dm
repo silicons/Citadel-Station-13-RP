@@ -60,6 +60,7 @@
 	attack_verb = list("struck", "hit", "bashed")
 	zoomdevicename = "scope"
 	inhand_default_type = INHAND_DEFAULT_ICON_GUNS
+	ai_adapter_type = /datum/ai_adapter/item/gun
 
 	//* Accuracy, Dispersion, Instability *//
 
