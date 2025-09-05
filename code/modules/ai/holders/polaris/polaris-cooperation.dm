@@ -1,16 +1,5 @@
 // Involves cooperating with other ai_holders.
 /datum/ai_holder/polaris
-	var/cooperative = FALSE						// If true, asks allies to help when fighting something.
-	var/call_distance = 14						// How far away calls for help will go for.
-	var/last_helpask_time = 0					// world.time when a mob asked for help.
-	var/list/faction_friends = list()			// List of all mobs inside the faction with ai_holders that have cooperate on, to call for help without using range().
-												// Note that this is only used for sending calls out. Receiving calls doesn't care about this list, only if the mob is in the faction.
-												// This means the AI could respond to a player's call for help, if a way to do so was implemented.
-
-	// These vars don't do anything currently. They did before but an optimization made them nonfunctional.
-	// It was probably worth it.
-	var/call_players = FALSE					// (Currently nonfunctional) If true, players get notified of an allied mob calling for help.
-	var/called_player_message = "needs help!"	// (Currently nonfunctional) Part of a message used when above var is true. Full message is "\The [holder] [called_player_message]"
 
 /datum/ai_holder/polaris/New(new_holder)
 	..()

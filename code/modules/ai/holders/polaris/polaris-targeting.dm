@@ -1,29 +1,5 @@
 // Used for assigning a target for attacking.
 
-/datum/ai_holder/polaris
-	var/hostile = FALSE						// Do we try to hurt others?
-	var/retaliate = FALSE					// Attacks whatever struck it first. Mobs will still attack back if this is false but hostile is true.
-	var/mauling = FALSE						// Attacks unconscious mobs
-	var/handle_corpse = FALSE					// Allows AI to acknowledge corpses (e.g. nurse spiders)
-
-	var/atom/movable/target = null			// The thing (mob or object) we're trying to kill.
-	var/atom/movable/preferred_target = null// If set, and if given the chance, we will always prefer to target this over other options.
-	var/turf/target_last_seen_turf = null 	// Where the mob last observed the target being, used if the target disappears but the mob wants to keep fighting.
-
-	var/vision_range = 7					// How far the targeting system will look for things to kill. Note that values higher than 7 are 'offscreen' and might be unsporting.
-	var/respect_alpha = TRUE				// If true, mobs with a sufficently low alpha will be treated as invisible.
-	var/alpha_vision_threshold = 127		// Targets with an alpha less or equal to this will be considered invisible. Requires above var to be true.
-	var/max_range = 7 						// Max range a ranged mob will shoot from
-
-	var/lose_target_time = 0				// world.time when a target was lost.
-	var/lose_target_timeout = 5 SECONDS		// How long until a mob 'times out' and stops trying to find the mob that disappeared.
-
-	var/list/attackers = list()				// List of strings of names of people who attacked us before in our life.
-											// This uses strings and not refs to allow for disguises, and to avoid needing to use weakrefs.
-	var/destructive = FALSE					// Will target 'neutral' structures/objects and not just 'hostile' ones.
-
-// A lot of this is based off of /TG/'s AI code.
-
 // Step 1, find out what we can see.
 /datum/ai_holder/polaris/proc/list_targets()
 	. = hearers(vision_range, holder) - holder // Remove ourselves to prevent suicidal decisions. ~ SRC is the ai_holder.

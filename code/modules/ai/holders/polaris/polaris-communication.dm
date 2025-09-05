@@ -1,15 +1,6 @@
 // Contains code for speaking and emoting.
 
 /datum/ai_holder/polaris
-	var/threaten = FALSE				// If hostile and sees a valid target, gives a 'warning' to the target before beginning the attack.
-	var/threatening = FALSE				// If the mob actually gave the warning, checked so it doesn't constantly yell every tick.
-	var/threaten_delay = 3 SECONDS		// How long a 'threat' lasts, until actual fighting starts. If null, the mob never starts the fight but still does the threat.
-	var/threaten_timeout = 1 MINUTE		// If the mob threatens someone, they leave, and then come back before this timeout period, the mob escalates to fighting immediately.
-	var/last_conflict_time = null		// Last occurance of fighting being used, in world.time.
-	var/last_threaten_time = null		// Ditto but only for threats.
-	var/last_target_time = null			// Ditto for when we last switched targets, used to stop retaliate from gimping mobs
-
-	var/speak_chance = 0				// Probability that the mob talks (this is 'X in 200' chance since even 1/100 is pretty noisy)
 
 
 /datum/ai_holder/polaris/proc/should_threaten()

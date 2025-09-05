@@ -1,14 +1,5 @@
 // This code handles what to do inside STANCE_FLEE.
 
-/datum/ai_holder/polaris
-	var/can_flee = TRUE					// If they're even allowed to flee.
-	var/flee_when_dying = TRUE			// If they should flee when low on health.
-	var/dying_threshold = 0.3			// How low on health the holder needs to be before fleeing. Defaults to 30% or lower health.
-	var/flee_when_outmatched = FALSE	// If they should flee upon reaching a specific tension threshold.
-	var/outmatched_threshold = 200		// The tension threshold needed for a mob to decide it should run away.
-
-
-
 /datum/ai_holder/polaris/proc/should_flee(force = FALSE)
 	if(holder.has_modifier_of_type(/datum/modifier/berserk)) // Berserked mobs will never flee, even if 'forced' to.
 		return FALSE

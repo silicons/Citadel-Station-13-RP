@@ -1,8 +1,5 @@
 // Handles AI while stunned or otherwise disabled.
 
-/datum/ai_holder/polaris
-	var/respect_confusion = TRUE // If false, the mob won't wander around recklessly.
-
 // If our holder is able to do anything.
 /datum/ai_holder/polaris/proc/can_act()
 	if(holder.key)

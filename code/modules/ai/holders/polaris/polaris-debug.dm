@@ -1,19 +1,5 @@
 // Contains settings to make it easier to debug things.
 
-/datum/ai_holder/polaris
-	var/path_display = FALSE						// Displays a visual path when A* is being used.
-	var/path_icon = 'icons/misc/debug_group.dmi'	// What icon to use for the overlay
-	var/path_icon_state = "red"						// What state to use for the overlay
-	var/image/path_overlay							// A reference to the overlay
-
-	var/last_turf_display = FALSE					// Similar to above, but shows the target's last known turf visually.
-	var/last_turf_icon_state = "green"				// A seperate icon_state from the previous.
-	var/image/last_turf_overlay						// Another reference for an overlay.
-
-	var/stance_coloring = FALSE						// Colors the mob depending on its stance.
-
-	var/debug_ai = POLARIS_AI_LOG_OFF						// The level of debugging information to display to people who can see log_debug().
-
 /datum/ai_holder/polaris/New()
 	..()
 	path_overlay = new(path_icon,path_icon_state)

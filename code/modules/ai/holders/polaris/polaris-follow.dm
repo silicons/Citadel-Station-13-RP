@@ -1,11 +1,5 @@
 // This handles following a specific atom/movable, without violently murdering it.
 
-/datum/ai_holder/polaris
-	// Following.
-	var/atom/movable/leader = null		// The movable atom that the mob wants to follow.
-	var/follow_distance = 2				// How far leader must be to start moving towards them.
-	var/follow_until_time = 0			// world.time when the mob will stop following leader. 0 means it won't time out.
-
 /datum/ai_holder/polaris/proc/walk_to_leader()
 	polaris_ai_log("walk_to_leader() : Entering.",POLARIS_AI_LOG_TRACE)
 	if(!leader)

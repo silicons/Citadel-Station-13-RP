@@ -1,14 +1,6 @@
 // This handles obtaining a (usually A*) path towards something, such as a target, destination, or leader.
 // This interacts heavily with code inside ai_holder_movement.dm
 
-/datum/ai_holder/polaris
-	// Pathfinding.
-	var/use_astar = FALSE				// Do we use the more expensive A* implementation or stick with BYOND's default step_to()?
-	var/list/path = list()				// A list of tiles that A* gave us as a solution to reach the target.
-	var/list/obstacles = list()			// Things A* will try to avoid.
-	var/astar_adjacent_proc = /turf/proc/CardinalTurfsWithAccess // Proc to use when A* pathfinding.  Default makes them bound to cardinals.
-	var/failed_steps = 0				// If move_once() fails to move the mob onto the correct tile, this increases. When it reaches 3, the path is recalc'd since they're probably stuck.
-
 // This clears the stored A* path.
 /datum/ai_holder/polaris/proc/forget_path()
 	polaris_ai_log("forget_path() : Entering.", POLARIS_AI_LOG_DEBUG)

@@ -1,21 +1,4 @@
 /datum/ai_holder/polaris
-	// General.
-	var/turf/destination = null			// The targeted tile the mob wants to walk to.
-	var/min_distance_to_destination = 1	// Holds how close the mob should go to destination until they're done.
-
-	// Home.
-	var/turf/home_turf = null			// The mob's 'home' turf. It will try to stay near it if told to do so. This is the turf the AI was initialized on by default.
-	var/returns_home = FALSE			// If true, makes the mob go to its 'home' if it strays too far.
-	var/home_low_priority = FALSE		// If true, the mob will not go home unless it has nothing better to do, e.g. its following someone.
-	var/max_home_distance = 3			// How far the mob can go away from its home before being told to go_home().
-										// Note that there is a 'BYOND cap' of 14 due to limitations of get_/step_to().
-
-	// Wandering.
-	var/wander = FALSE					// If true, the mob will randomly move in the four cardinal directions when idle.
-	var/wander_delay = 0				// How many ticks until the mob can move a tile in handle_wander_movement().
-	var/base_wander_delay = 2			// What the above var gets set to when it wanders. Note that a tick happens every half a second.
-	var/wander_when_pulled = FALSE		// If the mob will refrain from wandering if someone is pulling it.
-
 
 /datum/ai_holder/polaris/proc/walk_to_destination()
 	polaris_ai_log("walk_to_destination() : Entering.",POLARIS_AI_LOG_TRACE)
