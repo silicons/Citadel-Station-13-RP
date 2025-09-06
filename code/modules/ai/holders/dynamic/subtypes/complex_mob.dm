@@ -3,6 +3,3 @@
 
 /datum/ai_holder/dynamic/complex_mob
 	agent_type = /mob/living/carbon/human
-
-/datum/ai_holder/dynamic/complex_mob/steering_move_agent(dir)
-	#warn impl, return ds to next or -1

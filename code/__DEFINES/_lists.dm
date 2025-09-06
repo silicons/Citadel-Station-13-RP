@@ -103,6 +103,33 @@
 		};\
 	} while(FALSE)
 
+/**
+ * `BINARY_INSERT` but compares against an associative number directly.
+ */
+#define BINARY_INSERT_ASSOC_NUMBER(LIST, INPUT, VALUE) \
+	do { \
+		var/list/__BIN_LIST = LIST; \
+		var/__BIN_LEN = length(__BIN_LIST); \
+		if(!__BIN_LEN) { \
+			__BIN_LIST[INPUT] = VALUE; \
+		} else { \
+			var/__BIN_LEFT = 1; \
+			var/__BIN_RIGHT = __BIN_LEN; \
+			var/__BIN_MID = (__BIN_LEFT + __BIN_RIGHT) >> 1; \
+			while(__BIN_LEFT < __BIN_RIGHT) { \
+				if(__BIN_LIST[__BIN_MID] <= VALUE) { \
+					__BIN_LEFT = __BIN_MID + 1; \
+				} else { \
+					__BIN_RIGHT = __BIN_MID; \
+				}; \
+				__BIN_MID = (__BIN_LEFT + __BIN_RIGHT) >> 1; \
+			}; \
+			__BIN_MID = __BIN_LIST[__BIN_MID] > VALUE ? __BIN_MID : __BIN_MID + 1; \
+			__BIN_LIST.Insert(__BIN_MID, INPUT); \
+			__BIN_LIST[INPUT] = VALUE; \
+		}; \
+	} while(FALSE)
+
 #define islist(L) istype(L, /list)
 
 #define VARSET_FROM_LIST(L, V) if(L && L[#V]) V = L[#V]

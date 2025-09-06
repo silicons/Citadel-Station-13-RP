@@ -38,19 +38,19 @@ GLOBAL_LIST_INIT(ai_dynamic_combat_routines, init_ai_dynamic_combat_routines())
 /datum/ai_dynamic_combat/proc/on_enter(datum/ai_holder/hodler)
 	return
 
-/datum/ai_dynamic_combat/proc/on_Exit(datum/ai_holder/hodler)
+/datum/ai_dynamic_combat/proc/on_exit(datum/ai_holder/hodler)
 	return
 
-/datum/ai_dynamic_combat/proc/tick_standard_subroutines(datum/ai_holder/holder, datum/ai_dynamic_combat_context/context)
+/datum/ai_dynamic_combat/proc/tick_standard_subroutines(datum/ai_holder/holder, datum/ai_dynamic_combat_context/context, datum/ai_dynamic_state/state)
 	if(standard_resist_subroutines)
-		standard_resist_subroutines(holder, context)
+		standard_resist_subroutines(holder, context, state)
 	#warn impl
 
-/datum/ai_dynamic_combat/proc/auto_standard_resist_subroutines(datum/ai_holder/holder, datum/ai_dynamic_combat_context/context)
+/datum/ai_dynamic_combat/proc/auto_standard_resist_subroutines(datum/ai_holder/holder, datum/ai_dynamic_combat_context/context, datum/ai_dynamic_state/state)
 	if(standard_resist_subroutines)
-		standard_resist_subroutines(holder, context)
+		standard_resist_subroutines(holder, context, state)
 
-/datum/ai_dynamic_combat/proc/standard_resist_subroutines(datum/ai_holder/holder, datum/ai_dynamic_combat_context/context)
+/datum/ai_dynamic_combat/proc/standard_resist_subroutines(datum/ai_holder/holder, datum/ai_dynamic_combat_context/context, datum/ai_dynamic_state/state)
 	#warn impl
 
 

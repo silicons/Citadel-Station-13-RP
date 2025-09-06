@@ -44,6 +44,8 @@
 	///   due to being very useful and also very expensive
 	///   and hard to get right
 	var/list/turf/cover_candidates
+	/// the angle we're trying to cover from
+	var/cover_inbound_angle
 
 	//* emnity *//
 
@@ -54,7 +56,14 @@
 	/// * highest emnity is further down the list
 	/// * highest emnity is priority target, generally
 	/// * lazy list
+	/// * this is **not** a system to memorize who the mob hates.
+	///   emnity is already dropped if something isn't a valid target.
+	///   it's a fast-targeting list with hard-refs, not a memory list.
 	var/list/atom/emnity_list
+	/// last emnity tick
+	var/emnity_last_tick
+	/// natural falloff per second
+	var/emnity_falloff = 1
 
 	//* steering *//
 

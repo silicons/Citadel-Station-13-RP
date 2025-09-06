@@ -19,4 +19,9 @@
 	///   and more likely to use resources.
 	var/anger = 0
 
+	/// can ever move?
+	var/movement_supported = FALSE
+	/// can currently move?
+	var/movement_evaluation = FALSE
+
 #warn impl
