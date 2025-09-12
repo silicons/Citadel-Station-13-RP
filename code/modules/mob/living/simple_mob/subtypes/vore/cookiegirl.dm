@@ -15,7 +15,7 @@
 	legacy_melee_damage_lower = 2
 	legacy_melee_damage_upper = 5
 
-	say_list_type = /datum/polaris_ai_say_list/cookiegirl
+	ai_saylist_type = /datum/ai_saylist/polaris/cookiegirl
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/passive/cookiegirl
 
 	// Activate Noms!
@@ -35,7 +35,7 @@
 	if(findtext(message, "Can I serve you to the crew?"))
 		delayed_say(pick("If I have a backup, sure!"), speaker)
 
-/datum/polaris_ai_say_list/cookiegirl
+/datum/ai_saylist/polaris/cookiegirl
 	speak = list("Hi!","Are you hungry?","Got milk~?","What to do, what to do...")
 	emote_hear = list("hums","whistles")
 	emote_see = list("shakes her head","shivers", "picks a bit of crumb off of her body and sticks it in her mouth.")

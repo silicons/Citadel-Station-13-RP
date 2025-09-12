@@ -90,7 +90,7 @@
 	hide_amount = 1
 	hide_type = /obj/item/stack/hairlesshide
 
-	say_list_type = /datum/polaris_ai_say_list/mouse
+	ai_saylist_type = /datum/ai_saylist/polaris/mouse
 
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/melee/evasive
 
@@ -424,7 +424,7 @@
 	break_cloak()
 
 // Mouse noises
-/datum/polaris_ai_say_list/mouse
+/datum/ai_saylist/polaris/mouse
 	speak = list("Squeek!","SQUEEK!","Squeek?")
 	emote_hear = list("squeeks","squeaks","squiks")
 	emote_see = list("runs in a circle", "shakes", "scritches at something")

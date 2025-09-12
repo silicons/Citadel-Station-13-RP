@@ -107,7 +107,7 @@
 	exotic_amount = 1 //Spiders now drop their venom glands for reagent harvesting.
 	exotic_type = /obj/item/reagent_containers/glass/venomgland/spider/s_toxin
 
-	say_list_type = /datum/polaris_ai_say_list/spider
+	ai_saylist_type = /datum/ai_saylist/polaris/spider
 
 	var/poison_type = "spidertoxin"	// The reagent that gets injected when it attacks.
 	var/poison_chance = 10			// Chance for injection to occur.

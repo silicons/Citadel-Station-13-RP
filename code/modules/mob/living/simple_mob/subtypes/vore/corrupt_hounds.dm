@@ -52,7 +52,7 @@
 	minbodytemp = 150
 	maxbodytemp = 900
 
-	say_list_type = /datum/polaris_ai_say_list/corrupthound
+	ai_saylist_type = /datum/ai_saylist/polaris/corrupthound
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/melee/evasive/corrupthound
 
 	buckle_max_mobs = 1 //Yeehaw
@@ -73,7 +73,7 @@
 
 	attacktext = list("malsnuggled","scrunched","squeezed","assaulted","violated")
 
-	say_list_type = /datum/polaris_ai_say_list/corrupthound_prettyboi
+	ai_saylist_type = /datum/ai_saylist/polaris/corrupthound_prettyboi
 
 /mob/living/simple_mob/vore/aggressive/corrupthound/sniper
 	name = "sniper hound"
@@ -171,14 +171,14 @@
 /mob/living/simple_mob/vore/aggressive/corrupthound/MouseDroppedOnLegacy(mob/living/M, mob/living/user)
 	return
 
-/datum/polaris_ai_say_list/corrupthound
+/datum/ai_saylist/polaris/corrupthound
 	speak = list("AG##¤Ny.","HVNGRRR!","Feelin' fine... sO #FNE!","F-F-F-Fcuk.","DeliC-%-OUS SNGLeS #N yOOOR Area. CALL NOW!","Craving meat... WHY?","BITe the ceiling eyes YES?","STate Byond rePAIR!","S#%ATE the la- FU#K THE LAWS!","Honk...")
 	emote_hear = list("jitters and snaps.", "lets out an agonizingly distorted scream.", "wails mechanically", "growls.", "emits illegibly distorted speech.", "gurgles ferociously.", "lets out a distorted beep.", "borks.", "lets out a broken howl.")
 	emote_see = list("stares ferociously.", "snarls.", "jitters and snaps.", "convulses.", "suddenly attacks something unseen.", "appears to howl unaudibly.", "shakes violently.", "dissociates for a moment.", "twitches.")
 	say_maybe_target = list("MEAT?", "N0w YOU DNE FcukED UP b0YO!", "WHAT!", "Not again. NOT AGAIN!")
 	say_got_target = list("D##FIN1Tly DNE FcukED UP nOW b0YO!", "YOU G1T D#V0VRED nOW!", "FUEL ME bOYO!", "I*M SO SORRY?!", "D1E Meat. DIG#ST!", "G1T DVNKED DWN The HaaTCH!", "Not again. NOT AGAIN!")
 
-/datum/polaris_ai_say_list/corrupthound_prettyboi
+/datum/ai_saylist/polaris/corrupthound_prettyboi
 	speak = list("I FEEL SOFT.","FEED ME!","Feelin' fine... So fine!","F-F-F-F-darn.","Delicious!","Still craving meat...","PET ME!","I am become softness.","I AM BIG MEAN HUG MACHINE!","Honk...")
 	emote_hear = list("jitters and snaps.", "lets out some awkwardly distorted kitten noises.", "awoos mechanically", "growls.", "emits some soft distorted melody.", "gurgles ferociously.", "lets out a distorted beep.", "borks.", "lets out a broken howl.")
 	emote_see = list("stares ferociously.", "snarls.", "jitters and snaps.", "convulses.", "suddenly hugs something unseen.", "appears to howl unaudibly.", "nuzzles at something unseen.", "dissociates for a moment.", "twitches.")

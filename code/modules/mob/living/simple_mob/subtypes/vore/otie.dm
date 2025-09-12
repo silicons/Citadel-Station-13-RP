@@ -30,7 +30,7 @@
 	base_pixel_x = -16
 
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/melee/evasive/otie
-	say_list_type = /datum/polaris_ai_say_list/otie
+	ai_saylist_type = /datum/ai_saylist/polaris/otie
 
 	var/mob/living/carbon/human/friend
 	var/tamed = 0
@@ -224,7 +224,7 @@
 /mob/living/simple_mob/otie/MouseDroppedOnLegacy(mob/living/M, mob/living/user)
 	return
 
-/datum/polaris_ai_say_list/otie
+/datum/ai_saylist/polaris/otie
 	speak = list("Boof.","Waaf!","Prurr.","Bork!","Rurrr..","Arf.")
 	emote_hear = list("rurrs", "rumbles", "rowls", "groans softly", "murrs", "yawns")
 	emote_see = list("stares ferociously", "snarls", "licks their chops", "stretches", "yawns")

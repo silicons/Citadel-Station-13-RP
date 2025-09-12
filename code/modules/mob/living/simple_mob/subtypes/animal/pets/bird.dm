@@ -41,13 +41,13 @@
 	response_disarm = "gently moves aside"
 	response_harm   = "swats"
 
-	say_list_type = /datum/polaris_ai_say_list/bird
+	ai_saylist_type = /datum/ai_saylist/polaris/bird
 	holder_type = /obj/item/holder/bird
 
 	meat_amount = 1
 	bone_amount = 1
 
-/datum/polaris_ai_say_list/bird
+/datum/ai_saylist/polaris/bird
 	speak = list("Chirp!","Caw!","Screech!","Squawk!")
 	emote_hear = list("chirps","caws")
 	emote_see = list("shakes their head", "ruffles their feathers")

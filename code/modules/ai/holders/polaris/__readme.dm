@@ -170,7 +170,7 @@ it could check if a gun is inside their current module.
 
 [Say List]
 
-A /datum/polaris_ai_say_list is a very light datum that holds a list of strings for the
+A /datum/ai_saylist/polaris is a very light datum that holds a list of strings for the
 AI to have their mob say based on certain conditions, such as when threatening
 to kill another mob. Despite the name, a say_list also can contain emotes
 and some sounds.

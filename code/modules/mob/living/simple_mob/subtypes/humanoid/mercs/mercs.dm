@@ -75,7 +75,7 @@
 	loot_list = list(/obj/item/material/knife/tacknife = 100)	// Might as well give it the knife
 
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/merc
-	say_list_type = /datum/polaris_ai_say_list/merc
+	ai_saylist_type = /datum/ai_saylist/polaris/merc
 
 	// Grenade special attack vars
 	var/grenade_type = /obj/item/grenade/simple/concussion
@@ -500,7 +500,7 @@
 	icon_living = "syndi-ranged-space-sup"
 	armor_legacy_mob = list(melee = 80, bullet = 65, laser = 50, energy = 15, bomb = 80, bio = 100, rad = 100) // this is the merc rig's stats
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/merc/ranged/suppressor
-	say_list_type = /datum/polaris_ai_say_list/merc/elite
+	ai_saylist_type = /datum/ai_saylist/polaris/merc/elite
 	projectiletype = /obj/projectile/bullet/pistol/medium/ap/suppressor // it's high velocity
 	projectilesound = 'sound/weapons/doompistol.ogg' // converted from .wavs extracted from doom 2
 	base_attack_cooldown = 3 // three? attacks a second
@@ -633,7 +633,7 @@
 					)
 
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/merc
-	say_list_type = /datum/polaris_ai_say_list/merc/voxpirate
+	ai_saylist_type = /datum/ai_saylist/polaris/merc/voxpirate
 
 /mob/living/simple_mob/humanoid/merc/voxpirate/pirate
 	name = "vox pirate"

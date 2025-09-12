@@ -44,7 +44,7 @@
 	bone_amount = 1
 	hide_amount = 1
 
-	say_list_type = /datum/polaris_ai_say_list/mouse	// Close enough
+	ai_saylist_type = /datum/ai_saylist/polaris/mouse	// Close enough
 
 	var/scare_chance = 15
 

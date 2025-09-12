@@ -29,7 +29,7 @@
 	response_harm   = "kicks"
 	attacktext = list("kicked")
 
-	say_list_type = /datum/polaris_ai_say_list/cow
+	ai_saylist_type = /datum/ai_saylist/polaris/cow
 
 	meat_amount = 6
 	bone_amount = 4
@@ -81,7 +81,7 @@
 	else
 		..()
 
-/datum/polaris_ai_say_list/cow
+/datum/ai_saylist/polaris/cow
 	speak = list("moo?","moo","MOOOOOO")
 	emote_hear = list("brays", "moos","moos hauntingly")
 	emote_see = list("shakes its head")

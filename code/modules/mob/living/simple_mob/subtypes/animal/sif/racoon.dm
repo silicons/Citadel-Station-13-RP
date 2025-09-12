@@ -52,7 +52,7 @@
 		"rad" = 100
 		)
 
-	say_list_type = /datum/polaris_ai_say_list/sakimm
+	ai_saylist_type = /datum/ai_saylist/polaris/sakimm
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/retaliate/cooperative/sakimm
 
 	bone_amount = 2
@@ -123,7 +123,7 @@
 			else
 				to_chat(user, "<span class='warning'>You aren't holding a hat...</span>")
 
-/datum/polaris_ai_say_list/sakimm
+/datum/ai_saylist/polaris/sakimm
 	speak = list("Shurr.", "|R|rr?", "Hss.")
 	emote_see = list("sniffs","looks around", "rubs its hands")
 	emote_hear = list("chitters", "clicks")

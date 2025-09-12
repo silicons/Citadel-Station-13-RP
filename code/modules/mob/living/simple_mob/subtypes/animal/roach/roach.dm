@@ -91,7 +91,7 @@
 	maxbodytemp = 323
 
 	speak_emote = list("chitters")
-	say_list_type = /datum/polaris_ai_say_list/roach
+	ai_saylist_type = /datum/ai_saylist/polaris/roach
 	holder_type = /obj/item/holder/roach
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/melee
 

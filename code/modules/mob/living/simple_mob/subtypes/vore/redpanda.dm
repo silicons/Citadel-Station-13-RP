@@ -33,7 +33,7 @@
 	legacy_melee_damage_upper = 1
 	attacktext = list("bapped")
 
-	say_list_type = /datum/polaris_ai_say_list/redpanda
+	ai_saylist_type = /datum/ai_saylist/polaris/redpanda
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/passive
 
 /mob/living/simple_mob/vore/redpanda/fae
@@ -51,7 +51,7 @@
 	legacy_melee_damage_lower = 10
 	legacy_melee_damage_upper = 20
 
-/datum/polaris_ai_say_list/redpanda
+/datum/ai_saylist/polaris/redpanda
 	speak = list("Wah!","Wah?","Waaaah.")
 	emote_hear = list("wahs!","chitters.")
 	emote_see = list("trundles around","rears up onto their hind legs and pounces a bug")

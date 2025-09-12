@@ -33,7 +33,7 @@
 	legacy_melee_damage_upper = 5
 	attacktext = list("kicked")
 
-	say_list_type = /datum/polaris_ai_say_list/goat
+	ai_saylist_type = /datum/ai_saylist/polaris/goat
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/retaliate
 
 	meat_amount = 4
@@ -89,7 +89,7 @@
 	else
 		..()
 
-/datum/polaris_ai_say_list/goat
+/datum/ai_saylist/polaris/goat
 	speak = list("EHEHEHEHEH","eh?")
 	emote_hear = list("brays")
 	emote_see = list("shakes its head", "stamps a foot", "glares around")

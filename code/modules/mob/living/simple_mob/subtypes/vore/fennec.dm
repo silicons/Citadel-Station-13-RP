@@ -32,13 +32,13 @@
 	legacy_melee_damage_upper = 3
 	attacktext = list("bapped")
 
-	say_list_type = /datum/polaris_ai_say_list/fennec
+	ai_saylist_type = /datum/ai_saylist/polaris/fennec
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/passive
 
 // Activate Noms!
 /mob/living/simple_mob/vore/fennec
 
-/datum/polaris_ai_say_list/fennec
+/datum/ai_saylist/polaris/fennec
 	speak = list("SKREEEE!","Chrp?","Ararrrararr.")
 	emote_hear = list("screEEEEeeches!","chirps.")
 	emote_see = list("earflicks","sniffs at the ground")

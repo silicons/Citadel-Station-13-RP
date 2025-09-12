@@ -39,10 +39,10 @@
 	attack_edge = 1		// Razor-edged wings, and 'claws' made for digging through ice.
 	attacktext = list("nipped", "bit", "cut", "clawed")
 
-	say_list_type = /datum/polaris_ai_say_list/duck
+	ai_saylist_type = /datum/ai_saylist/polaris/duck
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/retaliate/cooperative
 
-/datum/polaris_ai_say_list/duck
+/datum/ai_saylist/polaris/duck
 	speak = list("Wack!", "Wock?", "Wack.")
 	emote_see = list("ruffles its wings","looks around", "preens itself")
 	emote_hear = list("quacks", "giggles")

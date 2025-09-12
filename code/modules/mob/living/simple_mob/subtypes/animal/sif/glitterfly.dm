@@ -53,7 +53,7 @@
 
 	attacktext = list("bit", "buffeted", "slashed")
 
-	say_list_type = /datum/polaris_ai_say_list/glitterfly
+	ai_saylist_type = /datum/ai_saylist/polaris/glitterfly
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/melee/evasive/glitterfly
 
 /mob/living/simple_mob/animal/sif/glitterfly/Initialize(mapload)
@@ -82,7 +82,7 @@
 /mob/living/simple_mob/animal/sif/glitterfly/rare/Initialize(mapload)
 	. = ..()
 
-/datum/polaris_ai_say_list/glitterfly
+/datum/ai_saylist/polaris/glitterfly
 	speak = list("Pi..","Po...", "Pa...")
 	emote_see = list("vibrates","flutters", "twirls")
 	emote_hear = list("pips", "clicks", "chirps")

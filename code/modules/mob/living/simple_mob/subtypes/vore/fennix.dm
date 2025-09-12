@@ -22,10 +22,10 @@
 	legacy_melee_damage_upper = 3
 	attacktext = list("Bites")
 
-	say_list_type = /datum/polaris_ai_say_list/fennix
+	ai_saylist_type = /datum/ai_saylist/polaris/fennix
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/retaliate/cooperative
 
-/datum/polaris_ai_say_list/fennix
+/datum/ai_saylist/polaris/fennix
 	speak = list("SQUEL!","SQEL?","Skree.")
 	emote_hear = list("Screeeeecheeeeessss!","Chirrup.")
 	emote_see = list("earflicks","pats at the ground")

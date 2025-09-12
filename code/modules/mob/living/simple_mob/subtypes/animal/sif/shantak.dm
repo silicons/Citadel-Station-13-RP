@@ -46,9 +46,9 @@
 	attack_edge = TRUE
 	attacktext = list("gouged")
 
-	say_list_type = /datum/polaris_ai_say_list/shantak
+	ai_saylist_type = /datum/ai_saylist/polaris/shantak
 
-/datum/polaris_ai_say_list/shantak
+/datum/ai_saylist/polaris/shantak
 	speak = list("Shuhn.","Shrunnph?","Shunpf.")
 	emote_see = list("scratches the ground", "shakes out its mane", "clinks gently as it moves")
 

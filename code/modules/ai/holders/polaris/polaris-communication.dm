@@ -23,10 +23,10 @@
 		threatening = TRUE
 		last_threaten_time = world.time
 
-		if(holder.say_list)
-			holder.ai_polaris_say(SAFEPICK(holder.say_list.say_threaten))
-			playsound(holder.loc, holder.say_list.threaten_sound, 50, 1) // We do this twice to make the sound -very- noticable to the target.
-			playsound(target.loc, holder.say_list.threaten_sound, 50, 1) // Actual aim-mode also does that so at least it's consistant.
+		if(holder.ai_saylist)
+			holder.ai_polaris_say(SAFEPICK(holder.ai_saylist.say_threaten))
+			playsound(holder.loc, holder.ai_saylist.threaten_sound, 50, 1) // We do this twice to make the sound -very- noticable to the target.
+			playsound(target.loc, holder.ai_saylist.threaten_sound, 50, 1) // Actual aim-mode also does that so at least it's consistant.
 	else // Otherwise we are waiting for them to go away or to wait long enough for escalate.
 		if(target in list_targets()) // Are they still visible?
 			var/should_escalate = FALSE
@@ -37,8 +37,8 @@
 			if(should_escalate)
 				threatening = FALSE
 				set_stance(STANCE_APPROACH)
-				if(holder.say_list)
-					holder.ai_polaris_say(SAFEPICK(holder.say_list.say_escalate))
+				if(holder.ai_saylist)
+					holder.ai_polaris_say(SAFEPICK(holder.ai_saylist.say_escalate))
 			else
 				return // Wait a bit.
 
@@ -46,10 +46,10 @@
 			if(last_threaten_time + threaten_timeout < world.time)	// They've been gone long enough, probably safe to stand down
 				threatening = FALSE
 			set_stance(STANCE_IDLE)
-			if(holder.say_list)
-				holder.ai_polaris_say(SAFEPICK(holder.say_list.say_stand_down))
-				playsound(holder.loc, holder.say_list.stand_down_sound, 50, 1) // We do this twice to make the sound -very- noticable to the target.
-				playsound(target.loc, holder.say_list.stand_down_sound, 50, 1) // Actual aim-mode also does that so at least it's consistant.
+			if(holder.ai_saylist)
+				holder.ai_polaris_say(SAFEPICK(holder.ai_saylist.say_stand_down))
+				playsound(holder.loc, holder.ai_saylist.stand_down_sound, 50, 1) // We do this twice to make the sound -very- noticable to the target.
+				playsound(target.loc, holder.ai_saylist.stand_down_sound, 50, 1) // Actual aim-mode also does that so at least it's consistant.
 
 // Determines what is deserving of a warning when STANCE_ALERT is active.
 /datum/ai_holder/polaris/proc/will_threaten(mob/living/the_target)
@@ -84,14 +84,14 @@
 			return
 
 		var/list/comm_types = list() // What kinds of things can we do?
-		if(!holder.say_list)
+		if(!holder.ai_saylist)
 			return
 
-		if(holder.say_list.speak.len)
+		if(holder.ai_saylist.speak.len)
 			comm_types += COMM_SAY
-		if(holder.say_list.emote_hear.len)
+		if(holder.ai_saylist.emote_hear.len)
 			comm_types += COMM_AUDIBLE_EMOTE
-		if(holder.say_list.emote_see.len)
+		if(holder.ai_saylist.emote_see.len)
 			comm_types += COMM_VISUAL_EMOTE
 
 		if(!comm_types.len)
@@ -99,11 +99,11 @@
 
 		switch(pick(comm_types))
 			if(COMM_SAY)
-				holder.ai_polaris_say(SAFEPICK(holder.say_list.speak))
+				holder.ai_polaris_say(SAFEPICK(holder.ai_saylist.speak))
 			if(COMM_AUDIBLE_EMOTE)
-				holder.audible_emote(SAFEPICK(holder.say_list.emote_hear))
+				holder.audible_emote(SAFEPICK(holder.ai_saylist.emote_hear))
 			if(COMM_VISUAL_EMOTE)
-				holder.visible_emote(SAFEPICK(holder.say_list.emote_see))
+				holder.visible_emote(SAFEPICK(holder.ai_saylist.emote_see))
 
 #undef COMM_SAY
 #undef COMM_AUDIBLE_EMOTE

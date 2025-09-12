@@ -28,7 +28,7 @@
 	bone_amount = 1
 
 // Say list
-/datum/polaris_ai_say_list/bird/polly
+/datum/ai_saylist/polaris/bird/polly
 	speak = list(
 		"Polly wanna cracker!",
 		"Check the singulo, you chucklefucks!",
@@ -128,7 +128,7 @@
 	icon_dead = "polly-dead"
 	tt_desc = "E Ara macao"
 	my_headset = /obj/item/radio/headset/headset_eng
-	say_list_type = /datum/polaris_ai_say_list/bird/polly
+	ai_saylist_type = /datum/ai_saylist/polaris/bird/polly
 	randomized = FALSE
 
 // Best Bird with best headset.
@@ -265,7 +265,7 @@
 	base_wander_delay = 8
 
 /datum/ai_holder/polaris/simple_mob/passive/parrot/on_hear_say(mob/living/speaker, message)
-	if(holder.stat || !holder.say_list || !message || speaker == holder)
+	if(holder.stat || !holder.ai_saylist || !message || speaker == holder)
 		return
-	var/datum/polaris_ai_say_list/S = holder.say_list
+	var/datum/ai_saylist/polaris/S = holder.ai_saylist
 	S.speak |= message

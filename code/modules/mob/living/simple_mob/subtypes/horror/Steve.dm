@@ -39,7 +39,7 @@
 	friendly = list("nuzzles", "boops", "bumps against", "leans on")
 
 
-	say_list_type = /datum/polaris_ai_say_list/Steve
+	ai_saylist_type = /datum/ai_saylist/polaris/Steve
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/horror
 
 	exotic_amount = 2
@@ -69,7 +69,7 @@
 	playsound(src, 'sound/h_sounds/holla.ogg', 50, 1)
 	..()
 
-/datum/polaris_ai_say_list/Steve
+/datum/ai_saylist/polaris/Steve
 	speak = list("Uuurrgh?","Aauuugghh...", "AAARRRGH!")
 	emote_hear = list("shrieks horrifically", "groans in pain", "cries", "whines")
 	emote_see = list("blinks aggressively at", "shakes violently in place", "stares aggressively")

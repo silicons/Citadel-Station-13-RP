@@ -61,7 +61,7 @@
 		"rad" = 100
 		)
 
-	say_list_type = /datum/polaris_ai_say_list/kururak
+	ai_saylist_type = /datum/ai_saylist/polaris/kururak
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/intentional/kururak
 
 	special_attack_min_range = 0
@@ -75,7 +75,7 @@
 	var/instinct	// The points used by Kururaks to decide Who Is The Boss
 	var/obey_pack_rule = TRUE	// Decides if the Kururak will automatically assign itself to follow the one with the highest instinct.
 
-/datum/polaris_ai_say_list/kururak
+/datum/ai_saylist/polaris/kururak
 	speak = list("Kurr?","|R|rrh..", "Ksss...")
 	emote_see = list("scratches its ear","flutters its tails", "flicks an ear", "shakes out its hair")
 	emote_hear = list("chirps", "clicks", "grumbles", "chitters")

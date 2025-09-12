@@ -82,7 +82,7 @@
 	attacktext = list("nipped", "bit", "pinched")
 
 	armor_type = /datum/armor/physiology/sif_leach
-	say_list_type = /datum/polaris_ai_say_list/leech
+	ai_saylist_type = /datum/ai_saylist/polaris/leech
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/intentional/leech
 
 /mob/living/simple_mob/animal/sif/leech/ai_polaris_is_ally(mob/living/L)
@@ -102,7 +102,7 @@
 			has_organ = TRUE
 		return has_organ
 
-/datum/polaris_ai_say_list/leech
+/datum/ai_saylist/polaris/leech
 	speak = list("...", "Sss..", ". . .","Gss..")
 	emote_see = list("vibrates","looks around", "stares", "extends a proboscis")
 	emote_hear = list("chitters", "clicks", "gurgles")

@@ -60,7 +60,7 @@
 	friendly = list("pokes")
 
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/melee
-	say_list_type = /datum/polaris_ai_say_list/slime
+	ai_saylist_type = /datum/ai_saylist/polaris/slime
 
 	var/cores = 1 // How many cores you get when placed in a Processor.
 	var/obj/item/clothing/head/hat = null // The hat the slime may be wearing.
@@ -73,7 +73,7 @@
 
 	can_enter_vent_with = list(/obj/item/clothing/head)
 
-/datum/polaris_ai_say_list/slime
+/datum/ai_saylist/polaris/slime
 	speak = list("Blorp...", "Blop...", "Blorble...")
 	emote_see = list("bounces", "jiggles", "sways")
 	emote_hear = list("squishes")

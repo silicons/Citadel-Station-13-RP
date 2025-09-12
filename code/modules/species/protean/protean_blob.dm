@@ -15,7 +15,7 @@
 
 	maxHealth = 250
 	health = 250
-	say_list_type = /datum/polaris_ai_say_list/protean_blob
+	ai_saylist_type = /datum/ai_saylist/polaris/protean_blob
 
 	show_stat_health = FALSE //We will do it ourselves
 	pass_flags = ATOM_PASS_TABLE
@@ -70,7 +70,7 @@
 	buckle_allowed = TRUE
 	buckle_flags = BUCKLING_GROUND_HOIST //blobsurfing
 
-/datum/polaris_ai_say_list/protean_blob
+/datum/ai_saylist/polaris/protean_blob
 	speak = list("Blrb?","Sqrsh.","Glrsh!")
 	emote_hear = list("squishes softly","spluts quietly","makes wet noises")
 	emote_see = list("shifts wetly","undulates placidly")

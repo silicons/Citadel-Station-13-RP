@@ -55,7 +55,7 @@
 	response_harm = "hits"
 
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/ranged/kiting/threatening
-	say_list_type = /datum/polaris_ai_say_list/malf_drone
+	ai_saylist_type = /datum/ai_saylist/polaris/malf_drone
 
 	var/datum/effect_system/ion_trail_follow/ion_trail = null
 	var/obj/item/shield_projector/shields = null

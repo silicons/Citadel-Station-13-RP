@@ -32,16 +32,16 @@
 
 	attacktext = list("slams into")
 	attack_sound = 'sound/effects/slime_squish.ogg'
-	say_list_type = /datum/polaris_ai_say_list/spore
+	ai_saylist_type = /datum/ai_saylist/polaris/spore
 
 	var/mob/living/carbon/human/infested = null // The human this thing is totally not making into a zombie.
 	var/can_infest = FALSE
 	var/is_infesting = FALSE
 
-/datum/polaris_ai_say_list/spore
+/datum/ai_saylist/polaris/spore
 	emote_see = list("sways", "inflates briefly")
 
-/datum/polaris_ai_say_list/infested
+/datum/ai_saylist/polaris/infested
 	emote_see = list("shambles around", "twitches", "stares")
 
 
@@ -130,7 +130,7 @@
 	H.forceMove(src)
 	infested = H
 
-	say_list = new /datum/polaris_ai_say_list/infested()
+	ai_saylist = new /datum/ai_saylist/polaris/infested()
 
 	update_icons()
 	visible_message(SPAN_WARNING( "The corpse of [H.name] suddenly rises!"))

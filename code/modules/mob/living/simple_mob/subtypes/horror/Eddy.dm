@@ -32,7 +32,7 @@
 	friendly = list("nuzzles", "boops", "bumps against", "leans on")
 
 
-	say_list_type = /datum/polaris_ai_say_list/Eddy
+	ai_saylist_type = /datum/ai_saylist/polaris/Eddy
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/horror
 
 	bone_amount = 1
@@ -63,7 +63,7 @@
 	playsound(src, 'sound/h_sounds/holla.ogg', 50, 1)
 	..()
 
-/datum/polaris_ai_say_list/Eddy
+/datum/ai_saylist/polaris/Eddy
 	speak = list("Uuurrgh?","Aauuugghh...", "AAARRRGH!")
 	emote_hear = list("shrieks horrifically", "groans in pain", "cries", "whines")
 	emote_see = list("blinks its many eyes", "shakes violently in place", "stares aggressively")

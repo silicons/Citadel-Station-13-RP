@@ -38,10 +38,10 @@
 	attack_sharp = 1 //Bleeds, but it shouldn't rip off a limb?
 	attacktext = list("gouged")
 
-	say_list_type = /datum/polaris_ai_say_list/diyaab
+	ai_saylist_type = /datum/ai_saylist/polaris/diyaab
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/retaliate/cooperative
 
-/datum/polaris_ai_say_list/diyaab
+/datum/ai_saylist/polaris/diyaab
 	speak = list("Awrr?", "Aowrl!", "Worrl.")
 	emote_see = list("sniffs the air cautiously","looks around")
 	emote_hear = list("snuffles")

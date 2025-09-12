@@ -40,7 +40,7 @@
 	projectilesound = 'sound/weapons/Gunshot_old.ogg'
 
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/hivebot
-	say_list_type = /datum/polaris_ai_say_list/hivebot
+	ai_saylist_type = /datum/ai_saylist/polaris/hivebot
 
 
 /mob/living/simple_mob/mechanical/hivebot/death()

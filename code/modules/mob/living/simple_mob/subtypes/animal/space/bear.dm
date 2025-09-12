@@ -40,9 +40,9 @@
 	bone_amount = 3
 	hide_amount = 5
 
-	say_list_type = /datum/polaris_ai_say_list/bear
+	ai_saylist_type = /datum/ai_saylist/polaris/bear
 
-/datum/polaris_ai_say_list/bear
+/datum/ai_saylist/polaris/bear
 	speak = list("RAWR!","Rawr!","GRR!","Growl!")
 	emote_see = list("stares ferociously", "stomps")
 	emote_hear = list("rawrs","grumbles","grawls", "growls", "roars")

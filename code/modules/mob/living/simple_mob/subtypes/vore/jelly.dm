@@ -27,14 +27,14 @@
 	response_disarm = "tries to shove"
 	response_harm = "mushes their hand into"
 
-	say_list_type = /datum/polaris_ai_say_list/jelly
+	ai_saylist_type = /datum/ai_saylist/polaris/jelly
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/retaliate/jelly
 
 // Activate Noms!
 /mob/living/simple_mob/animal/space/jelly
 	swallowTime = 2 SECONDS // Hungry little bastards.
 
-/datum/polaris_ai_say_list/jelly
+/datum/ai_saylist/polaris/jelly
 	emote_hear = list("squishes","spluts","splorts","sqrshes","makes slime noises")
 	emote_see = list("undulates quietly")
 

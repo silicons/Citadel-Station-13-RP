@@ -49,7 +49,7 @@
 	buckle_allowed = TRUE
 	buckle_flags = BUCKLING_NO_USER_BUCKLE_OTHER_TO_SELF
 
-	say_list_type = /datum/polaris_ai_say_list/horse
+	ai_saylist_type = /datum/ai_saylist/polaris/horse
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/retaliate
 
 	var/obj/item/saddle/saddled = null
@@ -102,7 +102,7 @@
 	else if(!saddled)
 		cut_overlays()
 
-/datum/polaris_ai_say_list/horse
+/datum/ai_saylist/polaris/horse
 	speak = list("NEHEHEHEHEH","Neh?")
 	emote_hear = list("snorts","whinnies")
 	emote_see = list("shakes its head", "stamps a hoof", "looks around")

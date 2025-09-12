@@ -32,7 +32,7 @@
 	harm_intent_damage = 0
 
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/melee
-	say_list_type = /datum/polaris_ai_say_list/malf_drone
+	ai_saylist_type = /datum/ai_saylist/polaris/malf_drone
 
 	var/datum/effect_system/spark_spread/sparks
 	var/wreckage = /obj/effect/decal/mecha_wreckage/gygax/dark
@@ -50,7 +50,7 @@
 		name = "autonomous [initial(name)]"
 		desc = "[initial(desc)] It appears to be piloted by a drone intelligence."
 	else
-		say_list_type = /datum/polaris_ai_say_list/merc
+		ai_saylist_type = /datum/ai_saylist/polaris/merc
 
 	if(has_repair_droid)
 		update_icon()

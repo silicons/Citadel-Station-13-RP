@@ -76,7 +76,7 @@
 	icon_living = "polarbear"
 	icon_dead = "polarbear-dead"
 	icon_gib = "bear-gib"
-	say_list_type = /datum/polaris_ai_say_list/polar_bear
+	ai_saylist_type = /datum/ai_saylist/polaris/polar_bear
 
 	iff_factions = MOB_IFF_FACTION_BIND_TO_MAP
 
@@ -95,7 +95,7 @@
 	minbodytemp = 0
 
 	meat_type = /obj/item/reagent_containers/food/snacks/bearmeat
-/datum/polaris_ai_say_list/polar_bear
+/datum/ai_saylist/polaris/polar_bear
 	speak = list("RAWR!","Rawr!","GRR!","Growl!")
 	emote_hear = list("rawrs","grumbles","grawls")
 	emote_see = list("stares ferociously", "stomps")

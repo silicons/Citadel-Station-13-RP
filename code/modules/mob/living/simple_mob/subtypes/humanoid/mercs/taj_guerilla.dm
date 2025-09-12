@@ -46,7 +46,7 @@
 	corpse = /obj/spawner/corpse/tajara
 
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/merc
-	say_list_type = /datum/polaris_ai_say_list/tajara
+	ai_saylist_type = /datum/ai_saylist/polaris/tajara
 
 
 ///////////////////////////////
@@ -78,7 +78,7 @@
 	corpse = /obj/spawner/corpse/tajara/nka_soldier
 	loot_list = list(/obj/item/material/knife/tacknife = 100)
 
-	say_list_type = /datum/polaris_ai_say_list/tajara/nka
+	ai_saylist_type = /datum/ai_saylist/polaris/tajara/nka
 
 /mob/living/simple_mob/humanoid/taj_guerilla/bandit/sword
 	name = "Tajara Bandit Freeblade"
@@ -194,7 +194,7 @@
 	corpse = /obj/spawner/corpse/tajara/dra_soldier
 	loot_list = list(/obj/item/material/knife/tacknife = 100)
 
-	say_list_type = /datum/polaris_ai_say_list/tajara/dra
+	ai_saylist_type = /datum/ai_saylist/polaris/tajara/dra
 
 /mob/living/simple_mob/humanoid/taj_guerilla/guerilla/uzi
 	name = "Tajara Guerilla Gunman"
@@ -274,7 +274,7 @@
 	corpse = /obj/spawner/corpse/tajara/pra_soldier
 	loot_list = list(/obj/item/material/knife/tacknife = 100)
 
-	say_list_type = /datum/polaris_ai_say_list/tajara/pra
+	ai_saylist_type = /datum/ai_saylist/polaris/tajara/pra
 
 /mob/living/simple_mob/humanoid/taj_guerilla/insurgent/sawn_rifle
 	name = "Tajara Insurgent Bandit"

@@ -160,7 +160,7 @@
 	icon_state = "kitten"
 	w_class = WEIGHT_CLASS_SMALL
 
-/datum/polaris_ai_say_list/cat
+/datum/ai_saylist/polaris/cat
 	speak = list("Meow!","Esp!","Purr!","HSSSSS")
 	emote_hear = list("meows","mews")
 	emote_see = list("shakes their head", "shivers")
