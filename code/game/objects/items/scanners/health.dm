@@ -1,3 +1,4 @@
+// TODO: health_analyzer
 /obj/item/healthanalyzer
 	name = "health analyzer"
 	desc = "A hand-held body scanner able to distinguish vital signs of the subject."

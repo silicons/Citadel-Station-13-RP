@@ -1,0 +1,5 @@
+//* This file is explicitly licensed under the MIT license. *//
+//* Copyright (c) 2025 Citadel Station Developers           *//
+
+/mob/living/carbon/analyze_health(datum/analyze_health/request)
+	#warn impl
