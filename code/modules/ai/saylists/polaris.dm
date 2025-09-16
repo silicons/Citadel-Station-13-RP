@@ -5,20 +5,6 @@
 // Also note this also contains emotes, despite its name.
 // and now sounds because its probably better that way.
 
-/mob/living
-	var/datum/ai_saylist/polaris/ai_saylist = null
-	var/ai_saylist_type = /datum/ai_saylist/polaris	// Type to give us on initialization. Default has empty lists, so the mob will be silent.
-
-/mob/living/Initialize(mapload)
-	if(ai_saylist_type)
-		ai_saylist = new ai_saylist_type(src)
-	return ..()
-
-/mob/living/Destroy()
-	if(ai_saylist)
-		QDEL_NULL(ai_saylist)
-	return ..()
-
 /datum/ai_saylist/polaris
 	var/list/speak = list()				// Things the mob might say if it talks while idle.
 	var/list/emote_hear = list()		// Hearable emotes it might perform
@@ -35,13 +21,51 @@
 	var/threaten_sound = null			// Sound file played when the mob's AI calls threaten_target() for the first time.
 	var/stand_down_sound = null			// Sound file played when the mob's AI loses sight of the threatened target.
 
+/datum/ai_saylist/polaris/pull_lazy_accept_order(atom/movable/agent, datum/ai_holder/holder, atom/target)
 
+/datum/ai_saylist/polaris/pull_lazy_deny_order(atom/movable/agent, datum/ai_holder/holder, atom/target)
 
+/datum/ai_saylist/polaris/pull_lazy_engaging(atom/movable/agent, datum/ai_holder/holder, atom/target)
 
+/datum/ai_saylist/polaris/pull_investigating(atom/movable/agent, datum/ai_holder/holder, atom/target, turf/target_tile)
 
+/datum/ai_saylist/polaris/pull_threaten(atom/movable/agent, datum/ai_holder/holder, atom/target)
+	. = ..()
+	#warn impl
 
+/datum/ai_saylist/polaris/pull_backoff(atom/movable/agent, datum/ai_holder/holder, atom/target)
+	. = ..()
+	#warn impl
 
-// Subtypes.
+/datum/ai_saylist/polaris/pull_idle(atom/movable/agent, datum/ai_holder/holder)
+	var/t_len = length(speak)
+	var/h_len = length(emote_hear)
+	var/s_len = length(emote_see)
+	var/total_len = t_len + h_len + s_len
+	if(!total_len)
+		return
+	var/drawn = rand(1, total_len)
+
+	var/datum/ai_saylist_response/response = new
+
+	if(drawn > t_len)
+		drawn -= t_len
+	else
+		response.emit_say = speak[drawn]
+		return response
+	if(drawn > h_len)
+		drawn -= h_len
+	else
+		response.emit_emote = emote_hear[drawn]
+		response.emit_emote_audible = TRUE
+		return response
+	if(drawn > s_len)
+		drawn -= s_len
+	else
+		response.emit_emote = emote_see[drawn]
+		response.emit_emote_audible = FALSE
+		return response
+	CRASH("what?")
 
 // This one's pretty dumb, but pirates are dumb anyways and it makes for a good test.
 /datum/ai_saylist/polaris/pirate

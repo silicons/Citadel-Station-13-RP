@@ -27,6 +27,11 @@
 	var/datum/ai_holder/ai_holder
 	/// AI tracking datum. Handled by procs in [code/modules/ai/ai_tracking.dm].
 	var/datum/ai_tracking/ai_tracking
+	/// AI saylist.
+	/// * Unlike [ai_holder], this is a shared reference. DO NOT DELETE OR MODIFY THIS.
+	var/datum/ai_saylist/ai_saylist
+	/// AI saylist type or ID to pull.
+	var/ai_saylist_type
 
 	//? Intrinsics
 	/// movable flags - see [code/__DEFINES/_flags/atoms.dm]
@@ -222,8 +227,13 @@
 	if (bound_overlay)
 		QDEL_NULL(bound_overlay)
 
+	// AI cleanup:
+	// * holders are deleted
+	// * saylists are dropped
 	if(ai_holder)
 		QDEL_NULL(ai_holder)
+	if(ai_saylist)
+		ai_saylist = null
 
 	. = ..()
 

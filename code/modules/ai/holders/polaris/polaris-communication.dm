@@ -1,8 +1,5 @@
 // Contains code for speaking and emoting.
 
-/datum/ai_holder/polaris
-
-
 /datum/ai_holder/polaris/proc/should_threaten()
 	if(!threaten)
 		return FALSE // We don't negotiate.
@@ -22,11 +19,7 @@
 	if(!threatening) // First tick.
 		threatening = TRUE
 		last_threaten_time = world.time
-
-		if(holder.ai_saylist)
-			holder.ai_polaris_say(SAFEPICK(holder.ai_saylist.say_threaten))
-			playsound(holder.loc, holder.ai_saylist.threaten_sound, 50, 1) // We do this twice to make the sound -very- noticable to the target.
-			playsound(target.loc, holder.ai_saylist.threaten_sound, 50, 1) // Actual aim-mode also does that so at least it's consistant.
+		holder.ai_saylist?.pull_threaten(holder, src, target)?.lazy_emit(holder)
 	else // Otherwise we are waiting for them to go away or to wait long enough for escalate.
 		if(target in list_targets()) // Are they still visible?
 			var/should_escalate = FALSE
@@ -37,8 +30,7 @@
 			if(should_escalate)
 				threatening = FALSE
 				set_stance(STANCE_APPROACH)
-				if(holder.ai_saylist)
-					holder.ai_polaris_say(SAFEPICK(holder.ai_saylist.say_escalate))
+				holder.ai_saylist?.pull_engaging(holder, src, target)?.lazy_emit(holder)
 			else
 				return // Wait a bit.
 
@@ -46,10 +38,7 @@
 			if(last_threaten_time + threaten_timeout < world.time)	// They've been gone long enough, probably safe to stand down
 				threatening = FALSE
 			set_stance(STANCE_IDLE)
-			if(holder.ai_saylist)
-				holder.ai_polaris_say(SAFEPICK(holder.ai_saylist.say_stand_down))
-				playsound(holder.loc, holder.ai_saylist.stand_down_sound, 50, 1) // We do this twice to make the sound -very- noticable to the target.
-				playsound(target.loc, holder.ai_saylist.stand_down_sound, 50, 1) // Actual aim-mode also does that so at least it's consistant.
+			holder.ai_saylist?.pull_backoff(holder, src, target)?.lazy_emit(holder)
 
 // Determines what is deserving of a warning when STANCE_ALERT is active.
 /datum/ai_holder/polaris/proc/will_threaten(mob/living/the_target)
@@ -83,27 +72,7 @@
 		if(alone) // Forever alone. No point doing anything else.
 			return
 
-		var/list/comm_types = list() // What kinds of things can we do?
-		if(!holder.ai_saylist)
-			return
-
-		if(holder.ai_saylist.speak.len)
-			comm_types += COMM_SAY
-		if(holder.ai_saylist.emote_hear.len)
-			comm_types += COMM_AUDIBLE_EMOTE
-		if(holder.ai_saylist.emote_see.len)
-			comm_types += COMM_VISUAL_EMOTE
-
-		if(!comm_types.len)
-			return // All the relevant lists are empty, so do nothing.
-
-		switch(pick(comm_types))
-			if(COMM_SAY)
-				holder.ai_polaris_say(SAFEPICK(holder.ai_saylist.speak))
-			if(COMM_AUDIBLE_EMOTE)
-				holder.audible_emote(SAFEPICK(holder.ai_saylist.emote_hear))
-			if(COMM_VISUAL_EMOTE)
-				holder.visible_emote(SAFEPICK(holder.ai_saylist.emote_see))
+		holder.ai_saylist?.pull_idle(holder, src)?.lazy_emit(holder)
 
 #undef COMM_SAY
 #undef COMM_AUDIBLE_EMOTE

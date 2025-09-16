@@ -214,7 +214,4 @@
 				threatening = FALSE
 			set_stance(STANCE_IDLE)
 			holder.visible_emote("<span class='notice'>calms down, lowering its horn</span>")
-			if(holder.ai_saylist)
-				holder.ai_polaris_say(SAFEPICK(holder.ai_saylist.say_stand_down))
-				playsound(holder, holder.ai_saylist.stand_down_sound, 50, 1) // We do this twice to make the sound -very- noticable to the target.
-				playsound(target, holder.ai_saylist.stand_down_sound, 50, 1) // Actual aim-mode also does that so at least it's consistant.
+			holder?.ai_saylist?.pull_backoff(holder, src)?.lazy_emit(src)

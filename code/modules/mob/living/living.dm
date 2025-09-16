@@ -7,6 +7,9 @@ TYPE_REGISTER_SPATIAL_GRID(/mob/living, SSspatial_grids.living)
 
 	if(ai_holder_type && !ai_holder)
 		ai_holder = new ai_holder_type(src)
+	#warn saylists aren't new'd they're fetched by id if needed don't do this
+	if(ai_saylist_type && !ai_saylist)
+		ai_saylist = new ai_saylist_type(src)
 
 	selected_image = image(icon = 'icons/mob/screen1.dmi', loc = src, icon_state = "centermarker")
 
