@@ -1,13 +1,13 @@
 //* This file is explicitly licensed under the MIT license. *//
 //* Copyright (c) 2024 Citadel Station Developers           *//
 
-//* This is here in [code/__DEFINES/controllers/_repositories.dm] for compile order reasons. *//
+//* This is here in [code/__DEFINES/controllers/_repository.dm] for compile order reasons. *//
 /datum/controller/subsystem/repository/proc/__create_repositories()
 
-//* This is here in [code/__DEFINES/controllers/_repositories.dm] for compile order reasons. *//
+//* This is here in [code/__DEFINES/controllers/_repository.dm] for compile order reasons. *//
 /datum/controller/subsystem/repository/proc/__init_repositories()
 
-//* This is here in [code/__DEFINES/controllers/_repositories.dm] for compile order reasons. *//
+//* This is here in [code/__DEFINES/controllers/_repository.dm] for compile order reasons. *//
 /datum/controller/subsystem/repository/proc/__get_all_repositories()
 
 // todo: redo recover logic; maybe /datum/controller as a whole should be brushed up
