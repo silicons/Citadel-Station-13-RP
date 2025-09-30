@@ -4597,6 +4597,7 @@
 #include "code\modules\overmap\machinery\peripherals\disperser\disperser_shell.dm"
 #include "code\modules\overmap\machinery\peripherals\disperser\shells\emp.dm"
 #include "code\modules\overmap\machinery\peripherals\disperser\shells\flak.dm"
+#include "code\modules\overmap\machinery\peripherals\disperser\shells\tracking_shards.dm"
 #include "code\modules\overmap\machinery\peripherals\disperser_legacy\disperser.dm"
 #include "code\modules\overmap\machinery\peripherals\disperser_legacy\disperser_charge.dm"
 #include "code\modules\overmap\machinery\peripherals\disperser_legacy\disperser_circuit.dm"
