@@ -1,3 +1,6 @@
+//* This file is explicitly licensed under the MIT license. *//
+//* Copyright (c) 2025 Citadel Station Developers           *//
+
 //! all flags related to buckling
 /// force - just do it, ignore all checks
 #define BUCKLE_OP_FORCE							(1<<0)

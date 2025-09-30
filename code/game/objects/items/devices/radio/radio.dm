@@ -349,7 +349,7 @@ GLOBAL_DATUM_INIT(virtual_announcer_ai, /mob/living/silicon/ai/announcer, new(nu
 		return FALSE
 
 	if(istype(M))
-		M.trigger_aiming(TARGET_CAN_RADIO)
+		M.trigger_aiming_legacy(TARGET_CAN_RADIO)
 
 	//  Uncommenting this. To the above comment:
 	// 	The permacell radios aren't suppose to be able to transmit, this isn't a bug and this "fix" is just making radio wires useless. -Giacom

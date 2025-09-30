@@ -48,11 +48,11 @@
 		if(mover_living.aiming && mover_living.aiming.aiming_at)
 			mover_living.aiming.update_aiming()
 		if(mover_living.aimed.len)
-			mover_living.trigger_aiming(TARGET_CAN_MOVE)
+			mover_living.trigger_aiming_legacy(TARGET_CAN_MOVE)
 
 /mob/living/forceMove(atom/destination)
 	. = ..()
 	if(aiming && aiming.aiming_at)
 		aiming.update_aiming()
 	if(aimed.len)
-		trigger_aiming(TARGET_CAN_MOVE)
+		trigger_aiming_legacy(TARGET_CAN_MOVE)

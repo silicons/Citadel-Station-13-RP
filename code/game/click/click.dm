@@ -197,7 +197,7 @@
 	if(active_item == clickchain.target)
 		active_item.attack_self(src, clickchain)
 		//! legacy
-		trigger_aiming(TARGET_CAN_CLICK)
+		trigger_aiming_legacy(TARGET_CAN_CLICK)
 		//! end
 		return clickchain_flags | CLICKCHAIN_DID_SOMETHING | CLICKCHAIN_DO_NOT_PROPAGATE
 
@@ -225,7 +225,7 @@
 		else
 			. = melee_interaction_chain(clickchain, clickchain_flags)
 		//! legacy
-		trigger_aiming(TARGET_CAN_CLICK)
+		trigger_aiming_legacy(TARGET_CAN_CLICK)
 		//! end
 		return
 	else if(ranged_generics_allowed)
@@ -234,7 +234,7 @@
 		else
 			. = ranged_interaction_chain(clickchain, clickchain_flags)
 		//! legacy
-		trigger_aiming(TARGET_CAN_CLICK)
+		trigger_aiming_legacy(TARGET_CAN_CLICK)
 		//! end
 		return
 
