@@ -126,14 +126,16 @@
 
 	return dat
 
-/obj/overmap/Crossed(var/obj/overmap/entity/visitable/other)
+/obj/overmap/Crossed(atom/movable/AM)
 	. = ..()
+	var/obj/overmap/entity/visitable/other = AM
 	if(istype(other))
 		for(var/z in other.map_z)
 			SSparallax.queue_z_vis_update(z)
 
-/obj/overmap/Uncrossed(var/obj/overmap/entity/visitable/other)
+/obj/overmap/Uncrossed(atom/movable/AM)
 	. = ..()
+	var/obj/overmap/entity/visitable/other = AM
 	if(istype(other))
 		for(var/z in other.map_z)
 			SSparallax.queue_z_vis_update(z)
