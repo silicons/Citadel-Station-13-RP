@@ -73,6 +73,30 @@
 	if(!isturf(old_loc) || (forced && !is_forced_moving))
 		initialize_physics()
 
+/obj/overmap/entity/Crossed(atom/movable/AM)
+	..()
+	if(istype(AM, /obj/overmap/entity))
+		var/obj/overmap/entity/casted = AM
+		casted.CrossedWith(src)
+
+/obj/overmap/entity/Uncrossed(atom/movable/AM)
+	..()
+	if(istype(AM, /obj/overmap/entity))
+		var/obj/overmap/entity/casted = AM
+		casted.UncrossedWith(src)
+
+/**
+ * Called when we cross into someone.
+ */
+/obj/overmap/entity/proc/CrossedWith(obj/overmap/entity/other)
+	return
+
+/**
+ * Called when we uncross from soemone.
+ */
+/obj/overmap/entity/proc/UncrossedWith(obj/overmap/entity/other)
+	return
+
 /obj/overmap/entity/vv_edit_var(var_name, var_value, mass_edit, raw_edit)
 	switch(var_name)
 		if(NAMEOF(src, vel_x))
