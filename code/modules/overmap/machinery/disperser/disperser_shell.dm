@@ -34,12 +34,15 @@
 	#warn impl + log impact (including pierce)
 
 /**
+ * * 'projectile' may be null
+ * * 'impactor' may be null
  * @return FALSE to go through the target
  */
-/obj/structure/disperser_shell/proc/handle_projectile_traversal(obj/overmap/entity/entity, obj/overmap/entity/projectile/disperser_shell/projectile, turf/predicted_impact, angle)
+/obj/structure/disperser_shell/proc/handle_projectile_traversal(obj/overmap/entity/entity, obj/overmap/entity/projectile/disperser_shell/projectile, turf/predicted_impact, angle, obj/projectile/overmap_impactor/impactor)
 	return FALSE
 
 /**
+ * * 'projectile' may be null
  * @return FALSE to go through the target
  */
 /obj/structure/disperser_shell/proc/handle_bombardment_traversal(obj/overmap/entity/entity, obj/overmap/entity/projectile/disperser_shell/projectile, turf/predicted_impact)

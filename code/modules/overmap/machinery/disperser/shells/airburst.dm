@@ -10,6 +10,18 @@
 
 #warn impl
 
+/obj/structure/disperser_shell/airburst/handle_bombardment_traversal(obj/overmap/entity/entity, obj/overmap/entity/projectile/disperser_shell/projectile, turf/predicted_impact)
+	if(!predicted_impact)
+		return FALSE
+	on_bombardment_airburst(entity, predicted_impact, projectile)
+	return TRUE
+
+/obj/structure/disperser_shell/airburst/handle_projectile_traversal(obj/overmap/entity/entity, obj/overmap/entity/projectile/disperser_shell/projectile, turf/predicted_impact, angle)
+
+	#warn impl
+	return
+
+
 /**
  * @params
  * * entity - overmap entity
