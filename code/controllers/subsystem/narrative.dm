@@ -3,7 +3,7 @@
  *
  * todo: can we rename this to something that doesn't coincide with 'world' aka byond worlds??
  */
-SUBSYSTEM_DEF(game_world)
+SUBSYSTEM_DEF(narrative)
 	name = "World"
 	init_order = INIT_ORDER_GAME_WORLD
 	subsystem_flags = SS_NO_FIRE

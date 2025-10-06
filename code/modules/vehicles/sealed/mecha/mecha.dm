@@ -142,7 +142,6 @@
 	var/list/equipment = new
 	var/obj/item/vehicle_module/selected
 	var/max_equip = 2
-	var/datum/events/events
 
 	/// outgoing melee damage (legacy var)
 	var/damtype = DAMAGE_TYPE_BRUTE
@@ -278,8 +277,6 @@
 	. = ..()
 	INVOKE_ASYNC(src, PROC_REF(create_components))
 	update_transform()
-
-	events = new
 
 	icon_state += "-open"
 	add_radio()
