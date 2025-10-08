@@ -68,6 +68,10 @@ GLOBAL_REAL(Configuration, /datum/controller/toml_configuration)
 		current_list[entry.key] = entry
 	reload()
 
+	// Admin load hook is here.
+	admin__reload_ranks()
+	admin__reload_holders()
+
 /datum/controller/toml_configuration/stat_key()
 	return "Configuration (New):"
 

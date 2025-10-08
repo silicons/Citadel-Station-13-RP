@@ -96,7 +96,6 @@
 
 	var/footstep_volume = 0
 
-	var/admin_legacy_system = 0	//Defines whether the server uses the legacy admin system with admins.txt or the SQL system. Config option in
 	var/ban_legacy_system = 0	//Defines whether the server uses the legacy banning system with the files in /data or the SQL system. Config option in config_legacy.txt
 
 	var/simultaneous_pm_warning_timeout = 100
@@ -191,9 +190,6 @@
 
 		if(type == "config")
 			switch (name)
-				if ("admin_legacy_system")
-					config_legacy.admin_legacy_system = 1
-
 				if ("ban_legacy_system")
 					config_legacy.ban_legacy_system = 1
 

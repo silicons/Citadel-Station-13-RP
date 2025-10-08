@@ -1,12 +1,41 @@
-var/list/admin_datums = list()
-
 GLOBAL_VAR_INIT(href_token, GenerateToken())
 GLOBAL_PROTECT(href_token)
 
+/proc/load_admins()
+	#warn impl
+
+	//load text from file
+	var/list/Lines = world.file2list("config/admins.txt")
+
+	//process each line seperately
+	for(var/line in Lines)
+		if(!length(line))				continue
+		if(copytext(line,1,2) == "#")	continue
+
+		//Split the line at every "-"
+		var/list/List = splittext(line, "-")
+		if(!List.len)					continue
+
+		//ckey is before the first "-"
+		var/ckey = ckey(List[1])
+		if(!ckey)						continue
+
+		//rank follows the first "-"
+		var/rank = ""
+		if(List.len >= 2)
+			rank = ckeyEx(List[2])
+
+		//load permissions associated with this rank
+		var/rights = admin_ranks[rank]
+
+		//create the admin datum and store it for later use
+		var/datum/admins/D = new /datum/admins(rank, rights, ckey)
+
+		//find the client for a ckey if they are connected and associate them with the new admin datum
+		D.associate(GLOB.directory[ckey])
+
+// todo: /datum/admin_holder
 /datum/admins
-	var/rank			= "Temporary Admin"
-	var/client/owner	= null
-	var/rights = 0
 	// todo: rework
 	/// If set, we are under stealth-mode with this as our public ckey.
 	var/fakekey = null
@@ -18,6 +47,8 @@ GLOBAL_PROTECT(href_token)
 	var/datum/feed_channel/admincaster_feed_channel = new /datum/feed_channel
 	var/admincaster_signature	//What you'll sign the newsfeeds as
 
+	// TODO: find a better solution for this; admins should
+	//       generally not be hitting raw Topic()'s'
 	var/href_token
 
 	var/datum/filter_editor/filteriffic
@@ -37,26 +68,97 @@ GLOBAL_PROTECT(href_token)
 		UNTIL(SSmapping.loaded_station)
 		admincaster_signature = "[(LEGACY_MAP_DATUM).company_name] Officer #[rand(0,9)][rand(0,9)][rand(0,9)]"
 
+// todo: assertions on this are too weak
 /datum/admins/proc/associate(client/C)
-	if(istype(C))
-		owner = C
-		owner.holder = src
-		owner.add_admin_verbs()	//TODO
-		GLOB.admins |= C
-
-/datum/admins/proc/disassociate()
+	if(owner == C)
+		return
 	if(owner)
-		GLOB.admins -= owner
-		owner.remove_admin_verbs()
-		owner.deadmin_holder = owner.holder
-		owner.holder = null
+		disassociate()
+	if(!istype(C))
+		return
+	owner = C
+	owner.holder = src
+	GLOB.admins |= C
+	// add verbs
+	add_admin_verbs()
+
+// todo: assertions on this are too weak
+/datum/admins/proc/disassociate()
+	if(!owner)
+		return
+	GLOB.admins -= owner
+	owner.deadmin_holder = owner.holder
+	owner.holder = null
+	// for now, destroy all modals
+	QDEL_LIST(admin_modals)
+	// obliterate verbs
+	remove_admin_verbs()
 
 /datum/admins/proc/reassociate()
-	if(owner)
-		GLOB.admins |= owner
-		owner.holder = src
-		owner.deadmin_holder = null
-		owner.add_admin_verbs()
+	associate(owner)
+
+/datum/admins/add_admin_verbs()
+	..()
+	if(!owner)
+		return
+	var/list/verbs_to_add = list()
+	verbs_to_add += admin_verbs_default
+	if(rights & R_BUILDMODE)
+		verbs_to_add += /client/proc/togglebuildmodeself
+	if(rights & R_ADMIN)
+		verbs_to_add += admin_verbs_admin
+	if(rights & R_BAN)
+		verbs_to_add += admin_verbs_ban
+	if(rights & R_FUN)
+		verbs_to_add += admin_verbs_fun
+	if(rights & R_SERVER)
+		verbs_to_add += admin_verbs_server
+	if(rights & R_DEBUG)
+		verbs_to_add += admin_verbs_debug
+	if(rights & R_POSSESS)
+		verbs_to_add += admin_verbs_possess
+	if(rights & R_PERMISSIONS)
+		verbs_to_add += admin_verbs_permissions
+	if(rights & R_STEALTH)
+		verbs_to_add += /client/proc/stealth
+	if(rights & R_REJUVINATE)
+		verbs_to_add += admin_verbs_rejuv
+	if(rights & R_SOUNDS)
+		verbs_to_add += admin_verbs_sounds
+	if(rights & R_SPAWN)
+		verbs_to_add += admin_verbs_spawn
+	if(rights & R_MOD)
+		verbs_to_add += admin_verbs_mod
+	if(rights & R_EVENT)
+		verbs_to_add += admin_verbs_event_manager
+	add_verb(
+		owner,
+		verbs_to_add,
+	)
+
+/datum/admins/remove_admin_verbs()
+	..()
+	if(!owner)
+		return
+	remove_verb(
+		owner,
+		list(
+			admin_verbs_default,
+			/client/proc/togglebuildmodeself,
+			admin_verbs_admin,
+			admin_verbs_ban,
+			admin_verbs_fun,
+			admin_verbs_server,
+			admin_verbs_debug,
+			admin_verbs_possess,
+			admin_verbs_permissions,
+			/client/proc/stealth,
+			admin_verbs_rejuv,
+			admin_verbs_sounds,
+			admin_verbs_spawn,
+			debug_verbs,
+		),
+	)
 
 /*
 checks if usr is an admin with at least ONE of the flags in rights_required. (Note, they don't need all the flags)
@@ -119,7 +221,6 @@ NOTE: It checks usr by default. Supply the "user" argument if you wish to check 
 /client/proc/deadmin()
 	if(holder)
 		holder.disassociate()
-		//qdel(holder)
 	return 1
 
 /proc/GenerateToken()
@@ -159,12 +260,3 @@ NOTE: It checks usr by default. Supply the "user" argument if you wish to check 
 		return TRUE
 	log_admin_private("[key_name(usr)] clicked an href with [msg] authorization key! [href]")
 	*/
-
-/datum/admins/vv_edit_var(var_name, var_value)
-#ifdef TESTING
-	return ..()
-#else
-	if(var_name == NAMEOF(src, rank) || var_name == NAMEOF(src, rights))
-		return FALSE
-	return ..()
-#endif
