@@ -31,6 +31,12 @@
 	/// * lazy list
 	var/list/datum/event_new/active_events
 
+	/// broadphase: overmaps left to iterate
+	var/list/datum/overmap/bp_overmaps
+	/// broadphase: overmap entities left to iterate
+	var/list/obj/overmap/entity/bp_overmap_entities
+
+
 /**
  * Executes an entity's instantiator and loads it into the game.
  * * You must drop all existing references to the entity once this is called. If you need a reference, get the return value.

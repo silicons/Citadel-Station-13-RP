@@ -10,3 +10,24 @@ The heavily in-dev work-in-progress automated game-mastering system for Citadel 
 ## Architecture
 
 -- WIP --
+
+Storyteller is a cooperative _storyteller_.
+
+- The reason it requires overmap being active is because overmap & overmap entities
+  are a good way to abstract game distances. As an example, if it wants to spawn pirates,
+  it can check overmap entity distance to determine nominal difficulty in reaching another
+  map.
+- Storyteller API must be implemented on a given overmap & entity for storyteller to work.
+  - The storyteller evaluates the API to determine what it wants, and the job of the engine
+    is to spawn/instance sensical things to fulfill that request.
+
+### broadphase
+
+The storyteller calls a broadphase evaluation proc on:
+
+- Overmaps
+- Overmap entities
+
+This determines if they are storyteller-compatible and injection-compatible.
+
+- Entities
