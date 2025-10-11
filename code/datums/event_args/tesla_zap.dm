@@ -6,7 +6,7 @@
 	/// * copied as ref for speed, so we know what the bolt is from.
 	/// * this means don't edit it numbnuts, this is an immutable!
 	/// * kept when forking, as a ref
-	var/datum/tesla_zap_initiation/initiation
+	var/datum/event_args/tesla_zap_initiation/initiation
 	/// arbitrary k-v data list
 	/// * kept when forking, as a copy
 	var/alist/data
@@ -26,7 +26,9 @@
 /**
  * call to init fresh
  */
-/datum/event_args/tesla_zap/proc/init_fresh(datum/tesla_zap_initiation/initiation)
+/datum/event_args/tesla_zap/proc/init_fresh(datum/event_args/tesla_zap_initiation/initiation)
+	energy = initiation.original_energy
+
 	#warn impl
 
 // todo: de/serialize

@@ -22,7 +22,7 @@
 		tesla_zap_propagate(source, zap_struct)
 	// intentionally here to fail linters if something expects us not to sleep.
 	// in the future, this will be a blocking call as gathering results is blocking
-	// if yo need async tesla_zap, put it behind an async block or use a timer!
+	// if you need async tesla_zap, put it behind an async block or use a timer!
 	sleep(0)
 	return new /datum/event_args/tesla_zap_result
 

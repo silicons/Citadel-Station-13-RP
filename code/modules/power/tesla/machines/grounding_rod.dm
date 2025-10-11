@@ -15,6 +15,8 @@
 
 	/// how much energy we can get rid of per second in kj
 	var/energy_dispersal_rate = 1000
+	/// last energy dispersal time
+	var/energy_dispersal_last = 0
 
 /obj/machinery/power/grounding_rod/update_icon()
 	if(panel_open)
@@ -35,12 +37,16 @@
 	return ..()
 
 /obj/machinery/power/grounding_rod/tesla_act_new(datum/event_args/tesla_zap/zap_struct)
-	#warn impl
-	// if(anchored && !panel_open)
+	if(!zap_struct.energy)
+		return null
+	return zap_struct
+	#warn impl and if panel open and if person got caught in it
 	// 	flick("grounding_rodhit", src)
-	// else
-	// 	..()
-	#warn impl
+
+/obj/machinery/power/grounding_rod/proc/update_stored_energy()
+	var/elapsed = max(0, world.time - energy_dispersal_last) * 0.1
+	energy_dispersal_last = world.time
+	stored_energy = max(0, stored_energy - elapsed * energy_dispersal_rate)
 
 /obj/machinery/power/grounding_rod/secured
 	anchored = TRUE
