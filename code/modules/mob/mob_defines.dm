@@ -13,7 +13,7 @@
 	sight = SIGHT_FLAGS_DEFAULT
 	rad_flags = NONE
 
-	//? Core
+	//* -- System -- *//
 	/// mobs use ids as ref tags instead of actual refs.
 	var/static/next_mob_id = 0
 
@@ -27,17 +27,26 @@
 	/// * control and sight of these requires only control over motion / actions
 	var/datum/action_holder/actions_controlled
 
-	//? Rendering
+	//* Rendering *//
 	/// Fullscreen objects
 	var/list/fullscreens = list()
 
-	//? Intents
+	//* Intents *//
+	//  todo: movement intents are complicated and will have to stay on the mob for quite a while
+	//  todo: action intents should not be on /mob level, instead be on actor huds and passed through to click procs from the
+	//        initiator's HUD.
 	/// How are we intending to move? Walk / run / etc.
 	var/m_intent = MOVE_INTENT_RUN
 	/// How are we intending to act? Help / harm / etc.
 	var/a_intent = INTENT_HELP
 
-	//? Perspectives
+	//* Input*//
+	/// next time we should allow a click being ingested into the click-chain handling sequence.
+	/// * This is effectively only from our client. Remote control should directly call clickchain
+	///   handlers, instead of 'click_on'.
+	var/next_click
+
+	//* Perspective & Vision *//
 	/// using perspective - if none, it'll be self - when client logs out, if using_perspective has reset_on_logout, this'll be unset.
 	var/datum/perspective/using_perspective
 	/// current darksight modifiers.
@@ -49,10 +58,11 @@
 	/// current datum that's entirely intercepting our movements. only can have one - this is usually used with perspective.
 	var/datum/movement_intercept
 
-	//? Buckling
+	//* Buckling *//
 	/// Atom we're buckled to
 	var/atom/movable/buckled
 	/// Atom we're buckl**ing** to. Used to stop stuff like lava from incinerating those who are mid buckle.
+	//  todo: can this be put in an existing bitfield somewhere else?
 	var/atom/movable/buckling
 
 	//* HUD (Atom) *//
@@ -63,6 +73,7 @@
 	/// active, opened storage
 	//  todo: doesn't clear from clients properly on logout, relies on login clearing screne.
 	//  todo: we'll eventually need a system to handle ckey transfers properly.
+	//  todo: this shouldn't be registered on the /mob probably? actor huds maybe?
 	var/datum/object_system/storage/active_storage
 
 	//? Movespeed
@@ -115,11 +126,12 @@
 	/// our size multiplier
 	var/size_multiplier = 1
 
-	//? Misc
+	//* Misc *//
 	/// What we're interacting with right now, associated to list of reasons and the number of concurrent interactions for that reason.
+	/// * Used by do_after().
 	var/list/interacting_with
 
-	//? Mobility / Stat
+	//* Mobility / Stat *//
 	/// mobility flags from [code/__DEFINES/mobs/mobility.dm], updated by update_mobility(). use traits to remove these.
 	var/mobility_flags = MOBILITY_FLAGS_DEFAULT
 	/// force-enabled mobility flags, usually updated by traits
@@ -132,11 +144,11 @@
 	/// which way are we lying down right now? in degrees. 0 default since we're not laying down.
 	var/lying = 0
 
-	//? Status Effects
+	//* Status Effects *//
 	/// A list of all status effects the mob has
 	var/list/status_effects
 
-	//? SSD
+	//* SSD Indicator *//
 	/// current ssd overlay
 	var/image/ssd_overlay
 	/// do we use ssd overlays?
@@ -222,10 +234,6 @@
 	/// Allows mobs to move through dense areas without restriction. For instance, in space or out of holder objects.
 	var/incorporeal_move = 0 //0 is off, 1 is normal, 2 is for ninjas.
 	var/unacidable = 0
-	/// List of things pinning this creature to walls. (see living_defense.dm)
-	var/list/pinned = list()
-	/// Embedded items, since simple mobs don't have organs.
-	var/list/embedded = list()
 	/// For speaking/listening.
 	var/list/languages = list()
 	/// For species who want reset to use a specified default.
@@ -408,10 +416,6 @@
 	/// a singular thing that can intercept keyboard inputs
 	var/datum/key_intercept
 
-	//Moved from code\game\click\click.dm
-	// 1 decisecond click delay (above and beyond mob/next_move)
-	var/next_click = 0
-
 	//Moved from code\game\rendering\legacy\alert.dm
 	var/list/alerts = list() // contains /atom/movable/screen/alert only // On /mob so clientless mobs will throw alerts properly
 
@@ -431,7 +435,7 @@
 
 	//Moved from code\modules\nano\nanoexternal.dm
 	// Used by the Nano UI Manager (/datum/nanomanager) to track UIs opened by this mob
-	var/list/open_uis = list()
+	var/list/open_nano_uis = list()
 
 	///List of progress bars this mob is currently seeing for actions
 	var/list/progressbars = null //for stacking do_after bars

@@ -51,8 +51,11 @@
 	.["scan_ready"] = !on_cooldown()
 	.["network"] = network_key || ""
 
-/obj/machinery/computer/bioscan/ui_act(action, list/params, datum/tgui/ui)
+/obj/machinery/computer/bioscan/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state, datum/event_args/actor/actor)
 	. = ..()
+	if(.)
+		return
+
 	switch(action)
 		if("scan")
 			if(!network_key)
