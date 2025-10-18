@@ -16,9 +16,12 @@
 	value = CATALOGUER_REWARD_MEDIUM
 
 /datum/armor/physiology/frostfly
-	melee = 0.20
+	melee = 0.4
+	melee_tier = 2
 	bullet = 0.1
-	laser = 0.05
+	bullet_tier = 2
+	laser = 0.15
+	laser_tier = 2
 	laser_soak = 15
 	bomb = 0.1
 	bio = 1.0
@@ -102,8 +105,8 @@
 /mob/living/simple_mob/animal/sif/frostfly/statpanel_data(client/C)
 	. = ..()
 	if(C.statpanel_tab("Status"))
-		STATPANEL_DATA_LINE("")
-		STATPANEL_DATA_ENTRY("Energy", energy)
+		INJECT_STATPANEL_DATA_LINE(., "")
+		INJECT_STATPANEL_DATA_ENTRY(., "Energy", energy)
 
 /mob/living/simple_mob/animal/sif/frostfly/should_special_attack(atom/A)
 	if(energy >= 20)

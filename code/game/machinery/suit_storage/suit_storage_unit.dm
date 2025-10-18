@@ -131,7 +131,7 @@
 		data["occupied"] = FALSE
 	return data
 
-/obj/machinery/suit_storage_unit/ui_act(action, list/params, datum/tgui/ui)
+/obj/machinery/suit_storage_unit/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state, datum/event_args/actor/actor)
 	if(..() || isUV || isbroken)
 		return TRUE
 
@@ -318,7 +318,7 @@
 			var/obj/item/organ/internal/diona/nutrients/rad_organ = locate() in occupant.internal_organs
 			if(!rad_organ)
 				if(occupant.can_feel_pain())
-					occupant.emote("scream")
+					occupant.emote_nosleep("scream")
 				if(issuperUV)
 					var/burndamage = rand(28,35)
 					occupant.take_random_targeted_damage(brute = 0, brute = burndamage)

@@ -32,7 +32,7 @@
 	/// armor flag for melee attacks
 	var/damage_flag = ARMOR_MELEE
 	/// damage tier
-	var/damage_tier = MELEE_TIER_MEDIUM
+	var/damage_tier = 3
 	/// damage_mode bitfield - see [code/__DEFINES/combat/damage.dm]
 	var/damage_mode = NONE
 	/// DAMAGE_TYPE_* enum
@@ -48,6 +48,10 @@
 	/// note that the component will not be modified while held;
 	/// if this is changed, the component needs to be remade.
 	var/passive_parry
+	/// base melee click cooldown
+	var/melee_click_cd_base = 0.8 SECONDS
+	/// base melee click cooldown multiplier
+	var/melee_click_cd_multiply = 1
 
 	//* Economy
 	/// economic category for items
@@ -186,8 +190,6 @@
 	/// 0 won't embed, and 100 will always embed
 	var/embed_chance = EMBED_CHANCE_UNSET
 
-	/// How long click delay will be when using this, in 1/10ths of a second. Checked in the user's get_attack_speed_legacy().
-	var/attackspeed = DEFAULT_ATTACK_COOLDOWN
 	/// Length of tiles it can reach, 1 is adjacent.
 	var/reach = 1
 	/// Icon overlay for ADD highlights when applicable.
@@ -834,19 +836,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	if(isturf(loc) && I.obj_storage?.allow_mass_gather && I.obj_storage.allow_mass_gather_via_click)
 		I.obj_storage.auto_handle_interacted_mass_pickup(new /datum/event_args/actor(user), src)
 		return CLICKCHAIN_DO_NOT_PROPAGATE | CLICKCHAIN_DID_SOMETHING
-	if(istype(I, /obj/item/cell) && !isnull(obj_cell_slot) && isnull(obj_cell_slot.cell) && obj_cell_slot.interaction_active(user))
-		if(!user.transfer_item_to_loc(I, src))
-			user.action_feedback(SPAN_WARNING("[I] is stuck to your hand!"), src)
-			return CLICKCHAIN_DO_NOT_PROPAGATE
-		user.visible_action_feedback(
-			target = src,
-			hard_range = obj_cell_slot.remove_is_discrete? 0 : MESSAGE_RANGE_CONSTRUCTION,
-			visible_hard = SPAN_NOTICE("[user] inserts [I] into [src]."),
-			audible_hard = SPAN_NOTICE("You hear something being slotted in."),
-			visible_self = SPAN_NOTICE("You insert [I] into [src]."),
-		)
-		obj_cell_slot.insert_cell(I)
-		return CLICKCHAIN_DO_NOT_PROPAGATE | CLICKCHAIN_DID_SOMETHING
 	return ..()
 
 /**
@@ -878,11 +867,11 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	var/datum/prototype/material/material = get_primary_material()
 	var/turf/T = get_turf(src)
 	T.visible_message("<span class='danger'>\The [src] [material.destruction_desc]!</span>")
-	if(istype(loc, /mob/living))
-		var/mob/living/M = loc
-		if(material.shard_type == SHARD_SHARD) // Wearing glass armor is a bad idea.
-			var/obj/item/material/shard/S = material.place_shard(T)
-			M.embed(S)
+	// if(istype(loc, /mob/living))
+	// 	var/mob/living/M = loc
+	// 	if(material.shard_type == SHARD_SHARD) // Wearing glass armor is a bad idea.
+	// 		var/obj/item/material/shard/S = material.place_shard(T)
+	// 		M.embed(S)
 
 	playsound(src, "shatter", 70, 1)
 	qdel(src)
