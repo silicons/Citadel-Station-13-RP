@@ -2,12 +2,25 @@
 //* Copyright (c) 2025 Citadel Station Developers           *//
 
 /datum/map/station/penumbra
+	id = "station-penumbra"
+	name = "Penumbra Station"
+
+	#warn INDEV
+	allow_random_draw = FALSE
+
+/datum/map/station/penumbra/New()
+	LAZYINITLIST(levels)
+	for(var/datum/map_level/level_path as anything in subtypesof(/datum/map_level/station/penumbra))
+		if(level_path.abstract_type == level_path)
+			continue
+		levels += level_path
+	..()
 
 #warn impl
 
-
 #warn make sure /station exists
 /datum/map_level/station/penumbra
+	abstract_type = /datum/map_level/station/penumbra
 	var/p_dmm_root = "penumbra-"
 	var/p_name_root = "Penumbra Station "
 	var/p_display_name_root = "<Planet Name Here> "
@@ -18,6 +31,7 @@
 
 #warn struct x/y/z all of these
 /datum/map_level/station/penumbra/surface
+	abstract_type = /datum/map_level/station/penumbra/surface
 	p_dmm_root = /datum/map_level/station/penumbra::p_dmm_root + "surface-"
 	p_name_root = /datum/map_level/station/penumbra::p_name_root + "Surface "
 	p_display_name_root = /datum/map_level/station/penumbra::p_display_name_root + "Surface "
@@ -102,6 +116,7 @@
 // -- CAVERNS --
 
 /datum/map_level/station/penumbra/cavern
+	abstract_type = /datum/map_level/station/penumbra/cavern
 	p_dmm_root = /datum/map_level/station/penumbra::p_dmm_root + "cavern-"
 	p_name_root = /datum/map_level/station/penumbra::p_name_root + "Cavern "
 	p_display_name_root = /datum/map_level/station/penumbra::p_display_name_root + "Cavern "
@@ -172,6 +187,7 @@
 // -- CAVERNS --
 
 /datum/map_level/station/penumbra/abyss
+	abstract_type = /datum/map_level/station/penumbra/abyss
 	p_dmm_root = /datum/map_level/station/penumbra::p_dmm_root + "abyss-"
 	p_name_root = /datum/map_level/station/penumbra::p_name_root + "Abyss "
 	p_display_name_root = /datum/map_level/station/penumbra::p_display_name_root + "Abyss "
