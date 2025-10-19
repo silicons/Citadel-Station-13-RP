@@ -5850,6 +5850,8 @@
 #include "maps\shuttles\factions\corporations\nanotrasen\sci_vector.dm"
 #include "maps\shuttles\factions\generic\outlaw\reaver.dm"
 #include "maps\stations\penumbra\penumbra.dm"
+#include "maps\stations\penumbra\levels\penumbra-surface-1-1-2.dmm"
+#include "maps\stations\penumbra\levels\penumbra-surface-1-1-3.dmm"
 #include "maps\strelka\strelka-areas.dm"
 #include "maps\strelka\strelka-misc.dm"
 #include "maps\strelka\strelka-overmap.dm"
