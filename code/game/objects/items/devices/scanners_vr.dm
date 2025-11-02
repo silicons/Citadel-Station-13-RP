@@ -103,7 +103,7 @@ var/global/mob/living/carbon/human/dummy/mannequin/sleevemate_mob
 
 	//Soulcatcher transfer
 	if(H.nif)
-		var/datum/nifsoft/soulcatcher/SC = H.nif.imp_check(NIF_SOULCATCHER)
+		var/datum/nifsoft/simulation_core_installer/SC = H.nif.imp_check(NIF_SOULCATCHER)
 		if(SC)
 			output += "<br>"
 			output += "<b>Soulcatcher detected ([SC.brainmobs.len] minds)</b><br>"
@@ -207,7 +207,7 @@ var/global/mob/living/carbon/human/dummy/mannequin/sleevemate_mob
 		if(!H.nif)
 			return //Lost it? or href hacking
 
-		var/datum/nifsoft/soulcatcher/SC = H.nif.imp_check(NIF_SOULCATCHER)
+		var/datum/nifsoft/simulation_core_installer/SC = H.nif.imp_check(NIF_SOULCATCHER)
 		if(!SC)
 			return //Uninstalled it?
 
@@ -252,7 +252,7 @@ var/global/mob/living/carbon/human/dummy/mannequin/sleevemate_mob
 			to_chat(usr,"<span class='warning'>There is already someone's mind stored inside</span>")
 			return
 		var/mob/living/carbon/human/H = target
-		var/datum/nifsoft/soulcatcher/SC = H.nif.imp_check(NIF_SOULCATCHER)
+		var/datum/nifsoft/simulation_core_installer/SC = H.nif.imp_check(NIF_SOULCATCHER)
 		if(!SC)
 			return
 		for(var/mob/living/carbon/brain/caught_soul/soul in SC.brainmobs)

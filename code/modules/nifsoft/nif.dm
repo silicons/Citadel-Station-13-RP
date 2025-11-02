@@ -71,7 +71,7 @@ GLOBAL_LIST_INIT(nif_id_lookup, init_nif_id_lookup())
 
 	var/list/starting_software = list(
 		/datum/nifsoft/commlink,
-		/datum/nifsoft/soulcatcher,
+		/datum/nifsoft/simulation_core_installer,
 		/datum/nifsoft/hud/ar_civ
 	)
 
@@ -188,7 +188,7 @@ GLOBAL_LIST_INIT(nif_id_lookup, init_nif_id_lookup())
 		if(!NS.active)
 			continue
 		NS.deactivate(TRUE)
-	var/datum/nifsoft/soulcatcher/SC = imp_check(NIF_SOULCATCHER)
+	var/datum/nifsoft/simulation_core_installer/SC = imp_check(NIF_SOULCATCHER)
 	if(SC) //Clean up stored people, this is dirty but the easiest way.
 		QDEL_LIST_NULL(SC.brainmobs)
 		SC.brainmobs = list()

@@ -1,62 +1,55 @@
-//These two also have NIF FLAG representations. These are the local setting representations.
-#define NIF_SC_CATCHING_ME			0x1
-#define NIF_SC_CATCHING_OTHERS		0x2
-//These are purely local setings flags, without global representation.
-#define NIF_SC_ALLOW_EARS			0x4
-#define NIF_SC_ALLOW_EYES			0x8
-#define NIF_SC_BACKUPS				0x10
-#define NIF_SC_PROJECTING			0x20
-
 #define SOULCATCHER_RANGE 7
 
 ///////////
 // Soulcatcher - Like a posibrain, sorta!
-/datum/nifsoft/soulcatcher
-	name = "Soulcatcher"
-	desc = "A mind storage and processing system capable of capturing and supporting human-level minds in a small VR space."
+/datum/nifsoft/simulation_core_installer
+	name = "Simulation Core"
+	desc = "An advanced nanite construction template capable of installing onto its user a simulation core - \
+	a highly advanced processing unit capable of running virtual reality worlds inside their body."
 	list_pos = NIF_SOULCATCHER
-	cost = 25 //If I wanna trap people's minds and lood them, then by god I'll do so.
+#warn below
+	// it's an erp item go wild
+	cost = 25
 	wear = 1
 	p_drain = 0.01
 
-	var/setting_flags = (NIF_SC_CATCHING_OTHERS|NIF_SC_ALLOW_EARS|NIF_SC_ALLOW_EYES|NIF_SC_BACKUPS|NIF_SC_PROJECTING)
-	var/list/brainmobs = list()
+	#warn all
 	var/inside_flavor = "A small completely white room with a couch, and a window to what seems to be the outside world. A small sign in the corner says 'Configure Me'."
 	var/visibility = TRUE
 	var/list/visibility_exceptions = list()
 	var/list/visibility_blacklist = list()
 
-/datum/nifsoft/soulcatcher/New()
+/datum/nifsoft/simulation_core_installer/New()
 	..()
 	load_settings()
 
-/datum/nifsoft/soulcatcher/Destroy()
+/datum/nifsoft/simulation_core_installer/Destroy()
 	QDEL_LIST_NULL(brainmobs)
 	return ..()
 
-/datum/nifsoft/soulcatcher/activate()
+/datum/nifsoft/simulation_core_installer/activate()
 	if((. = ..()))
 		show_settings(nif.human)
 		spawn(0)
 			deactivate()
 
-/datum/nifsoft/soulcatcher/stat_text()
+/datum/nifsoft/simulation_core_installer/stat_text()
 	return "Change Settings ([brainmobs.len] minds)"
 
-/datum/nifsoft/soulcatcher/install()
+/datum/nifsoft/simulation_core_installer/install()
 	if((. = ..()))
 		//nif.set_flag(NIF_O_SCOTHERS,NIF_FLAGS_OTHER)	//Only required on install if the flag is in the default setting_flags list defined few lines above.
 		if(nif?.human)
 			add_verb(nif.human, /mob/living/carbon/human/proc/nsay)
 			add_verb(nif.human, /mob/living/carbon/human/proc/nme)
 
-/datum/nifsoft/soulcatcher/uninstall()
+/datum/nifsoft/simulation_core_installer/uninstall()
 	QDEL_LIST_NULL(brainmobs)
 	if((. = ..()) && nif?.human) //Sometimes NIFs are deleted outside of a human
 		remove_verb(nif.human, /mob/living/carbon/human/proc/nsay)
 		remove_verb(nif.human, /mob/living/carbon/human/proc/nme)
 
-/datum/nifsoft/soulcatcher/proc/save_settings()
+/datum/nifsoft/simulation_core_installer/proc/save_settings()
 	if(!nif)
 		return
 	nif.save_data["[list_pos]"] = inside_flavor
@@ -67,7 +60,7 @@
 	nif.save_data["[list_pos]_actual"] = save_data
 	return TRUE
 
-/datum/nifsoft/soulcatcher/proc/load_settings()
+/datum/nifsoft/simulation_core_installer/proc/load_settings()
 	if(!nif)
 		return
 	var/load = nif.save_data["[list_pos]"]
@@ -87,7 +80,7 @@
 		visibility_blacklist = save_data["vis_blacklist"]
 	return TRUE
 
-/datum/nifsoft/soulcatcher/proc/visibility_check(ckey)
+/datum/nifsoft/simulation_core_installer/proc/visibility_check(ckey)
 	ckey = ckey(ckey)
 	if(islist(visibility_blacklist))
 		if(ckey in visibility_blacklist)
@@ -99,7 +92,7 @@
 			return TRUE
 	return FALSE
 
-/datum/nifsoft/soulcatcher/proc/notify_into(var/message)
+/datum/nifsoft/simulation_core_installer/proc/notify_into(var/message)
 	var/sound = nif.good_sound
 
 	to_chat(nif.human,"<b>\[[icon2html(thing = nif.big_icon, target = nif.human)]NIF\]</b> <b>Soulcatcher</b> displays, \"<span class='notice nif'>[message]</span>\"")
@@ -110,7 +103,7 @@
 		to_chat(CS,"<b>\[[icon2html(thing = nif.big_icon, target = CS)]NIF\]</b> <b>Soulcatcher</b> displays, \"<span class='notice nif'>[message]</span>\"")
 		SEND_SOUND(brainmob, sound)
 
-/datum/nifsoft/soulcatcher/proc/say_into(var/message, var/mob/living/sender, var/mob/eyeobj)
+/datum/nifsoft/simulation_core_installer/proc/say_into(var/message, var/mob/living/sender, var/mob/eyeobj)
 	message = trim(message)
 	if(!length(message))
 		return
@@ -129,7 +122,7 @@
 
 	log_nsay(message,nif.human.real_name,sender)
 
-/datum/nifsoft/soulcatcher/proc/emote_into(var/message, var/mob/living/sender, var/mob/eyeobj)
+/datum/nifsoft/simulation_core_installer/proc/emote_into(var/message, var/mob/living/sender, var/mob/eyeobj)
 	message = trim(message)
 	if(!length(message))
 		return
@@ -148,7 +141,7 @@
 
 	log_nme(message,nif.human.real_name,sender)
 
-/datum/nifsoft/soulcatcher/proc/show_settings(var/mob/living/carbon/human/H)
+/datum/nifsoft/simulation_core_installer/proc/show_settings(var/mob/living/carbon/human/H)
 	set waitfor = FALSE
 	var/settings_list = list(
 	"Catching You \[[setting_flags & NIF_SC_CATCHING_ME ? "Enabled" : "Disabled"]\]" = NIF_SC_CATCHING_ME,
@@ -238,28 +231,12 @@
 				var/flag = settings_list[choice]
 				return toggle_setting(flag)
 
-/datum/nifsoft/soulcatcher/proc/toggle_setting(var/flag)
+/datum/nifsoft/simulation_core_installer/proc/toggle_setting(var/flag)
 	setting_flags ^= flag
 
 	var/notify_message
 	//Special treatment
 	switch(flag)
-/*		if(NIF_SC_BACKUPS)
-			if(setting_flags & NIF_SC_BACKUPS)
-				notify_message = "Mind backup system enabled."
-			else
-				notify_message = "Mind backup system disabled."
-*/
-		if(NIF_SC_CATCHING_ME)
-			if(setting_flags & NIF_SC_CATCHING_ME)
-				nif.set_flag(NIF_O_SCMYSELF,NIF_FLAGS_OTHER)
-			else
-				nif.clear_flag(NIF_O_SCMYSELF,NIF_FLAGS_OTHER)
-		if(NIF_SC_CATCHING_OTHERS)
-			if(setting_flags & NIF_SC_CATCHING_OTHERS)
-				nif.set_flag(NIF_O_SCOTHERS,NIF_FLAGS_OTHER)
-			else
-				nif.clear_flag(NIF_O_SCOTHERS,NIF_FLAGS_OTHER)
 		if(NIF_SC_ALLOW_EARS)
 			if(setting_flags & NIF_SC_ALLOW_EARS)
 				for(var/mob/living/carbon/brain/caught_soul/brainmob as anything in brainmobs)
@@ -285,7 +262,7 @@
 	return TRUE
 
 	//Complex version for catching in-round characters
-/datum/nifsoft/soulcatcher/proc/catch_mob(var/mob/M)
+/datum/nifsoft/simulation_core_installer/proc/catch_mob(var/mob/M)
 	if(!M.mind)
 		return
 
@@ -355,7 +332,7 @@
 	universal_understand = TRUE
 
 	var/obj/item/nif/nif
-	var/datum/nifsoft/soulcatcher/soulcatcher
+	var/datum/nifsoft/simulation_core_installer/soulcatcher
 	var/identifying_gender
 
 /mob/living/carbon/brain/caught_soul/Login()
@@ -589,10 +566,10 @@
 		var/obj/belly/B = H.loc
 		var/mob/living/carbon/human/HP = B.owner
 		if(istype(HP) && HP.nif && HP.nif.flag_check(NIF_O_SCOTHERS,NIF_FLAGS_OTHER))
-			var/datum/nifsoft/soulcatcher/SC = HP.nif.imp_check(NIF_SOULCATCHER)
+			var/datum/nifsoft/simulation_core_installer/SC = HP.nif.imp_check(NIF_SOULCATCHER)
 			SC.catch_mob(H)
 	else if(H.nif && H.nif.flag_check(NIF_O_SCMYSELF,NIF_FLAGS_OTHER)) //They are caught in their own NIF
-		var/datum/nifsoft/soulcatcher/SC = H.nif.imp_check(NIF_SOULCATCHER)
+		var/datum/nifsoft/simulation_core_installer/SC = H.nif.imp_check(NIF_SOULCATCHER)
 		SC.catch_mob(H)
 
 	return TRUE
@@ -616,7 +593,7 @@
 	if(!nif)
 		to_chat(src, SPAN_WARNING("You can't use NSay without a NIF."))
 		return
-	var/datum/nifsoft/soulcatcher/SC = nif.imp_check(NIF_SOULCATCHER)
+	var/datum/nifsoft/simulation_core_installer/SC = nif.imp_check(NIF_SOULCATCHER)
 	if(!SC)
 		to_chat(src, SPAN_WARNING("You need the Soulcatcher software to use NSay."))
 		return
@@ -646,7 +623,7 @@
 	if(!nif)
 		to_chat(src, SPAN_WARNING("You can't use NMe without a NIF."))
 		return
-	var/datum/nifsoft/soulcatcher/SC = nif.imp_check(NIF_SOULCATCHER)
+	var/datum/nifsoft/simulation_core_installer/SC = nif.imp_check(NIF_SOULCATCHER)
 	if(!SC)
 		to_chat(src, SPAN_WARNING("You need the Soulcatcher software to use NMe."))
 		return

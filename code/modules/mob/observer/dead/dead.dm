@@ -802,7 +802,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	for(var/mob/living/carbon/human/H in GLOB.player_list)
 		if(!H.nif?.imp_check(NIF_SOULCATCHER))
 			continue
-		var/datum/nifsoft/soulcatcher/SC = H.nif.imp_check(NIF_SOULCATCHER)
+		var/datum/nifsoft/simulation_core_installer/SC = H.nif.imp_check(NIF_SOULCATCHER)
 		if(!SC.visibility_check(ckey))
 			continue
 		filtered += H
@@ -828,7 +828,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		to_chat(src,"<span class='warning'>[H] doesn't have a NIF installed.</span>")
 		return
 
-	var/datum/nifsoft/soulcatcher/SC = H.nif.imp_check(NIF_SOULCATCHER)
+	var/datum/nifsoft/simulation_core_installer/SC = H.nif.imp_check(NIF_SOULCATCHER)
 	if(!SC?.visibility_check(ckey))
 		to_chat(src,"<span class='warning'>[H] doesn't have the Soulcatcher NIFSoft installed, or their NIF is unpowered.</span>")
 		return
