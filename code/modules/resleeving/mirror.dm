@@ -27,6 +27,10 @@
 /obj/item/implant/mirror/digest_act(var/atom/movable/item_storage = null)
     return FALSE
 
+/obj/item/implant/mirror/on_attack_self(datum/event_args/actor/e_args)
+	. = ..()
+	#warn impl ; chirp to simulation cores
+
 /obj/item/implant/mirror/get_data()
 	var/dat = {"
 <b>Implant Specifications:</b><BR>

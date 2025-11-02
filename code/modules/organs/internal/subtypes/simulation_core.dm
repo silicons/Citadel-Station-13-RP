@@ -11,6 +11,7 @@
 /obj/item/organ/internal/simulation_core
 	name = "simulation core"
 	desc = "A highly advanced computer core capable of running virtual reality simulations."
+	#warn sprite
 	organ_action_name = "Simulation Controller"
 	organ_action_desc = "Access the controls for your simulation core."
 	robotic = ORGAN_ROBOT
@@ -18,9 +19,14 @@
 	/// simulation contained
 	var/datum/simulation_core/simulation
 
+	/// automatically capture mirrors
+	var/capture_mirrors_automatically = FALSE
 	/// captured mirrors
 	/// * use the procs to add/remove, signals will be registered to check for validity
 	var/list/obj/item/implant/mirror/captured_mirrors
+	/// last mirror capturing check
+	/// * we tick every 10-20 seconds and when mirrors are put in hand and used.
+	var/capture_mirrors_automatically_last = 0
 
 #warn impl
 
