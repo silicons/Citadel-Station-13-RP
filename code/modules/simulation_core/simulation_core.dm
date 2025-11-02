@@ -16,8 +16,11 @@
 
 	/// Residents
 	var/list/mob/simulation_core_resident/residents
-	/// Captured mirrors associated to their resident, if any.
-	var/list/obj/item/implant/mirror/captured_mirrors
+	/// Interior
+	var/datum/simulation_core_interior/interior
+
+	/// Perspective used for people inside
+	var/datum/perspective/using_perspective
 
 #warn impl
 
@@ -40,3 +43,22 @@
 	. = list()
 
 #warn impl
+
+/datum/simulation_core/proc/check_projection_distance(atom/movable/simulation_core_projection/projection)
+
+/**
+ * Checks hypervisor authorization flags.
+ */
+/datum/simulation_core/proc/check_hypervisor_flags(datum/event_args/actor/actor)
+	#warn vm escape so cabbage can virus people
+	if(istype(actor.performer, /mob/simulation_core_resident))
+		var/mob/simulation_core_resident/resident = actor.performer
+		return resident.check_hypervisor_flags()
+	#warn impl
+
+/datum/simulation_core/proc/update_perspective()
+
+/datum/simulation_core/proc/get_perspective()
+
+/datum/simulation_core/proc/set_perspective(datum/perspective/perspective)
+

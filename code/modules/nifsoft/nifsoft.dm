@@ -38,6 +38,10 @@
 	/// If the implant can be destroyed via EMP attack
 	var/empable = TRUE
 
+	/// automatically enable on install
+	#warn hook
+	var/auto_enable_on_install = FALSE
+
 	/// Trial software! Or self-deleting illegal ones!
 	var/expiring = FALSE
 	/// World.time for when they expire

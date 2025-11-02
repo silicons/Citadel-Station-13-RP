@@ -2,7 +2,7 @@
 
 ///////////
 // Soulcatcher - Like a posibrain, sorta!
-/datum/nifsoft/simulation_core_installer
+/datum/nifsoft/simulation_core
 	name = "Simulation Core"
 	desc = "An advanced nanite construction template capable of installing onto its user a simulation core - \
 	a highly advanced processing unit capable of running virtual reality worlds inside their body."
@@ -12,7 +12,9 @@
 	wear = 1
 	p_drain = 0.01
 
-	var/installed = FALSE
+	auto_enable_on_install = TRUE
+
+	var/core_installed = FALSE
 
 #warn below
 	#warn all
@@ -21,25 +23,27 @@
 	var/list/visibility_exceptions = list()
 	var/list/visibility_blacklist = list()
 
-/datum/nifsoft/simulation_core_installer/New()
+/datum/nifsoft/simulation_core/New()
 	..()
 	load_settings()
 
-/datum/nifsoft/simulation_core_installer/activate()
+/datum/nifsoft/simulation_core/activate()
 	if((. = ..()))
 		attempt_install_on(nif.human, new /datum/event_args/actor(usr))
 		spawn(0)
 			deactivate()
 
-/datum/nifsoft/simulation_core_installer/proc/attempt_install_on(mob/living/carbon/target, datum/event_args/actor/actor)
+/datum/nifsoft/simulation_core/proc/attempt_install_on(mob/living/carbon/target, datum/event_args/actor/actor)
 	#warn impl
 
-	installed = TRUE
+	core_installed = TRUE
 
-/datum/nifsoft/simulation_core_installer/stat_text()
-	return installed ? "Installed" : "Attempt Install?"
+/datum/nifsoft/simulation_core/stat_text()
+	return core_installed ? "Installed" : "Attempt Install?"
 
-/datum/nifsoft/simulation_core_installer/proc/save_settings()
+#warn impl
+
+/datum/nifsoft/simulation_core/proc/save_settings()
 	if(!nif)
 		return
 	nif.save_data["[list_pos]"] = inside_flavor
@@ -50,7 +54,7 @@
 	nif.save_data["[list_pos]_actual"] = save_data
 	return TRUE
 
-/datum/nifsoft/simulation_core_installer/proc/load_settings()
+/datum/nifsoft/simulation_core/proc/load_settings()
 	if(!nif)
 		return
 	var/load = nif.save_data["[list_pos]"]
@@ -70,7 +74,7 @@
 		visibility_blacklist = save_data["vis_blacklist"]
 	return TRUE
 
-/datum/nifsoft/simulation_core_installer/proc/visibility_check(ckey)
+/datum/nifsoft/simulation_core/proc/visibility_check(ckey)
 	ckey = ckey(ckey)
 	if(islist(visibility_blacklist))
 		if(ckey in visibility_blacklist)
@@ -82,7 +86,7 @@
 			return TRUE
 	return FALSE
 
-/datum/nifsoft/simulation_core_installer/proc/notify_into(var/message)
+/datum/nifsoft/simulation_core/proc/notify_into(var/message)
 	var/sound = nif.good_sound
 
 	to_chat(nif.human,"<b>\[[icon2html(thing = nif.big_icon, target = nif.human)]NIF\]</b> <b>Soulcatcher</b> displays, \"<span class='notice nif'>[message]</span>\"")
@@ -93,7 +97,7 @@
 		to_chat(CS,"<b>\[[icon2html(thing = nif.big_icon, target = CS)]NIF\]</b> <b>Soulcatcher</b> displays, \"<span class='notice nif'>[message]</span>\"")
 		SEND_SOUND(brainmob, sound)
 
-/datum/nifsoft/simulation_core_installer/proc/say_into(var/message, var/mob/living/sender, var/mob/eyeobj)
+/datum/nifsoft/simulation_core/proc/say_into(var/message, var/mob/living/sender, var/mob/eyeobj)
 	message = trim(message)
 	if(!length(message))
 		return
@@ -112,7 +116,7 @@
 
 	log_nsay(message,nif.human.real_name,sender)
 
-/datum/nifsoft/simulation_core_installer/proc/emote_into(var/message, var/mob/living/sender, var/mob/eyeobj)
+/datum/nifsoft/simulation_core/proc/emote_into(var/message, var/mob/living/sender, var/mob/eyeobj)
 	message = trim(message)
 	if(!length(message))
 		return
@@ -131,7 +135,7 @@
 
 	log_nme(message,nif.human.real_name,sender)
 
-/datum/nifsoft/simulation_core_installer/proc/show_settings(var/mob/living/carbon/human/H)
+/datum/nifsoft/simulation_core/proc/show_settings(var/mob/living/carbon/human/H)
 	set waitfor = FALSE
 	var/choice = tgui_input_list(nif.human,"Select a setting to modify:","Soulcatcher NIFSoft", settings_list)
 	if(choice in settings_list)
@@ -209,7 +213,7 @@
 				var/flag = settings_list[choice]
 				return toggle_setting(flag)
 
-/datum/nifsoft/simulation_core_installer/proc/toggle_setting(var/flag)
+/datum/nifsoft/simulation_core/proc/toggle_setting(var/flag)
 	setting_flags ^= flag
 
 	var/notify_message
@@ -240,7 +244,7 @@
 	return TRUE
 
 	//Complex version for catching in-round characters
-/datum/nifsoft/simulation_core_installer/proc/catch_mob(var/mob/M)
+/datum/nifsoft/simulation_core/proc/catch_mob(var/mob/M)
 	if(!M.mind)
 		return
 
@@ -310,7 +314,7 @@
 	universal_understand = TRUE
 
 	var/obj/item/nif/nif
-	var/datum/nifsoft/simulation_core_installer/soulcatcher
+	var/datum/nifsoft/simulation_core/soulcatcher
 	var/identifying_gender
 
 /mob/living/carbon/brain/caught_soul/Login()
@@ -544,10 +548,10 @@
 		var/obj/belly/B = H.loc
 		var/mob/living/carbon/human/HP = B.owner
 		if(istype(HP) && HP.nif && HP.nif.flag_check(NIF_O_SCOTHERS,NIF_FLAGS_OTHER))
-			var/datum/nifsoft/simulation_core_installer/SC = HP.nif.imp_check(NIF_SOULCATCHER)
+			var/datum/nifsoft/simulation_core/SC = HP.nif.imp_check(NIF_SOULCATCHER)
 			SC.catch_mob(H)
 	else if(H.nif && H.nif.flag_check(NIF_O_SCMYSELF,NIF_FLAGS_OTHER)) //They are caught in their own NIF
-		var/datum/nifsoft/simulation_core_installer/SC = H.nif.imp_check(NIF_SOULCATCHER)
+		var/datum/nifsoft/simulation_core/SC = H.nif.imp_check(NIF_SOULCATCHER)
 		SC.catch_mob(H)
 
 	return TRUE
@@ -572,7 +576,7 @@
 	if(!nif)
 		to_chat(src, SPAN_WARNING("You can't use NSay without a NIF."))
 		return
-	var/datum/nifsoft/simulation_core_installer/SC = nif.imp_check(NIF_SOULCATCHER)
+	var/datum/nifsoft/simulation_core/SC = nif.imp_check(NIF_SOULCATCHER)
 	if(!SC)
 		to_chat(src, SPAN_WARNING("You need the Soulcatcher software to use NSay."))
 		return
@@ -602,7 +606,7 @@
 	if(!nif)
 		to_chat(src, SPAN_WARNING("You can't use NMe without a NIF."))
 		return
-	var/datum/nifsoft/simulation_core_installer/SC = nif.imp_check(NIF_SOULCATCHER)
+	var/datum/nifsoft/simulation_core/SC = nif.imp_check(NIF_SOULCATCHER)
 	if(!SC)
 		to_chat(src, SPAN_WARNING("You need the Soulcatcher software to use NMe."))
 		return

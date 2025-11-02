@@ -15,6 +15,7 @@
 	organ_action_desc = "Access the controls for your simulation core."
 	robotic = ORGAN_ROBOT
 
+	/// simulation contained
 	var/datum/simulation_core/simulation
 
 	/// captured mirrors

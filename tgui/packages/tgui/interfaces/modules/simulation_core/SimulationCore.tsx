@@ -7,7 +7,16 @@ import { useBackend } from "../../../backend";
 import { Window } from "../../../layouts";
 
 interface SimulationCoreData {
+  residents: SimulationCoreResidentStatus[];
+}
 
+interface SimulationCoreResidentStatus {
+
+}
+
+enum SimulationCoreHypervisorAuthorization {
+  World = (1 << 0),
+  Puppet = (1 << 1),
 }
 
 export const SimulationCore = (props) => {
