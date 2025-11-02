@@ -1,7 +1,4 @@
-//////////////////////////////////////////////////////////////
-////////////////////////Mirror Implants//////////////////////
-////////////////////////////////////////////////////////////
-
+// TODO: organ this holy shit
 /obj/item/implant/mirror
 	name = "Mirror"
 	desc = "A small implanted disk that stores a copy of ones conciousness, updated at times of rest."
@@ -12,6 +9,12 @@
 	var/stored_mind = null
 	var/tmp/mob/living/carbon/human/human
 	item_flags = ITEM_NO_BLUDGEON | ITEM_ENCUMBERS_WHILE_HELD
+
+	/**
+	 * Capturing. Mirrors can be captured by a simulation.
+	 */
+	#warn impl
+	var/datum/simulation_core/captured_by_simulation
 
 //holder to prevent having to find it each time
 /mob/living/carbon/human/var/obj/item/implant/mirror/mirror

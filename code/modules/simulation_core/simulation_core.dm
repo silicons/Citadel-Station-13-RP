@@ -14,8 +14,10 @@
 
 	var/allow_join_from_ghost = FALSE
 
-	/// residents
+	/// Residents
 	var/list/mob/simulation_core_resident/residents
+	/// Captured mirrors associated to their resident, if any.
+	var/list/obj/item/implant/mirror/captured_mirrors
 
 #warn impl
 
