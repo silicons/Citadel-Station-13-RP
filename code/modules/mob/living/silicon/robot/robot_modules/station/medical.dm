@@ -132,7 +132,6 @@
 		/obj/item/reagent_scanner/adv,
 		/obj/item/reagent_containers/syringe, //In case the chemist is nice!
 		/obj/item/reagent_containers/glass/beaker/large,//For holding the chemicals when the chemist is nice
-		// /obj/item/sleevemate, //Lets them scan people.
 		/obj/item/shockpaddles/robot/hound, //Paws of life
 		//New surgery tools + grippers
 		/obj/item/surgical/scalpel/cyborg,

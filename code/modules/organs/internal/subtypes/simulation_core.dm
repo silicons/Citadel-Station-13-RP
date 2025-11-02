@@ -37,3 +37,21 @@
  */
 /obj/item/organ/internal/simulation_core/proc/check_mirror_capturing_distance(obj/item/implant/mirror/mirror)
 
+//* VERBS *//
+
+/mob/living/carbon/proc/__speak_into_simulation_core(message as text)
+	set name = "NSay"
+	set desc = "Speak into your simulation core as your self-avatar."
+	set category = VERB_CATEGORY_IC
+
+/mob/living/carbon/proc/__emote_into_simulation_core(message as text)
+	set name = "NMe"
+	set desc = "Emote into your simulation core as your self-avatar."
+	set category = VERB_CATEGORY_IC
+
+/mob/living/carbon/proc/__narrate_into_simulation_core(message as text)
+	set name = "NNarrate"
+	set desc = "Narrate to everyone inside your simulation core from a third-person perspective."
+	set category = VERB_CATEGORY_IC
+
+#warn impl all

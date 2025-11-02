@@ -7,12 +7,14 @@
 	desc = "An advanced nanite construction template capable of installing onto its user a simulation core - \
 	a highly advanced processing unit capable of running virtual reality worlds inside their body."
 	list_pos = NIF_SOULCATCHER
-#warn below
 	// it's an erp item go wild
 	cost = 25
 	wear = 1
 	p_drain = 0.01
 
+	var/installed = FALSE
+
+#warn below
 	#warn all
 	var/inside_flavor = "A small completely white room with a couch, and a window to what seems to be the outside world. A small sign in the corner says 'Configure Me'."
 	var/visibility = TRUE
@@ -23,31 +25,19 @@
 	..()
 	load_settings()
 
-/datum/nifsoft/simulation_core_installer/Destroy()
-	QDEL_LIST_NULL(brainmobs)
-	return ..()
-
 /datum/nifsoft/simulation_core_installer/activate()
 	if((. = ..()))
-		show_settings(nif.human)
+		attempt_install_on(nif.human, new /datum/event_args/actor(usr))
 		spawn(0)
 			deactivate()
 
+/datum/nifsoft/simulation_core_installer/proc/attempt_install_on(mob/living/carbon/target, datum/event_args/actor/actor)
+	#warn impl
+
+	installed = TRUE
+
 /datum/nifsoft/simulation_core_installer/stat_text()
-	return "Change Settings ([brainmobs.len] minds)"
-
-/datum/nifsoft/simulation_core_installer/install()
-	if((. = ..()))
-		//nif.set_flag(NIF_O_SCOTHERS,NIF_FLAGS_OTHER)	//Only required on install if the flag is in the default setting_flags list defined few lines above.
-		if(nif?.human)
-			add_verb(nif.human, /mob/living/carbon/human/proc/nsay)
-			add_verb(nif.human, /mob/living/carbon/human/proc/nme)
-
-/datum/nifsoft/simulation_core_installer/uninstall()
-	QDEL_LIST_NULL(brainmobs)
-	if((. = ..()) && nif?.human) //Sometimes NIFs are deleted outside of a human
-		remove_verb(nif.human, /mob/living/carbon/human/proc/nsay)
-		remove_verb(nif.human, /mob/living/carbon/human/proc/nme)
+	return installed ? "Installed" : "Attempt Install?"
 
 /datum/nifsoft/simulation_core_installer/proc/save_settings()
 	if(!nif)
@@ -143,18 +133,6 @@
 
 /datum/nifsoft/simulation_core_installer/proc/show_settings(var/mob/living/carbon/human/H)
 	set waitfor = FALSE
-	var/settings_list = list(
-	"Catching You \[[setting_flags & NIF_SC_CATCHING_ME ? "Enabled" : "Disabled"]\]" = NIF_SC_CATCHING_ME,
-	"Catching Prey \[[setting_flags & NIF_SC_CATCHING_OTHERS ? "Enabled" : "Disabled"]\]" = NIF_SC_CATCHING_OTHERS,
-	"Ext. Hearing \[[setting_flags & NIF_SC_ALLOW_EARS ? "Enabled" : "Disabled"]\]" = NIF_SC_ALLOW_EARS,
-	"Ext. Vision \[[setting_flags & NIF_SC_ALLOW_EYES ? "Enabled" : "Disabled"]\]" = NIF_SC_ALLOW_EYES,
-//	"Mind Backups \[[setting_flags & NIF_SC_BACKUPS ? "Enabled" : "Disabled"]\]" = NIF_SC_BACKUPS,
-	"AR Projecting \[[setting_flags & NIF_SC_PROJECTING ? "Enabled" : "Disabled"]\]" = NIF_SC_PROJECTING,
-	"Design Inside",
-	"Visibility \[[visibility? "Visible to Observers" : "Invisible to Observers"]\]" = "Visibility",
-	"Visibility Exceptions ([length(visibility_exceptions)])" = "Exceptions",
-	"Visibility Blacklist ([length(visibility_blacklist)])" = "Blacklist",
-	"Erase Contents")
 	var/choice = tgui_input_list(nif.human,"Select a setting to modify:","Soulcatcher NIFSoft", settings_list)
 	if(choice in settings_list)
 		var/associative = settings_list[choice]
@@ -574,6 +552,7 @@
 
 	return TRUE
 
+#warn we want to add variants of this for simulation cores
 ///////////////////
 //Verbs for humans
 /mob/living/carbon/human/proc/nsay(message as text)

@@ -14060,7 +14060,6 @@
 	},
 /obj/structure/table/rack/steel,
 /obj/item/slime_scanner,
-/obj/item/sleevemate,
 /obj/item/robotanalyzer,
 /obj/item/reagent_scanner,
 /obj/item/healthanalyzer,

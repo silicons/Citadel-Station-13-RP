@@ -33,4 +33,10 @@
 /datum/simulation_core/ui_static_data(mob/user, datum/tgui/ui)
 	. = ..()
 
-#warn do we still need to support vore with this?
+/**
+ * export interface SimulationCoreJoinable{}
+ */
+/datum/simulation_core/proc/ui_simulation_joinable_data()
+	. = list()
+
+#warn impl

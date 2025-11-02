@@ -217,6 +217,8 @@
 	anchored = TRUE
 	dir = WEST
 
+#warn let people slot mirrors in if died to vore exclusively
+
 //Cryopods themselves.
 /obj/machinery/cryopod
 	name = "cryogenic freezer"

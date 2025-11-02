@@ -1,3 +1,9 @@
+// TODO: this is pretty much adminspawn only for a reason
+//       - add a way to lint for adminspawn paths in maps
+//       - add a guard to admin spawning that marks if anything that shouldn't exist is spawned and what type
+//         so post-round stats can tell if the round was tampered with using things that aren't
+//         considered baseline canon
+
 //Body snatcher. Based off the sleevemate, but instead of storing a mind it lets you swap your mind with someone. Extremely illegal and being caught with one s
 /obj/item/bodysnatcher
 	name = "\improper Body Snatcher Device"

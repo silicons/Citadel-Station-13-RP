@@ -1531,7 +1531,6 @@
 /area/tether/surfacebase/security/detective/officeb)
 "bgP" = (
 /obj/structure/table/steel,
-/obj/item/sleevemate,
 /obj/item/camera{
 	name = "Autopsy Camera";
 	pixel_x = -2;

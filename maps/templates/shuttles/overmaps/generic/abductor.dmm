@@ -201,7 +201,6 @@
 /area/abductor/interior)
 "pa" = (
 /obj/structure/closet/alien,
-/obj/item/sleevemate,
 /obj/item/flash,
 /obj/item/storage/firstaid/toxin,
 /turf/simulated/shuttle/floor/alien,
@@ -304,7 +303,6 @@
 /obj/structure/table/alien,
 /obj/item/storage/box/handcuffs,
 /obj/item/storage/box/handcuffs,
-/obj/item/sleevemate,
 /turf/simulated/shuttle/floor/alienplating,
 /area/abductor/interior)
 "tI" = (

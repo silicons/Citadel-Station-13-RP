@@ -2621,7 +2621,6 @@
 /area/shuttle/escape)
 "ww" = (
 /obj/structure/table/steel,
-/obj/item/sleevemate,
 /obj/item/camera{
 	name = "Autopsy Camera";
 	pixel_x = -2;

@@ -390,6 +390,7 @@
 // Default implementation calls M.death() and removes from internal contents.
 // Indigestable items are removed, and M is deleted.
 /obj/belly/proc/digestion_death(var/mob/living/M)
+	#warn mark their mirror as died of vore
 	//M.death(1) // "Stop it he's already dead..." Basically redundant and the reason behind screaming mouse carcasses.
 	if(M.ckey)
 		log_game("[key_name(owner)] has digested [key_name(M)] in their [lowertext(name)] ([owner ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[owner.x];Y=[owner.y];Z=[owner.z]'>JMP</a>" : "null"])")
