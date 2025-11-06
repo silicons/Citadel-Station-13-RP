@@ -8,7 +8,7 @@
 	ask_verb = "clinks"
 	exclaim_verb = "clunks"
 	colour = "phoronoid"
-	key = "c"
+	key_default = "c"
 	syllables = list("clatter","tink","chink","clack","rattle","clink","clunk","dink","tonk","donk","plink,","plonk")
 	shorthand = "PHO"
 
@@ -23,7 +23,7 @@
 	ask_verb = "enunciates"
 	exclaim_verb = "enunciates"
 	colour = "phoronoid_conlang"
-	key = "C"
+	key_default = "C"
 	syllables = list(
 		"ar", "at", "an","am","eh","ee","ooz","ite","og","re","si","ite","ish",
 		"click", "clack", "clunk", "plink", "rattle", "tink", "plonk"

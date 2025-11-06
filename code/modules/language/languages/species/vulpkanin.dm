@@ -7,7 +7,7 @@
 	ask_verb = "rurs"
 	exclaim_verb = "barks"
 	colour = "vulpkanin"
-	key = "8"
+	key_default = "8"
 	syllables = list("rur","ya","cen","rawr","bar","kuk","tek","qat","uk","wu","vuh","tah","tch","schz","auch", \
 	"ist","ein","entch","zwichs","tut","mir","wo","bis","es","vor","nic","gro","lll","enem","zandt","tzch","noch", \
 	"hel","ischt","far","wa","baram","iereng","tech","lach","sam","mak","lich","gen","or","ag","eck","gec","stag","onn", \

@@ -5,6 +5,6 @@
 	desc = "The dominant language of the Naramadi people. Often snarled instead of spoken."
 	speech_verb = "snarls"
 	colour = "sergal"
-	key = "T"
+	key_default = "T"
 	syllables = list ("vishante", "kaffas", "ahran", "mikhren", "rhenan", "ruhnar", "sirgna", "oknhe", "hastharan", "vikhnea", "andarana", "vienn", "makhara", "sarkhan", "nakran", "seferel")
 	shorthand = "SAG"

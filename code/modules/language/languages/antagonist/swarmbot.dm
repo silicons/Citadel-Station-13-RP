@@ -7,7 +7,7 @@
 	ask_verb = "chatters"
 	exclaim_verb = "shrieks"
 	colour = "changeling"
-	key = "_"
+	key_default = "_"
 	language_flags = LANGUAGE_NO_STUTTER | LANGUAGE_RESTRICTED
 	syllables = list("^", "v", "-", ".", "~")
 	space_chance = 60

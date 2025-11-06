@@ -7,7 +7,7 @@
 	whisper_verb = "whispers"
 	exclaim_verb = list("exclaims","shouts","yells")
 	colour = "solcom"
-	key = "1"
+	key_default = "1"
 	//syllables are at the bottom of the file
 	shorthand = "SC"
 
@@ -26,7 +26,7 @@
 	translation_class = TRANSLATION_CLASS_DEFAULT_CORE_RACE
 	desc = "Was established in 2122 by the short-lived United Slavic Confederation on Earth."
 	colour = "solcom"
-	key = "G"
+	key_default = "G"
 	syllables = list(
 		"rus", "zem", "ave", "groz", "ski", "ska", "ven", "konst", "pol", "lin", "svy",
 		"danya", "da", "mied", "zan", "das", "krem", "myka", "to", "st", "no", "na", "ni",

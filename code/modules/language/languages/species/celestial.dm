@@ -8,7 +8,7 @@
 	ask_verb = "croons"
 	exclaim_verb = "incants"
 	colour = "daemon" //So fancy
-	key = "n"
+	key_default = "n"
 	syllables = list("viepn","e","bag","docu","kar","xlaqf","raa","qwos","nen","ty","von","kytaf","xin","ty","ka","baak","hlafaifpyk","znu","agrith","na'ar","uah","plhu","six","fhler","bjel","scee","lleri",
 	"dttm","aggr","uujl","hjjifr","wwuthaav",)
 	shorthand = "DEM"
@@ -23,7 +23,7 @@
 	ask_verb = "hums"
 	exclaim_verb = "loudly sings"
 	colour = "enochian" //So fancy
-	key = "i"
+	key_default = "i"
 	syllables = list("salve","sum","loqui","operatur","iusta","et","permittit","facere","effercio","pluribus","enim","hoc",
 	"mihi","wan","six","tartu")
 	shorthand = "ANG"

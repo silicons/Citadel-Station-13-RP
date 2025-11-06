@@ -7,7 +7,7 @@
 	ask_verb = "woofs"
 	exclaim_verb = "howls"
 	language_flags = LANGUAGE_RESTRICTED
-	key = null	// demoted
+
 	space_chance = 100
 	syllables = list("bark", "woof", "bowwow", "yap", "arf")
 	shorthand = "DOG"
@@ -21,7 +21,7 @@
 	ask_verb = "mrowls"
 	exclaim_verb = "yowls"
 	language_flags = LANGUAGE_RESTRICTED
-	key = null	// demoted
+
 	space_chance = 100
 	syllables = list("meow", "mrowl", "purr", "meow", "meow", "meow")
 	shorthand = "CAT"
@@ -35,7 +35,7 @@
 	ask_verb = "squeaks"
 	exclaim_verb = "squeaks"
 	language_flags = LANGUAGE_RESTRICTED
-	key = null	// demoted
+
 	space_chance = 100
 	syllables = list("squeak")	// , "gripes", "oi", "meow")
 	shorthand = "MSE"
@@ -49,7 +49,7 @@
 	ask_verb = "tweets"
 	exclaim_verb = "squawks"
 	language_flags = LANGUAGE_RESTRICTED
-	key = null	// demoted
+
 	space_chance = 100
 	syllables = list("chirp", "squawk", "tweet")
 	shorthand = "BIRD"

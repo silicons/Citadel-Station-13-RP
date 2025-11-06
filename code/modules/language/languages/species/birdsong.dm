@@ -5,7 +5,7 @@
 	desc = "A language primarily spoken by Narvians"
 	speech_verb = "chirps"
 	colour = "birdsongc"
-	key = "7"
+	key_default = "7"
 	syllables = list ("cheep", "peep", "tweet")
 	shorthand = "BDSNG"
 // todo: wtf is this

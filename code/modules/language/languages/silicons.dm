@@ -6,7 +6,7 @@
 	speech_verb = "states"
 	ask_verb = "queries"
 	exclaim_verb = "declares"
-	key = "b"
+	key_default = "b"
 	language_flags = LANGUAGE_RESTRICTED | LANGUAGE_HIVEMIND
 	var/drone_only
 
@@ -65,6 +65,6 @@
 	ask_verb = "transmits"
 	exclaim_verb = "transmits"
 	colour = "say_quote"
-	key = "d"
+	key_default = "d"
 	language_flags = LANGUAGE_RESTRICTED | LANGUAGE_HIVEMIND
 	drone_only = 1

@@ -8,7 +8,7 @@
 	exclaim_verb = "sings"
 	whisper_verb = "hums"
 	colour = "skrell"
-	key = "k"
+	key_default = "k"
 	space_chance = 30
 	syllables = list("qr","qrr","xuq","qil","quum","xuqm","vol","xrim","zaoo","qu-uu","qix","qoo","zix")
 	shorthand = "SKRL"
@@ -24,7 +24,7 @@
 	exclaim_verb = "sings"
 	whisper_verb = "hums"
 	colour = "skrellfar"
-	key = "p"
+	key_default = "p"
 	space_chance = 30
 	syllables = list("qr","qrr","xuq","qil","quum","xuqm","vol","xrim","zaoo","qu-uu","qix","qoo","zix", "...", "oo", "q", "nq", "x", "xq", "ll", "...", "...", "...") //should sound like there's holes in it
 	shorthand = "SKRLFR"

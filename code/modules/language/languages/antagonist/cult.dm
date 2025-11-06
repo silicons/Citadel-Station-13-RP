@@ -7,7 +7,7 @@
 	ask_verb = "intones"
 	exclaim_verb = "chants"
 	colour = "cult"
-	key = "f"
+	key_default = "f"
 	language_flags = LANGUAGE_RESTRICTED
 	space_chance = 100
 	syllables = list("ire","ego","nahlizet","certum","veri","jatkaa","mgar","balaq", "karazet", "geeri", \
@@ -26,6 +26,6 @@
 	ask_verb = "intones"
 	exclaim_verb = "chants"
 	colour = "cult"
-	key = "y"
+	key_default = "y"
 	language_flags = LANGUAGE_RESTRICTED | LANGUAGE_HIVEMIND
 

@@ -8,7 +8,7 @@
 	ask_verb = "asks"
 	exclaim_verb = "shouts"
 	colour = "warning"
-	key = "]"
+	key_default = "]"
 	language_flags = LANGUAGE_RESTRICTED
 	syllables = list("chan","ange","thi","se")
 
@@ -22,8 +22,9 @@
 	exclaim_verb = "shouts"
 	colour = "deadsay"
 	language_flags = LANGUAGE_RESTRICTED
-	key = "\["
+	key_default = "\["
 	syllables = list("rus","zem","ave","groz","ski","ska","ven","konst","pol","lin","svy",
 	"danya","da","mied","zan","das","krem","myka","cyka","blyat","to","st","no","na","ni",
 	"ko","ne","en","po","ra","li","on","byl","cto","eni","ost","ol","ego","ver","stv","pro")
 
+#warn deal with

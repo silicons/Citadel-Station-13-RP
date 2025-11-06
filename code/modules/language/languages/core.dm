@@ -7,7 +7,7 @@
 	speech_verb = "says"
 	exclaim_verb = list("exclaims","shouts","yells")
 	whisper_verb = "whispers"
-	key = "0"
+	key_default = "0"
 	language_flags = LANGUAGE_RESTRICTED
 	syllables = list(
 "vol", "zum", "coo","zoo","bi","do","ooz","ite","og","re","si","ite","ish",
@@ -24,7 +24,7 @@
 	ask_verb = "chirps"
 	exclaim_verb = "whistles loudly"
 	colour = "changeling"
-	key = "6"
+	key_default = "6"
 	language_flags = LANGUAGE_NO_STUTTER
 	syllables = list("beep","beep","beep","beep","beep","boop","boop","boop","bop","bop","dee","dee","doo","doo","hiss","hss","buzz","buzz","bzz","ksssh","keey","wurr","wahh","tzzz","shh","shk")
 	space_chance = 10
@@ -43,7 +43,7 @@
 	desc = "A sign language commonly used for those who are deaf or mute."
 	signlang_verb = list("gestures")
 	colour = "say_quote"
-	key = "s"
+	key_default = "s"
 	language_flags = LANGUAGE_SIGNLANG|LANGUAGE_NO_STUTTER|LANGUAGE_NONVERBAL
 	shorthand = "SIGN"
 

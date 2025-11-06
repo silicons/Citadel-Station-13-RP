@@ -6,7 +6,6 @@
 	ask_verb = "sings"
 	exclaim_verb = "sings"
 	colour = "alien"
-	key = "" //!! THIS DOES NOT HAVE A LANGUAGE KEY IF YOU SOMEHOW MIRACULOUSLY GET ANTAGS WORKING ON RP BEFORE WE TRANSITION TO SS14 IN LIKE 2025 PUT ONE IN.
 	language_flags = LANGUAGE_RESTRICTED | LANGUAGE_HIVEMIND
 
 /datum/prototype/language/corticalborer/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)

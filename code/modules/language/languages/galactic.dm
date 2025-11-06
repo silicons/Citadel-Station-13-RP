@@ -6,7 +6,7 @@
 	desc = "Maintained by the various trading cartels in major systems, this elegant, structured language is used for bartering and bargaining."
 	speech_verb = "enunciates"
 	colour = "say_quote"
-	key = "2"
+	key_default = "2"
 	shorthand = "TBND"
 	syllables = list(
 "fea","vea","vei","veh","vee","feh","fa","soa","su","sua","sou","se","seh","twa","twe","twi",
@@ -23,7 +23,7 @@
 	desc = "Gutter originated as a Thieves' Cant of sorts during the early colonization era. The language eventually spread from the cartels and triads to the disenfranchised people of the Bowl."
 	speech_verb = "growls"
 	colour = "rough"
-	key = "3"
+	key_default = "3"
 	space_chance = 45
 	partial_understanding = list(LANGUAGE_GALCOM = 10, LANGUAGE_TRADEBAND = 20, LANGUAGE_SOL_COMMON = 20)
 	shorthand = "GUT"

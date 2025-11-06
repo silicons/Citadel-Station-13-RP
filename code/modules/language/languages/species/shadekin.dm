@@ -6,5 +6,5 @@
 	ask_verb = "mars"
 	exclaim_verb = "mars"
 	colour = "changeling"
-	key = "m"
+	key_default = "m"
 	language_flags = LANGUAGE_WHITELISTED | LANGUAGE_HIVEMIND

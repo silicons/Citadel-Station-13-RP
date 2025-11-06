@@ -4,7 +4,7 @@
 	desc = "Although they are normally wary and suspicious of each other, changelings can commune over a distance."
 	speech_verb = "says"
 	colour = "changeling"
-	key = "g"
+	key_default = "g"
 	language_flags = LANGUAGE_RESTRICTED | LANGUAGE_HIVEMIND
 
 /datum/prototype/language/ling/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)

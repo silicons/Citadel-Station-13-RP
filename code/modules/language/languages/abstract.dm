@@ -3,7 +3,6 @@
 	id = LANGUAGE_ID_NOISE
 	name = "Noise"
 	desc = "Noises"
-	key = ""
 	language_flags = LANGUAGE_RESTRICTED|LANGUAGE_NONGLOBAL|LANGUAGE_INNATE|LANGUAGE_NO_TALK_MSG|LANGUAGE_NO_STUTTER
 
 /datum/prototype/language/noise/format_message(message, verb)
@@ -32,7 +31,7 @@
 	whisper_verb = "mumbles"
 	exclaim_verb = "shrieks"
 	colour = "attack"
-	key = "r"	// Radda radda radda
+	key_default = "r"	// Radda radda radda
 	language_flags = LANGUAGE_RESTRICTED|LANGUAGE_NONGLOBAL
 	syllables = list (
 			"radda", "fea","vea","vei","veh","vee","feh","fa","soa","su","sua","sou","se","seh","twa","twe","twi",

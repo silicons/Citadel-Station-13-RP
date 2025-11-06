@@ -7,7 +7,7 @@
 	speech_verb = "hisses"
 	ask_verb = "hisses"
 	exclaim_verb = "hisses"
-	key = "u"
+	key_default = "u"
 	language_flags = LANGUAGE_RESTRICTED
 	syllables = list("sss","sSs","SSS")
 	shorthand = "XENO"
@@ -20,7 +20,7 @@
 	ask_verb = "hisses"
 	exclaim_verb = "hisses"
 	colour = "alien"
-	key = "x"
+	key_default = "x"
 	language_flags = LANGUAGE_RESTRICTED | LANGUAGE_HIVEMIND
 
 /datum/prototype/language/xenos/check_special_condition(var/mob/other)

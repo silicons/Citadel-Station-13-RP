@@ -7,7 +7,7 @@
 	ask_verb = "creaks"
 	exclaim_verb = "rustles"
 	colour = "soghun"
-	key = "q"
+	key_default = "q"
 	language_flags = LANGUAGE_RESTRICTED
 	syllables = list("hs","zt","kr","st","sh")
 	shorthand = "DIO"
@@ -21,5 +21,5 @@
 	id = LANGUAGE_ID_DIONA_HIVEMIND
 	name = LANGUAGE_ROOTGLOBAL
 	desc = "A complex language known instinctively by Dionaea, 'spoken' by emitting modulated radio waves. This version uses low frequency waves for slow communication at long ranges."
-	key = "w"
+	key_default = "w"
 	language_flags = LANGUAGE_RESTRICTED | LANGUAGE_HIVEMIND

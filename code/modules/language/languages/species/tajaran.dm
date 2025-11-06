@@ -7,7 +7,7 @@
 	ask_verb = "mrowls"
 	exclaim_verb = "yowls"
 	colour = "tajaran"
-	key = "j"
+	key_default = "j"
 	syllables = list("mrr","rr","tajr","kir","raj","kii","mir","kra","ahk","nal","vah","khaz","jri","ran","darr",
 	"mi","jri","dynh","manq","rhe","zar","rrhaz","kal","chur","eech","thaa","dra","jurl","mah","sanu","dra","ii'r",
 	"ka","aasi","far","wa","baq","ara","qara","zir","saam","mak","hrar","nja","rir","khan","jun","dar","rik","kah",
@@ -31,7 +31,7 @@
 	ask_verb = "mrowls"
 	exclaim_verb = "wails"
 	colour = "akhani"
-	key = "h"
+	key_default = "h"
 	syllables = list("mrr","rr","marr","tar","ahk","ket","hal","kah","dra","nal","kra","vah","dar","hrar", "eh",
 	"ara","ka","zar","mah","ner","zir","mur","hai","raz","ni","ri","nar","njar","jir","ri","ahn","kha","sir",
 	"kar","yar","kzar","rha","hrar","err","fer","rir","rar","yarr","arr","ii'r","jar","kur","ran","rii","ii",
@@ -45,7 +45,7 @@
 	desc = "A standardized Tajaran sign language, incorporating hand gestures and movements of the ears and tail."
 	signlang_verb = list("gestures with their hands", "gestures with their ears and tail", "gestures with their ears, tail and hands")
 	colour = "tajaran"
-	key = "l"
+	key_default = "l"
 	language_flags = LANGUAGE_SIGNLANG | LANGUAGE_NO_STUTTER | LANGUAGE_NONVERBAL
 	shorthand = "TAJR"
 

@@ -1,6 +1,6 @@
 /datum/prototype/language/human/monkey
 	id = LANGUAGE_ID_CHIMPANZEE
-	key = null
+
 	name = "Chimpanzee"
 	translation_class = TRANSLATION_CLASS_LEVEL_3
 	desc = "Ook ook ook."
@@ -13,7 +13,7 @@
 
 /datum/prototype/language/skrell/monkey
 	id = LANGUAGE_ID_NEAERA
-	key = null
+
 	name = SPECIES_MONKEY_SKRELL
 	translation_class = TRANSLATION_CLASS_LEVEL_3
 	desc = "Squik squik squik."
@@ -23,7 +23,7 @@
 
 /datum/prototype/language/unathi/monkey
 	id = LANGUAGE_ID_STOK
-	key = null
+
 	name = SPECIES_MONKEY_UNATHI
 	translation_class = TRANSLATION_CLASS_LEVEL_3
 	desc = "Hiss hiss hiss."
@@ -33,7 +33,7 @@
 
 /datum/prototype/language/tajaran/monkey
 	id = LANGUAGE_ID_FARWA
-	key = null
+
 	name = SPECIES_MONKEY_TAJ
 	translation_class = TRANSLATION_CLASS_LEVEL_3
 	desc = "Meow meow meow."

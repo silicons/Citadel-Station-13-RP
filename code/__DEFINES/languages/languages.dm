@@ -89,6 +89,17 @@ DEFINE_SHARED_BITFIELD(translation_classes, list(
 	BITFIELD(TRANSLATION_CLASS_MACHINE),
 ))
 
+//* Language Knowledge Levels *//
+
+/// don't know it (or just null out on list lol)
+#define LANGUAGE_KNOWLEDGE_NONE 0
+/// know very basic words, occasionally some others
+#define LANGUAGE_KNOWLEDGE_SOME 1
+/// know most words
+#define LANGUAGE_KNOWLEDGE_MOST 2
+/// know all words
+#define LANGUAGE_KNOWLEDGE_ALL 3
+
 //* Translation Context *//
 
 /// above this point we're considered perfect, stop doing expensive computations

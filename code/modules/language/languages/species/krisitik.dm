@@ -4,7 +4,7 @@
 	translation_class = TRANSLATION_CLASS_DEFAULT_STANDARD_RACE
 	desc = "A language native to the Krisitik. It is composed of many squeakish whistles and nuzzles that is very hard to learn for non-native speakers. \
 	It has in recent times adopted words from Tyrmalin."
-	key = "E"
+	key_default = "E"
 	colour = "squeakish"
 	speech_verb = "squeaks"
 	whisper_verb = "squiks"
