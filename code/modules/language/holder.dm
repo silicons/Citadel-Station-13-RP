@@ -1,1 +1,6 @@
-// todo: language holder and sources
+//* This file is explicitly licensed under the MIT license. *//
+//* Copyright (c) 2025 Citadel Station Developers           *//
+
+/datum/language_holder
+
+#warn stuff

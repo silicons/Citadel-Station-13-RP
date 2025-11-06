@@ -88,3 +88,8 @@ DEFINE_SHARED_BITFIELD(translation_classes, list(
 	BITFIELD(TRANSLATION_CLASS_TRIBAL),
 	BITFIELD(TRANSLATION_CLASS_MACHINE),
 ))
+
+//* Translation Context *//
+
+/// above this point we're considered perfect, stop doing expensive computations
+#define TRANSLATION_CONTEXT_PERFECT_THRESHOLD 0.98
