@@ -1,7 +1,5 @@
 //! language names - stop using these, use id lookup
-#define LANGUAGE_ADHERENT "Vibrant"
 #define LANGUAGE_AKHANI "Akhani"
-#define LANGUAGE_AKULA "Olelo Mano"
 #define LANGUAGE_BIRDSONG "Birdsong"
 #define LANGUAGE_BONES "Echorus"
 #define LANGUAGE_CANILUNZT "Canilunzt"

@@ -19,10 +19,6 @@
 #define LANGUAGE_ID_DRONE_BINARY "binary_drones"
 
 //? Species
-/// adherent
-#define LANGUAGE_ID_ADHERENT "adherent"
-/// akula
-#define LANGUAGE_ID_AKULA "akula"
 /// ????????
 #define LANGUAGE_ID_BIRDSONG "birdsong"
 /// aurils

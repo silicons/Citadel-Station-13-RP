@@ -19,12 +19,6 @@
 	var/input_id
 	var/tmp/input_id_resolved
 
-	/// higher = overrides lower when it comes to default keys
-	var/key_priority = 0
-	/// default key; can be null.
-	/// * case-sensitive
-	var/key_default = null
-
 	/// scrambler; set to type to init
 	var/datum/language_scrambler/scrambler
 

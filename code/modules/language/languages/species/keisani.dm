@@ -8,8 +8,6 @@
 	ask_verb = "inquires"
 	exclaim_verb = "promulgates"
 	colour = "keisani" //so sandy
-	key_default = "K"
-	uses_replace = TRUE
 	//does not use syllables
 	syllables = list()
 	shorthand = "KEI"

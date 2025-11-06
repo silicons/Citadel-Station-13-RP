@@ -10,7 +10,6 @@
 	whisper_verb = "clicks"
 	signlang_verb = list("")
 	colour = "luinimma"
-	key_default = "e"
 	native = TRUE
 	language_flags = NONE
 	syllables = list(
