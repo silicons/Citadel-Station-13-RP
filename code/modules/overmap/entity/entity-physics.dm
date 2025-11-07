@@ -1,3 +1,6 @@
+//* This file is explicitly licensed under the MIT license. *//
+//* Copyright (c) 2024 Citadel Station Developers           *//
+
 /**
  * (re)initialize physics
  *
@@ -19,6 +22,10 @@
 /obj/overmap/entity/process(delta_time)
 	physics_tick(delta_time)
 
+/**
+ * @params
+ * * dt - time passed in seconds
+ */
 /obj/overmap/entity/proc/physics_tick(dt)
 	if(!overmap || !isturf(loc))
 		initialize_physics()
@@ -47,6 +54,12 @@
 	if(isnull(vy))
 		vel_y += vy
 
+	var/interpolate_limiter
+	if((interpolate_limiter = OVERMAP_DIST_TO_PIXEL(sqrt(vel_x ** 2 + vel_y ** 2))) > SSovermap_physics.global_interpolate_limit_as_per_second)
+		interpolate_limiter = SSovermap_physics.global_interpolate_limit_as_per_second / interpolate_limiter
+		vel_x *= interpolate_limiter
+		vel_y *= interpolate_limiter
+
 	if(QUANTIZE_OVERMAP_DISTANCE(vel_x) || QUANTIZE_OVERMAP_DISTANCE(vel_y))
 		activate_physics()
 	else
@@ -59,6 +72,12 @@
 		vel_x = vx
 	if(!isnull(vy))
 		vel_y = vy
+
+	var/interpolate_limiter
+	if((interpolate_limiter = OVERMAP_DIST_TO_PIXEL(sqrt(vel_x ** 2 + vel_y ** 2))) > SSovermap_physics.global_interpolate_limit_as_per_second)
+		interpolate_limiter = SSovermap_physics.global_interpolate_limit_as_per_second / interpolate_limiter
+		vel_x *= interpolate_limiter
+		vel_y *= interpolate_limiter
 
 	if(QUANTIZE_OVERMAP_DISTANCE(vel_x) || QUANTIZE_OVERMAP_DISTANCE(vel_y))
 		activate_physics()
@@ -113,6 +132,24 @@
 	if(!overmap)
 		return 0
 	return y - overmap.lower_left_y + 1
+
+/**
+ * Get tile X with floating point where being on a tile is considered being at the center of it.
+ */
+/obj/overmap/entity/proc/get_tile_x_f()
+	if(!overmap)
+		return 0
+	var/center = bound_x + bound_width * 0.5
+	return x - overmap.lower_left_x + 1 + (center - (WORLD_ICON_SIZE * 0.5)) / WORLD_ICON_SIZE
+
+/**
+ * Get tile Y with floating point where being on a tile is considered being at the center of it.
+ */
+/obj/overmap/entity/proc/get_tile_y_f()
+	if(!overmap)
+		return 0
+	var/center = bound_y + bound_height * 0.5
+	return y - overmap.lower_left_y + 1 + (center - (WORLD_ICON_SIZE * 0.5)) / WORLD_ICON_SIZE
 
 /**
  * gets our movement (non-angular) speed in overmaps units per second
