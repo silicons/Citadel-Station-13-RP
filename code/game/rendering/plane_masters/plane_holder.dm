@@ -108,6 +108,15 @@
 	by_plane_type(/atom/movable/screen/plane_master/mobs).set_fake_ambient_occlusion(enabled)
 
 /**
+ * Overmaps
+ */
+/datum/plane_holder/overmap_perspective
+
+/datum/plane_holder/overmap_perspective/generate()
+
+#warn impl
+
+/**
  * Client global planes
  */
 /datum/plane_holder/client_global

@@ -278,3 +278,12 @@
 
 /atom/movable/screen/plane_master/above_hud
 	plane = ABOVE_HUD_PLANE
+
+//* Overmaps *//
+
+/atom/movable/screen/plane_master/overmap
+
+/atom/movable/screen/plane_master/overmap
+
+#warn impl
+

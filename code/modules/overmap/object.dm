@@ -17,6 +17,8 @@
 	icon = 'icons/modules/overmap/entity.dmi'
 	icon_state = "object"
 	color = "#fffffe"
+	plane = OVERMAPS_BACKDROP_PLANE
+	layer = OVERMAPS_BACKDROP_LAYER
 
 	/// curernt bounds overlay, if any
 	var/bounds_overlay

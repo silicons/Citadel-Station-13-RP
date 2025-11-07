@@ -85,18 +85,32 @@
 #define CAMERA_BACKGROUND_LAYER_BACK 1
 #define CAMERA_BACKGROUND_LAYER_MAP 2
 
+//* --- OVERMAPS START --- *//
+
+#define OVERMAPS_BACKDROP_PLANE -97
+	#define OVERMAPS_BACKDROP_LAYER 100
+#define OVERMAPS_ENTITY_PLANE -96
+	#define OVERMAPS_ENTITY_LAYER 100
+#define OVERMAPS_LIGHTING_PLANE -94
+#define OVERMAPS_SENSOR_PLANE -93
+#define OVERMAPS_HUD_PLANE -92
+
+#warn impl
+
+//* --- OVERMAPS END   --- *//
+
+
 /**
  *! -- Space Plane
  *? For space turfs.
  */
-#define SPACE_PLANE -95 /// Reserved for use in space/parallax.
+#define SPACE_PLANE -90 /// Reserved for use in space/parallax.
 
 /**
  *! -- Parallax Plane
  *? For the parallax background.
  */
-#define PARALLAX_PLANE -90
-
+#define PARALLAX_PLANE -89
 #define PARALLAX_VIS_LAYER_BELOW -100 // Everything layering below.
 #define PARALLAX_LAYER_CENTER       0
 #define PARALLAX_VIS_LAYER_ABOVE  100 // Ditto

@@ -12,6 +12,8 @@
  */
 /obj/overmap/entity
 	// pixel movement gaming
+	plane = OVERMAPS_ENTITY_PLANE
+	layer = OVERMAPS_ENTITY_LAYER
 	appearance_flags = KEEP_TOGETHER
 	pixel_movement = TRUE
 	animate_movement = NONE
