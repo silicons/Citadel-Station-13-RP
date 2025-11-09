@@ -3,7 +3,7 @@
 
 SUBSYSTEM_DEF(overmaps)
 	name = "Overmaps"
-	subsystem_flags = SS_NO_FIRE
+	subsystem_flags = NONE
 	init_order = INIT_ORDER_OVERMAPS
 
 	//* Overmaps *//
@@ -19,6 +19,10 @@ SUBSYSTEM_DEF(overmaps)
 
 	/// Initialize queue of callbacks
 	var/list/datum/callback/entity_initialize_queue = list()
+	/// Ticking entities
+	var/list/obj/overmap/entity/ticking = list()
+	var/list/obj/overmap/entity/ticking_currentrun
+	#warn impl ticking
 
 	//*                    Global Tuning                       *//
 	//* Balance tuning goes in here; not sim                   *//

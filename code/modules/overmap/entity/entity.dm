@@ -56,6 +56,17 @@
 	/// todo: reevaluate if this is the right way to perform forced movements like wrapping.
 	var/tmp/is_forced_moving = FALSE
 
+	//* ship *//
+	/// our ship datum, if any
+	var/datum/overmap_ship/ship
+	/// our signal host, if we're capable of hosting signals
+	var/datum/overmap_signal_host/signal_host
+
+	//* ticking *//
+	/// Is ticking?
+	var/ticking = FALSE
+	#warn implement ticking
+
 /obj/overmap/entity/New()
 	// assign id immediately
 	id = "[GLOB.round_id? "[GLOB.round_id]_" : ""][num2text(++id_next, 999)]"

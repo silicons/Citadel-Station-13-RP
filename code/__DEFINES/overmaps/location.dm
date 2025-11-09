@@ -1,5 +1,5 @@
 //* This file is explicitly licensed under the MIT license. *//
-//* Copyright (c) 2024 Citadel Station Developers           *//
+//* Copyright (c) 2025 Citadel Station Developers           *//
 
 //* loaded_status / get_location_load_status() / get_load_status() *//
 

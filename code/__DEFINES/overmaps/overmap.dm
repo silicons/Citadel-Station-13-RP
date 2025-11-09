@@ -1,3 +1,6 @@
+//* This file is explicitly licensed under the MIT license. *//
+//* Copyright (c) 2025 Citadel Station Developers           *//
+
 // debug
 #ifdef ENABLE_OVERMAP_AGGRESSIVE_ASSERT
 	#define OVERMAP_AGGRESSIVE_ASSERT(statement)		ASSERT(statement)

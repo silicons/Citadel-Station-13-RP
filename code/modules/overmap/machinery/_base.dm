@@ -11,6 +11,12 @@
 /obj/machinery/overmap/Moved(atom/old_loc, direction, forced)
 	. = ..()
 
+/**
+ * ensures we're on the right host entity and registered to a ship if needed
+ */
+/obj/machinery/overmap/proc/refresh_host_entity()
+	#warn impl
+
 /obj/machinery/overmap/proc/set_host_entity(obj/overmap/entity/entity)
 	SHOULD_NOT_SLEEP(TRUE)
 	SHOULD_NOT_OVERRIDE(TRUE)
