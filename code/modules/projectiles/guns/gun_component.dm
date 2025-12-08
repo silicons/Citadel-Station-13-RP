@@ -33,6 +33,7 @@
 	/// * This defaults to the gun's typepath if unset.
 	var/component_type
 
+	#warn actions
 
 	/// should we be hidden from examine?
 	var/show_on_examine = TRUE

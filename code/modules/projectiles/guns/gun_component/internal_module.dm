@@ -7,8 +7,6 @@
 	icon = 'icons/modules/projectiles/components/internal_module.dmi'
 	component_slot = GUN_COMPONENT_INTERNAL_MODULE
 
-// TODO: This file is mostly stubs and WIPs.
-
 /**
  * mostly a test module;
  *
@@ -40,5 +38,3 @@
 			// add dispersion
 			LAZYSET(cycle.blackboard, "an-94-refire-triggered", 2)
 			cycle.next_dispersion_adjust += dispersion_amount
-
-// todo: integrated electronics framework
