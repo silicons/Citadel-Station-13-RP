@@ -24,12 +24,25 @@
 /datum/prototype/exotic_particle/halcyon
 	abstract_type = /datum/prototype/exotic_particle/halcyon
 
+/datum/exotic_particle_projection/preset/halcyon
+	abstract_type = /datum/exotic_particle_projection/preset/halcyon
+
 /**
  * primary carrier wave + energy, affects energy
  */
 /datum/prototype/exotic_particle/halcyon/carrier
 	name = "Halcyon Carrier Wave"
 	id = "halcyon-energy"
+
+/datum/exotic_particle_projection/preset/halcyon/carrier
+	abstract_type = /datum/exotic_particle_projection/preset/halcyon/carrier
+	use_particle = /datum/prototype/exotic_particle/halcyon/carrier
+
+/datum/exotic_particle_projection/preset/halcyon/carrier/scorch
+
+/datum/exotic_particle_projection/preset/halcyon/carrier/energize
+
+/datum/exotic_particle_projection/preset/halcyon/carrier/disrupt
 
 /**
  * transmutes and transfers matter, affects physics
@@ -38,6 +51,19 @@
 	name = "Halcyon Transference Wave"
 	id = "halcyon-matter"
 
+/datum/exotic_particle_projection/preset/halcyon/reshape
+	abstract_type = /datum/exotic_particle_projection/preset/halcyon/reshape
+	use_particle = /datum/prototype/exotic_particle/halcyon/reshape
+
+// hit game final fantasy xiv reference
+/datum/exotic_particle_projection/preset/halcyon/reshape/sunder
+
+/datum/exotic_particle_projection/preset/halcyon/reshape/leaden
+
+/datum/exotic_particle_projection/preset/halcyon/reshape/levitate
+
+/datum/exotic_particle_projection/preset/halcyon/reshape/barrier
+
 /**
  * transfers thoughts and gives life to the lifeless, affects mind / heuristics
  */
@@ -45,11 +71,33 @@
 	name = "Halcyon Consciousness Wave"
 	id = "halcyon-mind"
 
+/datum/exotic_particle_projection/preset/halcyon/commune
+	abstract_type = /datum/exotic_particle_projection/preset/halcyon/commune
+	use_particle = /datum/prototype/exotic_particle/halcyon/commune
+
+/datum/exotic_particle_projection/preset/halcyon/commune/shock
+
+/datum/exotic_particle_projection/preset/halcyon/commune/invigorate
+
+/datum/exotic_particle_projection/preset/halcyon/commune/madden
+
+/datum/exotic_particle_projection/preset/halcyon/commune/impose
+	// todo: the most complex one; gives life to the lifeless. blast an airlock and it'll be yours for a while, etc.
+
 /**
  * binding wave that interacts with other exotic particles and occult things
+ * * doesn't really have many effects like the rest, thematically this is what gives this tech
+ *   occult resistance, and is just blasted out without much effect whenever antimagic is invoked for
+ *   the clockwork cult
  */
 /datum/prototype/exotic_particle/halcyon/antimagic
 	name = "Halcyon Suppression Wave"
 	id = "halcyon-antimagic"
+
+/datum/exotic_particle_projection/preset/halcyon/antimagic
+	abstract_type = /datum/exotic_particle_projection/preset/halcyon/antimagic
+	use_particle = /datum/prototype/exotic_particle/halcyon/antimagic
+
+/datum/exotic_particle_projection/preset/halcyon/antimagic/sever
 
 #warn impl
