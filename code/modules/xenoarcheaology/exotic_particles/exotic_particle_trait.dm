@@ -12,9 +12,15 @@
  */
 /datum/exotic_particle_trait
 	/// type to register under
-	var/register_type
+	var/tmp/register_type
 
 #warn impl
+
+/datum/exotic_particle_trait/electrical_charge
+
+/datum/exotic_particle_trait/electrical_drain
+
+/datum/exotic_particle_trait/electrical_disruption
 
 /datum/exotic_particle_trait/gravity
 	register_type = /datum/exotic_particle_trait/gravity

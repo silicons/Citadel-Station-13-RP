@@ -5,6 +5,10 @@
  * Particle effects.
  */
 /datum/exotic_particle_effect
+	/// particle filter flags we care about
+	/// * projections MAY automatically filter out atoms not in any effect for optimization
+	/// * projections are not required to do so and depending on such is undefined behavior.
+	var/exotic_particle_filter_flags = NONE
 	/// cares about field edges
 	var/hooks_field_edge = FALSE
 	/// cares about field turfs
@@ -12,9 +16,6 @@
 
 #warn impl
 #warn lists?
-
-/datum/exotic_particle_effect/proc/potentially_affects(atom/target)
-	. = FALSE
 
 /datum/exotic_particle_effect/proc/inflict_for_targeted(atom/target, power, hit_zone)
 /datum/exotic_particle_effect/proc/inflict_for_targeted_all(list/atom/targets, power)

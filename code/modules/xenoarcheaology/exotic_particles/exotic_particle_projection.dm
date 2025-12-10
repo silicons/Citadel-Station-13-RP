@@ -16,7 +16,19 @@
 	/// * typepaths, anonymous types, are all valid.
 	var/list/datum/exotic_particle_effect/use_effects
 
+	/// filter flags to use
+	var/tmp/compiled_exotic_particle_filter_flags
+
+/datum/exotic_particle_projection
+
+/**
+ * computes all cache data needed to quickly run this against things
+ */
+/datum/exotic_particle_projection/proc/compile()
+
+
 #warn impl
+#warn lists?
 
 /**
  * for cases like;
@@ -50,18 +62,17 @@
 
 /datum/exotic_particle_projection/proc/inflict_for_pulsed(atom/target, turf/from_epicenter, power_per_second, dt)
 
-/**
- * * called before on_field_turf_change_intensity
- */
-/datum/exotic_particle_projection/proc/on_field_turf_add(turf/target)
+/datum/exotic_particle_projection/proc/on_field_edge_turf_add(turf/target, power_density)
 
-/**
- * * called before on_field_turf_change_intensity
- */
-/datum/exotic_particle_projection/proc/on_field_turf_remove(turf/target)
+/datum/exotic_particle_projection/proc/on_field_edge_turf_remove(turf/target, power_density)
 
-/datum/exotic_particle_projection/proc/on_field_turf_change_intensity(turf/target, old_power_density, new_power_density)
+/datum/exotic_particle_projection/proc/on_field_edge_turf_change_intensity(turf/target, old_power_density, new_power_density)
 
-/datum/exotic_particle_projection/proc/on_field_turf_tick(turf/target, power_density)
+/datum/exotic_particle_projection/proc/on_field_inner_turf_add(turf/target, power_density)
+
+/datum/exotic_particle_projection/proc/on_field_inner_turf_remove(turf/target, power_density)
+
+/datum/exotic_particle_projection/proc/on_field_inner_turf_change_intensity(turf/target, old_power_density, new_power_density)
+
 
 #warn impl

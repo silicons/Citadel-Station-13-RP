@@ -233,6 +233,8 @@ DEFINE_BITFIELD(buckle_flags, list(
 /// * gravity, telekinesis, etc
 #define EXOTIC_PARTICLE_FILTER_MOTION (1<<6)
 /// we are affected by ~THE OCCULT~
+/// * counterspell, suppression, etc
+/// * pretty much only occult shit should have this
 #define EXOTIC_PARTICLE_FILTER_MAGIC (1<<7)
 
 #warn define bitfield

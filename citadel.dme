@@ -5774,6 +5774,7 @@
 #include "code\modules\xenoarcheaology\exotic_particles\exotic_particle_effect.dm"
 #include "code\modules\xenoarcheaology\exotic_particles\exotic_particle_field.dm"
 #include "code\modules\xenoarcheaology\exotic_particles\exotic_particle_projection.dm"
+#include "code\modules\xenoarcheaology\exotic_particles\exotic_particle_theme.dm"
 #include "code\modules\xenoarcheaology\exotic_particles\exotic_particle_trait.dm"
 #include "code\modules\xenoarcheaology\exotic_particles\effects\electrical_discharge.dm"
 #include "code\modules\xenoarcheaology\exotic_particles\effects\emp_discharge.dm"
