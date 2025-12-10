@@ -3,8 +3,14 @@
 /// Returns a bitfield gathered from all registered procs
 /// Arguments given here are packaged in a list and given to _SendSignal
 #define SEND_SIGNAL(target, sigtype, arguments...) ( !target.comp_lookup || !target.comp_lookup[sigtype] ? NONE : target._SendSignal(sigtype, list(target, ##arguments)) )
-#define SEND_SPATIAL_SIGNAL(target, sigtype, arguments...) (target._SendSignal(sigtype, list(target, ##arguments)) )
 #define SEND_GLOBAL_SIGNAL(sigtype, arguments...) ( SEND_SIGNAL(SSdcs, sigtype, ##arguments) )
+/**
+ * * Source will be the turf at the atom's location.
+ * * Will null-op if turf isn't on the map or is the wrong type.
+ * * Handlers will be called with args: (turf/epicenter, arguments...).
+ */
+#define SEND_SPATIAL_SIGNAL(turf, range, sigtype, arguments...) \
+	(SSdcs._SendSpatialSignal(get_turf(turf), range, sigtype, list(target, ##arguments)) )
 
 /// Signifies that this proc is used to handle signals.
 /// Every proc you pass to RegisterSignal must have this.

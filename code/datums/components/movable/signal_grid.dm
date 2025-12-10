@@ -85,6 +85,7 @@
 /**
  * Don't use this directly, use the [SEND_SPATIAL_SIGNAL] define.
  */
-/datum/proc/_SendSpatialSignal(sigtype, list/arguments)
+/datum/controller/subsystem/dcs/proc/_SendSpatialSignal(turf/location, range, sigtype, list/arguments)
+	// invoke handlers with (location, ...arguments)
 
 #warn impl
