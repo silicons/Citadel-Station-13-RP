@@ -1,20 +1,22 @@
 //* This file is explicitly licensed under the MIT license. *//
 //* Copyright (c) 2025 Citadel Station Developers           *//
 
+#warn impl
+
 /**
- * registers a /movable in a spatial grid
+ * effectively acts as a signal grid relay that datums can register signals onto.
  */
-/datum/component/spatial_grid
-	dupe_mode = COMPONENT_DUPE_SELECTIVE
-	registered_type = /datum/component/spatial_grid
+/datum/component/signal_grid
+	dupe_mode = COMPONENT_DUPE_UNIQUE
+	registered_type = /datum/component/signal_grid
 	/// target spatial grid
-	var/datum/spatial_grid/grid
+	var/datum/signal_grid/grid
 	/// target grid width
 	var/grid_width
 	/// last grid index
 	var/current_index
 
-/datum/component/spatial_grid/Initialize(datum/spatial_grid/grid)
+/datum/component/signal_grid/Initialize(datum/signal_grid/grid, datum/callback/on_signal)
 	. = ..()
 	if(. == COMPONENT_INCOMPATIBLE)
 		return
@@ -24,18 +26,15 @@
 	src.grid = grid
 	src.grid_width = grid.width
 
-/datum/component/spatial_grid/RegisterWithParent()
+/datum/component/signal_grid/RegisterWithParent()
 	..()
 	construct()
 
-/datum/component/spatial_grid/UnregisterFromParent()
+/datum/component/signal_grid/UnregisterFromParent()
 	teardown()
 	..()
 
-/datum/component/spatial_grid/CheckDupeComponent(datum/component/C, datum/spatial_grid/grid)
-	return grid != src.grid
-
-/datum/component/spatial_grid/proc/construct(atom/root = parent)
+/datum/component/signal_grid/proc/construct(atom/root = parent)
 	while(ismovable(root))
 		RegisterSignal(root, COMSIG_MOVABLE_MOVED, PROC_REF(update))
 		root = root.loc
@@ -44,7 +43,7 @@
 		grid.direct_insert(parent, root.z, idx)
 		current_index = idx
 
-/datum/component/spatial_grid/proc/teardown(atom/root = parent)
+/datum/component/signal_grid/proc/teardown(atom/root = parent)
 	while(ismovable(root))
 		UnregisterSignal(root, COMSIG_MOVABLE_MOVED)
 		root = root.loc
@@ -52,7 +51,7 @@
 		grid.direct_remove(parent, root.z, current_index)
 		current_index = null
 
-/datum/component/spatial_grid/proc/update(atom/movable/source, atom/oldloc)
+/datum/component/signal_grid/proc/update(atom/movable/source, atom/oldloc)
 	var/atom/newloc = source.loc
 	if(newloc == oldloc)
 		return
@@ -68,3 +67,24 @@
 	else
 		teardown(oldloc)
 		construct(newloc)
+
+/datum/component/signal_grid/proc/register_listener(datum/listener, signal, procref)
+
+/datum/component/signal_grid/proc/unregister_listener(datum/listener, signal)
+
+/datum/proc/RegisterSpatialSignal(atom/movable/target, signal_type, proc_type, override)
+	var/datum/component/signal_grid/target_grid_comp = target.LoadComponent(/datum/component/signal_grid)
+	RegisterSignal(target_grid_comp, signal_type, proc_type, override)
+
+/datum/proc/UnregisterSpatialSignal(atom/movable/target, signal_type)
+	var/datum/component/signal_grid/target_grid_comp = target.GetComponent(/datum/component/signal_grid)
+	if(!target_grid_comp)
+		return
+	UnregisterSignal(target_grid_comp, signal_type)
+
+/**
+ * Don't use this directly, use the [SEND_SPATIAL_SIGNAL] define.
+ */
+/datum/proc/_SendSpatialSignal(sigtype, list/arguments)
+
+#warn impl

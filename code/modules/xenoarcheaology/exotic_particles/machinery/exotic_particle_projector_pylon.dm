@@ -1,6 +1,6 @@
 //* This file is explicitly licensed under the MIT license. *//
 //* Copyright (c) 2025 Citadel Station Developers           *//
 
-/obj/item/exotic_particle_jammer
+/obj/machinery/exotic_particle_projector_pylon
 
 #warn impl

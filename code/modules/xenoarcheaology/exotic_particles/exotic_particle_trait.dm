@@ -39,3 +39,10 @@
 
 /datum/exotic_particle_trait/light_emission
 	register_type = /datum/exotic_particle_trait/light_emission
+
+/datum/exotic_particle_trait/physics_ablating
+
+/datum/exotic_particle_trait/physics_1
+
+/datum/exotic_particle_trait/physics_shearing
+

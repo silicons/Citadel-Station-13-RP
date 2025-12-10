@@ -10,3 +10,7 @@
 
 /datum/component/exotic_particle_melee/hardcoded_projection/Initialize(datum/exotic_particle_projection/projection, power)
 
+/datum/component/exotic_particle_melee/via_battery
+
+/datum/component/exotic_particle_melee/via_battery/Initialize(datum/callback/fetch_battery)
+
