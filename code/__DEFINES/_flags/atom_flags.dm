@@ -204,3 +204,35 @@ DEFINE_BITFIELD(buckle_flags, list(
 	BITFIELD(BUCKLING_GROUND_HOIST),
 	BITFIELD(BUCKLING_PROJECTS_DEPTH),
 ))
+
+//* /atom exotic_particle_filter_flags *//
+
+/// we have neurons
+/// * neural shock
+/// * hallucinations
+#define EXOTIC_PARTICLE_FILTER_NEURAL (1<<0)
+/// we have electronics
+/// * emp
+/// * ion
+/// * power add / drain
+#define EXOTIC_PARTICLE_FILTER_ELECTRONIC (1<<1)
+/// we can take damage
+/// * ablate, shear, fracture
+#define EXOTIC_PARTICLE_FILTER_PHYSICAL (1<<2)
+/// we're some kind of organic
+/// * heal
+/// * harm
+#define EXOTIC_PARTICLE_FILTER_ORGANIC (1<<3)
+/// we probably care about temperature
+/// * scorch, freeze
+#define EXOTIC_PARTICLE_FILTER_TEMPERATURE (1<<4)
+/// we have enough of a sprite that we should matter for rendering greatly
+/// * light, glow, etc
+#define EXOTIC_PARTICLE_FILTER_VISIION (1<<5)
+/// we are movable
+/// * gravity, telekinesis, etc
+#define EXOTIC_PARTICLE_FILTER_MOTION (1<<6)
+/// we are affected by ~THE OCCULT~
+#define EXOTIC_PARTICLE_FILTER_MAGIC (1<<7)
+
+#warn define bitfield

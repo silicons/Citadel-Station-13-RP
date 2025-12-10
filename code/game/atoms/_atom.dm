@@ -51,6 +51,12 @@
 	/// * this variable is not visible and should not be edited in the map editor.
 	var/tmp/list/context_menus
 
+	//* Exotic Particles *//
+
+	/// particle filter flags
+	/// * compile time set only, used to optimize routing in code
+	var/exotic_particle_filter_flags = NONE
+
 	//? Integrity
 	/// max health
 	var/integrity_max
