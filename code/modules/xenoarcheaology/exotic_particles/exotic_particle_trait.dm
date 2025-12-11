@@ -8,6 +8,9 @@
  *
  * Sometimes, however, an item / machine needs to know if a particle has a specific ability to do .. a specific thing.
  *
+ * Either that, or, a particle should always do something that we just hard-check for
+ * in a projection datum's compile().
+ *
  * This is what traits are for.
  */
 /datum/exotic_particle_trait
@@ -16,33 +19,44 @@
 
 #warn impl
 
-/datum/exotic_particle_trait/electrical_charge
-
-/datum/exotic_particle_trait/electrical_drain
-
-/datum/exotic_particle_trait/electrical_disruption
-
-/datum/exotic_particle_trait/gravity
-	register_type = /datum/exotic_particle_trait/gravity
-	var/can_attract = FALSE
-	var/can_repel = FALSE
-
-/datum/exotic_particle_trait/gravity/attract
-	can_attract = TRUE
-
-/datum/exotic_particle_trait/gravity/repel
-	can_repel = TRUE
-
-/datum/exotic_particle_trait/gravity/manipulation
-	can_attract = TRUE
-	can_repel = TRUE
-
 /datum/exotic_particle_trait/light_emission
 	register_type = /datum/exotic_particle_trait/light_emission
 
-/datum/exotic_particle_trait/physics_ablating
+	/// this isn't just "can emit light", this is "always emits light"
+	var/always_lit = TRUE
+	/// color of light
+	var/color = "#ffffff"
 
-/datum/exotic_particle_trait/physics_1
+/**
+ * "We can do this"
+ */
+/datum/exotic_particle_trait/capability
+	abstract_type = /datum/exotic_particle_trait/capability
 
-/datum/exotic_particle_trait/physics_shearing
+/datum/exotic_particle_trait/capability/electrical_charge
+
+/datum/exotic_particle_trait/capability/electrical_drain
+
+/datum/exotic_particle_trait/capability/electrical_disruption
+
+/datum/exotic_particle_trait/capability/gravity
+	register_type = /datum/exotic_particle_trait/capability/gravity
+	var/can_attract = FALSE
+	var/can_repel = FALSE
+
+/datum/exotic_particle_trait/capability/gravity/attract
+	can_attract = TRUE
+
+/datum/exotic_particle_trait/capability/gravity/repel
+	can_repel = TRUE
+
+/datum/exotic_particle_trait/capability/gravity/manipulation
+	can_attract = TRUE
+	can_repel = TRUE
+
+/datum/exotic_particle_trait/capability/physics_ablating
+
+/datum/exotic_particle_trait/capability/physics_1
+
+/datum/exotic_particle_trait/capability/physics_shearing
 
