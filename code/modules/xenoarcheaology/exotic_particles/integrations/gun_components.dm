@@ -7,14 +7,14 @@
 	var/enabled
 
 /obj/item/gun_component/exotic_particle_injector/acceleration_coil
-	name = /obj/item/gun_component/acceleration_coil::name + " (exotic particle injector)"
+	name = /obj/item/gun_component/acceleration_coil::name + " (particle injector)"
 	desc = {"
 		A magnetic acceleration coil that can infuse outgoing shots with exotic particles from an inserted battery.
 	"}
 	component_slot = GUN_COMPONENT_ACCELERATION_COIL
 
 /obj/item/gun_component/exotic_particle_injector/focusing_lens
-	name = /obj/item/gun_component/focusing_lens::name + " (exotic particle injector)"
+	name = /obj/item/gun_component/focusing_lens::name + " (particle injector)"
 	desc = {"
 		A special focusing lens that can inject exotic particles inline with a weapon's discharge beam.
 	"}

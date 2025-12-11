@@ -3,4 +3,7 @@
 
 /obj/machinery/exotic_particle_sensor
 
-#warn impl
+// -- Unticked for now --
+
+// TODO: when we finally unify networks, telecomms, and suit sensors, this will allow
+//       for coalescing particle signals and displaying on a tracking map.

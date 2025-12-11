@@ -8,6 +8,10 @@
  * * Careful observers may note that these don't actually care about bindings.
  *   This is intentional, as bindings are actually a lie that is artificially added
  *   to pretend science has a job.
+ * * Careful observers may note that a single particle is allowed per projection.
+ *   This is because particle processing is fairly complicated, and while it's possible,
+ *   it's not recommended to use multiple, and thus we have decided to force the API to be more annoying
+ *   to use for that purpose.
  */
 /datum/exotic_particle_projection
 	/// set to typepath or ID to initialize.

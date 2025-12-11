@@ -1,5 +1,5 @@
 CREATE_STANDARD_TURFS(/turf/simulated/mineral)
-/turf/simulated/mineral //wall piece
+/turf/simulated/mineral
 	name = "rock"
 	icon = 'icons/turf/walls/natural.dmi'
 	icon_state = "preview"
@@ -39,6 +39,23 @@ CREATE_STANDARD_TURFS(/turf/simulated/mineral)
 	var/ignore_mapgen
 	var/ignore_oregen = FALSE
 	var/ignore_cavegen = FALSE
+
+	/**
+	 * Unordered list of archeology finds.
+	 * * Lazy list.
+	 * TODO: only on /turf/simulated/mineral_wall or something why the hell are they the same type?
+	 */
+	var/list/datum/archeology_find/archeology_finds
+	/**
+	 * If exists, this holds active finds that aren't dug out yet.
+	 */
+	var/atom/movable/archeology_embedded_container/archeology_active_container
+	#warn impl
+
+/turf/simulated/mineral/Destroy()
+	QDEL_NULL(archeology_active_container)
+	QDEL_LIST(archeology_finds)
+	return ..()
 
 /turf/simulated/mineral/floor
 	name = "sand"
@@ -722,3 +739,10 @@ CREATE_STANDARD_TURFS(/turf/simulated/mineral/icerock/floor/ignore_cavegen)
 		mineral = GLOB.ore_data[mineral_name]
 		if(atom_flags & ATOM_INITIALIZED)
 			update_icon()
+
+//* Archeology *//
+
+/turf/simulated/mineral/proc/request_archeology_active_container() as /atom/movable/archeology_embedded_container
+	if(!archeology_active_container)
+		archeology_active_container = new(src)
+	return ..()
