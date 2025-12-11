@@ -27,6 +27,10 @@
 	/// our THEME...
 	var/datum/prototype/exotic_particle_theme/theme
 
-
+	/// viscosity
+	/// * sounds insane, right?
+	/// * determines the nominal propagation speed of our projections
+	/// * 0.5 = 2x as fast, 2 = 2x as slow
+	var/viscosity = 1
 
 #warn impl
