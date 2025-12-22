@@ -23,16 +23,37 @@
 	/// filter flags to use
 	var/tmp/compiled_exotic_particle_filter_flags
 
-/datum/exotic_particle_projection
+	/// compiled with cached data?
+	var/tmp/compiled = FALSE
+
+/datum/exotic_particle_projection/New()
+	if(use_particle)
+		#warn resolve
+	if(use_effects)
+		#warn resolve
 
 /**
  * computes all cache data needed to quickly run this against things
  */
 /datum/exotic_particle_projection/proc/compile()
-
+	compiled_exotic_particle_filter_flags = NONE
+	for(var/datum/exotic_particle_effect/effect as anything in use_effects)
+		compiled_exotic_particle_filter_flags |= effect.exotic_particle_filter_flags
 
 #warn impl
 #warn lists?
+
+/datum/exotic_particle_projection/proc/cast_as_projectile()
+
+/datum/exotic_particle_projection/proc/cast_as_rayscan()
+
+/datum/exotic_particle_projection/proc/cast_as_splash()
+
+/datum/exotic_particle_projection/proc/cast_as_pulse()
+
+/datum/exotic_particle_projection/proc/cast_as_melee()
+
+/datum/exotic_particle_projection/proc/cast_as_touch()
 
 /**
  * for cases like;

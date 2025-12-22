@@ -14,7 +14,7 @@
 	/// the number
 	var/value = 0
 
-/datum/archeology_dating_estimate(magnitude, value)
+/datum/archeology_dating_estimate/New(magnitude, value)
 	src.magnitude = magnitude
 	src.value = value
 

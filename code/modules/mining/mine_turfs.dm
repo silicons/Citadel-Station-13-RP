@@ -745,4 +745,4 @@ CREATE_STANDARD_TURFS(/turf/simulated/mineral/icerock/floor/ignore_cavegen)
 /turf/simulated/mineral/proc/request_archeology_active_container() as /atom/movable/archeology_embedded_container
 	if(!archeology_active_container)
 		archeology_active_container = new(src)
-	return ..()
+	return archeology_active_container
