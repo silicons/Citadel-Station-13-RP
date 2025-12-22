@@ -5874,6 +5874,7 @@
 #include "code\modules\xenoarcheaology\unsorted\old_tools\suspension_generator.dm"
 #include "code\modules\xenoarcheaology\unsorted\old_tools\tools.dm"
 #include "code\modules\xenoarcheaology\unsorted\old_tools\tools_pickaxe.dm"
+#include "code\modules\xenoarcheaology\xenoarch\xenoarch_effect.dm"
 #include "code\modules\xenoarcheaology\xenoarch\components\xenoarch_artifact.dm"
 #include "code\modules\xenoarcheaology\xenoarch\items\xenoarch_depth_scanner.dm"
 #include "code\modules\xenoarcheaology\xenoarch\items\xenoarch_measuring_tape.dm"
