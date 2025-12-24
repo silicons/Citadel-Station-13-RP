@@ -1081,23 +1081,33 @@ GLOBAL_DATUM_INIT(circuit_translation_context, /datum/translation_context/simple
 
 /obj/item/integrated_circuit/input/microphone
 	name = "microphone"
-	desc = "Useful for spying on people, or for voice-activated machines."
+	desc = "A microphone with a built-in line-of-sight sign language analyzer."
 	extended_desc = "This will automatically translate most languages it hears to Galactic Common.  \
 	The first activation pin is always pulsed when the circuit hears someone talk, while the second one \
-	is only triggered if it hears someone speaking a language other than Galactic Common."
+	is only triggered if it hears someone speaking a language other than Galactic Common. The third is activated if \
+	sign-language is translated, though this requires the circuit to have line of sight to the 'speaker'. \
+	If part of the message cannot be read, it will be replaced with '--'."
 	icon_state = "recorder"
 	complexity = 8
 	inputs = list()
 	atom_flags = ATOM_HEAR
 	outputs = list(
-	"speaker" = IC_PINTYPE_STRING,
-	"message" = IC_PINTYPE_STRING
+		"speaker" = IC_PINTYPE_STRING,
+		"message" = IC_PINTYPE_STRING,
 	)
-	activators = list("on message received" = IC_PINTYPE_PULSE_OUT, "on translation" = IC_PINTYPE_PULSE_OUT)
+	activators = list(
+		"on message received" = IC_PINTYPE_PULSE_OUT,
+		"on translation" = IC_PINTYPE_PULSE_OUT,
+		"on sign-language read" = IC_PINTYPE_PULSE_OUT,
+	)
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
 	power_draw_per_use = 5
 	/// translation context
 	var/datum/translation_context/translation_context
+	var/list/readable_signlang_ids = list(
+		/datum/prototype/language/sign::id,
+		/datum/prototype/language/tajsign::id,
+	)
 
 /obj/item/integrated_circuit/input/microphone/Initialize(mapload)
 	translation_context = GLOB.circuit_translation_context
@@ -1107,78 +1117,30 @@ GLOBAL_DATUM_INIT(circuit_translation_context, /datum/translation_context/simple
 	translation_context = null
 	return ..()
 
-/obj/item/integrated_circuit/input/microphone/hear_talk(mob/living/M, msg, var/verb="says", datum/prototype/language/speaking=null)
-	var/translated = FALSE
-	if(M && msg)
-		if(speaking)
-			if(!translation_context.can_translate(speaking, M))
-				msg = speaking.scramble(msg)
-			else
-				msg = translation_context.attempt_translation(speaking, M, msg)
-			if(!istype(speaking, /datum/prototype/language/common) && !istype(speaking, /datum/prototype/language/noise))
-				translated = TRUE
-		set_pin_data(IC_OUTPUT, 1, M.GetVoice())
-		set_pin_data(IC_OUTPUT, 2, msg)
-
-	push_data()
-	activate_pin(1)
-	if(translated)
-		activate_pin(2)
-
-/obj/item/integrated_circuit/input/microphone/sign
-	name = "sign-language translator"
-	desc = "Useful for spying on people or for sign activated machines."
-	extended_desc = "This will automatically translate galactic standard sign language it sees to Galactic Common.  \
-	The first activation pin is always pulsed when the circuit sees someone speak sign, while the second one \
-	is only triggered if it sees someone speaking a language other than sign language, which it will attempt to \
-	lip-read."
-	icon_state = "video_camera"
-	complexity = 12
-	inputs = list()
-	outputs = list(
-	"speaker" = IC_PINTYPE_STRING,
-	"message" = IC_PINTYPE_STRING
-	)
-	activators = list("on message received" = IC_PINTYPE_PULSE_OUT, "on translation" = IC_PINTYPE_PULSE_OUT)
-	spawn_flags = IC_SPAWN_RESEARCH
-	power_draw_per_use = 30
-
-	var/list/my_langs = list()
-	var/list/readable_langs = list(
-		LANGUAGE_GALCOM,
-		LANGUAGE_SOL_COMMON,
-		LANGUAGE_TRADEBAND,
-		LANGUAGE_GUTTER,
-		LANGUAGE_TERMINUS
-		)
-
-/obj/item/integrated_circuit/input/microphone/sign/Initialize(mapload)
+/obj/item/integrated_circuit/input/microphone/hear_say_new(datum/saycode_packet/packet, datum/saycode_transmit/transmit)
 	. = ..()
-	for(var/lang in readable_langs)
-		var/datum/prototype/language/newlang = RSlanguages.legacy_resolve_language_name(lang)
-		my_langs |= newlang
+	#warn impl, including sign
 
-/obj/item/integrated_circuit/input/microphone/sign/hear_talk(mob/living/M, msg, var/verb="says", datum/prototype/language/speaking=null)
-	var/signlang = FALSE
-	if(M && msg)
-		if(speaking)
-			if(!((speaking.language_flags & LANGUAGE_NONVERBAL) || (speaking.language_flags & LANGUAGE_SIGNLANG)))
-				signlang = FALSE
-				msg = speaking.scramble(msg, my_langs)
-			else
-				signlang = TRUE
-		set_pin_data(IC_OUTPUT, 1, M.GetVoice())
-		set_pin_data(IC_OUTPUT, 2, msg)
+/obj/item/integrated_circuit/input/microphone/proc/messageify_inbound_say(datum/saycode_packet/packet, datum/saycode_transmit/transmit)
+	#warn impl
 
-	push_data()
-	activate_pin(1)
-	if(signlang)
-		activate_pin(2)
+// /obj/item/integrated_circuit/input/microphone/hear_talk(mob/living/M, msg, var/verb="says", datum/prototype/language/speaking=null)
+// 	var/translated = FALSE
+// 	if(M && msg)
+// 		if(speaking)
+// 			if(!translation_context.can_translate(speaking, M))
+// 				msg = speaking.scramble(msg)
+// 			else
+// 				msg = translation_context.attempt_translation(speaking, M, msg)
+// 			if(!istype(speaking, /datum/prototype/language/common) && !istype(speaking, /datum/prototype/language/noise))
+// 				translated = TRUE
+// 		set_pin_data(IC_OUTPUT, 1, M.GetVoice())
+// 		set_pin_data(IC_OUTPUT, 2, msg)
 
-/obj/item/integrated_circuit/input/microphone/sign/hear_signlang(mob/M as mob, text, verb, datum/prototype/language/speaking)
-	hear_talk(M, text, verb, speaking)
-	return
-
+// 	push_data()
+// 	activate_pin(1)
+// 	if(translated)
+// 		activate_pin(2)
 
 /obj/item/integrated_circuit/output/move_detector
 	name = "movement detection"

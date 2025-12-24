@@ -36,7 +36,7 @@ var/list/sacrificed = list()
 		if(istype(src,/obj/effect/rune))
 			user.say_legacy("Sas[pick("'","`")]so c'arta forbici!")//Only you can stop auto-muting
 		else
-			user.whisper("Sas[pick("'","`")]so c'arta forbici!")
+			user.lazy_whisper("Sas[pick("'","`")]so c'arta forbici!")
 		user.visible_message("<span class='danger'>[user] disappears in a flash of red light!</span>", \
 		"<span class='danger'>You feel as your body gets dragged through the dimension of Nar-Sie!</span>", \
 		"<span class='danger'>You hear a sickening crunch and sloshing of viscera.</span>")
@@ -92,7 +92,7 @@ var/list/sacrificed = list()
 	if(istype(src,/obj/effect/rune))
 		usr.say_legacy("N[pick("'","`")]ath reth sh'yro eth d'raggathnor!")
 	else
-		usr.whisper("N[pick("'","`")]ath reth sh'yro eth d'raggathnor!")
+		usr.lazy_whisper("N[pick("'","`")]ath reth sh'yro eth d'raggathnor!")
 	usr.visible_message("<span class='warning'>Rune disappears with a flash of red light, and in its place now a book lies.</span>", \
 	"<span class='warning'>You are blinded by the flash of red light! After you're able to see again, you see that now instead of the rune there's a book.</span>", \
 	"<span class='warning'>You hear a pop and smell ozone.</span>")
@@ -224,7 +224,7 @@ var/list/sacrificed = list()
 	if(istype(src,/obj/effect/rune))
 		usr.say_legacy("Ta'gh fara[pick("'","`")]qha fel d'amar det!")
 	else
-		usr.whisper("Ta'gh fara[pick("'","`")]qha fel d'amar det!")
+		usr.lazy_whisper("Ta'gh fara[pick("'","`")]qha fel d'amar det!")
 	playsound(U, 'sound/items/Welder2.ogg', 25, 1)
 	var/turf/T = get_turf(U)
 	if(T)
@@ -249,7 +249,7 @@ var/list/sacrificed = list()
 					drain += bdrain
 	if(!drain)
 		return fizzle()
-	usr.say ("Yu[pick("'","`")]gular faras desdae. Havas mithum javara. Umathar uf'kal thenar!")
+	usr.say_legacy ("Yu[pick("'","`")]gular faras desdae. Havas mithum javara. Umathar uf'kal thenar!")
 	usr.visible_message("<span class='danger'>Blood flows from the rune into [usr]!</span>", \
 	"<span class='danger'>The blood starts flowing from the rune and into your frail mortal body. You feel... empowered.</span>", \
 	"<span class='warning'>You hear a liquid flowing.</span>")
@@ -404,7 +404,7 @@ var/list/sacrificed = list()
 				V.show_message("<span class='warning'>The rune turns into gray dust, veiling the surrounding runes.</span>", 3)
 			qdel(src)
 		else
-			usr.whisper("Kla[pick("'","`")]atu barada nikt'o!")
+			usr.lazy_whisper("Kla[pick("'","`")]atu barada nikt'o!")
 			to_chat(usr, "<span class='warning'>Your talisman turns into gray dust, veiling the surrounding runes.</span>")
 			for (var/mob/V in orange(1,src))
 				if(V!=usr)
@@ -615,7 +615,7 @@ var/list/sacrificed = list()
 	if(istype(src,/obj/effect/rune))
 		usr.say_legacy("O bidai nabora se[pick("'","`")]sma!")
 	else
-		usr.whisper("O bidai nabora se[pick("'","`")]sma!")
+		usr.lazy_whisper("O bidai nabora se[pick("'","`")]sma!")
 
 	input = sanitize(input)
 	log_and_message_admins("used a communicate rune to say '[input]'")
@@ -775,7 +775,7 @@ var/list/sacrificed = list()
 			qdel(src)
 			return
 		if(istype(W,/obj/item/paper/talisman))
-			usr.whisper("Nikt[pick("'","`")]o barada kla'atu!")
+			usr.lazy_whisper("Nikt[pick("'","`")]o barada kla'atu!")
 			to_chat(usr, "<span class='warning'>Your talisman turns into red dust, revealing the surrounding runes.</span>")
 			for (var/mob/V in orange(1,usr.loc))
 				if(V!=usr)
@@ -925,7 +925,7 @@ var/list/sacrificed = list()
 			C.show_message("<span class='warning'>The world around you suddenly becomes quiet.</span>", 3)
 			affected += C
 		if(affected.len)
-			usr.whisper("Sti[pick("'","`")] kaliedir!")
+			usr.lazy_whisper("Sti[pick("'","`")] kaliedir!")
 			to_chat(usr, "<span class='warning'>Your talisman turns into gray dust, deafening everyone around.</span>")
 			add_attack_logs(usr, affected, "Deafen rune")
 			for (var/mob/V in orange(1,src))
@@ -970,7 +970,7 @@ var/list/sacrificed = list()
 			affected += C
 			C.show_message("<span class='warning'>You feel a sharp pain in your eyes, and the world disappears into darkness..</span>", 3)
 		if(affected.len)
-			usr.whisper("Sti[pick("'","`")] kaliesin!")
+			usr.lazy_whisper("Sti[pick("'","`")] kaliesin!")
 			to_chat(usr, "<span class='warning'>Your talisman turns into gray dust, blinding those who not follow the Nar-Sie.</span>")
 			add_attack_logs(usr, affected, "Blindness rune")
 	return
@@ -1094,7 +1094,7 @@ var/list/sacrificed = list()
 	if(istype(src,/obj/effect/rune))
 		usr.say_legacy("N'ath reth sh'yro eth d[pick("'","`")]raggathnor!")
 	else
-		usr.whisper("N'ath reth sh'yro eth d[pick("'","`")]raggathnor!")
+		usr.lazy_whisper("N'ath reth sh'yro eth d[pick("'","`")]raggathnor!")
 	usr.visible_message("<span class='warning'>The rune disappears with a flash of red light, and a set of armor appears on [usr]...</span>", \
 	"<span class='warning'>You are blinded by the flash of red light! After you're able to see again, you see that you are now wearing a set of armor.</span>")
 

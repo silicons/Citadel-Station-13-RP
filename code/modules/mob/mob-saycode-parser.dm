@@ -242,11 +242,11 @@ GLOBAL_REAL(saycode_token_parser, /regex) = regex(
 	// tokenize
 	var/list/tokens = splittext_char(message, global.saycode_token_parser)
 	if(length(tokens) > token_safety_limit)
-		log_saycode_reject(src, "safe rejection of token limit [length(tokenized_body) > token_safety_limit]", message)
+		log_saycode_reject(src, "safe rejection of token limit +[length(tokens) - token_safety_limit]", message)
 		return new /datum/saycode_context/failure("Token limit reached.", null, message)
 	// active language overrides; last item on it is active language
 	var/list/datum/prototype/language/language_stack = list()
-	for(var/token in tokenized_body)
+	for(var/token in tokens)
 		switch(token[1])
 			if("}")
 				// end of language fragment
@@ -264,7 +264,7 @@ GLOBAL_REAL(saycode_token_parser, /regex) = regex(
 				// symbol fragment
 				// copy symbol (assumed to be everything but the first two '${' and the last '}')
 				var/symbol = copytext(token, 3, length(token))
-				#warn impl
+				// null-op for now
 
 	// parse: <footer>
 	switch(copytext_char(message, -1))

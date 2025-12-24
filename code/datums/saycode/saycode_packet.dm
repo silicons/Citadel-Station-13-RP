@@ -21,7 +21,7 @@
 	var/saycode_type = NONE
 
 	//* Message *//
-	/// message fragments
+	/// message body fragments
 	///
 	/// * Text will be interpolated directly as raw HTML.
 	/// * /datum/saycode_fragment's will be interpolate()'d as required.
@@ -65,34 +65,20 @@
 /datum/saycode_packet/proc/get_mutable()
 	return immutable ? clone() : src
 
-
-
 /**
  * Renders a say into a HTML-formatted message for the chat.
  *
  * @params
- * * context - the saycode context to use, if any
  * * target - client that's going to view us
  * * force - render, even if no client is provided
  *
  * @return rendered string, or null if fail / skipped
  */
-/datum/saycode_packet/proc/perform_render(client/target, force) as text
+/datum/saycode_packet/proc/render(client/target, force) as text
 	if(!target && !force)
 		return
 
+	#warn ghost follow shit?
+
 	var/raw_html = render()
-
-
-/**
- * Renders a say into a HTML-formatted message for the chat.
- *
- * * All html, including internal signalling used in tgui-chat like component injection,
- *   should be returned.
- * * This pretty much is the proc that does it all.
- *
- * @return rendered string, or null if fail / skipped
- */
-/datum/saycode_packet/proc/render() as text
-	// todo: caching
-	var/list/joining
+	return raw_html

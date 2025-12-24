@@ -1,7 +1,7 @@
 //* This file is explicitly licensed under the MIT license. *//
 //* Copyright (c) 2024 Citadel Station Developers           *//
 
-/mob/observer/dead/hear_say_new(datum/saycode_packet/packet)
+/mob/observer/dead/hear_say_new(datum/saycode_packet/packet, datum/saycode_transmit/transmit)
 	if(!client)
 		return ..()
 	// reject non-players that are offscreen

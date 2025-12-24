@@ -1,5 +1,5 @@
 /mob/proc/say_legacy(var/message, var/datum/prototype/language/speaking = null, var/verb="says", var/alt_name="", var/whispering = 0)
-	return
+	#warn impl
 
 /mob/proc/say_dead(var/message)
 	if(!client)
@@ -26,6 +26,26 @@
 		return
 
 	say_dead_direct("[pick("complains","moans","whines","laments","blubbers")], <span class='message'>\"<span class='linkify'>[message]</span>\"</span>", src)
+
+// Checks if the mob's own name is included inside message.  Handles both first and last names.
+/mob/proc/check_mentioned(var/message)
+	var/not_included = list("a", "the", "of", "in", "for", "through", "throughout", "therefore", "here", "there", "then", "now", "I", "you", "they", "he", "she", "by")
+	var/list/valid_names = splittext_char(real_name, " ") // Should output list("John", "Doe") as an example.
+	valid_names -= not_included
+	var/list/nicknames = splittext_char(nickname, " ")
+	valid_names += nicknames
+	valid_names += special_mentions()
+	for(var/name in valid_names)
+		if(findtext_char(message, regex("\\b[REGEX_QUOTE(name)]\\b", "i"))) // This is to stop 'ai' from triggering if someone says 'wait'.
+			return TRUE
+	return FALSE
+
+// Override this if you want something besides the mob's name to count for being mentioned in check_mentioned().
+/mob/proc/special_mentions()
+	return list()
+
+/mob/living/silicon/ai/special_mentions()
+	return list("AI") // AI door!
 
 /mob/proc/say_understands(var/mob/other,var/datum/prototype/language/speaking = null)
 

@@ -78,32 +78,6 @@ var/list/department_radio_keys = list(
 
 	return null
 
-//parses the language code (e.g. :j) from text, such as that supplied to say.
-//returns the language object only if the code corresponds to a language that src can speak, otherwise null.
-/mob/proc/parse_language(var/message)
-	var/prefix = copytext_char(message,1,2)
-	// This is for audible emotes
-	if(length_char(message) >= 1 && prefix == "!")
-		return SScharacters.resolve_language_name("Noise")
-
-	if(length_char(message) >= 2 && is_language_prefix(prefix))
-		var/language_prefix = copytext_char(message, 2 ,3)
-		var/datum/prototype/language/L = SScharacters.resolve_language_key(language_prefix)
-		if (can_speak(L))
-			return L
-		else
-			var/alert_result = alert(src, "You don't know that language. Would you rather speak your default language, gibberish, or nothing?", "Unknown Language Alert","Default Language","Gibberish", "Whoops I made a typo!")
-			switch(alert_result)
-				if("Default Language")
-					if(isliving(src))
-						var/mob/living/caller = src
-						return SScharacters.resolve_language_name(caller.default_language)
-				if("Gibberish")
-					return SScharacters.resolve_language_name(LANGUAGE_GIBBERISH)
-				if("Whoops I made a typo!")
-					return -1
-	return null
-
 var/list/channel_to_radio_key = new
 /proc/get_radio_key_from_channel(channel)
 	var/key = channel_to_radio_key[channel]

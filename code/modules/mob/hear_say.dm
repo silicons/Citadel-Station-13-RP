@@ -1,7 +1,26 @@
 #warn hear_say
-/mob/hear_say_new(datum/saycode_packet/packet)
+/mob/hear_say_new(datum/saycode_packet/packet,)
 	. = ..()
 
+// Checks if the mob's own name is included inside message.  Handles both first and last names.
+/mob/proc/check_mentioned(var/message)
+	var/not_included = list("a", "the", "of", "in", "for", "through", "throughout", "therefore", "here", "there", "then", "now", "I", "you", "they", "he", "she", "by")
+	var/list/valid_names = splittext_char(real_name, " ") // Should output list("John", "Doe") as an example.
+	valid_names -= not_included
+	var/list/nicknames = splittext_char(nickname, " ")
+	valid_names += nicknames
+	valid_names += special_mentions()
+	for(var/name in valid_names)
+		if(findtext_char(message, regex("\\b[REGEX_QUOTE(name)]\\b", "i"))) // This is to stop 'ai' from triggering if someone says 'wait'.
+			return TRUE
+	return FALSE
+
+// Override this if you want something besides the mob's name to count for being mentioned in check_mentioned().
+/mob/proc/special_mentions()
+	return list()
+
+/mob/living/silicon/ai/special_mentions()
+	return list("AI") // AI door!
 
 // At minimum every mob has a hear_say proc.
 

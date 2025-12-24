@@ -31,7 +31,7 @@
 	// clear typing indicator
 	set_typing_indicator(FALSE)
 	// perform say
-	say(message)
+	lazy_say(message)
 
 //* Whisper *//
 
@@ -61,7 +61,7 @@
 	// clear typing indicator
 	set_typing_indicator(FALSE)
 	// perform say
-	whisper(message)
+	lazy_whisper(message)
 
 //* Emote *//
 

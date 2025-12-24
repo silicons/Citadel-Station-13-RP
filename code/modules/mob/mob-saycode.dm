@@ -6,6 +6,7 @@
 
 /mob/transmit_say(datum/saycode_packet/packet, datum/saycode_context/context)
 	#warn impl
+	#warn ask for gibberish or noise if non-resolved language key is found
 
 /mob/hear_say_new(datum/saycode_packet/packet)
 	. = ..()
@@ -19,4 +20,4 @@
 /**
  * Does what we need to do to hear a message.
  */
-/mob/proc/
+/mob/proc/on_hear_say(datum/saycode_packet/packet)

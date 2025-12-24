@@ -13,6 +13,8 @@
  */
 /atom/movable/proc/lazy_say(message)
 
+/atom/movable/proc/lazy_whisper(message)
+
 #warn impl above/below
 
 //* API *//
@@ -59,6 +61,7 @@
  *
  * @params
  * * packet - The received packet.
+ * * transmit - The transmission context.
  */
-/atom/movable/proc/hear_say_new(datum/saycode_packet/packet)
+/atom/movable/proc/hear_say_new(datum/saycode_packet/packet, datum/saycode_transmit/transmit)
 	SHOULD_CALL_PARENT(TRUE)

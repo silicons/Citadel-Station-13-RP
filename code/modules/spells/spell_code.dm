@@ -265,9 +265,9 @@
 				user.say_legacy(replacetext(invocation," ","`"))
 		if(SpI_WHISPER)
 			if(prob(50))
-				user.whisper(invocation)
+				user.lazy_whisper(invocation)
 			else
-				user.whisper(replacetext(invocation," ","`"))
+				user.lazy_whisper(replacetext(invocation," ","`"))
 		if(SpI_EMOTE)
 			user.emote("me", 1, invocation) //the 1 means it's for everyone in view, the me makes it an emote, and the invocation is written accordingly.
 

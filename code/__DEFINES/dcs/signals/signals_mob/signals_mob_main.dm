@@ -19,8 +19,6 @@
 #define COMSIG_MOB_EXAMINATE "mob_examinate"
 /// From base of /mob/update_sight(): ()
 #define COMSIG_MOB_UPDATE_SIGHT "mob_update_sight"
-//// From /mob/living/say_legacy(): ()
-#define COMSIG_MOB_SAY "mob_say"
 
 /// Sent when a mob/login() finishes: (client)
 #define COMSIG_MOB_CLIENT_LOGIN "comsig_mob_client_login"

@@ -25,8 +25,6 @@
 /// Called when teleporting into a protected turf: (channel, turf/origin)
 ////#define COMSIG_ATOM_INTERCEPT_TELEPORT "intercept_teleport"
 	////#define COMPONENT_BLOCK_TELEPORT (1<<0)
-/// Called when an atom is added to the hearers on get_hearers_in_view(): (list/processing_list, list/hearers)
-#define COMSIG_ATOM_HEARER_IN_VIEW "atom_hearer_in_view"
 /// Called when an atom starts orbiting another atom: (atom/movable/orbiter, radius, clockwise, rotation_speed, rotation_segments, pre_rotation)
 #define COMSIG_ATOM_ORBIT_BEGIN "atom_orbit_begin"
 /// Called from orbit component: (atom/movable/orbiter, refreshing)

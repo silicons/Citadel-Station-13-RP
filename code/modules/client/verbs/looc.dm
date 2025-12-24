@@ -58,9 +58,7 @@
 	var/turf/T = get_turf(source)
 	if(!T)
 		return
-	var/list/in_range = get_mobs_and_objs_in_view_fast(T,world.view,0)
-	var/list/m_viewers = in_range["mobs"]
-
+	var/list/atom/in_range = get_players_in_view(world.view, T)
 	var/list/receivers = list() //Clients, not mobs.
 	var/list/r_receivers = list()
 
@@ -74,7 +72,7 @@
 			display_name = "[H.mind.name] (as [H.name])"
 
 	// Everyone in normal viewing range of the LOOC
-	for(var/mob/viewer in m_viewers)
+	for(var/mob/viewer in in_range)
 		if(viewer.client && viewer.client.get_preference_toggle(/datum/game_preference_toggle/chat/looc))
 			receivers |= viewer.client
 		else if(istype(viewer,/mob/observer/eye)) // For AI eyes and the like
