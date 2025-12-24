@@ -68,6 +68,7 @@
 		/datum/radio_preset/station/command::freq_number,
 		/datum/radio_preset/station/engineering::freq_number,
 		/datum/radio_preset/station/security::freq_number,
+		/datum/radio_preset/station/exploration::freq_number,
 		/datum/radio_preset/general/entertainment::freq_number,
 	)
 
@@ -94,6 +95,7 @@
 	freq_listening = list(
 		/datum/radio_preset/station/science::freq_number,
 		/datum/radio_preset/station/medical::freq_number,
+		/datum/radio_preset/station/exploration::freq_number,
 	)
 	autolinkers = list("processor1", "science", "medical")
 

@@ -1,27 +1,3 @@
-// Access check is of the type requires one. These have been carefully selected to avoid allowing the janitor to see channels he shouldn't
-GLOBAL_LIST_INIT(default_internal_channels, list(
-	num2text(FREQ_COMMON) = list(),
-	num2text(FREQ_AI_PRIVATE)  = list(ACCESS_SPECIAL_SILICONS),
-	num2text(FREQ_ENTERTAINMENT) = list(),
-	num2text(FREQ_ERT) = list(ACCESS_CENTCOM_ERT),
-	num2text(FREQ_COMMAND)= list(ACCESS_COMMAND_BRIDGE),
-	num2text(FREQ_ENGINEERING) = list(ACCESS_ENGINEERING_ENGINE, ACCESS_ENGINEERING_ATMOS),
-	num2text(FREQ_MEDICAL) = list(ACCESS_MEDICAL_EQUIPMENT),
-	num2text(FREQ_MEDICAL_INTERNAL)=list(ACCESS_MEDICAL_EQUIPMENT),
-	num2text(FREQ_SECURITY) = list(ACCESS_SECURITY_EQUIPMENT),
-	num2text(FREQ_SECURITY_INTERNAL)=list(ACCESS_SECURITY_EQUIPMENT),
-	num2text(FREQ_SCIENCE) = list(ACCESS_SCIENCE_FABRICATION, ACCESS_SCIENCE_ROBOTICS, ACCESS_SCIENCE_XENOBIO, ACCESS_GENERAL_EXPLORER),
-	num2text(FREQ_SUPPLY) = list(ACCESS_SUPPLY_BAY, ACCESS_SUPPLY_MINE_OUTPOST),
-	num2text(FREQ_SERVICE) = list(ACCESS_GENERAL_JANITOR, ACCESS_GENERAL_LIBRARY, ACCESS_GENERAL_BOTANY, ACCESS_GENERAL_BAR, ACCESS_GENERAL_KITCHEN),
-	num2text(FREQ_EXPLORER) = list(ACCESS_GENERAL_EXPLORER, ACCESS_GENERAL_PILOT, ACCESS_SCIENCE_RD)
-))
-
-GLOBAL_LIST_INIT(default_medbay_channels, list(
-	num2text(FREQ_COMMON) = list(),
-	num2text(FREQ_MEDICAL) = list(ACCESS_MEDICAL_EQUIPMENT),
-	num2text(FREQ_MEDICAL_INTERNAL) = list(ACCESS_MEDICAL_EQUIPMENT)
-))
-
 /obj/item/radio
 	icon = 'icons/obj/radio.dmi'
 	name = "shortwave radio"
@@ -34,8 +10,11 @@ GLOBAL_LIST_INIT(default_medbay_channels, list(
 	/// * each of these creates an UI entry so don't fuck around
 	/// * lazy list
 	var/list/freqs_hardbind
+	/// channels registered on in the radio controller
+	/// * "[freq]" = /datum/radio_connection
+	var/list/freqs_registered
 
-
+#warn impl
 	// legacy below
 
 	///FALSE for off

@@ -85,7 +85,6 @@
 
 /obj/item/radio/headset/syndicate
 	origin_tech = list(TECH_ILLEGAL = 3)
-	syndie = 1
 	ks1type = /obj/item/encryptionkey/syndicate
 
 /obj/item/radio/headset/syndicate/alt
@@ -104,7 +103,6 @@
 
 /obj/item/radio/headset/trader
 	name = "trade headset"
-	syndie = 0
 	adhoc_fallback = TRUE
 	ks1type = /obj/item/encryptionkey/trader
 

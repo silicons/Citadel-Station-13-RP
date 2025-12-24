@@ -34,16 +34,13 @@
 
 /obj/machinery/telecomms/receiver/preset_right/strelka
 //	id = "strelka_rx"
-	freq_listening = list(FREQ_AI_PRIVATE, FREQ_SCIENCE, FREQ_MEDICAL, FREQ_SUPPLY, FREQ_SERVICE, FREQ_COMMAND, FREQ_ENGINEERING, FREQ_SECURITY, FREQ_ENTERTAINMENT, FREQ_EXPLORER)
 
 /obj/machinery/telecomms/broadcaster/preset_right/strelka
 //	id = "strelka_tx"
 
 /obj/machinery/telecomms/bus/preset_two/strelka
-	freq_listening = list(FREQ_SUPPLY, FREQ_SERVICE, FREQ_EXPLORER)
 
 /obj/machinery/telecomms/server/presets/service/strelka
-	freq_listening = list(FREQ_SERVICE, FREQ_EXPLORER)
 	autolinkers = list("service", "explorer")
 
 // Telecommunications Satellite
