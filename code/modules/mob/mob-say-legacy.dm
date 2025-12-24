@@ -1,4 +1,4 @@
-/mob/proc/say_legacy(var/message, var/datum/language/speaking = null, var/verb="says", var/alt_name="", var/whispering = 0)
+/mob/proc/say_legacy(var/message, var/datum/prototype/language/speaking = null, var/verb="says", var/alt_name="", var/whispering = 0)
 	return
 
 /mob/proc/say_dead(var/message)

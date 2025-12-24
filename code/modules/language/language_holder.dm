@@ -4,6 +4,6 @@
 /**
  * Context holder for one's understanding of languages.
  */
-/datum/language_holder
+/datum/prototype/language_holder
 
 #warn impl

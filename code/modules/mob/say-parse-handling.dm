@@ -56,7 +56,7 @@ var/list/department_radio_keys = list(
 	  ":�" = "Supply",		".�" = "Supply",
 )
 
-/mob/proc/say_quote(var/message, var/datum/language/speaking = null)
+/mob/proc/say_quote(var/message, var/datum/prototype/language/speaking = null)
 	var/verb = "says"
 	var/ending = copytext_char(message, length_char(message))
 	if(ending=="!")
@@ -88,7 +88,7 @@ var/list/department_radio_keys = list(
 
 	if(length_char(message) >= 2 && is_language_prefix(prefix))
 		var/language_prefix = copytext_char(message, 2 ,3)
-		var/datum/language/L = SScharacters.resolve_language_key(language_prefix)
+		var/datum/prototype/language/L = SScharacters.resolve_language_key(language_prefix)
 		if (can_speak(L))
 			return L
 		else
@@ -150,7 +150,7 @@ var/list/channel_to_radio_key = new
 		return "asks"
 	return verb
 
-/mob/living/say_legacy(var/message, var/datum/language/speaking = null, var/verb="says", var/alt_name="", var/whispering = 0)
+/mob/living/say_legacy(var/message, var/datum/prototype/language/speaking = null, var/verb="says", var/alt_name="", var/whispering = 0)
 	//If you're muted for IC chat
 	if(client)
 		if(message)
@@ -450,7 +450,7 @@ var/list/channel_to_radio_key = new
 		log_say(message, src)
 	return 1
 
-/obj/proc/hear_talk(mob/M as mob, text, verb, datum/language/speaking)
+/obj/proc/hear_talk(mob/M as mob, text, verb, datum/prototype/language/speaking)
 	if(talking_atom)
 		talking_atom.catchMessage(text, M)
 /*
@@ -461,7 +461,7 @@ var/list/channel_to_radio_key = new
 		*/
 	return
 
-/obj/proc/hear_signlang(mob/M as mob, text, verb, datum/language/speaking) // Saycode gets worse every day.
+/obj/proc/hear_signlang(mob/M as mob, text, verb, datum/prototype/language/speaking) // Saycode gets worse every day.
 	return FALSE
 
 /obj/proc/see_emote(mob/M as mob, text, var/emote_type)

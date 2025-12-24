@@ -5,16 +5,9 @@
  * A fragment of saycode data. Goes with `/datum/saycode_packet`
  */
 /datum/saycode_fragment
-	/// message that comprises this
-	var/message
-	/// the list of spans, as raw text, to apply to the message
-	var/list/spans
-	/// language id of message
-	var/language_id = /datum/language/common::id
-	/// saycode type; uses SAYCODE_TYPE_* defines.
-	///
-	/// * This means that a message can theoretically have multiple different saycode types.
-	var/saycode_type = SAYCODE_TYPE_ALWAYS
+	/// cached html
+	/// * make sure to invalidate this if anything changes
+	var/tmp/cached_html
 
 /datum/saycode_fragment/clone(include_contents)
 	var/datum/saycode_fragment/fragment = new
@@ -35,9 +28,23 @@
 /datum/saycode_fragment/proc/render() as text
 	return message
 
+/datum/saycode_fragment/proc/render_cached() as text
+
 #warn impl
 
 //* Fragments *//
+
+/datum/saycode_fragment/user_message
+	/// message that comprises this
+	var/message
+	/// the list of spans, as raw text, to apply to the message
+	var/list/spans
+	/// language id of message
+	var/language_id = /datum/prototype/language/common::id
+	/// saycode type; uses SAYCODE_TYPE_* defines.
+	///
+	/// * This means that a message can theoretically have multiple different saycode types.
+	var/saycode_type = SAYCODE_TYPE_ALWAYS
 
 /**
  * The actor name.

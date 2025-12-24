@@ -108,13 +108,11 @@
 		if(!langset)
 			return
 		listening = 1
-		listening_objects |= src
 		if(mult_icons)
 			icon_state = "[initial(icon_state)]1"
 		to_chat(user, "<span class='notice'>You enable \the [src], translating into [langset.name].</span>")
 	else	//Turning OFF
 		listening = 0
-		listening_objects -= src
 		langset = null
 		icon_state = "[initial(icon_state)]"
 		to_chat(user, "<span class='notice'>You disable \the [src].</span>")

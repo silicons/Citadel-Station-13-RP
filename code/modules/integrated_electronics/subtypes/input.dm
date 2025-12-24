@@ -1101,11 +1101,10 @@ GLOBAL_DATUM_INIT(circuit_translation_context, /datum/translation_context/simple
 
 /obj/item/integrated_circuit/input/microphone/Initialize(mapload)
 	translation_context = GLOB.circuit_translation_context
-	. = ..()
-	listening_objects |= src
+	return ..()
 
 /obj/item/integrated_circuit/input/microphone/Destroy()
-	listening_objects -= src
+	translation_context = null
 	return ..()
 
 /obj/item/integrated_circuit/input/microphone/hear_talk(mob/living/M, msg, var/verb="says", datum/prototype/language/speaking=null)

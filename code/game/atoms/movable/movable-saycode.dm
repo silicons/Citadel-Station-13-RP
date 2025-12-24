@@ -31,6 +31,7 @@
 /atom/movable/proc/say(datum/saycode_packet/packet, datum/saycode_context/context)
 	SHOULD_CALL_PARENT(TRUE)
 
+	packet = packet.get_mutable()
 	packet.context_origin_turf = get_turf(src)
 	packet.context_speaker_weakref = WEAKREF(src)
 

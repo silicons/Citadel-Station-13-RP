@@ -730,6 +730,7 @@ GLOBAL_VAR_INIT(holopad_connectivity_rebuild_queued, FALSE)
 
 //? Say / Emote
 
+#warn nuke all of these
 /obj/machinery/holopad/see_emote(mob/living/M, text)
 	. = ..()
 	relay_intercepted_emote(M, M.name, say_emphasis(text))

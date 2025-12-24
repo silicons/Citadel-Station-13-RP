@@ -7,7 +7,7 @@
 /mob/transmit_say(datum/saycode_packet/packet, datum/saycode_context/context)
 	#warn impl
 
-/mob/hear(datum/saycode_packet/packet)
+/mob/hear_say_new(datum/saycode_packet/packet)
 	. = ..()
 
 	// if no one's home, we don't care

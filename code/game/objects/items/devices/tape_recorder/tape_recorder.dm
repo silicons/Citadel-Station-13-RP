@@ -34,11 +34,9 @@
 	if(ispath(tape))
 		tape = new tape(src)
 		update_icon()
-	listening_objects += src
 
 /obj/item/tape_recorder/Destroy()
 	stop_everything()
-	listening_objects -= src
 	QDEL_NULL(tape)
 	QDEL_NULL(tape_iterator)
 	STOP_PROCESSING(SSobj, src)

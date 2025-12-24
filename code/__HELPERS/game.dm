@@ -271,57 +271,6 @@
 					. |= M		// Since we're already looping through mobs, why bother using |= ? This only slows things down.
 	return .
 
-/**
- * Uses dview to quickly return mobs and objects in view,
- * then adds additional mobs or objects if they are in range 'smartly',
- * based on their presence in lists of players or registered objects
- * Type: 1-audio, 2-visual, 0-neither
- */
-/proc/get_mobs_and_objs_in_view_fast(turf/T, range, type = 1, remote_ghosts = TRUE)
-	var/list/mobs = list()
-	var/list/objs = list()
-
-	var/list/hear = list()
-	DVIEW(hear, range, T, INVISIBILITY_MAXIMUM)
-	var/list/hearturfs = list()
-
-	for(var/atom/movable/AM in hear)
-		if(ismob(AM))
-			mobs += AM
-			hearturfs += get_turf(AM)
-		else if(isobj(AM))
-			objs += AM
-			hearturfs += get_turf(AM)
-
-	// A list of every mob with a client.
-	for(var/mob in GLOB.player_list)
-		if(!ismob(mob))
-			GLOB.player_list -= mob
-			crash_with("There is a null or non-mob reference inside GLOB.player_list ([mob]).")
-			continue
-		if(get_turf(mob) in hearturfs)
-			mobs |= mob
-			continue
-
-		var/mob/M = mob
-		if(M && M.stat == DEAD && remote_ghosts && !M.forbid_seeing_deadchat)
-			switch(type)
-				// Audio messages use ghost_ears.
-				if(1)
-					if(M.get_preference_toggle(/datum/game_preference_toggle/observer/ghost_ears))
-						mobs |= M
-				// Visual messages use ghost_sight.
-				if(2)
-					if(M.get_preference_toggle(/datum/game_preference_toggle/observer/ghost_sight))
-						mobs |= M
-
-	// For objects below the top level who still want to hear.
-	for(var/obj/O in global.listening_objects)
-		if(get_turf(O) in hear)
-			objs |= O
-
-	return list("mobs" = mobs, "objs" = objs)
-
 /proc/inLineOfSight(X1, Y1, X2, Y2, Z=1, PX1=16.5, PY1=16.5, PX2=16.5, PY2=16.5)
 	var/turf/T
 	if(X1 == X2)

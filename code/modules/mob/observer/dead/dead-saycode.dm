@@ -5,6 +5,10 @@
 	if(!client)
 		return ..()
 	// reject non-players that are offscreen
-	if(!(packet.saycode_packet_flags & SAYCODE_PACKET_CONSIDERED_PLAYER) && packet.context_origin_turf && get_dist(packet.context_origin_turf, src) > max(client.current_viewport_height, client.current_viewport_width))
+	if(\
+		!(packet.saycode_packet_flags & SAYCODE_PACKET_CONSIDERED_PLAYER) && \
+		packet.context_origin_turf && \
+		get_dist(packet.context_origin_turf, src) > max(client.current_viewport_height, client.current_viewport_width)\
+	)
 		return FALSE
 	return ..()

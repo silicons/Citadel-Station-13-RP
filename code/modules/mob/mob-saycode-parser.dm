@@ -8,14 +8,14 @@ GLOBAL_REAL(saycode_emphasis_parser, /regex) = regex(
 )
 
 /**
- * Used by GLOB.saycode_emphasis_parser to parse the following wraps:
+ * Used with `global.saycode_emphasis_parser` to parse the following wraps:
  *
  * +bold+
  * |italics|
  * _underline_
  * ~strikethrough~
  */
-/proc/zz__saycode_emphasis_parser(match, group_1, group_2)
+/proc/saycode_emphasis_replacer(match, group_1, group_2)
 	var/static/list/lookup = list(
 		"+" = "b",
 		"~" = "s",
@@ -24,6 +24,24 @@ GLOBAL_REAL(saycode_emphasis_parser, /regex) = regex(
 	)
 	var/use_html_tag = lookup[group_1]
 	return "<[use_html_tag]>[group_2]</[use_html_tag]>"
+
+// Standalone message parser that applies standard saycode emphasis
+/proc/say_emphasis(msg)
+	return replacetext_char(msg, global.saycode_emphasis_parser, /proc/saycode_emphasis_replacer)
+
+// Standalone message parser that removes standard saycode emphasis
+/proc/say_emphasis_strip(msg)
+	return replacetext_char(msg, global.saycode_emphasis_parser, "")
+
+/**
+ * Valid outputs of this regex:
+ * * '#...{' where '...' is 0 to n alphanumeric-plus-dash-and-underscore characters
+ * * '${...}'
+ * * '}'
+ */
+GLOBAL_REAL(saycode_token_parser, /regex) = regex(
+	@{"(#[\w\-]*{|${[\w\-]}|})"},
+)
 
 /**
  * Processes an attempt to say something.
@@ -216,27 +234,37 @@ GLOBAL_REAL(saycode_emphasis_parser, /regex) = regex(
 	 * to avoid needing to manually parse every language fragment.
 	 */
 
-	// parse emphasis into HTML
-	message = replacetext_char(message, global.saycode_emphasis_parser, /proc/zz__saycode_emphasis_parser)
-	// tokenize
-	/**
-	 * Valid outputs of this regex:
-	 * * '#...{' where '...' is 0 to n alphanumeric-plus-dash-and-underscore characters
-	 * * '${...}'
-	 * * '}'
-	 */
-	var/static/regex/tokenizer_regex = regex(
-		@{"(#[\w\-]*{|${[\w\-]}|})"},
-	)
-	while(tokenizer_regex.Find_char())
+	var/datum/saycode_packet/creating_packet = new
+	creating_context.packet = creating_packet
 
-	var/list/tokenized_body = zz__saycode_tokenizer(message, parse_position + 1)
-	if(length(tokenized_body) > token_safety_limit)
+	// parse emphasis into HTML
+	message = replacetext_char(message, global.saycode_emphasis_parser, /proc/saycode_emphasis_replacer)
+	// tokenize
+	var/list/tokens = splittext_char(message, global.saycode_token_parser)
+	if(length(tokens) > token_safety_limit)
 		log_saycode_reject(src, "safe rejection of token limit [length(tokenized_body) > token_safety_limit]", message)
 		return new /datum/saycode_context/failure("Token limit reached.", null, message)
+	// active language overrides; last item on it is active language
+	var/list/datum/prototype/language/language_stack = list()
 	for(var/token in tokenized_body)
-		switch(length(token))
-			if()
+		switch(token[1])
+			if("}")
+				// end of language fragment
+				if(!length(language_stack))
+					// don't error, just ignore it
+				else
+					// pop top language
+					--language_stack.len
+			if("#")
+				// start of language fragment
+				// copy language key (assumed to be everything but the first '#' and the last '}')
+				var/language_key = copytext(token, 2, length(token))
+				#warn impl
+			if("$")
+				// symbol fragment
+				// copy symbol (assumed to be everything but the first two '${' and the last '}')
+				var/symbol = copytext(token, 3, length(token))
+				#warn impl
 
 	// parse: <footer>
 	switch(copytext_char(message, -1))
@@ -253,8 +281,6 @@ GLOBAL_REAL(saycode_emphasis_parser, /regex) = regex(
 	var/end_tu = TICK_USAGE
 	log_saycode_parse(src, TICK_USAGE_TO_MS(end_tu - start_tu), message)
 	return creating_context
-
-#warn impl
 
 /mob/verb/saycode_help()
 	set name = "Help - Say / Emote"

@@ -4,8 +4,11 @@
 #define ATOM_INITIALIZED       (1<<0)
 /// Item has priority to check when entering or leaving.
 #define ATOM_BORDER            (1<<1)
-/// Unused.
-#define ATOM_FLAG_UNUSED_1     (1<<2)
+/// get_hearers_in_view() returns us
+/// * This means we intercept usually for-players messages.
+/// * Mobs, mechas, etc should all have this!
+/// * Saycode instead uses saycode filter flags.
+#define ATOM_HEAR           (1<<2)
 /// Atom queued to SSoverlay for compile_overlays
 #define ATOM_OVERLAY_QUEUED    (1<<3)
 /// Atom is absolute-abstract - should not be interactable or movable in any way shape or form

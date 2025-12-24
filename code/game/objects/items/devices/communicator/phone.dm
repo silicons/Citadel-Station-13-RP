@@ -5,7 +5,6 @@
 	if(!comm || !istype(comm)) return
 
 	communicating |= comm
-	listening_objects |= src
 	update_icon()
 
 // Proc: del_communicating()
@@ -73,7 +72,6 @@
 	new_voice.mind = candidate.mind			//Transfer the mind, if any.
 	candidate.transfer_client_to(new_voice)
 	voice_mobs.Add(new_voice)
-	listening_objects |= src
 
 	var/atom/movable/screen/blackness = new() 	//Makes a black screen, so the candidate can't see what's going on before actually 'connecting' to the communicator.
 	blackness.screen_loc = SCREEN_LOC_FULLSCREEN
@@ -139,7 +137,6 @@
 			comm.end_video()
 
 	if(voice_mobs.len == 0 && communicating.len == 0)
-		listening_objects.Remove(src)
 
 // Proc: request()
 // Parameters: 1 (candidate - the ghost or communicator wanting to call the device)

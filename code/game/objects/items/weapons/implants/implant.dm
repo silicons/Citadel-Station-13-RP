@@ -38,7 +38,6 @@
 	else
 		forceMove(source)
 
-	listening_objects |= src
 
 // Takes place after handle_implant, if that returns TRUE
 /obj/item/implant/proc/post_implant(var/mob/source)
@@ -75,7 +74,6 @@
 /obj/item/implant/Destroy()
 	if(part)
 		part.implants.Remove(src)
-	listening_objects.Remove(src)
 	part = null
 	imp_in = null
 	return ..()
