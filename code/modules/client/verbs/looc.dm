@@ -58,7 +58,7 @@
 	var/turf/T = get_turf(source)
 	if(!T)
 		return
-	var/list/atom/in_range = get_players_in_view(world.view, T)
+	var/list/atom/in_range = get_hearers_in_view(world.view, T)
 	var/list/receivers = list() //Clients, not mobs.
 	var/list/r_receivers = list()
 
