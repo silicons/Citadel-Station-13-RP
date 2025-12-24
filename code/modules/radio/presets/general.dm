@@ -26,9 +26,13 @@
 	freq_number = 1461
 	is_comms_channel = TRUE
 	c_access_encoding = list()
+	html_span = "entradio"
 
 /datum/radio_preset/general/traffic_control
 	name = "Traffic Control"
 	freq_number = 1463
 	is_comms_channel = TRUE
 	c_access_encoding = list()
+	#warn html span
+
+#warn impl all

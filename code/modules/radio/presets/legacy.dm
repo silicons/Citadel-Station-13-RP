@@ -14,21 +14,25 @@
 	name = "Mercenary"
 	freq_number = 1001
 	is_comms_channel = TRUE
+	html_span = "syndradio"
 
 /datum/radio_preset/legacy/raider
 	name = "Raider"
 	freq_number = 1003
 	is_comms_channel = TRUE
+	html_span = "syndradio"
 
 /datum/radio_preset/legacy/talon
 	name = "Talon"
 	freq_number = 1005
 	is_comms_channel = TRUE
+	html_span = "syndradio"
 
 // the return of the king
 /datum/radio_preset/legacy/syndicate
 	name = "Syndicate"
 	freq_number = 1007
 	is_comms_channel = TRUE
+	html_span = "syndradio"
 
 #warn impl all

@@ -665,6 +665,7 @@ var/datum/legacy_announcement/minor/admin_min_announcer = new
 	set desc = "Send an intercom message, like an arrivals announcement."
 	if(!check_rights(0))	return
 
+	#warn use radio presets
 	var/channel = input("Channel for message:","Channel", null) as null|anything in radiochannels
 
 	if(channel) //They picked a channel
@@ -688,6 +689,7 @@ var/datum/legacy_announcement/minor/admin_min_announcer = new
 	set waitfor = FALSE //Why bother? We have some sleeps. You can leave tho!
 	if(!check_rights(0))	return
 
+	#warn use radio presets
 	var/channel = input("Channel for message:","Channel", null) as null|anything in radiochannels
 
 	if(!channel) //They picked a channel

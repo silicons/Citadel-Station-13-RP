@@ -71,7 +71,6 @@
 	autolinkers = list("receiverCent")
 	freq_listening = list(FREQ_ERT, FREQ_DEATH_SQUAD, FREQ_SYNDICATE)
 
-
 //Buses
 
 /obj/machinery/telecomms/bus/preset_one

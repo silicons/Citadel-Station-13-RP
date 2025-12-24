@@ -97,64 +97,9 @@ On the map:
 1455 for AI access
 */
 
-var/list/radiochannels = list(
-	"Common"		= FREQ_COMMON,
-	"Science"		= FREQ_SCIENCE,
-	"Command"		= FREQ_COMMAND,
-	"Medical"		= FREQ_MEDICAL,
-	"Engineering"	= FREQ_ENGINEERING,
-	"Security" 		= FREQ_SECURITY,
-	"Response Team" = FREQ_ERT,
-	"Special Ops" 	= FREQ_DEATH_SQUAD,
-	"Mercenary" 	= FREQ_SYNDICATE,
-	"Raider"		= FREQ_RAIDER,
-	"Trader"		= FREQ_TRADER,
-	"Supply" 		= FREQ_SUPPLY,
-	"Service" 		= FREQ_SERVICE,
-	"Explorer"		= FREQ_EXPLORER,
-	"AI Private"	= FREQ_AI_PRIVATE,
-	"Entertainment" = FREQ_ENTERTAINMENT,
-	"Medical(I)"	= FREQ_MEDICAL_INTERNAL,
-	"Security(I)"	= FREQ_SECURITY_INTERNAL,
-	"SDF"			= FREQ_SDF
-)
-
-// central command channels, i.e deathsquid & response teams
-var/list/CENT_FREQS = list(FREQ_ERT, FREQ_DEATH_SQUAD)
-
-// Antag channels, i.e. Syndicate
-// Raider Frequency was previously listed here, FREQ_RAIDER. I'm removing it to see if I can make it self contained.
-var/list/ANTAG_FREQS = list(FREQ_SYNDICATE)
-
-//Department channels, arranged lexically
-var/list/DEPT_FREQS = list(FREQ_AI_PRIVATE, FREQ_COMMAND, FREQ_ENGINEERING, FREQ_ENTERTAINMENT, FREQ_MEDICAL, FREQ_SECURITY, FREQ_SCIENCE, FREQ_SERVICE, FREQ_SUPPLY, FREQ_TRADER)
-
-// TODO: move me to say or something
-#warn sigh
-GLOBAL_LIST_INIT(freqtospan, list(
-	"[FREQ_SCIENCE]" = "sciradio",
-	"[FREQ_EXPLORER]" = "expradio",
-	"[FREQ_MEDICAL]" = "medradio",
-	"[FREQ_ENGINEERING]" = "engradio",
-	"[FREQ_SUPPLY]" = "suppradio",
-	"[FREQ_SERVICE]" = "servradio",
-	"[FREQ_SECURITY]" = "secradio",
-	"[FREQ_COMMAND]" = "comradio",
-	"[FREQ_AI_PRIVATE]" = "aiprivradio",
-	"[FREQ_ENTERTAINMENT]" = "entradio",
-	"[FREQ_SYNDICATE]" = "syndradio",
-	"[FREQ_RAIDER]" = "syndradio",
-	"[FREQ_TRADER]" = "syndradio",
-	"[FREQ_SDF]"	= "sdfradio",
-	"[FREQ_ERT]" = "centradio",
-	"[FREQ_DEATH_SQUAD]" = "centradio"
-	))
-
 /proc/get_radio_span(freq)
-	var/returntext = GLOB.freqtospan["[freq]"]
-	if(returntext)
-		return returntext
-	return "radio"
+	var/datum/radio_preset/preset = GLOB.radio_presets_freq_lookup[num2text(freq, 12)]
+	return preset?.html_span || "radio"
 
 /* filters */
 //When devices register with the radio controller, they might register under a certain filter.

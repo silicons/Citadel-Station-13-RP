@@ -97,7 +97,6 @@ CREATE_WALL_MOUNTING_TYPES_SHIFTED(/obj/item/radio/intercom, 28)
 	plane = TURF_PLANE
 	layer = PLANT_LAYER
 
-
 /obj/item/radio/intercom/omni
 	name = "global announcer"
 
