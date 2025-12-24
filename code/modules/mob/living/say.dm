@@ -4,59 +4,13 @@ var/list/department_radio_keys = list(
 	  ":i" = "intercom",	".i" = "intercom",
 	  ":h" = "department",	".h" = "department",
 	  ":+" = "special",		".+" = "special", //activate radio-specific special functions
-	  ":c" = "Command",		".c" = "Command",
-	  ":n" = "Science",		".n" = "Science",
-	  ":m" = "Medical",		".m" = "Medical",
-	  ":e" = "Engineering", ".e" = "Engineering",
-	  ":s" = "Security",	".s" = "Security",
 	  ":w" = "whisper",		".w" = "whisper",
 	  ":t" = "Mercenary",	".t" = "Mercenary",
 	  ":x" = "Raider",		".x" = "Raider",
-	  ":u" = "Supply",		".u" = "Supply",
-	  ":v" = "Service",		".v" = "Service",
-	  ":p" = "AI Private",	".p" = "AI Private",
-	  ":y" = "Explorer",	".y" = "Explorer",
-	  ":f" = "Trader",		".f" = "Trader",
-	  ":g" = "Common",		".g" = "Common",
-	  ":d" = "SDF",			".d" = "SDF",
-
-	  ":R" = "right ear",	".R" = "right ear",
-	  ":L" = "left ear",	".L" = "left ear",
-	  ":I" = "intercom",	".I" = "intercom",
-	  ":H" = "department",	".H" = "department",
-	  ":C" = "Command",		".C" = "Command",
-	  ":N" = "Science",		".N" = "Science",
-	  ":M" = "Medical",		".M" = "Medical",
-	  ":E" = "Engineering",	".E" = "Engineering",
-	  ":S" = "Security",	".S" = "Security",
-	  ":W" = "whisper",		".W" = "whisper",
-	  ":T" = "Mercenary",	".T" = "Mercenary",
-	  ":X" = "Raider",		".X" = "Raider",
-	  ":U" = "Supply",		".U" = "Supply",
-	  ":V" = "Service",		".V" = "Service",
-	  ":P" = "AI Private",	".P" = "AI Private",
-	  ":Y" = "Explorer",	".Y" = "Explorer",
-	  ":F" = "Trader",		".F" = "Trader",
-	  ":G" = "Common",		".G" = "Common",
-	  ":D" = "SDF",			".D" = "SDF",
-
-	  //kinda localization -- rastaf0
-	  //same keys as above, but on russian keyboard layout. This file uses cp1251 as encoding.
-	  ":�" = "right ear",	".�" = "right ear",
-	  ":�" = "left ear",	".�" = "left ear",
-	  ":�" = "intercom",	".�" = "intercom",
-	  ":�" = "department",	".�" = "department",
-	  ":�" = "Command",		".�" = "Command",
-	  ":�" = "Science",		".�" = "Science",
-	  ":�" = "Medical",		".�" = "Medical",
-	  ":�" = "Engineering",	".�" = "Engineering",
-	  ":�" = "Security",	".�" = "Security",
-	  ":�" = "whisper",		".�" = "whisper",
-	  ":�" = "Mercenary",	".�" = "Mercenary",
-	  ":�" = "Supply",		".�" = "Supply",
+	  ":d" = "SDF",			".d" = "SDF"
 )
 
-
+#warn sigh
 var/list/channel_to_radio_key = new
 /proc/get_radio_key_from_channel(channel)
 	var/key = channel_to_radio_key[channel]
