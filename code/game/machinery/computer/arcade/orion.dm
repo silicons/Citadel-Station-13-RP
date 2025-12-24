@@ -127,11 +127,19 @@ GLOBAL_LIST_INIT(orion_events, generate_orion_events())
 
 	if(gamers[gamer] > ORION_GAMER_REPORT_THRESHOLD && prob(20 * gamers[gamer]))
 
-		radio.set_frequency(FREQ_SECURITY)
-		radio.talk_into(src, "SECURITY ALERT: Crewmember [gamer] recorded displaying antisocial tendencies in [get_area(src)]. Please watch for violent behavior.", FREQ_SECURITY)
+		radio.set_frequency(/datum/radio_preset/station/security::freq_number)
+		radio.talk_into(
+			src,
+			"SECURITY ALERT: Crewmember [gamer] recorded displaying antisocial tendencies in [get_area(src)]. Please watch for violent behavior.",
+			/datum/radio_preset/station/security::freq_number,
+		)
 
-		radio.set_frequency(FREQ_MEDICAL)
-		radio.talk_into(src, "PSYCH ALERT: Crewmember [gamer] recorded displaying antisocial tendencies in [get_area(src)]. Please schedule psych evaluation.", FREQ_MEDICAL)
+		radio.set_frequency(/datum/radio_preset/station/medical::freq_number)
+		radio.talk_into(
+			src,
+			"PSYCH ALERT: Crewmember [gamer] recorded displaying antisocial tendencies in [get_area(src)]. Please schedule psych evaluation.",
+			/datum/radio_preset/station/medical::freq_number,
+		)
 
 		gamers[gamer] = ORION_GAMER_PAMPHLET //next report send a pamph
 

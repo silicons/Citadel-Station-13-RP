@@ -56,11 +56,24 @@
 	id = "Receiver A"
 	network = "tcommsat"
 	autolinkers = list("receiverA") // link to relay
-	freq_listening = list(FREQ_AI_PRIVATE, FREQ_SCIENCE, FREQ_MEDICAL, FREQ_SUPPLY, FREQ_SERVICE, FREQ_COMMAND, FREQ_ENGINEERING, FREQ_SECURITY, FREQ_ENTERTAINMENT)
+	freq_listening = list(
+		/datum/radio_preset/station/ai_routing_1::freq_number,
+		/datum/radio_preset/station/ai_routing_2::freq_number,
+		/datum/radio_preset/station/ai_routing_3::freq_number,
+		/datum/radio_preset/station/ai_routing_4::freq_number,
+		/datum/radio_preset/station/ai_routing_5::freq_number,
+		/datum/radio_preset/station/science::freq_number,
+		/datum/radio_preset/station/medical::freq_number,
+		/datum/radio_preset/station/supply::freq_number,
+		/datum/radio_preset/station/command::freq_number,
+		/datum/radio_preset/station/engineering::freq_number,
+		/datum/radio_preset/station/security::freq_number,
+		/datum/radio_preset/general/entertainment::freq_number,
+	)
 
 /// Common and other radio frequencies for people to freely use.
 /obj/machinery/telecomms/receiver/preset_right/Initialize(mapload)
-	for(var/i = MIN_FREQ, i < MAX_FREQ, i += 2)
+	for(var/i = 1441, i < 1489, i += 2)
 		freq_listening |= i
 	return ..()
 
@@ -69,20 +82,28 @@
 	network = "tcommsat"
 	produces_heat = 0
 	autolinkers = list("receiverCent")
-	freq_listening = list(FREQ_ERT, FREQ_DEATH_SQUAD, FREQ_SYNDICATE)
+	freq_listening = list(
+		/datum/radio_preset/station/emergency_responder,
+	)
 
 //Buses
 
 /obj/machinery/telecomms/bus/preset_one
 	id = "Bus 1"
 	network = "tcommsat"
-	freq_listening = list(FREQ_SCIENCE, FREQ_MEDICAL)
+	freq_listening = list(
+		/datum/radio_preset/station/science::freq_number,
+		/datum/radio_preset/station/medical::freq_number,
+	)
 	autolinkers = list("processor1", "science", "medical")
 
 /obj/machinery/telecomms/bus/preset_two
 	id = "Bus 2"
 	network = "tcommsat"
-	freq_listening = list(FREQ_SUPPLY, FREQ_SERVICE)
+	freq_listening = list(
+		/datum/radio_preset/station/supply::freq_number,
+		/datum/radio_preset/station/service::freq_number,
+	)
 	autolinkers = list("processor2", "supply", "service", "unused")
 
 /obj/machinery/telecomms/bus/preset_two/Initialize(mapload)
@@ -95,19 +116,35 @@
 /obj/machinery/telecomms/bus/preset_three
 	id = "Bus 3"
 	network = "tcommsat"
-	freq_listening = list(FREQ_SECURITY, FREQ_COMMAND)
+	freq_listening = list(
+		/datum/radio_preset/station/security::freq_number,
+		/datum/radio_preset/station/command::freq_number,
+	)
 	autolinkers = list("processor3", "security", "command")
 
 /obj/machinery/telecomms/bus/preset_four
 	id = "Bus 4"
 	network = "tcommsat"
-	freq_listening = list(FREQ_ENGINEERING, FREQ_AI_PRIVATE, FREQ_COMMON, FREQ_ENTERTAINMENT)
+	freq_listening = list(
+		/datum/radio_preset/station/engineering::freq_number,
+		/datum/radio_preset/station/ai_routing_1::freq_number,
+		/datum/radio_preset/station/ai_routing_2::freq_number,
+		/datum/radio_preset/station/ai_routing_3::freq_number,
+		/datum/radio_preset/station/ai_routing_4::freq_number,
+		/datum/radio_preset/station/ai_routing_5::freq_number,
+		/datum/radio_preset/station/main::freq_number,
+		/datum/radio_preset/general/entertainment::freq_number,
+		/datum/radio_preset/general/traffic_control::freq_number,
+		/datum/radio_preset/general/common::freq_number,
+	)
 	autolinkers = list("processor4", "engineering", "common")
 
 /obj/machinery/telecomms/bus/preset_cent
 	id = "CentCom Bus"
 	network = "tcommsat"
-	freq_listening = list(FREQ_ERT, FREQ_DEATH_SQUAD, FREQ_SYNDICATE)
+	freq_listening = list(
+		/datum/radio_preset/station/emergency_responder::freq_number,
+	)
 	produces_heat = 0
 	autolinkers = list("processorCent", "centcom")
 
@@ -142,27 +179,34 @@
 //Servers
 
 /obj/machinery/telecomms/server/presets
-
 	network = "tcommsat"
 
 /obj/machinery/telecomms/server/presets/science
 	id = "Science Server"
-	freq_listening = list(FREQ_SCIENCE)
+	freq_listening = list(
+		/datum/radio_preset/station/science::freq_number,
+	)
 	autolinkers = list("science")
 
 /obj/machinery/telecomms/server/presets/medical
 	id = "Medical Server"
-	freq_listening = list(FREQ_MEDICAL)
+	freq_listening = list(
+		/datum/radio_preset/station/medical::freq_number,
+	)
 	autolinkers = list("medical")
 
 /obj/machinery/telecomms/server/presets/supply
 	id = "Supply Server"
-	freq_listening = list(FREQ_SUPPLY)
+	freq_listening = list(
+		/datum/radio_preset/station/supply::freq_number,
+	)
 	autolinkers = list("supply")
 
 /obj/machinery/telecomms/server/presets/service
 	id = "Service Server"
-	freq_listening = list(FREQ_SERVICE)
+	freq_listening = list(
+		/datum/radio_preset/station/service::freq_number,
+	)
 	autolinkers = list("service")
 
 /obj/machinery/telecomms/server/presets/common
@@ -185,22 +229,30 @@
 
 /obj/machinery/telecomms/server/presets/command
 	id = "Command Server"
-	freq_listening = list(FREQ_COMMAND)
+	freq_listening = list(
+		/datum/radio_preset/station/command::freq_number,
+	)
 	autolinkers = list("command")
 
 /obj/machinery/telecomms/server/presets/engineering
 	id = "Engineering Server"
-	freq_listening = list(FREQ_ENGINEERING)
+	freq_listening = list(
+		/datum/radio_preset/station/engineering::freq_number,
+	)
 	autolinkers = list("engineering")
 
 /obj/machinery/telecomms/server/presets/security
 	id = "Security Server"
-	freq_listening = list(FREQ_SECURITY)
+	freq_listening = list(
+		/datum/radio_preset/station/security::freq_number,
+	)
 	autolinkers = list("security")
 
 /obj/machinery/telecomms/server/presets/centcom
 	id = "CentCom Server"
-	freq_listening = list(FREQ_ERT, FREQ_DEATH_SQUAD, FREQ_SYNDICATE)
+	freq_listening = list(
+		/datum/radio_preset/station/emergency_responder::freq_number,
+	)
 	produces_heat = 0
 	autolinkers = list("centcom")
 
@@ -219,7 +271,6 @@
 	network = "tcommsat"
 	produces_heat = 0
 	autolinkers = list("broadcasterCent")
-
 
 /obj/item/multitool/nt_buffered
 	name = "pre-linked multitool (hub)"

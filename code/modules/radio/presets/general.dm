@@ -7,6 +7,8 @@
  */
 /datum/radio_preset/general
 	abstract_type = /datum/radio_preset/general
+	block_start = 1401
+	block_end = 1499
 
 //* allocated block: 1401 to 1499
 

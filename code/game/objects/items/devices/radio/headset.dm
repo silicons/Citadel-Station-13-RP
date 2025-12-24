@@ -9,6 +9,16 @@
 	canhear_range = 0	// Can't hear headsets from very far away
 	slot_flags = SLOT_EARS
 
+	//* encryption keys *//
+
+	/// inserted radio keys
+	/// * set to list of typepaths to init
+	/// * lazy list
+	var/list/obj/item/radio_key/radio_keys
+
+	// legacy below
+	#warn below
+
 	var/translate_binary = 0
 	var/translate_hive = 0
 	var/ear_protection = 0	// Flashbang Protection... I know.
@@ -81,8 +91,6 @@
 /obj/item/radio/headset/syndicate/alt
 	icon_state = "syndie_headset"
 	item_state = "headset"
-	origin_tech = list(TECH_ILLEGAL = 3)
-	syndie = 1
 	ks1type = /obj/item/encryptionkey/syndicate
 
 /obj/item/radio/headset/raider
@@ -96,7 +104,6 @@
 
 /obj/item/radio/headset/trader
 	name = "trade headset"
-	origin_tech = list(TECH_ILLEGAL = 2)
 	syndie = 0
 	adhoc_fallback = TRUE
 	ks1type = /obj/item/encryptionkey/trader
@@ -106,7 +113,6 @@
 	set_frequency(FREQ_TRADER)
 
 /obj/item/radio/headset/binary
-	origin_tech = list(TECH_ILLEGAL = 3)
 	ks1type = /obj/item/encryptionkey/binary
 
 /obj/item/radio/headset/trader/outsider

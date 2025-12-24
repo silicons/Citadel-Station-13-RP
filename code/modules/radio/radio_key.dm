@@ -1,4 +1,5 @@
 
+#warn /radio_key
 /obj/item/encryptionkey/
 	name = "standard encryption key"
 	desc = "An encryption key for a radio headset. Contains cypherkeys."

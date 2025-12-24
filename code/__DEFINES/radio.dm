@@ -1,5 +1,5 @@
 
-#define MIN_FREE_FREQ 1201 // -------------------------------------------------
+#define MIN_FREE_FREQ 1001 // -------------------------------------------------
 // Frequencies are always odd numbers and range from 1201 to 1599.
 
 #define FREQ_AI_PRIVATE 1343 // actual ai private

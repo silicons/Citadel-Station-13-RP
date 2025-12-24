@@ -30,6 +30,14 @@ GLOBAL_LIST_INIT(default_medbay_channels, list(
 	item_state = "radio"
 	suit_storage_class = SUIT_STORAGE_CLASS_SOFTWEAR | SUIT_STORAGE_CLASS_HARDWEAR
 
+	/// hardbound, always-available frequencies
+	/// * each of these creates an UI entry so don't fuck around
+	/// * lazy list
+	var/list/freqs_hardbind
+
+
+	// legacy below
+
 	///FALSE for off
 	var/on = TRUE
 	var/last_transmission
@@ -49,10 +57,6 @@ GLOBAL_LIST_INIT(default_medbay_channels, list(
 	var/subspace_switchable = FALSE
 	///Falls back to 'radio' mode if subspace not available
 	var/adhoc_fallback = FALSE
-	///Holder to see if it's a syndicate encrypted radio
-	var/syndie = FALSE
-	///Holder to see if it's a CentCom encrypted radio
-	var/centcom = FALSE
 	slot_flags = SLOT_BELT
 	throw_speed = 2
 	throw_range = 9

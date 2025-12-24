@@ -8,6 +8,8 @@
  */
 /datum/radio_preset/offmap
 	abstract_type = /datum/radio_preset/offmap
+	block_start = 1201
+	block_end = 1299
 
 //* allocated block: 1201 to 1299
 

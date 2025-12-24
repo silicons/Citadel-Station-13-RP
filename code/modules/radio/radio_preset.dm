@@ -6,7 +6,7 @@
 GLOBAL_LIST_EMPTY(radio_presets)
 /// type lookup
 /// * initialized by SSearly_init
-GLOBAL_LIST_EMPTY(radio_presets_key_lookup)
+GLOBAL_LIST_EMPTY(radio_presets_type_lookup)
 /// hotkey lookup
 /// * initialized by SSearly_init
 GLOBAL_LIST_EMPTY(radio_presets_key_lookup)
@@ -59,5 +59,9 @@ GLOBAL_LIST_EMPTY(radio_presets_freq_lookup)
 	/// by just having the access
 	var/list/c_access_encoding
 
+	/// our reserved block
+	var/block_start
+	/// our reserved block
+	var/block_end
 
 /datum/radio_preset

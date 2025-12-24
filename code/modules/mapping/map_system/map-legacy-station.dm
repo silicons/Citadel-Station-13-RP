@@ -205,23 +205,3 @@
 			return station_levels.Copy()
 		else
 			return list(srcz)
-
-// Access check is of the type requires one. These have been carefully selected to avoid allowing the janitor to see channels he shouldn't
-// This list needs to be purged but people insist on adding more cruft to the radio.
-/datum/map/station/proc/default_internal_channels()
-	return list(
-		num2text(FREQ_COMMON) = list(),
-		num2text(FREQ_AI_PRIVATE)  = list(ACCESS_SPECIAL_SILICONS),
-		num2text(FREQ_ENTERTAINMENT) = list(),
-		num2text(FREQ_ERT) = list(ACCESS_CENTCOM_ERT),
-		num2text(FREQ_COMMAND)= list(ACCESS_COMMAND_BRIDGE),
-		num2text(FREQ_ENGINEERING) = list(ACCESS_ENGINEERING_ENGINE, ACCESS_ENGINEERING_ATMOS),
-		num2text(FREQ_MEDICAL) = list(ACCESS_MEDICAL_EQUIPMENT),
-		num2text(FREQ_MEDICAL_INTERNAL)=list(ACCESS_MEDICAL_EQUIPMENT),
-		num2text(FREQ_SECURITY) = list(ACCESS_SECURITY_EQUIPMENT),
-		num2text(FREQ_SECURITY_INTERNAL)=list(ACCESS_SECURITY_EQUIPMENT),
-		num2text(FREQ_SCIENCE) = list(ACCESS_SCIENCE_FABRICATION,ACCESS_SCIENCE_ROBOTICS,ACCESS_SCIENCE_XENOBIO),
-		num2text(FREQ_SUPPLY) = list(ACCESS_SUPPLY_BAY),
-		num2text(FREQ_SERVICE) = list(ACCESS_GENERAL_JANITOR, ACCESS_GENERAL_BOTANY),
-		num2text(FREQ_EXPLORER) = list(ACCESS_GENERAL_EXPLORER)
-	)

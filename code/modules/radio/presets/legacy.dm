@@ -7,6 +7,8 @@
  */
 /datum/radio_preset/legacy
 	abstract_type = /datum/radio_preset/legacy
+	block_start = 1001
+	block_end = 1199
 
 //* allocated block: 1001 to 1199
 

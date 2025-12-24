@@ -34,16 +34,37 @@
 
 /obj/machinery/telecomms/receiver/preset_right/endeavour
 //	id = "endeavour_rx"
-	freq_listening = list(FREQ_AI_PRIVATE, FREQ_SCIENCE, FREQ_MEDICAL, FREQ_SUPPLY, FREQ_SERVICE, FREQ_COMMAND, FREQ_ENGINEERING, FREQ_SECURITY, FREQ_ENTERTAINMENT, FREQ_EXPLORER)
+	freq_listening = list(
+		/datum/radio_preset/station/ai_routing_1::freq_number,
+		/datum/radio_preset/station/ai_routing_2::freq_number,
+		/datum/radio_preset/station/ai_routing_3::freq_number,
+		/datum/radio_preset/station/ai_routing_4::freq_number,
+		/datum/radio_preset/station/ai_routing_5::freq_number,
+		/datum/radio_preset/station/science::freq_number,
+		/datum/radio_preset/station/medical::freq_number,
+		/datum/radio_preset/station/supply::freq_number,
+		/datum/radio_preset/station/command::freq_number,
+		/datum/radio_preset/station/engineering::freq_number,
+		/datum/radio_preset/station/security::freq_number,
+		/datum/radio_preset/station/exploration::freq_number,
+		/datum/radio_preset/general/entertainment::freq_number,
+	)
 
 /obj/machinery/telecomms/broadcaster/preset_right/endeavour
 //	id = "endeavour_tx"
 
 /obj/machinery/telecomms/bus/preset_two/endeavour
-	freq_listening = list(FREQ_SUPPLY, FREQ_SERVICE, FREQ_EXPLORER)
+	freq_listening = list(
+		/datum/radio_preset/station/supply::freq_number,
+		/datum/radio_preset/station/service::freq_number,
+		/datum/radio_preset/station/exploration::freq_number,
+	)
 
 /obj/machinery/telecomms/server/presets/service/endeavour
-	freq_listening = list(FREQ_SERVICE, FREQ_EXPLORER)
+	freq_listening = list(
+		/datum/radio_preset/station/service::freq_number,
+		/datum/radio_preset/station/exploration::freq_number,
+	)
 	autolinkers = list("service", "explorer")
 
 // Telecommunications Satellite

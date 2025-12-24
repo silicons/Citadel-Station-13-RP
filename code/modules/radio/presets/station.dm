@@ -3,6 +3,8 @@
 
 /datum/radio_preset/station
 	abstract_type = /datum/radio_preset/station
+	block_start = 1301
+	block_end = 1399
 
 //* allocated block: 1301 to 1399
 
