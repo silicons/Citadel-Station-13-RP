@@ -36,21 +36,38 @@
 	origin_tech = list(TECH_MATERIAL = 1)
 	icon = 'icons/obj/stacks.dmi'
 	item_flags = ITEM_CAREFUL_BLUDGEON | ITEM_ENCUMBERS_WHILE_HELD
+
+	/// Always create this type when splitting, instead of our own type.
+	var/split_type
+	/// The type we actually are. This is what is used when things try to consume an amount of us.
+	/// * null = this current type
+	var/stack_type
+
 	var/singular_name
 	var/amount = 1
 	/// See stack recipes initialisation, param "max_res_amount" must be equal to this max_amount.
 	var/max_amount = 50
 	/// Determines whether different stack types can merge.
-	var/stacktype
-	/// enforce a certain type when splitting; useful if you have an infinite stack you don't want to be split into another one
-	var/split_type
-	/// Used when directly applied to a turf.
-	var/build_type = null
+	var/stacktype_legacy
 	var/uses_charge = 0
 	var/list/charge_costs = null
 	var/list/datum/matter_synth/synths = null
 	/// Determines whether the item should update it's sprites based on amount.
 	var/no_variants = TRUE
+
+	/// skip default / old update_icon() handling
+	var/skip_legacy_icon_update = FALSE
+	/// use new update icon system
+	/// * this is mandatory for all new stacks
+	var/use_new_icon_update = FALSE
+
+	/// Total number of states used in updating icons.
+	/// todo: all stacks should use this, remove `use_new_icon_update
+	///
+	/// * Only active when [use_new_icon_update] is set on
+	/// * This counts up from 1.
+	/// * If null, we don't do icon updates based on amount.
+	var/icon_state_count
 
 	/// Will the item pass its own color var to the created item? Dyed cloth, wood, etc.
 	var/pass_color = FALSE
@@ -67,16 +84,31 @@
 		explicit_recipes = typelist(NAMEOF(src, explicit_recipes), generate_explicit_recipes())
 	if(new_amount != null)
 		amount = new_amount
-	if(!stacktype)
-		stacktype = type
+	if(!stacktype_legacy)
+		stacktype_legacy = type
 	. = ..()
-	if(merge)
+	// only merge 1. outside of mapload and 2. if we had amount
+	if(merge && !mapload && amount)
 		for(var/obj/item/stack/S in loc)
 			if(can_merge(S))
 				merge(S)
+		// and if we did and no longer have amount, delete ourselves
+		if(amount == 0)
+			zero_amount()
 	update_icon()
 
+/obj/item/stack/update_icon_state()
+	if(!use_new_icon_update)
+		return ..()
+	if(!icon_state_count)
+		return ..()
+	icon_state = "[base_icon_state || initial(icon_state)]-[get_amount_icon_notch(get_amount())]"
+	return ..()
+
 /obj/item/stack/update_icon()
+	. = ..()
+	if(skip_legacy_icon_update)
+		return
 	if(no_variants)
 		icon_state = initial(icon_state)
 	else
@@ -128,7 +160,7 @@
 	. = ..()
 	.["amount"] = get_amount()
 
-/obj/item/stack/ui_act(action, list/params, datum/tgui/ui)
+/obj/item/stack/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state, datum/event_args/actor/actor)
 	. = ..()
 	if(.)
 		return
@@ -184,14 +216,14 @@
 		return FALSE
 	if((strict_color_stacking || other.strict_color_stacking) && (color != other.color))
 		return FALSE
-	return other.stacktype == stacktype
+	return other.stacktype_legacy == stacktype_legacy
 
-/obj/item/stack/proc/use(used)
+/obj/item/stack/proc/use(used, no_delete)
 	if (!can_use(used))
 		return FALSE
 	if(!uses_charge)
 		amount -= used
-		if (amount <= 0)
+		if (amount <= 0 && !no_delete)
 			qdel(src) //should be safe to qdel immediately since if someone is still using this stack it will persist for a little while longer
 		update_icon()
 		return TRUE
@@ -317,7 +349,7 @@
 		merge(AM)
 
 /// Merge src into S, as much as possible.
-/obj/item/stack/proc/merge(obj/item/stack/S)
+/obj/item/stack/proc/merge(obj/item/stack/S, no_delete)
 	if(uses_charge)
 		return	// how about no!
 	if(QDELETED(S) || QDELETED(src) || (S == src)) //amusingly this can cause a stack to consume itself, let's not allow that.
@@ -330,7 +362,7 @@
 	if(pulledby)
 		pulledby.start_pulling(S)
 	S.copy_evidences(src)
-	use(transfer, TRUE)
+	use(transfer, no_delete)
 	S.add(transfer)
 	return transfer
 
@@ -341,11 +373,30 @@
 		return
 	return ..()
 
-/obj/item/stack/AltClick(mob/living/user)
+/obj/item/stack/context_menu_query(datum/event_args/actor/e_args)
 	. = ..()
-	if(!istype(user) || !in_range(user, src) || !CHECK_MOBILITY(user, MOBILITY_CAN_PICKUP))
+	.["split"] = create_context_menu_tuple("split", src, 1, MOBILITY_CAN_USE | MOBILITY_CAN_PICKUP, TRUE)
+
+/obj/item/stack/context_menu_act(datum/event_args/actor/e_args, key)
+	. = ..()
+	if(.)
 		return
-	attempt_split_stack(user)
+	switch(key)
+		if("split")
+			// TODO: e-args support
+			attempt_split_stack(e_args.initiator)
+
+/obj/item/stack/alt_clicked_on(mob/user, location, control, list/params)
+	. = ..()
+	if(.)
+		return
+	if(user.Reachability(src) && CHECK_MOBILITY(user, MOBILITY_CAN_PICKUP))
+		attempt_split_stack(user)
+		return TRUE
+
+// TODO: THERE HAS TO BE A BETTER FUCKING WAY
+/obj/item/stack/should_list_turf_on_alt_click(mob/user)
+	return FALSE
 
 /obj/item/stack/proc/attempt_split_stack(mob/living/user)
 	if(uses_charge)
@@ -419,3 +470,37 @@
 		return FALSE
 	update_icon()
 	return TRUE
+
+//* Getters *//
+
+/**
+ * Get the number for `iconstate-[n]` icon state rendering.
+ *
+ * @return number, or null if `icon_state_count` isn't set.
+ */
+/obj/item/stack/proc/get_amount_icon_notch(the_amount)
+	if(!icon_state_count)
+		return null
+	return CEILING(the_amount / max_amount * icon_state_count, 1)
+
+//* Types *//
+
+/**
+ * Get our 'use as type'.
+ */
+/obj/item/stack/proc/get_use_as_type()
+	return stack_type || type
+
+/**
+ * We can be used as a specific stack type.
+ */
+/obj/item/stack/proc/can_use_as_type(path)
+	return stack_type == path || type == path
+
+/**
+ * Can merge into a type
+ *
+ * todo: use this instead of raw stacktype_legacy checks
+ */
+/obj/item/stack/proc/can_merge_into_type(path)
+	CRASH("Not implemented.")

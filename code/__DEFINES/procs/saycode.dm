@@ -20,6 +20,11 @@
 #define SAYCODE_TYPE_LIVING (1<<3)
 /// it just works
 #define SAYCODE_TYPE_ALWAYS (1<<4)
+/// special
+///
+/// * runtime / stack traces if used in actual saycode
+/// * used in emotes for automatically generating both visible and audible messages
+#define SAYCODE_TYPE_AUTO (1<<5)
 
 /// saycode type filters for generic listening objects
 #define SAYCODE_TYPE_FILTER_FOR_OBJECT (ALL)

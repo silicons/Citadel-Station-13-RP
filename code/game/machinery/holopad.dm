@@ -477,8 +477,11 @@ GLOBAL_VAR_INIT(holopad_connectivity_rebuild_queued, FALSE)
 		ringing[++ringing.len] = holocall.ui_caller_id_source()
 	.["ringing"] = ringing
 
-/obj/machinery/holopad/ui_act(action, list/params, datum/tgui/ui)
+/obj/machinery/holopad/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state, datum/event_args/actor/actor)
 	. = ..()
+	if(.)
+		return
+
 	switch(action)
 		// user requesting ai
 		if("ai_request")
@@ -735,18 +738,18 @@ GLOBAL_VAR_INIT(holopad_connectivity_rebuild_queued, FALSE)
 	. = ..()
 	relay_intercepted_emote(null, "-- INTERCEPTED -- ", say_emphasis(msg))
 
-/obj/machinery/holopad/hear_talk(mob/living/M, text, verb, datum/language/speaking)
+/obj/machinery/holopad/hear_talk(mob/living/M, text, verb, datum/prototype/language/speaking)
 	. = ..()
 	relay_intercepted_say(M, M.name, say_emphasis(text), speaking, FALSE)
 
-/obj/machinery/holopad/hear_signlang(mob/M, text, verb, datum/language/speaking)
+/obj/machinery/holopad/hear_signlang(mob/M, text, verb, datum/prototype/language/speaking)
 	. = ..()
 	relay_intercepted_say(M, M.name, say_emphasis(text), speaking, TRUE)
 
 /**
  * relays a heard say
  */
-/obj/machinery/holopad/proc/relay_intercepted_say(atom/movable/speaking, voice_name, msg, datum/language/using_language, sign_lang, list/heard = list())
+/obj/machinery/holopad/proc/relay_intercepted_say(atom/movable/speaking, voice_name, msg, datum/prototype/language/using_language, sign_lang, list/heard = list())
 	// no loops please - shame we can't have a room of 8 holopads acting as a council chamber though!
 	if(istype(speaking, /obj/machinery/holopad))
 		return
@@ -786,7 +789,7 @@ GLOBAL_VAR_INIT(holopad_connectivity_rebuild_queued, FALSE)
 /**
  * relays a say sent to us
  */
-/obj/machinery/holopad/proc/relay_inbound_say(atom/movable/speaker, speaker_name, msg, datum/language/using_language, sign_lang = FALSE, using_verb = "says", obj/machinery/holopad/source, list/heard = list())
+/obj/machinery/holopad/proc/relay_inbound_say(atom/movable/speaker, speaker_name, msg, datum/prototype/language/using_language, sign_lang = FALSE, using_verb = "says", obj/machinery/holopad/source, list/heard = list())
 	. = TRUE
 	var/scrambled = stars(msg)
 	var/for_knowers = "[source && "[SPAN_NOTICE(source.holocall_name(src))]: "][SPAN_NAME(speaker_name)] [using_language? using_language.format_message(msg, using_verb) : "[using_verb], [msg]"]"
@@ -1106,7 +1109,7 @@ GLOBAL_VAR_INIT(holopad_connectivity_rebuild_queued, FALSE)
 	anchored = TRUE
 	density = FALSE
 	opacity = FALSE
-	pass_flags = ATOM_PASS_ALL
+	pass_flags = ATOM_PASS_FLAGS_ALL
 	pass_flags_self = ATOM_PASS_BLOB | ATOM_PASS_GLASS | ATOM_PASS_GRILLE | ATOM_PASS_MOB | ATOM_PASS_OVERHEAD_THROW | ATOM_PASS_THROWN | ATOM_PASS_TABLE
 
 /obj/effect/overlay/hologram/Initialize(mapload, appearance/clone_from = /datum/hologram/general/holo_female)
@@ -1201,7 +1204,7 @@ GLOBAL_VAR_INIT(holopad_connectivity_rebuild_queued, FALSE)
 	// emissive-fy
 	cheap_become_emissive()
 
-/obj/effect/overlay/hologram/proc/relay_speech(speaker_name, message, datum/language/lang)
+/obj/effect/overlay/hologram/proc/relay_speech(speaker_name, message, datum/prototype/language/lang)
 	// TODO: ATOM SAY(), not janky ass atom_say().
 	atom_say("[SPAN_NAME(speaker_name)] says, [message]", lang)
 
@@ -1252,9 +1255,11 @@ GLOBAL_VAR_INIT(holopad_connectivity_rebuild_queued, FALSE)
 	var/mob/living/vored
 
 /obj/effect/overlay/hologram/holopad/ai/Destroy()
-	if(owner?.hologram == src)
-		owner.hologram = null
-		owner.terminate_holopad_connection()
+	if(owner)
+		if(owner?.hologram == src)
+			owner.hologram = null
+			owner.terminate_holopad_connection()
+		owner = null
 	// handle fetish content
 	drop_vored()
 	// dump shit out just in case

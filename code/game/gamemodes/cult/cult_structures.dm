@@ -24,7 +24,6 @@
 	var/isbroken = 0
 	light_range = 5
 	light_color = "#3e0000"
-	var/obj/item/wepon = null
 
 	var/shatter_message = "The pylon shatters!"
 	var/impact_sound = 'sound/effects/Glasshit.ogg'
@@ -37,6 +36,10 @@
 	. = ..()
 	START_PROCESSING(SSobj, src)
 
+/obj/structure/cult/pylon/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	return ..()
+
 /obj/structure/cult/pylon/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
 	attackpylon(user, 5)
 
@@ -46,7 +49,7 @@
 /obj/structure/cult/pylon/attackby(obj/item/W as obj, mob/user as mob)
 	attackpylon(user, W.damage_force)
 
-/obj/structure/cult/pylon/inflict_atom_damage(damage, damage_type, damage_tier, damage_flag, damage_mode, hit_zone, attack_type, datum/weapon)
+/obj/structure/cult/pylon/inflict_atom_damage(damage, damage_type, damage_tier, damage_flag, damage_mode, hit_zone, attack_type, datum/attack_source)
 	pylonhit(damage)
 	return damage
 

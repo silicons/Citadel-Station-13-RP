@@ -202,6 +202,7 @@
 				M.update_perspective()
 			else
 				qdel(A)
+	QDEL_NULL(circuit)
 	return ..()
 
 /obj/machinery/process(delta_time)//If you dont use process or power why are you here
@@ -214,7 +215,7 @@
 
 /obj/machinery/emp_act(severity)
 	if(use_power && machine_stat == NONE)
-		use_power(7500/severity)
+		use_power(7500 / severity)
 
 		var/obj/effect/overlay/pulse2 = new /obj/effect/overlay(src.loc)
 		pulse2.icon = 'icons/effects/effects.dmi'
@@ -293,7 +294,7 @@
 		return ..()
 	if(IsAdminGhost(user))
 		return FALSE
-	if(!(istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon)))
+	if(!user.IsAdvancedToolUser())
 		to_chat(user, SPAN_WARNING("You don't have the dexterity to do this!"))
 		return TRUE
 	if(ishuman(user))
@@ -562,8 +563,10 @@
 	A.pixel_y = pixel_y
 	A.update_desc()
 	A.update_appearance()
-	M.loc = null
+	M.forceMove(A)
 	M.after_deconstruct(src)
+	// release circuit
+	circuit = null
 
 // todo: kill this shit, this is legacy
 /obj/machinery/proc/dismantle()

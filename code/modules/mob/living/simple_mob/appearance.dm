@@ -26,12 +26,6 @@
 	else
 		icon_state = initial(icon_state)
 
-	if(has_hands)
-		if(r_hand_sprite)
-			add_overlay(r_hand_sprite)
-		if(l_hand_sprite)
-			add_overlay(l_hand_sprite)
-
 	if(has_eye_glow)
 		if(icon_state != icon_living)
 			remove_eyes()
@@ -60,7 +54,6 @@
 	modifier_overlay = effects
 	add_overlay(modifier_overlay)
 
-
 /mob/living/simple_mob/proc/add_eyes()
 	if(!eye_layer)
 		eye_layer = image(icon, "[icon_state]-eyes")
@@ -70,7 +63,6 @@
 
 /mob/living/simple_mob/proc/remove_eyes()
 	cut_overlay(eye_layer)
-
 
 /mob/living/simple_mob/gib()
 	..(icon_gib,1,icon) // we need to specify where the gib animation is stored

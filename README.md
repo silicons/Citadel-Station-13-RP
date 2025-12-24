@@ -13,7 +13,7 @@
 * **Ban Appeals:** <http://citadel-station.net/forum/forumdisplay.php?fid=8>
 * **Discord:**  <https://discord.gg/citadelstation>
 
-This is the codebase for the CitadelRP flavoured fork of SpaceStation 13.
+This is the codebase for the CitadelRP flavored fork of SpaceStation 13.
 
 Citadel Station 13 RP, also known as CitadelRP was originally a fork of VOREStation, which separated on 01/25/2019.
 
@@ -21,7 +21,7 @@ Citadel Station 13 RP, also known as CitadelRP was originally a fork of VOREStat
 
 [Downloading](.github/guides/DOWNLOADING.md)
 
-## :exclamation: How to compile :exclamation
+## :exclamation: How to compile :exclamation:
 
 On **May 9, 2022** we have changed the way to compile the codebase.
 
@@ -42,8 +42,12 @@ On **May 9, 2022** we have changed the way to compile the codebase.
 ## SQL Setup
 
 The SQL backend for the library and stats tracking requires a MariaDB server.
-Your server details go in /config/legacy/dbconfig.txt, and the SQL schema is in /SQL/tgstation_schema.sql.
-More detailed setup instructions arecoming soon, for now ask in our Discord.
+Your server details go in /config/legacy/dbconfig.txt.
+
+Flyway is used for setup and migration. Run the migrations in `sql/migrations` against your database, and everything should just work.
+We do not use table prefixes.
+
+More detailed setup instructions are coming soon, for now ask in our Discord.
 
 todo: update this section
 
@@ -62,7 +66,8 @@ These are also the folders you are likely going to encounter while managing the 
   - /players: player data, like saves and characters get dumped in here
 - /tmp: server scratch space
   - /assets - for asset generation
-  
+  - /config - used as scratch space for config
+
 You only need to make the top level folders (e.g. config, data) static folders in TGS4.
 
 Subfolders are automatically included.

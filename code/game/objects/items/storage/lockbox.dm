@@ -19,34 +19,35 @@
 	if(locked && !broken)
 		obj_storage.set_locked(TRUE)
 
-/obj/item/storage/lockbox/attackby(obj/item/W, mob/user)
+/obj/item/storage/lockbox/using_item_on(obj/item/using, datum/event_args/actor/clickchain/clickchain, clickchain_flags)
+	var/obj/item/W = using
+	var/mob/user = clickchain.performer
 	if (istype(W, /obj/item/card/id))
 		if(src.broken)
 			to_chat(user, "<span class='warning'>It appears to be broken.</span>")
-			return
+			return CLICKCHAIN_DID_SOMETHING | CLICKCHAIN_DO_NOT_PROPAGATE
 		if(src.allowed(user))
 			obj_storage.set_locked(!obj_storage.locked)
 			if(obj_storage.locked)
 				src.icon_state = src.icon_locked
 				to_chat(user, "<span class='notice'>You lock \the [src]!</span>")
-				return
+				return CLICKCHAIN_DID_SOMETHING | CLICKCHAIN_DO_NOT_PROPAGATE
 			else
 				src.icon_state = src.icon_closed
 				to_chat(user, "<span class='notice'>You unlock \the [src]!</span>")
-				return
+				return CLICKCHAIN_DID_SOMETHING | CLICKCHAIN_DO_NOT_PROPAGATE
 		else
 			to_chat(user, "<span class='warning'>Access Denied</span>")
+			return CLICKCHAIN_DID_SOMETHING | CLICKCHAIN_DO_NOT_PROPAGATE
 	else if(istype(W, /obj/item/melee/ninja_energy_blade))
-		if(emag_act(INFINITY, user, W, "The locker has been sliced open by [user] with an energy blade!", "You hear metal being sliced and sparks flying."))
+		if(emag_act(INFINITY, user, W, "The lockbox has been sliced open by [user] with an energy blade!", "You hear metal being sliced and sparks flying."))
 			var/datum/effect_system/spark_spread/spark_system = new /datum/effect_system/spark_spread()
 			spark_system.set_up(5, 0, src.loc)
 			spark_system.start()
 			playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
-			playsound(src.loc, /datum/soundbyte/grouped/sparks, 50, 1)
-	if(!locked)
-		..()
-	else
-		to_chat(user, "<span class='warning'>It's locked!</span>")
+			playsound(src.loc, /datum/soundbyte/sparks, 50, 1)
+			return CLICKCHAIN_DID_SOMETHING | CLICKCHAIN_DO_NOT_PROPAGATE
+	return ..()
 
 /obj/item/storage/lockbox/emag_act(remaining_charges, mob/user, emag_source, visual_feedback = "", audible_feedback = "")
 	if(!broken)
@@ -78,7 +79,7 @@
 	name = "lockbox of clusterbangs"
 	desc = "You have a bad feeling about opening this."
 	req_access = list(ACCESS_SECURITY_EQUIPMENT)
-	starts_with = list(/obj/item/grenade/flashbang/clusterbang)
+	starts_with = list(/obj/item/grenade/simple/flashbang/clusterbang)
 
 /obj/item/storage/lockbox/medal
 	name = "lockbox of medals"
@@ -104,10 +105,10 @@
 		/obj/item/clothing/under/customs/khaki = 4,
 		/obj/item/clothing/suit/colonial_redcoat = 4,
 		/obj/item/clothing/head/redcoat = 4,
-		/obj/item/gun/ballistic/musket/pistol = 1,
+		/obj/item/gun/projectile/ballistic/musket/pistol = 1,
 		/obj/item/ammo_casing/musket  = 12,
 		/obj/item/storage/belt/sheath = 1,
-		/obj/item/gun/ballistic/musket = 3,
+		/obj/item/gun/projectile/ballistic/musket = 3,
 		/obj/item/reagent_containers/glass/powder_horn = 4,
 		/obj/item/reagent_containers/food/drinks/tea = 8,
 	)
@@ -120,9 +121,9 @@
 		/obj/item/clothing/under/tactical = 4,
 		/obj/item/clothing/accessory/storage/black_vest = 4,
 		/obj/item/clothing/head/soft/black = 4,
-		/obj/item/gun/ballistic/automatic/p90 = 2,
+		/obj/item/gun/projectile/ballistic/automatic/p90 = 2,
 		/obj/item/ammo_magazine/a5_7mm/p90 = 4,
-		/obj/item/gun/ballistic/p92x = 1,
+		/obj/item/gun/projectile/ballistic/p92x = 1,
 		/obj/item/ammo_magazine/a9mm = 2,
 	)
 
@@ -134,11 +135,11 @@
 		/obj/item/clothing/suit/storage/toggle/brown_jacket = 4,
 		/obj/item/clothing/shoes/boots/cowboy/classic = 4,
 		/obj/item/clothing/head/cowboy_hat = 4,
-		/obj/item/gun/ballistic/revolver/dirty_harry = 2,
+		/obj/item/gun/projectile/ballistic/revolver/dirty_harry = 2,
 		/obj/item/ammo_magazine/a44/speedloader = 4,
-		/obj/item/gun/ballistic/shotgun/pump/rifle/lever/win1895 = 1,
+		/obj/item/gun/projectile/ballistic/shotgun/pump/rifle/lever/win1895 = 1,
 		/obj/item/ammo_magazine/a7_62mm/clip = 2,
-		/obj/item/gun/ballistic/shotgun/doublebarrel/pellet = 1,
+		/obj/item/gun/projectile/ballistic/shotgun/doublebarrel/pellet = 1,
 		/obj/item/storage/box/shotgunshells = 1,
 		/obj/item/reagent_containers/food/drinks/bottle/small/sarsaparilla = 3,
 		/obj/item/reagent_containers/food/drinks/bottle/small/sassafras = 3,
@@ -153,9 +154,9 @@
 		/obj/item/clothing/under/soviet = 4,
 		/obj/item/clothing/head/ushanka = 3,
 		/obj/item/clothing/head/bearpelt = 1,
-		/obj/item/gun/ballistic/shotgun/pump/rifle = 3,
+		/obj/item/gun/projectile/ballistic/shotgun/pump/rifle = 3,
 		/obj/item/ammo_magazine/a7_62mm/clip = 3,
-		/obj/item/gun/ballistic/pistol = 1,
+		/obj/item/gun/projectile/ballistic/pistol = 1,
 		/obj/item/ammo_magazine/a9mm/compact = 1,
 		/obj/item/reagent_containers/food/drinks/bottle/vodka = 1,
 	)
@@ -194,7 +195,7 @@
 		/obj/item/clothing/under/rank/trek/engsec/ds9 = 2,
 		/obj/item/clothing/under/rank/trek/medsci/ds9 = 1,
 		/obj/item/clothing/suit/storage/trek/ds9 = 1,
-		/obj/item/gun/energy/retro = 4,
+		/obj/item/gun/projectile/energy/retro = 4,
 		/obj/item/cell/device/weapon = 8,
 	)
 
@@ -205,7 +206,7 @@
 	sfx_open = 'sound/items/storage/briefcase.ogg'
 	req_access = list(ACCESS_GENERAL_EXPLORER)
 	starts_with = list(
-		/obj/item/gun/ballistic/ax59 = 1,
+		/obj/item/gun/projectile/ballistic/ax59 = 1,
 		/obj/item/clothing/accessory/holster/leg = 1,
 		/obj/item/ammo_magazine/a45/doublestack = 2,
 		/obj/item/gun_attachment/harness/magnetic/lanyard = 1

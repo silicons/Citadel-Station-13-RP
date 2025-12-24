@@ -10,6 +10,7 @@
 	throw_speed = 4
 	throw_range = 20
 	materials_base = list(MAT_STEEL = 30, MAT_GLASS = 20)
+	suit_storage_class = SUIT_STORAGE_CLASS_SOFTWEAR | SUIT_STORAGE_CLASS_HARDWEAR
 
 	origin_tech = list(TECH_MAGNET = 2, TECH_BIO = 2)
 	var/details = 0
@@ -27,10 +28,11 @@
 			return
 
 		var/dat = ""
-		if(target.reagents.reagent_list.len > 0)
+		if(target.reagents.reagent_volumes.len > 0)
 			var/one_percent = target.reagents.total_volume / 100
-			for (var/datum/reagent/R in target.reagents.reagent_list)
-				dat += "\n \t " + SPAN_NOTICE("[R][details ? ": [R.volume / one_percent]%" : ""]")
+			for (var/id in target.reagents.reagent_volumes)
+				var/datum/reagent/R = SSchemistry.fetch_reagent(id)
+				dat += "\n \t " + SPAN_NOTICE("[R][details ? ": [target.reagents.reagent_volumes[id] / one_percent]%" : ""]")
 		if(dat)
 			to_chat(user, SPAN_NOTICE("Chemicals found: [dat]"))
 		else

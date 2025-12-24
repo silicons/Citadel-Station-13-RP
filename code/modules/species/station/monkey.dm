@@ -30,9 +30,8 @@
 
 	fire_icon_state = "monkey"
 
-	unarmed_types = list(/datum/unarmed_attack/bite, /datum/unarmed_attack/claws)
+	unarmed_types = list(/datum/melee_attack/unarmed/bite, /datum/melee_attack/unarmed/claws)
 	inherent_verbs = list(/mob/living/proc/ventcrawl)
-	hud_type = /datum/hud_data/monkey
 	meat_type = /obj/item/reagent_containers/food/snacks/meat/monkey
 
 	//rarity_value = 0.1
@@ -62,6 +61,22 @@
 		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right),
 		BP_L_FOOT = list("path" = /obj/item/organ/external/foot),
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right),
+	)
+
+	//* Inventory *//
+
+	inventory_slots = list(
+		/datum/inventory_slot/inventory/back::id,
+		/datum/inventory_slot/inventory/id::id = list(
+			INVENTORY_SLOT_REMAP_MAIN_AXIS = 0,
+			INVENTORY_SLOT_REMAP_CROSS_AXIS = 2,
+			INVENTORY_SLOT_REMAP_CLASS = INVENTORY_HUD_CLASS_ALWAYS,
+		),
+		/datum/inventory_slot/inventory/mask::id = list(
+			INVENTORY_SLOT_REMAP_MAIN_AXIS = 0,
+			INVENTORY_SLOT_REMAP_CROSS_AXIS = 1,
+			INVENTORY_SLOT_REMAP_CLASS = INVENTORY_HUD_CLASS_ALWAYS,
+		),
 	)
 
 /datum/species/monkey/handle_npc(mob/living/carbon/human/H)
@@ -207,13 +222,13 @@
 //Also, M was added to the end of the spawn names to signify that it's a monkey, since some names were conflicting.
 
 /mob/living/carbon/human/sharkm/Initialize(mapload)
-	..(mapload, SPECIES_MONKEY_AKULA)
+	return ..(mapload, SPECIES_MONKEY_AKULA)
 
 /mob/living/carbon/human/sergallingm/Initialize(mapload)
-	..(mapload, SPECIES_MONKEY_SERGAL)
+	return ..(mapload, SPECIES_MONKEY_SERGAL)
 
 /mob/living/carbon/human/sparram/Initialize(mapload)
-	..(mapload, SPECIES_MONKEY_NEVREAN)
+	return ..(mapload, SPECIES_MONKEY_NEVREAN)
 
 /mob/living/carbon/human/wolpin/Initialize(mapload)
-	..(mapload, SPECIES_MONKEY_VULPKANIN)
+	return ..(mapload, SPECIES_MONKEY_VULPKANIN)

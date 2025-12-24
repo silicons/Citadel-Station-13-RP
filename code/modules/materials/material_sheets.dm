@@ -14,8 +14,12 @@
 		)
 	drop_sound = 'sound/items/drop/axe.ogg'
 	pickup_sound = 'sound/items/pickup/axe.ogg'
+	description_info = "Use in your hand to bring up the recipe menu.  If you have enough sheets, click on something on the list to build it."
 
 	material_parts = MATERIAL_DEFAULT_DISABLED
+
+	skip_legacy_icon_update = TRUE
+
 	/// material - direct ref because stack
 	var/datum/prototype/material/material
 
@@ -24,15 +28,30 @@
 	var/allow_window_autobuild = TRUE
 
 /obj/item/stack/material/Initialize(mapload, new_amount, merge = TRUE, material)
+	// allow material override if needed
 	if(!isnull(material))
 		src.material = material
-	src.material = RSmaterials.fetch(src.material)
+
+	// fetch material
+	src.material = RSmaterials.fetch_or_defer(src.material)
+	if(src.material == REPOSITORY_FETCH_DEFER)
+		stack_trace("material deferred on a material stack. this isn't supported.")
+
+	// ensure our icon is set properly
+	if(src.material.icon && icon != src.material.icon)
+		icon = src.material.icon
+
+	//! LEGACY: turn it back on if our material doesn't have the proper shit set
+	if(!src.material.icon_stack_count)
+		skip_legacy_icon_update = FALSE
+	//! END
+
 	. = ..()
 
 	pixel_x = rand(0,4)-4
 	pixel_y = rand(0,4)-4
 
-	stacktype = src.material.stack_type
+	stacktype_legacy = src.material.stack_type
 	if(islist(src.material.stack_origin_tech))
 		origin_tech = src.material.stack_origin_tech.Copy()
 
@@ -46,6 +65,11 @@
 
 /obj/item/stack/material/get_materials(respect_multiplier)
 	return list(material.id = (respect_multiplier? material_multiplier : 1) * SHEET_MATERIAL_AMOUNT)
+
+/obj/item/stack/material/update_icon()
+	if(material.icon_stack_count)
+		icon_state = "stack-[min(ceil((amount / max_amount) * material.icon_stack_count), material.icon_stack_count)]"
+	return ..()
 
 /obj/item/stack/material/tgui_recipes()
 	var/list/assembled = ..()
@@ -77,10 +101,9 @@
 		desc = "A [material.sheet_singular_name] of [material.use_name]."
 		gender = NEUTER
 
-/obj/item/stack/material/use(var/used)
+/obj/item/stack/material/use(used, no_delete)
 	. = ..()
 	update_strings()
-	return
 
 /obj/item/stack/material/transfer_to(obj/item/stack/S, var/tamount=null, var/type_verified)
 	var/obj/item/stack/material/M = S
@@ -211,12 +234,6 @@
 	apply_colour = 1
 	no_variants = FALSE
 
-/obj/item/stack/material/steel
-	name = MAT_STEEL
-	icon_state = "sheet-metal"
-	material = /datum/prototype/material/steel
-	no_variants = FALSE
-
 /obj/item/stack/material/steel/hull
 	name = MAT_STEELHULL
 	material = /datum/prototype/material/steel/hull
@@ -294,10 +311,9 @@
 	set_weight_class(min(5, round(amount / 10) + 1))
 	throw_range = round(amount / 7) + 1
 
-/obj/item/stack/material/supermatter/use(var/used)
+/obj/item/stack/material/supermatter/use(used, no_delete)
 	. = ..()
 	update_mass()
-	return
 
 /obj/item/stack/material/supermatter/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
 	. = ..()
@@ -311,7 +327,7 @@
 	var/burn_user = TRUE
 	if(istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
-		var/obj/item/clothing/gloves/G = H.gloves
+		var/obj/item/clothing/gloves/G = H.inventory.get_slot_single(/datum/inventory_slot/inventory/gloves::id)
 		if(istype(G) && ((G.clothing_flags & CLOTHING_THICK_MATERIAL && prob(70)) || istype(G, /obj/item/clothing/gloves/gauntlets)))
 			burn_user = FALSE
 
@@ -395,7 +411,7 @@
 		return ..()
 	if(CHECK_MULTIPLE_BITFIELDS(I.damage_mode, DAMAGE_MODE_EDGE | DAMAGE_MODE_SHARP))
 		var/time = (3 SECONDS / max(I.damage_force / 10, 1)) * I.tool_speed
-		user.setClickCooldown(time)
+		user.setClickCooldownLegacy(time)
 		if(do_after(user, time, src) && use(1))
 			to_chat(user, "<span class='notice'>You cut up a log into planks.</span>")
 			playsound(get_turf(src), 'sound/effects/woodcutting.ogg', 50, 1)
@@ -426,7 +442,7 @@
 		return ..()
 	if(CHECK_MULTIPLE_BITFIELDS(I.damage_mode, DAMAGE_MODE_EDGE | DAMAGE_MODE_SHARP))
 		var/time = (3 SECONDS / max(I.damage_force / 10, 1)) * I.tool_speed
-		user.setClickCooldown(time)
+		user.setClickCooldownLegacy(time)
 		if(do_after(user, time, src) && use(1))
 			to_chat(user, "<span class='notice'>You cut up a log into planks.</span>")
 			playsound(get_turf(src), 'sound/effects/woodcutting.ogg', 50, 1)

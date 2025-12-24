@@ -1,3 +1,43 @@
+/mob
+	//* Actionspeed *//
+	/// List of action speed modifiers applying to this mob
+	/// * Lazy list, see mob_movespeed.dm
+	var/list/actionspeed_modifiers
+	/// List of action speed modifiers ignored by this mob. List -> List (id) -> List (sources)
+	/// * Lazy list, see mob_movespeed.dm
+	var/list/actionspeed_modifier_immunities
+
+	//* HUD (Atom) *//
+	/// HUDs to initialize, typepaths
+	var/list/atom_huds_to_initialize
+
+	//* Buckling *//
+	/// Atom we're buckled to
+	var/atom/movable/buckled
+	/// Atom we're buckl**ing** to. Used to stop stuff like lava from incinerating those who are mid buckle.
+	//  todo: can this be put in an existing bitfield somewhere else?
+	var/atom/movable/buckling
+
+	//* Emotes *//
+	/// running emotes, associated to context the emote can set
+	var/list/datum/emote/emotes_running
+	/// our default emote classes
+	var/emote_class = EMOTE_CLASS_IS_BODY
+
+	//* Impairments *//
+	/// active feign_impairment types
+	/// * lazy list
+	var/list/impairments_feigned
+
+	//* Movespeed *//
+	/// List of movement speed modifiers applying to this mob
+	/// * This is a lazy list.
+	var/list/movespeed_modifiers
+	/// List of movement speed modifiers ignored by this mob. List -> List (id) -> List (sources)
+	/// * This is a lazy list.
+	var/list/movespeed_modifier_immunities
+	/// The calculated mob speed slowdown based on the modifiers list
+	var/movespeed_hyperbolic
 
 /**
  * Intialize a mob
@@ -15,7 +55,7 @@
  */
 /mob/Initialize(mapload)
 	// mob lists
-	mob_list_register(stat)
+	mob_list_register()
 	// actions
 	actions_controlled = new /datum/action_holder/mob_actor(src)
 	actions_innate = new /datum/action_holder/mob_actor(src)
@@ -23,9 +63,8 @@
 	init_physiology()
 	// atom HUDs
 	prepare_huds()
+	// key focus
 	set_key_focus(src)
-	// todo: remove hooks
-	hook_vr("mob_new",list(src))
 	// signal
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOBAL_MOB_NEW, src)
 	// abilities
@@ -41,8 +80,7 @@
 	// update gravity
 	update_gravity()
 	// movespeed
-	update_movespeed(TRUE)
-	update_config_movespeed()
+	update_movespeed_base()
 	// actionspeed
 	initialize_actionspeed()
 	// ssd overlay
@@ -52,23 +90,52 @@
 	return ..()
 
 /mob/Destroy()
+	// this kicks out client
+	// this is needed to be early because we destroy stuff like inventory
+	// TODO: can we have this ran even earlier?
+	//       ideally we want to preserve as much state as possible so
+	//       we don't want to run further-down behavior before this
+	ghostize()
 	// status effects
 	for(var/id in status_effects)
 		var/datum/status_effect/effect = status_effects[id]
 		qdel(effect)
 	status_effects = null
 	// mob lists
-	mob_list_unregister(stat)
+	mob_list_unregister()
+	// key focus
+	set_key_focus(null)
 	// todo: remove machine
 	unset_machine()
 	// hud
 	for(var/alert in alerts)
 		clear_alert(alert)
-	if(client)
-		for(var/atom/movable/screen/movable/spell_master/spell_master in spell_masters)
-			qdel(spell_master)
-		remove_screen_obj_references()
-		client.screen = list()
+	// abilities
+	QDEL_NULL(ability_master)
+	// spells
+	QDEL_LIST(spell_list)
+	QDEL_LIST(spell_masters)
+	// cleanup screen objects
+	QDEL_NULL(hands)
+	QDEL_NULL(pullin)
+	QDEL_NULL(purged)
+	QDEL_NULL(internals)
+	QDEL_NULL(oxygen)
+	QDEL_NULL(i_select)
+	QDEL_NULL(m_select)
+	QDEL_NULL(toxin)
+	QDEL_NULL(fire)
+	QDEL_NULL(bodytemp)
+	QDEL_NULL(healths)
+	QDEL_NULL(throw_icon)
+	QDEL_NULL(nutrition_icon)
+	QDEL_NULL(pressure)
+	QDEL_NULL(pain)
+	QDEL_NULL(item_use_icon)
+	QDEL_NULL(gun_move_icon)
+	QDEL_NULL(gun_setting_icon)
+	QDEL_NULL(spell_masters)
+	QDEL_NULL(zone_sel)
 	// mind
 	if(!isnull(mind))
 		if(mind.current == src)
@@ -83,16 +150,15 @@
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOBAL_MOB_DEL, src)
 	// abilities
 	dispose_abilities()
+	// inventory
+	QDEL_NULL(inventory)
 	// actions
 	QDEL_NULL(actions_controlled)
 	QDEL_NULL(actions_innate)
-	// this kicks out client
-	ghostize()
 	// get rid of our shit and nullspace everything first..
 	..()
 	// rendering
-	if(hud_used)
-		QDEL_NULL(hud_used)
+	QDEL_NULL(hud_used)
 	dispose_rendering()
 	// perspective; it might be gone now because self perspective is destroyed in ..()
 	using_perspective?.remove_mob(src, TRUE)
@@ -100,30 +166,38 @@
 	QDEL_NULL(physiology)
 	physiology_modifiers = null
 	// movespeed
-	movespeed_modification = null
+	movespeed_modifiers = null
 	// actionspeed
-	actionspeed_modification = null
-	return QDEL_HINT_HARDDEL
+	actionspeed_modifiers = null
+	return QDEL_HINT_QUEUE
 
 //* Mob List Registration *//
 
-/mob/proc/mob_list_register(for_stat)
+/mob/proc/mob_list_register()
 	GLOB.mob_list += src
-	if(for_stat == DEAD)
+	if(stat == DEAD)
 		dead_mob_list += src
 	else
 		living_mob_list += src
 
-/mob/proc/mob_list_unregister(for_stat)
+/mob/proc/mob_list_unregister()
 	GLOB.mob_list -= src
-	if(for_stat == DEAD)
-		dead_mob_list -= src
-	else
-		living_mob_list -= src
+	dead_mob_list -= src
+	living_mob_list -= src
 
 /mob/proc/mob_list_update_stat(old_stat, new_stat)
-	mob_list_unregister(old_stat)
-	mob_list_register(new_stat)
+	if(old_stat == new_stat)
+		return
+	switch(old_stat)
+		if(DEAD)
+			dead_mob_list -= src
+		else
+			living_mob_list -= src
+	switch(new_stat)
+		if(DEAD)
+			dead_mob_list += src
+		else
+			living_mob_list += src
 
 /**
  * Generate the tag for this mob
@@ -148,35 +222,13 @@
 		update_atom_hud_provider(src, hud)
 	atom_huds_to_initialize = null
 
-/mob/proc/remove_screen_obj_references()
-	hands = null
-	pullin = null
-	purged = null
-	internals = null
-	oxygen = null
-	i_select = null
-	m_select = null
-	toxin = null
-	fire = null
-	bodytemp = null
-	healths = null
-	throw_icon = null
-	nutrition_icon = null
-	pressure = null
-	pain = null
-	item_use_icon = null
-	gun_move_icon = null
-	gun_setting_icon = null
-	spell_masters = null
-	zone_sel = null
-
 /mob/statpanel_data(client/C)
 	. = ..()
 	if(C.statpanel_tab("Status"))
-		STATPANEL_DATA_ENTRY("Ping", "[round(client.lastping,1)]ms (Avg: [round(client.avgping,1)]ms)")
-		STATPANEL_DATA_ENTRY("Map", "[(LEGACY_MAP_DATUM)?.name || "Loading..."]")
-		if(!isnull(SSmapping.next_station) && (SSmapping.next_station.name != SSmapping.loaded_station.name))
-			STATPANEL_DATA_ENTRY("Next Map", "[SSmapping.next_station.name]")
+		INJECT_STATPANEL_DATA_ENTRY(., "Ping", "[round(client.lastping,1)]ms (Avg: [round(client.avgping,1)]ms)")
+		INJECT_STATPANEL_DATA_ENTRY(., "Map", "[(LEGACY_MAP_DATUM)?.name || "Loading..."]")
+		if(!isnull(SSmapping.next_station) && !isnull(SSmapping.loaded_station) && (SSmapping.next_station.name != SSmapping.loaded_station.name))
+			INJECT_STATPANEL_DATA_ENTRY(., "Next Map", "[SSmapping.next_station.name]")
 
 /// Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
 // todo: refactor
@@ -712,7 +764,7 @@ GLOBAL_VAR_INIT(exploit_warn_spam_prevention, 0)
 /mob/proc/pull_damage()
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
-		if(H.health - H.halloss <= config_legacy.health_threshold_softcrit)
+		if(H.health - H.halloss <= H.getSoftCritHealth())
 			for(var/name in H.organs_by_name)
 				var/obj/item/organ/external/e = H.organs_by_name[name]
 				if(e && H.lying)
@@ -789,108 +841,104 @@ GLOBAL_VAR_INIT(exploit_warn_spam_prevention, 0)
 
 /mob/proc/get_visible_implants(var/class = 0)
 	var/list/visible_implants = list()
-	for(var/obj/item/O in embedded)
-		if(O.w_class > class)
-			visible_implants += O
 	return visible_implants
 
-/mob/proc/embedded_needs_process()
-	return (embedded.len > 0)
+// TODO: rework and readd embeds
 
-/mob/proc/yank_out_object()
-	set category = VERB_CATEGORY_OBJECT
-	set name = "Yank out object"
-	set desc = "Remove an embedded item at the cost of bleeding and pain."
-	set src in view(1)
+// /mob/proc/yank_out_object()
+// 	set category = VERB_CATEGORY_OBJECT
+// 	set name = "Yank out object"
+// 	set desc = "Remove an embedded item at the cost of bleeding and pain."
+// 	set src in view(1)
 
-	if(!isliving(usr) || !usr.canClick())
-		return
-	usr.setClickCooldown(20)
+// 	if(!isliving(usr) || !usr.canClick())
+// 		return
+// 	usr.setClickCooldownLegacy(20)
 
-	if(usr.stat == 1)
-		to_chat(usr, "You are unconcious and cannot do that!")
-		return
+// 	if(usr.stat == 1)
+// 		to_chat(usr, "You are unconcious and cannot do that!")
+// 		return
 
-	if(usr.restrained())
-		to_chat(usr, "You are restrained and cannot do that!")
-		return
+// 	if(usr.restrained())
+// 		to_chat(usr, "You are restrained and cannot do that!")
+// 		return
 
-	var/mob/S = src
-	var/mob/U = usr
-	var/list/valid_objects = list()
-	var/self = null
+// 	var/mob/S = src
+// 	var/mob/U = usr
+// 	var/list/valid_objects = list()
+// 	var/self = null
 
-	if(S == U)
-		self = 1 // Removing object from yourself.
+// 	if(S == U)
+// 		self = 1 // Removing object from yourself.
 
-	valid_objects = get_visible_implants(0)
-	if(!valid_objects.len)
-		if(self)
-			to_chat(src, "You have nothing stuck in your body that is large enough to remove.")
-		else
-			to_chat(U, "[src] has nothing stuck in their wounds that is large enough to remove.")
-		return
+// 	valid_objects = get_visible_implants(0)
+// 	if(!valid_objects.len)
+// 		if(self)
+// 			to_chat(src, "You have nothing stuck in your body that is large enough to remove.")
+// 		else
+// 			to_chat(U, "[src] has nothing stuck in their wounds that is large enough to remove.")
+// 		return
 
-	var/obj/item/selection = input("What do you want to yank out?", "Embedded objects") in valid_objects
+// 	var/obj/item/selection = input("What do you want to yank out?", "Embedded objects") in valid_objects
 
-	if(self)
-		to_chat(src, "<span class='warning'>You attempt to get a good grip on [selection] in your body.</span>")
-	else
-		to_chat(U, "<span class='warning'>You attempt to get a good grip on [selection] in [S]'s body.</span>")
+// 	if(self)
+// 		to_chat(src, "<span class='warning'>You attempt to get a good grip on [selection] in your body.</span>")
+// 	else
+// 		to_chat(U, "<span class='warning'>You attempt to get a good grip on [selection] in [S]'s body.</span>")
 
-	if(!do_after(U, 30))
-		return
-	if(!selection || !S || !U)
-		return
+// 	if(!do_after(U, 30))
+// 		return
+// 	if(!selection || !S || !U)
+// 		return
 
-	if(self)
-		visible_message("<span class='warning'><b>[src] rips [selection] out of their body.</b></span>","<span class='warning'><b>You rip [selection] out of your body.</b></span>")
-	else
-		visible_message("<span class='warning'><b>[usr] rips [selection] out of [src]'s body.</b></span>","<span class='warning'><b>[usr] rips [selection] out of your body.</b></span>")
-	valid_objects = get_visible_implants(0)
-	if(valid_objects.len == 1) //Yanking out last object - removing verb.
-		remove_verb(src, /mob/proc/yank_out_object)
+// 	if(self)
+// 		visible_message("<span class='warning'><b>[src] rips [selection] out of their body.</b></span>","<span class='warning'><b>You rip [selection] out of your body.</b></span>")
+// 	else
+// 		visible_message("<span class='warning'><b>[usr] rips [selection] out of [src]'s body.</b></span>","<span class='warning'><b>[usr] rips [selection] out of your body.</b></span>")
+// 	valid_objects = get_visible_implants(0)
+// 	if(valid_objects.len == 1) //Yanking out last object - removing verb.
+// 		remove_verb(src, /mob/proc/yank_out_object)
 
-	if(ishuman(src))
-		var/mob/living/carbon/human/H = src
-		var/obj/item/organ/external/affected
+// 	if(ishuman(src))
+// 		var/mob/living/carbon/human/H = src
+// 		var/obj/item/organ/external/affected
 
-		for(var/obj/item/organ/external/organ in H.organs) //Grab the organ holding the implant.
-			for(var/obj/item/O in organ.implants)
-				if(O == selection)
-					affected = organ
+// 		for(var/obj/item/organ/external/organ in H.organs) //Grab the organ holding the implant.
+// 			for(var/obj/item/O in organ.implants)
+// 				if(O == selection)
+// 					affected = organ
 
-		affected.implants -= selection
-		H.shock_stage+=20
-		affected.inflict_bodypart_damage(
-			brute = selection.w_class * 3,
-			damage_mode = DAMAGE_MODE_EDGE,
-			weapon_descriptor = "object removal",
-		)
+// 		affected.implants -= selection
+// 		H.shock_stage+=20
+// 		affected.inflict_bodypart_damage(
+// 			brute = selection.w_class * 3,
+// 			damage_mode = DAMAGE_MODE_EDGE,
+// 			weapon_descriptor = "object removal",
+// 		)
 
-		if(prob(selection.w_class * 5) && (affected.robotic < ORGAN_ROBOT)) //I'M SO ANEMIC I COULD JUST -DIE-.
-			affected.create_specific_wound(/datum/wound/internal_bleeding, min(selection.w_class * 5, 15))
-			H.custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 50)
+// 		if(prob(selection.w_class * 5) && (affected.robotic < ORGAN_ROBOT)) //I'M SO ANEMIC I COULD JUST -DIE-.
+// 			affected.create_specific_wound(/datum/wound/internal_bleeding, min(selection.w_class * 5, 15))
+// 			H.custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 50)
 
-		if (ishuman(U))
-			var/mob/living/carbon/human/human_user = U
-			human_user.bloody_hands(H)
+// 		if (ishuman(U))
+// 			var/mob/living/carbon/human/human_user = U
+// 			human_user.bloody_hands(H)
 
-	else if(issilicon(src))
-		var/mob/living/silicon/robot/R = src
-		R.embedded -= selection
-		R.adjustBruteLoss(5)
-		R.adjustFireLoss(10)
+// 	else if(issilicon(src))
+// 		var/mob/living/silicon/robot/R = src
+// 		R.embedded -= selection
+// 		R.adjustBruteLoss(5)
+// 		R.adjustFireLoss(10)
 
-	selection.forceMove(get_turf(src))
-	U.put_in_hands(selection)
+// 	selection.forceMove(get_turf(src))
+// 	U.put_in_hands(selection)
 
-	for(var/obj/item/O in pinned)
-		if(O == selection)
-			pinned -= O
-		if(!pinned.len)
-			anchored = 0
-	return 1
+// 	for(var/obj/item/O in pinned)
+// 		if(O == selection)
+// 			pinned -= O
+// 		if(!pinned.len)
+// 			anchored = 0
+// 	return 1
 
 /// Check for brain worms in head.
 /mob/proc/has_brain_worms()
@@ -1031,9 +1079,6 @@ GLOBAL_VAR_INIT(exploit_warn_spam_prevention, 0)
 		animate(client, color = null, time = 10)
 	return
 
-/mob/proc/swap_hand()
-	return
-
 /mob/proc/will_show_tooltip()
 	if(alpha <= EFFECTIVE_INVIS)
 		return FALSE
@@ -1128,7 +1173,42 @@ GLOBAL_VAR_INIT(exploit_warn_spam_prevention, 0)
 /mob/z_pass_out(atom/movable/AM, dir, turf/new_loc)
 	return TRUE
 
-//? Pixel Offsets
+//* Dir *//
+
+/**
+ * Tries to turn to face an atom.
+ */
+/mob/proc/face_atom(var/atom/atom_to_face)
+	if(buckled || stat != CONSCIOUS || !atom_to_face || !x || !y || !atom_to_face.x || !atom_to_face.y)
+		return
+	if(!CHECK_MOBILITY(src, MOBILITY_CAN_MOVE))
+		return
+
+	var/dx = atom_to_face.x - x
+	var/dy = atom_to_face.y - y
+	if(!dx && !dy) // Wall items are graphically shifted but on the floor
+		if(atom_to_face.pixel_y > 16)
+			setDir(NORTH)
+		else if(atom_to_face.pixel_y < -16)
+			setDir(SOUTH)
+		else if(atom_to_face.pixel_x > 16)
+			setDir(EAST)
+		else if(atom_to_face.pixel_x < -16)
+			setDir(WEST)
+		return
+
+	if(abs(dx) < abs(dy))
+		if(dy > 0)
+			setDir(NORTH)
+		else
+			setDir(SOUTH)
+	else
+		if(dx > 0)
+			setDir(EAST)
+		else
+			setDir(WEST)
+
+//* Pixel Offsets *//
 
 /mob/proc/get_buckled_pixel_x_offset()
 	if(!buckled)
@@ -1302,4 +1382,4 @@ GLOBAL_VAR_INIT(exploit_warn_spam_prevention, 0)
  * Checks if we can avoid things like landmine, lava, etc, whether beneficial or harmful.
  */
 /mob/is_avoiding_ground()
-	return ..() || hovering || (buckled?.buckle_flags & BUCKLING_GROUND_HOIST)
+	return ..() || hovering || flying || (buckled?.buckle_flags & BUCKLING_GROUND_HOIST) || buckled?.is_avoiding_ground()

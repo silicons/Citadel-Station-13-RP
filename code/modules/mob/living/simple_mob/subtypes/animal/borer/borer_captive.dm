@@ -5,7 +5,7 @@
 	real_name = "host brain"
 	universal_understand = 1
 
-/mob/living/captive_brain/say_legacy(var/message, var/datum/language/speaking = null, var/verb="says", var/alt_name="", var/whispering = 0)
+/mob/living/captive_brain/say_legacy(var/message, var/datum/prototype/language/speaking = null, var/verb="says", var/alt_name="", var/whispering = 0)
 
 	if (src.client)
 		if(client.prefs.muted & MUTE_IC)
@@ -31,8 +31,8 @@
 			else if(M.stat == DEAD && M.get_preference_toggle(/datum/game_preference_toggle/observer/ghost_ears))
 				to_chat(M, "The captive mind of [src] whispers, \"[message]\"")
 
-/mob/living/captive_brain/emote(var/message)
-	return
+/mob/living/captive_brain/process_emote(datum/emote/emote, raw_parameter_string, datum/event_args/actor/actor, used_binding)
+	return FALSE
 
 /mob/living/captive_brain/process_resist()
 	//Resisting control by an alien mind.

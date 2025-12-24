@@ -9,7 +9,7 @@
 
 	iff_factions = MOB_IFF_FACTION_MERCENARY
 
-	movement_cooldown = 5
+	movement_base_speed = 10 / 5
 	movement_sound = "mechstep" // This gets fed into playsound(), which can also take strings as a 'group' of sound files.
 	turn_sound = 'sound/mecha/mechturn.ogg'
 	maxHealth = 300
@@ -40,7 +40,6 @@
 	var/deflect_chance = 10 // Chance to outright stop an attack, just like a normal exosuit.
 	var/has_repair_droid = FALSE // If true, heals 2 damage every tick and gets a repair droid overlay.
 
-
 /mob/living/simple_mob/mechanical/mecha/Initialize(mapload)
 	sparks = new (src)
 	sparks.set_up(3, 1, src)
@@ -58,7 +57,7 @@
 	return ..()
 
 /mob/living/simple_mob/mechanical/mecha/Destroy()
-	qdel(sparks)
+	QDEL_NULL(sparks)
 	return ..()
 
 /mob/living/simple_mob/mechanical/mecha/death()
@@ -115,7 +114,8 @@
 /mob/living/simple_mob/mechanical/mecha/on_bullet_act(obj/projectile/proj, impact_flags, list/bullet_act_args)
 	if(prob(deflect_chance))
 		visible_message(SPAN_WARNING( "\The [proj] is deflected by \the [src]'s armor!"))
-		deflect_sprite()
+		spawn(-1)
+			deflect_sprite()
 		return PROJECTILE_IMPACT_BLOCKED
 	return ..()
 
@@ -130,7 +130,7 @@
 	if(prob(deflect_chance))
 		visible_message(SPAN_WARNING( "\The [user]'s [I] bounces off \the [src]'s armor!"))
 		deflect_sprite()
-		user.setClickCooldown(user.get_attack_speed(I))
+		user.setClickCooldownLegacy(user.get_attack_speed_legacy(I))
 		return
 	..()
 

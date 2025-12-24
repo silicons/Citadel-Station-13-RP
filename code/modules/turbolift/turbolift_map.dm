@@ -18,12 +18,16 @@
 	// rotated
 	var/got_rotated_by_maploader
 
-/obj/turbolift_map_holder/preloading_dir(datum/dmm_context/context)
+/obj/turbolift_map_holder/preloading_from_mapload_rotation(datum/dmm_context/context)
 	. = ..()
 	got_rotated_by_maploader = context.loaded_orientation
 
 /obj/turbolift_map_holder/Initialize(mapload)
 	. = ..()
+	return INITIALIZE_HINT_LATELOAD
+
+// since this WILL cause qdels (on other atoms) to be invoked
+/obj/turbolift_map_holder/LateInitialize()
 	// Create our system controller.
 	var/datum/turbolift/lift = new()
 
@@ -249,4 +253,3 @@
 			light2.setDir(NORTH)
 
 	lift.open_doors()
-	return INITIALIZE_HINT_QDEL

@@ -175,7 +175,7 @@
 					// If there's no brain, the mob is deleted and a structure/AIcore is created.
 					if(A)
 						A.rename_self("ai")
-						for(var/datum/language/L in brain.brainmob.languages)
+						for(var/datum/prototype/language/L in brain.brainmob.languages)
 							A.add_language(L.name)
 				feedback_inc("cyborg_ais_created",1)
 				qdel(src)
@@ -191,7 +191,7 @@ GLOBAL_LIST_BOILERPLATE(all_deactivated_AI_cores, /obj/structure/AIcore/deactiva
 	state = 20//So it doesn't interact based on the above. Not really necessary.
 
 //! temporary hack to detect improper usage
-/obj/structure/AIcore/deactivated/New()
+/obj/structure/AIcore/deactivated/Initialize(mapload)
 	if(loc == null)
 		CRASH("attempted to spawn deactivated aicore at null loc")
 	return ..()

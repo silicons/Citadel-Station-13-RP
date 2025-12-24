@@ -2,9 +2,6 @@
 	////////////
 	//SECURITY//
 	////////////
-///Could probably do with being lower.
-///Restricts client uploads to the server to 1MB
-#define UPLOAD_LIMIT		1048576
 
 #define LIMITER_SIZE	5
 #define CURRENT_SECOND	1
@@ -150,14 +147,6 @@
 	..()	//redirect to hsrc.Topic()
 
 
-//This stops files larger than UPLOAD_LIMIT being sent from client to server via input(), client.Import() etc.
-/client/AllowUpload(filename, filelength)
-	if(filelength > UPLOAD_LIMIT)
-		to_chat(src, "<font color='red'>Error: AllowUpload(): File Upload too large. Upload Limit: [UPLOAD_LIMIT/1024]KiB.</font>")
-		return 0
-	return 1
-
-
 	///////////
 	//CONNECT//
 	///////////
@@ -173,9 +162,6 @@
 /client/New(TopicData)
 	//* pre-connect-ish *//
 
-	// Byond only populates whether or not you can profile at connect. You have to give someone this
-	// before their client loads/whatever. This cannot be behind a spawn(). We will remove it from non-admins later.
-	world.SetConfig("APP/admin", ckey, "role=admin")
 	// Block client.Topic() calls from connect.
 	TopicData = null
 	// Kick invalid connections.
@@ -206,13 +192,11 @@
 	// log to player lookup
 	update_lookup_in_db()
 
-	//* Resolve storage datums
-	// resolve persistent data
+	//* Resolve storage datums *//
+
 	persistent = resolve_client_data(ckey, key)
-	//* Resolve database data
 	player = resolve_player_data(ckey, key)
 	player.log_connect()
-	//* Resolve preferences
 	preferences = SSpreferences.resolve_game_preferences(key, ckey)
 	//? WARNING: SHITCODE ALERT ?//
 	// we wait until it inits to do this
@@ -221,56 +205,39 @@
 	preferences.on_reconnect()
 	//? END ?//
 
-	//* Create UI *//
+	//* Create interface UI *//
+
+	if(byond_version >= 516)
+		winset(src, null, list("browser-options" = "find,refresh,byondstorage"))
+
 	// todo: move top level menu here, for now it has to be under prefs.
-	// Instantiate statpanel
 	tgui_stat = new(src, SKIN_BROWSER_ID_STAT)
-	// Instantiate tgui panel
 	tgui_panel = new(src, SKIN_BROWSER_ID_CHAT)
 	// Instantiate cutscene system
 	spawn(1)
 		init_cutscene_system()
-	// instantiate tooltips
 	tooltips = new(src)
-	// start action drawer
+
+	//* Setup on-map HUDs *//
 	action_drawer = new(src)
-	// make action holder
+	actor_huds = new(src)
 	action_holder = new /datum/action_holder/client_actor(src)
 	action_drawer.register_holder(action_holder)
 
-	//* Setup admin tooling
+	//* Setup admin tooling *//
+	// Notify tickets they logged in
 	GLOB.ahelp_tickets.ClientLogin(src)
-	// var/connecting_admin = FALSE //because de-admined admins connecting should be treated like admins.
-	//Admin Authorisation
-	holder = admin_datums[ckey]
-	var/debug_tools_allowed = FALSE
-	if(holder)
-		GLOB.admins |= src
-		holder.owner = src
-		// connecting_admin = TRUE
-		//if(check_rights_for(src, R_DEBUG))
-		if(R_DEBUG & holder?.rights) //same wiht this, check_rights when?
-			debug_tools_allowed = TRUE
-	/*
-	else if(GLOB.deadmins[ckey])
-		add_verb(src, /client/proc/readmin)
-		connecting_admin = TRUE
-	*/
-	// if(CONFIG_GET(flag/enable_localhost_rank) && !connecting_admin)
-	if(is_localhost() && CONFIG_GET(flag/enable_localhost_rank))
+	// Give them admin if they're an admin
+	// TODO: Maybe don't do it if they're deadminned..
+	var/datum/admins/maybe_holder = admin_datums[ckey]
+	maybe_holder?.associate(src)
+
+	//! TODO: This is shitcode, fix it.
+	if(is_localhost() && CONFIG_GET(flag/enable_localhost_rank) && !holder)
 		holder = new /datum/admins("!localhost!", ALL, ckey)
-		holder.owner = src
-		GLOB.admins |= src
-		//admins |= src // this makes them not have admin. what the fuck??
-		// holder.associate(ckey)
-		// connecting_admin = TRUE
-	//CITADEL EDIT
-	//if(check_rights_for(src, R_DEBUG))	//check if autoadmin gave us it
-	if(R_DEBUG & holder?.rights) //this is absolutely horrid
-		debug_tools_allowed = TRUE
-	if(!debug_tools_allowed)
-		world.SetConfig("APP/admin", ckey, null)
-	//END CITADEL EDIT
+		holder.associate(src)
+	//! END
+
 	// todo: refactor and hoist
 	//preferences datum - also holds some persistent data for the client (because we may as well keep these datums to a minimum)
 	prefs = GLOB.preferences_datums[ckey]
@@ -324,7 +291,6 @@
 		winset(src, null, "command=\".configure graphics-hwmode on\"")
 
 	if(holder)
-		add_admin_verbs()
 		admin_memo_show()
 		// to_chat(src, get_message_output("memo"))
 		// adminGreet()
@@ -354,7 +320,7 @@
 	// run post-init 'lint'-like checks
 	// this is on a spawn() to force a separate call chain
 	spawn(0)
-		on_new_hook_stability_checks()
+		invoke_hooks__client_stability_check(src)
 
 	// todo: fuck you voreprefs
 	spawn(0)
@@ -378,17 +344,6 @@
 	// update our hub label
 	// todo: this should be a global signal that the subsystem hooks
 	SSserver_maint.queue_hub_update()
-
-/**
- * Called in the middle of new, after everything critical
- * is loaded / initialized.
- *
- * This proc should all be async; it is where you hook to ensure things are properly
- * loaded.
- */
-/client/proc/on_new_hook_stability_checks()
-	SHOULD_CALL_PARENT(TRUE)
-	SHOULD_NOT_SLEEP(TRUE)
 
 	//////////////
 	//DISCONNECT//
@@ -428,26 +383,22 @@
 		prefs.client = null
 		prefs = null
 	SSserver_maint.UpdateHubStatus()
-	if(holder)
-		holder.owner = null
-		GLOB.admins -= src //delete them on the managed one too
 
-	active_mousedown_item = null
+	holder?.disassociate()
 
-	//* cleanup rendering
-	// clear perspective
+	//* Cleanup rendering *//
 	if(using_perspective)
 		set_perspective(null)
-	// clear HUDs
 	clear_atom_hud_providers()
 
-	//* cleanup client UI *//
+	//* Cleanup interface UI *//
 	QDEL_NULL(tgui_stat)
 	cleanup_cutscene_system()
 	QDEL_NULL(tgui_panel)
 	QDEL_NULL(tooltips)
 
-	//* cleanup map UI *//
+	//* Cleanup on-map HUDs *//
+	QDEL_NULL(actor_huds)
 	QDEL_NULL(action_holder)
 	QDEL_NULL(action_drawer)
 
@@ -470,7 +421,7 @@
 	var/sql_system_ckey = sanitizeSQL(system_ckey)
 	var/sql_ckey = sanitizeSQL(ckey)
 	//check to see if we noted them in the last day.
-	var/datum/DBQuery/query_get_notes = SSdbcore.NewQuery("SELECT id FROM [format_table_name("messages")] WHERE type = 'note' AND targetckey = '[sql_ckey]' AND adminckey = '[sql_system_ckey]' AND timestamp + INTERVAL 1 DAY < NOW() AND deleted = 0 AND expire_timestamp > NOW()")
+	var/datum/DBQuery/query_get_notes = SSdbcore.NewQuery("SELECT id FROM [DB_PREFIX_TABLE_NAME("messages")] WHERE type = 'note' AND targetckey = '[sql_ckey]' AND adminckey = '[sql_system_ckey]' AND timestamp + INTERVAL 1 DAY < NOW() AND deleted = 0 AND expire_timestamp > NOW()")
 	if(!query_get_notes.Execute())
 		qdel(query_get_notes)
 		return
@@ -479,7 +430,7 @@
 		return
 	qdel(query_get_notes)
 	//regardless of above, make sure their last note is not from us, as no point in repeating the same note over and over.
-	query_get_notes = SSdbcore.NewQuery("SELECT adminckey FROM [format_table_name("messages")] WHERE targetckey = '[sql_ckey]' AND deleted = 0 AND expire_timestamp > NOW() ORDER BY timestamp DESC LIMIT 1")
+	query_get_notes = SSdbcore.NewQuery("SELECT adminckey FROM [DB_PREFIX_TABLE_NAME("messages")] WHERE targetckey = '[sql_ckey]' AND deleted = 0 AND expire_timestamp > NOW() ORDER BY timestamp DESC LIMIT 1")
 	if(!query_get_notes.Execute())
 		qdel(query_get_notes)
 		return
@@ -490,8 +441,6 @@
 	qdel(query_get_notes)
 	create_message("note", key, system_ckey, message, null, null, 0, 0, null, 0, 0)
 */
-
-#undef UPLOAD_LIMIT
 
 //checks if a client is afk
 //3000 frames = 5 minutes
@@ -606,3 +555,31 @@ GLOBAL_VAR_INIT(log_clicks, FALSE)
 /client/proc/AnnouncePR(announcement)
 	to_chat(src, announcement)
 
+// TODO: this shoudln't be on client.
+/client/proc/getAlertDesc()
+	var/color
+	var/desc
+	//borrow the same colors from the fire alarms
+	switch(get_security_level())
+		if("green")
+			color = "#00ff00"
+			desc = "" //no special description if nothing special is going on
+		if("yellow")
+			color = "#ffff00"
+			desc = CONFIG_GET(string/alert_desc_yellow_upto)
+		if("violet")
+			color = "#9933ff"
+			desc = CONFIG_GET(string/alert_desc_violet_upto)
+		if("orange")
+			color = "#ff9900"
+			desc = CONFIG_GET(string/alert_desc_orange_upto)
+		if("blue")
+			color = "#1024A9"
+			desc = CONFIG_GET(string/alert_desc_blue_upto)
+		if("red")
+			color = "#ff0000"
+			desc = CONFIG_GET(string/alert_desc_red_upto)
+		if("delta")
+			color = "#FF6633"
+			desc = CONFIG_GET(string/alert_desc_delta)
+	. = SPAN_NOTICE("<br>The alert level on \the [station_name()] is currently: <font color=[color]>Code [capitalize(get_security_level())]</font>. [desc]")

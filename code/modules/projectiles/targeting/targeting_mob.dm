@@ -1,6 +1,3 @@
-/mob/living/var/obj/aiming_overlay/aiming
-/mob/living/var/list/aimed = list()
-
 /mob/verb/toggle_gun_mode()
 	set name = "Toggle Gun Mode"
 	set desc = "Begin or stop aiming."
@@ -17,7 +14,7 @@
 
 /mob/living/proc/stop_aiming(obj/item/thing, no_message = FALSE)
 	if(!aiming)
-		aiming = new(src)
+		return
 	if(thing && aiming.aiming_with != thing)
 		return
 	aiming.cancel_aiming(no_message)
@@ -35,12 +32,6 @@
 	stop_aiming(no_message=1)
 	..()
 
-/mob/living/Destroy()
-	if(aiming)
-		QDEL_NULL(aiming)
-	aimed.Cut()
-	return ..()
-
 /turf/Enter(atom/movable/mover, atom/oldloc)
 	. = ..()
 	if(isliving(mover))
@@ -56,11 +47,3 @@
 		aiming.update_aiming()
 	if(aimed.len)
 		trigger_aiming(TARGET_CAN_MOVE)
-
-/mob/living/proc/set_m_intent(intent)
-	if (intent != "walk" && intent != "run")
-		return 0
-	m_intent = intent
-	if(hud_used)
-		if (hud_used.move_intent)
-			hud_used.move_intent.icon_state = intent == "walk" ? "walking" : "running"

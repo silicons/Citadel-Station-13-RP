@@ -27,8 +27,6 @@
 	// todo: KILL THIS WITH FIRE
 	var/list/expected_z_levels = list()
 
-	var/turf/unsimulated/wall/planetary/planetary_wall_type = /turf/unsimulated/wall/planetary
-
 	var/list/turf/simulated/floor/planet_floors = list()
 	var/list/turf/unsimulated/wall/planetary/planet_walls = list()
 
@@ -87,6 +85,7 @@
 
 	needs_work |= PLANET_PROCESS_SUN
 
+// TODO: subsystemize this proc
 /datum/planet/proc/update_sunlight()
 	if (sun_next_brightness == sun_apparent_brightness && sun_next_color == sun_apparent_color)
 		log_debug("update_sunlight(): apparent == next, not bothering")

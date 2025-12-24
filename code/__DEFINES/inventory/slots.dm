@@ -34,7 +34,8 @@ DEFINE_BITFIELD(slot_equip_checks, list(
 	BITFIELD(SLOT_EQUIP_CHECK_USE_PROC),
 ))
 
-//! slot meta inventory_slot_flags flags
+//* /datum/inventory_slot inventory_slot_flags *//
+
 /// render on mob
 #define INV_SLOT_IS_RENDERED				(1<<0)
 /// considered worn equipment
@@ -64,6 +65,26 @@ DEFINE_BITFIELD(inventory_slot_flags, list(
 	BITFIELD(INV_SLOT_IS_STRIPPABLE),
 	BITFIELD(INV_SLOT_STRIP_SIMPLE_LINK),
 	BITFIELD(INV_SLOT_STRIP_ONLY_REMOVES),
+))
+
+//* /datum/inventory_slot inventory_filter_flags *//
+
+#define INV_FILTER_UNKNOWN (1<<1)
+#define INV_FILTER_EQUIPMENT (1<<2)
+#define INV_FILTER_RESTRAINTS (1<<3)
+
+/// specially handled value
+#define INV_FILTER_HANDS (1<<23)
+
+DEFINE_BITFIELD_NAMED(inv_slot_filter, list(
+	/datum/inventory_slot = list(
+		NAMEOF_TYPE(/datum/inventory_slot, inventory_filter_flags),
+	),
+), list(
+	BITFIELD_NAMED("Unknown", INV_FILTER_UNKNOWN),
+	BITFIELD_NAMED("Equipment", INV_FILTER_EQUIPMENT),
+	BITFIELD_NAMED("Restraints", INV_FILTER_RESTRAINTS),
+	BITFIELD_NAMED("Hands", INV_FILTER_HANDS),
 ))
 
 //! slot flags

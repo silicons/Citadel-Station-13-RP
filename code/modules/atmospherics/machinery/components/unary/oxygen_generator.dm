@@ -12,14 +12,15 @@
 	var/oxygen_content = 10
 
 /obj/machinery/atmospherics/component/unary/oxygen_generator/update_icon()
+	. = ..()
 	if(node)
 		icon_state = "intact_[on?("on"):("off")]"
 	else
 		icon_state = "exposed_off"
 		on = 0
 
-/obj/machinery/atmospherics/component/unary/oxygen_generator/New()
-	..()
+/obj/machinery/atmospherics/component/unary/oxygen_generator/Initialize(mapload)
+	. = ..()
 	air_contents.volume = 50
 
 /obj/machinery/atmospherics/component/unary/oxygen_generator/process()

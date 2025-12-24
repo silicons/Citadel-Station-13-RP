@@ -1,6 +1,13 @@
-/datum/prototype/material/steel
+GENERATE_MATERIAL_STACKS(/steel)
+DECLARE_MATERIAL(/steel)
 	id = MAT_STEEL
 	name = MAT_STEEL
+
+	display_name = "steel"
+
+	icon = 'icons/materials/metals/steel.dmi'
+	icon_stack_count = 3
+
 	stack_type = /obj/item/stack/material/steel
 	icon_base = 'icons/turf/walls/solid_wall.dmi'
 	icon_reinf = 'icons/turf/walls/solid_wall_reinforced.dmi'
@@ -22,6 +29,9 @@
 	refraction = MATERIAL_RESISTANCE_LOW
 	absorption = MATERIAL_RESISTANCE_MODERATE
 	nullification = MATERIAL_RESISTANCE_NONE
+
+	material_constraints = MATERIAL_CONSTRAINT_RIGID
+	material_tags = list(MATERIAL_TAG_BASIC_STRUCTURAL)
 
 /datum/prototype/material/steel/generate_recipes()
 	. = ..()
@@ -226,7 +236,7 @@
 	)
 	. += create_stack_recipe_datum(
 		category = "weapons",
-		product = /obj/item/grenade/chem_grenade,
+		product = /obj/item/grenade/simple/chemical,
 		name = "grenade casing",
 		cost = 2,
 	)

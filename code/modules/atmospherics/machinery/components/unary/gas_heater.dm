@@ -1,7 +1,7 @@
 
 /obj/machinery/atmospherics/component/unary/heater
 	name = "gas heating system"
-	desc = "Heats gas when connected to a pipe network"
+	desc = "Heats gas when connected to a pipe network.\n <span class='notice'>\[Accepts Upgrades\]</span>"
 	icon = 'icons/obj/medical/cryogenic2.dmi'
 	icon_state = "heater_0"
 	density = TRUE
@@ -37,8 +37,7 @@
 	if(node)
 		update_icon()
 
-
-/obj/machinery/atmospherics/component/unary/heater/update_icon()
+/obj/machinery/atmospherics/component/unary/heater/update_icon_state()
 	if(node)
 		if(use_power && heating)
 			icon_state = "heater_1"
@@ -46,8 +45,7 @@
 			icon_state = "heater"
 	else
 		icon_state = "heater_0"
-	return
-
+	return ..()
 
 /obj/machinery/atmospherics/component/unary/heater/process(delta_time)
 	..()
@@ -100,7 +98,7 @@
 
 	return data
 
-/obj/machinery/atmospherics/component/unary/heater/ui_act(action, list/params, datum/tgui/ui)
+/obj/machinery/atmospherics/component/unary/heater/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state, datum/event_args/actor/actor)
 	if(..())
 		return TRUE
 

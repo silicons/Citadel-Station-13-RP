@@ -18,51 +18,39 @@
  */
 /obj/item/material/twohanded
 	w_class = WEIGHT_CLASS_BULKY
-	var/unwielded_force_multiplier = 0.25
-	var/wielded = 0
-	var/wieldsound = null
-	var/unwieldsound = null
-	var/base_icon
-	var/base_name
 	attack_sound = "swing_hit"
 	drop_sound = 'sound/items/drop/sword.ogg'
 	pickup_sound = 'sound/items/pickup/sword.ogg'
-
 	passive_parry = /datum/passive_parry/melee{
 		parry_chance_melee = 15;
 	}
 
-/obj/item/material/twohanded/update_held_icon()
-	var/mob/living/M = loc
-	if(istype(M) && M.can_wield_item(src) && is_held_twohanded(M))
-		wielded = 1
-		name = "[base_name] (wielded)"
-	else
-		wielded = 0
-		name = "[base_name]"
-	update_icon()
-	update_material_parts()
-	..()
-
-/obj/item/material/twohanded/update_material_parts()
-	. = ..()
-	if(!wielded)
-		damage_force *= unwielded_force_multiplier
-		// don't affect throwforce
+	var/base_icon
+	var/base_name
+	var/unwielded_force_multiplier = 0.25
 
 /obj/item/material/twohanded/Initialize(mapload, material_key)
 	. = ..()
+	AddComponent(/datum/component/wielding)
 	update_icon()
 
-/obj/item/material/twohanded/update_icon()
-	icon_state = "[base_icon][wielded]"
-	item_state = icon_state
+/obj/item/material/twohanded/on_wield(mob/user, hands)
+	. = ..()
+	update_icon()
 
-/obj/item/material/twohanded/dropped(mob/user, flags, atom/newLoc)
-	..()
-	if(wielded)
-		spawn(0)
-			update_held_icon()
+/obj/item/material/twohanded/on_unwield(mob/user, hands)
+	. = ..()
+	update_icon()
+
+/obj/item/material/twohanded/melee_attack(datum/event_args/actor/clickchain/clickchain, clickchain_flags, datum/melee_attack/weapon/attack_style)
+	if(!(item_flags & ITEM_MULTIHAND_WIELDED))
+		clickchain.attack_melee_multiplier *= unwielded_force_multiplier
+	return ..()
+
+/obj/item/material/twohanded/update_icon()
+	icon_state = "[base_icon][!!(item_flags & ITEM_MULTIHAND_WIELDED)]"
+	. = ..()
+	item_state = icon_state
 
 /*
  * Fireaxe
@@ -84,23 +72,19 @@
 	pickup_sound = 'sound/items/pickup/axe.ogg'
 	heavy = TRUE
 
-/obj/item/material/twohanded/fireaxe/update_held_icon()
-	var/mob/living/M = loc
-	if(istype(M) && M.can_wield_item(src) && M.is_holding(src) && !M.hands_full())
-		wielded = 1
-		pry = 1
-		name = "[base_name] (wielded)"
-	else
-		wielded = 0
-		pry = 0
-		name = "[base_name]"
-	..()
+/obj/item/material/twohanded/fireaxe/on_wield(mob/user, hands)
+	. = ..()
+	pry = TRUE
 
-/obj/item/material/twohanded/fireaxe/attack_object(atom/target, datum/event_args/actor/clickchain/clickchain, clickchain_flags, mult = 1)
-	if(istype(target, /obj/structure/window))
-		mult *= 2
-	else if(istype(target, /obj/effect/plant))
-		mult *= 2
+/obj/item/material/twohanded/fireaxe/on_unwield(mob/user, hands)
+	. = ..()
+	pry = FALSE
+
+/obj/item/material/twohanded/fireaxe/melee_attack(datum/event_args/actor/clickchain/clickchain, clickchain_flags, datum/melee_attack/weapon/attack_style)
+	if(istype(clickchain.target, /obj/structure/window))
+		clickchain.attack_melee_multiplier *= 2
+	else if(istype(clickchain.target, /obj/effect/plant))
+		clickchain.attack_melee_multiplier *= 2
 	return ..()
 
 /obj/item/material/twohanded/fireaxe/foam
@@ -126,6 +110,14 @@
 	icon_state = "bronze_axe0"
 	base_icon = "bronze_axe"
 	material_color = FALSE
+
+/obj/item/material/twohanded/fireaxe/iron
+	name = "Woodcutter's Axe"
+	desc = "A simple iron axe for cutting down trees. Though not made of the sturdiest metal it will get the job done."
+	material_parts = /datum/prototype/material/iron
+	icon_state = "fireaxe_mask0"
+	base_icon = "fireaxe_mask"
+	material_color = TRUE
 
 /obj/item/material/twohanded/fireaxe/plasteel
 	material_parts = /datum/prototype/material/plasteel
@@ -161,6 +153,7 @@
 	damage_force = 10
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = SLOT_BACK
+	suit_storage_class = SUIT_STORAGE_CLASS_HARDWEAR
 	material_significance = MATERIAL_SIGNIFICANCE_WEAPON_HEAVY
 	throw_force_multiplier = 1.5
 	throw_speed = 5
@@ -170,9 +163,8 @@
 	material_parts = /datum/prototype/material/glass
 	material_color = 0
 	reach = 2 // Spears are long.
-	attackspeed = 20
 	weight = ITEM_WEIGHT_MELEE_SPEAR
-	var/obj/item/grenade/explosive = null
+	var/obj/item/grenade/simple/explosive = null
 	var/war_cry = "AAAAARGH!!!"
 
 /obj/item/material/twohanded/spear/Initialize(mapload, material_key)
@@ -187,7 +179,7 @@
 
 /obj/item/material/twohanded/spear/afterattack(atom/target, mob/user, clickchain_flags, list/params)
 	. = ..()
-	if(explosive && wielded) //Citadel edit removes qdel and explosive.forcemove(AM)
+	if(explosive && (item_flags & ITEM_MULTIHAND_WIELDED)) //Citadel edit removes qdel and explosive.forcemove(AM)
 		user.say_legacy("[war_cry]")
 		explosive.detonate()
 
@@ -199,15 +191,13 @@
 
 /obj/item/material/twohanded/spear/AltClick(mob/user)
 	. = ..()
-	if(usr)
-		..()
-		if(!explosive)
-			return
-		if(istype(user) && loc == user)
-			var/input = stripped_input(user,"What do you want your war cry to be? You will shout it when you hit someone in melee.", ,"", 50)
-			if(input)
-				src.war_cry = input
-		return TRUE
+	if(!explosive)
+		return
+	if(istype(user) && loc == user)
+		var/input = stripped_input(user,"What do you want your war cry to be? You will shout it when you hit someone in melee.", ,"", 50)
+		if(input)
+			src.war_cry = input
+	return TRUE
 
 /obj/item/material/twohanded/spear/CheckParts(list/parts_list)
 	var/obj/item/material/twohanded/spear/S = locate() in parts_list
@@ -234,7 +224,7 @@
 	material_color = 0
 
 /obj/item/material/twohanded/spear/bone/Initialize(mapload, material_key)
-	..(mapload,"bone")
+	return ..(mapload,"bone")
 
 /obj/item/material/twohanded/spear/plasteel
 	material_parts = /datum/prototype/material/plasteel
@@ -253,7 +243,7 @@
 
 
 /obj/item/material/twohanded/spear/bronze/Initialize(mapload, material_key)
-	..(mapload,"bronze")
+	return ..(mapload,"bronze")
 
 //Sledgehammers. Slightly less force than fire axes, but breaks bones easier.
 
@@ -268,6 +258,6 @@
 	w_class = WEIGHT_CLASS_HUGE
 	encumbrance = ITEM_ENCUMBRANCE_MELEE_SLEDGEHAMMER
 	attack_verb = list("attacked", "smashed", "crushed", "wacked", "pounded")
-	armor_penetration = 50
 	heavy = TRUE
+	damage_tier = 4
 	can_cleave = TRUE

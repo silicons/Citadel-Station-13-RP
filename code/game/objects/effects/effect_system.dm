@@ -20,6 +20,11 @@ would spawn and follow the beaker, even if it is carried or thrown.
 	var/atom/holder
 	var/setup = 0
 
+/datum/effect_system/Destroy()
+	holder = null
+	location = null
+	return..()
+
 /datum/effect_system/proc/set_up(n = 3, c = 0, turf/loc)
 	if(n > 10)
 		n = 10
@@ -99,7 +104,7 @@ steam.start() -- spawns the effect
 
 /obj/effect/particle_effect/sparks/Initialize(mapload)
 	. = ..()
-	playsound(src, /datum/soundbyte/grouped/sparks, 100, 1)
+	playsound(src, /datum/soundbyte/sparks, 100, 1)
 	var/turf/T = src.loc
 	if (istype(T, /turf))
 		T.hotspot_expose(1000,100)
@@ -148,7 +153,8 @@ steam.start() -- spawns the effect
 				direction = pick(GLOB.alldirs)
 			for(i=0, i<pick(1,2,3), i++)
 				sleep(5)
-				step(sparks,direction)
+				if(isloc(sparks.loc) && !QDELETED(sparks))
+					step(sparks,direction)
 			spawn(20)
 				src.total_sparks--
 
@@ -198,10 +204,6 @@ steam.start() -- spawns the effect
 			return 0
 	return 1
 
-/////////////////////////////////////////////
-// Illumination
-/////////////////////////////////////////////
-
 /obj/effect/particle_effect/smoke/illumination
 	name = "illumination"
 	opacity = 0
@@ -213,13 +215,8 @@ steam.start() -- spawns the effect
 	. = ..(mapload)
 	set_light(range, power, color)
 
-/////////////////////////////////////////////
-// Bad smoke
-/////////////////////////////////////////////
-
 /obj/effect/particle_effect/smoke/bad
 	time_to_live = 600
-	//var/list/projectiles
 
 /obj/effect/particle_effect/smoke/bad/Move()
 	..()
@@ -233,26 +230,6 @@ steam.start() -- spawns the effect
 		L.adjustOxyLoss(1)
 		if(prob(25))
 			L.emote("cough")
-
-/* Not feasile until a later date
-/obj/effect/particle_effect/smoke/bad/Crossed(atom/movable/M as mob|obj)
-	..()
-	if(istype(M, /obj/projectile/beam))
-		var/obj/projectile/beam/B = M
-		if(!(B in projectiles))
-			B.damage = (B.damage/2)
-			projectiles += B
-			destroyed_event.register(B, src, TYPE_PROC_REF(/obj/effect/particle_effect/smoke/bad, on_projectile_delete))
-		to_chat(world, "Damage is: [B.damage]")
-	return 1
-
-/obj/effect/particle_effect/smoke/bad/proc/on_projectile_delete(obj/projectile/beam/proj)
-	projectiles -= proj
-*/
-
-/////////////////////////////////////////////
-// 'Elemental' smoke
-/////////////////////////////////////////////
 
 /obj/effect/particle_effect/smoke/elemental
 	name = "cloud"
@@ -304,7 +281,7 @@ steam.start() -- spawns the effect
 	color = "#4D4D4D"
 
 /obj/effect/particle_effect/smoke/elemental/shock/affect(mob/living/L)
-	L.inflict_shock_damage(strength)
+	L.inflict_shock_damage_legacy(strength)
 
 /obj/effect/particle_effect/smoke/elemental/mist
 	name = "misty cloud"
@@ -357,9 +334,12 @@ steam.start() -- spawns the effect
 					direction = pick(GLOB.alldirs)
 			for(i=0, i<pick(0,1,1,1,2,2,2,3), i++)
 				sleep(10)
+				if(QDELETED(smoke))
+					break
 				step(smoke,direction)
 			spawn(smoke.time_to_live*0.75+rand(10,30))
-				if (smoke) qdel(smoke)
+				if (smoke)
+					qdel(smoke)
 				src.total_smoke--
 
 /datum/effect_system/smoke_spread/bad

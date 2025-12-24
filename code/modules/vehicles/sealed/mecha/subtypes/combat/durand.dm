@@ -24,28 +24,17 @@
 	max_special_equip = 1
 
 	starting_components = list(
-		/obj/item/mecha_parts/component/hull/durable,
-		/obj/item/mecha_parts/component/actuator,
-		/obj/item/mecha_parts/component/armor/military,
-		/obj/item/mecha_parts/component/gas,
-		/obj/item/mecha_parts/component/electrical
+		/obj/item/vehicle_component/hull/durable,
+		/obj/item/vehicle_component/actuator,
+		/obj/item/vehicle_component/armor/military,
+		/obj/item/vehicle_component/gas,
+		/obj/item/vehicle_component/electrical
 		)
 
 	defence_mode_possible = 1
 
 	icon_scale_x = 1.5
 	icon_scale_y = 1.5
-
-/*
-/obj/vehicle/sealed/mecha/combat/durand/New()
-	..()
-	weapons += new /datum/mecha_weapon/ballistic/lmg(src)
-	weapons += new /datum/mecha_weapon/ballistic/scattershot(src)
-	selected_weapon = weapons[1]
-	return
-*/
-
-
 
 //This is for the Mech stats / Menu system. To be moved later on.
 /obj/vehicle/sealed/mecha/combat/durand/get_commands()

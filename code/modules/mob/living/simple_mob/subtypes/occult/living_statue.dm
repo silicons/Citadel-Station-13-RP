@@ -38,9 +38,20 @@
 	max_n2 = 0
 	minbodytemp = 0
 
-	movement_cooldown = -1
+	movement_base_speed = 5
 
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/statue
+
+/mob/living/simple_mob/living_statue/Initialize(mapload)
+	. = ..()
+
+	AddComponent(/datum/component/unobserved_actor, unobserved_flags = NO_OBSERVED_MOVEMENT | NO_OBSERVED_ATTACKS)
+	ADD_TRAIT(src, TRAIT_UNOBSERVANT, INNATE_TRAIT)
+
+	// Give spells
+	add_spell(new/spell/aoe_turf/flicker_lights)
+	add_spell(new/spell/aoe_turf/blindness)
+	add_spell(new/spell/aoe_turf/veil_of_darkness)
 
 /mob/living/simple_mob/living_statue/death()
 	new /obj/item/ectoplasm (src.loc)
@@ -77,18 +88,6 @@
 	wander = FALSE
 
 //# Mob Code.
-
-/mob/living/simple_mob/living_statue/Initialize(mapload)
-	. = ..()
-
-	AddComponent(/datum/component/unobserved_actor, unobserved_flags = NO_OBSERVED_MOVEMENT | NO_OBSERVED_ATTACKS)
-	ADD_TRAIT(src, TRAIT_UNOBSERVANT, INNATE_TRAIT)
-
-	// Give spells
-	add_spell(new/spell/aoe_turf/flicker_lights)
-	add_spell(new/spell/aoe_turf/blindness)
-	add_spell(new/spell/aoe_turf/veil_of_darkness)
-
 
 //? Cannot talk
 /mob/living/simple_mob/living_statue/say_legacy(whispering = FALSE)

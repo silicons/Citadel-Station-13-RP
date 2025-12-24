@@ -4,6 +4,7 @@
 	icon_state = "flask"
 	volume = 60
 	center_of_mass = list("x"=17, "y"=7)
+	suit_storage_class = SUIT_STORAGE_CLASS_SOFTWEAR
 
 /obj/item/reagent_containers/food/drinks/flask/shiny
 	name = "shiny flask"
@@ -31,3 +32,17 @@
 	desc = "Keeping your drinks at the perfect temperature since 1892."
 	icon_state = "vacuumflask"
 	center_of_mass = list("x"=15, "y"=4)
+
+/obj/item/reagent_containers/food/drinks/flask/tajflask
+	name = "Adhomai flask"
+	desc = "A flask wrapped in warm fabric designed to keep the drink warm in Adhomai's frigid climate."
+	icon_state = "tajflask"
+
+/obj/item/reagent_containers/food/drinks/flask/tajflask/v_gin
+	name = "Victory Gin Flask"
+	desc = "Victory Gin is the choice drink of the lower classes of Adhomai. This oily grain alcohol is said to keep you warm on cold winters night."
+
+/obj/item/reagent_containers/food/drinks/flask/tajflask/v_gin/Initialize(mapload)
+	. = ..()
+	reagents.add_reagent("victory_gin", 60)
+

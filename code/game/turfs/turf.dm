@@ -1,11 +1,16 @@
 /// Any floor or wall. What makes up the station and the rest of the map.
 /turf
 	abstract_type = /turf
-
 	icon = 'icons/turf/floors.dmi'
+	luminosity = 1
+
+	//* Default turf inbuilts *//
+
 	layer = TURF_LAYER
 	plane = TURF_PLANE
-	luminosity = 1
+	opacity = FALSE
+	density = FALSE
+	alpha = 255
 
 	//* Atmospherics
 	/**
@@ -48,6 +53,8 @@
 	//* Flags
 	/// turf flags
 	var/turf_flags = NONE
+	/// turf spawning flags
+	var/turf_spawn_flags = TURF_SPAWN_FLAG_BUILDMODE | TURF_SPAWN_FLAG_FILLABLE | TURF_SPAWN_FLAG_LEVEL_TURF
 	/// multiz flags
 	var/mz_flags = MZ_ATMOS_UP | MZ_OPEN_UP
 
@@ -72,7 +79,7 @@
 	 * FALSE - as it implies
 	 * null - use area default
 	 */
-	var/outdoors = FALSE
+	var/outdoors = null
 
 	//* Radiation
 	/// cached rad insulation of contents
@@ -87,9 +94,6 @@
 	var/temperature = T20C
 	/// Does this turf contain air/let air through?
 	var/blocks_air = FALSE
-
-
-	var/holy = 0
 
 	/// Icon-smoothing variable to map a diagonal wall corner with a fixed underlay.
 	var/list/fixed_underlay = null
@@ -130,9 +134,9 @@
 
 /turf/vv_edit_var(var_name, new_value)
 	var/static/list/banned_edits = list(
-		NAMEOF_STATIC(src, x),
-		NAMEOF_STATIC(src, y),
-		NAMEOF_STATIC(src, z),
+		NAMEOF_TYPE(/turf, x),
+		NAMEOF_TYPE(/turf, y),
+		NAMEOF_TYPE(/turf, z),
 	)
 	if(var_name in banned_edits)
 		return FALSE
@@ -152,12 +156,11 @@
 	assemble_baseturfs()
 
 	SETUP_SMOOTHING()
-
 	QUEUE_SMOOTH(src)
 
 	//atom color stuff
 	if(color)
-		add_atom_colour(color, FIXED_COLOUR_PRIORITY)
+		add_atom_color(color)
 
 	// todo: uh oh.
 	// TODO: what would tg do (but maybe not that much component signal abuse?)
@@ -259,6 +262,8 @@
 
 /turf/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
 	. = ..()
+	if(.)
+		return
 	//QOL feature, clicking on turf can toggle doors, unless pulling something
 	if(!user.pulling)
 		var/obj/machinery/door/airlock/AL = locate(/obj/machinery/door/airlock) in src.contents
@@ -271,11 +276,11 @@
 			return TRUE
 
 	if(!CHECK_MOBILITY(user, MOBILITY_CAN_MOVE) || user.restrained() || !(user.pulling))
-		return 0
+		return FALSE
 	if(user.pulling.anchored || !isturf(user.pulling.loc))
-		return 0
+		return FALSE
 	if(user.pulling.loc != user.loc && get_dist(user, user.pulling) > 1)
-		return 0
+		return FALSE
 	if(ismob(user.pulling))
 		var/mob/M = user.pulling
 		var/atom/movable/t = M.pulling
@@ -284,12 +289,13 @@
 		M.start_pulling(t, suppress_message = TRUE)
 	else
 		step(user.pulling, get_dir(user.pulling.loc, src))
-	return 1
+	return TRUE
 
 /turf/attack_ai(mob/user as mob) //this feels like a bad idea ultimately but this is the cheapest way to let cyborgs nudge things they're pulling around
 	. = ..()
 	if(Adjacent(user))
-		attack_hand(user, list("siliconattack" = TRUE))
+		var/datum/event_args/actor/clickchain/clickchain = user.default_clickchain_event_args(src)
+		attack_hand(user, clickchain)
 
 /turf/attackby(obj/item/I, mob/user, list/params, clickchain_flags, damage_multiplier)
 	if(I.obj_storage?.allow_mass_gather && I.obj_storage.allow_mass_gather_via_click)
@@ -298,32 +304,33 @@
 	return ..()
 
 // Hits a mob on the tile.
-/turf/proc/attack_tile(obj/item/W, mob/living/user)
-	if(!istype(W))
-		return FALSE
+// todo: redo this
+// /turf/proc/attack_tile(obj/item/W, mob/living/user)
+// 	if(!istype(W))
+// 		return FALSE
 
-	var/list/viable_targets = list()
-	var/success = FALSE	// Hitting something makes this true. If its still false, the miss sound is played.
+// 	var/list/viable_targets = list()
+// 	var/success = FALSE	// Hitting something makes this true. If its still false, the miss sound is played.
 
-	for(var/mob/living/L in contents)
-		if(L == user)	// Don't hit ourselves.
-			continue
-		viable_targets += L
+// 	for(var/mob/living/L in contents)
+// 		if(L == user)	// Don't hit ourselves.
+// 			continue
+// 		viable_targets += L
 
-	if(!viable_targets.len)	// No valid targets on this tile.
-		if(W.can_cleave)
-			success = W.cleave(user, src)
-	else
-		var/mob/living/victim = pick(viable_targets)
-		success = W.resolve_attackby(victim, user)
+// 	if(!viable_targets.len)	// No valid targets on this tile.
+// 		if(W.can_cleave)
+// 			success = W.cleave(user, src)
+// 	else
+// 		var/mob/living/victim = pick(viable_targets)
+// 		success = W.resolve_attackby(victim, user)
 
-	user.setClickCooldown(user.get_attack_speed(W))
-	user.do_attack_animation(src, no_attack_icons = TRUE)
+// 	user.setClickCooldownLegacy(user.get_attack_speed_legacy(W))
+// 	user.do_attack_animation(src, no_attack_icons = TRUE)
 
-	if(!success)	// Nothing got hit.
-		user.visible_message("<span class='warning'>\The [user] swipes \the [W] over \the [src].</span>")
-		playsound(src, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
-	return success
+// 	if(!success)	// Nothing got hit.
+// 		user.visible_message("<span class='warning'>\The [user] swipes \the [W] over \the [src].</span>")
+// 		playsound(src, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
+// 	return success
 
 /turf/MouseDroppedOnLegacy(atom/movable/O as mob|obj, mob/user as mob)
 	var/turf/T = get_turf(user)
@@ -339,7 +346,7 @@
 		return
 	if(!isturf(O.loc) || !isturf(user.loc))
 		return
-	if(isanimal(user) && O != user)
+	if(isanimal_legacy_this_is_broken(user) && O != user)
 		return
 	if(M.pulledby || M.is_grabbed())
 		return
@@ -511,7 +518,7 @@
 			//? length check
 			return TRUE
 */
-	return SSmapping.level_trait(z, ZTRAIT_GRAVITY)
+	return SSmapping.level_has_trait(z, ZTRAIT_GRAVITY)
 
 /* // TODO: Implement this. @Zandario
 /turf/proc/update_weather(obj/abstract/weather_system/new_weather, force_update_below = FALSE)
@@ -578,19 +585,19 @@
 
 //* Atom Color - we don't use the expensive system. *//
 
-/turf/get_atom_colour()
+/turf/get_atom_color()
 	return color
 
-/turf/add_atom_colour(coloration, colour_priority)
+/turf/add_atom_color(coloration, colour_priority)
 	color = coloration
 
-/turf/remove_atom_colour(colour_priority, coloration)
+/turf/remove_atom_color(colour_priority, coloration)
 	color = null
 
-/turf/update_atom_colour()
+/turf/update_atom_color()
 	return
 
-/turf/copy_atom_colour(atom/other, colour_priority)
+/turf/copy_atom_color(atom/other, colour_priority)
 	if(isnull(other.color))
 		return
 	color = other.color
@@ -609,6 +616,12 @@
 
 //* Multiz *//
 
+/**
+ * Update multiz linkage. This is done when a zlevel rebuilds its multiz state.
+ *
+ * todo: maybe include params for 'z_offset_up', 'z_offset_down'? manuallly fetching on
+ *       every turf is slow as balls.
+ */
 /turf/proc/update_multiz()
 	return
 
@@ -666,8 +679,13 @@
 /turf/proc/update_underfloor_objects()
 	var/we_should_cover = hides_underfloor_objects()
 	for(var/obj/thing in contents)
-		if(thing.hides_underfloor == OBJ_UNDERFLOOR_DISABLED)
+		if(thing.hides_underfloor == OBJ_UNDERFLOOR_UNSUPPORTED)
 			continue
 		thing.update_hiding_underfloor(
 			(thing.hides_underfloor != OBJ_UNDERFLOOR_NEVER) && we_should_cover,
 		)
+
+//* VV *//
+
+/turf/vv_delete()
+	ScrapeAway()

@@ -83,6 +83,36 @@
 	. = ..()
 	icon_state = "snowbush[rand(1, 6)]"
 
+/obj/structure/flora/snow_berry
+	name = "Ashomarr Tree"
+	desc = "Ashomarr or 'Adhomai Holly' is a berry bush know to thrive in extreme cold. Unlike earth holly, the berries are non-toxic."
+	icon = 'icons/obj/flora/snowflora.dmi'
+	icon_state = "holly"
+
+/obj/structure/flora/snow_berry/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
+	var/harvest_amount = rand(1, 5)
+	visible_message("[user] begins to pick berries from the Bush.", "You begin picking the berries from the bush.")
+	if(do_after(user, 5 SECONDS))
+		for(var/i in 1 to harvest_amount)
+			new /obj/item/reagent_containers/food/snacks/ashomarr(src.loc)
+		visible_message("[user] harvests the berries from the Ashomarr Tree.", "You finish harvesting the berries from the tree.")
+	qdel(src)
+
+/obj/structure/flora/taj_tuber
+	name = "Guskaroot"
+	desc = "A tuber native to Adhomai known for its unnatural resillence to cold and its ability to grow in the wild."
+	icon = 'icons/obj/flora/snowflora.dmi'
+	icon_state = "tajtuber"
+
+/obj/structure/flora/taj_tuber/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
+	var/harvest_amount = rand(1, 3)
+	visible_message("[user] begins to pull the tubers from the earth.", "You begin pulling up the tubers.")
+	if(do_after(user, 5 SECONDS))
+		for(var/i in 1 to harvest_amount)
+			new /obj/item/reagent_containers/food/snacks/guska(src.loc)
+		visible_message("[user] pull the tubers clean from the frozen earth", "You finish harvesting the tubers.")
+	qdel(src)
+
 /obj/structure/flora/pottedplant
 	name = "potted plant"
 	desc = "Really ties the room together."
@@ -394,6 +424,11 @@
 	desc = "This is a tiny well lit decorative christmas tree."
 	icon_state = "plant-xmas"
 
+/obj/structure/flora/pottedplant/hedge
+	name = "potted hedge"
+	desc = "A well maintained hedge."
+	icon_state = "plant-27"
+
 /obj/structure/flora/sif
 	icon = 'icons/obj/flora/sifflora.dmi'
 
@@ -479,15 +514,17 @@
 	icon = 'icons/obj/flora/pumpkins.dmi'
 	icon_state = "spawner-jackolantern"
 
-/obj/landmark/carved_pumpkin_spawn/New()
-    var/new_pumpkin = pick(
+/obj/landmark/carved_pumpkin_spawn/Initialize(mapload)
+	SHOULD_CALL_PARENT(FALSE)
+	atom_flags |= ATOM_INITIALIZED
+	var/new_pumpkin = pick(
 		prob(70);/obj/structure/flora/pumpkin,
-        prob(60);/obj/structure/flora/pumpkin/carved,
-        prob(30);/obj/structure/flora/pumpkin/carved/scream,
-        prob(30);/obj/structure/flora/pumpkin/carved/girly,
-        prob(10);/obj/structure/flora/pumpkin/carved/owo)
-    new new_pumpkin(src.loc)
-    ..()
+		prob(60);/obj/structure/flora/pumpkin/carved,
+		prob(30);/obj/structure/flora/pumpkin/carved/scream,
+		prob(30);/obj/structure/flora/pumpkin/carved/girly,
+		prob(10);/obj/structure/flora/pumpkin/carved/owo)
+	new new_pumpkin(src.loc)
+	return INITIALIZE_HINT_QDEL
 
 /obj/structure/flora/pumpkin/carved
 	name = "jack o'lantern"

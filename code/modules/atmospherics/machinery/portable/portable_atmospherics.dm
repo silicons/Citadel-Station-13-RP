@@ -101,7 +101,7 @@
 	.["temperature"] = air_contents.temperature
 	.["portConnected"] = !!connected_port
 
-/obj/machinery/portable_atmospherics/ui_act(action, list/params, datum/tgui/ui)
+/obj/machinery/portable_atmospherics/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state, datum/event_args/actor/actor)
 	. = ..()
 	if(.)
 		return
@@ -123,15 +123,16 @@
 			if(isnull(holding))
 				return TRUE
 			on_eject(holding, usr)
-			usr.action_feedback(SPAN_NOTICE("You remove [holding] from [src]."), src)
-			usr.grab_item_from_interacted_with(holding, src)
-			holding = null
 			return TRUE
 
 /**
  * Called on tank ejection
  */
 /obj/machinery/portable_atmospherics/proc/on_eject(obj/item/tank/tank, mob/user)
+	usr.action_feedback(SPAN_NOTICE("You remove [holding] from [src]."), src)
+	usr.grab_item_from_interacted_with(holding, src)
+	holding = null
+	update_icon()
 	return TRUE
 
 /obj/machinery/portable_atmospherics/proc/set_on(enabled)

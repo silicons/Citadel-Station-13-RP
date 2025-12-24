@@ -28,7 +28,10 @@
 	/// overrides build_name for purposes of name generation.
 	var/design_name
 	/// category - string or list, or null; null results in undefined behavior depending on UI.
-	var/category = "Misc"
+	var/category = DESIGN_CATEGORY_MISC
+
+	/// subcategory - string or list, or null. null generally results in no seperate subcategory header
+	var/subcategory = null
 
 	//? Build Data
 	/// name of item before any name-generation is done. also shown in ui. if null, it'll be auto-detected from the build_path if possible.
@@ -36,14 +39,17 @@
 	/// desc of item before any desc-generation is done. also shown in ui. if null, it'll be auto-detected from the build_path if possible.
 	var/build_desc
 	/// type of what we build
+	///
+	/// * Autodetection only works on /obj's.
 	var/build_path
-	/// types of lathes that can print us
+	/// Types of lathes that can print us.
+	/// * Type: /bitfield/lathe_type
 	var/lathe_type = NONE
 	/// time needed in deciseconds - for stacks, this is time *PER SHEET*.
 	var/work = 5 SECONDS
 
 	//? Build Costs
-	/// list of materials needed - typepath or id to amount. null to auto-detect from the object in question. list() for no cost (DANGEROUS).
+	/// list of specific materials needed - typepath or id to amount. null to auto-detect from the object in question. list() for no cost (DANGEROUS).
 	///
 	/// * This should always be using typepath instead of ID for hardcoded designs, as typepaths can be eagerly loaded before
 	///   the materials repository can initialize normally.
@@ -56,6 +62,12 @@
 	/// this should obviously match material_parts on the /obj in question.
 	/// todo: add optional parts and constraints
 	var/list/material_costs
+	/// for variable-material designs: assoc list of keys to constraints
+	/// this should obviously match material_parts on the /obj in question.
+	var/list/material_constraints
+	/// for variable-material designs: assoc list of keys to tags, for autodetect
+	/// this should obviously match material_parts on the /obj in question.
+	var/list/material_autodetect_tags
 	/// Items needed, as ingredients list - see [code/__HELPERS/datastructs/ingredients.dm]
 	///
 	/// * This should always be using typepath instead of ID where possible for hardcoded designs, as typepaths can be eagerly
@@ -72,6 +84,8 @@
 	///IDs of that techs the object originated from and the minimum level requirements.
 	var/list/req_tech = list()
 
+	var/complexity = 1 //'complexity' or storage space required on design disks. almost always 1.
+
 /datum/prototype/design/New()
 	autodetect()
 	generate()
@@ -83,9 +97,12 @@
 		is_stack = TRUE
 		var/obj/item/stack/stack_path = build_path
 		max_stack = initial(stack_path.max_amount)
-	var/obj/item/instance = SSatoms.instance_atom_immediate(build_path)
+	var/obj/instance = SSatoms.instance_atom_immediate(build_path)
 	// lathe designs shouldn't be qdeleting, but incase someone puts in a random..
 	if(QDELETED(instance))
+		return
+	if(!isobj(instance))
+		qdel(instance)
 		return
 	if(isnull(materials_base))
 		var/list/fetched = instance.detect_material_base_costs()
@@ -129,9 +146,12 @@
 		"desc" = desc,
 		"id" = id,
 		"work" = work,
-		"category" = category,
+		"categories" = COERCE_OPTIONS_LIST(category),
+		"subcategories" = COERCE_OPTIONS_LIST(subcategory),
 		"materials" = length(materials_base)? materials_base : null,
 		"material_parts" = length(material_costs)? material_costs : null,
+		"material_constraints" = length(material_constraints)? material_constraints : null,
+		"autodetect_tags" = length(material_autodetect_tags)? material_autodetect_tags : null,
 		"reagents" = length(reagents)? reagents : null,
 		"ingredients" = length(ingredients)? ingredients : null,
 		"resultItem" = list(
@@ -208,11 +228,3 @@
  */
 /datum/prototype/design/proc/lathe_print(atom/where, amount, list/material_parts, list/ingredient_parts, list/reagent_parts, obj/machinery/lathe/fabricator, cost_multiplier = 1)
 	return print(where, amount, material_parts, ingredient_parts, reagent_parts, cost_multiplier)
-
-//? legacy below
-
-/**
- * for legacy lathes
- */
-/datum/prototype/design/proc/legacy_print(atom/where, fabricator)
-	return print(where, 1)

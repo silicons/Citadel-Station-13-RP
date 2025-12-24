@@ -74,13 +74,13 @@
 	data["unclaimedPoints"] = machine.points
 	if(inserted_id)
 		data["idName"] = inserted_id.registered_name
-		data["idPoints"] = inserted_id.mining_points
+		data["idPoints"] = inserted_id.get_redemption_points(POINT_REDEMPTION_TYPE_MINING)
 	else
 		data["idName"] = ""
 		data["idPoints"] = 0
 	return data
 
-/obj/machinery/mineral/processing_unit_console/ui_act(action, list/params, datum/tgui/ui)
+/obj/machinery/mineral/processing_unit_console/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state, datum/event_args/actor/actor)
 	if(..())
 		return TRUE
 
@@ -114,7 +114,7 @@
 				return TRUE
 		if("claim_points")
 			if(istype(inserted_id))
-				inserted_id.mining_points += machine.points
+				inserted_id.adjust_redemption_points(POINT_REDEMPTION_TYPE_MINING, machine.points)
 				machine.points = 0
 				playsound(src.loc, 'sound/machines/ping.ogg', clickvol, 0)
 				return TRUE

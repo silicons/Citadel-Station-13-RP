@@ -388,7 +388,9 @@
 		available_trait.real_record = trait
 		available_trait.cost = trait.cost
 
-		if (LAZYLEN(trait.allowed_species) && !(species in trait.allowed_species))
+		var/species_is_not_in_allowed = LAZYLEN(trait.allowed_species) && !(species in trait.allowed_species)
+		var/species_is_in_excluded = LAZYLEN(trait.excluded_species) && (species in trait.excluded_species)
+		if (species_is_not_in_allowed || species_is_in_excluded)
 			available_trait.forbidden_reason = "This trait is not allowed for your species."
 
 		// NOTE: For some reason, this is only actually used for neutral traits??? Weird.
@@ -572,7 +574,7 @@
 /datum/tgui_trait_selector/ui_static_data(mob/user, datum/tgui/ui)
 	. = src.input_data
 
-/datum/tgui_trait_selector/ui_act(action, list/params, datum/tgui/ui)
+/datum/tgui_trait_selector/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state, datum/event_args/actor/actor)
 	. = ..()
 	if (.)
 		return

@@ -27,7 +27,6 @@ SUBSYSTEM_DEF(lighting)
 	var/total_ss_updates = 0
 	var/total_instant_updates = 0
 
-
 #ifdef USE_INTELLIGENT_LIGHTING_UPDATES
 	var/instant_ctr = 0
 	var/force_queued = TRUE
@@ -48,7 +47,7 @@ SUBSYSTEM_DEF(lighting)
 
 #ifdef USE_INTELLIGENT_LIGHTING_UPDATES
 
-/hook/roundstart/proc/lighting_init_roundstart()
+/legacy_hook/roundstart/proc/lighting_init_roundstart()
 	SSlighting.handle_roundstart()
 	return TRUE
 
@@ -157,6 +156,12 @@ SUBSYSTEM_DEF(lighting)
 
 	while (lq_idex <= curr_lights.len)
 		var/datum/light_source/L = curr_lights[lq_idex++]
+
+		// citadel edit: light source can be deleted before update, if that happens, skip
+		//               check QDELING, light sources are LETMELIVE so shouldn't be being
+		//               harddel'd
+		if(QDELING(L))
+			continue
 
 		if (L.needs_update != LIGHTING_NO_UPDATE)
 			total_ss_updates += 1

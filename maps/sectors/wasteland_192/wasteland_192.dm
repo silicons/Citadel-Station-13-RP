@@ -11,13 +11,13 @@
 	id = "Wasteland192"
 	name = "Sector - Moon Wastes (192x192)"
 	display_name = "Class-D Moon Wastes"
-	absolute_path = "maps/sectors/wasteland_192/levels/wasteland_192.dmm"
+	path = "maps/sectors/wasteland_192/levels/wasteland_192.dmm"
 	base_turf = /turf/simulated/mineral/floor/classd
 	planet_path = /datum/planet/classd
 
-/datum/map_level/sector/wasteland_192/on_loaded_immediate(z_index, list/datum/callback/additional_generation)
+/datum/map_level/sector/wasteland_192/on_loaded_immediate(z_index, list/datum/callback/out_generation_callbacks)
 	. = ..()
-	additional_generation?.Add(
+	out_generation_callbacks?.Add(
 		CALLBACK(
 			GLOBAL_PROC,
 			GLOBAL_PROC_REF(seed_submaps),

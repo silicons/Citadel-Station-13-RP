@@ -11,18 +11,18 @@
 	id = "FrozenWorld192"
 	name = "Sector - Frozen World"
 	display_name = "Class-P Frozen World"
-	absolute_path = "maps/sectors/frozen_192/levels/frozen_192.dmm"
+	path = "maps/sectors/frozen_192/levels/frozen_192.dmm"
 	base_area = /area/class_p/ruins
-	base_turf = /turf/simulated/floor/outdoors/ice/classp
+	base_turf = /turf/simulated/floor/outdoors/ice
 	traits = list(
 		ZTRAIT_GRAVITY,
 	)
 	planet_path = /datum/planet/classp
 	air_outdoors = /datum/atmosphere/planet/classp
 
-/datum/map_level/sector/frozen_192/on_loaded_immediate(z_index, list/datum/callback/additional_generation)
+/datum/map_level/sector/frozen_192/on_loaded_immediate(z_index, list/datum/callback/out_generation_callbacks)
 	. = ..()
-	additional_generation?.Add(
+	out_generation_callbacks?.Add(
 		CALLBACK(
 			GLOBAL_PROC,
 			GLOBAL_PROC_REF(seed_submaps),

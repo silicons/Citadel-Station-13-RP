@@ -1,12 +1,9 @@
-/mob/living/movement_delay()
+/mob/living/legacy_movement_delay()
 	. = ..()
 	switch(m_intent)
 		if(MOVE_INTENT_RUN)
 			if(drowsyness > 0)
 				. += 6
-			. += config_legacy.run_speed
-		if(MOVE_INTENT_WALK)
-			. += config_legacy.walk_speed
 
 // todo: all this depth staged stuff is stupid and it should all be on /turf and cached someday
 //       this is however, faster, so that'll be a very long 'someday'.
@@ -162,9 +159,6 @@
 	// if not, can we bump
 	// we just return at this point to let the other code handle it
 	. = !can_bump_push_mob(L)
-	if(.)
-		// idk why this is here but i'm keeping it i guess
-		L.LAssailant = src
 
 /**
  * swaps us with another mob. assumes they're next to us.

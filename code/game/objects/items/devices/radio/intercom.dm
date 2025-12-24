@@ -33,6 +33,7 @@ CREATE_WALL_MOUNTING_TYPES_SHIFTED(/obj/item/radio/intercom, 28)
 
 /obj/item/radio/intercom/update_icon(updates)
 	cut_overlays()
+	. = ..()
 	if(!on)
 		icon_state = "intercom-p"
 	else
@@ -78,6 +79,24 @@ CREATE_WALL_MOUNTING_TYPES_SHIFTED(/obj/item/radio/intercom, 28)
 /obj/item/radio/intercom/entertainment
 	name = "entertainment intercom"
 	frequency = FREQ_ENTERTAINMENT
+
+/obj/item/radio/intercom/entertainment/laptop
+	icon = 'icons/obj/computer.dmi'
+	icon_state = "laptop"
+	anchored = FALSE
+	broadcasting = FALSE
+	listening = TRUE
+	name = "Radio Computer"
+	desc = "A laptop with a mic, connected to the entertainement frequency."
+	frequency = FREQ_ENTERTAINMENT
+	anchored = TRUE
+	can_be_unanchored = TRUE
+	canhear_range = 5
+	broadcasting = 1
+	listening = 0
+	plane = TURF_PLANE
+	layer = PLANT_LAYER
+
 
 /obj/item/radio/intercom/omni
 	name = "global announcer"

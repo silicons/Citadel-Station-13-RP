@@ -28,14 +28,16 @@
 
 /obj/structure/bonfire/Initialize(mapload, material_name)
 	. = ..()
-
 	if(!material_name)
 		material_name = MAT_WOOD
 	material = get_material_by_name("[material_name]")
 	if(!material)
-		qdel(src)
-		return
+		return INITIALIZE_HINT_QDEL
 	color = material.icon_colour
+
+/obj/structure/bonfire/Destroy()
+	extinguish()
+	return ..()
 
 // Blue wood.
 /obj/structure/bonfire/sifwood/Initialize(mapload)
@@ -200,6 +202,7 @@
 
 /obj/structure/bonfire/update_icon()
 	cut_overlays()
+	. = ..()
 	var/list/overlays_to_add = list()
 	if(burning)
 		var/state
@@ -373,6 +376,7 @@
 
 /obj/structure/fireplace/update_icon()
 	cut_overlays()
+	. = ..()
 	if(burning)
 		var/state
 		switch(get_fuel_amount())

@@ -24,12 +24,13 @@
 	desc = "It's just an ordinary box."
 	icon_state = "box"
 	item_state = "syringe_kit"
-	var/foldable = /obj/item/stack/material/cardboard	// BubbleWrap - if set, can be folded (when empty) into a sheet of cardboard
 	max_single_weight_class = WEIGHT_CLASS_SMALL
 	max_combined_volume = STORAGE_VOLUME_BOX
 	drop_sound = 'sound/items/drop/cardboardbox.ogg'
 	pickup_sound = 'sound/items/pickup/cardboardbox.ogg'
 	worth_intrinsic = 25
+
+	var/foldable = /obj/item/stack/material/cardboard	// BubbleWrap - if set, can be folded (when empty) into a sheet of cardboard
 
 	/// dynamic state support
 	var/dynamic_state = TRUE
@@ -60,20 +61,20 @@
 	new foldable(get_turf(src))
 	qdel(src)
 
-/obj/item/storage/box/survival
+/obj/item/storage/box/legacy_survival
 	name = "emergency supply box"
 	desc = "A survival box issued to crew members for use in emergency situations."
 	starts_with = list(
 		/obj/item/clothing/mask/breath
 	)
 
-/obj/item/storage/box/survival/synth
+/obj/item/storage/box/legacy_survival/synth
 	name = "synthetic supply box"
 	desc = "A survival box issued to synthetic crew members for use in emergency situations."
 	starts_with = list(
 	)
 
-/obj/item/storage/box/survival/comp
+/obj/item/storage/box/legacy_survival/comp
 	name = "emergency supply box"
 	desc = "A comprehensive survival box issued to crew members for use in emergency situations. Contains additional supplies."
 	icon_state = "survival"
@@ -107,7 +108,7 @@
 	name = "box of syringe gun cartridges"
 	desc = "A box full of compressed gas cartridges."
 	icon_state = "syringe"
-	starts_with = list(/obj/item/syringe_cartridge = 7)
+	starts_with = list(/obj/item/ammo_casing/syringe = 7)
 
 /obj/item/storage/box/beakers
 	name = "box of beakers"
@@ -236,7 +237,7 @@
 	name = "box of flashbangs (WARNING)"
 	desc = "<B>WARNING: These devices are extremely dangerous and can cause blindness or deafness in repeated use.</B>"
 	icon_state = "flashbang"
-	starts_with = list(/obj/item/grenade/flashbang = 7)
+	starts_with = list(/obj/item/grenade/simple/flashbang = 7)
 	drop_sound = 'sound/items/drop/ammobox.ogg'
 	pickup_sound = 'sound/items/pickup/ammobox.ogg'
 
@@ -244,7 +245,7 @@
 	name = "box of emp grenades"
 	desc = "A box containing 5 military grade EMP grenades.<br> WARNING: Do not use near unshielded electronics or biomechanical augmentations, death or permanent paralysis may occur."
 	icon_state = "emp"
-	starts_with = list(/obj/item/grenade/empgrenade = 7)
+	starts_with = list(/obj/item/grenade/simple/emp = 7)
 	drop_sound = 'sound/items/drop/ammobox.ogg'
 	pickup_sound = 'sound/items/pickup/ammobox.ogg'
 
@@ -252,7 +253,7 @@
 	name = "box of low yield emp grenades"
 	desc = "A box containing 5 low yield EMP grenades.<br> WARNING: Do not use near unshielded electronics or biomechanical augmentations, death or permanent paralysis may occur."
 	icon_state = "emp"
-	starts_with = list(/obj/item/grenade/empgrenade/low_yield = 7)
+	starts_with = list(/obj/item/grenade/simple/emp/low_yield = 7)
 	drop_sound = 'sound/items/drop/ammobox.ogg'
 	pickup_sound = 'sound/items/pickup/ammobox.ogg'
 
@@ -260,7 +261,7 @@
 	name = "box of smoke bombs"
 	desc = "A box containing 7 smoke bombs."
 	icon_state = "flashbang"
-	starts_with = list(/obj/item/grenade/smokebomb = 7)
+	starts_with = list(/obj/item/grenade/simple/smoke = 7)
 	drop_sound = 'sound/items/drop/ammobox.ogg'
 	pickup_sound = 'sound/items/pickup/ammobox.ogg'
 
@@ -268,7 +269,7 @@
 	name = "box of anti-photon grenades"
 	desc = "A box containing 7 experimental photon disruption grenades."
 	icon_state = "flashbang"
-	starts_with = list(/obj/item/grenade/anti_photon = 7)
+	starts_with = list(/obj/item/grenade/simple/antiphoton = 7)
 	drop_sound = 'sound/items/drop/ammobox.ogg'
 	pickup_sound = 'sound/items/pickup/ammobox.ogg'
 
@@ -276,7 +277,7 @@
 	name = "box of fragmentation grenades (WARNING)"
 	desc = "A box containing 7 military grade fragmentation grenades.<br> WARNING: These devices are extremely dangerous and can cause limb loss or death in repeated use."
 	icon_state = "frag"
-	starts_with = list(/obj/item/grenade/explosive = 7)
+	starts_with = list(/obj/item/grenade/simple/explosive = 7)
 	drop_sound = 'sound/items/drop/ammobox.ogg'
 	pickup_sound = 'sound/items/pickup/ammobox.ogg'
 
@@ -284,7 +285,7 @@
 	name = "box of fragmentation grenades (WARNING)"
 	desc = "A box containing 4 military grade fragmentation grenades.<br> WARNING: These devices are extremely dangerous and can cause limb loss or death in repeated use."
 	icon_state = "frag"
-	starts_with = list(/obj/item/grenade/explosive = 4)
+	starts_with = list(/obj/item/grenade/simple/explosive = 4)
 	drop_sound = 'sound/items/drop/ammobox.ogg'
 	pickup_sound = 'sound/items/pickup/ammobox.ogg'
 
@@ -292,13 +293,13 @@
 	name = "box of metal foam grenades."
 	desc = "A box containing 7 metal foam grenades."
 	icon_state = "flashbang"
-	starts_with = list(/obj/item/grenade/chem_grenade/metalfoam = 7)
+	starts_with = list(/obj/item/grenade/simple/chemical/premade/metalfoam = 7)
 
 /obj/item/storage/box/teargas
 	name = "box of teargas grenades"
 	desc = "A box containing 7 teargas grenades."
 	icon_state = "flashbang"
-	starts_with = list(/obj/item/grenade/chem_grenade/teargas = 7)
+	starts_with = list(/obj/item/grenade/simple/chemical/premade/teargas = 7)
 
 /obj/item/storage/box/flare
 	name = "box of flares"
@@ -439,6 +440,7 @@
 	desc = "A small box of 'Space-Proof' premium matches."
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "matchbox"
+	suit_storage_class = SUIT_STORAGE_CLASS_SOFTWEAR
 	w_class = WEIGHT_CLASS_TINY
 	slot_flags = SLOT_BELT
 	insertion_whitelist = list(/obj/item/flame/match)
@@ -446,14 +448,17 @@
 	drop_sound = 'sound/items/drop/matchbox.ogg'
 	pickup_sound =  'sound/items/pickup/matchbox.ogg'
 
-/obj/item/storage/box/matches/attackby(obj/item/flame/match/W as obj, mob/user as mob)
-	if(istype(W) && !W.lit && !W.burnt)
-		W.lit = 1
-		W.damage_type = "burn"
-		W.icon_state = "match_lit"
-		START_PROCESSING(SSobj, W)
-	W.update_icon()
-	return
+/obj/item/storage/box/matches/using_item_on(obj/item/using, datum/event_args/actor/clickchain/clickchain, clickchain_flags)
+	if(istype(using, /obj/item/flame/match))
+		var/obj/item/flame/match/W = using
+		if(istype(W) && !W.lit && !W.burnt)
+			W.lit = 1
+			W.damage_type = "burn"
+			W.icon_state = "match_lit"
+			START_PROCESSING(SSobj, W)
+		W.update_icon()
+		return CLICKCHAIN_DID_SOMETHING | CLICKCHAIN_DO_NOT_PROPAGATE
+	return ..()
 
 /obj/item/storage/box/autoinjectors
 	name = "box of injectors"
@@ -624,20 +629,20 @@
 	icon_state = "firingpins"
 	starts_with = list(/obj/item/firing_pin = 8)
 
-/obj/item/storage/box/survival
+/obj/item/storage/box/legacy_survival
 	starts_with = list(
 		/obj/item/tool/prybar/red,
 		/obj/item/clothing/glasses/goggles,
 		/obj/item/clothing/mask/breath
 	)
 
-/obj/item/storage/box/survival/synth
+/obj/item/storage/box/legacy_survival/synth
 	starts_with = list(
 		/obj/item/tool/prybar/red,
 		/obj/item/clothing/glasses/goggles
 	)
 
-/obj/item/storage/box/survival/comp
+/obj/item/storage/box/legacy_survival/comp
 	starts_with = list(
 		/obj/item/tool/prybar/red,
 		/obj/item/clothing/glasses/goggles,
@@ -667,7 +672,7 @@
 	desc = "A box full of service keys, for the HoP to give out as necessary."
 	starts_with = list(/obj/item/encryptionkey/headset_service = 7)
 
-/obj/item/storage/box/survival/space
+/obj/item/storage/box/legacy_survival/space
 	name = "boxed emergency suit and helmet"
 	icon_state = "survivaleng"
 	starts_with = list(

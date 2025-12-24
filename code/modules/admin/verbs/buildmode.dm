@@ -154,6 +154,7 @@
 
 GLOBAL_LIST_EMPTY(buildholders)
 
+INITIALIZE_IMMEDIATE(/obj/effect/bmode/buildholder)
 /obj/effect/bmode/buildholder
 	density = 0
 	anchored = 1
@@ -165,7 +166,7 @@ GLOBAL_LIST_EMPTY(buildholders)
 	var/atom/movable/throw_atom = null
 	var/list/selected_mobs = list()
 
-/obj/effect/bmode/buildholder/New()
+/obj/effect/bmode/buildholder/Initialize(mapload)
 	GLOB.buildholders += src
 	return ..()
 
@@ -321,7 +322,7 @@ GLOBAL_LIST_EMPTY(buildholders)
 					T.ChangeTurf(/turf/simulated/floor/plating)
 					log_admin("[key_name(usr)] created 1 plating at [COORD(T)]")
 					return
-				else if(istype(object, /turf/simulated/floor/outdoors))
+				else if(T.outdoors)
 					log_admin("[key_name(usr)] created 1 plating at [COORD(T)]")
 					T.PlaceOnTop(/turf/simulated/floor/plating)
 					return

@@ -57,13 +57,13 @@
 /obj/item/material/knife/machete/hatchet/unathiknife/durasteel
 	material_parts = /datum/prototype/material/durasteel
 
-/obj/item/material/knife/machete/hatchet/unathiknife/attack_mob(mob/target, mob/user, clickchain_flags, list/params, mult, target_zone, intent)
+/obj/item/material/knife/machete/hatchet/unathiknife/legacy_mob_melee_hook(mob/target, mob/user, clickchain_flags, list/params, mult, target_zone, intent)
 	if(hits > 0)
 		return
 	var/obj/item/I = user.get_inactive_held_item()
 	if(istype(I, /obj/item/material/knife/machete/hatchet/unathiknife))
 		hits ++
-		I.melee_interaction_chain(target, user, CLICKCHAIN_REDIRECTED, params)
+		I.lazy_melee_interaction_chain(target, user, CLICKCHAIN_REDIRECTED, params)
 	..()
 
 /obj/item/material/knife/machete/hatchet/unathiknife/afterattack(atom/target, mob/user, clickchain_flags, list/params)
@@ -76,8 +76,10 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "hoe"
 	material_significance = MATERIAL_SIGNIFICANCE_WEAPON_LIGHT
+	material_primary = "tip"
 	w_class = WEIGHT_CLASS_SMALL
 	attack_verb = list("slashed", "sliced", "cut", "clawed")
+	suit_storage_class = SUIT_STORAGE_CLASS_SOFTWEAR | SUIT_STORAGE_CLASS_HARDWEAR
 
 /obj/item/material/minihoe/plasteel
 	material_parts = /datum/prototype/material/plasteel
@@ -101,6 +103,12 @@
 	force_multiplier = 0
 	w_class = WEIGHT_CLASS_SMALL
 	attack_verb = list("mushed", "splatted", "splooshed", "splushed") // Words that totally exist.
+
+/obj/item/material/snow/snowball/throw_impact(atom/hit_atom)
+	if(!..()) // not caught in mid-air
+		if(isliving(hit_atom))
+			visible_message("<span class='notice'>[src] explodes into a shower of snow upon impact!</span>")
+			qdel(src)
 
 /obj/item/material/snow/snowball/attack_self(mob/user, datum/event_args/actor/actor)
 	. = ..()

@@ -1,5 +1,5 @@
 /// Init this specific atom
-/datum/controller/subsystem/atoms/proc/InitAtom(atom/A, from_template = FALSE, list/arguments)
+/datum/controller/subsystem/atoms/proc/InitAtom(atom/A, from_template, list/arguments)
 
 	var/the_type = A.type
 
@@ -7,6 +7,7 @@
 		// Check init_start_time to not worry about atoms created before the atoms SS that are cleaned up before this
 		if (A.gc_destroyed > init_start_time)
 			BadInitializeCalls[the_type] |= BAD_INIT_QDEL_BEFORE
+			stack_trace("[A] ([A.type]) qdel'd during init without using hint.")
 		return TRUE
 
 	// This is handled and battle tested by dreamchecker. Limit to UNIT_TESTS just in case that ever fails.
@@ -19,6 +20,7 @@
 	#ifdef UNIT_TESTS
 	if(start_tick != world.time)
 		BadInitializeCalls[the_type] |= BAD_INIT_SLEPT
+		stack_trace("[A] ([A.type]) slept during init.")
 	#endif
 
 	var/qdeleted = FALSE
@@ -32,22 +34,25 @@
 			else
 				A.LateInitialize()
 		if(INITIALIZE_HINT_QDEL)
+			// never call EarlyDestroy if we return this hint as it's atleast partially
+			// initialized.
+			A.atom_flags |= ATOM_INITIALIZED
 			qdel(A)
 			qdeleted = TRUE
 		else
+			// this means init runtimed or someone fucked up, which is really bad.
+			// we should assume it's in inconsistent state, and therefore
+			// Destroy() should be called.
+			A.atom_flags |= ATOM_INITIALIZED
+			stack_trace("[A] ([A.type]) didn't return a hint.")
 			BadInitializeCalls[the_type] |= BAD_INIT_NO_HINT
 
 	if(!A) //possible harddel
 		qdeleted = TRUE
 	else if(!(A.atom_flags & ATOM_INITIALIZED))
+		stack_trace("[A] ([A.type]) didn't init.")
 		BadInitializeCalls[the_type] |= BAD_INIT_DIDNT_INIT
 	else
-		SEND_SIGNAL(A, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZE)
-		// SEND_GLOBAL_SIGNAL(COMSIG_GLOB_ATOM_AFTER_POST_INIT, A)
-		var/atom/location = A.loc
-		if(location)
-			/// Sends a signal that the new atom `src`, has been created at `loc`
-			SEND_SIGNAL(location, COMSIG_ATOM_INITIALIZED_ON, A, arguments[1])
 		if(created_atoms && from_template && ispath(the_type, /atom/movable))//we only want to populate the list with movables
 			created_atoms += A.get_all_contents()
 
@@ -61,9 +66,11 @@
  * if the preloader is being used and then call [InitAtom][/datum/controller/subsystem/atoms/proc/InitAtom] of which the ultimate
  * result is that the Initialize proc is called.
  *
+ * * Creating any other atoms in this call is explicitly disallowed.
  */
 /atom/New(loc, ...)
 	//atom creation method that preloads variables at creation
+	// TODO: do we need the target type verify? it seems unnecsesary if /New() isn't allowed to be overridden usually
 	if(global.dmm_preloader_active && global.dmm_preloader_target == type)//in case the instantiated atom is creating other atoms in New()
 		world.preloader_load(src)
 
@@ -129,7 +136,7 @@
 
 	//atom color stuff
 	if(color)
-		add_atom_colour(color, FIXED_COLOUR_PRIORITY)
+		add_atom_color(color)
 
 	if(light_power && light_range)
 		update_light()

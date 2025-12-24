@@ -1,7 +1,9 @@
 /datum/prototype/design/aimodule
 	abstract_type = /datum/prototype/design/aimodule
 	lathe_type = LATHE_TYPE_CIRCUIT
-	materials_base = list(MAT_GLASS = 2000, MAT_GOLD = 100)
+	category = DESIGN_CATEGORY_AI
+	subcategory = DESIGN_SUBCATEGORY_LAWS
+	materials_base = list(MAT_GLASS = 250, MAT_GOLD = 50)
 
 /datum/prototype/design/aimodule/generate_name(template)
 	return "AI module design ([template])"
@@ -66,6 +68,7 @@
 // Core modules
 /datum/prototype/design/aimodule/core
 	abstract_type = /datum/prototype/design/aimodule/core
+	subcategory = DESIGN_SUBCATEGORY_CORE
 	req_tech = list(TECH_DATA = 4, TECH_MATERIAL = 6)
 
 /datum/prototype/design/aimodule/core/generate_name(template)

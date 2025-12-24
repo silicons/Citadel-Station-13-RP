@@ -41,6 +41,10 @@ GLOBAL_LIST_INIT(atm_sounds, list('sound/items/polaroid1.ogg', 'sound/items/pola
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
 
+/obj/machinery/atm/Destroy()
+	QDEL_NULL(spark_system)
+	return ..()
+
 /obj/machinery/atm/process(delta_time)
 	if(machine_stat & NOPOWER)
 		return
@@ -81,9 +85,6 @@ GLOBAL_LIST_INIT(atm_sounds, list('sound/items/polaroid1.ogg', 'sound/items/pola
 		if(emagged > 0)
 			//prevent inserting id into an emagged ATM
 			to_chat(user, SPAN_CAUTION("[icon2html(thing = src, target = user)] CARD READER ERROR. This system has been compromised!"))
-			return
-		else if(istype(I,/obj/item/card/emag))
-			I.resolve_attackby(src, user)
 			return
 
 		var/obj/item/card/id/idcard = I
@@ -164,8 +165,11 @@ GLOBAL_LIST_INIT(atm_sounds, list('sound/items/polaroid1.ogg', 'sound/items/pola
 
 	return data
 
-/obj/machinery/atm/ui_act(action, list/params, datum/tgui/ui)
+/obj/machinery/atm/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state, datum/event_args/actor/actor)
 	. = ..()
+	if(.)
+		return
+
 	var/mob/living/carbon/human/user = usr
 	switch(action)
 		if("attempt_authentication")

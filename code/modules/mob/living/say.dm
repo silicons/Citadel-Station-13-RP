@@ -1,3 +1,4 @@
+
 /mob/living/proc/get_default_language()
 	return default_language
 
@@ -20,11 +21,11 @@
 		verb = pick("yells","roars","hollers")
 		whispering = 0
 		. = 1
-	if(slurring)
+	if(get_effective_impairment_power_slurring())
 		message = slur(message)
 		verb = pick("slobbers","slurs")
 		. = 1
-	if(stuttering)
+	if(get_effective_impairment_power_stutter())
 		message = stutter(message)
 		verb = pick("stammers","stutters")
 		. = 1
@@ -43,6 +44,7 @@
 	returns[2] = null
 	return returns
 
+#warn torch
 /mob/living/proc/say_signlang(var/message, var/verb="gestures", var/datum/language/language)
 	var/turf/T = get_turf(src)
 	//We're in something, gesture to people inside the same thing

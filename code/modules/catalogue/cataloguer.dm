@@ -24,6 +24,7 @@ GLOBAL_LIST_EMPTY(all_cataloguers)
 	icon_state = "cataloguer"
 	w_class = WEIGHT_CLASS_NORMAL
 	origin_tech = list(TECH_MATERIAL = 2, TECH_DATA = 3, TECH_MAGNET = 3)
+	suit_storage_class = SUIT_STORAGE_CLASS_SOFTWEAR | SUIT_STORAGE_CLASS_HARDWEAR
 	damage_force = 0
 	var/points_stored = 0 // Amount of 'exploration points' this device holds.
 	var/scan_range = 3 // How many tiles away it can scan. Changing this also changes the box size.
@@ -329,7 +330,7 @@ GLOBAL_LIST_EMPTY(all_cataloguers)
 		busy = TRUE
 		var/obj/item/card/id/ID = W
 		if(points_stored)
-			ID.survey_points += points_stored
+			ID.adjust_redemption_points(POINT_REDEMPTION_TYPE_SURVEY, points_stored)
 			points_stored = 0
 			to_chat(user, "<span class='notice'>You swipe the id over \the [src].</span>")
 		else

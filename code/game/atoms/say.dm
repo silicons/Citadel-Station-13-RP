@@ -2,7 +2,7 @@
  * shim until saycode rewrite
  */
 // todo: refactor this shit to be unified saycode, christ
-/atom/proc/atom_say(message, datum/language/L)
+/atom/proc/atom_say(message, datum/prototype/language/L)
 	if(!message)
 		return
 	var/list/speech_bubble_hearers = list()
@@ -23,14 +23,24 @@
 			flick_overlay_global(I, speech_bubble_hearers, 3 SECONDS)
 		INVOKE_ASYNC(src, TYPE_PROC_REF(/atom/movable, animate_chat), message, null, FALSE, speech_bubble_hearers, 3 SECONDS)
 
-/atom/proc/say_overhead(var/message, whispering, message_range = 7, var/datum/language/speaking = null, var/list/passed_hearing_list)
-	var/list/speech_bubble_hearers = list()
+/atom/proc/say_overhead(var/message, whispering, message_range = 7, var/datum/prototype/language/speaking = null, var/list/passed_hearing_list)
 	var/italics
 	if(whispering)
 		italics = TRUE
-	for(var/mob/M in get_mobs_in_view(message_range, src))
-		if(M.client)
-			speech_bubble_hearers += M.client
+	var/list/speech_bubble_hearers
+	if(passed_hearing_list)
+		speech_bubble_hearers = list()
+		for(var/anything in passed_hearing_list)
+			if(ismob(anything))
+				var/mob/casted = anything
+				speech_bubble_hearers += casted.client
+			else if(istype(anything, /client))
+				speech_bubble_hearers += anything
+	else
+		speech_bubble_hearers = list()
+		for(var/mob/M in get_mobs_in_view(message_range, src))
+			if(M.client)
+				speech_bubble_hearers += M.client
 	if(length(speech_bubble_hearers))
 		INVOKE_ASYNC(src, TYPE_PROC_REF(/atom/movable, animate_chat), message, speaking, italics, speech_bubble_hearers, 30)
 
@@ -41,3 +51,21 @@
 
 /atom/proc/speech_bubble(bubble_state = "", bubble_loc = src, list/bubble_recipients = list())
 	return
+
+// atom emote
+/atom/proc/atom_emote(message, saycode_type)
+	if(!message)
+		return
+	var/list/speech_bubble_hearers = list()
+	for(var/mob/M in get_hearers_in_view(MESSAGE_RANGE_COMBAT_LOUD, src))
+		var/processed = message
+		M.show_message("<span class='game say'><span class='name'>[src]</span> [processed]</span>", saycode_type, null, 1)
+		if(M.client)
+			speech_bubble_hearers += M.client
+
+	if(length(speech_bubble_hearers))
+		var/image/I = generate_speech_bubble(src, "[bubble_icon][say_test(message)]", FLY_LAYER)
+		I.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
+		ASYNC
+			flick_overlay_global(I, speech_bubble_hearers, 3 SECONDS)
+		INVOKE_ASYNC(src, TYPE_PROC_REF(/atom/movable, animate_chat), message, null, FALSE, speech_bubble_hearers, 3 SECONDS)

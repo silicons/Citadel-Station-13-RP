@@ -10,6 +10,7 @@
 	throw_speed = 4
 	throw_range = 20
 	materials_base = list(MAT_STEEL = 60, MAT_GLASS = 30)
+	suit_storage_class = SUIT_STORAGE_CLASS_SOFTWEAR
 
 	/// inserted tape
 	var/obj/item/cassette_tape/tape = /obj/item/cassette_tape/random
@@ -28,7 +29,6 @@
 	/// are we recording?
 	var/recording = FALSE
 
-
 /obj/item/tape_recorder/Initialize(mapload)
 	. = ..()
 	if(ispath(tape))
@@ -39,8 +39,8 @@
 /obj/item/tape_recorder/Destroy()
 	stop_everything()
 	listening_objects -= src
-	if(tape)
-		QDEL_NULL(tape)
+	QDEL_NULL(tape)
+	QDEL_NULL(tape_iterator)
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
@@ -186,7 +186,7 @@
 		return
 	var/msg = got[CASSETTE_TAPE_DATA_MESSAGE]
 	if(msg)
-		var/datum/language/L = got[CASSETTE_TAPE_DATA_LANGUAGE]
+		var/datum/prototype/language/L = got[CASSETTE_TAPE_DATA_LANGUAGE]
 		var/speaker = got[CASSETTE_TAPE_DATA_NAME]
 		var/opcode = got[CASSETTE_TAPE_DATA_OPCODE]
 		switch(opcode)
@@ -284,7 +284,7 @@
 	writer.tick(delta_time)
 
 //! todo : saycode refactor
-/obj/item/tape_recorder/hear_talk(mob/living/M as mob, msg, var/verb="says", datum/language/speaking=null)
+/obj/item/tape_recorder/hear_talk(mob/living/M as mob, msg, var/verb="says", datum/prototype/language/speaking=null)
 	if(!recording)
 		return
 	var/datum/cassette_tape_iterator/write/writer = tape_iterator
@@ -408,7 +408,7 @@
 	var/datum/cassette_tape_iterator/reader = tape_iterator
 	var/msg
 	var/name
-	var/datum/language/lang
+	var/datum/prototype/language/lang
 	var/delay
 	var/current_time = 0
 	var/opcode

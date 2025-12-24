@@ -1,5 +1,5 @@
 //? This is here because the linter will explode if this isn't here. Don't believe me? Remove it. I dare you.
-/datum/language_server_error_blocker
+/datum/prototype/language_server_error_blocker
 
 //## Core settings
 //! Fastboot flags - useful for debugging
@@ -113,26 +113,44 @@
 #endif
 
 // ## CBT BUILD DEFINES
-
-#ifdef CIBUILDING
-	#define UNIT_TESTS
+#if defined(CIBUILDING) && !defined(OPENDREAM)
+#define UNIT_TESTS
 #endif
 
 #ifdef CITESTING
-	#define TESTING
+#define TESTING
 #endif
 
+#if defined(UNIT_TESTS)
+	//Hard del testing defines
+	#define REFERENCE_TRACKING
+	#define REFERENCE_TRACKING_DEBUG
+	// #define FIND_REF_NO_CHECK_TICK
+	// #define GC_FAILURE_HARD_LOOKUP
+	// Test init.
+	#define CF_ATOM_TRACE_INIT_EARLY_QDEL
+	//Ensures all early assets can actually load early
+	#define DO_NOT_DEFER_ASSETS
+	//Test at full capacity, the extra cost doesn't matter
+	#define TIMER_DEBUG
+#endif
 
 #ifdef TGS
 // TGS performs its own build of dm.exe, but includes a prepended TGS define.
 #define CBT
 #endif
 
-// ## LEGACY WARNING
-#if !(defined(CBT) || defined(SPACEMAN_DMM) || defined(OPENDREAM))
-	#warn Building with Dream Maker is no longer supported and will result in errors.
-	#warn In order to build, run BUILD.bat in the root directory.
-	#warn Consider switching to VSCode editor instead, where you can press Ctrl+Shift+B to build.
+#if defined(OPENDREAM)
+	#if !defined(CIBUILDING)
+		#warn You are building with OpenDream. Remember to build TGUI manually.
+		#warn You can do this by running tgui-build.cmd from the bin directory.
+	#endif
+#else
+	#if !defined(CBT) && !defined(SPACEMAN_DMM)
+		#warn Building with Dream Maker is no longer supported and will result in errors.
+		#warn In order to build, run BUILD.cmd in the root directory.
+		#warn Consider switching to VSCode editor instead, where you can press Ctrl+Shift+B to build.
+	#endif
 #endif
 
 /**
@@ -156,7 +174,14 @@
  */
 //#define DO_NOT_DEFER_ASSETS
 
-// ## AI Holders
+// ## Atoms
+
+/**
+ * Trace Destroy() before Initialize().
+ */
+// #define CF_ATOM_TRACE_INIT_EARLY_QDEL
+
+// ## AI Holders / AI System
 
 /**
  * Enables high-overhead debug assertions.
@@ -236,3 +261,14 @@
 // ## Timers
 
 // #define TIMER_LOOP_DEBUGGING
+
+// ## Misc visualizations
+
+/**
+ * terraria-like damage bubble toasts every time something takes significant damage
+*/
+// #define CF_VISUALIZE_DAMAGE_TICKS
+
+#ifdef CF_VISUALIZE_DAMAGE_TICKS
+	#warn Visualization of atom damage ticks enabled.
+#endif

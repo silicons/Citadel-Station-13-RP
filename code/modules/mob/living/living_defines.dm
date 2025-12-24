@@ -73,14 +73,10 @@
 
 	/// This is used to determine if the mob failed a breath. If they did fail a brath, they will attempt to breathe each tick, otherwise just once per 4 ticks.
 	var/failed_last_breath = 0
-	var/lastpuke = 0//* This file is explicitly licensed under the MIT license. *//
-//* Copyright (c) 2024 Citadel Station developers.          *//
-
+	var/lastpuke = 0
 
 	/// Makes attacks harder to land. Negative numbers increase hit chance.
 	var/evasion = 0
-	/// If true, the mob runs extremely fast and cannot be slowed.
-	var/force_max_speed = FALSE
 
 	/// If they're glowing!
 	var/glow_toggle = FALSE
@@ -102,9 +98,6 @@
 	/// Used for buildmode AI control stuff.
 	var/image/selected_image = null
 
-	//Pending Refactor, as per Kev.
-	//var/mobility_flags = MOBILITY_FLAGS_DEFAULT
-
 	// TODO: execute iamcrystalclear for making this var
 	var/last_blood_warn = -INFINITY
 
@@ -113,6 +106,7 @@
 	var/datum/description_profile/profile
 	var/fullref_url
 	var/headshot_url
+	// todo: shitcode, torch this
 	var/obj/structure/mob_spawner/source_spawner = null
 
 //custom say verbs
@@ -122,19 +116,12 @@
 	var/custom_whisper = null
 
 	//? inventory
-	var/hand = null
-	var/obj/item/l_hand = null
-	var/obj/item/r_hand = null
 	var/obj/item/back = null//Human/Monkey
 	var/obj/item/tank/internal = null//Human/Monkey
 	var/obj/item/clothing/mask/wear_mask = null//Carbon
 
-	// TODO: /tg/ arbitrary hand numbers
-	/// Set to TRUE to enable the use of hands and the hands hud
-	var/has_hands = FALSE
-
-	//* Carry Weight
-	//  todo: put all this on /datum/inventory after hand refactor
+	//* Carry Weight *//
+	//  todo: put all this on /datum/inventory after s refactor
 	/// cached carry weight of all items
 	var/cached_carry_weight = 0
 	/// cached encumbrance of all items
@@ -150,27 +137,13 @@
 	/// the force we use when we throw things
 	var/throw_impulse = THROW_FORCE_DEFAULT
 
-	//? mobility
-	/// are we resting either by will or by force
-	var/resting = FALSE
-	/// are we intentionally resting?
-	var/resting_intentionally = FALSE
-	/// are we resisting out of a resting state?
-	var/getting_up = FALSE
-	/// last loc while getting up - used by resist_a_rest
-	var/atom/getting_up_loc
-	/// last penalize time while getting up - used by resist_a_rest
-	var/getting_up_penalized
-	/// last delay before modifications while getting up - used by resist_a_rest, so reducing damage / whatever doesn't leave you with the same delay
-	var/getting_up_original
-
-	//? movement
-	/// current depth on turf in pixels
-	var/depth_current = 0
-	/// set during move: staged depth; on successful move, we update depth_current if it's different.
-	var/tmp/depth_staged = 0
-
 //virology stuffs
 	var/list/datum/disease2/disease/virus2 = list()
 	var/image/pathogen
-	var/datum/immune_system/immune_system
+
+	var/minHealth = MOB_MINIMUM_HEALTH
+	var/softCritHealth = MOB_SOFT_CRITICAL_HEALTH
+	var/critHealth = MOB_CRITICAL_HEALTH
+
+	var/obj/aiming_overlay/aiming
+	var/list/aimed = list()

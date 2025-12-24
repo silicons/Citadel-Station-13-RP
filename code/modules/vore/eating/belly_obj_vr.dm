@@ -45,7 +45,7 @@
 	//Digest mode addon flags
 	var/tmp/static/list/mode_flag_list = list("Numbing" = DM_FLAG_NUMBING, "Stripping" = DM_FLAG_STRIPPING, "Leave Remains" = DM_FLAG_LEAVEREMAINS, "Muffles" = DM_FLAG_THICKBELLY)
 	//Transformation modes
-	var/tmp/static/list/transform_modes = list(DM_TRANSFORM_MALE,DM_TRANSFORM_FEMALE,DM_TRANSFORM_KEEP_GENDER,DM_TRANSFORM_CHANGE_SPECIES_AND_TAUR,DM_TRANSFORM_CHANGE_SPECIES_AND_TAUR_EGG,DM_TRANSFORM_REPLICA,DM_TRANSFORM_REPLICA_EGG,DM_TRANSFORM_KEEP_GENDER_EGG,DM_TRANSFORM_MALE_EGG,DM_TRANSFORM_FEMALE_EGG, DM_EGG)
+	var/tmp/static/list/transform_modes = list(DM_TRANSFORM_MALE,DM_TRANSFORM_FEMALE,DM_TRANSFORM_KEEP_GENDER,DM_TRANSFORM_CHANGE_SPECIES_AND_TAUR)
 	//Item related modes
 	var/tmp/static/list/item_digest_modes = list(IM_HOLD,IM_DIGEST_FOOD,IM_DIGEST)
 
@@ -164,14 +164,19 @@
 	. = ..()
 	//If not, we're probably just in a prefs list or something.
 	if(isliving(loc))
+		if(QDELING(loc))
+			CRASH("tried to make a belly in a qdeleting/qdeleted mob, what the fuck")
 		owner = loc
 		owner.vore_organs |= src
 		SSbellies.belly_list += src
 
 /obj/belly/Destroy()
 	SSbellies.belly_list -= src
-	if(owner?.vore_organs)
-		owner.vore_organs -= src
+	if(owner)
+		if(owner.vore_organs)
+			owner.vore_organs -= src
+		if(owner.vore_selected == src)
+			owner.vore_selected = null
 		owner = null
 	. = ..()
 
@@ -454,8 +459,6 @@
 	M.absorbed = 1
 	to_chat(M,"<span class='notice'>[owner]'s [lowertext(name)] absorbs your body, making you part of them.</span>")
 	to_chat(owner,"<span class='notice'>Your [lowertext(name)] absorbs [M]'s body, making them part of you.</span>")
-	if(M.noisy) //Mute drained absorbee hunger if enabled.
-		M.noisy = FALSE
 
 	if(ishuman(M) && ishuman(owner))
 		var/mob/living/carbon/human/Prey = M
@@ -518,12 +521,15 @@
 	return null
 
 //Handle a mob struggling
-// Called from /mob/living/carbon/relaymove()
-/obj/belly/proc/relay_resist(var/mob/living/R)
+// Called from /mob/living/proc/process_resist()
+/obj/belly/contents_resist(var/mob/living/R)
+	. = TRUE //Sure are doing something unless
 	if (!(R in contents))
-		return  // User is not in this belly
+		return FALSE // User is not in this belly
+	R.setClickCooldownLegacy(50)
+	INVOKE_ASYNC(src, TYPE_PROC_REF(/obj/belly,handle_resist), R)
 
-	R.setClickCooldown(50)
+/obj/belly/proc/handle_resist(var/mob/living/R)
 
 	if(owner.stat) //If owner is stat (dead, KO) we can actually escape
 		to_chat(R,"<span class='warning'>You attempt to climb out of \the [lowertext(name)]. (This will take around [escapetime/10] seconds.)</span>")

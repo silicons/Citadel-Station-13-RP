@@ -9,11 +9,13 @@
 	layer = TURF_LAYER
 
 	//* Core *//
+
 	/// Atom flags.
 	var/atom_flags = NONE
 	/// Prototype ID; persistence uses this to know what atom to load, even if the path changes in a refactor.
 	///
 	/// * this is very much a 'set this on type and all subtypes or don't set it at all' situation.
+	/// * should be `FormattedLikeThis`.
 	var/prototype_id
 
 	//? Interaction
@@ -94,6 +96,8 @@
 
 	//? Chemistry
 	// todo: properly finalize the semantics of this variable and what it's for.
+	// todo: should this variable even exist? most atoms don't need this, and we can easily have an APi
+	//       to fetch a relevant holder upon being inspected by an analyzer.
 	var/datum/reagent_holder/reagents = null
 
 	//? Detective Work
@@ -115,7 +119,8 @@
 	/// Shows up under a UV light.
 	var/fluorescent
 
-	//? Materials
+	//* Materials *//
+
 	/// combined material trait flags
 	/// this list is at /atom level but are only used/implemented on /obj generically; anything else, e.g. walls, should implement manually for efficiency.
 	/// * this variable is a cache variable and is generated from the materials on an entity.
@@ -132,7 +137,6 @@
 	var/tmp/material_traits_data
 	/// 'stacks' of ticking
 	/// this synchronizes the system so removing one ticking material trait doesn't fully de-tick the entity
-	//! DO NOT FUCK WITH THIS UNLESS YOU KNOW WHAT YOU ARE DOING
 	/// * this variable is a cache variable and is generated from the materials on an entity.
 	/// * this variable is not visible and should not be edited in the map editor.
 	var/tmp/material_ticking_counter = 0
@@ -145,6 +149,7 @@
 	/// radiation flags
 	var/rad_flags = RAD_NO_CONTAMINATE	// overridden to NONe in /obj and /mob base
 	/// radiation insulation - does *not* affect rad_act!
+	//  TODO: BUG: rad_insulation needs a `set_rad_insulation()` which updates turf!
 	var/rad_insulation = RAD_INSULATION_NONE
 	/// contamination insulation; null defaults to rad_insulation, this is a multiplier. *never* set higher than 1!!
 	var/rad_stickiness = 1
@@ -202,6 +207,16 @@
 	var/hit_sound_burn
 
 /**
+ * Called if we're deleted before Initialize() is called.
+ * * Must clean up anything done in /New.
+ */
+/atom/proc/EarlyDestroy(force)
+	// tag is set in New()
+	if(tag)
+		tag = null
+	return QDEL_HINT_QUEUE
+
+/**
  * Top level of the destroy chain for most atoms
  *
  * Cleans up the following:
@@ -231,19 +246,28 @@
 
 	return ..()
 
-/**
- * Called by the maploader if a dmm_context is set
- */
-/atom/proc/preloading_instance(datum/dmm_context/context)
-	return
-
-/**
- * hook for abstract direction sets from the maploader
- *
- * return FALSE to override maploader automatic rotation
- */
-/atom/proc/preloading_dir(datum/dmm_context/context)
-	return TRUE
+/atom/gc_trace_data()
+	. = ..()
+	if(loc)
+		.["atom-coord"] = "[COORD(src)]"
+		var/turf/our_turf = get_turf(src)
+		.["atom-turf"] = "[AREACOORD(our_turf)]"
+	else
+		.["atom-coord"] = "nullspace"
+	if(length(context_menus))
+		.["atom-context-menus"] = json_encode(context_menus)
+	if(length(atom_huds))
+		.["atom-huds"] = json_encode(atom_huds)
+	if(reagents)
+		.["atom-reagents"] = "exists"
+	if(length(material_traits))
+		.["atom-material-traits"] = json_encode(material_traits)
+	if(length(shieldcalls))
+		.["atom-shieldcalls"] = json_encode(shieldcalls)
+	if(orbiters)
+		.["atom-orbiters"] = "exists"
+	if(length(interacting_mobs))
+		.["atom-interacting-mobs"] = json_encode(interacting_mobs)
 
 /atom/proc/reveal_blood()
 	return
@@ -295,121 +319,6 @@
 		if(A.contents.len)
 			found += A.search_contents_for(path,filter_path)
 	return found
-
-/atom/proc/get_examine_name(mob/user)
-	. = "\a <b>[src]</b>"
-	var/list/override = list(gender == PLURAL ? "some" : "a", " ", "[name]")
-
-	var/should_override = FALSE
-
-	if(SEND_SIGNAL(src, COMSIG_ATOM_GET_EXAMINE_NAME, user, override) & COMPONENT_EXNAME_CHANGED)
-		should_override = TRUE
-
-
-	if(blood_DNA && !istype(src, /obj/effect/decal))
-		override[EXAMINE_POSITION_BEFORE] = " blood-stained "
-		should_override = TRUE
-
-	if(should_override)
-		. = override.Join("")
-
-/// Generate the full examine string of this atom (including icon for goonchat)
-/atom/proc/get_examine_string(mob/user, thats = FALSE)
-	return "[icon2html(src, user)] [thats? "That's ":""][get_examine_name(user)]"
-
-/**
- * Returns an extended list of examine strings for any contained ID cards.
- *
- * Arguments:
- * * user - The user who is doing the examining.
- */
-/atom/proc/get_id_examine_strings(mob/user)
-	. = list()
-	return
-
-/// Used to insert text after the name but before the description in examine()
-/atom/proc/get_name_chaser(mob/user, list/name_chaser = list())
-	return name_chaser
-
-/**
- * Called when a mob examines (shift click or verb) this atom
- *
- * Default behaviour is to get the name and icon of the object and it's reagents where
- * the [TRANSPARENT] flag is set on the reagents holder
- *
- * Produces a signal [COMSIG_PARENT_EXAMINE]
- *
- * @params
- * * user - who's examining. can be null
- * * dist - effective distance of examine, usually from user to src.
- */
-/atom/proc/examine(mob/user, dist = 1)
-	var/examine_string = get_examine_string(user, thats = TRUE)
-	if(examine_string)
-		. = list("[examine_string].")
-	else
-		. = list()
-
-	. += get_name_chaser(user)
-	if(desc)
-		. += "<hr>[desc]"
-	if(get_description_info() || get_description_fluff() || length(get_description_interaction(user)))
-		. += SPAN_TINYNOTICE("<a href='byond://winset?command=.statpanel_goto_tab \"Examine\"'>For more information, click here.</a>") //This feels VERY HACKY but eh its PROBABLY fine
-	if(integrity_flags & INTEGRITY_INDESTRUCTIBLE)
-		. += SPAN_NOTICE("It doesn't look like it can be damaged through common means.")
-/*
-	if(custom_materials)
-		var/list/materials_list = list()
-		for(var/datum/prototype/material/current_material as anything in custom_materials)
-			materials_list += "[current_material.name]"
-		. += "<u>It is made out of [english_list(materials_list)]</u>."
-*/
-	if(reagents)
-		if(reagents.reagents_holder_flags & TRANSPARENT)
-			. += "It contains:"
-			if(length(reagents.reagent_list))
-				var/has_alcohol = FALSE
-				if(user.can_see_reagents()) //Show each individual reagent
-					for(var/datum/reagent/current_reagent as anything in reagents.reagent_list)
-						if(!has_alcohol && istype(current_reagent,/datum/reagent/ethanol))
-							has_alcohol = TRUE
-						. += "&bull; [round(current_reagent.volume, 0.01)] units of [current_reagent.name]"
-				else //Otherwise, just show the total volume
-					var/total_volume = 0
-					for(var/datum/reagent/current_reagent as anything in reagents.reagent_list)
-						if(!has_alcohol && istype(current_reagent,/datum/reagent/ethanol))
-							has_alcohol = TRUE
-						total_volume += current_reagent.volume
-					. += "[total_volume] units of various reagents"
-				if(has_alcohol)
-					. += "It smells of alcohol."
-			else
-				. += "Nothing."
-		else if(reagents.reagents_holder_flags & AMOUNT_VISIBLE)
-			if(reagents.total_volume)
-				. += SPAN_NOTICE("It has [reagents.total_volume] unit\s left.")
-			else
-				. += SPAN_DANGER("It's empty.")
-
-	MATERIAL_INVOKE(src, MATERIAL_TRAIT_EXAMINE, on_examine, ., user, dist)
-
-	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, .)
-
-/**
- * Called when a mob examines (shift click or verb) this atom twice (or more) within EXAMINE_MORE_WINDOW (default 1 second)
- *
- * This is where you can put extra information on something that may be superfluous or not important in critical gameplay
- * moments, while allowing people to manually double-examine to take a closer look
- *
- * Produces a signal [COMSIG_PARENT_EXAMINE_MORE]
- */
-/atom/proc/examine_more(mob/user)
-	SHOULD_CALL_PARENT(TRUE)
-	RETURN_TYPE(/list)
-
-	. = list()
-	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE_MORE, user, .)
-
 
 // called by mobs when e.g. having the atom as their machine, pulledby, loc (AKA mob being inside the atom) or buckled var set.
 // see code/modules/mob/mob_movement.dm for more.
@@ -682,7 +591,7 @@
 /// message is the message output to anyone who can hear.
 /// deaf_message (optional) is what deaf people will see.
 /// hearing_distance (optional) is the range, how many tiles away the message can be heard.
-/atom/proc/audible_message(var/message, var/deaf_message, var/hearing_distance, datum/language/lang)
+/atom/proc/audible_message(var/message, var/deaf_message, var/hearing_distance, datum/prototype/language/lang)
 
 	var/range = hearing_distance || world.view
 	var/list/hear = get_mobs_and_objs_in_view_fast(get_turf(src),range,remote_ghosts = FALSE)
@@ -780,12 +689,13 @@
 
 /atom/proc/CheckParts(list/parts_list)
 	for(var/A in parts_list)
-		if(istype(A, /datum/reagent))
-			if(!reagents)
-				reagents = new()
-			reagents.reagent_list.Add(A)
-			reagents.conditional_update()
-		else if(ismovable(A))
+		// todo: i don't know why we do this in crafting but crafting needs fucking refactored lmao
+		// if(istype(A, /datum/reagent))
+		// 	if(!reagents)
+		// 		reagents = new()
+		// 	reagents.reagent_list.Add(A)
+		// 	reagents.conditional_update()
+		if(ismovable(A))
 			var/atom/movable/M = A
 			M.forceMove(src)
 
@@ -796,69 +706,35 @@
 /atom/proc/get_cell(inducer)
 	return
 
-//? Radiation
+//* Color *//
 
 /**
- * called when we're hit by a radiation wave
- *
- * * this is only called directly on turfs
- * * this is also called directly if an outgoing pulse is shielded by something, so it hits everything inside it instead
- * * for any other atom on turf, you need /datum/component/radiation_listener
- * * /datum/element/z_radiation_listener is needed if you want to listen to z-wide and other high-gain rad pulses
- */
-/atom/proc/rad_act(strength, datum/radiation_wave/wave)
-	SHOULD_CALL_PARENT(TRUE)
-	SEND_SIGNAL(src, COMSIG_ATOM_RAD_ACT, strength)
-
-/**
- * called when we're hit by z radiation
- */
-/atom/proc/z_rad_act(strength)
-	SHOULD_CALL_PARENT(TRUE)
-	rad_act(strength)
-
-/atom/proc/add_rad_block_contents(source)
-	ADD_TRAIT(src, TRAIT_ATOM_RAD_BLOCK_CONTENTS, source)
-	rad_flags |= RAD_BLOCK_CONTENTS
-
-/atom/proc/remove_rad_block_contents(source)
-	REMOVE_TRAIT(src, TRAIT_ATOM_RAD_BLOCK_CONTENTS, source)
-	if(!HAS_TRAIT(src, TRAIT_ATOM_RAD_BLOCK_CONTENTS))
-		rad_flags &= ~RAD_BLOCK_CONTENTS
-
-/atom/proc/clean_radiation(str, mul, cheap)
-	var/datum/component/radioactive/RA = GetComponent(/datum/component/radioactive)
-	RA?.clean(str, mul)
-
-//? Atom Colour Priority System
-/**
- * A System that gives finer control over which atom colour to colour the atom with.
- * The "highest priority" one is always displayed as opposed to the default of
- * "whichever was set last is displayed"
+ * Managed color set procs for the atom's raw `color` variable. This used to be a full priority system,
+ * but it was determined to be unnecessary.
  */
 
 /**
  * getter for current color
  */
-/atom/proc/get_atom_colour()
+/atom/proc/get_atom_color()
 	CRASH("base proc hit")
 
 /**
  * copies from other
  */
-/atom/proc/copy_atom_colour(atom/other, colour_priority)
+/atom/proc/copy_atom_color(atom/other)
 	CRASH("base proc hit")
 
-/// Adds an instance of colour_type to the atom's atom_colours list
-/atom/proc/add_atom_colour(coloration, colour_priority)
+/// Adds an instance of colour_type to the atom's atom_colors list
+/atom/proc/add_atom_color(new_color)
 	CRASH("base proc hit")
 
-/// Removes an instance of colour_type from the atom's atom_colours list
-/atom/proc/remove_atom_colour(colour_priority, coloration)
+/// Removes an instance of colour_type from the atom's atom_colors list
+/atom/proc/remove_atom_color(require_color)
 	CRASH("base proc hit")
 
 /// Resets the atom's color to null, and then sets it to the highest priority colour available
-/atom/proc/update_atom_colour()
+/atom/proc/update_atom_color()
 	CRASH("base proc hit")
 
 //* Deletions *//
@@ -909,15 +785,11 @@
 	// base layer being null isn't
 	layer = base_layer + 0.001 * relative_layer
 
+// todo: deprecate this
 /atom/proc/hud_layerise()
-	plane = INVENTORY_PLANE
+	plane = HUD_ITEM_PLANE
 	set_base_layer(HUD_LAYER_ITEM)
 	// appearance_flags |= NO_CLIENT_COLOR
-
-/atom/proc/hud_unlayerise()
-	plane = initial(plane)
-	set_base_layer(initial(layer))
-	// appearance_flags &= ~(NO_CLIENT_COLOR)
 
 /atom/proc/reset_plane_and_layer()
 	plane = initial(plane)
@@ -937,6 +809,7 @@
 
 //? Pixel Offsets
 
+// todo: figure out exactly what we're doing here because this is a dumpster fire; we need to well-define what each of htese is supposed to do.
 // todo: at some point we need to optimize this entire chain of bullshit, proccalls are expensive yo
 
 /atom/proc/set_pixel_x(val)
@@ -1021,3 +894,17 @@
 /atom/proc/auto_pixel_offset_to_center()
 	set_base_pixel_y(get_centering_pixel_y_offset())
 	set_base_pixel_x(get_centering_pixel_x_offset())
+
+/**
+ * Get the left-to-right lower-left to top-right width of our icon in pixels.
+ * * This is used to align some overlays like HUD overlays.
+ */
+/atom/proc/get_pixel_x_self_width()
+	return icon_x_dimension
+
+/**
+ * Get the left-to-right lower-left to top-right width of our icon in pixels.
+ * * This is used to align some overlays like HUD overlays.
+ */
+/atom/proc/get_pixel_y_self_width()
+	return icon_y_dimension

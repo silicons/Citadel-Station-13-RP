@@ -27,6 +27,9 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 	/// How many times have we ran?
 	var/iteration = 0
 
+	/// Stack end detector to detect stack overflows that kill the mc's main loop
+	var/datum/stack_end_detector/stack_end_detector
+
 	/// world.time of last fire, for tracking lag outside of the mc.
 	var/last_run
 
@@ -112,15 +115,20 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 	// which results in all procs called by the MC inheriting that usr.
 	usr = null
 
-	//# 1. load configs
-	if(!config_legacy)
-		load_configuration()
+	//# 1. create configs
+	create_legacy_configuration()
 	if(!config)
 		config = new
+	if(!Configuration)
+		Configuration = new
 
 	//# 2. set up random seed
 	if(!random_seed)
-		random_seed = (TEST_RUN_PARAMETER in world.params) ? 29051994 : rand(1, 1e9)
+		#ifdef UNIT_TESTS
+		random_seed = 29051994 // How about 22475?
+		#else
+		random_seed = rand(1, 1e9)
+		#endif
 		rand_seed(random_seed)
 
 	//# 3. create subsystems
@@ -364,17 +372,17 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 
 	switch(initialize_result)
 		if(SS_INIT_FAILURE)
-			message_prefix = "Failed to initialize [subsystem.name] subsystem after"
+			message_prefix = "Failed to initialize [subsystem.name] ([subsystem.type]) subsystem after"
 			tell_everyone = TRUE
 			chat_warning = TRUE
 			// Since this is an explicit failure, shut its ticking off. We also will not set its initialized variable.
 			subsystem.subsystem_flags |= SS_NO_FIRE
 		if(SS_INIT_NONE)
-			message_prefix = "Initialized [subsystem.name] subsystem with errors within"
+			message_prefix = "Initialized [subsystem.name] ([subsystem.type]) subsystem with errors within"
 			tell_everyone = TRUE
 			chat_warning = TRUE
 			subsystem.initialized = TRUE
-			warning("[subsystem.name] subsystem does not implement Initialize() or it returns ..(). If the former is true, the SS_NO_INIT flag should be set for this subsystem.")
+			warning("[subsystem.name] ([subsystem.type]) subsystem does not implement Initialize() or it returns ..(). If the former is true, the SS_NO_INIT flag should be set for this subsystem.")
 		if(SS_INIT_SUCCESS)
 			message_prefix = "Initialized [subsystem.name] subsystem within"
 			tell_everyone = TRUE
@@ -507,6 +515,10 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 	var/error_level = 0
 	var/sleep_delta = 1
 
+	//setup the stack overflow detector
+	stack_end_detector = new()
+	var/datum/stack_canary/canary = stack_end_detector.prime_canary()
+	canary.use_variable()
 	//# The actual loop.
 	while (1)
 		var/new_tickdrift = (((REALTIMEOFDAY - loop_start_timeofday) - (world.time - loop_start_time)) / world.tick_lag)
@@ -883,10 +895,12 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 		var/datum/controller/subsystem/SS = S
 		SS.StopLoadingMap()
 
-/datum/controller/master/proc/OnConfigLoad()
+/datum/controller/master/proc/on_config_loaded()
 	for (var/thing in subsystems)
 		var/datum/controller/subsystem/SS = thing
-		SS.OnConfigLoad()
+		SS.on_config_loaded()
+	for(var/datum/controller/repository/repository in SSrepository.get_all_repositories())
+		repository.on_config_loaded()
 
 /**
  * CitRP snowflake special: Check if any subsystems are sleeping.

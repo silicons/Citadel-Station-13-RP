@@ -30,18 +30,18 @@
 	thrusters_possible = 1
 
 	starting_components = list(
-		/obj/item/mecha_parts/component/hull/durable,
-		/obj/item/mecha_parts/component/actuator,
-		/obj/item/mecha_parts/component/armor/military,
-		/obj/item/mecha_parts/component/gas,
-		/obj/item/mecha_parts/component/electrical
+		/obj/item/vehicle_component/hull/durable,
+		/obj/item/vehicle_component/actuator,
+		/obj/item/vehicle_component/armor/military,
+		/obj/item/vehicle_component/gas,
+		/obj/item/vehicle_component/electrical
 		)
 
 	starting_equipment = list(
-		/obj/item/mecha_parts/mecha_equipment/weapon/energy/pulse,
-		/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/explosive,
-		/obj/item/mecha_parts/mecha_equipment/tesla_energy_relay,
-		/obj/item/mecha_parts/mecha_equipment/antiproj_armor_booster
+		/obj/item/vehicle_module/weapon/energy/pulse,
+		/obj/item/vehicle_module/weapon/ballistic/missile_rack/explosive,
+		/obj/item/vehicle_module/tesla_energy_relay,
+		/obj/item/vehicle_module/antiproj_armor_booster
 		)
 
 	icon_scale_x = 1.5
@@ -62,11 +62,11 @@
 	max_equip = 5
 
 	starting_equipment = list(
-		/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/scattershot,
-		/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/explosive,
-		/obj/item/mecha_parts/mecha_equipment/tesla_energy_relay,
-		/obj/item/mecha_parts/mecha_equipment/antiproj_armor_booster,
-		/obj/item/mecha_parts/mecha_equipment/teleporter
+		/obj/item/vehicle_module/weapon/ballistic/scattershot,
+		/obj/item/vehicle_module/weapon/ballistic/missile_rack/explosive,
+		/obj/item/vehicle_module/tesla_energy_relay,
+		/obj/item/vehicle_module/antiproj_armor_booster,
+		/obj/item/vehicle_module/teleporter
 		)
 
 //Note that is the Mauler
@@ -78,6 +78,7 @@
 	operation_req_access = list(ACCESS_FACTION_SYNDICATE)
 	wreckage = /obj/effect/decal/mecha_wreckage/mauler
 	mech_faction = MECH_FACTION_SYNDI
+
 
 //I'll break this down later
 /obj/vehicle/sealed/mecha/combat/marauder/relaymove(mob/user,direction)
@@ -107,9 +108,13 @@
 	if(internal_damage&MECHA_INT_CONTROL_LOST)
 		move_result = mechsteprand()
 	else if(src.dir!=direction)
-		move_result = mechturn(direction)
+		if(strafing)
+			move_result = mechstep(direction)
+		else
+			move_result = mechturn(direction)
 	else
 		move_result	= mechstep(direction)
+
 	if(move_result)
 		if(istype(src.loc, /turf/space))
 			if(!src.check_for_support())

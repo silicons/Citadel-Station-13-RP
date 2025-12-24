@@ -1,6 +1,6 @@
-/**
- *! Copyright (c) 2020 Aleksej Komarov
- *! SPDX-License-Identifier: MIT
+/*!
+ * Copyright (c) 2020 Aleksej Komarov
+ * SPDX-License-Identifier: MIT
  */
 
 /**
@@ -12,13 +12,15 @@
 	var/datum/tgui_window/window
 	var/broken = FALSE
 	var/initialized_at
+	/// Each client notifies on protected playback, so this prevents spamming admins.
+	var/static/admins_warned = FALSE
 
 /datum/tgui_panel/New(client/client, id)
 	src.client = client
 	window = new(client, id)
 	window.subscribe(src, PROC_REF(on_message))
 
-/datum/tgui_panel/Del()
+/datum/tgui_panel/Destroy()
 	window.unsubscribe(src)
 	window.close()
 	client = null
@@ -70,6 +72,7 @@
 	// Other setup
 	request_telemetry()
 	addtimer(CALLBACK(src, PROC_REF(on_initialize_timed_out)), 5 SECONDS)
+	window.send_message("testTelemetryCommand")
 
 /**
  * private
@@ -78,7 +81,7 @@
  */
 /datum/tgui_panel/proc/on_initialize_timed_out()
 	// Currently does nothing but sending a message to old chat.
-	SEND_TEXT(client, "<span class=\"userdanger\">Failed to load fancy chat, click <a href='?src=[REF(src)];reload_tguipanel=1'>HERE</a> to attempt to reload it.</span>")
+	SEND_TEXT(client, SPAN_USERDANGER("Failed to load fancy chat, click <a href='byond://?src=[REF(src)];reload_tguipanel=1'>HERE</a> to attempt to reload it."))
 
 /**
  * private
@@ -102,9 +105,18 @@
 			),
 		))
 		return TRUE
+
 	if(type == "audio/setAdminMusicVolume")
 		client.admin_music_volume = payload["volume"]
 		return TRUE
+
+	if(type == "audio/protected")
+		if(!admins_warned)
+			message_admins(SPAN_NOTICE("Audio returned a protected playback error, likely due to being copyrighted."))
+			admins_warned = TRUE
+			addtimer(VARSET_CALLBACK(src, admins_warned, FALSE), 10 SECONDS)
+		return TRUE
+
 	if(type == "telemetry")
 		analyze_telemetry(payload)
 		return TRUE

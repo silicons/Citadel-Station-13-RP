@@ -8,6 +8,7 @@
 	icon_state = null
 	item_state = "atoxinbottle"
 	w_class = WEIGHT_CLASS_SMALL
+	suit_storage_class = SUIT_STORAGE_CLASS_SOFTWEAR
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = list(5,10,15,25,30,60)
 	atom_flags = 0
@@ -186,3 +187,10 @@
 	icon = 'icons/obj/medical/chemical.dmi'
 	icon_state = "bottle-3"
 	prefill = list("biomass" = 60)
+
+/obj/item/reagent_containers/glass/bottle/superhol
+	name = "unlabeled bottle"
+	desc = "A unlabeled bottle that seems to be filled with ethanol. The fumes burn the air around you."
+	icon = 'icons/obj/medical/chemical.dmi'
+	icon_state = "bottle-4"
+	prefill = list(/datum/reagent/superhol = 60)

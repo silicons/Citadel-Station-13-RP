@@ -18,6 +18,7 @@ var/global/list/active_radio_jammers = list()
 	desc = "Primarily for blocking subspace communications, preventing the use of headsets, PDAs, and communicators. Also masks suit sensors."	// Added suit sensor jamming
 	icon = 'icons/obj/device.dmi'
 	icon_state = "jammer0"
+	suit_storage_class = SUIT_STORAGE_CLASS_SOFTWEAR | SUIT_STORAGE_CLASS_HARDWEAR
 	var/active_state = "jammer1"
 	var/last_overlay_percent = null // Stores overlay icon_state to avoid excessive recreation of overlays.
 
@@ -100,6 +101,8 @@ var/global/list/active_radio_jammers = list()
 		to_chat(user,"<span class='notice'>You insert \the [power_source] into \the [src].</span>")
 
 /obj/item/radio_jammer/update_icon()
+	cut_overlays()
+	. = ..()
 	if(on)
 		icon_state = active_state
 	else
@@ -111,12 +114,9 @@ var/global/list/active_radio_jammers = list()
 	else
 		overlay_percent = 0
 
-	// Only Cut() if we need to.
-	if(overlay_percent != last_overlay_percent)
-		cut_overlays()
-		var/image/I = image(src.icon, src, "jammer_overlay_[overlay_percent]")
-		add_overlay(I)
-		last_overlay_percent = overlay_percent
+	var/image/I = image(src.icon, src, "jammer_overlay_[overlay_percent]")
+	add_overlay(I)
+	last_overlay_percent = overlay_percent
 
 //Unlimited use, unlimited range jammer for admins. Turn it on, drop it somewhere, it works.
 /obj/item/radio_jammer/admin

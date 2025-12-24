@@ -20,22 +20,25 @@
 	id = "Virgo4Beach140"
 	name = "Sector - Virgo 4: Beach"
 	display_name = "Virgo 4 - Beach"
-	absolute_path = "maps/sectors/virgo4_140/levels/virgo4_140_beach.dmm"
+	path = "maps/sectors/virgo4_140/levels/virgo4_140_beach.dmm"
 	base_turf = /turf/simulated/floor/outdoors/beach/sand
-	link_north = /datum/map_level/sector/virgo4_140/cave
+	struct_x = 0
+	struct_y = 0
+	struct_z = 0
 
 /datum/map_level/sector/virgo4_140/cave
 	id = "Virgo4Caves140"
 	name = "Sector - Virgo 4: Caves"
 	display_name = "Virgo 4 - Caves"
-	absolute_path = "maps/sectors/virgo4_140/levels/virgo4_140_cave.dmm"
+	path = "maps/sectors/virgo4_140/levels/virgo4_140_cave.dmm"
 	base_turf = /turf/simulated/floor/outdoors/rocks/caves
-	link_south = /datum/map_level/sector/virgo4_140/beach
-	link_west = /datum/map_level/sector/virgo4_140/desert
+	struct_x = 0
+	struct_y = 1
+	struct_z = 0
 
-/datum/map_level/sector/virgo4_140/cave/on_loaded_immediate(z_index, list/datum/callback/additional_generation)
+/datum/map_level/sector/virgo4_140/cave/on_loaded_immediate(z_index, list/datum/callback/out_generation_callbacks)
 	. = ..()
-	additional_generation?.Add(
+	out_generation_callbacks?.Add(
 		CALLBACK(
 			GLOBAL_PROC,
 			GLOBAL_PROC_REF(seed_submaps),
@@ -53,13 +56,15 @@
 	id = "Virgo4Desert140"
 	name = "Sector - Virgo 4: Desert"
 	display_name = "Virgo 4 - Desert"
-	absolute_path = "maps/sectors/virgo4_140/levels/virgo4_140_desert.dmm"
+	path = "maps/sectors/virgo4_140/levels/virgo4_140_desert.dmm"
 	base_turf = /turf/simulated/floor/outdoors/beach/sand/lowdesert
-	link_east = /datum/map_level/sector/virgo4_140/cave
+	struct_x = -1
+	struct_y = 1
+	struct_z = 0
 
-/datum/map_level/sector/virgo4_140/desert/on_loaded_immediate(z_index, list/datum/callback/additional_generation)
+/datum/map_level/sector/virgo4_140/desert/on_loaded_immediate(z_index, list/datum/callback/out_generation_callbacks)
 	. = ..()
-	additional_generation?.Add(
+	out_generation_callbacks?.Add(
 		CALLBACK(
 			GLOBAL_PROC,
 			GLOBAL_PROC_REF(seed_submaps),

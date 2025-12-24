@@ -10,6 +10,7 @@
 	w_class = WEIGHT_CLASS_SMALL
 	materials_base = list(MAT_STEEL = 150)
 	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
+	suit_storage_class = SUIT_STORAGE_CLASS_SOFTWEAR | SUIT_STORAGE_CLASS_HARDWEAR
 
 	var/scan_range = 1
 
@@ -21,6 +22,7 @@
 	var/global/list/overlay_cache = list() //cache recent overlays
 
 /obj/item/t_scanner/update_icon()
+	. = ..()
 	icon_state = "t-ray[on]"
 
 /obj/item/t_scanner/AltClick()
@@ -121,7 +123,7 @@
 			continue
 
 		for(var/obj/O in T.contents)
-			if(O.hides_underfloor == OBJ_UNDERFLOOR_NEVER)
+			if(!O.is_hidden_underfloor())
 				continue
 			if(!O.invisibility)
 				continue //if it's already visible don't need an overlay for it

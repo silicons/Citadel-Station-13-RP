@@ -12,13 +12,14 @@
 	opacity = 0
 	var/list/welder_salvage = list(/obj/item/stack/material/plasteel,/obj/item/stack/material/steel,/obj/item/stack/rods)
 	var/list/wirecutters_salvage = list(/obj/item/stack/cable_coil)
-	var/list/crowbar_salvage
+	var/list/crowbar_salvage = list()
 	var/salvage_num = 5
 
-/obj/effect/decal/mecha_wreckage/New()
-	..()
-	crowbar_salvage = new
-	return
+/obj/effect/decal/mecha_wreckage/Destroy()
+	welder_salvage = null
+	wirecutters_salvage = null
+	crowbar_salvage = null
+	return ..()
 
 /obj/effect/decal/mecha_wreckage/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weldingtool))
@@ -31,7 +32,7 @@
 			if(type)
 				var/N = new type(get_turf(user))
 				user.visible_message("[user] cuts [N] from [src]", "You cut [N] from [src]", "You hear a sound of welder nearby")
-				if(istype(N, /obj/item/mecha_parts/part))
+				if(istype(N, /obj/item/vehicle_part))
 					welder_salvage -= type
 				salvage_num--
 			else
@@ -70,22 +71,21 @@
 	name = "Gygax wreckage"
 	icon_state = "gygax-broken"
 
-/obj/effect/decal/mecha_wreckage/gygax/New()
-	..()
+/obj/effect/decal/mecha_wreckage/gygax/Initialize(mapload)
+	. = ..()
 	var/list/parts = list(
-		/obj/item/mecha_parts/part/gygax_torso,
-		/obj/item/mecha_parts/part/gygax_head,
-		/obj/item/mecha_parts/part/gygax_left_arm,
-		/obj/item/mecha_parts/part/gygax_right_arm,
-		/obj/item/mecha_parts/part/gygax_left_leg,
-		/obj/item/mecha_parts/part/gygax_right_leg,
+		/obj/item/vehicle_part/gygax_torso,
+		/obj/item/vehicle_part/gygax_head,
+		/obj/item/vehicle_part/gygax_left_arm,
+		/obj/item/vehicle_part/gygax_right_arm,
+		/obj/item/vehicle_part/gygax_left_leg,
+		/obj/item/vehicle_part/gygax_right_leg,
 	)
 	for(var/i=0;i<2;i++)
 		if(!!length(parts) && prob(40))
 			var/part = pick(parts)
 			welder_salvage += part
 			parts -= part
-	return
 
 /obj/effect/decal/mecha_wreckage/gygax/dark
 	name = "Dark Gygax wreckage"
@@ -124,34 +124,33 @@
 	name = "Ripley wreckage"
 	icon_state = "ripley-broken"
 
-/obj/effect/decal/mecha_wreckage/ripley/New()
-	..()
+/obj/effect/decal/mecha_wreckage/ripley/Initialize(mapload)
+	. = ..()
 	var/list/parts = list(
-		/obj/item/mecha_parts/part/ripley_torso,
-		/obj/item/mecha_parts/part/ripley_left_arm,
-		/obj/item/mecha_parts/part/ripley_right_arm,
-		/obj/item/mecha_parts/part/ripley_left_leg,
-		/obj/item/mecha_parts/part/ripley_right_leg,
+		/obj/item/vehicle_part/ripley_torso,
+		/obj/item/vehicle_part/ripley_left_arm,
+		/obj/item/vehicle_part/ripley_right_arm,
+		/obj/item/vehicle_part/ripley_left_leg,
+		/obj/item/vehicle_part/ripley_right_leg,
 	)
 	for(var/i=0;i<2;i++)
 		if(!!length(parts) && prob(40))
 			var/part = pick(parts)
 			welder_salvage += part
 			parts -= part
-	return
 
 /obj/effect/decal/mecha_wreckage/ripley/firefighter
 	name = "Firefighter wreckage"
 	icon_state = "firefighter-broken"
 
-/obj/effect/decal/mecha_wreckage/ripley/firefighter/New()
-	..()
+/obj/effect/decal/mecha_wreckage/ripley/firefighter/Initialize(mapload)
+	. = ..()
 	var/list/parts = list(
-		/obj/item/mecha_parts/part/ripley_torso,
-		/obj/item/mecha_parts/part/ripley_left_arm,
-		/obj/item/mecha_parts/part/ripley_right_arm,
-		/obj/item/mecha_parts/part/ripley_left_leg,
-		/obj/item/mecha_parts/part/ripley_right_leg,
+		/obj/item/vehicle_part/ripley_torso,
+		/obj/item/vehicle_part/ripley_left_arm,
+		/obj/item/vehicle_part/ripley_right_arm,
+		/obj/item/vehicle_part/ripley_left_leg,
+		/obj/item/vehicle_part/ripley_right_leg,
 		/obj/item/clothing/suit/fire,
 	)
 	for(var/i=0;i<2;i++)
@@ -159,28 +158,25 @@
 			var/part = pick(parts)
 			welder_salvage += part
 			parts -= part
-	return
 
 /obj/effect/decal/mecha_wreckage/ripley/geiger
 	name = "Lightweight APLU wreckage"
 	icon_state = "ripley-broken-old"
 
-/obj/effect/decal/mecha_wreckage/ripley/geiger/New()
-	..()
+/obj/effect/decal/mecha_wreckage/ripley/geiger/Initialize(mapload)
+	. = ..()
 	var/list/parts = list(
-		/obj/item/mecha_parts/part/geiger_torso,
-		/obj/item/mecha_parts/part/ripley_left_arm,
-		/obj/item/mecha_parts/part/ripley_right_arm,
-		/obj/item/mecha_parts/part/ripley_left_leg,
-		/obj/item/mecha_parts/part/ripley_right_leg,
+		/obj/item/vehicle_part/geiger_torso,
+		/obj/item/vehicle_part/ripley_left_arm,
+		/obj/item/vehicle_part/ripley_right_arm,
+		/obj/item/vehicle_part/ripley_left_leg,
+		/obj/item/vehicle_part/ripley_right_leg,
 	)
 	for(var/i=0;i<2;i++)
 		if(!!length(parts) && prob(40))
 			var/part = pick(parts)
 			welder_salvage += part
 			parts -= part
-	return
-
 
 /obj/effect/decal/mecha_wreckage/ripley/deathripley
 	name = "Death-Ripley wreckage"
@@ -190,22 +186,21 @@
 	name = "Durand wreckage"
 	icon_state = "durand-broken"
 
-/obj/effect/decal/mecha_wreckage/durand/New()
-	..()
+/obj/effect/decal/mecha_wreckage/durand/Initialize(mapload)
+	. = ..()
 	var/list/parts = list(
-		/obj/item/mecha_parts/part/durand_torso,
-		/obj/item/mecha_parts/part/durand_head,
-		/obj/item/mecha_parts/part/durand_left_arm,
-		/obj/item/mecha_parts/part/durand_right_arm,
-		/obj/item/mecha_parts/part/durand_left_leg,
-		/obj/item/mecha_parts/part/durand_right_leg,
+		/obj/item/vehicle_part/durand_torso,
+		/obj/item/vehicle_part/durand_head,
+		/obj/item/vehicle_part/durand_left_arm,
+		/obj/item/vehicle_part/durand_right_arm,
+		/obj/item/vehicle_part/durand_left_leg,
+		/obj/item/vehicle_part/durand_right_leg,
 	)
 	for(var/i=0;i<2;i++)
 		if(!!length(parts) && prob(40))
 			var/part = pick(parts)
 			welder_salvage += part
 			parts -= part
-	return
 
 /obj/effect/decal/mecha_wreckage/phazon
 	name = "Phazon wreckage"
@@ -216,22 +211,21 @@
 	name = "Odysseus wreckage"
 	icon_state = "odysseus-broken"
 
-/obj/effect/decal/mecha_wreckage/odysseus/New()
-	..()
+/obj/effect/decal/mecha_wreckage/odysseus/Initialize(mapload)
+	. = ..()
 	var/list/parts = list(
-		/obj/item/mecha_parts/part/odysseus_torso,
-		/obj/item/mecha_parts/part/odysseus_head,
-		/obj/item/mecha_parts/part/odysseus_left_arm,
-		/obj/item/mecha_parts/part/odysseus_right_arm,
-		/obj/item/mecha_parts/part/odysseus_left_leg,
-		/obj/item/mecha_parts/part/odysseus_right_leg,
+		/obj/item/vehicle_part/odysseus_torso,
+		/obj/item/vehicle_part/odysseus_head,
+		/obj/item/vehicle_part/odysseus_left_arm,
+		/obj/item/vehicle_part/odysseus_right_arm,
+		/obj/item/vehicle_part/odysseus_left_leg,
+		/obj/item/vehicle_part/odysseus_right_leg,
 	)
 	for(var/i=0;i<2;i++)
 		if(!!length(parts) && prob(40))
 			var/part = pick(parts)
 			welder_salvage += part
 			parts -= part
-	return
 
 /obj/effect/decal/mecha_wreckage/odysseus/murdysseus
 	icon_state = "murdysseus-broken"
@@ -258,22 +252,21 @@
 	name = "H.O.N.K. wreckage"
 	icon_state = "honker-broken"
 
-/obj/effect/decal/mecha_wreckage/honker/New()
-	..()
+/obj/effect/decal/mecha_wreckage/honker/Initialize(mapload)
+	. = ..()
 	var/list/parts = list(
-		/obj/item/mecha_parts/part/honker_torso,
-		/obj/item/mecha_parts/part/honker_head,
-		/obj/item/mecha_parts/part/honker_left_arm,
-		/obj/item/mecha_parts/part/honker_right_arm,
-		/obj/item/mecha_parts/part/honker_left_leg,
-		/obj/item/mecha_parts/part/honker_right_leg,
+		/obj/item/vehicle_part/honker_torso,
+		/obj/item/vehicle_part/honker_head,
+		/obj/item/vehicle_part/honker_left_arm,
+		/obj/item/vehicle_part/honker_right_arm,
+		/obj/item/vehicle_part/honker_left_leg,
+		/obj/item/vehicle_part/honker_right_leg,
 	)
 	for(var/i=0;i<2;i++)
 		if(!!length(parts) && prob(40))
 			var/part = pick(parts)
 			welder_salvage += part
 			parts -= part
-	return
 
 /obj/effect/decal/mecha_wreckage/honker/cluwne
 	name = "C.L.W.U.N.E. wreckage"
@@ -285,22 +278,21 @@
 	name = "Reticent wreckage"
 	icon_state = "reticent-broken"
 
-/obj/effect/decal/mecha_wreckage/reticent/New()
-	..()
+/obj/effect/decal/mecha_wreckage/reticent/Initialize(mapload)
+	. = ..()
 	var/list/parts = list(
-		/obj/item/mecha_parts/part/reticent_torso,
-		/obj/item/mecha_parts/part/reticent_head,
-		/obj/item/mecha_parts/part/reticent_left_arm,
-		/obj/item/mecha_parts/part/reticent_right_arm,
-		/obj/item/mecha_parts/part/reticent_left_leg,
-		/obj/item/mecha_parts/part/reticent_right_leg,
+		/obj/item/vehicle_part/reticent_torso,
+		/obj/item/vehicle_part/reticent_head,
+		/obj/item/vehicle_part/reticent_left_arm,
+		/obj/item/vehicle_part/reticent_right_arm,
+		/obj/item/vehicle_part/reticent_left_leg,
+		/obj/item/vehicle_part/reticent_right_leg,
 	)
 	for(var/i=0;i<2;i++)
 		if(!!length(parts) && prob(40))
 			var/part = pick(parts)
 			welder_salvage += part
 			parts -= part
-	return
 
 /obj/effect/decal/mecha_wreckage/reticent/reticence
 	name = "Reticence wreckage"

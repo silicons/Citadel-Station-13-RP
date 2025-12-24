@@ -23,6 +23,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	materials_base = list(MAT_STEEL = 3750)
 	worth_intrinsic = 75
+	suit_storage_class = SUIT_STORAGE_CLASS_HARDWEAR
 	var/digspeed = 40 //moving the delay to an item var so R&D can make improved picks. --NEO
 	var/sand_dig = FALSE
 	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
@@ -151,17 +152,25 @@
 //Snowflake drill that works like a chainsaw! How fun. Honestly they should probably all work like this or something. I dunno. Might be a fun mining overhaul later.
 /obj/item/pickaxe/tyrmalin
 	name = "\improper Tyrmalin excavator"
-	desc = "A mining drill build from scrap parts, often found on Tyrmalin mining operations. No two are alike."
+	desc = "A mining drill built from scrap parts, often found on Tyrmalin mining operations. No two are alike."
 	icon_state = "goblindrill"
 	item_state = "goblindrill"
+	digspeed = 25
 	destroy_artefacts = TRUE
 	var/max_fuel = 100
 	active = 0
-	var/jam_chance = TRUE
+	var/jam_chance = 15
 	worth_intrinsic = 75
 
 /obj/item/pickaxe/tyrmalin/Initialize(mapload)
 	. = ..()
+	digspeed = rand(10, 50) // let's go gambling!
+	if (digspeed > 25)
+		desc += pick(" This one has a cracked engine block...",
+					 " Seems like it got damaged in shipping...",
+					 " There's a worrying grinding noise in the gearbox...",
+					 " The drill head's barely intact...",
+					 " You hear an incessant knocking coming from the engine...")
 	var/datum/reagent_holder/R = new/datum/reagent_holder(max_fuel)
 	reagents = R
 	R.my_atom = src
@@ -179,7 +188,7 @@
 	to_chat(user, "You start pulling the string on \the [src].")
 	//visible_message("[usr] starts pulling the string on the [src].")
 
-	if(max_fuel <= 0)
+	if(get_fuel() <= 0)
 		if(do_after(user, 15))
 			to_chat(user, "\The [src] won't start!")
 		else
@@ -224,14 +233,12 @@
 	if(target && active)
 		if(get_fuel() > 0)
 			reagents.remove_reagent("fuel", 1)
-		if(istype(target, /obj/structure/window) || istype(target, /obj/structure/grille))
-			target.atom_destruction()
 	if(jam_chance && active)
-		switch(rand(1,100))
-			if(1 to 30)
-				turnOff()
-			if(31 to 100)
-				return
+		if(prob(jam_chance))
+			user.action_feedback(SPAN_WARNING("\The [src] jolts as it stalls out!"))
+			turnOff()
+		else
+			return
 	if (istype(target, /obj/structure/reagent_dispensers/fueltank) || istype(target, /obj/item/reagent_containers/portable_fuelcan) && get_dist(src,target) <= 1)
 		to_chat(usr, "<span class='notice'>You begin filling the tank on the [src].</span>")
 		if(do_after(usr, 15))
@@ -249,7 +256,7 @@
 		reagents.remove_reagent("fuel", 1)
 		playsound(src, 'sound/weapons/chainsaw_turnoff.ogg',15,1)
 	if(get_fuel() <= 0)
-		to_chat(usr, "\The [src] sputters to a stop!")
+		visible_message(SPAN_WARNING("\The [src] sputters to a stop!"))
 		turnOff()
 
 /obj/item/pickaxe/tyrmalin/proc/get_fuel()
@@ -286,6 +293,7 @@
 	attack_verb = list("bashed", "bludgeoned", "thrashed", "whacked")
 	damage_mode = DAMAGE_MODE_EDGE
 	worth_intrinsic = 50
+	suit_storage_class = SUIT_STORAGE_CLASS_HARDWEAR
 	var/digspeed = 40
 
 /obj/item/shovel/bone
@@ -350,6 +358,7 @@
 	amount = 10
 	max_amount = 10
 	zmm_flags = ZMM_MANGLE_PLANES
+	suit_storage_class = SUIT_STORAGE_CLASS_SOFTWEAR | SUIT_STORAGE_CLASS_HARDWEAR
 
 	var/upright = 0
 	var/base_state

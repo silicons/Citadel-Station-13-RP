@@ -25,7 +25,8 @@
 		/datum/category_item/catalogue/fauna/construct/juggernaut,
 		/datum/category_item/catalogue/fauna/construct/proteon,
 		/datum/category_item/catalogue/fauna/construct/shade,
-		/datum/category_item/catalogue/fauna/construct/wraith
+		/datum/category_item/catalogue/fauna/construct/wraith,
+		/datum/category_item/catalogue/fauna/construct/cyclops
 		)
 
 /mob/living/simple_mob/construct
@@ -40,7 +41,7 @@
 	mob_class = MOB_CLASS_DEMONIC
 
 	ui_icons = 'icons/mob/screen1_construct.dmi'
-	has_hands = 1
+	hand_count = 2
 	hand_form = "stone manipulators"
 
 	response_help  = "thinks better of touching"
@@ -85,11 +86,21 @@
 
 	supernatural = TRUE
 
+	vision_innate = /datum/vision/baseline/species_tier_3 //Supernatural Other Things Are Beyond Needing Light to see
+
 	var/construct_type = "shade"
 	var/list/construct_spells = list()
 //	var/do_glow = TRUE
 
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/melee
+
+/mob/living/simple_mob/construct/Initialize(mapload)
+	. = ..()
+	name = "[initial(name)] ([rand(1, 1000)])"
+	real_name = name
+	for(var/spell in construct_spells)
+		src.add_spell(new spell, "const_spell_ready")
+	updateicon()
 
 /mob/living/simple_mob/construct/place_spell_in_hand(var/path)
 	if(!path || !ispath(path))
@@ -103,16 +114,14 @@
 		if(S.run_checks())
 			S.on_innate_cast(src)
 
-	if(l_hand && r_hand) //Make sure our hands aren't full.
-		if(istype(r_hand, /obj/item/spell)) //If they are full, perhaps we can still be useful.
-			var/obj/item/spell/r_spell = r_hand
-			if(r_spell.aspect == ASPECT_CHROMATIC) //Check if we can combine the new spell with one in our hands.
-				r_spell.on_combine_cast(S, src)
-		else if(istype(l_hand, /obj/item/spell))
-			var/obj/item/spell/l_spell = l_hand
-			if(l_spell.aspect == ASPECT_CHROMATIC) //Check the other hand too.
-				l_spell.on_combine_cast(S, src)
-		else //Welp
+	if(are_usable_hands_full())
+		var/found = FALSE
+		for(var/obj/item/spell/spell as anything in get_held_item_of_type(/obj/item/spell))
+			if(spell.aspect != ASPECT_CHROMATIC)
+				continue
+			found = TRUE
+			spell.on_combine_cast(S, src)
+		if(!found)
 			to_chat(src, "<span class='warning'>You require a free manipulator to use this power.</span>")
 			return 0
 
@@ -125,14 +134,6 @@
 
 /mob/living/simple_mob/construct/cultify()
 	return
-
-/mob/living/simple_mob/construct/Initialize(mapload)
-	. = ..()
-	name = "[initial(name)] ([rand(1, 1000)])"
-	real_name = name
-	for(var/spell in construct_spells)
-		src.add_spell(new spell, "const_spell_ready")
-	updateicon()
 
 /*
 /mob/living/simple_mob/construct/update_icon()

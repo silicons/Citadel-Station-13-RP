@@ -7,7 +7,7 @@
 	icon_state = "Contain_F"
 	anchored = TRUE
 	density = FALSE
-	integrity_flags = INTEGRITY_ACIDPROOF | INTEGRITY_FIREPROOF | INTEGRITY_LAVAPROOF
+	integrity_flags = INTEGRITY_ACIDPROOF | INTEGRITY_FIREPROOF | INTEGRITY_LAVAPROOF | INTEGRITY_INDESTRUCTIBLE
 	use_power = USE_POWER_OFF
 	light_range = 4
 	var/obj/machinery/field_generator/FG1 = null
@@ -50,7 +50,7 @@
 	if(isliving(user))
 		hasShocked = 1
 		var/shock_damage = min(rand(30,40),rand(30,40))
-		user.electrocute_act(shock_damage, src, 1, BP_TORSO)
+		user.electrocute(0, shock_damage, 0, NONE, BP_TORSO, src)
 
 		var/atom/target = get_edge_target_turf(user, get_dir(src, get_step_away(user, src)))
 		user.throw_at_old(target, 200, 4)

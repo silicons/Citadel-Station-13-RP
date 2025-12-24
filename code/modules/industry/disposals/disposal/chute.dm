@@ -17,7 +17,6 @@
 	desc = "A pneumatic waste disposal unit."
 	icon = 'icons/obj/pipes/disposal.dmi'
 	icon_state = "disposal"
-	atom_colouration_system = FALSE
 	anchored = TRUE
 	density = TRUE
 	pass_flags_self = ATOM_PASS_OVERHEAD_THROW
@@ -160,7 +159,7 @@
 		return
 
 	//animals cannot put mobs other than themselves into disposal
-	if(isanimal(user) && target != user)
+	if(isanimal_legacy_this_is_broken(user) && target != user)
 		return
 
 	src.add_fingerprint(user)

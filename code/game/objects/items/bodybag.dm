@@ -27,8 +27,8 @@
 	desc = "This box contains body bags."
 	icon_state = "bodybags"
 
-/obj/item/storage/box/bodybags/New()
-	..()
+/obj/item/storage/box/bodybags/Initialize(mapload, empty)
+	. = ..()
 	new /obj/item/bodybag(src)
 	new /obj/item/bodybag(src)
 	new /obj/item/bodybag(src)
@@ -114,7 +114,7 @@
 		var/obj/structure/morgue/M = loc
 		M.update(broadcast)
 
-/obj/structure/closet/body_bag/update_icon()
+/obj/structure/closet/body_bag/update_icon_state()
 	if(opened)
 		icon_state = icon_opened
 	else
@@ -122,7 +122,7 @@
 			icon_state = "bodybag_closed1"
 		else
 			icon_state = icon_closed
-
+	return ..()
 
 /obj/item/bodybag/cryobag
 	name = "stasis bag"
@@ -136,12 +136,17 @@
 
 	var/obj/item/reagent_containers/syringe/syringe
 
+/obj/item/bodybag/cryobag/Destroy()
+	QDEL_NULL(syringe)
+	return ..()
+
 /obj/item/bodybag/cryobag/create_bag(atom/where)
 	var/obj/structure/closet/body_bag/cryobag/bag = ..()
 	if(!istype(bag))
 		return
-	if(!isnull(syringe))
+	if(syringe)
 		bag.syringe = syringe
+		syringe.forceMove(bag)
 		syringe = null
 	return bag
 
@@ -160,7 +165,7 @@
 
 /obj/structure/closet/body_bag/cryobag/Initialize(mapload)
 	tank = new tank_type(null) //It's in nullspace to prevent ejection when the bag is opened.
-	..()
+	return ..()
 
 /obj/structure/closet/body_bag/cryobag/Destroy()
 	QDEL_NULL(syringe)
@@ -171,6 +176,7 @@
 	. = ..()
 	if(. && syringe)
 		var/obj/item/bodybag/cryobag/folded = .
+		syringe.forceMove(folded)
 		folded.syringe = syringe
 		syringe = null
 
@@ -223,7 +229,7 @@
 		if(istype(W,/obj/item/healthanalyzer))
 			var/obj/item/healthanalyzer/analyzer = W
 			for(var/mob/living/L in contents)
-				analyzer.melee_interaction_chain(L,user)
+				analyzer.lazy_melee_interaction_chain(L,user)
 
 		else if(istype(W,/obj/item/reagent_containers/syringe))
 			if(syringe)

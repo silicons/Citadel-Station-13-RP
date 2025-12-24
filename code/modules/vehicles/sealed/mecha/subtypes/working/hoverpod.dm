@@ -31,6 +31,10 @@
 	ion_trail = new /datum/effect_system/ion_trail_follow()
 	ion_trail.set_up(src)
 
+/obj/vehicle/sealed/mecha/working/hoverpod/Destroy()
+	QDEL_NULL(ion_trail)
+	return ..()
+
 /obj/vehicle/sealed/mecha/working/hoverpod/occupant_added(mob/adding, datum/event_args/actor/actor, control_flags, silent)
 	. = ..()
 	ion_trail.start()
@@ -121,9 +125,9 @@
 
 /obj/vehicle/sealed/mecha/working/hoverpod/combatpod/Initialize(mapload)
 	. = ..()
-	var/obj/item/mecha_parts/mecha_equipment/ME = new /obj/item/mecha_parts/mecha_equipment/weapon/energy/laser
+	var/obj/item/vehicle_module/ME = new /obj/item/vehicle_module/weapon/energy/laser
 	ME.attach(src)
-	ME = new /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/explosive
+	ME = new /obj/item/vehicle_module/weapon/ballistic/missile_rack/explosive
 	ME.attach(src)
 
 
@@ -132,7 +136,7 @@
 
 /obj/vehicle/sealed/mecha/working/hoverpod/shuttlepod/Initialize(mapload)
 	. = ..()
-	var/obj/item/mecha_parts/mecha_equipment/ME = new /obj/item/mecha_parts/mecha_equipment/tool/passenger
+	var/obj/item/vehicle_module/ME = new /obj/item/vehicle_module/tool/passenger
 	ME.attach(src)
-	ME = new /obj/item/mecha_parts/mecha_equipment/tool/passenger
+	ME = new /obj/item/vehicle_module/tool/passenger
 	ME.attach(src)

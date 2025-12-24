@@ -7,10 +7,10 @@
 	w_class = WEIGHT_CLASS_SMALL
 	icon = 'icons/obj/integrated_electronics/electronic_setups.dmi'
 	icon_state = "setup_small"
-	item_flags = ITEM_NOBLUDGEON | ITEM_ENCUMBERS_WHILE_HELD
+	item_flags = ITEM_NO_BLUDGEON | ITEM_ENCUMBERS_WHILE_HELD
 	show_messages = TRUE
 	datum_flags = DF_USE_TAG
-	var/list/assembly_components = list()
+	var/list/obj/item/integrated_circuit/assembly_components = list()
 	var/list/ui_circuit_props = list()
 	/// Players who built the circuit can scan it as a ghost.
 	var/list/ckeys_allowed_to_scan = list()
@@ -54,6 +54,36 @@
 	/// Cost set to default during init if unset.
 	var/cost = 0
 
+/obj/item/electronic_assembly/Initialize(mapload)
+	battery = new(src)
+	src.max_components = round(max_components)
+	src.max_complexity = round(max_complexity)
+	if(!cost)
+		cost = IC_ASSEMBLY_COST(src)
+	START_PROCESSING(SSobj, src)
+/* TBI //sets up diagnostic hud view
+	prepare_huds()
+	for(var/datum/atom_hud/data/diagnostic/diag_hud in GLOB.huds)
+		diag_hud.add_to_hud(src)
+	diag_hud_set_circuithealth()
+	diag_hud_set_circuitcell()
+	diag_hud_set_circuitstat()
+	diag_hud_set_circuittracking()
+*/
+	return ..()
+
+/obj/item/electronic_assembly/Destroy()
+	battery = null // It will be qdel'd by ..() if still in our contents
+	STOP_PROCESSING(SSobj, src)
+	collw = null
+	for(var/obj/item/integrated_circuit/circuit in assembly_components)
+		QDEL_NULL(circuit)
+	if(length(assembly_components))
+		stack_trace("failed to clear all assembly component refs")
+//	for(var/datum/atom_hud/data/diagnostic/diag_hud in GLOB.huds)
+// TBI		diag_hud.remove_from_hud(src)
+	return ..()
+
 /obj/item/electronic_assembly/generate_tag()
 	tag = "assembly_[next_assembly_id++]"
 
@@ -89,31 +119,6 @@
 		var/obj/machinery/door/D = collw
 		if(D.check_access(src))
 			D.open()
-
-/obj/item/electronic_assembly/Initialize(mapload)
-	battery = new(src)
-	src.max_components = round(max_components)
-	src.max_complexity = round(max_complexity)
-	if(!cost)
-		cost = IC_ASSEMBLY_COST(src)
-	START_PROCESSING(SSobj, src)
-/* TBI //sets up diagnostic hud view
-	prepare_huds()
-	for(var/datum/atom_hud/data/diagnostic/diag_hud in GLOB.huds)
-		diag_hud.add_to_hud(src)
-	diag_hud_set_circuithealth()
-	diag_hud_set_circuitcell()
-	diag_hud_set_circuitstat()
-	diag_hud_set_circuittracking()
-*/
-	return ..()
-
-/obj/item/electronic_assembly/Destroy()
-	battery = null // It will be qdel'd by ..() if still in our contents
-	STOP_PROCESSING(SSobj, src)
-//	for(var/datum/atom_hud/data/diagnostic/diag_hud in GLOB.huds)
-// TBI		diag_hud.remove_from_hud(src)
-	return ..()
 
 /obj/item/electronic_assembly/process(delta_time)
 	handle_idle_power()
@@ -200,7 +205,7 @@
 				)))*/
 	return data
 
-/obj/item/electronic_assembly/ui_act(action, list/params, datum/tgui/ui)
+/obj/item/electronic_assembly/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state, datum/event_args/actor/actor)
 	if(..())
 		return TRUE
 
@@ -393,11 +398,13 @@
 
 // Actually puts the circuit inside, doesn't perform any checks.
 /obj/item/electronic_assembly/proc/add_component(var/obj/item/integrated_circuit/IC)
+	if(IC in assembly_components)
+		return
 	IC.forceMove(get_object())
 	IC.assembly = src
 	// Build TGUI lists here for efficiency.  We don't need to do that every time the UI updates.
 	ui_circuit_props.Add(list(list("name" = IC.displayed_name,"ref" = REF(IC),"removable" = IC.removable,"input" = IC.can_be_asked_input)))
-	assembly_components |= IC
+	assembly_components += IC
 	/* TBI	diag hud
 	//increment numbers for diagnostic hud
 	if(component.action_flags & IC_ACTION_COMBAT)
@@ -502,7 +509,7 @@
 		var/saved = "[src.name] analyzed! On circuit printers with cloning enabled, you may use the code below to clone the circuit:<br><br><code>[save]</code>"
 		if(save)
 			to_chat(usr, SPAN_WARNING("You scan [src]."))
-			user << browse(saved, "window=circuit_scan;size=500x600;border=1;can_resize=1;can_close=1;can_minimize=1")
+			user << browse(HTML_SKELETON(saved), "window=circuit_scan;size=500x600;border=1;can_resize=1;can_close=1;can_minimize=1")
 		else
 			to_chat(usr, SPAN_WARNING("[src] is not complete enough to be encoded!"))
 		return TRUE
@@ -537,32 +544,32 @@
 	if(battery)
 		var/lost = battery.use(DYNAMIC_W_TO_CELL_UNITS(amount, 1))
 		net_power -= lost
-		return lost > 0
-	return FALSE
+		return lost
+	return 0
 
 // Ditto for giving.
 /obj/item/electronic_assembly/proc/give_power(amount)
 	if(battery)
 		var/gained = battery.give(DYNAMIC_W_TO_CELL_UNITS(amount, 1))
 		net_power += gained
-		return TRUE
-	return FALSE
+		return gained
+	return 0
 
 // Returns true if power was successfully drawn.
 /obj/item/electronic_assembly/proc/draw_power_kw(amount)
 	if(battery)
 		var/lost = battery.use(DYNAMIC_KW_TO_CELL_UNITS(amount, 1))
 		net_power -= lost
-		return lost > 0
-	return FALSE
+		return lost
+	return 0
 
 // Ditto for giving.
 /obj/item/electronic_assembly/proc/give_power_kw(amount)
 	if(battery)
 		var/gained = battery.give(DYNAMIC_KW_TO_CELL_UNITS(amount, 1))
 		net_power += gained
-		return TRUE
-	return FALSE
+		return gained
+	return 0
 
 /obj/item/electronic_assembly/on_loc_moved(oldloc)
 	. = ..()

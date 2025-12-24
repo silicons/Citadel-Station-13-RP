@@ -1,7 +1,7 @@
 // Based on railing.dmi from https://github.com/Endless-Horizon/CEV-Eris
 /obj/structure/railing
 	name = "railing"
-	desc = "A standard steel railing.  Play stupid games, win stupid prizes."
+	desc = "A standard steel railing. Play stupid games, win stupid prizes."
 	icon = 'icons/obj/railing.dmi'
 	density = TRUE
 	pass_flags_self = ATOM_PASS_THROWN | ATOM_PASS_CLICK | ATOM_PASS_TABLE | ATOM_PASS_OVERHEAD_THROW | ATOM_PASS_CLICK | ATOM_PASS_BUCKLED
@@ -11,6 +11,7 @@
 	anchored = TRUE
 	atom_flags = ATOM_BORDER
 	icon_state = "railing0"
+	color =  "#975b2a"//"#b36525"
 
 	integrity = 150
 	integrity_max = 150
@@ -18,11 +19,6 @@
 
 	var/broken = FALSE
 	var/check = 0
-
-/obj/structure/railing/grey
-	name = "grey railing"
-	desc = "A standard steel railing. Prevents stupid people from falling to their doom."
-	icon_state = "grey_railing0"
 
 /obj/structure/railing/Initialize(mapload, constructed = FALSE)
 	. = ..()
@@ -93,10 +89,11 @@
 				R.update_icon(UpdateNeighbors = FALSE)
 
 /obj/structure/railing/update_icon(updates, UpdateNeighbors = TRUE)
-	NeighborsCheck(UpdateNeighbors)
 	//layer = (dir == SOUTH) ? FLY_LAYER : initial(layer) // wtf does this even do
 	cut_overlays()
+	. = ..()
 
+	NeighborsCheck(UpdateNeighbors)
 	if (!check || !anchored)//|| !anchored
 		icon_state = "railing0"
 	else
@@ -273,3 +270,8 @@
 
 /obj/structure/railing/do_climb_target(mob/living/climber)
 	return climber.loc == get_turf(src)? get_step(src, dir) : ..()
+
+/obj/structure/railing/grey
+	name = "grey railing"
+	desc = "A standard steel railing. Prevents stupid people from falling to their doom."
+	color = "#979db6"

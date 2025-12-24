@@ -60,10 +60,7 @@
 	if(istype(O,/obj/item/organ/internal/brain) && !brainmob) //Time to stick a brain in it --NEO
 
 		var/obj/item/organ/internal/brain/B = O
-		if(B.health <= 0)
-			to_chat(user, SPAN_WARNING("That brain is well and truly dead."))
-			return
-		else if(!B.brainmob)
+		if(!B.brainmob)
 			to_chat(user, SPAN_WARNING("You aren't sure where this brain came from, but you're pretty sure it's useless."))
 			return
 
@@ -104,7 +101,7 @@
 			to_chat(user, "<span class='warning'>Access denied.</span>")
 		return
 	if(brainmob)
-		O.melee_interaction_chain(brainmob, user)//Oh noooeeeee
+		O.lazy_melee_interaction_chain(brainmob, user)//Oh noooeeeee
 		return
 	..()
 

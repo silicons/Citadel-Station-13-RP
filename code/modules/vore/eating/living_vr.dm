@@ -9,14 +9,13 @@
 	var/list/vore_organs = list()		// List of vore containers inside a mob
 	var/absorbed = FALSE				// If a mob is absorbed into another
 	var/weight = 137					// Weight for mobs for weightgain system
-	var/vore_egg_type = "egg" 				// Default egg type.
 	var/feral = 0 						// How feral the mob is, if at all. Does nothing for non xenochimera at the moment.
 	var/revive_ready = REVIVING_READY	// Only used for creatures that have the xenochimera regen ability, so far.
 	var/vore_taste = null				// What the character tastes like
 	var/vore_smell = null				// What the character smells like
 	var/no_vore = FALSE					// If the character/mob can vore.
 	var/openpanel = FALSE				// Is the vore panel open?
-	var/noisy = FALSE					// Toggle audible hunger.
+	//var/noisy = FALSE					// Toggle audible hunger.
 	var/absorbing_prey = 0 				// Determines if the person is using the succubus drain or not. See station_special_abilities_vr.
 	var/drain_finalized = 0				// Determines if the succubus drain will be KO'd/absorbed. Can be toggled on at any time.
 	var/fuzzy = 1						// Preference toggle for sharp/fuzzy icon.
@@ -24,7 +23,6 @@
 	var/can_be_drop_prey = FALSE
 	var/can_be_drop_pred = TRUE			// Mobs are pred by default.
 	var/next_preyloop					// For Fancy sound internal loop
-	var/adminbus_trash = FALSE			// For abusing trash eater for event shenanigans.
 	var/bitten = 0
 	var/painmsg = 1
 	/// pending refactor - allow size gun on us?
@@ -36,27 +34,10 @@
 	/// Following the above - allow stripper gun on us?
 	var/permit_stripped
 
-//
-// Hook for generic creation of stuff on new creatures
-//
-/hook/living_new/proc/vore_setup(mob/living/M)
-	add_verb(M, /mob/living/proc/escapeOOC)
-	add_verb(M, /mob/living/proc/lick)
-	add_verb(M, /mob/living/proc/smell)
-	add_verb(M, /mob/living/proc/switch_scaling)
-	if(M.no_vore) //If the mob isn't supposed to have a stomach, let's not give it an insidepanel so it can make one for itself, or a stomach.
-		return TRUE
-	add_verb(M, /mob/living/proc/insidePanel)
-
-	//Tries to load prefs if a client is present otherwise gives freebie stomach
-	spawn(2 SECONDS)
-		if(M)
-			M.init_vore()
-
-	//return TRUE to hook-caller
-	return TRUE
-
 /mob/living/proc/init_vore()
+	// FUCK YOU FUCK YOU WHY DOESNT THIS CHECK FOR GC??
+	if(QDELING(src))
+		CRASH("vore just tried to have a vore moment")
 	//Something else made organs, meanwhile.
 	if(LAZYLEN(vore_organs))
 		return TRUE
@@ -81,15 +62,6 @@
 		B.can_taste = TRUE
 		return TRUE
 
-//
-// Hide vore organs in contents
-//
-///mob/living/view_variables_filter_contents(list/L)
-//	. = ..()
-//	var/len_before = L.len
-//	L -= vore_organs
-//	. += len_before - L.len
-//
 //
 // Handle being clicked, perhaps with something to devour
 //
@@ -320,7 +292,7 @@
 	if(!canClick() || incapacitated(INCAPACITATION_ALL))
 		return
 
-	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	setClickCooldownLegacy(DEFAULT_ATTACK_COOLDOWN)
 
 	visible_message("<span class='warning'>[src] licks [tasted]!</span>","<span class='notice'>You lick [tasted]. They taste rather like [tasted.get_taste_message()].</span>","<b>Slurp!</b>")
 
@@ -341,8 +313,8 @@
 
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
-		if(H.touching.reagent_list.len) // Just the first one otherwise I'll go insane.
-			var/datum/reagent/R = H.touching.reagent_list[1]
+		if(H.touching.total_volume) // Just the first one otherwise I'll go insane.
+			var/datum/reagent/R = H.touching.get_majority_reagent_datum()
 			taste_message += " You also get the flavor of [R.taste_description] from something on them"
 	return taste_message
 
@@ -358,7 +330,7 @@
 	if(!canClick() || incapacitated(INCAPACITATION_ALL))
 		return
 
-	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	setClickCooldownLegacy(DEFAULT_ATTACK_COOLDOWN)
 	visible_message("<span class='warning'>[src] smells [smelled]!</span>","<span class='notice'>You smell [smelled]. They smell like [smelled.get_smell_message()].</span>","<b>Sniff!</b>")
 
 /mob/living/proc/get_smell_message(allow_generic = 1)
@@ -518,15 +490,17 @@
 
 // This is about 0.896m^3 of atmosphere
 /datum/gas_mixture/belly_air
-    volume = 2500
-    temperature = 293.150
-    total_moles = 104
+	volume = 2500
+	temperature = 293.150
+	total_moles = 104
 
 /datum/gas_mixture/belly_air/New()
-    . = ..()
-    gas = list(
-        GAS_ID_OXYGEN = 21,
-        GAS_ID_NITROGEN = 79)
+	. = ..()
+	gas = list(
+		GAS_ID_OXYGEN = 21,
+		GAS_ID_NITROGEN = 79,
+	)
+	update_values()
 
 // Procs for micros stuffed into boots and the like to escape from them
 /mob/living/proc/escape_clothes(obj/item/clothing/C)
@@ -618,7 +592,7 @@
 		to_chat(src, "<span class='warning'>You are not allowed to eat this.</span>")
 		return
 
-	if(is_type_in_list(I,edible_trash) || adminbus_trash)
+	if(is_type_in_list(I,edible_trash))
 		if(I.hidden_uplink)
 			to_chat(src, "<span class='warning'>You really should not be eating this.</span>")
 			message_admins("[key_name(src)] has attempted to ingest an uplink item. ([src ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>" : "null"])")
@@ -653,7 +627,7 @@
 				return
 		if(istype(I,/obj/item/reagent_containers/hypospray/autoinjector))
 			var/obj/item/reagent_containers/hypospray/autoinjector/A = I
-			if(A.reagents && A.reagents.reagent_list.len)
+			if(A.reagents?.total_volume)
 				if(istype(src,/mob/living/carbon/human)) //in case other mobs besides humans have trashcan trait
 					to_chat(src, "<span class='warning'>[A] gets injected into you as you try to consume it!</span>")
 					A.do_injection(src,src) //a rather strange way of injecting yourself, don't you think?

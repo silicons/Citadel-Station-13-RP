@@ -81,6 +81,8 @@ research holder datum.
 ///Checks to see if design has all the required pre-reqs.
 ///Input: datum/prototype/design; Output: 0/1 (false/true)
 /datum/research/proc/DesignHasReqs(var/datum/prototype/design/D)
+	if(!(D.design_unlock & DESIGN_UNLOCK_TECHLEVEL))
+		return FALSE
 	if(!LAZYLEN(D.req_tech))
 		return TRUE
 
@@ -89,7 +91,7 @@ research holder datum.
 		k_tech[known.id] = known.level
 
 	for(var/req in D.req_tech)
-		if(isnull(k_tech[req]) || k_tech[req] < D.req_tech[req])
+		if(isnull(k_tech[req]) || (k_tech[req] < D.req_tech[req]))
 			return FALSE
 	return TRUE
 
@@ -110,7 +112,7 @@ research holder datum.
 ///Input/Output: n/a
 /datum/research/proc/RefreshResearch()
 	if(stores_designs)
-		for(var/datum/prototype/design/PD in RSdesigns.fetch_subtypes(/datum/prototype/design))
+		for(var/datum/prototype/design/PD in RSdesigns.fetch_subtypes_immutable(/datum/prototype/design))
 			if(DesignHasReqs(PD))
 				AddDesign2Known(PD)
 	for(var/datum/tech/T in known_tech)

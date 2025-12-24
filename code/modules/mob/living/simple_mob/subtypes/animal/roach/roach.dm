@@ -40,6 +40,9 @@
 		)
 
 /datum/armor/physiology/roach
+	melee_tier = 3
+	bullet_tier = 3
+	laser_tier = 3
 	melee = 0.05
 	rad = 1.0
 
@@ -125,18 +128,8 @@
 
 //Unrandom the pet...?
 /mob/living/simple_mob/animal/roach/Greta/Initialize(mapload)
-    . = ..()
-    size_multiplier = 1
-    maxHealth = maxHealth
-    health = health
-    legacy_melee_damage_lower = legacy_melee_damage_lower
-    legacy_melee_damage_upper = legacy_melee_damage_upper
-    movement_cooldown = movement_cooldown
-    meat_amount = meat_amount
-    update_icons()
-
-/mob/living/simple_mob/animal/roach/Greta/Initialize(mapload)
 	. = ..()
+	size_multiplier = 1
 	// Change my name back, don't want to be named Tom (666)
 	name = initial(name)
 
@@ -161,7 +154,7 @@
 	maxHealth = 5
 	health = 5
 
-	movement_cooldown = 4
+	movement_base_speed = 10 / 4
 
 	legacy_melee_damage_lower = 2
 	legacy_melee_damage_upper = 3
@@ -179,6 +172,11 @@
 	if(prob(50))
 		amount_grown = 1
 	get_light_and_color(parent)
+
+/mob/living/simple_mob/animal/roach/roachling/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	walk(src, 0) // Because we might have called walk_to, we must stop the walk loop or BYOND keeps an internal reference to us forever.
+	return ..()
 
 /mob/living/simple_mob/animal/roach/roachling/death()
 	STOP_PROCESSING(SSobj, src)
@@ -224,7 +222,7 @@
 
 	taser_kill = 0
 
-	movement_cooldown = 7
+	movement_base_speed = 10 / 7
 
 	armor_type = /datum/armor/physiology/roach/panzer
 
@@ -258,7 +256,7 @@
 	legacy_melee_damage_lower = 7
 	legacy_melee_damage_upper = 10
 
-	movement_cooldown = 4
+	movement_base_speed = 10 / 4
 
 	armor_type = /datum/armor/physiology/roach/jaegar
 	ai_holder_type = /datum/ai_holder/polaris/simple_mob/melee/evasive
@@ -383,7 +381,7 @@
 	maxHealth = 30
 	health = 30
 	taser_kill = 0
-	movement_cooldown = 8
+	movement_base_speed = 10 / 8
 
 	legacy_melee_damage_lower = 5
 	legacy_melee_damage_upper = 10
@@ -466,7 +464,7 @@
 	legacy_melee_damage_lower = 5
 	legacy_melee_damage_upper = 10
 
-	movement_cooldown = 3
+	movement_base_speed = 10 / 3
 
 	armor_type = /datum/armor/physiology/roach/zeitraum
 
@@ -542,8 +540,10 @@
 	. = ..()
 	break_cloak()
 
-/mob/living/simple_mob/animal/roach/zeitraum/hit_with_weapon(obj/item/O, mob/living/user, effective_force, hit_zone)
+/mob/living/simple_mob/animal/roach/zeitraum/on_melee_act(mob/attacker, obj/item/weapon, datum/melee_attack/attack_style, target_zone, datum/event_args/actor/clickchain/clickchain, clickchain_flags)
 	. = ..()
+	if(. & CLICKCHAIN_ATTACK_MISSED)
+		return
 	break_cloak()
 
 //King? Look around you! King of what?
@@ -581,6 +581,6 @@
 	legacy_melee_damage_lower = 10
 	legacy_melee_damage_upper = 20
 
-	movement_cooldown = 6
+	movement_base_speed = 10 / 6
 
 	armor_type = /datum/armor/physiology/roach/fuhrer

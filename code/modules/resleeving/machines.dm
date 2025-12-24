@@ -92,7 +92,7 @@
 		H.add_modifier(modifier_type)
 
 	//Apply damage
-	H.adjustCloneLoss((H.getMaxHealth() - config_legacy.health_threshold_dead)*-0.75)
+	H.adjustCloneLoss((H.getMaxHealth() - H.getMinHealth())*-0.75)
 	H.afflict_unconscious(20 * 4)
 	H.update_health()
 
@@ -177,7 +177,7 @@
 //Synthetic version
 /obj/machinery/transhuman/synthprinter
 	name = "SynthFab 3000"
-	desc = "A rapid fabricator for synthetic bodies."
+	desc = "A rapid fabricator for synthetic bodies.\n <span class='notice'>\[Accepts Upgrades\]</span>"
 	catalogue_data = list(///datum/category_item/catalogue/information/organization/vey_med,
 						/datum/category_item/catalogue/technology/resleeving)
 	icon = 'icons/obj/machines/synthpod.dmi'
@@ -396,7 +396,7 @@
 /////// Resleever Pod ///////
 /obj/machinery/transhuman/resleever
 	name = "resleeving pod"
-	desc = "Used to combine mind and body into one unit."
+	desc = "Used to combine mind and body into one unit.\n <span class='notice'>\[Accepts Upgrades\]</span>"
 	catalogue_data = list(
 		// /datum/category_item/catalogue/information/organization/vey_med,
 		/datum/category_item/catalogue/technology/resleeving,
@@ -451,7 +451,7 @@
 	dat +="<B>Current occupant:</B> [src.occupant ? "<BR>Name: [src.occupant]<BR>Health: [health_text]<BR>" : "<FONT color=red>None</FONT>"]<BR>"
 	dat +="<B>Mind status:</B> [mind_text]<BR>"
 	user.set_machine(src)
-	user << browse(dat, "window=resleever")
+	user << browse(HTML_SKELETON(dat), "window=resleever")
 	onclose(user, "resleever")
 
 /obj/machinery/transhuman/resleever/attackby(obj/item/W, mob/user)
@@ -544,7 +544,7 @@
 		occupant.ghostize()
 
 	//Attach as much stuff as possible to the mob.
-	for(var/datum/language/L in MR.languages)
+	for(var/datum/prototype/language/L in MR.languages)
 		occupant.add_language(L.name)
 	MR.mind_ref.active = 1 //Well, it's about to be.
 	MR.mind_ref.transfer(occupant) //Does mind+ckey+client.

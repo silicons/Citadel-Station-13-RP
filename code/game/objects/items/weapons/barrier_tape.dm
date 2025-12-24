@@ -4,6 +4,7 @@
 	icon = 'icons/policetape.dmi'
 	icon_state = "tape"
 	w_class = WEIGHT_CLASS_SMALL
+	suit_storage_class = SUIT_STORAGE_CLASS_SOFTWEAR | SUIT_STORAGE_CLASS_HARDWEAR
 
 	tool_speed = 3 //You can use it in surgery. It's stupid, but you can.
 
@@ -40,6 +41,7 @@ var/list/tape_roll_applications = list()
 	var/icon_base = "tape"
 
 /obj/item/barrier_tape_segment/update_icon()
+	. = ..()
 	//Possible directional bitflags: 0 (AIRLOCK), 1 (NORTH), 2 (SOUTH), 4 (EAST), 8 (WEST), 3 (VERTICAL), 12 (HORIZONTAL)
 	switch (tape_dir)
 		if(0)  // AIRLOCK
@@ -50,7 +52,7 @@ var/list/tape_roll_applications = list()
 			icon_state = "[icon_base]_h_[crumpled]"
 		else   // END POINT (1|2|4|8)
 			icon_state = "[icon_base]_dir_[crumpled]"
-			dir = tape_dir
+			setDir(tape_dir)
 
 /obj/item/barrier_tape_segment/Initialize(mapload)
 	. = ..()
@@ -115,6 +117,7 @@ var/list/tape_roll_applications = list()
 
 /obj/item/barrier_tape_roll/update_icon()
 	cut_overlays()
+	. = ..()
 	var/image/overlay = image(icon = src.icon)
 	overlay.appearance_flags = RESET_COLOR
 	if(ismob(loc))
@@ -123,7 +126,6 @@ var/list/tape_roll_applications = list()
 		else
 			overlay.icon_state = "stop"
 		add_overlay(overlay)
-
 
 /obj/item/barrier_tape_roll/dropped(mob/user, flags, atom/newLoc)
 	update_icon()

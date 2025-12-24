@@ -80,7 +80,7 @@
 		/obj/item/seeds/shandseed = 2,
 	)
 	premium = list(
-		/obj/item/toy/waterflower = 1,
+		/obj/item/reagent_containers/spray/waterflower = 1,
 		/obj/item/toy/gnome = 1,
 	)
 
@@ -102,6 +102,7 @@
 		for(var/entry in current_list[1])
 			var/obj/item/seeds/S = new entry(src)
 			var/name = S.name
+			qdel(S)
 			var/datum/stored_item/vending_product/product = new/datum/stored_item/vending_product(src, entry, name)
 
 			product.price = (entry in prices) ? prices[entry] : 0

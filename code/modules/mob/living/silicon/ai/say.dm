@@ -11,7 +11,7 @@
 		return aiRadio.talk_into(src,message,message_mode,verb,speaking)
 
 //For holopads only. Usable by AI.
-/mob/living/silicon/ai/proc/holopad_talk(var/message, verb, datum/language/speaking)
+/mob/living/silicon/ai/proc/holopad_talk(var/message, verb, datum/prototype/language/speaking)
 	message = trim(message)
 
 	if (!message)
@@ -45,9 +45,3 @@
 		to_chat(src, "No holopad connected.")
 		return FALSE
 	return TRUE
-
-/mob/living/silicon/ai/emote(var/act, var/type, var/message)
-	if(holopad)
-		holopad_emote(message)
-	else //Emote normally, then.
-		..()
