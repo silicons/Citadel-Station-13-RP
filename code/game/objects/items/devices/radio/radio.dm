@@ -757,6 +757,22 @@ GLOBAL_DATUM_INIT(virtual_announcer_ai, /mob/living/silicon/ai/announcer, new(nu
 	canhear_range = 0
 	adhoc_fallback = TRUE
 
+/obj/item/radio/phone/laptop
+	icon = 'icons/obj/computer.dmi'
+	icon_state = "laptop"
+	anchored = TRUE
+	broadcasting = FALSE
+	listening = TRUE
+	name = "Occulum Model.2566 Radio Computer"
+	desc = "The lastest in technology radio wise : A laptop with a mic, connected to the entertainement frequency."
+	frequency = FREQ_ENTERTAINMENT
+	anchored = TRUE
+	bluespace_radio = TRUE
+	can_be_unanchored = TRUE
+	canhear_range = 5
+	broadcasting = 1
+	listening = 0
+
 /obj/item/radio/emergency
 	name = "Medbay Emergency Radio Link"
 	icon_state = "med_walkietalkie"

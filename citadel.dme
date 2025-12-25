@@ -1867,6 +1867,7 @@
 #include "code\game\objects\items\devices\PDA\PDA.dm"
 #include "code\game\objects\items\devices\PDA\radio.dm"
 #include "code\game\objects\items\devices\radio\beacon.dm"
+#include "code\game\objects\items\devices\radio\bluespace_radio.dm"
 #include "code\game\objects\items\devices\radio\electropack.dm"
 #include "code\game\objects\items\devices\radio\headset.dm"
 #include "code\game\objects\items\devices\radio\intercom.dm"
