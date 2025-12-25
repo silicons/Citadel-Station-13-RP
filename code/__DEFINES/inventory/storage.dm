@@ -99,6 +99,8 @@ GLOBAL_REAL_LIST(w_class_to_volume) = list(
 #define ITEM_VOLUME_BOX (WEIGHT_VOLUME_NORMAL * 1)
 // for some bigger boxes
 #define ITEM_VOLUME_BOX_AND_HALF (WEIGHT_VOLUME_NORMAL * 1.5)
+// belts hold a ton more now
+#define ITEM_VOLUME_BELT (WEIGHT_VOLUME_NORMAL * 2)
 
 #define ITEM_VOLUME_SMALL_CELL (WEIGHT_VOLUME_NORMAL / 4)
 #define ITEM_VOLUME_WEAPON_CELL (WEIGHT_VOLUME_NORMAL / 2)

@@ -6,6 +6,7 @@
 	max_items = 7
 	max_combined_volume = WEIGHT_VOLUME_NORMAL * 7 //This should ensure belts always have enough room to store whatever.
 	max_single_weight_class = WEIGHT_CLASS_NORMAL
+	weight_volume = ITEM_VOLUME_BELT
 	ui_force_slot_mode = TRUE
 	slot_flags = SLOT_BELT
 	attack_verb = list("whipped", "lashed", "disciplined")
