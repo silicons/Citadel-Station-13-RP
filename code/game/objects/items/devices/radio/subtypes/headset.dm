@@ -15,17 +15,14 @@
 	/// * set to list of typepaths to init
 	/// * lazy list
 	var/list/obj/item/radio_key/radio_keys
+	/// max radio keys
+	var/radio_keys_max = 3
 
 	// legacy below
 	#warn below
 
 	var/translate_binary = 0
-	var/translate_hive = 0
 	var/ear_protection = 0	// Flashbang Protection... I know.
-	var/obj/item/encryptionkey/keyslot1 = null
-	var/obj/item/encryptionkey/keyslot2 = null
-	var/ks1type = null
-	var/ks2type = null
 
 	drop_sound = 'sound/items/drop/component.ogg'
 	pickup_sound = 'sound/items/pickup/component.ogg'
@@ -62,9 +59,6 @@
 		if (translate_binary)
 			var/datum/prototype/language/binary = RSlanguages.fetch(LANGUAGE_ID_SILICON_BINARY)
 			binary.broadcast(M, message)
-		if (translate_hive)
-			var/datum/prototype/language/hivemind = RSlanguages.legacy_resolve_language_name("Hivemind")
-			hivemind.broadcast(M, message)
 		return null
 
 	return ..()
@@ -147,13 +141,6 @@
 
 		if(keyslot1.translate_binary)
 			src.translate_binary = 1
-
-		if(keyslot1.translate_hive)
-			src.translate_hive = 1
-
-		if(keyslot1.syndie)
-			src.syndie = 1
-
 	if(keyslot2)
 		for(var/ch_name in keyslot2.channels)
 			if(ch_name in src.channels)
@@ -163,14 +150,6 @@
 
 		if(keyslot2.translate_binary)
 			src.translate_binary = 1
-
-		if(keyslot2.translate_hive)
-			src.translate_hive = 1
-
-		if(keyslot2.syndie)
-			src.syndie = 1
-
-
 	for (var/ch_name in channels)
 		secure_radio_connections[ch_name] = radio_controller.add_object(src, radiochannels[ch_name],  RADIO_CHAT)
 
@@ -187,3 +166,22 @@
 			radio_text += ", "
 
 	radio_desc = radio_text
+
+#warn above
+
+/obj/item/radio/headset/compute_available_frequencies()
+	. = ..()
+
+/obj/item/radio/headset/proc/user_insert_radio_key(obj/item/encryptionkey/key, datum/event_args/actor/actor, silent)
+
+/obj/item/radio/headset/proc/user_remove_radio_key(obj/item/encryptionkey/key, datum/event_args/actor/actor, silent, put_in_hands = TRUE)
+
+/obj/item/radio/headset/proc/insert_radio_key(obj/item/encryptionkey/key, datum/event_args/actor/actor, silent)
+
+/obj/item/radio/headset/proc/remove_radio_key(obj/item/encryptionkey/key, datum/event_args/actor/actor, silent, atom/new_loc)
+
+/obj/item/radio/headset/proc/on_radio_key_inserted(obj/item/encryptionkey/key, datum/event_args/actor/actor, silent)
+
+/obj/item/radio/headset/proc/on_radio_key_removed(obj/item/encryptionkey/key, datum/event_args/actor/actor, silent)
+
+#warn impl all

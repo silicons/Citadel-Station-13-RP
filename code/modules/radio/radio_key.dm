@@ -9,7 +9,6 @@
 	slot_flags = SLOT_EARS
 	var/translate_binary = 0
 	var/translate_hive = 0
-	var/syndie = 0
 	var/list/channels = list()
 
 /obj/item/encryptionkey/attackby(obj/item/W as obj, mob/user as mob)

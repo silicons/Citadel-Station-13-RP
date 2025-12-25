@@ -61,7 +61,6 @@
 
 /obj/item/radio/borg/recalculateChannels()
 	src.channels = list()
-	src.syndie = 0
 
 	var/mob/living/silicon/robot/D = src.loc
 	if(D.module)
@@ -76,9 +75,6 @@
 				continue
 			src.channels += ch_name
 			src.channels[ch_name] += keyslot.channels[ch_name]
-
-		if(keyslot.syndie)
-			src.syndie = 1
 
 	for (var/ch_name in src.channels)
 		if(!radio_controller)

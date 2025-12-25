@@ -9,18 +9,51 @@
 	/// hardbound, always-available frequencies
 	/// * each of these creates an UI entry so don't fuck around
 	/// * lazy list
+	/// * this is a list of /datum/radio_preset paths/types's or frequency numbers (or a mix of the two)
 	var/list/freqs_hardbind
 	/// channels registered on in the radio controller
+	/// * THIS IS NOT THE SAME AS FREQS AVAILABLE; an available frequency that's disabled
+	//    is not registered.
 	/// * "[freq]" = /datum/radio_connection
 	var/list/freqs_registered
+	/// default frequency
+	/// * may be a /datum/radio_preset path / type to initialize
+	var/freq = /datum/radio_preset/general/common
+	/// allow encoding any frequency with the right access codes
+	/// * basically mimics a key escrow system lol
+	/// * encoded frequencies get put in [freq]; you might want to disallow default frequency switching
+	var/freq_allow_all_access_encoding = FALSE
+	/// allow frequency switching at will
+	var/freq_allow_change_default = FALSE
+	// TODO: better way
+	var/freq_allow_change_default_low = MIN_FREQ
+	// TODO: better way
+	var/freq_allow_change_default_high = MAX_FREQ
+
+	/// transmit over subspace
+	/// * this isn't a switch statement because comms code is up in the air and i don't want to add defines
+	/// TODO: telecomms refactor not soon enough, just do packet networks
+	var/subspace_transmit = FALSE
+	/// can be set to transmit over subspace
+	var/subspace_transmit_possible = FALSE
+
+	/// transmit over radio
+	/// * this isn't a switch statement because comms code is up in the air and i don't want to add defines
+	/// TODO: telecomms refactor not soon enough, just do packet networks
+	var/radio_transmit = TRUE
+	/// can be set to transmit over radio
+	var/radio_transmit_possible = TRUE
+
+	/// automatic radio fallback if subspace network cannot accept a transmission
+	/// * only shown in UI / does anything if [radio_transmit_possible] is on or you otherwise
+	///   have enough modes to justify this
+	var/auto_transmit_mode_switching = TRUE
+
 
 #warn impl
 	// legacy below
 
-	///FALSE for off
 	var/on = TRUE
-	var/last_transmission
-	var/frequency = FREQ_COMMON //common chat
 	///Tune to frequency to unlock traitor supplies
 	var/traitor_frequency = 0
 	///The range which mobs can hear this radio from
@@ -31,11 +64,6 @@
 	var/b_stat = 0
 	var/broadcasting = FALSE
 	var/listening = TRUE
-	var/list/channels = list() //see communications.dm for full list. First channel is a "default" for :h
-	var/subspace_transmission = FALSE
-	var/subspace_switchable = FALSE
-	///Falls back to 'radio' mode if subspace not available
-	var/adhoc_fallback = FALSE
 	slot_flags = SLOT_BELT
 	throw_speed = 2
 	throw_range = 9
@@ -50,11 +78,6 @@
 	var/bs_rx_preload_id
 
 	materials_base = list(MAT_GLASS = 25,MAT_STEEL = 75)
-	var/const/FREQ_LISTENING = 1
-	var/list/internal_channels
-
-	var/datum/radio_frequency/radio_connection
-	var/list/datum/radio_frequency/secure_radio_connections = new
 
 /obj/item/radio/proc/set_frequency(new_frequency)
 	radio_controller.remove_object(src, frequency)
@@ -568,12 +591,6 @@ GLOBAL_DATUM_INIT(virtual_announcer_ai, /mob/living/silicon/ai/announcer, new(nu
 	if(!(0 in level))
 		var/turf/position = get_turf(src)
 		if((!position || !(position.z in level)) && !bluespace_radio)			return -1
-	if(freq in ANTAG_FREQS)
-		if(!(src.syndie))//Checks to see if it's allowed on that frequency, based on the encryption keys
-			return -1
-	if(freq in CENT_FREQS)
-		if(!(src.centcom))//Checks to see if it's allowed on that frequency, based on the encryption keys
-			return -1
 	if (!on)
 		return -1
 	if (!freq) //recieved on main frequency
@@ -628,7 +645,6 @@ GLOBAL_DATUM_INIT(virtual_announcer_ai, /mob/living/silicon/ai/announcer, new(nu
 		channels[ch_name] = 0
 	..()
 
-
 /obj/item/radio/proc/config(op)
 	if(radio_controller)
 		for (var/ch_name in channels)
@@ -638,7 +654,21 @@ GLOBAL_DATUM_INIT(virtual_announcer_ai, /mob/living/silicon/ai/announcer, new(nu
 	if(radio_controller)
 		for (var/ch_name in op)
 			secure_radio_connections[ch_name] = radio_controller.add_object(src, radiochannels[ch_name],  RADIO_CHAT)
-	return
+
+#warn above
+
+//* Channels *//
+
+/**
+ * * doesn't include anything in public frequency block, as you can just tune to them dynamically
+ * @return a list of frequencies
+ */
+/obj/item/radio/proc/compute_available_frequencies()
+	#warn impl
+
+/obj/item/radio/proc/rebuild_available_frequencies()
+	#warn impl
+
 
 /obj/item/radio/off
 	listening = FALSE

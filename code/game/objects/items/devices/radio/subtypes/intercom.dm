@@ -10,6 +10,8 @@ CREATE_WALL_MOUNTING_TYPES_SHIFTED(/obj/item/radio/intercom, 28)
 	w_class = WEIGHT_CLASS_BULKY
 	canhear_range = 2
 	atom_flags = NOBLOODY
+	freq_allow_all_access_encoding = TRUE
+
 	var/circuit = /obj/item/circuitboard/intercom
 	var/number = 0
 	var/last_tick //used to delay the powercheck
@@ -68,7 +70,10 @@ CREATE_WALL_MOUNTING_TYPES_SHIFTED(/obj/item/radio/intercom, 28)
 
 /obj/item/radio/intercom/department/medbay
 	name = "station intercom (Medbay)"
-	frequency = FREQ_MEDICAL_INTERNAL
+	freqs_hardbind = list(
+		/datum/radio_preset/station/medical_internal,
+	)
+	freq = /datum/radio_preset/station/medical_internal
 	overlay_color = COLOR_TEAL
 
 /obj/item/radio/intercom/department/security

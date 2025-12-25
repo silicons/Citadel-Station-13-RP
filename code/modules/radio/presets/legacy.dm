@@ -36,5 +36,3 @@
 	freq_number = 1007
 	is_comms_channel = TRUE
 	html_span = "syndradio"
-
-#warn impl all

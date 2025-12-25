@@ -23,5 +23,3 @@
 	freq_number = 1279
 	is_comms_channel = TRUE
 	html_span = "sdfradio"
-
-#warn impl all

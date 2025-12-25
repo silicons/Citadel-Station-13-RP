@@ -36,5 +36,3 @@
 	is_comms_channel = TRUE
 	c_access_encoding = list()
 	#warn html span
-
-#warn impl all
