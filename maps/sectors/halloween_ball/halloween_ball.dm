@@ -1,4 +1,19 @@
 /datum/map/sector/halloween_ball
+	id = "halloween_ball"
+	name = "Sector - Halloween Ball"
+	width = 192
+	height = 192
+	levels = list(
+		/datum/map_level/sector/halloween_ball,
+	)
+
+/datum/map_level/sector/halloween_ball
+	id = "halloween_ball"
+	name = "Sector - Halloween Ball"
+	display_name = "NT Resort Facility"
+	path = "maps/sectors/halloween_ball/halloween_ball.dmm"
+	base_turf = /turf/simulated/floor/outdoors/snow
+	base_area = /area/sector/halloween_ball
 
 /area/sector/halloween_ball
 	name = "Main Ball Facility"
