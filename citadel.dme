@@ -5891,6 +5891,7 @@
 #include "maps\sectors\desert_192\desert_192.dm"
 #include "maps\sectors\frozen_192\frozen_192.dm"
 #include "maps\sectors\gaia_192\gaia_192.dm"
+#include "maps\sectors\halloween_ball\halloween_ball.dm"
 #include "maps\sectors\ice_comet\ice_comet-area.dm"
 #include "maps\sectors\ice_comet\ice_comet-misc.dm"
 #include "maps\sectors\ice_comet\ice_comet.dm"
