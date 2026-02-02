@@ -27,7 +27,6 @@ SUBSYSTEM_DEF(lighting)
 	var/total_ss_updates = 0
 	var/total_instant_updates = 0
 
-
 #ifdef USE_INTELLIGENT_LIGHTING_UPDATES
 	var/instant_ctr = 0
 	var/force_queued = TRUE
@@ -48,7 +47,7 @@ SUBSYSTEM_DEF(lighting)
 
 #ifdef USE_INTELLIGENT_LIGHTING_UPDATES
 
-/hook/roundstart/proc/lighting_init_roundstart()
+/legacy_hook/roundstart/proc/lighting_init_roundstart()
 	SSlighting.handle_roundstart()
 	return TRUE
 

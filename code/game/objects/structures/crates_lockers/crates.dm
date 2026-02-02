@@ -144,12 +144,13 @@
 	desc = "A secure crate."
 	name = "Secure crate"
 	icon_state = "securecrate"
+	broken = FALSE
+	locked = TRUE
+	secure = TRUE
 	var/redlight = "securecrater"
 	var/greenlight = "securecrateg"
 	var/sparks = "securecratesparks"
 	var/emag = "securecrateemag"
-	broken = 0
-	locked = 1
 	//closet_appearance = /singleton/closet_appearance/crate/secure
 	var/tamper_proof = 0
 
@@ -566,7 +567,8 @@
 		/obj/item/stack/material/plasteel = 10,
 		/obj/item/stack/material/steel/full_stack = 5,
 		/obj/fiftyspawner/glass = 4,
-		/obj/item/cell/high = 4,
+		/obj/item/cell/basic/tier_1/medium = 4,
+		/obj/item/cell/basic/tier_1/large = 4,
 		/obj/item/stack/cable_coil = 2,
 		/obj/item/flash/synthetic = 8,
 		/obj/item/healthanalyzer = 4,

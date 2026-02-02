@@ -9,6 +9,7 @@
 	pickup_sound = 'sound/items/pickup/gloves.ogg'
 	pen_color = "#FF0000" //RGB
 	clickable = FALSE
+	interaction_flags_atom = parent_type::interaction_flags_atom | INTERACT_ATOM_IGNORE_MOBILITY
 
 	// todo: reorganize vars
 	/// color name
@@ -98,7 +99,7 @@
 	immediate += /datum/asset_pack/spritesheet/crayons
 	return ..()
 
-/obj/item/pen/crayon/ui_act(action, list/params, datum/tgui/ui)
+/obj/item/pen/crayon/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state, datum/event_args/actor/actor)
 	. = ..()
 	if(.)
 		return

@@ -1,5 +1,5 @@
 
-/hook/startup/proc/createDatacore()
+/legacy_hook/startup/proc/createDatacore()
 	data_core = new /datum/datacore()
 	return 1
 
@@ -102,7 +102,7 @@
 					break
 			isactive[name] = active ? "Active" : "Inactive"
 
-			var/datum/role/job/J = SSjob.get_job(real_rank)
+			var/datum/prototype/role/job/J = RSroles.legacy_job_by_title(real_rank)
 			if(J?.offmap_spawn)
 				off[name] = rank
 
@@ -112,7 +112,7 @@
 
 	for(var/mob/living/silicon/robot/robot in GLOB.mob_list)
 		// No combat/syndicate cyborgs, no drones, and no AI shells.
-		if(!robot.scrambledcodes && !robot.shell && !(robot.module && robot.module.hide_on_manifest))
+		if(!robot.scrambledcodes && !robot.shell && robot.module?.legacy_show_on_manifest)
 			bot[robot.name] = "[robot.modtype] [robot.braintype]"
 
 
@@ -271,7 +271,7 @@ GLOBAL_LIST_EMPTY(PDA_Manifest)
 
 	for(var/mob/living/silicon/robot/robot in GLOB.mob_list)
 		// No combat/syndicate cyborgs, no drones, and no AI shells.
-		if(robot.scrambledcodes || robot.shell || (robot.module && robot.module.hide_on_manifest))
+		if(robot.scrambledcodes || robot.shell || !robot.module?.legacy_show_on_manifest)
 			continue
 
 		bot[++bot.len] = list("name" = robot.real_name, "rank" = "[robot.modtype] [robot.braintype]", "active" = "Active")
@@ -310,7 +310,7 @@ GLOBAL_LIST_EMPTY(PDA_Manifest)
 
 	var/list/all_jobs = get_job_datums()
 
-	for(var/datum/role/job/J in all_jobs)
+	for(var/datum/prototype/role/job/J in all_jobs)
 		if(J.title == rank)					//If we have a rank, just default to using that.
 			real_title = rank
 			break
@@ -331,7 +331,7 @@ GLOBAL_LIST_EMPTY(PDA_Manifest)
 	if(H.mind && !player_is_antag(H.mind, only_offstation_roles = 1))
 		var/assignment = GetAssignment(H)
 		var/hidden
-		var/datum/role/job/J = SSjob.get_job(H.mind.assigned_role)
+		var/datum/prototype/role/job/J = RSroles.legacy_job_by_title(H.mind.assigned_role)
 		hidden = J?.offmap_spawn
 
 		/* Note: Due to cached_character_icon, a number of emergent properties occur due to the initialization

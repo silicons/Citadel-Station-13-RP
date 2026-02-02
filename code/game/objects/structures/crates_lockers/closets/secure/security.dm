@@ -202,7 +202,7 @@
 		/obj/item/reagent_containers/spray/pepper,
 		/obj/item/melee/baton/loaded,
 		/obj/item/gun/projectile/energy/gun,
-		/obj/item/cell/device/weapon,
+		/obj/item/cell/basic/tier_2/weapon,
 		/obj/item/storage/box/holobadge,
 		/obj/item/clothing/head/beret/sec/corporate/warden,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/security,
@@ -250,7 +250,7 @@
 		/obj/item/clothing/head/soft/sec/corp,
 		/obj/item/clothing/under/rank/security/corp,
 		/obj/item/gun/projectile/energy/secutor,
-		/obj/item/cell/device/weapon,
+		/obj/item/cell/basic/tier_2/weapon,
 		/obj/item/gps/security,
 		/obj/item/clothing/under/bodysuit/bodysuitsec,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/security,
@@ -401,11 +401,10 @@ GLOBAL_LIST_BOILERPLATE(all_brig_closets, /obj/structure/closet/secure_closet/br
 		/obj/item/flashlight/flare,
 		/obj/item/clothing/accessory/storage/black_vest,
 		/obj/item/gun/projectile/energy/secutor,
-		/obj/item/cell/device/weapon,
+		/obj/item/cell/basic/tier_2/weapon,
 		/obj/item/flashlight/maglight,
 		/obj/item/clothing/head/soft/nanotrasen,
 		/obj/item/clothing/head/beret/nanotrasen,
-		/obj/item/clothing/under/nanotrasen/security,
 		/obj/item/clothing/gloves/black,
 		/obj/item/clothing/shoes/boots/jackboots,
 		/obj/item/clothing/shoes/boots/jackboots/toeless)
@@ -451,15 +450,14 @@ GLOBAL_LIST_BOILERPLATE(all_brig_closets, /obj/structure/closet/secure_closet/br
 		/obj/item/flash,
 		/obj/item/melee/baton/loaded,
 		/obj/item/gun/projectile/energy/gun,
-		/obj/item/cell/device/weapon,
+		/obj/item/cell/basic/tier_2/weapon,
 		/obj/item/clothing/accessory/holster/waist,
 		/obj/item/melee/telebaton,
 		/obj/item/clothing/head/beret/sec/corporate/hos,
 		/obj/item/flashlight/maglight,
 		/obj/item/clothing/gloves/black,
 		/obj/item/clothing/shoes/boots/jackboots,
-		/obj/item/clothing/shoes/boots/jackboots/toeless,
-		/obj/item/clothing/under/nanotrasen/security/commander)
+		/obj/item/clothing/shoes/boots/jackboots/toeless)
 
 /obj/structure/closet/secure_closet/nanotrasen_commander/Initialize(mapload)
 	if(prob(25))
@@ -479,7 +477,6 @@ GLOBAL_LIST_BOILERPLATE(all_brig_closets, /obj/structure/closet/secure_closet/br
 
 	starts_with = list(
 		/obj/item/clothing/suit/storage/vest/warden,
-		/obj/item/clothing/under/nanotrasen/security/warden,
 		/obj/item/clothing/suit/storage/vest/wardencoat/alt,
 		/obj/item/clothing/head/helmet/warden,
 		/obj/item/cartridge/security,
@@ -495,7 +492,7 @@ GLOBAL_LIST_BOILERPLATE(all_brig_closets, /obj/structure/closet/secure_closet/br
 		/obj/item/reagent_containers/spray/pepper,
 		/obj/item/melee/baton/loaded,
 		/obj/item/gun/projectile/energy/gun,
-		/obj/item/cell/device/weapon,
+		/obj/item/cell/basic/tier_2/weapon,
 		/obj/item/storage/box/holobadge,
 		/obj/item/clothing/head/beret/sec/corporate/warden,
 		/obj/item/flashlight/maglight,

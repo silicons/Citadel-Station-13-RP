@@ -13,9 +13,15 @@ GLOBAL_DATUM_INIT(has_discord_embeddable_links, /regex, regex("(https?://\[^\\s|
 //All < and > characters
 GLOBAL_DATUM_INIT(angular_brackets, /regex, regex(@"[<>]", "g"))
 
+//All characters between < a > inclusive of the bracket
+GLOBAL_DATUM_INIT(html_tags, /regex, regex(@"<.*?>", "g"))
+
 //All characters forbidden by filenames: ", \, \n, \t, /, ?, %, *, :, |, <, >, ..
 GLOBAL_DATUM_INIT(filename_forbidden_chars, /regex, regex(@{""|[\\\n\t/?%*:|<>]|\.\."}, "g"))
 GLOBAL_PROTECT(filename_forbidden_chars)
 // had to use the OR operator for quotes instead of putting them in the character class because it breaks the syntax highlighting otherwise.
 
 GLOBAL_DATUM_INIT(multi_space_splitter, /regex, regex("\[ \]+"))
+
+//Finds if a string started with "," or "'", used for me messages
+GLOBAL_DATUM_INIT(valid_starting_punctuation, /regex, regex("^(\[,\]|(&#39;))"))

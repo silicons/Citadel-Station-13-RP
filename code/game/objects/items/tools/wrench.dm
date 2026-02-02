@@ -8,7 +8,7 @@
 	icon_state = "wrench"
 	item_state = "wrench"
 	slot_flags = SLOT_BELT
-	tool_behaviour = TOOL_WRENCH
+	tool_behavior = TOOL_WRENCH
 	damage_force = 6
 	throw_force = 7
 	w_class = WEIGHT_CLASS_SMALL
@@ -150,13 +150,13 @@
 	throw_force = 8
 	attack_verb = list("drilled", "screwed", "jabbed")
 	tool_speed = 0.25
-	var/obj/item/tool/screwdriver/power/counterpart = null
+	var/obj/item/tool/screwdriver/power/counterpart = /obj/item/tool/screwdriver/power
 	random_color = FALSE
 
 /obj/item/tool/wrench/power/Initialize(mapload, no_counterpart = TRUE)
 	. = ..()
-	if(!counterpart && no_counterpart)
-		counterpart = new(src, FALSE)
+	if(!isobj(counterpart) && no_counterpart)
+		counterpart = new counterpart(src, FALSE)
 		counterpart.counterpart = src
 
 /obj/item/tool/wrench/power/Destroy()

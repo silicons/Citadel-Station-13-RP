@@ -40,6 +40,12 @@
 	/// How are we intending to act? Help / harm / etc.
 	var/a_intent = INTENT_HELP
 
+	//* Input*//
+	/// next time we should allow a click being ingested into the click-chain handling sequence.
+	/// * This is effectively only from our client. Remote control should directly call clickchain
+	///   handlers, instead of 'click_on'.
+	var/next_click
+
 	//* Perspective & Vision *//
 	/// using perspective - if none, it'll be self - when client logs out, if using_perspective has reset_on_logout, this'll be unset.
 	var/datum/perspective/using_perspective
@@ -52,17 +58,6 @@
 	/// current datum that's entirely intercepting our movements. only can have one - this is usually used with perspective.
 	var/datum/movement_intercept
 
-	//* Buckling *//
-	/// Atom we're buckled to
-	var/atom/movable/buckled
-	/// Atom we're buckl**ing** to. Used to stop stuff like lava from incinerating those who are mid buckle.
-	//  todo: can this be put in an existing bitfield somewhere else?
-	var/atom/movable/buckling
-
-	//* HUD (Atom) *//
-	/// HUDs to initialize, typepaths
-	var/list/atom_huds_to_initialize
-
 	//* HUD *//
 	/// active, opened storage
 	//  todo: doesn't clear from clients properly on logout, relies on login clearing screne.
@@ -73,6 +68,8 @@
 	//? Movespeed
 	/// Next world.time we will be able to move.
 	var/move_delay = 0
+	/// Next world.time we should allow a self-turn
+	var/turn_delay = 2
 	/// Last world.time we finished a normal, non relay/intercepted move
 	var/last_self_move = 0
 	/// Last world.time we turned in our spot without moving (see: facing directions)
@@ -103,9 +100,8 @@
 	var/list/datum/ability/abilities
 
 	//* Inventory *//
-	/// our inventory datum, if any.
-	var/datum/inventory/inventory
 	/// active hand index - null or num. must always be in range of held_items indices!
+	/// * 1 is left, 2 is right, etc
 	var/active_hand
 
 	//* IFF *//
@@ -195,8 +191,6 @@
 	 */
 	var/atom/movable/screen/zone_sel/zone_sel = null
 
-	/// Allows all mobs to use the me verb by default, will have to manually specify they cannot.
-	var/use_me = 1
 	var/damageoverlaytemp = 0
 	var/computer_id = null
 	var/obj/machinery/machine = null
@@ -288,9 +282,6 @@
 	/// To prevent pAIs/mice/etc from getting antag in autotraitor and future auto- modes. Uses inheritance instead of a bunch of typechecks.
 	// todo: what the fuck
 	var/can_be_antagged = FALSE
-
-	/// The last mob/living/carbon to push/drag/grab this mob (mostly used by slimes friend recognition)
-	var/mob/living/carbon/LAssailant = null
 
 	/// Wizard's spell list, it can be used in other modes thanks to the "Give Spell" badmin button.
 	var/list/spell/spell_list = list()
@@ -410,10 +401,6 @@
 	/// a singular thing that can intercept keyboard inputs
 	var/datum/key_intercept
 
-	//Moved from code\game\click\click.dm
-	// 1 decisecond click delay (above and beyond mob/next_move)
-	var/next_click = 0
-
 	//Moved from code\game\rendering\legacy\alert.dm
 	var/list/alerts = list() // contains /atom/movable/screen/alert only // On /mob so clientless mobs will throw alerts properly
 
@@ -433,7 +420,9 @@
 
 	//Moved from code\modules\nano\nanoexternal.dm
 	// Used by the Nano UI Manager (/datum/nanomanager) to track UIs opened by this mob
-	var/list/open_uis = list()
+	var/list/open_nano_uis = list()
 
 	///List of progress bars this mob is currently seeing for actions
 	var/list/progressbars = null //for stacking do_after bars
+
+	var/interaction_range = 0 //how far a mob has to be to interact with something without caring about obsctruction, defaulted to 0 tiles

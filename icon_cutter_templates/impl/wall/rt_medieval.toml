@@ -1,0 +1,14 @@
+template = "impl/wall_default.toml"
+
+output_name = "wall"
+output_type = "Cardinal"
+
+[positions]
+convex = 0
+horizontal = 1
+vertical = 2
+concave = 3
+
+[cut_pos]
+x = 16
+y = 16

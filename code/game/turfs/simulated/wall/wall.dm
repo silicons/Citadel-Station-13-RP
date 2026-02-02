@@ -2,6 +2,17 @@
  * **Wall.** Our powerful, generic, material wall system.
  * Surely, *surely*, such a nice, amazing thing wouldn't be entirely shitcode.
  * Right?
+ *
+ * TODO: /turf/simulated/wall/material; do not have steel defines on base.
+ *
+ * ## Material System
+ *
+ * By default, walls are made out of /datum/material's.
+ *
+ * Sometimes, however, it's necessary to opt out of it. Walls have many generic behaviors;
+ * it would suck if they needed to be duplicated just to not have to use materials.
+ *
+ * If `material_system` is switched off, materials won't do anything, nor will they be applied or updated.
  */
 /turf/simulated/wall
 	name = "wall"
@@ -49,6 +60,8 @@
 	var/active
 	var/can_open = FALSE
 
+	/// Do we use materials system?
+	var/material_system = TRUE
 	/// The material of the girders that are produced when the wall is dismantled.
 	var/datum/prototype/material/material_girder = /datum/prototype/material/steel
 	/// The base material of the wall.
@@ -134,10 +147,10 @@
 	if(!can_melt())
 		return
 
-	src.ChangeTurf(/turf/simulated/floor/plating)
+	ScrapeAway()
 
 	var/turf/simulated/floor/F = src
-	if(!F)
+	if(!istype(F))
 		return
 	F.burn_tile()
 	F.icon_state = "wall_thermite"
@@ -175,6 +188,8 @@
 	ScrapeAway()
 
 /turf/simulated/wall/legacy_ex_act(severity)
+	if(integrity_flags & INTEGRITY_INDESTRUCTIBLE)
+		return
 	switch(severity)
 		if(1.0)
 			if(material_girder.explosion_resistance >= 25 && prob(material_girder.explosion_resistance))
@@ -207,7 +222,7 @@
 	if(material_girder.relative_integrity >= 1.5) //Strong girders will remain in place when a wall is melted.
 		dismantle_wall(1,1)
 	else
-		src.ChangeTurf(/turf/simulated/floor/plating)
+		ScrapeAway()
 
 	var/turf/simulated/floor/F = src
 	F.burn_tile()
@@ -226,7 +241,7 @@
 
 /turf/simulated/wall/proc/do_burn(temperature)
 	new /obj/structure/girder(src, material_girder.name)
-	src.ChangeTurf(/turf/simulated/floor)
+	ScrapeAway()
 	for(var/turf/simulated/wall/W in range(3,src))
 		W.burn((temperature/4))
 	for(var/obj/machinery/door/airlock/phoron/D in range(3,src))

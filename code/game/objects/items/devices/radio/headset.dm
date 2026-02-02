@@ -8,6 +8,7 @@
 	subspace_transmission = 1
 	canhear_range = 0	// Can't hear headsets from very far away
 	slot_flags = SLOT_EARS
+	belt_storage_class = BELT_CLASS_SMALL
 
 	var/translate_binary = 0
 	var/translate_hive = 0
@@ -582,3 +583,10 @@
 	adhoc_fallback = TRUE
 	icon_state = "pilot_headset"
 	ks2type = /obj/item/encryptionkey/talon
+
+/obj/item/radio/headset/sdf
+	name = "sdf headset"
+	desc = "A headset for communication for the SDF."
+	adhoc_fallback = TRUE
+	icon_state = "pilot_headset"
+	ks2type = /obj/item/encryptionkey/sdf

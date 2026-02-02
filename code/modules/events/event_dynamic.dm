@@ -1,25 +1,3 @@
-
-/*
-/proc/start_events()
-	//changed to a while(1) loop since they are more efficient.
-	//Moved the spawn in here to allow it to be called with advance proc call if it crashes.
-	//and also to stop spawn copying variables from the game SSticker
-	spawn(3000)
-		while(1)
-			/*if(prob(50))//Every 120 seconds and prob 50 2-4 weak spacedusts will hit the station
-				spawn(1)
-					dust_swarm("weak")*/
-			if(!event)
-				//CARN: checks to see if random events are enabled.
-				if(config_legacy.allow_random_events)
-					hadevent = event()
-				else
-					Holiday_Random_Event()
-			else
-				event = 0
-			sleep(2400)
-			*/
-
 var/list/event_last_fired = list()
 
 //Always triggers an event when called, dynamically chooses events based on job population
@@ -193,18 +171,6 @@ var/list/event_last_fired = list()
 			continue
 
 		active_with_role["Any"]++
-
-		if(istype(M, /mob/living/silicon/robot))
-			var/mob/living/silicon/robot/R = M
-			if(R.module)
-				if(istype(R.module, /obj/item/robot_module/robot/engineering))
-					active_with_role["Engineer"]++
-				else if(istype(R.module, /obj/item/robot_module/robot/security))
-					active_with_role["Security"]++
-				else if(istype(R.module, /obj/item/robot_module/robot/medical))
-					active_with_role["Medical"]++
-				else if(istype(R.module, /obj/item/robot_module/robot/research))
-					active_with_role["Scientist"]++
 
 		if(M.mind.assigned_role in SSjob.get_job_titles_in_department(DEPARTMENT_ENGINEERING))
 			active_with_role["Engineer"]++

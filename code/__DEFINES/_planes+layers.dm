@@ -333,11 +333,21 @@
 #define DEBUG_LAYER_SHUTTLE_MARKERS 500
 
 /**
+ *! -- Admin Plane
+ *? For things like GM pings. This plane is only visible to admins.
+ */
+#define ADMIN_PLANE 24
+#define ADMIN_LAYER_GM_PING 100
+
+/**
  *! -- Ghost Plane
  *? Where ghosts live.
  * ~ Spooooooooky ghooooooosts ~
  */
 #define OBSERVER_PLANE 30
+
+/// Just above ghosts
+#define POINT_PLANE 31
 
 /**
  *! -- Augmented Plane
@@ -377,6 +387,13 @@
  */
 #define SONAR_PLANE 80
 
+///--------------- FULLSCREEN RUNECHAT BUBBLES, just under hud. ------------
+
+///Popup Chat Messages
+#define RUNECHAT_PLANE 85
+/// Plane for balloon text (text that fades up)
+#define BALLOON_CHAT_PLANE 86
+
 /**
  *! -- Player HUD Plane
  *? Client UI HUD stuff.
@@ -398,6 +415,10 @@
 #define HUD_LAYER_ITEM  7 /// Things sitting on HUD items (largely irrelevant because INVENTORY_PLANE).
 // todo: deprecate
 #define HUD_LAYER_ABOVE 8 /// Things that reside above items (highlights).
+
+#define RADIAL_BACKGROUND_LAYER 0
+///1000 is an unimportant number, it's just to normalize copied layers
+#define RADIAL_CONTENT_LAYER 1000
 
 /**
  *! -- Player HUD Plane - Items

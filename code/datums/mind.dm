@@ -62,12 +62,12 @@
 
 	// todo: id, not title
 	var/assigned_role
-	// todo: id, not title; also unify /datum/role/(job | antagonist | ghostrole)?
+	// todo: id, not title; also unify /datum/prototype/role/(job | antagonist | ghostrole)?
 	var/special_role
 
 	var/role_alt_title
 
-	var/datum/role/job/assigned_job
+	var/datum/prototype/role/job/assigned_job
 
 	var/list/datum/objective/objectives = list()
 	var/list/datum/objective/special_verbs = list()
@@ -168,15 +168,10 @@
 		associate(new_character)
 		return
 
-	var/mob/old_character = current
-
 	disassociate()
 
 	if(!isnull(new_character.mind))
 		new_character.mind.disassociate()
-
-	SStgui.on_transfer(old_character, new_character)
-	SSnanoui.user_transferred(old_character, new_character)
 
 	associate(new_character)
 
@@ -263,7 +258,7 @@
 		if(antag) antag.place_mob(src.current)
 
 	else if (href_list["role_edit"])
-		var/new_role = input("Select new role", "Assigned role", assigned_role) as null|anything in SSjob.all_job_titles()
+		var/new_role = input("Select new role", "Assigned role", assigned_role) as null|anything in RSroles.legacy_all_job_titles()
 		if (!new_role) return
 		assigned_role = new_role
 
@@ -438,38 +433,14 @@
 
 			if("unemag")
 				var/mob/living/silicon/robot/R = current
-				if (istype(R))
-					R.emagged = 0
-					if (R.activated(R.module.emag))
-						R.module_active = null
-					if(R.module_state_1 == R.module.emag)
-						R.module_state_1 = null
-						R.contents -= R.module.emag
-					else if(R.module_state_2 == R.module.emag)
-						R.module_state_2 = null
-						R.contents -= R.module.emag
-					else if(R.module_state_3 == R.module.emag)
-						R.module_state_3 = null
-						R.contents -= R.module.emag
-					log_admin("[key_name_admin(usr)] has unemag'ed [R].")
+				R.set_emag_state(FALSE)
+				log_admin("[key_name_admin(usr)] has unemag'ed [R].")
 
 			if("unemagcyborgs")
 				if (istype(current, /mob/living/silicon/ai))
 					var/mob/living/silicon/ai/ai = current
 					for (var/mob/living/silicon/robot/R in ai.connected_robots)
-						R.emagged = 0
-						if (R.module)
-							if (R.activated(R.module.emag))
-								R.module_active = null
-							if(R.module_state_1 == R.module.emag)
-								R.module_state_1 = null
-								R.contents -= R.module.emag
-							else if(R.module_state_2 == R.module.emag)
-								R.module_state_2 = null
-								R.contents -= R.module.emag
-							else if(R.module_state_3 == R.module.emag)
-								R.module_state_3 = null
-								R.contents -= R.module.emag
+						R.set_emag_state(TRUE)
 					log_admin("[key_name_admin(usr)] has unemag'ed [ai]'s Cyborgs.")
 
 	else if (href_list["common"])

@@ -137,7 +137,7 @@
 		var/turf/n = D.loc
 		for(i in 1 to range)
 			ASSERT(isturf(n))
-			if(n.TurfAdjacency(th))
+			if(n.TurfAdjacency(th, target, src))
 				// succeeded
 				qdel(D)
 				return REACH_PHYSICAL
@@ -179,6 +179,7 @@
 	return curr.TurfAdjacency(source)
 
 /atom/movable/reachability_delegate
+	atom_flags = ATOM_NONWORLD
 	pass_flags = ATOM_PASS_CLICK | ATOM_PASS_TABLE
 	invisibility = INVISIBILITY_ABSTRACT
 
@@ -192,6 +193,9 @@
 
 /mob/DirectAccess()
 	return ..() + get_equipped_items()
+
+/mob/living/silicon/robot/DirectAccess()
+	return ..() + robot_inventory?.provided_items
 
 /**
  * gets DirectAccess as a hashed list for quick lookups

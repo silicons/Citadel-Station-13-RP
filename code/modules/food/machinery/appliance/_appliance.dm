@@ -47,6 +47,7 @@
 
 /obj/machinery/appliance/Initialize(mapload, newdir)
 	. = ..()
+	// tODO: what??
 	component_parts = list()
 	component_parts += /obj/item/circuitboard/cooking
 	component_parts += /obj/item/stock_parts/capacitor
@@ -161,8 +162,9 @@
 	playsound(src, 'sound/machines/click.ogg', 40, 1)
 	update_icon()
 
-/obj/machinery/appliance/AICtrlClick(mob/user)
-	attempt_toggle_power(user)
+// TODO: probably add this ..? and more control for ais?
+// /obj/machinery/appliance/AICtrlClick(mob/user)
+// 	attempt_toggle_power(user)
 
 /obj/machinery/appliance/proc/choose_output()
 	set src in view()
@@ -564,7 +566,7 @@
 	if (!Adjacent(user))
 		return FALSE
 
-	if (isanimal(user))
+	if (isanimal_legacy_this_is_broken(user))
 		return FALSE
 
 	return TRUE
@@ -644,9 +646,9 @@
 	if (victim.reagents)
 		victim.reagents.trans_to_holder(result.reagents, victim.reagents.total_volume)
 
-	if (isanimal(victim))
-		var/mob/living/simple_animal/SA = victim
-		result.kitchen_tag = SA.kitchen_tag
+	// if (issimplemob(victim))
+	// 	var/mob/living/simple_animal/SA = victim
+	// 	result.kitchen_tag = SA.kitchen_tag
 
 	result.appearance = victim
 

@@ -22,6 +22,8 @@
 	absorption = MATERIAL_RESISTANCE_LOW
 	nullification = MATERIAL_RESISTANCE_NONE
 
+	material_constraints = MATERIAL_CONSTRAINT_RIGID
+
 /datum/prototype/material/plastic/generate_recipes()
 	. = ..()
 	. += create_stack_recipe_datum(
@@ -32,7 +34,7 @@
 	)
 	. += create_stack_recipe_datum(
 		name = "plastic bag",
-		product = /obj/item/storage/bag/plasticbag,
+		product = /obj/item/storage/bag/trash/plasticbag,
 		cost = 3,
 	)
 	. += create_stack_recipe_datum(

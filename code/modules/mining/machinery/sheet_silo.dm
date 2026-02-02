@@ -1,5 +1,5 @@
 //* This file is explicitly licensed under the MIT license. *//
-//* Copyright (c) 2024 silicons                             *//
+//* Copyright (c) 2024 Citadel Station Developers           *//
 
 /**
  * persistence allowed storage system
@@ -50,8 +50,6 @@
 	return ..()
 
 /obj/machinery/sheet_silo/proc/take_sheets(obj/item/stack/material/sheets)
-	if(sheets.uses_charge)
-		return 0
 	var/mat_id = sheets.material.id
 	var/mat_amount = sheets.amount
 	. = mat_amount
@@ -98,7 +96,7 @@
 		ui = new(user, src, "SheetSilo")
 		ui.open()
 
-/obj/machinery/sheet_silo/ui_act(action, list/params, datum/tgui/ui)
+/obj/machinery/sheet_silo/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state, datum/event_args/actor/actor)
 	. = ..()
 	if(.)
 		return

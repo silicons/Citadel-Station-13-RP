@@ -18,6 +18,7 @@
 	pickup_sound = 'sound/items/pickup/helm.ogg'
 	encumbrance = ITEM_ENCUMBRANCE_ARMOR_MEDIUM_HELMET
 	weight = ITEM_WEIGHT_ARMOR_MEDIUM_HELMET
+	suit_storage_class = SUIT_STORAGE_CLASS_ARMOR
 	material_factoring = 0.000075
 
 /obj/item/clothing/head/helmet/ntsec
@@ -396,7 +397,7 @@
 /obj/item/clothing/head/helmet/aquiline
 	name = "aquiline enforcer helmet"
 	desc = "Prior to the Final War, issues with law enforcement on Old Earth became so bad that in many countries the police became little more than roving executioners. This striking helmet was designed to help law enforcement officers easily identify themselves in crowds."
-	icon = 'icons/clothing/uniform/costume/aquiline.dmi'
+	icon = 'icons/clothing/head/aquiline.dmi'
 	icon_state = "dreddhelm"
 	worn_render_flags = WORN_RENDER_SLOT_ONE_FOR_ALL
 

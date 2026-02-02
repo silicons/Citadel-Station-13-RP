@@ -15,7 +15,7 @@ Yes, this currently includes all turfs, mobs, objs, and misc things. Sorry. We'l
   - /clothing - general, non-module clothing items placed in here
     - /{type} - uniform, head, shoes, suit, etc
       - /costumes - vanity costumes like kilts, mime outfits, clown outfits, cueball outfits, etc
-      - /formal - formalwear like siuts, dresses, etc
+      - /formal - formalwear like suits, dresses, etc
       - /job - basic job uniforms
       - /misc - unsorted things
       - /rank - "formal" "rank"-wear like flight suits, military/naval, etc
@@ -33,14 +33,11 @@ Yes, this currently includes all turfs, mobs, objs, and misc things. Sorry. We'l
   - /mob - mob sprites
     - /bodysets - limbs and their corrosponding sprite accessories & markings & miscellaneous.
                   used in the abstraction of limb sprite from limb definition.
+    - /robot - `/mob/living/silicon/robot` stuff
+      - /iconset - iconsets for silicon / robot mobs
     - /sprite_accessories - unconverted sprite accessories
     - /sprite_accessory - modern sprite accessory system
-  - /modules - used for specific departments / content packs / logical bundles
-    - /{modulename} - the examples below are just that, examples. some modules will require different styles of icon organization.
-      - /items - items
-      - /clothing - clothing
-      - /machinery - machinery
-      - /structures - structures
+  - /modules - same hierarchy as `code/modules`.
   - /objects - miscellaneous objects that are not items, machinery, or structures
   - /runtime - follow similar structure inside this, treat it as a   sub-copy. icons in this are copied over for use during runtime
     - currently being deprecated; we have chosen to instead copy over all icons/sounds, so the runtime

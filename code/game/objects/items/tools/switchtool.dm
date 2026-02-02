@@ -10,6 +10,7 @@
 	icon_state = "switchtool"
 	item_state = "switchtool"
 	desc = "A multi-deployable, multi-instrument, finely crafted multi-purpose tool. The envy of engineers everywhere."
+	belt_storage_class = BELT_CLASS_SMALL
 	siemens_coefficient = 1
 	damage_force = 3
 	w_class = WEIGHT_CLASS_SMALL
@@ -261,8 +262,8 @@
 		.[i] = tool_quality
 
 //? tool redirection
-/obj/item/switchtool/tool_behaviour()
-	return deployed?.tool_behaviour()
+/obj/item/switchtool/tool_behavior()
+	return deployed?.tool_behavior()
 
 //? tool redirection
 /obj/item/switchtool/tool_feedback_start(function, flags, mob/user, atom/target, time, cost, usage)
@@ -277,19 +278,19 @@
 	update_icon()
 
 //? click redirection
-/obj/item/switchtool/melee_interaction_chain(atom/target, mob/user, clickchain_flags, params)
+/obj/item/switchtool/melee_interaction_chain(datum/event_args/actor/clickchain/clickchain, clickchain_flags)
 	if(!deployed)
 		return ..()
-	. = deployed.melee_interaction_chain(target, user, clickchain_flags | CLICKCHAIN_REDIRECTED, params)
+	. = deployed.melee_interaction_chain(clickchain, clickchain_flags | CLICKCHAIN_REDIRECTED)
 	if(deployed && deployed.loc != src)
 		deployed.forceMove(src)
 		undeploy()
 
 //? click redirection
-/obj/item/switchtool/ranged_interaction_chain(atom/target, mob/user, clickchain_flags, params)
+/obj/item/switchtool/ranged_interaction_chain(datum/event_args/actor/clickchain/clickchain, clickchain_flags)
 	if(!deployed)
 		return ..()
-	. = deployed.ranged_interaction_chain(target, user, clickchain_flags | CLICKCHAIN_REDIRECTED, params)
+	. = deployed.ranged_interaction_chain(clickchain, clickchain_flags | CLICKCHAIN_REDIRECTED)
 	if(deployed.loc != src)
 		deployed.forceMove(src)
 		undeploy()

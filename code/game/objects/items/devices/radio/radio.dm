@@ -28,6 +28,8 @@ GLOBAL_LIST_INIT(default_medbay_channels, list(
 	suffix = "\[3\]"
 	icon_state = "walkietalkie"
 	item_state = "radio"
+	suit_storage_class = SUIT_STORAGE_CLASS_SOFTWEAR | SUIT_STORAGE_CLASS_HARDWEAR
+	interaction_flags_atom = parent_type::interaction_flags_atom | INTERACT_ATOM_ALLOW_USER_LOCATION | INTERACT_ATOM_IGNORE_MOBILITY
 
 	///FALSE for off
 	var/on = TRUE
@@ -187,7 +189,7 @@ GLOBAL_LIST_INIT(default_medbay_channels, list(
 
 	return data
 
-/obj/item/radio/ui_act(action, list/params, datum/tgui/ui)
+/obj/item/radio/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state, datum/event_args/actor/actor)
 	if(..())
 		return TRUE
 
@@ -670,7 +672,7 @@ GLOBAL_DATUM_INIT(virtual_announcer_ai, /mob/living/silicon/ai/announcer, new(nu
 	if (isrobot(src.loc))
 		var/mob/living/silicon/robot/R = src.loc
 		var/datum/robot_component/C = R.components["radio"]
-		R.cell_use_power(C.active_usage)
+		R.legacy_cell_use_power(C.active_usage)
 
 /obj/item/radio/borg/attackby(obj/item/I, mob/living/user, params, clickchain_flags, damage_multiplier)
 	user.set_machine(src)
@@ -713,12 +715,12 @@ GLOBAL_DATUM_INIT(virtual_announcer_ai, /mob/living/silicon/ai/announcer, new(nu
 	src.syndie = 0
 
 	var/mob/living/silicon/robot/D = src.loc
-	if(D.module)
-		for(var/ch_name in D.module.channels)
+	if(D.module_legacy)
+		for(var/ch_name in D.module_legacy.channels)
 			if(ch_name in src.channels)
 				continue
 			src.channels += ch_name
-			src.channels[ch_name] += D.module.channels[ch_name]
+			src.channels[ch_name] += D.module_legacy.channels[ch_name]
 	if(keyslot)
 		for(var/ch_name in keyslot.channels)
 			if(ch_name in src.channels)
@@ -920,4 +922,8 @@ GLOBAL_DATUM_INIT(virtual_announcer_ai, /mob/living/silicon/ai/announcer, new(nu
 */
 /obj/item/bluespace_radio/commerce
 	name = "commercial subspace radio"
+	desc = "Immensely expensive, this communications device has the ability to send and recieve transmissions from anywhere. Only a few of these devices have been sold by either Ward Takahashi or Nanotrasen. This device is incredibly rare and mind-numbingly expensive. Do not lose it."
+
+/obj/item/bluespace_radio/sdf
+	name = "sdf subspace radio"
 	desc = "Immensely expensive, this communications device has the ability to send and recieve transmissions from anywhere. Only a few of these devices have been sold by either Ward Takahashi or Nanotrasen. This device is incredibly rare and mind-numbingly expensive. Do not lose it."

@@ -15,6 +15,8 @@
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "paper"
 	item_state = "paper"
+	suit_storage_class = SUIT_STORAGE_CLASS_SOFTWEAR
+	belt_storage_class = BELT_CLASS_SMALL
 	throw_force = 0
 	w_class = WEIGHT_CLASS_TINY
 	throw_range = 1
@@ -144,7 +146,7 @@
 		icon_state = "scrap"
 		return
 	user.examinate(src)
-	if(rigged && (Holiday == "April Fool's Day"))
+	if(rigged && IsHoliday(HOLIDAY_APRIL_FOOLS))
 		if(spam_flag == 0)
 			spam_flag = 1
 			playsound(loc, 'sound/items/bikehorn.ogg', 50, 1)
@@ -425,6 +427,8 @@
 			updateinfolinks()
 
 		update_space(t)
+
+		playsound(src, pick('sound/items/pen1.ogg','sound/items/pen2.ogg'), 5)
 
 		SSassets.send_asset_pack(usr.client, /datum/asset_pack/simple/logos)
 		usr.client.asset_cache_flush_browse_queue()

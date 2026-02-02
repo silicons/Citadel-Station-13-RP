@@ -111,12 +111,11 @@ SUBSYSTEM_DEF(ticker)
 				if(blackbox)
 					blackbox.save_all_data_to_sql()
 
-				send2irc("Server", "A round of [mode.name] just ended.")
 				if(CONFIG_GET(string/chat_roundend_notice_tag))
 					var/broadcastmessage = "The round has ended."
 					if(CONFIG_GET(string/chat_reboot_role))
 						broadcastmessage += "\n\n<@&[CONFIG_GET(string/chat_reboot_role)]>, the server will reboot shortly!"
-					send2chat(broadcastmessage, CONFIG_GET(string/chat_roundend_notice_tag))
+					send2chat(new /datum/tgs_message_content(broadcastmessage), CONFIG_GET(string/chat_roundend_notice_tag))
 
 				SSdbcore.SetRoundEnd()
 				SSpersistence.SavePersistence()
@@ -125,7 +124,7 @@ SUBSYSTEM_DEF(ticker)
 
 
 /datum/controller/subsystem/ticker/proc/on_mc_init_finish()
-	send2irc("Server lobby is loaded and open at byond://[config_legacy.serverurl ? config_legacy.serverurl : (config_legacy.server ? config_legacy.server : "[world.address]:[world.port]")]")
+	send2chat(new /datum/tgs_message_content("Server lobby is loaded and open at byond://[config_legacy.serverurl ? config_legacy.serverurl : (config_legacy.server ? config_legacy.server : "[world.address]:[world.port]")]"))
 	to_chat(world, "<span class='boldnotice'>Welcome to the pregame lobby!</span>")
 	to_chat(world, "Please set up your character and select ready. The round will start in [CONFIG_GET(number/lobby_countdown)] seconds.")
 	SEND_SOUND(world, sound('sound/misc/server-ready.ogg', volume = 100))
@@ -189,8 +188,6 @@ SUBSYSTEM_DEF(ticker)
 	var/start_wait = world.time
 	//UNTIL(round_end_sound_sent || (world.time - start_wait) > (delay * 2))	//don't wait forever
 	while(world.time - start_wait < delay)
-		if(delay_end)		//delayed, break loop.
-			break
 		var/timeleft = delay - (world.time - start_wait)
 		// If we have less than 10 seconds left.
 		if(timeleft <= 10 SECONDS)
@@ -309,6 +306,8 @@ SUBSYSTEM_DEF(ticker)
 
 	log_world("Game start took [(world.timeofday - init_start)/10]s")
 	round_start_time = world.time
+	SStime_keep.cached_round_start_time = world.time
+	SStime_keep.cached_round_start_rtod = REALTIMEOFDAY
 	INVOKE_ASYNC(SSdbcore, TYPE_PROC_REF(/datum/controller/subsystem/dbcore, SetRoundStart))
 
 	// TODO Dear God Fix This.  Fix all of this. Not just this line, this entire proc. This entire file!
@@ -326,8 +325,6 @@ SUBSYSTEM_DEF(ticker)
 				SEND_SOUND(world, sound('sound/roundStart/start_up_3.ogg'))
 			if(4)
 				SEND_SOUND(world, sound('sound/roundStart/start_up_4.ogg'))//the original sound
-		//Holiday Round-start stuff	~Carn
-		Holiday_Game_Start()
 
 	//start_events() //handles random events and space dust.
 	//new random event system is handled from the MC.
@@ -554,6 +551,7 @@ SUBSYSTEM_DEF(ticker)
 
 	to_chat(world, "<span class='infoplain'><BR><BR><BR><span class='big bold'>The round has ended.</span></span>")
 	log_game("The round has ended.")
+	send2adminchat("Server", "Round just ended.")
 
 	for(var/datum/callback/roundend_callbacks as anything in round_end_events)
 		roundend_callbacks.InvokeAsync()
@@ -605,7 +603,7 @@ SUBSYSTEM_DEF(ticker)
 
 	for (var/mob/living/silicon/robot/robo in GLOB.mob_list)
 
-		if(istype(robo,/mob/living/silicon/robot/drone) && !istype(robo,/mob/living/silicon/robot/drone/swarm))
+		if(istype(robo,/mob/living/silicon/robot/drone))
 			dronecount++
 			continue
 

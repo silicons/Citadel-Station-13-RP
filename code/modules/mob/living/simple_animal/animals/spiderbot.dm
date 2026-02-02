@@ -9,7 +9,7 @@
 	name = "spider-bot"
 	desc = "A skittering robotic friend!"
 	tt_desc = "Maintenance Robot"
-	icon = 'icons/mob/robots.dmi'
+	icon = 'icons/mob/robot-legacy.dmi'
 	icon_state = "spiderbot-chassis"
 	icon_living = "spiderbot-chassis"
 	icon_dead = "spiderbot-smashed"
@@ -150,7 +150,7 @@
 			return 0
 
 	else
-		O.melee_interaction_chain(src, user, user.zone_sel.selecting)
+		O.lazy_melee_interaction_chain(src, user, user.zone_sel.selecting)
 
 /mob/living/simple_mob/spiderbot/emag_act(var/remaining_charges, var/mob/user)
 	if (emagged)

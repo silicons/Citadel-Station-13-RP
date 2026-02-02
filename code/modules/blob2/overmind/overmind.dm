@@ -60,16 +60,17 @@ var/list/overminds = list()
 			BM.update_icons()
 
 	overminds -= src
+	blob_core = null
 	return ..()
 
 /mob/observer/blob/statpanel_data(client/C)
 	. = ..()
 	if(C.statpanel_tab("Status"))
-		STATPANEL_DATA_LINE("")
+		INJECT_STATPANEL_DATA_LINE(., "")
 		if(blob_core)
-			STATPANEL_DATA_LINE("Core Health: [blob_core.integrity]")
-		STATPANEL_DATA_LINE("Power Stored: [blob_points]/[max_blob_points]")
-		STATPANEL_DATA_LINE("Total Blobs: [blobs.len]")
+			INJECT_STATPANEL_DATA_LINE(., "Core Health: [blob_core.integrity]")
+		INJECT_STATPANEL_DATA_LINE(., "Power Stored: [blob_points]/[max_blob_points]")
+		INJECT_STATPANEL_DATA_LINE(., "Total Blobs: [blobs.len]")
 
 /mob/observer/blob/Move(NewLoc, Dir = 0)
 	if(placed)

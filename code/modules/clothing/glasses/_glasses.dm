@@ -17,6 +17,7 @@ BLIND     // can't see anything
 	w_class = WEIGHT_CLASS_SMALL
 	slot_flags = SLOT_EYES
 	active_slots = list(SLOT_ID_GLASSES)
+	belt_storage_class = BELT_CLASS_SMALL
 	var/prescription = 0
 	drop_sound = 'sound/items/drop/accessory.ogg'
 	pickup_sound = 'sound/items/pickup/accessory.ogg'
@@ -487,12 +488,16 @@ BLIND     // can't see anything
 	drop_sound = 'sound/items/drop/gloves.ogg'
 	pickup_sound = 'sound/items/pickup/gloves.ogg'
 
-/*obj/item/clothing/glasses/sunglasses/blindfold/equipped(mob/user, slot, flags)
+/obj/item/clothing/glasses/sunglasses/blindfold/equipped(mob/user, slot, flags)
 	. = ..()
-	if(ishuman(loc))
-		var/mob/living/carbon/human/H = user
-		loc.add_modifier(/datum/modifier/sight/blindness)*/
+	if(slot == SLOT_ID_GLASSES)
+		user.add_blindness_source(CLOTHING_TRAIT)
 
+
+/obj/item/clothing/glasses/sunglasses/blindfold/unequipped(mob/user, slot, flags)
+	. = ..()
+	if(slot == SLOT_ID_GLASSES)
+		user.remove_blindness_source(CLOTHING_TRAIT)
 
 /obj/item/clothing/glasses/sunglasses/blindfold/tape
 	name = "length of tape"

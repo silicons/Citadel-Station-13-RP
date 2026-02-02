@@ -48,14 +48,20 @@
 // Defines for the [gc_destroyed][/datum/var/gc_destroyed] var.
 #define GC_CURRENTLY_BEING_QDELETED -2
 
+/// qdel() has been called, at some point, on us, and it did not return LETMELIVE
 #define QDELING(X) (X.gc_destroyed)
+/// we are either
+/// * deleted / nulled already
+/// * qdel() has been called, at some point, on us, and it did not return LETMELIVE
 #define QDELETED(X) (!X || QDELING(X))
+/// we are currently in Destroy() logic
 #define QDESTROYING(X) (!X || X.gc_destroyed == GC_CURRENTLY_BEING_QDELETED)
 
 //* Qdel helper macros. *//
 
 /// qdel something in a specific amount of time. returns a timer ID.
 #define QDEL_IN(item, time) addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(qdel), item), time, TIMER_STOPPABLE)
+#define QDEL_IN_STOPPABLE(item, time) addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(qdel), (time) > GC_FILTER_QUEUE ? WEAKREF(item) : item), time, TIMER_STOPPABLE)
 /// qdel something in a specific amount of real (wall) time. returns a timer ID.
 #define QDEL_IN_CLIENT_TIME(item, time) addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(qdel), item), time, TIMER_STOPPABLE | TIMER_CLIENT_TIME)
 /// qdel's something and nulls it out
@@ -66,6 +72,8 @@
 #define QDEL_LIST_NULL(x) if(x) { for(var/y in x) { qdel(y) } ; x = null }
 /// qdels the elements in a list and proceed to cut the list. in an asosciative list, this will qdelete the keys.
 #define QDEL_LIST(L) if(L) { for(var/I in L) qdel(I); L.Cut(); }
+/// Qdel every item in the list before setting the list to null. Can't cut it because the lazylist will already be nulled in some cases.
+#define QDEL_LAZYLIST(L) for(var/I in L) qdel(I); L = null;
 /// QDEL_LIST in a specific amount of time
 #define QDEL_LIST_IN(L, time) addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(______qdel_list_wrapper), L), time, TIMER_STOPPABLE)
 /// qdel's both the keys and the values of an associative list, and then cut the list.

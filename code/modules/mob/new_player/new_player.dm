@@ -5,6 +5,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 	var/totalPlayers = 0		// Player counts for the Lobby tab
 	var/totalPlayersReady = 0
 	var/datum/browser/panel
+	interaction_flags_atom = parent_type::interaction_flags_atom | INTERACT_ATOM_MOUSEDROP_IGNORE_CHECKS
 	universal_speak = 1
 
 	invisibility = 101
@@ -17,17 +18,20 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 
 /mob/new_player/Initialize(mapload)
 	SHOULD_CALL_PARENT(FALSE)	// "yes i know what I'm doing"
-	mob_list_register(stat)
+	mob_list_register()
 	atom_flags |= ATOM_INITIALIZED
 	// we only need innate
 	actions_innate = new /datum/action_holder/mob_actor(src)
 	return INITIALIZE_HINT_NORMAL
 
-/mob/new_player/mob_list_register(for_stat)
+/mob/new_player/mob_list_register()
 	GLOB.mob_list += src
 
-/mob/new_player/mob_list_unregister(for_stat)
+/mob/new_player/mob_list_unregister()
 	GLOB.mob_list -= src
+
+/mob/new_player/mob_list_update_stat(old_stat, new_stat)
+	return
 
 /mob/new_player/verb/new_player_panel()
 	set src = usr
@@ -87,25 +91,25 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 /mob/new_player/statpanel_data(client/C)
 	. = ..()
 	if(C.statpanel_tab("Status"))
-		STATPANEL_DATA_LINE("")
+		INJECT_STATPANEL_DATA_LINE(., "")
 		if(SSticker.current_state == GAME_STATE_PREGAME)
 			if(SSticker.hide_mode)
-				STATPANEL_DATA_ENTRY("Game Mode:", "Secret")
+				INJECT_STATPANEL_DATA_ENTRY(., "Game Mode:", "Secret")
 			else
 				if(SSticker.hide_mode == 0)
-					STATPANEL_DATA_ENTRY("Game Mode:", "[config_legacy.mode_names[master_mode]]")	// Old setting for showing the game mode
+					INJECT_STATPANEL_DATA_ENTRY(., "Game Mode:", "[config_legacy.mode_names[master_mode]]")	// Old setting for showing the game mode
 			var/time_remaining = SSticker.GetTimeLeft()
 			if(time_remaining > 0)
-				STATPANEL_DATA_LINE("Time To Start: [round(time_remaining/10)]s")
+				INJECT_STATPANEL_DATA_LINE(., "Time To Start: [round(time_remaining/10)]s")
 			else if(time_remaining == -10)
-				STATPANEL_DATA_LINE("Time To Start: DELAYED")
+				INJECT_STATPANEL_DATA_LINE(., "Time To Start: DELAYED")
 			else
-				STATPANEL_DATA_LINE("Time To Start: SOON")
-			STATPANEL_DATA_ENTRY("Players: [totalPlayers]", "Players Ready: [totalPlayersReady]")
+				INJECT_STATPANEL_DATA_LINE(., "Time To Start: SOON")
+			INJECT_STATPANEL_DATA_ENTRY(., "Players: [totalPlayers]", "Players Ready: [totalPlayersReady]")
 			totalPlayers = 0
 			totalPlayersReady = 0
 			for(var/mob/new_player/player in GLOB.player_list)
-				STATPANEL_DATA_ENTRY("[player.key]", (player.ready)?("(Playing)"):(""))
+				INJECT_STATPANEL_DATA_ENTRY(., "[player.key]", (player.ready)?("(Playing)"):(""))
 				totalPlayers++
 				if(player.ready)totalPlayersReady++
 
@@ -164,6 +168,9 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 		new_player_panel_proc()
 
 	if(href_list["observe"])
+		if (SSticker.current_state <= GAME_STATE_INIT)
+			to_chat(src, SPAN_BOLDANNOUNCE("You may not observe until the server is initialized."))
+			return
 		// don't lose out if we join fast
 		SSplaytime.queue_playtimes(client)
 		if(!client.reject_age_unverified())
@@ -408,7 +415,7 @@ INITIALIZE_IMMEDIATE(/mob/new_player)
 		to_chat(usr, "<span class='notice'>There is an administrative lock on entering the game!</span>")
 		log_shadowban("[key_name(src)] latejoin as [rank] blocked.")
 		return 0
-	var/datum/role/job/J = SSjob.job_by_title(rank)
+	var/datum/prototype/role/job/J = RSroles.legacy_job_by_title(rank)
 	var/reason
 	if((reason = J.check_client_availability_one(client)) != ROLE_AVAILABLE)
 		to_chat(src, SPAN_WARNING("[rank] is not available: [J.get_availability_reason(client, reason)]"))

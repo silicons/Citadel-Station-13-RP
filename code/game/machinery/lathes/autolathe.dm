@@ -7,12 +7,13 @@
 
 /obj/machinery/lathe/autolathe
 	name = "autolathe"
-	desc = "A versatile lathe capable of printing many objects with the right loaded designs."
+	desc = "A versatile lathe capable of printing many objects with the right loaded designs.\n <span class='notice'>\[Accepts Upgrades\]</span>"
 	icon = 'icons/machinery/lathe/autolathe.dmi'
 	icon_state = "base"
 	circuit = /obj/item/circuitboard/machine/lathe/autolathe
 	design_holder = /datum/design_holder/lathe/autolathe
 	lathe_type = LATHE_TYPE_AUTOLATHE
+	interaction_flags_atom = parent_type::interaction_flags_atom | INTERACT_ATOM_MOUSEDROP_IGNORE_CHECKS
 	has_interface = TRUE
 	active_icon_state = "active"
 	print_icon_state = "print"

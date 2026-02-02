@@ -24,6 +24,8 @@
 	voice_name = "synthesized voice"
 	silicon_privileges = PRIVILEGES_SILICON
 	rad_flags = RAD_BLOCK_CONTENTS
+	interaction_range = 7 //wireless control range
+
 	var/syndicate = 0
 	var/const/MAIN_CHANNEL = "Main Frequency"
 	var/lawchannel = MAIN_CHANNEL // Default channel on which to state laws
@@ -129,9 +131,9 @@
 /mob/living/silicon/proc/show_system_integrity()
 	. = list()
 	if(!src.stat)
-		STATPANEL_DATA_LINE("System integrity: [round((health/getMaxHealth())*100)]%")
+		INJECT_STATPANEL_DATA_LINE(., "System integrity: [round((health/getMaxHealth())*100)]%")
 	else
-		STATPANEL_DATA_LINE("Systems nonfunctional")
+		INJECT_STATPANEL_DATA_LINE(., "Systems nonfunctional")
 
 // This is a pure virtual function, it should be overwritten by all subclasses
 /mob/living/silicon/proc/show_malf_ai()
@@ -141,7 +143,7 @@
 /mob/living/silicon/statpanel_data(client/C)
 	. = ..()
 	if(C.statpanel_tab("Status"))
-		STATPANEL_DATA_LINE("")
+		INJECT_STATPANEL_DATA_LINE(., "")
 		. += show_system_integrity()
 		. += show_malf_ai()
 

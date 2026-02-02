@@ -39,8 +39,6 @@
 
 	meat_amount = 2
 
-	showvoreprefs = 0
-
 	var/morphed = FALSE
 	var/tooltip = TRUE
 	var/melee_damage_disguised = 0
@@ -71,7 +69,8 @@
 			. += "<span class='warning'>It doesn't look quite right...</span>"
 	return
 
-/mob/living/simple_mob/vore/hostile/morph/ShiftClickOn(atom/movable/A)
+/mob/living/simple_mob/vore/hostile/morph/shift_click_on(atom/target, location, control, list/params)
+	var/atom/A = target
 	if(Adjacent(A))
 		if(morph_time <= world.time && !stat)
 			if(A == src)
@@ -81,8 +80,9 @@
 				assume(A)
 		else
 			to_chat(src, "<span class='warning'>Your chameleon skin is still repairing itself!</span>")
+		return TRUE
 	else
-		..()
+		return ..()
 
 /mob/living/simple_mob/vore/hostile/morph/proc/assume(atom/movable/target)
 	if(morphed)
