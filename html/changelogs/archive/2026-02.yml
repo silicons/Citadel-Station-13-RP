@@ -363,3 +363,15 @@
   washikarasu:
   - rscdel: grey railing sprite
   - tweak: greyscaled railing sprite and added colour
+2026-02-16:
+  FreeStylaLT:
+  - rscadd: Added Valentine stools
+2026-02-24:
+  Putnam3145:
+  - bugfix: security winter coat now in loadout as intended
+  - bugfix: some minor stuff relating to unarmed stuns
+  timothyteakettle:
+  - bugfix: fix checkers icons
+  - bugfix: 'fix the security wintercoat not showing in the loadout
+
+      :cl:'

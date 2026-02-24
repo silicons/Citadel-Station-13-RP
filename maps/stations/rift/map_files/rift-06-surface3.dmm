@@ -38,7 +38,7 @@
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/kitchen)
 "aag" = (
-/obj/effect/spider/stickyweb/dark,
+/obj/structure/spider/stickyweb/dark,
 /turf/simulated/floor/outdoors/safeice/lythios43c/indoors,
 /area/rift/surfacebase/outside/outside3)
 "aaj" = (
@@ -5931,7 +5931,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/rift/trade_shop/landing_pad)
 "asH" = (
-/obj/effect/spider/cocoon,
+/obj/structure/spider/cocoon,
 /turf/simulated/floor/outdoors/safeice/lythios43c/indoors,
 /area/rift/surfacebase/outside/outside3)
 "asI" = (
@@ -6492,7 +6492,7 @@
 /turf/simulated/floor/plating,
 /area/shuttle/courser/general)
 "auw" = (
-/obj/effect/spider/spiderling/virgo,
+/obj/structure/spider/spiderling/virgo,
 /turf/simulated/floor/outdoors/safeice/lythios43c/indoors,
 /area/rift/surfacebase/outside/outside3)
 "aux" = (
@@ -6649,7 +6649,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/shuttle/excursion/cargo)
 "avc" = (
-/obj/effect/spider/spiderling/virgo,
+/obj/structure/spider/spiderling/virgo,
 /obj/random/maintenance/security,
 /turf/simulated/floor/outdoors/safeice/lythios43c/indoors,
 /area/rift/surfacebase/outside/outside3)
@@ -8153,7 +8153,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/substation/command)
 "azm" = (
-/obj/item/stool/padded,
+/obj/structure/bed/chair/heartstool,
 /obj/effect/floor_decal/spline/plain{
 	dir = 5
 	},
@@ -11689,7 +11689,7 @@
 /turf/simulated/floor/plating,
 /area/shuttle/courser/cockpit)
 "aKi" = (
-/obj/effect/spider/stickyweb,
+/obj/structure/spider/stickyweb,
 /turf/simulated/floor/outdoors/safeice/lythios43c/indoors,
 /area/rift/surfacebase/outside/outside3)
 "aKk" = (
@@ -17205,7 +17205,7 @@
 /turf/simulated/floor/wood,
 /area/crew_quarters/bar)
 "bTq" = (
-/obj/item/stool/padded,
+/obj/structure/bed/chair/heartstool,
 /obj/effect/floor_decal/corner/beige{
 	dir = 5
 	},
@@ -17684,7 +17684,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/commandmaint)
 "cSf" = (
-/obj/item/stool/padded,
+/obj/structure/bed/chair/heartstool,
 /obj/landmark/spawnpoint/job/assistant,
 /obj/effect/floor_decal/spline/plain{
 	dir = 1
@@ -20928,7 +20928,7 @@
 /turf/simulated/floor/tiled/steel,
 /area/hallway/secondary/docking_hallway2)
 "itf" = (
-/obj/item/stool/padded,
+/obj/structure/bed/chair/heartstool,
 /obj/effect/floor_decal/spline/plain{
 	dir = 1
 	},
@@ -22285,7 +22285,7 @@
 /turf/simulated/floor/tiled/steel,
 /area/crew_quarters/locker/laundry_arrival)
 "kIf" = (
-/obj/item/stool/padded,
+/obj/structure/bed/chair/heartstool,
 /obj/effect/floor_decal/spline/plain{
 	dir = 1
 	},
@@ -22833,7 +22833,7 @@
 /obj/machinery/newscaster{
 	pixel_x = 32
 	},
-/obj/item/stool/padded,
+/obj/structure/bed/chair/heartstool,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/bar)
 "lMp" = (
@@ -26038,7 +26038,7 @@
 /area/rift/surfaceeva/airlock/arrivals)
 "rQU" = (
 /obj/structure/disposalpipe/segment,
-/obj/item/stool/padded,
+/obj/structure/bed/chair/heartstool,
 /obj/effect/floor_decal/spline/plain{
 	dir = 1
 	},
@@ -26098,7 +26098,7 @@
 /turf/simulated/floor/tiled,
 /area/exploration/pilot_prep)
 "scn" = (
-/obj/item/stool/padded,
+/obj/structure/bed/chair/heartstool,
 /obj/landmark/spawnpoint/job/assistant,
 /obj/effect/floor_decal/spline/plain{
 	dir = 1
