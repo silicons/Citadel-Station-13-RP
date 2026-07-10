@@ -291,6 +291,9 @@
 	// immediately update munltiz cache
 	rebuild_multiz_lookup(instance.z_index)
 
+	// fire on loaded
+	instance.on_loaded(map_context, dmm_context, instance.z_index)
+
 	// fire pre-init hooks
 	dmm_context.execute_pre_init()
 

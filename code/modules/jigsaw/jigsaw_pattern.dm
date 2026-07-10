@@ -13,6 +13,24 @@
 	 */
 	var/list/datum/jigsaw_tile/pattern
 
+	/**
+	 * Calculated attachment points.
+	 * * [tag] = list(x, y, orientation, list(tags))
+	 * * orientation is facing away from the join point; this allows
+	 *   whatever is checking for valid joins to not have to rotate its own sense of sided-ness.
+	 * * this allows a 'fast' linear list match/check for a given tag
+	 *   rather than needing to rescan every time
+	 * * calculated the first time we need it
+	 * * x and y are in grid tiles, and are the offsets. '0, 0, NORTH, list(...)'
+	 *   means the bottom left tile's SOUTH side has those tags, because
+	 *   this allways an easy alignment check (as a NORTH side of a tile needs to match it).
+	 * * As another example, `3, 0, WEST, list(...)` means the **fourth** tile (0-indexed for offset!)
+	 *   from the left, on the bottom row, has those tags on the EAST side.
+	 * * As another example, `1, 2, SOUTH, list(...)` means the second tile from the left,
+	 *   third from the bottom, has those tags on the NORTH side.
+	 */
+	var/list/tmp/datum/jigsaw_pattern/calculated_attachment_points
+
 /datum/jigsaw_pattern/New(width, height, override_tile_cost)
 	src.width = width
 	src.height = height
@@ -31,3 +49,59 @@
 				cached_tile_cost += 1
 
 	return cached_tile_cost
+
+/datum/jigsaw_pattern/proc/get_attachment_points()
+	if(calculated_attachment_points)
+		return calculated_attachment_points
+
+	calculated_attachment_points = list()
+
+	for(var/x in 1 to width)
+		for(var/y in 1 to height)
+			var/datum/jigsaw_tile/tile = pattern[(y - 1) * width + x]
+
+			// north
+			if(tile.north_tags)
+				var/is_edge = y == height || !pattern[(y) * width + x]
+				if(is_edge)
+					calculated_attachment_points[++calculated_attachment_points.len] = list(
+						x - 1,
+						y - 1,
+						SOUTH,
+						tile.north_tags,
+					)
+
+			// south
+			if(tile.south_tags)
+				var/is_edge = y == 1 || !pattern[(y - 2) * width + x]
+				if(is_edge)
+					calculated_attachment_points[++calculated_attachment_points.len] = list(
+						x - 1,
+						y - 1,
+						NORTH,
+						tile.south_tags,
+					)
+
+			// east
+			if(tile.east_tags)
+				var/is_edge = x == width || !pattern[(y - 1) * width + (x + 1)]
+				if(is_edge)
+					calculated_attachment_points[++calculated_attachment_points.len] = list(
+						x - 1,
+						y - 1,
+						WEST,
+						tile.east_tags,
+					)
+
+			// west
+			if(tile.west_tags)
+				var/is_edge = x == 1 || !pattern[(y - 1) * width + (x - 1)]
+				if(is_edge)
+					calculated_attachment_points[++calculated_attachment_points.len] = list(
+						x - 1,
+						y - 1,
+						EAST,
+						tile.west_tags,
+					)
+
+	return calculated_attachment_points

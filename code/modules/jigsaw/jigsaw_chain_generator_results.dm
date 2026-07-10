@@ -7,5 +7,3 @@
 	var/tmp/total_approximate_ms_used = 0
 	var/tmp/total_tile_budget_used = 0
 	var/tmp/list/total_custom_budgets_used = list()
-
-#warn impl

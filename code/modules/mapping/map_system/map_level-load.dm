@@ -17,7 +17,6 @@
  * * dmm_context - context for this level's own base dmm
  * * z_index - zlevel we loaded on
  */
-#warn audit calls
 /datum/map_level/proc/on_loaded(datum/map_context/map_context, datum/dmm_context/dmm_context, z_level)
 	SHOULD_CALL_PARENT(TRUE)
 

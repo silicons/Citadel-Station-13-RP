@@ -23,51 +23,52 @@
 
 	var/blocked_off = FALSE
 
-/datum/jigsaw_buffer_tile/New(grid_x, grid_y)
-	src.grid_x = grid_x
-	src.grid_y = grid_y
-
-/datum/jigsaw_buffer_tile/enqueued
+	/**
+	 * * Nullable
+	 */
 	var/datum/jigsaw_buffer_enqueued/enqueued
 
-	var/list/north_match
+	var/list/north_tags
 	var/list/north_require
 	var/list/north_exclude
 
-	var/list/south_match
+	var/list/south_tags
 	var/list/south_require
 	var/list/south_exclude
 
-	var/list/east_match
+	var/list/east_tags
 	var/list/east_require
 	var/list/east_exclude
 
-	var/list/west_match
+	var/list/west_tags
 	var/list/west_require
 	var/list/west_exclude
 
-/datum/jigsaw_buffer_tile/enqueued/New(grid_x, grid_y, datum/jigsaw_buffer_enqueued/enqueued, datum/jigsaw_buffer_tile/tile)
-	..(grid_x, grid_y)
+/datum/jigsaw_buffer_tile/New(grid_x, grid_y, datum/jigsaw_buffer_enqueued/enqueued, datum/jigsaw_tile/tile)
+	src.grid_x = grid_x
+	src.grid_y = grid_y
 
-	src.enqueued = enqueued
+	if(enqueued)
+		src.enqueued = enqueued
 
-	src.north_match = tile.north_match
-	src.north_require = tile.north_require
-	src.north_exclude = tile.north_exclude
+	if(tile)
+		src.north_tags = tile.north_tags
+		src.north_require = tile.north_require
+		src.north_exclude = tile.north_exclude
 
-	src.south_match = tile.south_match
-	src.south_require = tile.south_require
-	src.south_exclude = tile.south_exclude
+		src.south_tags = tile.south_tags
+		src.south_require = tile.south_require
+		src.south_exclude = tile.south_exclude
 
-	src.east_match = tile.east_match
-	src.east_require = tile.east_require
-	src.east_exclude = tile.east_exclude
+		src.east_tags = tile.east_tags
+		src.east_require = tile.east_require
+		src.east_exclude = tile.east_exclude
 
-	src.west_match = tile.west_match
-	src.west_require = tile.west_require
-	src.west_exclude = tile.west_exclude
+		src.west_tags = tile.west_tags
+		src.west_require = tile.west_require
+		src.west_exclude = tile.west_exclude
 
-/datum/jigsaw_buffer_tile/enqueued/Destroy()
+/datum/jigsaw_buffer_tile/Destroy()
 	src.enqueued = null
 	return ..()
 
@@ -170,9 +171,9 @@
 	var/list/datum/dmm_context/loaded_contexts = list()
 
 	for(var/datum/jigsaw_buffer_enqueued/enqueued in src.enqueued)
-		var/datum/dmm_context/loaded_context = context.load_into_world(lower_left_x, lower_left_y)
+		var/datum/dmm_context/loaded_context = enqueued.load_into_world(lower_left_x, lower_left_y)
 		loaded_contexts += loaded_context
-		context.execute_pre_init()
+		loaded_context.execute_pre_init()
 
 	for(var/datum/dmm_context/loaded_context in loaded_contexts)
 		if(!SSatoms.initialized)
@@ -193,8 +194,8 @@
 	QDEL_LIST(enqueued_contexts)
 
 /datum/jigsaw_buffer/proc/template_fits_at(datum/prototype/jigsaw_template/template, lower_left_grid_x, lower_left_grid_y, orientation)
-	var/width = template.width
-	var/height = template.height
+	var/width = template.resultant_pattern.width
+	var/height = template.resultant_pattern.height
 
 	var/sideways = orientation & (EAST|WEST)
 	var/real_width = sideways? height : width

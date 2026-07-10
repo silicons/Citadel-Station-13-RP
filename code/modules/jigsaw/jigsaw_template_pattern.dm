@@ -56,19 +56,19 @@
 	width = 1
 	height = 1
 
-	var/list/south_match
+	var/list/south_tags
 	var/list/south_require
 	var/list/south_exclude
 
-	var/list/north_match
+	var/list/north_tags
 	var/list/north_require
 	var/list/north_exclude
 
-	var/list/east_match
+	var/list/east_tags
 	var/list/east_require
 	var/list/east_exclude
 
-	var/list/west_match
+	var/list/west_tags
 	var/list/west_require
 	var/list/west_exclude
 
@@ -76,7 +76,7 @@
 	width = 2
 	height = 2
 
-	var/list/south_match
+	var/list/south_tags
 	var/list/south_require
 	var/list/south_exclude
 	var/list/south_left_match
@@ -86,7 +86,7 @@
 	var/list/south_right_require
 	var/list/south_right_exclude
 
-	var/list/north_match
+	var/list/north_tags
 	var/list/north_require
 	var/list/north_exclude
 	var/list/north_left_match
@@ -96,7 +96,7 @@
 	var/list/north_right_require
 	var/list/north_right_exclude
 
-	var/list/east_match
+	var/list/east_tags
 	var/list/east_require
 	var/list/east_exclude
 	var/list/east_top_match
@@ -106,7 +106,7 @@
 	var/list/east_bottom_require
 	var/list/east_bottom_exclude
 
-	var/list/west_match
+	var/list/west_tags
 	var/list/west_require
 	var/list/west_exclude
 	var/list/west_top_match
@@ -120,7 +120,7 @@
 	width = 3
 	height = 3
 
-	var/list/south_match
+	var/list/south_tags
 	var/list/south_require
 	var/list/south_exclude
 	var/list/south_left_match
@@ -133,7 +133,7 @@
 	var/list/south_right_require
 	var/list/south_right_exclude
 
-	var/list/north_match
+	var/list/north_tags
 	var/list/north_require
 	var/list/north_exclude
 	var/list/north_left_match
@@ -146,7 +146,7 @@
 	var/list/north_right_require
 	var/list/north_right_exclude
 
-	var/list/east_match
+	var/list/east_tags
 	var/list/east_require
 	var/list/east_exclude
 	var/list/east_top_match
@@ -159,7 +159,7 @@
 	var/list/east_bottom_require
 	var/list/east_bottom_exclude
 
-	var/list/west_match
+	var/list/west_tags
 	var/list/west_require
 	var/list/west_exclude
 	var/list/west_top_match
