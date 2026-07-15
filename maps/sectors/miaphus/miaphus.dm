@@ -14,7 +14,7 @@
 
 /datum/map_level/sector/miaphus
 	base_turf = /turf/simulated/floor/outdoors/beach/sand/desert
-	traits = lwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwist(
+	traits = list(
 		ZTRAIT_GRAVITY,
 	)
 	planet_path = /datum/planet/miaphus

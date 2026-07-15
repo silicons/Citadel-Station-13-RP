@@ -37,11 +37,6 @@
 	return result
 
 /datum/jigsaw_template_resultant_config
-	/// alignment
-	/// * this is minimum dimensions (width and height); width and height of
-	///   all templates must be in alignment multiples plus one tile of border in each side
-	var/alignment = 8
-
 	/// always start with these templates, if exists
 	/// * may be typepaths or instances
 	/// * this ignores budget and will not take from it.
@@ -74,11 +69,11 @@
 
 /datum/jigsaw_template_config/everything/get_resultant_config()
 	var/datum/jigsaw_template_resultant_config/result = new
-	results.budgets = budgets.Copy()
+	result.budgets = budgets.Copy()
 	for(var/datum/prototype/jigsaw_template/path as anything in subtypesof(/datum/prototype/jigsaw_template))
 		if(path.abstract_type == path)
 			continue
-		var/datum/prototype/jigsaw_template/template = fetch_cached_jigsaw_template(path)
+		var/datum/prototype/jigsaw_template/template = RSjigsaw_templates.fetch_local_or_throw(path)
 		result.weighted_templates[template] = 1
 	return result
 
@@ -109,5 +104,5 @@
 	result.weighted_templates = weighted_templates.Copy()
 	result.priority_templates = priority_templates.Copy()
 	result.required_templates = required_templates.Copy()
-	results.budgets = budgets.Copy()
+	result.budgets = budgets.Copy()
 	return result

@@ -4,6 +4,9 @@
 /datum/jigsaw_buffer_enqueued
 	var/lower_left_grid_x
 	var/lower_left_grid_y
+	/**
+	 * * Starts at SOUTH.
+	 */
 	var/orientation
 	var/datum/prototype/jigsaw_template/template
 	var/datum/dmm_context/context
@@ -44,7 +47,7 @@
 	var/list/west_require
 	var/list/west_exclude
 
-/datum/jigsaw_buffer_tile/New(grid_x, grid_y, datum/jigsaw_buffer_enqueued/enqueued, datum/jigsaw_tile/tile)
+/datum/jigsaw_buffer_tile/New(grid_x, grid_y, datum/jigsaw_buffer_enqueued/enqueued, datum/jigsaw_tile/tile, orientation)
 	src.grid_x = grid_x
 	src.grid_y = grid_y
 
@@ -52,21 +55,87 @@
 		src.enqueued = enqueued
 
 	if(tile)
-		src.north_tags = tile.north_tags
-		src.north_require = tile.north_require
-		src.north_exclude = tile.north_exclude
+		switch(orientation)
+			// yeah so the fun part
+			// these get rotated based on orientation
+			// because these are always true-north (oriented to the buffer as a whole)
 
-		src.south_tags = tile.south_tags
-		src.south_require = tile.south_require
-		src.south_exclude = tile.south_exclude
+			if(SOUTH)
+				// 0 deg clockwise
 
-		src.east_tags = tile.east_tags
-		src.east_require = tile.east_require
-		src.east_exclude = tile.east_exclude
+				src.north_tags = tile.north_tags
+				src.north_require = tile.north_require
+				src.north_exclude = tile.north_exclude
 
-		src.west_tags = tile.west_tags
-		src.west_require = tile.west_require
-		src.west_exclude = tile.west_exclude
+				src.south_tags = tile.south_tags
+				src.south_require = tile.south_require
+				src.south_exclude = tile.south_exclude
+
+				src.east_tags = tile.east_tags
+				src.east_require = tile.east_require
+				src.east_exclude = tile.east_exclude
+
+				src.west_tags = tile.west_tags
+				src.west_require = tile.west_require
+				src.west_exclude = tile.west_exclude
+
+			if(NORTH)
+				// 180 deg clockwise
+
+				src.north_tags = tile.south_tags
+				src.north_require = tile.south_require
+				src.north_exclude = tile.south_exclude
+
+				src.south_tags = tile.north_tags
+				src.south_require = tile.north_require
+				src.south_exclude = tile.north_exclude
+
+				src.east_tags = tile.west_tags
+				src.east_require = tile.west_require
+				src.east_exclude = tile.west_exclude
+
+				src.west_tags = tile.east_tags
+				src.west_require = tile.east_require
+				src.west_exclude = tile.east_exclude
+
+			if(EAST)
+				// 270 deg clockwise / 90 deg counterclockwise
+
+				src.north_tags = tile.east_tags
+				src.north_require = tile.east_require
+				src.north_exclude = tile.east_exclude
+
+				src.south_tags = tile.west_tags
+				src.south_require = tile.west_require
+				src.south_exclude = tile.west_exclude
+
+				src.east_tags = tile.south_tags
+				src.east_require = tile.south_require
+				src.east_exclude = tile.south_exclude
+
+				src.west_tags = tile.north_tags
+				src.west_require = tile.north_require
+				src.west_exclude = tile.north_exclude
+
+			if(WEST)
+				// 90 deg clockwise / 270 deg counterclockwise
+
+				src.north_tags = tile.west_tags
+				src.north_require = tile.west_require
+				src.north_exclude = tile.west_exclude
+
+				src.south_tags = tile.east_tags
+				src.south_require = tile.east_require
+				src.south_exclude = tile.east_exclude
+
+				src.east_tags = tile.north_tags
+				src.east_require = tile.north_require
+				src.east_exclude = tile.north_exclude
+
+				src.west_tags = tile.south_tags
+				src.west_require = tile.south_require
+				src.west_exclude = tile.south_exclude
+
 
 /datum/jigsaw_buffer_tile/Destroy()
 	src.enqueued = null
@@ -130,7 +199,7 @@
 
 	return TRUE
 
-/datum/jigsaw_buffer/proc/block_off_according_to_world_at(lower_left_x, lower_left_y, respect_worldgen_overwrite_flags)
+/datum/jigsaw_buffer/proc/block_off_according_to_world_at(lower_left_x, lower_left_y, z, respect_worldgen_overwrite_flags)
 	// scan for obstructions
 	var/x_low = lower_left_x
 	var/y_low = lower_left_y
@@ -194,6 +263,8 @@
 	QDEL_LIST(enqueued_contexts)
 
 /datum/jigsaw_buffer/proc/template_fits_at(datum/prototype/jigsaw_template/template, lower_left_grid_x, lower_left_grid_y, orientation)
+	template.load_cached()
+
 	var/width = template.resultant_pattern.width
 	var/height = template.resultant_pattern.height
 
@@ -273,6 +344,15 @@
 	// since this is a hot loop, it's unrolled for performance
 	// SOUTH is treated as neutral due to BYOND defaulting to SOUTH.
 
+	var/datum/jigsaw_buffer_enqueued/enqueued = new /datum/jigsaw_buffer_enqueued(
+							template,
+							lower_left_grid_x,
+							lower_left_grid_y,
+							orientation
+						)
+
+	var/list/pattern = template.resultant_pattern.pattern
+
 	switch(orientation)
 		if(NORTH)
 			// 180 deg CW
@@ -280,9 +360,13 @@
 				for(var/y in 1 to height)
 					var/real_x = lower_left_grid_x + (width - x)
 					var/real_y = lower_left_grid_y + (height - y)
-					src.grid[real_x + src.width * (real_y - 1)] = new /datum/jigsaw_buffer_tile/enqueued(real_x, real_y, new /datum/jigsaw_buffer_enqueued(template, lower_left_grid_x, lower_left_grid_y, orientation), template.pattern[x + width * (y - 1)])
-					if(tile)
-						return FALSE
+					src.grid[real_x + src.width * (real_y - 1)] = new /datum/jigsaw_buffer_tile(
+						real_x,
+						real_y,
+						enqueued,
+						pattern[x + width * (y - 1)],
+						NORTH,
+					)
 
 		if(SOUTH)
 			// 0 deg CW
@@ -290,9 +374,13 @@
 				for(var/y in 1 to height)
 					var/real_x = lower_left_grid_x + x - 1
 					var/real_y = lower_left_grid_y + y - 1
-					var/datum/jigsaw_buffer_tile/tile = src.grid[real_x + src.width * (real_y - 1)]
-					if(tile)
-						return FALSE
+					src.grid[real_x + src.width * (real_y - 1)] = new /datum/jigsaw_buffer_tile(
+						real_x,
+						real_y,
+						enqueued,
+						pattern[x + width * (y - 1)],
+						SOUTH,
+					)
 
 		if(EAST)
 			// 270 deg CW
@@ -300,9 +388,13 @@
 				for(var/y in 1 to height)
 					var/real_x = lower_left_grid_x + (height - y)
 					var/real_y = lower_left_grid_y + x - 1
-					var/datum/jigsaw_buffer_tile/tile = src.grid[real_x + src.width * (real_y - 1)]
-					if(tile)
-						return FALSE
+					src.grid[real_x + src.width * (real_y - 1)] = new /datum/jigsaw_buffer_tile(
+						real_x,
+						real_y,
+						enqueued,
+						pattern[x + width * (y - 1)],
+						EAST,
+					)
 
 		if(WEST)
 			// 90 deg CW
@@ -310,8 +402,12 @@
 				for(var/y in 1 to height)
 					var/real_x = lower_left_grid_x + (y - 1)
 					var/real_y = lower_left_grid_y + (width - x)
-					var/datum/jigsaw_buffer_tile/tile = src.grid[real_x + src.width * (real_y - 1)]
-					if(tile)
-						return FALSE
+					src.grid[real_x + src.width * (real_y - 1)] = new /datum/jigsaw_buffer_tile(
+						real_x,
+						real_y,
+						enqueued,
+						pattern[x + width * (y - 1)],
+						WEST,
+					)
 
 	return TRUE

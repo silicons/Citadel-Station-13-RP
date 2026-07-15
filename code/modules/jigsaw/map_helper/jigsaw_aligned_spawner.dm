@@ -61,7 +61,7 @@
 
 	ASSERT(buffer.fits_in_world_at(aligned_x_low, aligned_y_low), "Buffer must fit in world at aligned coordinates.")
 
-	buffer.block_off_according_to_world_at(aligned_x_low, aligned_y_low, respect_worldgen_overwrite_flags)
+	buffer.block_off_according_to_world_at(aligned_x_low, aligned_y_low, z, respect_worldgen_overwrite_flags)
 
 	// generate
 	var/datum/jigsaw_generator/generator = new(preset.get_config())
