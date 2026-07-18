@@ -5,10 +5,10 @@
  * Until we get a proper world generation API (map_injections are not enough for worldgen)
  * with layers, this is what you get.
  */
-/datum/legacy_jigsaw_worldgen_hijinks
+/datum/map_injection/legacy_jigsaw_worldgen_hijinks
 	#warn impl
 
-/datum/legacy_jigsaw_worldgen_hijinks/on_map_pre_init(datum/map_context/map_context, datum/dmm_context/dmm_context)
+/datum/map_injection/legacy_jigsaw_worldgen_hijinks/on_map_pre_init(datum/map_context/map_context, datum/dmm_context/dmm_context)
 	..()
 
 	if(!dmm_context)

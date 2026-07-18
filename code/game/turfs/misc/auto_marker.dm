@@ -10,6 +10,19 @@
 	var/outdoors_rock_very_dense_type = /turf/simulated/mineral
 	var/outdoors_liquid_type = /turf/simulated/floor/water
 
+/datum/turf_auto_marker_config/clone()
+	var/datum/turf_auto_marker_config/clone = new
+
+	clone.outdoors_floor_type = src.outdoors_floor_type
+	clone.outdoors_floor_stripped_type = src.outdoors_floor_stripped_type
+	clone.outdoors_floor_very_stripped_type = src.outdoors_floor_very_stripped_type
+	clone.outdoors_rock_type = src.outdoors_rock_type
+	clone.outdoors_rock_dense_type = src.outdoors_rock_dense_type
+	clone.outdoors_rock_very_dense_type = src.outdoors_rock_very_dense_type
+	clone.outdoors_liquid_type = src.outdoors_liquid_type
+
+	return clone
+
 /**
  * automatic markers that replace themselves on mapload
  */

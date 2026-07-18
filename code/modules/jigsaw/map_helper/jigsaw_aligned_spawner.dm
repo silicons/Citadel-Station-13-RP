@@ -69,3 +69,10 @@
 	#warn generate
 
 	#warn apply
+
+/obj/map_helper/jigsaw_aligned_spawner/anything
+
+/obj/map_helper/jigsaw_aligned_spawner/anything/New()
+
+
+#warn impl

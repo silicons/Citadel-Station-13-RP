@@ -55,13 +55,15 @@ ADMIN_VERB_DEF(load_custom_overmap, R_ADMIN, "Load Custom Overmap", "Load a cust
 	var/datum/overmap/creating = new("loaded-[rand(1, 1000000)]", template)
 	creating.initialize()
 	// loaded, load the map template in there
+	var/datum/dmm_context/context = new
+	context.area_cache = list(
+		(/area/overmap) = creating.area,
+	)
 	var/datum/dmm_context/loaded_context = parsed_map.load(
 		creating.reservation.bottom_left_coords[1],
 		creating.reservation.bottom_left_coords[2],
 		creating.reservation.bottom_left_coords[3],
-		area_cache = list(
-			(/area/overmap) = creating.area,
-		),
+		context = context,
 	)
 	// initialize
 	SSatoms.init_map_bounds(loaded_context.loaded_bounds)

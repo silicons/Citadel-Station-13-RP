@@ -56,6 +56,13 @@
 
 	return TRUE
 
+/datum/jigsaw_buffer/proc/get_empty_tile_count()
+	var/count = 0
+	for(var/i in 1 to length(grid))
+		if(!grid[i])
+			count++
+	return count
+
 /datum/jigsaw_buffer/proc/block_off_according_to_world_at(lower_left_x, lower_left_y, z, respect_worldgen_overwrite_flags)
 	// scan for obstructions
 	var/x_low = lower_left_x

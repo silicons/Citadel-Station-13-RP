@@ -17,17 +17,24 @@
 	 * Custom budgets, key-value list of string-number.
 	 * * This is applied in parallel with the existing generator config budgets, so
 	 *   if this is lower, this is applied instead of that.
+	 * * The list itself may be modified.
 	 */
 	var/list/custom_budgets = list()
 
 	/**
+	 * A list of generator configs to try to emplace
+	 * * The list itself may be modified, but not its elements.
+	 */
+	var/list/datum/jigsaw_generator_config/explicit_configs = list()
+
+	/**
 	 * A list of generator config-literals to use until out of budget or time expired.
 	 * * Associate to number for weight. None = 1 weight.
-	 * * This list should be read only for its contents, because configs might be
-	 *   directly linked in.
+	 * * The list itself may be modified, but not its elements.
 	 */
-	var/list/datum/jigsaw_generator_config/configs = list()
+	var/list/datum/jigsaw_generator_config/weighted_configs = list()
 
 /datum/jigsaw_chain_generator_resultant_config/Destroy()
-	configs = null
+	explicit_configs = null
+	weighted_configs = null
 	return ..()

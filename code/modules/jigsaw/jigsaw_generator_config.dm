@@ -13,6 +13,7 @@
 	var/tile_budget_ratio
 	/**
 	 * Custom budgets, key-value list of string-number.
+	 * * This list may not be edited by the generator.
 	 */
 	var/list/custom_budgets = list()
 
@@ -30,5 +31,18 @@
 	/**
 	 * Spawn configs to use.
 	 * * If more than one is specified, one is chosen at random.
+	 * * This list may not be edited by the generator.
 	 */
 	var/list/datum/jigsaw_spawn_config/spawn_configs = list()
+
+/datum/jigsaw_generator_config/clone()
+	var/datum/jigsaw_generator_config/clone = new
+
+	clone.tile_budget = src.tile_budget
+	clone.tile_budget_ratio = src.tile_budget_ratio
+	clone.custom_budgets = src.custom_budgets.Copy()
+	clone.auto_marker_config = src.auto_marker_config.clone()
+	clone.template_config = src.template_config.clone()
+	clone.spawn_configs = deep_clone_list(src.spawn_configs)
+
+	return clone

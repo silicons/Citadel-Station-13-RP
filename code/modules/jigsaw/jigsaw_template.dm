@@ -26,7 +26,6 @@
 
 	/// pattern
 	var/datum/jigsaw_template_pattern/pattern
-	#warn impl
 	/// cached resultant pattern
 	var/tmp/datum/jigsaw_pattern/resultant_pattern
 
@@ -77,7 +76,6 @@
 	if(!parsed)
 		parsed = new(path)
 	if(!resultant_pattern)
-		#warn this and more?
 		resultant_pattern = pattern.get_pattern()
 
 /datum/prototype/jigsaw_template/override
