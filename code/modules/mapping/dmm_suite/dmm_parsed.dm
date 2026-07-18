@@ -29,13 +29,12 @@
  * * no_changeturf - do not call [turf/AfterChange] when loading turfs.
  * * place_on_top - use PlaceOnTop instead of ChangeTurf
  * * orientation - cardinal dir to do. default is south.
- * * area_cache - override area cache and provide your own, usually used to ensure multiple loadings share the same /area's.
  *
- * @return /datum/dmm_parsed instance
+ * @return /datum/dmm_context instance
  */
-/proc/load_map(map, ll_x, ll_y, ll_z, x_lower, y_lower, x_upper, y_upper, z_lower, z_upper, no_changeturf, place_on_top, orientation, list/area_cache)
+/proc/load_map(map, ll_x, ll_y, ll_z, x_lower, y_lower, x_upper, y_upper, z_lower, z_upper, no_changeturf, place_on_top, orientation)
 	var/datum/dmm_parsed/parsed = new(map, x_lower, x_upper, y_lower, y_upper, z_lower, z_upper)
-	return parsed.load(ll_x, ll_y, ll_z, no_changeturf = no_changeturf, place_on_top = place_on_top, orientation = orientation, area_cache = area_cache)
+	return parsed.load(ll_x, ll_y, ll_z, no_changeturf = no_changeturf, place_on_top = place_on_top, orientation = orientation)
 
 /**
  * parses a dmm map
@@ -288,16 +287,17 @@
  * * no_changeturf - do not call [turf/AfterChange] when loading turfs.
  * * place_on_top - use PlaceOnTop instead of ChangeTurf
  * * orientation - orientation to load. the 'natural' orientation is SOUTH. Any other orientation rotates it with respect from SOUTH to it.
- * * area_cache - override area cache and provide your own, used to make sure multiple loadings share the same areas if two areas are the same type.
  * * context - value to push to preloader's dmm context, used by atoms during preloading_from_mapload() to perform various things like mangling their linkage IDs
  *
- * @return bounds list of load, or null if failed.
+ * @return loaded /datum/dmm_context
  */
-/datum/dmm_parsed/proc/load(x, y, z, x_lower = -INFINITY, x_upper = INFINITY, y_lower = -INFINITY, y_upper = INFINITY, z_lower = -INFINITY, z_upper = INFINITY, no_changeturf, place_on_top, orientation = SOUTH, list/area_cache, datum/dmm_context/context)
+/datum/dmm_parsed/proc/load(x, y, z, x_lower = -INFINITY, x_upper = INFINITY, y_lower = -INFINITY, y_upper = INFINITY, z_lower = -INFINITY, z_upper = INFINITY, no_changeturf, place_on_top, orientation = SOUTH, datum/dmm_context/context)
 	// we always have context, even if we don't
 	if(isnull(context))
 		context = new
 	. = context
+
+	var/list/area_cache = context?.area_cache || context?.map_context?.area_cache
 
 	var/static/loading = FALSE
 	UNTIL(!loading)

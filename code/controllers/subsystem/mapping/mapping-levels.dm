@@ -196,14 +196,12 @@
  * @params
  * * instance - level to load
  * * use_dmm_context - use the given map_context for the loader. This is used to create the dmm_context for the level.
- * * use_area_cache - use the given list as the area cache for the DMM loader. if none is provided, one will be created.
  *
  * @return loaded context, or null on fail
  */
 /datum/controller/subsystem/mapping/proc/load_level(
 		datum/map_level/instance,
 		datum/map_context/map_context,
-		list/use_area_cache,
 	)
 	UNTIL(!map_system_mutex)
 	map_system_mutex = TRUE
@@ -211,7 +209,6 @@
 	var/datum/dmm_context/dmm_context = load_level_impl(
 		instance,
 		map_context,
-		use_area_cache,
 	)
 
 	if(!dmm_context)
@@ -228,7 +225,6 @@
 /datum/controller/subsystem/mapping/proc/load_level_impl(
 		datum/map_level/instance,
 		datum/map_context/map_context,
-		list/use_area_cache,
 	)
 	RETURN_TYPE(/datum/dmm_context)
 	PRIVATE_PROC(TRUE)
@@ -279,7 +275,6 @@
 			no_changeturf = TRUE,
 			place_on_top = FALSE,
 			orientation = instance.load_orientation,
-			area_cache = use_area_cache,
 			context = dmm_context,
 		)
 

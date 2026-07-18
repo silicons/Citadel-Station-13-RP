@@ -15,4 +15,15 @@
 	var/tile_budget_used = 0
 	var/list/custom_budgets_used = list()
 
-#warn impl
+/datum/jigsaw_generator_results/serialize()
+	. = ..()
+	.["failed"] = failed
+
+	var/list/placed_counts_serialized = list()
+	for(var/datum/prototype/jigsaw_template/template in placed_counts)
+		placed_counts_serialized[template.id] = placed_counts[template]
+	.["placed_counts"] = placed_counts_serialized
+
+	.["approximate_ms_used"] = approximate_ms_used
+	.["tile_budget_used"] = tile_budget_used
+	.["custom_budgets_used"] = custom_budgets_used.Copy()

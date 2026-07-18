@@ -104,13 +104,10 @@
 		for(var/datum/map_injection/injection as anything in loading_map.injections)
 			context.register_injection(injection)
 
-		var/list/map_use_area_cache = loading_map.load_shared_area_cache ? list() : null
-
 		for(var/datum/map_level/level as anything in loading_map.get_sorted_levels())
 			var/datum/dmm_context/level_context = load_level_impl(
 				level,
 				context,
-				map_use_area_cache,
 			)
 			if(isnull(level_context))
 				emit_fatal_log("load - failed to load level '[level.id]' in map '[instance.id]")

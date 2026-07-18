@@ -56,6 +56,14 @@
 	/// All dmm_context's loaded
 	var/list/datum/dmm_context/loaded_dmm_contexts = list()
 
+	//* Modifiable during load *//
+
+	/**
+	 * A cache of type --> area for areas to use during load.
+	 * * Keyed by typepath, edits to variables are ignored.
+	 */
+	var/list/area_cache = list()
+
 	//* Bespoke 'collected' values. *//
 
 	/// collected gear markers

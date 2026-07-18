@@ -25,6 +25,18 @@
 	 */
 	var/list/custom_budgets = list()
 
+	/**
+	 * A list of generator config-literals to use.
+	 * * Associate to number for weight. None = 1 weight.
+	 */
+	var/list/datum/jigsaw_generator_config/configs = list()
+
+	/**
+	 * A list of resolvables for presets to use.
+	 * * Associate to number for weight. None = 1 weight.
+	 */
+	var/list/datum/prototype/jigsaw_generator_preset/presets = list()
+
 /datum/jigsaw_chain_generator_config/proc/prepare()
 	SHOULD_NOT_OVERRIDE(TRUE)
 
@@ -40,6 +52,30 @@
 	SHOULD_CALL_PARENT(TRUE)
 	prepare()
 
-#warn impl
+	var/list/datum/jigsaw_generator_config/generator_configs = list()
+
+	for(var/datum/jigsaw_generator_config/config in configs)
+		generator_configs += config
+
+	for(var/datum/prototype/jigsaw_generator_preset/preset in presets)
+		generator_configs += preset.get_config()
+
+	return generator_configs
+
+/datum/jigsaw_chain_generator_config/weighted_pick
 
 /datum/jigsaw_chain_generator_config/literally_everything
+
+/datum/jigsaw_chain_generator_config/literally_everything/get_generator_configs()
+	var/list/datum/jigsaw_generator_config/generator_configs = list()
+
+	for(var/datum/jigsaw_generator_config/config in configs)
+		generator_configs += config
+
+	for(var/datum/prototype/jigsaw_generator_preset/preset in presets)
+		generator_configs += preset.get_config()
+
+	return generator_configs
+
+
+/datum/jigsaw_chain_generator_config

@@ -36,10 +36,18 @@
 	/// Offset the actual load from the lower-left (direction relative) of
 	/// the aligned pattern.
 	/// * This is in tiles, not alignment multiples.
+	/// * Patterns start at lower-left-aligned-to-lower-left, and SOUTH.
+	///   This means that a 2x3 (width/height) pattern in SOUTH orientation
+	///   should ideally represent a 2x3 chunk dmm.
+	/// * Setting offset will let you shift the actual load (relative to SOUTH).
 	var/offset_x = 0
 	/// Offset the actual load from the lower-left (direction relative) of
 	/// the aligned pattern.
 	/// * This is in tiles, not alignment multiples.
+	/// * Patterns start at lower-left-aligned-to-lower-left, and SOUTH.
+	///   This means that a 2x3 (width/height) pattern in SOUTH orientation
+	///   should ideally represent a 2x3 chunk dmm.
+	/// * Setting offset will let you shift the actual load (relative to SOUTH).
 	var/offset_y = 0
 
 	/// display name

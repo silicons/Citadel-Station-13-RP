@@ -44,6 +44,14 @@
 	/// * natural orientation is SOUTH
 	var/loaded_orientation
 
+	//* modifiable and used by loader *//
+
+	/**
+	 * K-V type --> area instance lookup for areas.
+	 * * Defaults to map_context.area_cache.
+	 */
+	var/list/area_cache
+
 	//* used by loader *//
 
 	/**

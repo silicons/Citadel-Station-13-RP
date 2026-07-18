@@ -7,9 +7,16 @@
 	var/name = "Unknown Preset"
 	var/desc = "Some kind of preset."
 
-	var/datum/jigsaw_generator_config/config = new
+	var/datum/jigsaw_generator_config/config
+	var/config_type = /datum/jigsaw_generator_config
 
-#warn impl
+/datum/prototype/jigsaw_generator_preset/New()
+	create_config()
+	..()
+
+/datum/prototype/jigsaw_generator_preset/proc/create_config()
+	if(!config && config_type)
+		config = new config_type
 
 /datum/prototype/jigsaw_generator_preset/proc/get_config()
 	return config
