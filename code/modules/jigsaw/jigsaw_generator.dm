@@ -10,8 +10,7 @@
 /datum/jigsaw_generator/New(datum/jigsaw_generator_config/config)
 	src.config = config
 
-/datum/jigsaw_generator/proc/get_available_templates()
-	return list()
+/datum/jigsaw_generator/proc/generate(datum/jigsaw_buffer/buffer)
 
 #warn impl
 

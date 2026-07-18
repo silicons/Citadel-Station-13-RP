@@ -3,12 +3,12 @@
 
 /obj/map_helper/jigsaw_aligned_spawner
 	name = "Jigsaw Dungeon Spawner"
-	desc = "Automatically emplaces a jigsaw dungeon on mapload."
-	#warn sprite
+	desc = "Automatically emplaces jigsaw dungeon(s) on mapload."
+	icon = 'icons/modules/jigsaw/map_helpers.dmi'
+	icon_state = "spawner"
 
 	early = TRUE
 
-	var/datum/prototype/jigsaw_generator_preset/preset = /datum/prototype/jigsaw_generator_preset/empty
 	var/respect_worldgen_overwrite_flags = TRUE
 
 	/**
@@ -17,10 +17,6 @@
 	 *   actually determines which aligned tiles we reach into.
 	 */
 	var/tile_radius = 48
-
-/obj/map_helper/jigsaw_aligned_spawner/New()
-	preset = RSjigsaw_generator_presets.fetch_local_or_throw(preset)
-	..()
 
 /obj/map_helper/jigsaw_aligned_spawner/map_initializations(datum/dmm_context/dmm_context, datum/map_context/map_context)
 	..()
@@ -63,16 +59,49 @@
 
 	buffer.block_off_according_to_world_at(aligned_x_low, aligned_y_low, z, respect_worldgen_overwrite_flags)
 
+	var/datum/jigsaw_generator_results/results = generate_buffer(buffer)
+
+	buffer.load_into_world(
+		aligned_x_low,
+		aligned_y_low,
+		z,
+	)
+
+/obj/map_helper/jigsaw_aligned_spawner/proc/generate_buffer(datum/jigsaw_buffer/buffer) as /datum/jigsaw_generator_results
+	return
+
+/obj/map_helper/jigsaw_aligned_spawner/specific
+	var/datum/prototype/jigsaw_generator_preset/preset = /datum/prototype/jigsaw_generator_preset/empty
+
+/obj/map_helper/jigsaw_aligned_spawner/specific/New()
+	preset = RSjigsaw_generator_presets.fetch_local_or_throw(preset)
+	..()
+
+/obj/map_helper/jigsaw_aligned_spawner/specific/generate_buffer(datum/jigsaw_buffer/buffer)
 	// generate
 	var/datum/jigsaw_generator/generator = new(preset.get_config())
-
-	#warn generate
-
-	#warn apply
+	return generator.generate(buffer)
 
 /obj/map_helper/jigsaw_aligned_spawner/anything
 
-/obj/map_helper/jigsaw_aligned_spawner/anything/New()
+/obj/map_helper/jigsaw_aligned_spawner/anything/generate_buffer(datum/jigsaw_buffer/buffer)
+	var/list/datum/prototype/jigsaw_generator_preset/presets = RSjigsaw_generator_presets.fetch_subtypes_mutable(/datum/prototype/jigsaw_generator_preset)
 
+	var/datum/jigsaw_generator_results/overall_results = new
+	var/iterations = 100
 
-#warn impl
+	while(iterations > 0)
+		iterations--
+
+		var/datum/prototype/jigsaw_generator_preset/preset = SAFEPICK(presets)
+		if(!preset)
+			break
+
+			var/datum/jigsaw_chain_generator/generator = new(preset.get_chain_config())
+			var/datum/jigsaw_generator_results/results = generator.generate(buffer)
+			overall_results.merge_from(results)
+
+			if(!results.failed)
+				break
+
+	return results

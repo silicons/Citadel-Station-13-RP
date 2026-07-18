@@ -27,3 +27,17 @@
 	.["approximate_ms_used"] = approximate_ms_used
 	.["tile_budget_used"] = tile_budget_used
 	.["custom_budgets_used"] = custom_budgets_used.Copy()
+
+/datum/jigsaw_generator_results/proc/merge_from(datum/jigsaw_generator_results/other)
+	SHOULD_CALL_PARENT(TRUE)
+
+	failed = failed || other.failed
+
+	for(var/datum/prototype/jigsaw_template/template in other.placed_counts)
+		placed_counts[template] += other.placed_counts[template]
+
+	approximate_ms_used += other.approximate_ms_used
+	tile_budget_used += other.tile_budget_used
+
+	for(var/key in other.custom_budgets_used)
+		custom_budgets_used[key] += other.custom_budgets_used[key]

@@ -29,9 +29,12 @@
 	SHOULD_CALL_PARENT(TRUE)
 
 	var/datum/jigsaw_chain_generator_resultant_config/result = new
-	return result
 
-#warn below
+	result.tile_budget = src.tile_budget
+	result.tile_budget_ratio = src.tile_budget_ratio
+	result.custom_budgets = src.custom_budgets.Copy()
+
+	return result
 
 /datum/jigsaw_chain_generator_config/weighted_pick
 	/**
@@ -46,4 +49,25 @@
 	 */
 	var/list/datum/prototype/jigsaw_generator_preset/presets = list()
 
+/datum/jigsaw_chain_generator_config/weighted_pick/get_resultant_config() as /datum/jigsaw_chain_generator_resultant_config
+	var/datum/jigsaw_chain_generator_resultant_config/result = ..()
+
+	result.weighted_configs = configs.Copy()
+
+	for(var/key in presets)
+		var/datum/prototype/jigsaw_generator_preset/preset = RSjigsaw_generator_presets.fetch_local_or_throw(key)
+		var/datum/jigsaw_generator_config/config = preset.get_config()
+		result.weighted_configs[config] += presets[key]
+
+	return result
+
 /datum/jigsaw_chain_generator_config/literally_everything
+
+/datum/jigsaw_chain_generator_config/literally_everything/get_resultant_config() as /datum/jigsaw_chain_generator_resultant_config
+	var/datum/jigsaw_chain_generator_resultant_config/result = ..()
+
+	for(var/datum/prototype/jigsaw_generator_preset/preset as anything in RSjigsaw_generator_presets.fetch_subtypes_immutable(/datum/prototype/jigsaw_generator_preset))
+		var/datum/jigsaw_generator_config/config = preset.get_config()
+		result.weighted_configs[config] = 1
+
+	return result

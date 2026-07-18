@@ -18,7 +18,7 @@
 	if(!isnull(resultant_config.tile_budget))
 		tile_budget_left = resultant_config.tile_budget
 	else if(!isnull(resultant_config.tile_budget_ratio))
-		tile_budget_left = ceil(buffer.get_total_tile_count() * resultant_config.tile_budget_ratio)
+		tile_budget_left = ceil(buffer.get_empty_tile_count() * resultant_config.tile_budget_ratio)
 	else
 		tile_budget_left = 0
 
@@ -30,9 +30,9 @@
 	var/iteration_limit = 100
 
 	// owned ref, may modify
-	var/list/datum/jigsaw_generator_config/push_configs = resultant_config.explicit_configs.Copy()
+	var/list/push_configs = resultant_config.explicit_configs.Copy()
 	// borrowed ref, do not modify
-	var/list/datum/jigsaw_generator_config/weighted_configs = resultant_config.weighted_configs
+	var/list/weighted_configs = resultant_config.weighted_configs
 
 	do
 		iteration_limit--
@@ -46,7 +46,7 @@
 		if(length(push_configs))
 			var/datum/jigsaw_generator_config/config = pick(push_configs)
 
-			push_configs[config]--
+			push_configs[config] -= 1
 			if(push_configs[config] <= 0)
 				push_configs -= config
 
@@ -61,14 +61,14 @@
 		modified_config.tile_budget = tile_budget_left
 		modified_config.custom_budgets = custom_budgets_left
 
-		var/datum/jigsaw_generator/generator = new(use_config)
+		var/datum/jigsaw_generator/generator = new(modified_config)
 		var/datum/jigsaw_generator_results/generator_results = generator.generate(buffer)
 
 		results.results += generator_results
 		results.total_approximate_ms_used += generator_results.approximate_ms_used
 		results.total_tile_budget_used += generator_results.tile_budget_used
 		for(var/key in generator_results.custom_budgets_used)
-			results.custom_budgets_used[key] += generator_results.custom_budgets_used[key]
+			results.total_custom_budgets_used[key] += generator_results.custom_budgets_used[key]
 			custom_budgets_left[key] -= generator_results.custom_budgets_used[key]
 
 		tile_budget_left -= generator_results.tile_budget_used
