@@ -82,6 +82,13 @@
 	pre_init_callbacks = null
 	post_init_callbacks = null
 	loaded_dmm_contexts = null
+	area_cache = null
+
+	collected_distributed_gear_markers = \
+		collected_role_gear_markers_by_role = \
+		collected_role_markers_by_tag = \
+		collected_fixed_template_seeding_targets = null
+
 	return ..()
 
 /datum/map_context/proc/create_blank_dmm_context()

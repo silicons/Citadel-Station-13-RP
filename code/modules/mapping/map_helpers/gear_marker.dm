@@ -217,8 +217,8 @@ GLOBAL_REAL_LIST(distributed_gear_marker_usage_weights) = list(
 	var/role_allow_overflow = TRUE
 
 /obj/map_helper/gear_marker/role/preloading_from_mapload(datum/dmm_context/context)
-	LAZYINITLIST(context.map_context.collected_stamped_gear_markers_by_role[role_tag])
-	context.map_context.collected_stamped_gear_markers_by_role[role_tag] += src
+	LAZYINITLIST(context.map_context.collected_role_gear_markers_by_role[role_tag])
+	context.map_context.collected_role_gear_markers_by_role[role_tag] += src
 	return ..()
 
 /**

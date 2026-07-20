@@ -196,11 +196,11 @@
 	return TRUE
 
 /**
- * @return TRUE / FALSE
+ * @return /datum/jigsaw_buffer_tile if successful, null if not.
  */
 /datum/jigsaw_buffer/proc/emplace_template_at(datum/prototype/jigsaw_template/template, lower_left_grid_x, lower_left_grid_y, orientation, datum/dmm_context/context)
 	if(!template_fits_at(template, lower_left_grid_x, lower_left_grid_y, orientation))
-		return FALSE
+		return null
 	return unsafe_emplace_template_at(template, lower_left_grid_x, lower_left_grid_y, orientation, context)
 
 /datum/jigsaw_buffer/proc/unsafe_emplace_template_at(datum/prototype/jigsaw_template/template, lower_left_grid_x, lower_left_grid_y, orientation, datum/dmm_context/context)
@@ -228,13 +228,15 @@
 				for(var/y in 1 to height)
 					var/real_x = lower_left_grid_x + (width - x)
 					var/real_y = lower_left_grid_y + (height - y)
-					src.grid[real_x + src.width * (real_y - 1)] = new /datum/jigsaw_buffer_tile(
+					var/datum/jigsaw_buffer_tile/created = new /datum/jigsaw_buffer_tile(
 						real_x,
 						real_y,
 						enqueued,
 						pattern[x + width * (y - 1)],
 						NORTH,
 					)
+					src.grid[real_x + src.width * (real_y - 1)] = created
+					enqueued.tiles += created
 
 		if(SOUTH)
 			// 0 deg CW
@@ -242,13 +244,15 @@
 				for(var/y in 1 to height)
 					var/real_x = lower_left_grid_x + x - 1
 					var/real_y = lower_left_grid_y + y - 1
-					src.grid[real_x + src.width * (real_y - 1)] = new /datum/jigsaw_buffer_tile(
+					var/datum/jigsaw_buffer_tile/created = new /datum/jigsaw_buffer_tile(
 						real_x,
 						real_y,
 						enqueued,
 						pattern[x + width * (y - 1)],
 						SOUTH,
 					)
+					src.grid[real_x + src.width * (real_y - 1)] = created
+					enqueued.tiles += created
 
 		if(EAST)
 			// 270 deg CW
@@ -256,13 +260,15 @@
 				for(var/y in 1 to height)
 					var/real_x = lower_left_grid_x + (height - y)
 					var/real_y = lower_left_grid_y + x - 1
-					src.grid[real_x + src.width * (real_y - 1)] = new /datum/jigsaw_buffer_tile(
+					var/datum/jigsaw_buffer_tile/created = new /datum/jigsaw_buffer_tile(
 						real_x,
 						real_y,
 						enqueued,
 						pattern[x + width * (y - 1)],
 						EAST,
 					)
+					src.grid[real_x + src.width * (real_y - 1)] = created
+					enqueued.tiles += created
 
 		if(WEST)
 			// 90 deg CW
@@ -270,12 +276,14 @@
 				for(var/y in 1 to height)
 					var/real_x = lower_left_grid_x + (y - 1)
 					var/real_y = lower_left_grid_y + (width - x)
-					src.grid[real_x + src.width * (real_y - 1)] = new /datum/jigsaw_buffer_tile(
+					var/datum/jigsaw_buffer_tile/created = new /datum/jigsaw_buffer_tile(
 						real_x,
 						real_y,
 						enqueued,
 						pattern[x + width * (y - 1)],
 						WEST,
 					)
+					src.grid[real_x + src.width * (real_y - 1)] = created
+					enqueued.tiles += created
 
-	return TRUE
+	return enqueued

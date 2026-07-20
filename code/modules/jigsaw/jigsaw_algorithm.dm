@@ -71,7 +71,9 @@
 		if(!next_template)
 			break
 
-		var/datum/jigsaw_generator_results/template_results = try_place_template(buffer, next_template, open_tiles, map_context)
+		var/datum/jigsaw_generator_results/template_results = any_passed ? \
+			try_place_initial(buffer, next_template, open_tiles, map_context) : \
+			try_place_template(buffer, next_template, open_tiles, map_context)
 
 		results.merge_from(template_results)
 
@@ -85,6 +87,11 @@
 			tile_budget_left -= template_results.tile_budget_used
 			for(var/key in template_results.custom_budgets_used)
 				custom_budgets_left[key] -= template_results.custom_budgets_used[key]
+
+		var/prune_begin = TICK_USAGE
+		prune_open_tiles(buffer, open_tiles)
+		var/prune_end = TICK_USAGE
+		total_tick_usage += prune_end - prune_begin
 
 	while(iterations > 0)
 
@@ -148,9 +155,6 @@
 				if(y == buffer.height)
 					continue
 				var/datum/jigsaw_buffer_tile/other_tile = buffer.grid[x + buffer.width * y]
-				if(other_tile)
-					// already filled
-					continue
 				our_tags = tile.north_tags
 				our_require = tile.north_require
 				our_exclude = tile.north_exclude
@@ -159,9 +163,6 @@
 				if(y == 1)
 					continue
 				var/datum/jigsaw_buffer_tile/other_tile = buffer.grid[x + buffer.width * (y - 2)]
-				if(other_tile)
-					// already filled
-					continue
 				our_tags = tile.south_tags
 				our_require = tile.south_require
 				our_exclude = tile.south_exclude
@@ -170,9 +171,6 @@
 				if(x == buffer.width)
 					continue
 				var/datum/jigsaw_buffer_tile/other_tile = buffer.grid[x + 1 + buffer.width * (y - 1)]
-				if(other_tile)
-					// already filled
-					continue
 				our_tags = tile.east_tags
 				our_require = tile.east_require
 				our_exclude = tile.east_exclude
@@ -181,9 +179,6 @@
 				if(x == 1)
 					continue
 				var/datum/jigsaw_buffer_tile/other_tile = buffer.grid[x - 1 + buffer.width * (y - 1)]
-				if(other_tile)
-					// already filled
-					continue
 				our_tags = tile.west_tags
 				our_require = tile.west_require
 				our_exclude = tile.west_exclude
@@ -231,6 +226,8 @@
 		var/emplace_begin = TICK_USAGE
 
 		// now attempt emplace
+
+
 		#warn compute x/y
 		emplaced = buffer.emplace_template_at(template, computed_x, computed_y, their_dir, dmm_context)
 
@@ -239,7 +236,7 @@
 		CHECK_TICK
 
 		if(emplaced)
-			results.success = TRUE
+			results.failed = FALSE
 			break
 		else
 			// failed to emplace, try next attachment point
@@ -253,6 +250,89 @@
 		map_context.register_dmm_context(dmm_context)
 
 	return results
+
+/datum/jigsaw_algorithm/general/proc/prune_open_tiles(datum/jigsaw_buffer/buffer, list/open_tiles)
+	// prune open tiles that are no longer valid
+	for(var/i in length(open_tiles) to 1 step -1)
+		var/list/open_tile = open_tiles[i]
+		var/x = open_tile[1]
+		var/y = open_tile[2]
+		var/dir = open_tile[3]
+
+		switch(dir)
+			if(NORTH)
+				if(y == buffer.height || buffer.grid[x + buffer.width * y])
+					open_tiles.Cut(i, i + 1)
+
+			if(SOUTH)
+				if(y == 1 || buffer.grid[x + buffer.width * (y - 2)])
+					open_tiles.Cut(i, i + 1)
+
+			if(EAST)
+				if(x == buffer.width || buffer.grid[x + 1 + buffer.width * (y - 1)])
+					open_tiles.Cut(i, i + 1)
+
+			if(WEST)
+				if(x == 1 || buffer.grid[x - 1 + buffer.width * (y - 1)])
+					open_tiles.Cut(i, i + 1)
+
+/datum/jigsaw_algorithm/general/proc/try_place_initial(datum/jigsaw_buffer/buffer, datum/prototype/jigsaw_template/template, list/open_tiles, datum/map_context/context) as /datum/jigsaw_generator_results
+	var/datum/jigsaw_generator_results/results = new
+
+	var/tick_used = 0
+
+	var/iterations = 100
+	while(iterations > 0)
+		iterations--
+
+		CHECK_TICK
+
+		var/place_begin = TICK_USAGE
+
+		var/dir = pick(SOUTH, EAST, NORTH, WEST)
+		var/sideways = dir & (EAST|WEST)
+		var/width = sideways ? template.resultant_pattern.height : template.resultant_pattern.width
+		var/height = sideways ? template.resultant_pattern.width : template.resultant_pattern.height
+
+		// this ignores dir but i don't care tbh
+		var/x = rand(1, buffer.width - width + 1)
+		var/y = rand(1, buffer.height - height + 1)
+
+		var/datum/jigsaw_buffer_enqueued/enqueued = buffer.emplace_template_at(template, x, y, dir, dmm_context)
+
+		if(enqueued)
+			results.failed = FALSE
+			enqueue_open_tiles(open_tiles, enqueued)
+			break
+
+		var/place_end = TICK_USAGE
+		tick_used += place_end - place_begin
+
+	results.approximate_ms_used += TICK_USAGE_TO_MS(tick_used)
+
+	if(!results.failed)
+		#warn dmm context
+
+	return results
+
+/datum/jigsaw_algorithm/general/proc/enqueue_open_tiles(list/open_tiles, datum/jigsaw_buffer_enqueued/enqueued)
+	// this is technically hugely inefficient
+	// but this is fine for now
+	// we just enqueue every single tile as part of the enqueued
+	// the filter on the try-place-template will automatically deal with it
+	for(var/i in 1 to length(enqueued.tiles))
+		var/datum/jigsaw_buffer_tile/tile = enqueued.tiles[i]
+		var/x = tile.grid_x
+		var/y = tile.grid_y
+
+		if(tile.north_tags)
+			open_tiles += list(x, y, NORTH)
+		if(tile.south_tags)
+			open_tiles += list(x, y, SOUTH)
+		if(tile.east_tags)
+			open_tiles += list(x, y, EAST)
+		if(tile.west_tags)
+			open_tiles += list(x, y, WEST)
 
 /**
  * @return list(template, required)

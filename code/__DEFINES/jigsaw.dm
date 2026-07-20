@@ -59,3 +59,18 @@
  * * The lack of JOIN_AIRTIGHT doesn't imply JOIN_LEAKY.
  */
 #define JIGSAW_MATCH_JOIN_LEAKY "join-leaky"
+
+//* Spawn Tags *//
+
+#define JIGSAW_SPAWN_TAG_MOB "mob"
+#define JIGSAW_SPAWN_TAG_MOB_BOSS "mob-boss"
+#define JIGSAW_SPAWN_TAG_MOB_RANGED "mob-ranged"
+#define JIGSAW_SPAWN_TAG_MOB_MELEE "mob-melee"
+
+#define JIGSAW_SPAWN_TAG_ITEM "item"
+#define JIGSAW_SPAWN_TAG_ITEM_GUN "item-gun"
+#define JIGSAW_SPAWN_TAG_ITEM_MELEE "item-melee"
+#define JIGSAW_SPAWN_TAG_ITEM_ARMOR "item-armor"
+#define JIGSAW_SPAWN_TAG_ITEM_SPACESUIT "item-spacesuit"
+#define JIGSAW_SPAWN_TAG_ITEM_MEDICAL "item-medical"
+#define JIGSAW_SPAWN_TAG_ITEM_MATERIALS "item-materials"

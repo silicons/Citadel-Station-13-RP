@@ -11,6 +11,8 @@
 	var/datum/prototype/jigsaw_template/template
 	var/datum/dmm_context/context
 
+	var/list/datum/jigsaw_buffer_tile/tiles = list()
+
 /datum/jigsaw_buffer_enqueued/New(datum/prototype/jigsaw_template/template, lower_left_grid_x, lower_left_grid_y, orientation, datum/dmm_context/context)
 	src.template = template
 	src.lower_left_grid_x = lower_left_grid_x
@@ -21,6 +23,7 @@
 /datum/jigsaw_buffer_enqueued/Destroy()
 	src.template = null
 	src.context = null
+	src.tiles = null
 	return ..()
 
 /**

@@ -93,6 +93,25 @@
 	/// * This can be null.
 	var/datum/dmm_parsed/loaded_dmm
 
+	//* bespoke 'collected' values *//
+
+	var/list/obj/map_helper/jigsaw_spawn/collected_jigsaw_spawns
+
+/datum/dmm_context/Destroy()
+	if(map_context)
+		if(map_context.loaded_dmm_contexts)
+			map_context.loaded_dmm_contexts -= src
+		map_context = null
+	auto_marker_config = null
+	injections = null
+	pre_init_callbacks = null
+	post_init_callbacks = null
+	area_cache = null
+
+	collected_jigsaw_spawns = null
+
+	return ..()
+
 /datum/dmm_context/proc/mark_used()
 	if(used)
 		stack_trace("a dmm_context was reused; this is not allowed and will result in bugs.")
