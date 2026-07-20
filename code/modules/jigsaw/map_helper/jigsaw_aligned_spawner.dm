@@ -89,6 +89,7 @@
 
 	var/datum/jigsaw_generator_results/overall_results = new
 	var/iterations = 100
+	var/failed = TRUE
 
 	while(iterations > 0)
 		iterations--
@@ -97,11 +98,14 @@
 		if(!preset)
 			break
 
-			var/datum/jigsaw_chain_generator/generator = new(preset.get_chain_config())
+			var/datum/jigsaw_chain_generator/generator = new(preset.get_config())
 			var/datum/jigsaw_generator_results/results = generator.generate(buffer)
 			overall_results.merge_from(results)
 
 			if(!results.failed)
+				failed = FALSE
 				break
 
-	return results
+	overall_results.failed = failed
+
+	return overall_results

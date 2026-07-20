@@ -15,7 +15,7 @@
 
 	/**
 	 * Calculated attachment points.
-	 * * [tag] = list(x, y, orientation, list(tags))
+	 * * list( list(x, y, orientation, list(match tags), list(require tags), list(exclude tags))... )
 	 * * orientation is facing away from the join point; this allows
 	 *   whatever is checking for valid joins to not have to rotate its own sense of sided-ness.
 	 * * this allows a 'fast' linear list match/check for a given tag
@@ -29,7 +29,7 @@
 	 * * As another example, `1, 2, SOUTH, list(...)` means the second tile from the left,
 	 *   third from the bottom, has those tags on the NORTH side.
 	 */
-	var/list/tmp/datum/jigsaw_pattern/calculated_attachment_points
+	var/list/calculated_attachment_points
 
 /datum/jigsaw_pattern/New(width, height, override_tile_cost)
 	src.width = width
@@ -37,6 +37,10 @@
 	src.override_tile_cost = override_tile_cost
 
 	src.pattern = new /list(width * height)
+
+/datum/jigsaw_pattern/proc/drop_cache()
+	cached_tile_cost = null
+	calculated_attachment_points = null
 
 /datum/jigsaw_pattern/proc/get_tile_cost()
 	if(!isnull(override_tile_cost))
@@ -69,6 +73,8 @@
 						y - 1,
 						SOUTH,
 						tile.north_tags,
+						tile.north_require,
+						tile.north_exclude,
 					)
 
 			// south
@@ -80,6 +86,8 @@
 						y - 1,
 						NORTH,
 						tile.south_tags,
+						tile.south_require,
+						tile.south_exclude,
 					)
 
 			// east
@@ -91,6 +99,8 @@
 						y - 1,
 						WEST,
 						tile.east_tags,
+						tile.east_require,
+						tile.east_exclude,
 					)
 
 			// west
@@ -102,6 +112,8 @@
 						y - 1,
 						EAST,
 						tile.west_tags,
+						tile.west_require,
+						tile.west_exclude,
 					)
 
 	return calculated_attachment_points

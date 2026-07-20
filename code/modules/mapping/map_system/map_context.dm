@@ -98,6 +98,11 @@
 	loaded_dmm_contexts += context
 	return context
 
+/datum/map_context/proc/register_dmm_context(datum/dmm_context/context)
+	if(context in loaded_dmm_contexts)
+		CRASH("dmm_context already registered")
+	loaded_dmm_contexts |= context
+
 /datum/map_context/proc/register_injection(datum/map_injection/injection)
 	if(injection in injections)
 		CRASH("injection already registered")

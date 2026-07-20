@@ -14,13 +14,7 @@
 	var/datum/jigsaw_chain_generator_results/results = new
 	var/datum/jigsaw_chain_generator_resultant_config/resultant_config = config.get_resultant_config()
 
-	var/tile_budget_left
-	if(!isnull(resultant_config.tile_budget))
-		tile_budget_left = resultant_config.tile_budget
-	else if(!isnull(resultant_config.tile_budget_ratio))
-		tile_budget_left = ceil(buffer.get_empty_tile_count() * resultant_config.tile_budget_ratio)
-	else
-		tile_budget_left = 0
+	var/tile_budget_left = resultant_config.get_tile_budget(buffer.get_empty_tile_count())
 
 	if(tile_budget_left <= 0)
 		return results

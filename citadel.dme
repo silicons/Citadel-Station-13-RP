@@ -3475,6 +3475,7 @@
 #include "code\modules\integrated_electronics\tools\debugger.dm"
 #include "code\modules\integrated_electronics\tools\wirer.dm"
 #include "code\modules\integrated_electronics\~defines\~defines.dm"
+#include "code\modules\jigsaw\jigsaw_algorithm.dm"
 #include "code\modules\jigsaw\jigsaw_buffer.dm"
 #include "code\modules\jigsaw\jigsaw_buffer_enqueued.dm"
 #include "code\modules\jigsaw\jigsaw_buffer_tile.dm"

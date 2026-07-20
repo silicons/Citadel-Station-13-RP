@@ -47,7 +47,7 @@
 
 	// we're always on the corner, so we just have to align it with us and do orientation stuff
 
-	template.load_standalone(target_corner, orientation = ORIENTATION_SOUTH)
+	template.load_standalone(target_corner, orientation = SOUTH)
 
 	var/width = template.width
 	var/height = template.height

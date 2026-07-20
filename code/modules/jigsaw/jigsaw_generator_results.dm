@@ -11,6 +11,10 @@
 
 	var/list/datum/prototype/jigsaw_template/placed_counts = list()
 
+	/**
+	 * * this generally only tracks time spent in-algorithm.
+	 *   preparing / copying beforehand is unfortunately untracked.
+	 */
 	var/approximate_ms_used = 0
 	var/tile_budget_used = 0
 	var/list/custom_budgets_used = list()

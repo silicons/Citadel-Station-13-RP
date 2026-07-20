@@ -12,6 +12,8 @@
 
 /datum/jigsaw_template_config/everything
 
+#warn add pack support?
+
 /datum/jigsaw_template_config/everything/clone()
 	var/datum/jigsaw_template_config/everything/clone = new
 	return clone
@@ -39,6 +41,8 @@
 	/// * may be typepaths or instances
 	/// * this are constrained by budgets.
 	var/list/datum/prototype/jigsaw_template/weighted_templates = list()
+
+#warn add pack support?
 
 /datum/jigsaw_template_config/specific/clone()
 	var/datum/jigsaw_template_config/specific/clone = ..()
