@@ -71,14 +71,16 @@
 		if(!next_template)
 			break
 
-		var/datum/jigsaw_generator_results/template_results = any_passed ? \
+		var/placing_initial = !any_passed
+
+		var/datum/jigsaw_generator_results/template_results = placing_initial ? \
 			try_place_initial(buffer, next_template, open_tiles, map_context) : \
 			try_place_template(buffer, next_template, open_tiles, map_context)
 
 		results.merge_from(template_results)
 
 		if(template_results.failed)
-			if(next_required)
+			if(next_required || placing_initial)
 				results.failed = TRUE
 				break
 		else
@@ -278,10 +280,11 @@
 
 /datum/jigsaw_algorithm/general/proc/try_place_initial(datum/jigsaw_buffer/buffer, datum/prototype/jigsaw_template/template, list/open_tiles, datum/map_context/context) as /datum/jigsaw_generator_results
 	var/datum/jigsaw_generator_results/results = new
+	var/datum/dmm_context/dmm_context = context.create_blank_dmm_context()
 
 	var/tick_used = 0
 
-	var/iterations = 100
+	var/iterations = 400
 	while(iterations > 0)
 		iterations--
 
@@ -311,7 +314,9 @@
 	results.approximate_ms_used += TICK_USAGE_TO_MS(tick_used)
 
 	if(!results.failed)
-		#warn dmm context
+		context.register_dmm_context(dmm_context)
+	else
+		qdel(dmm_context)
 
 	return results
 
