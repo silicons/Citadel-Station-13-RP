@@ -28,7 +28,7 @@
 	/**
 	 * Auto marker config to use for this load.
 	 */
-	var/datum/turf_auto_marker_config/auto_marker_config
+	var/datum/auto_marker_config/auto_marker_config
 	/**
 	 * Set to identify the area we're loading. Used by things like
 	 * automatic area naming.

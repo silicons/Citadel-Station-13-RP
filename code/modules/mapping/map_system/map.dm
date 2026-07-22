@@ -91,7 +91,7 @@
 	/// center us if we're smaller than world size
 	var/load_auto_center = TRUE
 	/// Default auto-marker options.
-	var/datum/turf_auto_marker_config/load_auto_marker_config = new
+	var/datum/auto_marker_config/load_auto_marker_config = new
 
 	//* Injections *//
 	/**

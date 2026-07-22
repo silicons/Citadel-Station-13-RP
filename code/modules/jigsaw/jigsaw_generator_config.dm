@@ -34,7 +34,7 @@
 	 * Set to override auto-marker settings. Otherwise, this uses
 	 * the map's auto-marker config.
 	 */
-	var/datum/turf_auto_marker_config/auto_marker_config
+	var/datum/auto_marker_config/auto_marker_config
 
 	/**
 	 * Template config

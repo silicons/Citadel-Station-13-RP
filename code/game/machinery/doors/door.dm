@@ -25,13 +25,6 @@
 
 	hit_sound_brute = 'sound/weapons/smash.ogg'
 
-	//* Preload *//
-	/**
-	 * If set, erase us on mapload if an airlock is already there.
-	 */
-	var/tmp/map_impl_erase_if_another_door_exists = FALSE
-	var/tmp/map_impl_erase_if_another_door_active = FALSE
-
 	//* Legacy Below *//
 	var/mineral
 	var/open_layer = DOOR_OPEN_LAYER
@@ -57,19 +50,7 @@
 
 	var/reinforcing = 0
 
-/obj/machinery/door/New()
-	..()
-
-	if(map_impl_erase_if_another_door_exists)
-		for(var/obj/machinery/door/other in locs)
-			if(other != src)
-				map_impl_erase_if_another_door_active = TRUE
-				break
-
 /obj/machinery/door/Initialize(mapload, newdir)
-	if(mapload && map_impl_erase_if_another_door_active)
-		return INITIALIZE_HINT_QDEL
-
 	. = ..()
 	if(density)
 		layer = closed_layer

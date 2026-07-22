@@ -8,9 +8,13 @@
  * * The match / require / exclude lists are used to determine if this tile can be placed
  *   next to another tile.
  * * All lists are immutable and potentially (likely) shared for efficiency.
- * * Match is tags for that side of ourselves.
+ * * Tags is tags for that side of ourselves.
  * * Require is tags that must be present on the other side of the adjacent tile.
  * * Exclude is tags that must NOT be present on the other side of the adjacent tile
+ * * Tags must be set on a side for it to be joinable.
+ * * Technically, required / exclude is not enforced for non-joinable sides,
+ *   but currently a border of 1 tile is placed around each ruin
+ *   so it's fine.
  */
 /datum/jigsaw_tile
 	var/list/north_tags

@@ -28,6 +28,18 @@
 	 */
 	var/tile_budget_cap_gaussian_stddev
 	/**
+	 * Tile budget gaussian center.
+	 * * Applied as min() to 'ratio' budget / tile budget if set.
+	 * * This is applied in parallel to the jigsaw generator config's limits.
+	 */
+	var/tile_budget_cap_ratio_gaussian_center
+	/**
+	 * Tile budget gaussian standard deviation.
+	 * * Applied as min() to 'ratio' budget / tile budget if set.
+	 * * This is applied in parallel to the jigsaw generator config's limits.
+	 */
+	var/tile_budget_cap_ratio_gaussian_stddev
+	/**
 	 * Custom budgets, key-value list of string-number.
 	 * * This list may not be edited by the generator.
 	 * * This is ignored for required / priority templates, but they still count against it.
@@ -64,3 +76,7 @@
 	if(!isnull(tile_budget_cap_gaussian_center) && !isnull(tile_budget_cap_gaussian_stddev))
 		var/gaussian_cap = gaussian(tile_budget_cap_gaussian_center, tile_budget_cap_gaussian_stddev)
 		. = min(., gaussian_cap)
+
+	if(!isnull(tile_budget_cap_ratio_gaussian_center) && !isnull(tile_budget_cap_ratio_gaussian_stddev))
+		var/gaussian_cap = gaussian(tile_budget_cap_ratio_gaussian_center, tile_budget_cap_ratio_gaussian_stddev)
+		. = min(., ceil(free_tiles * gaussian_cap))

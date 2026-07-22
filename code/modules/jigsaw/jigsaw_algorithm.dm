@@ -204,8 +204,10 @@
 
 			// match tags
 			// lack of require = anything goes
-			var/tag_pass = (!length(our_tags & their_exclude)) && (!length(our_exclude & their_tags)) && \
-				(length(our_require & their_tags) == length(our_require)) && (!length(their_require & our_tags) == length(their_require))
+			var/tag_pass = (!their_exclude || !length(our_tags & their_exclude)) && \
+				(!our_exclude || !length(our_exclude & their_tags)) && \
+				(!our_require || (length(our_require & their_tags) == length(our_require))) && \
+				(!their_require || (length(their_require & our_tags) == length(their_require)))
 
 			if(!tag_pass)
 				continue
@@ -229,8 +231,60 @@
 
 		// now attempt emplace
 
+		// compute x/y
+		// the position of our open tile is the tile that has an attachment point,
+		// not the tile that the attachment is connecting on
 
-		#warn compute x/y
+		// so, the template's attachment point should end up offset by one towards the open tile's facing direction
+
+		var/align_to_x
+		var/align_to_y
+
+		switch(dir)
+			if(NORTH)
+				align_to_x = x
+				align_to_y = y + 1
+
+			if(SOUTH)
+				align_to_x = x
+				align_to_y = y - 1
+
+			if(EAST)
+				align_to_x = x + 1
+				align_to_y = y
+
+			if(WEST)
+				align_to_x = x - 1
+				align_to_y = y
+
+		var/computed_x
+		var/computed_y
+
+		// compute rotation angle as clockwise rotation from their_dir to dir
+		var/rotation_angle = dir2angle(dir) - dir2angle(their_dir)
+		if (rotation_angle < 0)
+			rotation_angle += 360
+
+		switch(rotation_angle)
+			if(rotation_angle == 0)
+				computed_x = align_to_x - their_x_offset
+				computed_y = align_to_y - their_y_offset
+
+			if(rotation_angle == 180)
+				#warn this
+				computed_x = align_to_x - their_x_offset
+				computed_y = align_to_y - their_y_offset
+
+			if(rotation_angle == 90)
+				#warn this
+				computed_x = align_to_x - their_x_offset
+				computed_y = align_to_y - their_y_offset
+
+			if(rotation_angle == 270)
+				#warn this
+				computed_x = align_to_x - their_x_offset
+				computed_y = align_to_y - their_y_offset
+
 		emplaced = buffer.emplace_template_at(template, computed_x, computed_y, their_dir, dmm_context)
 
 		var/emplace_end = TICK_USAGE

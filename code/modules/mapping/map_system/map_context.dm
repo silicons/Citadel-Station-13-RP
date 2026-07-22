@@ -20,9 +20,11 @@
 	var/mangling_id
 
 	/**
-	 * Turf auto_marker configuration.
+	 * Auto marker configuration, used to dynamically
+	 * configure types of turfs and objects to theme
+	 * a room.
 	 */
-	var/datum/turf_auto_marker_config/auto_marker_config
+	var/datum/auto_marker_config/auto_marker_config
 
 	/**
 	 * Injections to fire
@@ -74,8 +76,6 @@
 	var/list/obj/map_helper/role_marker/collected_role_markers_by_tag
 	/// collected fixed template seeding targets
 	var/list/obj/map_helper/fixed_template_seeding_target/collected_fixed_template_seeding_targets
-
-#warn hook all
 
 /datum/map_context/Destroy()
 	injections = null

@@ -6,6 +6,10 @@
  * with layers, this is what you get.
  */
 /datum/map_injection/legacy_jigsaw_worldgen_hijinks
+	var/datum/jigsaw_chain_generator_config/config = new /datum/jigsaw_chain_generator_config/literally_everything{
+		tile_budget_cap_ratio_gaussian_center = 0.4;
+		tile_budget_cap_ratio_gaussian_stddev = 0.1;
+	}
 	#warn impl
 
 /datum/map_injection/legacy_jigsaw_worldgen_hijinks/on_map_pre_init(datum/map_context/map_context, datum/dmm_context/dmm_context)
@@ -36,4 +40,8 @@
 	var/datum/jigsaw_chain_generator/generator = new
 	var/datum/jigsaw_buffer/buffer = new(grid_width, grid_height)
 
-	#warn impl
+	buffer.block_off_according_to_world_at(aligned_x_low, aligned_y_low, dmm_context.loaded_bounds[MAP_MINZ], TRUE)
+
+	var/datum/jigsaw_chain_generator_results/results = generator.generate(buffer)
+
+	log_game("legacy_jigsaw_worldgen_hijinks: emplaced on zlevel [dmm_context.loaded_bounds[MAP_MINZ]] with ~[results.total_tile_budget_used] tile budget used. Data: [json_encode(results.serialize())]")
