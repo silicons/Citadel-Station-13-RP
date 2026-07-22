@@ -112,6 +112,9 @@
 
 	return ..()
 
+/datum/dmm_context/proc/prepare()
+	auto_marker_config = map_context?.auto_marker_config || new /datum/auto_marker_config
+
 /datum/dmm_context/proc/mark_used()
 	if(used)
 		stack_trace("a dmm_context was reused; this is not allowed and will result in bugs.")

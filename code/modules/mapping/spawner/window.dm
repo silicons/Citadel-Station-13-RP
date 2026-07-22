@@ -298,10 +298,34 @@
 
 /obj/spawner/window/auto/preloading_from_mapload(datum/dmm_context/context)
 	. = ..()
+	load_from_auto_marker_config(context.map_context.auto_marker_config)
 
-/obj/spawner/window/auto/proc/load_from_auto_marker_config(datum/turf_auto_marker_config/auto_marker_config)
+/obj/spawner/window/auto/proc/load_from_auto_marker_config(datum/auto_marker_config/auto_marker_config)
+	window_pane_path = auto_marker_config.window_type
+
+#warn below
+
+/obj/spawner/window/auto/firelocks
+	firelocks = TRUE
+
+/obj/spawner/window/auto/firelocks/transparent
+	firelocks_use_glass = TRUE
+
+/obj/spawner/window/auto/reinforced
+
+/obj/spawner/window/auto/reinforced/firelocks
+
+/obj/spawner/window/auto/reinforced/firelocks/transparent
+
+/obj/spawner/window/auto/borosillicate
+
+/obj/spawner/window/auto/borosillicate/firelocks
+
+/obj/spawner/window/auto/borosillicate/firelocks/transparent
 
 /obj/spawner/window/auto/low_wall
+
+/obj/spawner/window/auto/low_wall/load_from_auto_marker_config(datum/turf_auto_marker_config/auto_marker_config)
 
 /obj/spawner/window/auto/low_wall/firelocks
 
@@ -330,5 +354,6 @@
 /obj/spawner/window/auto/full/borosillicate
 
 /obj/spawner/window/auto/full/borosillicate/firelocks
+
 
 #warn auto marker config

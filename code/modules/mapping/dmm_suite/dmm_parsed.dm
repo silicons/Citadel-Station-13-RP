@@ -297,6 +297,8 @@
 		context = new
 	. = context
 
+	context.prepare()
+
 	var/list/area_cache = context?.area_cache || context?.map_context?.area_cache
 
 	var/static/loading = FALSE
