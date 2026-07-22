@@ -185,6 +185,12 @@
 				our_require = tile.west_require
 				our_exclude = tile.west_exclude
 
+		var/list/attachment_points_left = computed_pattern.calculated_attachment_points.Copy()
+		while(length(attachment_points_left))
+			#warn impl
+
+		#warn this entire thing needs to be wrapped in a tick checked function, use above variable
+
 		// we got the tags, try to match against the template
 		var/match_begin = TICK_USAGE
 
@@ -271,17 +277,17 @@
 				computed_y = align_to_y - their_y_offset
 
 			if(rotation_angle == 180)
-				#warn this
+				#warn this is wrong
 				computed_x = align_to_x - their_x_offset
 				computed_y = align_to_y - their_y_offset
 
 			if(rotation_angle == 90)
-				#warn this
+				#warn this is wrong
 				computed_x = align_to_x - their_x_offset
 				computed_y = align_to_y - their_y_offset
 
 			if(rotation_angle == 270)
-				#warn this
+				#warn this is wrong
 				computed_x = align_to_x - their_x_offset
 				computed_y = align_to_y - their_y_offset
 
@@ -306,6 +312,9 @@
 		map_context.register_dmm_context(dmm_context)
 
 	return results
+
+/datum/jigsaw_algorithm/general/proc/compute_next_possible_attachment_point(list/attachment_points_left, datum/jigsaw_generator_results/results) as /list
+	#warn impl
 
 /datum/jigsaw_algorithm/general/proc/prune_open_tiles(datum/jigsaw_buffer/buffer, list/open_tiles)
 	// prune open tiles that are no longer valid
