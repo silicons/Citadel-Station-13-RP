@@ -45,3 +45,7 @@
   - bugfix: fixed movespeed for a few mobs that were incorrectly set
   anon841-afk:
   - rscadd: Seed extractor ic chip now functions.
+2026-10-27:
+  Shadowtail117:
+  - bugfix: The Atlas' supermatter chamber is now surrounded on all sides by reinforced
+      borosilicate glass.
