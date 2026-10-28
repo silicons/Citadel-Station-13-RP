@@ -21,13 +21,13 @@
 /// ignores mobility check
 #define INTERACT_ATOM_IGNORE_MOBILITY (1<<10)
 // Bypass all adjacency checks for mouse drop
+// TODO: currently unused
 #define INTERACT_ATOM_MOUSEDROP_IGNORE_ADJACENT (1<<11)
 /// Bypass all can_perform_action checks for mouse drop
+// TODO: currently unused
 #define INTERACT_ATOM_MOUSEDROP_IGNORE_USABILITY (1<<12)
 /// Bypass all adjacency and other checks for mouse drop
 #define INTERACT_ATOM_MOUSEDROP_IGNORE_CHECKS (INTERACT_ATOM_MOUSEDROP_IGNORE_ADJACENT | INTERACT_ATOM_MOUSEDROP_IGNORE_USABILITY)
-/// calls try_interact() on attack_paw() and returns that.
-#define INTERACT_ATOM_ATTACK_PAW (1<<13)
 
 DEFINE_BITFIELD(interaction_flags_atom, list(
 	BITFIELD(INTERACT_ATOM_REQUIRES_ANCHORED),
@@ -43,7 +43,6 @@ DEFINE_BITFIELD(interaction_flags_atom, list(
 	BITFIELD(INTERACT_ATOM_IGNORE_MOBILITY),
 	BITFIELD(INTERACT_ATOM_MOUSEDROP_IGNORE_ADJACENT),
 	BITFIELD(INTERACT_ATOM_MOUSEDROP_IGNORE_USABILITY),
-	BITFIELD(INTERACT_ATOM_ATTACK_PAW),
 ))
 
 //? interaction_flags_item on /obj/item
@@ -74,6 +73,7 @@ DEFINE_BITFIELD(interaction_flags_atom, list(
 /// This flag determines if a machine set_machine's the user when the user uses it, making updateUsrDialog make the user re-call interact() on it.
 /// THIS FLAG IS ON ALL MACHINES BY DEFAULT, NEEDS TO BE RE-EVALUATED LATER!!
 ///! Legacy, do not use.
+//  TODO: this does nothing wtf?
 #define INTERACT_MACHINE_SET_MACHINE (1<<8)
 
 DEFINE_BITFIELD(interaction_flags_machine, list(
