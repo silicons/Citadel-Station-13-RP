@@ -12,6 +12,7 @@
 	// todo: remove when this is constructible (and all its subtypes are)
 	integrity_flags = INTEGRITY_INDESTRUCTIBLE
 
+#warn deal with
 /obj/machinery/button/attack_ai(mob/user)
 	return attack_hand(user)
 
@@ -30,6 +31,7 @@
 	desc = "A remote control switch for polarized windows."
 	var/range = 7
 
+#warn this
 /obj/machinery/button/windowtint/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
 	if (..())
 		return TRUE

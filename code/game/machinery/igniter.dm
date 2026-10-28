@@ -121,6 +121,7 @@
 	name = "ignition switch"
 	desc = "A remote control switch for a mounted igniter."
 
+#warn this
 /obj/machinery/button/ignition/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
 
 	if(..())
