@@ -30,14 +30,6 @@
 	depth_projected = FALSE
 	climb_allowed = FALSE
 
-/obj/machinery/computer/atmoscontrol/attack_ai(mob/user)
-	ui_interact(user)
-
-/obj/machinery/computer/atmoscontrol/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(..())
-		return TRUE
-	ui_interact(user)
-
 /obj/machinery/computer/atmoscontrol/emag_act(remaining_carges, mob/user)
 	if(!emagged)
 		user.visible_message(
