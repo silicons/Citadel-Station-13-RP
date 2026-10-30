@@ -70,7 +70,7 @@ DEFINE_BITFIELD(interaction_flags_atom, list(
 /// user must be standing up in order to interact
 #define INTERACT_MACHINE_REQUIRES_STANDING (1<<7)
 /// Require silicon to be adjacent still
-#warn impl
+//  TODO: this only checks on open. this should always check for UI states.
 #define INTERACT_MACHINE_REQUIRES_ADJACENT_SILICON (1<<9)
 /// MACHINES HAVE THIS BY DEFAULT, SOMEONE SHOULD RUN THROUGH MACHINES AND REMOVE IT FROM THINGS LIKE LIGHT SWITCHES WHEN POSSIBLE!!--------------------------
 /// This flag determines if a machine set_machine's the user when the user uses it, making updateUsrDialog make the user re-call interact() on it.

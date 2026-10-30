@@ -16,7 +16,7 @@
 	. = ..()
 	if(.)
 		return
-	on_activation(new /datum/event_args/actor/actor(user))
+	on_activation(new /datum/event_args/actor(user))
 
 /obj/machinery/button/proc/on_activation(datum/event_args/actor/actor)
 	playsound(src, 'sound/machines/button.ogg', 100, TRUE)
