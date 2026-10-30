@@ -54,16 +54,14 @@
 
 ////////////////////SWITCH///////////////////////////////////////
 
-#warn this
 /obj/machinery/button/holosign
 	name = "holosign switch"
 	desc = "A remote control switch for holosign."
 	icon = 'icons/obj/power.dmi'
 	icon_state = "crema_switch"
 
-/obj/machinery/button/holosign/attack_hand(mob/user, datum/event_args/actor/clickchain/e_args)
-	if(..())
-		return
+/obj/machinery/button/holosign/on_activation(datum/event_args/actor/actor)
+	..()
 
 	use_power(5)
 
@@ -75,5 +73,3 @@
 			spawn(0)
 				M.toggle()
 				return
-
-	return
